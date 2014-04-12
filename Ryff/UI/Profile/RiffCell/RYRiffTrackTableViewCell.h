@@ -9,13 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @class RYRiff;
+@class RMDownloadIndicator;
 
 @interface RYRiffTrackTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
+@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
 @property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
+@property (nonatomic, strong) RMDownloadIndicator *downloadIndicator;
 
 - (void) configureForRiff:(RYRiff *)riff;
+- (void) startDownloading;
+- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;
+- (void) finishDownloading:(BOOL)success;
+- (void) shouldPause:(BOOL)shouldPause;
+- (void) clearAudio;
 
 @end

@@ -13,6 +13,7 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+#import "RMDownloadIndicator.h"
 
 @implementation RYRiffTrackTableViewCell
 
@@ -33,36 +34,82 @@
     [_riffLengthText setText:[NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds]];
 }
 
-- (void) downloadChanged:(BOOL)finished
+#pragma mark -
+#pragma mark - Download UI Updates
+
+- (void) startPlaying
 {
-    if (finished)
+    // prepare loading images
+    NSInteger numImages = 3;
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    
+    // load all rotations of these images
+    for (NSNumber *rotation in @[@0,@2,@1,@3])
+    {
+        for (NSInteger imNum = 1; imNum <= numImages; imNum++)
+        {
+            NSInteger rotateVar = [rotation integerValue];
+            UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]];
+            loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
+            [images addObject:loadingImage];
+        }
+    }
+    
+    // Normal Animation
+    _statusImageView.animationImages = images;
+    _statusImageView.animationDuration = 1.5;
+    
+    [_statusImageView startAnimating];
+}
+
+- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes
+{
+    [_downloadIndicator updateWithTotalBytes:totalBytes downloadedBytes:bytesFinished];
+}
+
+- (void) finishDownloading:(BOOL)success
+{
+    [_downloadIndicator removeFromSuperview];
+    _downloadIndicator = nil;
+    if (success)
+        [self startPlaying];
+    else
+        [self clearAudio];
+}
+
+- (void) startDownloading
+{
+    _downloadIndicator = [[RMDownloadIndicator alloc]initWithFrame:_statusImageView.frame type:kRMFilledIndicator];
+    [_downloadIndicator setBackgroundColor:[UIColor clearColor]];
+    [_downloadIndicator setFillColor:[RYStyleSheet baseColor]];
+    [_downloadIndicator setStrokeColor:[RYStyleSheet baseColor]];
+    _downloadIndicator.radiusPercent = 0.45;
+    [self.contentView addSubview:_downloadIndicator];
+    [_downloadIndicator loadIndicator];
+    
+    // and hide imageView
+    [_statusImageView setImage:nil];
+}
+
+- (void) shouldPause:(BOOL)shouldPause
+{
+    if (shouldPause)
     {
         UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
-        [_playPauseButton setImage:maskedImage forState:UIControlStateNormal];
+        [_statusImageView setImage:maskedImage];
     }
     else
-    {
-        // prepare loading images
-        NSInteger numImages = 3;
-        NSMutableArray *images = [[NSMutableArray alloc] init];
-        
-        // load all rotations of these images
-        for (NSInteger rotateVar = 0; rotateVar < 4; rotateVar++)
-        {
-            for (NSInteger imNum = 1; imNum <= numImages; imNum++)
-            {
-                UIImage *loadingImage = [UIImage imageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]];
-                loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
-                [images addObject:loadingImage];
-            }
-        }
-        
-        // Normal Animation
-        _playPauseButton.imageView.animationImages = images;
-        _playPauseButton.imageView.animationDuration = 0.5;
-        
-        [_playPauseButton.imageView startAnimating];
-    }
+        [self startPlaying];
 }
+
+- (void) clearAudio
+{
+    [_downloadIndicator removeFromSuperview];
+    _downloadIndicator = nil;
+    
+    UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+    [_statusImageView setImage:maskedImage];
+}
+
 
 @end

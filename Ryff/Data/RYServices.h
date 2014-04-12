@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol RiffDownloadDelegate <NSObject>
-
-- (void) riffDownloadStarted;
-- (void) riffDownloadFinished;
-
-@end
-
 @class RYUser;
 
 @interface RYServices : NSObject
