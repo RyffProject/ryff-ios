@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E284C944ED0486C9BFCE560 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E90ADF0D11042CCB2DB4654 /* libPods.a */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
 		83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
@@ -31,6 +32,19 @@
 		83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */; };
 		83FCD19F18F91FC000A493F0 /* RYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19E18F91FC000A493F0 /* RYRegisterViewController.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
+		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
+		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
+		83FCD1AF18F93F5500A493F0 /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AC18F93F5500A493F0 /* artists.png */; };
+		83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AD18F93F5500A493F0 /* artists@2x.png */; };
+		83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AE18F93F5500A493F0 /* user@2x.png */; };
+		83FCD1B418F93FBF00A493F0 /* newsfeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1B218F93FBF00A493F0 /* newsfeed.png */; };
+		83FCD1B518F93FBF00A493F0 /* newsfeed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1B318F93FBF00A493F0 /* newsfeed@2x.png */; };
+		83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */; };
+		83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */; };
+		83FCD1BF18F9425400A493F0 /* RYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BE18F9425400A493F0 /* RYUser.m */; };
+		83FCD1C218F943AE00A493F0 /* RYRiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1C118F943AE00A493F0 /* RYRiff.m */; };
+		83FCD1C518F94AC400A493F0 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1C318F94AC400A493F0 /* play.png */; };
+		83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1C418F94AC400A493F0 /* play@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E90ADF0D11042CCB2DB4654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		705AEBD9648649D09BAB52BD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83FCD13D18F907C400A493F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -83,6 +99,24 @@
 		83FCD19E18F91FC000A493F0 /* RYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegisterViewController.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
+		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
+		83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStyleSheet.m; sourceTree = "<group>"; };
+		83FCD1AA18F93E6C00A493F0 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		83FCD1AC18F93F5500A493F0 /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
+		83FCD1AD18F93F5500A493F0 /* artists@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "artists@2x.png"; sourceTree = "<group>"; };
+		83FCD1AE18F93F5500A493F0 /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
+		83FCD1B218F93FBF00A493F0 /* newsfeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsfeed.png; sourceTree = "<group>"; };
+		83FCD1B318F93FBF00A493F0 /* newsfeed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newsfeed@2x.png"; sourceTree = "<group>"; };
+		83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreTabBarViewController.h; sourceTree = "<group>"; };
+		83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreTabBarViewController.m; sourceTree = "<group>"; };
+		83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedPost.h; sourceTree = "<group>"; };
+		83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedPost.m; sourceTree = "<group>"; };
+		83FCD1BD18F9425400A493F0 /* RYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUser.h; sourceTree = "<group>"; };
+		83FCD1BE18F9425400A493F0 /* RYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUser.m; sourceTree = "<group>"; };
+		83FCD1C018F943AE00A493F0 /* RYRiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiff.h; sourceTree = "<group>"; };
+		83FCD1C118F943AE00A493F0 /* RYRiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiff.m; sourceTree = "<group>"; };
+		83FCD1C318F94AC400A493F0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		83FCD1C418F94AC400A493F0 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +127,7 @@
 				83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */,
 				83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */,
 				83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */,
+				3E284C944ED0486C9BFCE560 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +151,7 @@
 				83FCD16318F907C400A493F0 /* RyffTests */,
 				83FCD13A18F907C400A493F0 /* Frameworks */,
 				83FCD13918F907C400A493F0 /* Products */,
+				705AEBD9648649D09BAB52BD /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +171,7 @@
 				83FCD13D18F907C400A493F0 /* CoreGraphics.framework */,
 				83FCD13F18F907C400A493F0 /* UIKit.framework */,
 				83FCD15D18F907C400A493F0 /* XCTest.framework */,
+				0E90ADF0D11042CCB2DB4654 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +179,8 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
+				83FCD1A918F93E6C00A493F0 /* Images */,
+				83FCD1A518F9393500A493F0 /* Style */,
 				83FCD1A018F921AB00A493F0 /* Data */,
 				83FCD14A18F907C400A493F0 /* RYAppDelegate.h */,
 				83FCD14B18F907C400A493F0 /* RYAppDelegate.m */,
@@ -154,6 +193,8 @@
 				83FCD19C18F91FA000A493F0 /* Register */,
 				83FCD15618F907C400A493F0 /* Images.xcassets */,
 				83FCD14218F907C400A493F0 /* Supporting Files */,
+				83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */,
+				83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */,
 			);
 			path = Ryff;
 			sourceTree = "<group>";
@@ -191,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				83FCD19B18F91A3F00A493F0 /* GroupCell */,
-				83FCD17718F90BE700A493F0 /* RiffCell */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				83FCD18518F9119B00A493F0 /* RYBandsCollectionViewCell.h */,
@@ -207,7 +247,8 @@
 				83FCD17818F90C1500A493F0 /* RYRiffTrackTableViewCell.h */,
 				83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */,
 			);
-			path = RiffCell;
+			name = RiffCell;
+			path = ../UI/Profile/RiffCell;
 			sourceTree = "<group>";
 		};
 		83FCD17E18F90F2A00A493F0 /* Search */ = {
@@ -233,8 +274,11 @@
 		83FCD18C18F9142600A493F0 /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
+				83FCD17718F90BE700A493F0 /* RiffCell */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
 				83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */,
+				83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */,
+				83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */,
 			);
 			path = Newsfeed;
 			sourceTree = "<group>";
@@ -281,8 +325,36 @@
 			children = (
 				83FCD1A118F921EA00A493F0 /* RYServices.h */,
 				83FCD1A218F921EA00A493F0 /* RYServices.m */,
+				83FCD1BD18F9425400A493F0 /* RYUser.h */,
+				83FCD1BE18F9425400A493F0 /* RYUser.m */,
+				83FCD1C018F943AE00A493F0 /* RYRiff.h */,
+				83FCD1C118F943AE00A493F0 /* RYRiff.m */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		83FCD1A518F9393500A493F0 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */,
+				83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		83FCD1A918F93E6C00A493F0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				83FCD1C318F94AC400A493F0 /* play.png */,
+				83FCD1C418F94AC400A493F0 /* play@2x.png */,
+				83FCD1B218F93FBF00A493F0 /* newsfeed.png */,
+				83FCD1B318F93FBF00A493F0 /* newsfeed@2x.png */,
+				83FCD1AC18F93F5500A493F0 /* artists.png */,
+				83FCD1AD18F93F5500A493F0 /* artists@2x.png */,
+				83FCD1AE18F93F5500A493F0 /* user@2x.png */,
+				83FCD1AA18F93E6C00A493F0 /* user.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,9 +364,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83FCD16D18F907C400A493F0 /* Build configuration list for PBXNativeTarget "Ryff" */;
 			buildPhases = (
+				EC708E39CB0740C68879790A /* Check Pods Manifest.lock */,
 				83FCD13418F907C400A493F0 /* Sources */,
 				83FCD13518F907C400A493F0 /* Frameworks */,
 				83FCD13618F907C400A493F0 /* Resources */,
+				182B259A9FD848C2B492D863 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -362,9 +436,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83FCD1B418F93FBF00A493F0 /* newsfeed.png in Resources */,
+				83FCD1C518F94AC400A493F0 /* play.png in Resources */,
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
+				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
+				83FCD1B518F93FBF00A493F0 /* newsfeed@2x.png in Resources */,
+				83FCD1AB18F93E6C00A493F0 /* user.png in Resources */,
+				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
+				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
 				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
+				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +460,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		182B259A9FD848C2B492D863 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC708E39CB0740C68879790A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		83FCD13418F907C400A493F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -388,13 +503,18 @@
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
 				83FCD19F18F91FC000A493F0 /* RYRegisterViewController.m in Sources */,
+				83FCD1C218F943AE00A493F0 /* RYRiff.m in Sources */,
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
+				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
+				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
 				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
 				83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */,
+				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
 				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
+				83FCD1BF18F9425400A493F0 /* RYUser.m in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +637,7 @@
 		};
 		83FCD16E18F907C400A493F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 705AEBD9648649D09BAB52BD /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -530,6 +651,7 @@
 		};
 		83FCD16F18F907C400A493F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 705AEBD9648649D09BAB52BD /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -600,6 +722,7 @@
 				83FCD16F18F907C400A493F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		83FCD17018F907C400A493F0 /* Build configuration list for PBXNativeTarget "RyffTests" */ = {
 			isa = XCConfigurationList;
@@ -608,6 +731,7 @@
 				83FCD17218F907C400A493F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

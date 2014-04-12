@@ -8,7 +8,18 @@
 
 #import "RYNewsfeedTableViewController.h"
 
+// Data Objects
+#import "RYNewsfeedPost.h"
+#import "RYRiff.h"
+#import "RYUser.h"
+
+// Custom UI
+#import "RYRiffTrackTableViewCell.h"
+#import "RYStyleSheet.h"
+
 @interface RYNewsfeedTableViewController ()
+
+@property (nonatomic, strong) NSArray *feedItems;
 
 @end
 
@@ -18,87 +29,87 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    // set up test data
+    RYUser *patrick = [[RYUser alloc] initWithUsername:@"Patrick"];
+    RYRiff *nextgirl = [[RYRiff alloc] initWithTitle:@"Next Girl" length:180 url:@"http://danielawrites.files.wordpress.com/2010/05/the-black-keys-next-girl.mp3"];
+    RYNewsfeedPost *testPost = [[RYNewsfeedPost alloc] initWithUser:patrick mainText:@"A new song we've been working on..." riff:nextgirl];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _feedItems = @[testPost];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return _feedItems.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    RYNewsfeedPost *post = [_feedItems objectAtIndex:section];
+    NSInteger numCells = (post.riff) ? 2 : 1;
+    return numCells;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell *cell;
+    RYNewsfeedPost *post = [_feedItems objectAtIndex:indexPath.section];
+    if (post.riff && indexPath.row == 0)
+    {
+        RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:@"RiffCell" forIndexPath:indexPath];
+        [riffCell configureForRiff:post.riff];
+        cell = riffCell;
+    }
+    else
+    {
+        // user post
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+        
+        NSAttributedString *attributedText = [self createAttributedTextWithPost:post];
+        
+        [cell.textLabel setAttributedText:attributedText];
+    }
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    CGFloat height = 44.0f;
+    
+    RYNewsfeedPost *post = [_feedItems objectAtIndex:indexPath.section];
+    if (indexPath.row == 1 || post.riff == NULL)
+    {
+        CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
+        NSAttributedString *mainText = [self createAttributedTextWithPost:post];
+        CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        height = MAX(result.size.height+20, height);
+    }
+    return height;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+#pragma mark -
+#pragma mark - Extras
+- (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post
 {
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [RYStyleSheet boldFont], NSFontAttributeName, nil];
+    NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [RYStyleSheet baseFont], NSFontAttributeName, nil];
+    const NSRange range = NSMakeRange(0,post.user.username.length);
+    
+    // Create the attributed string (text + attributes)
+    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.user.username,post.mainText];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
+                                                                                       attributes:subAttrs];
+    [attributedText setAttributes:attrs range:range];
+    return attributedText;
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class RYRiff;
+
 @interface RYRiffTrackTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
 @property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
+
+- (void) configureForRiff:(RYRiff *)riff;
 
 @end
