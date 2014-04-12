@@ -64,7 +64,8 @@
 
 - (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes
 {
-    [_downloadIndicator updateWithTotalBytes:totalBytes downloadedBytes:bytesFinished];
+    if (bytesFinished <= totalBytes)
+        [_downloadIndicator updateWithTotalBytes:totalBytes downloadedBytes:bytesFinished];
 }
 
 - (void) finishDownloading:(BOOL)success

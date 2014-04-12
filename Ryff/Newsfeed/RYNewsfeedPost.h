@@ -19,4 +19,6 @@
 
 - (RYNewsfeedPost *)initWithUsername:(NSString *)username mainText:(NSString*)mainText riff:(RYRiff*)riff;
 
++ (NSArray *)testNewsfeedPosts;
+
 @end

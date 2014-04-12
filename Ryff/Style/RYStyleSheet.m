@@ -24,6 +24,10 @@
 {
     return  [UIFont boldSystemFontOfSize:20.0f];
 }
++(UIFont *)longFont
+{
+    return [UIFont systemFontOfSize:13.0f];
+}
 
 +(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString *)imageName
 {

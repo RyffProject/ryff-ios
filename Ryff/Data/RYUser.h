@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *bio;
 @property (nonatomic, strong) NSSet *groups;
-@property (nonatomic, strong) NSArray *activity;
+@property (nonatomic, strong) NSArray *activity; // NSArray of NewsfeedPost objects
 
 - (RYUser *)initWithUsername:(NSString *)username firstName:(NSString *)firstName profileImage:(UIImage *)profileImage bio:(NSString*)bio groups:(NSSet*)groups activity:(NSArray *)activity;
 

@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3E284C944ED0486C9BFCE560 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E90ADF0D11042CCB2DB4654 /* libPods.a */; };
-		83DBCA7018F97A2A00262496 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA6D18F97A2A00262496 /* MBProgressHUD.m */; };
-		83DBCA7118F97A2A00262496 /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA6F18F97A2A00262496 /* UIViewController+Extras.m */; };
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
+		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
 		83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
@@ -80,14 +79,12 @@
 /* Begin PBXFileReference section */
 		0E90ADF0D11042CCB2DB4654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		705AEBD9648649D09BAB52BD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		83DBCA6C18F97A2A00262496 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		83DBCA6D18F97A2A00262496 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		83DBCA6E18F97A2A00262496 /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
-		83DBCA6F18F97A2A00262496 /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
 		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
 		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
 		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
 		83DBCA7618F9859000262496 /* RMDisplayLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDisplayLabel.m; sourceTree = "<group>"; };
+		83DBCA7918F99E3F00262496 /* RYRiffStreamingCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamingCoreViewController.h; sourceTree = "<group>"; };
+		83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamingCoreViewController.m; sourceTree = "<group>"; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83FCD13D18F907C400A493F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -205,13 +202,18 @@
 				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
 				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
 				83DBCA7318F9856800262496 /* RMDownloadIndicator.m */,
-				83DBCA6C18F97A2A00262496 /* MBProgressHUD.h */,
-				83DBCA6D18F97A2A00262496 /* MBProgressHUD.m */,
-				83DBCA6E18F97A2A00262496 /* UIViewController+Extras.h */,
-				83DBCA6F18F97A2A00262496 /* UIViewController+Extras.m */,
 			);
 			name = Custom;
 			path = UI/Custom;
+			sourceTree = "<group>";
+		};
+		83DBCA7818F99E2000262496 /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				83DBCA7918F99E3F00262496 /* RYRiffStreamingCoreViewController.h */,
+				83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */,
+			);
+			path = "Base Classes";
 			sourceTree = "<group>";
 		};
 		83FCD12F18F907C400A493F0 = {
@@ -249,6 +251,7 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
+				83DBCA7818F99E2000262496 /* Base Classes */,
 				83DBCA6B18F97A2A00262496 /* Custom */,
 				83FCD1D618F9741400A493F0 /* AFNetworking */,
 				83FCD1A918F93E6C00A493F0 /* Images */,
@@ -626,16 +629,15 @@
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
 				83FCD19F18F91FC000A493F0 /* RYRegisterViewController.m in Sources */,
-				83DBCA7018F97A2A00262496 /* MBProgressHUD.m in Sources */,
 				83FCD1C218F943AE00A493F0 /* RYRiff.m in Sources */,
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
-				83DBCA7118F97A2A00262496 /* UIViewController+Extras.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				83FCD1EC18F9741400A493F0 /* AFHTTPSessionManager.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
+				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,
 				83FCD1EF18F9741400A493F0 /* AFURLConnectionOperation.m in Sources */,
 				83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */,

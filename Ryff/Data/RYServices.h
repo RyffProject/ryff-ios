@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class RYUser;
+@class RYNewsfeedPost;
 
 @interface RYServices : NSObject
 
 + (RYServices *)sharedInstance;
 
 + (RYUser *) loggedInUser;
+
++ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
 @end

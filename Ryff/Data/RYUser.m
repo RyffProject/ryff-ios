@@ -8,6 +8,9 @@
 
 #import "RYUser.h"
 
+// Data Objects
+#import "RYNewsfeedPost.h"
+
 @implementation RYUser
 
 - (RYUser *)initWithUsername:(NSString *)username firstName:(NSString *)firstName profileImage:(UIImage *)profileImage bio:(NSString *)bio groups:(NSSet *)groups activity:(NSArray *)activity
@@ -27,7 +30,7 @@
 // Test User
 +(RYUser*)patrick
 {
-    return [[RYUser alloc] initWithUsername:@"patrickCarney" firstName:@"Patrick" profileImage:[UIImage imageNamed:@"patrickCarney"] bio:@"I'm an American musician best known as the drummer for The Black Keys, a blues rock band from Akron, Ohio. I also have a side-project rock band called Drummer." groups:[NSSet set] activity:@[]];
+    return [[RYUser alloc] initWithUsername:@"patrickCarney" firstName:@"Patrick" profileImage:[UIImage imageNamed:@"patrickCarney"] bio:@"I'm an American musician best known as the drummer for The Black Keys, a blues rock band from Akron, Ohio. I also have a side-project rock band called Drummer." groups:[NSSet set] activity:[RYNewsfeedPost testNewsfeedPosts]];
 }
 
 @end

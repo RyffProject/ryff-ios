@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYRiffStreamingCoreViewController.h"
 
-@interface RYNewsfeedTableViewController : UITableViewController
+@interface RYNewsfeedTableViewController : RYRiffStreamingCoreViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
