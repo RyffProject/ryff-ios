@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class RYUser;
+
 @interface RYProfileViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *profilePhoto;
@@ -17,5 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *groupsButton;
 @property (weak, nonatomic) IBOutlet UIButton *otherButton;
 @property (weak, nonatomic) IBOutlet UITableView *riffTableView;
+
+@property (nonatomic, strong) RYUser *user;
 
 @end

@@ -14,11 +14,11 @@
 
 @implementation RYNewsfeedPost
 
-- (RYNewsfeedPost *)initWithUser:(RYUser *)user mainText:(NSString*)mainText riff:(RYRiff*)riff
+- (RYNewsfeedPost *)initWithUsername:(NSString *)username mainText:(NSString*)mainText riff:(RYRiff*)riff
 {
     if (self = [super init])
     {
-        _user       = user;
+        _username   = username;
         _mainText   = mainText;
         _riff       = riff;
     }

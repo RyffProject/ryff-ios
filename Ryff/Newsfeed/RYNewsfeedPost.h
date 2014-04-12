@@ -13,10 +13,10 @@
 
 @interface RYNewsfeedPost : NSObject
 
-@property (nonatomic, strong) RYUser *user;
+@property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *mainText;
 @property (nonatomic, strong) RYRiff *riff;
 
-- (RYNewsfeedPost *)initWithUser:(RYUser *)user mainText:(NSString*)mainText riff:(RYRiff*)riff;
+- (RYNewsfeedPost *)initWithUsername:(NSString *)username mainText:(NSString*)mainText riff:(RYRiff*)riff;
 
 @end

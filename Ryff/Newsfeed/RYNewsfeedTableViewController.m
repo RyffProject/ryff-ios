@@ -30,9 +30,9 @@
     [super viewDidLoad];
     
     // set up test data
-    RYUser *patrick = [[RYUser alloc] initWithUsername:@"Patrick"];
+    RYUser *patrick = [RYUser patrick];
     RYRiff *nextgirl = [[RYRiff alloc] initWithTitle:@"Next Girl" length:180 url:@"http://danielawrites.files.wordpress.com/2010/05/the-black-keys-next-girl.mp3"];
-    RYNewsfeedPost *testPost = [[RYNewsfeedPost alloc] initWithUser:patrick mainText:@"A new song we've been working on..." riff:nextgirl];
+    RYNewsfeedPost *testPost = [[RYNewsfeedPost alloc] initWithUsername:patrick.username mainText:@"A new song we've been working on..." riff:nextgirl];
     
     _feedItems = @[testPost];
 }
@@ -102,10 +102,10 @@
                            [RYStyleSheet boldFont], NSFontAttributeName, nil];
     NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
                               [RYStyleSheet baseFont], NSFontAttributeName, nil];
-    const NSRange range = NSMakeRange(0,post.user.username.length);
+    const NSRange range = NSMakeRange(0,post.username.length);
     
     // Create the attributed string (text + attributes)
-    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.user.username,post.mainText];
+    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.username,post.mainText];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
                                                                                        attributes:subAttrs];
     [attributedText setAttributes:attrs range:range];

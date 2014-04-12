@@ -7,7 +7,15 @@
 //
 
 #import "RYCoreTabBarViewController.h"
+
+// Data Objects
+#import "RYUser.h"
+
+// Custom UI
 #import "RYStyleSheet.h"
+
+// Associated View Controller
+#import "RYProfileViewController.h"
 
 @interface RYCoreTabBarViewController ()
 
@@ -19,5 +27,16 @@
 {
     [super viewDidLoad];
     [self.tabBar setTintColor:[RYStyleSheet baseColor]];
+    
+    for (UIViewController *vc in self.viewControllers)
+    {
+        if ([vc isKindOfClass:[RYProfileViewController class]])
+        {
+            RYProfileViewController *profController = (RYProfileViewController*)vc;
+            // Should be user's object
+            RYUser *patrick = [RYUser patrick];
+            [profController setUser:patrick];
+        }
+    }
 }
 @end
