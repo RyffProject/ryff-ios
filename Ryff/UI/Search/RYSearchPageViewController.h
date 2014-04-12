@@ -1,5 +1,5 @@
 //
-//  RYSecondViewController.h
+//  RYSearchPageViewController.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/11/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RYSecondViewController : UIViewController
+@interface RYSearchPageViewController : UIPageViewController
 
 @end

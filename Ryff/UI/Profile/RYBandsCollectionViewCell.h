@@ -1,5 +1,5 @@
 //
-//  RYFirstViewController.h
+//  RYBandsCollectionViewCell.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/11/14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RYFirstViewController : UIViewController
+@interface RYBandsCollectionViewCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
