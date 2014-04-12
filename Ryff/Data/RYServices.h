@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+#define kLoggedInUserKey @"loggedInUser"
+
+#define host @"http://ryff.me/api/"
+
+#define kRegistrationAction @"create-user.php"
+
+@protocol POSTDelegate <NSObject>
+
+- (void) connectionFailed;
+- (void) postFailed;
+- (void) postSucceeded:(id)response;
+
+@end
+
 @class RYUser;
 @class RYNewsfeedPost;
 
@@ -18,5 +32,8 @@
 + (RYUser *) loggedInUser;
 
 + (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
+
+- (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
+- (void) submitAuthenticatedRest_POST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
 
 @end

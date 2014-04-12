@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3E284C944ED0486C9BFCE560 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E90ADF0D11042CCB2DB4654 /* libPods.a */; };
+		830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCAD18F9F54900A9C53F /* SSKeychain.strings */; };
+		830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB018F9F54900A9C53F /* SSKeychain.m */; };
+		830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */; };
+		830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB918FA055900A9C53F /* MBProgressHUD.m */; };
+		830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */; };
+		830BBCC318FA081600A9C53F /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCC118FA081600A9C53F /* checkmark.png */; };
+		830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCC218FA081600A9C53F /* checkmark@2x.png */; };
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
@@ -33,7 +40,7 @@
 		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
 		83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19518F9170700A493F0 /* RYArtistViewController.m */; };
 		83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */; };
-		83FCD19F18F91FC000A493F0 /* RYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19E18F91FC000A493F0 /* RYRegisterViewController.m */; };
+		83FCD19F18F91FC000A493F0 /* RYRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
 		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
 		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
@@ -79,6 +86,18 @@
 /* Begin PBXFileReference section */
 		0E90ADF0D11042CCB2DB4654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		705AEBD9648649D09BAB52BD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		830BBCAE18F9F54900A9C53F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSKeychain.strings; sourceTree = "<group>"; };
+		830BBCAF18F9F54900A9C53F /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		830BBCB018F9F54900A9C53F /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		830BBCB118F9F54900A9C53F /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		830BBCB718FA055900A9C53F /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		830BBCB818FA055900A9C53F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		830BBCB918FA055900A9C53F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
+		830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
+		830BBCC118FA081600A9C53F /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		830BBCC218FA081600A9C53F /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
 		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
 		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
 		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
@@ -120,8 +139,8 @@
 		83FCD19518F9170700A493F0 /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = ../RYArtistViewController.m; sourceTree = "<group>"; };
 		83FCD19818F91A1F00A493F0 /* RYGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYGroupTableViewCell.h; path = ../RiffCell/RYGroupTableViewCell.h; sourceTree = "<group>"; };
 		83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYGroupTableViewCell.m; path = ../RiffCell/RYGroupTableViewCell.m; sourceTree = "<group>"; };
-		83FCD19D18F91FC000A493F0 /* RYRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRegisterViewController.h; sourceTree = "<group>"; };
-		83FCD19E18F91FC000A493F0 /* RYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegisterViewController.m; sourceTree = "<group>"; };
+		83FCD19D18F91FC000A493F0 /* RYRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRegister2ViewController.h; sourceTree = "<group>"; };
+		83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegister2ViewController.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
@@ -195,9 +214,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		830BBCAC18F9F54900A9C53F /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				830BBCAD18F9F54900A9C53F /* SSKeychain.strings */,
+				830BBCAF18F9F54900A9C53F /* SSKeychain.h */,
+				830BBCB018F9F54900A9C53F /* SSKeychain.m */,
+				830BBCB118F9F54900A9C53F /* SSKeychainQuery.h */,
+				830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */,
+			);
+			path = SSKeychain;
+			sourceTree = "<group>";
+		};
+		830BBCB618FA055900A9C53F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				830BBCB718FA055900A9C53F /* MBProgressHUD-Prefix.pch */,
+				830BBCB818FA055900A9C53F /* MBProgressHUD.h */,
+				830BBCB918FA055900A9C53F /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		83DBCA6B18F97A2A00262496 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */,
+				830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */,
+				830BBCB618FA055900A9C53F /* MBProgressHUD */,
 				83DBCA7518F9859000262496 /* RMDisplayLabel.h */,
 				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
 				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
@@ -389,8 +433,8 @@
 		83FCD19C18F91FA000A493F0 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				83FCD19D18F91FC000A493F0 /* RYRegisterViewController.h */,
-				83FCD19E18F91FC000A493F0 /* RYRegisterViewController.m */,
+				83FCD19D18F91FC000A493F0 /* RYRegister2ViewController.h */,
+				83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -398,6 +442,7 @@
 		83FCD1A018F921AB00A493F0 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				830BBCAC18F9F54900A9C53F /* SSKeychain */,
 				83FCD1A118F921EA00A493F0 /* RYServices.h */,
 				83FCD1A218F921EA00A493F0 /* RYServices.m */,
 				83FCD1BD18F9425400A493F0 /* RYUser.h */,
@@ -430,6 +475,8 @@
 				83FCD1AD18F93F5500A493F0 /* artists@2x.png */,
 				83FCD1AE18F93F5500A493F0 /* user@2x.png */,
 				83FCD1AA18F93E6C00A493F0 /* user.png */,
+				830BBCC118FA081600A9C53F /* checkmark.png */,
+				830BBCC218FA081600A9C53F /* checkmark@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -555,6 +602,8 @@
 				83FCD1B418F93FBF00A493F0 /* newsfeed.png in Resources */,
 				83FCD1D118F9683D00A493F0 /* Loading_1@2x.png in Resources */,
 				83FCD1C518F94AC400A493F0 /* play.png in Resources */,
+				830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */,
+				830BBCC318FA081600A9C53F /* checkmark.png in Resources */,
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
@@ -564,6 +613,7 @@
 				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
 				83FCD1C818F95CBC00A493F0 /* patrickCarney.png in Resources */,
 				83FCD1D518F9683D00A493F0 /* Loading_3@2x.png in Resources */,
+				830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */,
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
 				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
@@ -625,13 +675,16 @@
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				83FCD1EE18F9741400A493F0 /* AFSecurityPolicy.m in Sources */,
 				83FCD1EB18F9741400A493F0 /* AFHTTPRequestOperationManager.m in Sources */,
+				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83FCD1EA18F9741400A493F0 /* AFHTTPRequestOperation.m in Sources */,
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
+				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
-				83FCD19F18F91FC000A493F0 /* RYRegisterViewController.m in Sources */,
+				83FCD19F18F91FC000A493F0 /* RYRegister2ViewController.m in Sources */,
 				83FCD1C218F943AE00A493F0 /* RYRiff.m in Sources */,
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
+				830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				83FCD1EC18F9741400A493F0 /* AFHTTPSessionManager.m in Sources */,
@@ -640,6 +693,7 @@
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,
 				83FCD1EF18F9741400A493F0 /* AFURLConnectionOperation.m in Sources */,
+				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
 				83FCD1F218F9741400A493F0 /* AFURLSessionManager.m in Sources */,
@@ -673,6 +727,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		830BBCAD18F9F54900A9C53F /* SSKeychain.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				830BBCAE18F9F54900A9C53F /* en */,
+			);
+			name = SSKeychain.strings;
+			sourceTree = "<group>";
+		};
 		83FCD14418F907C400A493F0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

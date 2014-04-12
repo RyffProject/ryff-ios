@@ -27,10 +27,18 @@
 - (void) configureForRiff:(RYRiff *)riff
 {
     [_riffTitleText setText:riff.title];
+    _riffDuration = riff.length;
+    _durationCountdown = riff.length;
     
-    NSInteger seconds = (NSInteger)riff.length % 60;
-    NSInteger minutes = (NSInteger)riff.length % 60;
+    [self updateDurationText];
+}
+
+- (void) updateDurationText
+{
+    NSInteger seconds = (NSInteger)_durationCountdown % 60;
+    NSInteger minutes = (NSInteger)_durationCountdown / 60;
     //NSInteger hours = ((NSInteger)riff.length / 3600);
+    
     [_riffLengthText setText:[NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds]];
 }
 
@@ -39,27 +47,24 @@
 
 - (void) startPlaying
 {
-    // prepare loading images
-    NSInteger numImages = 3;
-    NSMutableArray *images = [[NSMutableArray alloc] init];
+    // Set up timer
+    _durationCountdown = _riffDuration;
+    [self keepPlaying];
     
-    // load all rotations of these images
-    for (NSNumber *rotation in @[@0,@2,@1,@3])
-    {
-        for (NSInteger imNum = 1; imNum <= numImages; imNum++)
-        {
-            NSInteger rotateVar = [rotation integerValue];
-            UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]];
-            loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
-            [images addObject:loadingImage];
-        }
-    }
-    
-    // Normal Animation
-    _statusImageView.animationImages = images;
-    _statusImageView.animationDuration = 1.5;
-    
-    [_statusImageView startAnimating];
+    // Setup timer and duration countdown
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(refreshTimerHit:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+}
+
+- (void) keepPlaying
+{
+    // Setup timer and duration countdown
+    [self setPaused:NO];
+    // Update image
+    [self setShouldBePlaying:YES];
 }
 
 - (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes
@@ -98,9 +103,12 @@
     {
         UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
         [_statusImageView setImage:maskedImage];
+        [_durationTimer invalidate];
+        _durationTimer = nil;
     }
     else
-        [self startPlaying];
+        [self keepPlaying];
+    _paused = shouldPause;
 }
 
 - (void) clearAudio
@@ -108,9 +116,64 @@
     [_downloadIndicator removeFromSuperview];
     _downloadIndicator = nil;
     
-    UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
-    [_statusImageView setImage:maskedImage];
+    // reset duration text
+    [_durationTimer invalidate];
+    _durationTimer = nil;
+    _durationCountdown = _riffDuration;
+    [self updateDurationText];
+    [self setShouldBePlaying:NO];
 }
 
+#pragma mark -
+#pragma mark - Timers
+
+-(void) refreshTimerHit:(NSTimer*)sender
+{
+    if (!_downloadIndicator && _playing && !_shouldBePlaying)
+    {
+        // stop animation
+        UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+        [_statusImageView setImage:maskedImage];
+    }
+    if (!_downloadIndicator && !_playing && _shouldBePlaying)
+    {
+        //start animation
+        
+        // prepare loading images
+        NSInteger numImages = 3;
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        
+        // load all rotations of these images
+        for (NSNumber *rotation in @[@0,@2,@1,@3])
+        {
+            for (NSInteger imNum = 1; imNum <= numImages; imNum++)
+            {
+                NSInteger rotateVar = [rotation integerValue];
+                UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]];
+                loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
+                [images addObject:loadingImage];
+            }
+        }
+        
+        // Normal Animation
+        _statusImageView.animationImages = images;
+        _statusImageView.animationDuration = 1.5;
+        
+        [_statusImageView startAnimating];
+    }
+    
+    if (!_paused)
+    {
+        if (_durationCountdown > 0)
+        {
+            _durationCountdown--;
+            [self updateDurationText];
+        }
+        else
+        {
+            _paused = YES;
+        }
+    }
+}
 
 @end

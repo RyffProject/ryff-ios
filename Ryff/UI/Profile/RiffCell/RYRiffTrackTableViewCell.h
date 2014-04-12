@@ -16,7 +16,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
 @property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
+
 @property (nonatomic, strong) RMDownloadIndicator *downloadIndicator;
+
+// Duration objects
+@property (nonatomic, assign) NSInteger riffDuration;
+@property (nonatomic, assign) NSInteger durationCountdown;
+@property (nonatomic, assign) BOOL paused, playing, shouldBePlaying;
+@property (nonatomic, strong) NSTimer *durationTimer;
+@property (nonatomic, strong) NSTimer *refreshTimer;
 
 - (void) configureForRiff:(RYRiff *)riff;
 - (void) startDownloading;
