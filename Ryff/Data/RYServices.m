@@ -8,6 +8,9 @@
 
 #import "RYServices.h"
 
+// Data Objects
+#import "RYUser.h"
+
 @implementation RYServices
 
 static RYServices* _sharedInstance;
@@ -19,6 +22,11 @@ static RYServices* _sharedInstance;
         _sharedInstance = [RYServices allocWithZone:NULL];
     }
     return _sharedInstance;
+}
+
++ (RYUser *)loggedInUser
+{
+    return [RYUser patrick];
 }
 
 @end

@@ -25,39 +25,62 @@
     return  [UIFont boldSystemFontOfSize:20.0f];
 }
 
-+(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString*)imageName
++(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString *)imageName
 {
-    UIImage *image = [UIImage imageNamed:imageName];
+    return [self maskWithColor:color forImage:[UIImage imageNamed:imageName]];
+}
+
++(UIImage *) maskWithColor:(UIColor *)color forImage:(UIImage*)image
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, image.size.width, image.size.height);
     
-    // begin a new image context, to draw our colored image onto
-    UIGraphicsBeginImageContext(image.size);
+    if (UIGraphicsBeginImageContextWithOptions) {
+        CGFloat imageScale = 1.0f;
+        UIGraphicsBeginImageContextWithOptions(image.size, NO, imageScale);
+    }
+    else {
+        UIGraphicsBeginImageContext(image.size);
+    }
     
-    // get a reference to that context we created
+    [image drawInRect:rect];
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetBlendMode(context, kCGBlendModeSourceIn);
     
-    // set the fill color
-    [color setFill];
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextFillRect(context, rect);
     
-    // translate/flip the graphics context (for transforming from CG* coords to UI* coords
-    CGContextTranslateCTM(context, 0, image.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    // set the blend mode to color burn, and the original image
-    CGContextSetBlendMode(context, kCGBlendModeColorBurn);
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    CGContextDrawImage(context, rect, image.CGImage);
-    
-    // set a mask that matches the shape of the image, then draw (color burn) a colored rectangle
-    CGContextClipToMask(context, rect, image.CGImage);
-    CGContextAddRect(context, rect);
-    CGContextDrawPath(context,kCGPathFill);
-    
-    // generate a new UIImage from the graphics context we drew onto
-    UIImage *coloredImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *colored = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    //return the color-burned image
-    return coloredImg;
+    return colored;
+}
+
++ (UIImage *)image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians
+{
+    // calculate the size of the rotated view's containing box for our drawing space
+    UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0,imageToRotate.size.width, imageToRotate.size.height)];
+    CGAffineTransform t = CGAffineTransformMakeRotation(radians);
+    rotatedViewBox.transform = t;
+    CGSize rotatedSize = rotatedViewBox.frame.size;
+    
+    // Create the bitmap context
+    UIGraphicsBeginImageContext(rotatedSize);
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
+    
+    // Move the origin to the middle of the image so we will rotate and scale around the center.
+    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
+    
+    //   // Rotate the image context
+    CGContextRotateCTM(bitmap, radians);
+    
+    // Now, draw the rotated/scaled image into the context
+    CGContextScaleCTM(bitmap, 1.0, -1.0);
+    CGContextDrawImage(bitmap, CGRectMake(-imageToRotate.size.width / 2, -imageToRotate.size.height / 2, imageToRotate.size.width, imageToRotate.size.height), [imageToRotate CGImage]);
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end

@@ -8,6 +8,9 @@
 
 #import "RYNewsfeedTableViewController.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data Objects
 #import "RYNewsfeedPost.h"
 #import "RYRiff.h"
@@ -16,10 +19,19 @@
 // Custom UI
 #import "RYRiffTrackTableViewCell.h"
 #import "RYStyleSheet.h"
+#import "RYRiffTrackTableViewCell.h"
 
-@interface RYNewsfeedTableViewController ()
+// Media
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+
+@interface RYNewsfeedTableViewController () <RiffDownloadDelegate>
 
 @property (nonatomic, strong) NSArray *feedItems;
+
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, weak) RYRiffTrackTableViewCell *currentlyPlayingCell;
+@property (nonatomic, assign) BOOL isPlaying;
 
 @end
 
@@ -35,6 +47,21 @@
     RYNewsfeedPost *testPost = [[RYNewsfeedPost alloc] initWithUsername:patrick.username mainText:@"A new song we've been working on..." riff:nextgirl];
     
     _feedItems = @[testPost];
+    _isPlaying = NO;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(riffDownloadFinished) name:@"riffDownloadFinished" object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Table view data source
@@ -58,20 +85,33 @@
     if (post.riff && indexPath.row == 0)
     {
         RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:@"RiffCell" forIndexPath:indexPath];
-        [riffCell configureForRiff:post.riff];
         cell = riffCell;
     }
     else
     {
         // user post
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RYNewsfeedPost *post = [_feedItems objectAtIndex:indexPath.section];
+    if (post.riff && indexPath.row == 0)
+    {
+        RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
+        UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+        [riffCell.playPauseButton setImage:maskedImage forState:UIControlStateNormal];
         
+        [riffCell configureForRiff:post.riff];
+    }
+    else
+    {
         NSAttributedString *attributedText = [self createAttributedTextWithPost:post];
         
         [cell.textLabel setAttributedText:attributedText];
     }
-    
-    return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,7 +131,67 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];\
+    
+    RYNewsfeedPost *post = [_feedItems objectAtIndex:indexPath.section];
+    
+    if (post.riff && indexPath.row == 0)
+    {
+        // riff cell
+        [self playPauseHitForPost:indexPath.section];
+    }
+    else
+    {
+        // open new view controller for chosen user
+    }
+}
+
+#pragma mark -
+#pragma mark - Media Methods
+
+-(void) playPauseHitForPost:(NSUInteger)postIndex
+{
+    if (!_isPlaying)
+    {
+        RYNewsfeedPost *post = [_feedItems objectAtIndex:postIndex];
+        
+        NSString *soundFilePath = post.riff.URL;
+        
+        NSData *_objectData = [NSData dataWithContentsOfURL:[NSURL URLWithString:soundFilePath]];
+        NSError *error;
+        
+        _audioPlayer = [[AVAudioPlayer alloc] initWithData:_objectData error:&error];
+        _audioPlayer.numberOfLoops = 0;
+        _audioPlayer.volume = 1.0f;
+        [_audioPlayer prepareToPlay];
+        
+        if (_audioPlayer == nil)
+            NSLog(@"%@", [error description]);
+        else
+        {
+            _isPlaying = YES;
+        }
+    }
+    else
+    {
+        // should pause
+        [_audioPlayer pause];
+    }
+}
+
+#pragma mark -
+#pragma mark - Riff Download Delegate
+
+- (void) riffDownloadStarted
+{
+    
+}
+- (void) riffDownloadFinished
+{
+    if (_isPlaying)
+    {
+        [_audioPlayer play];
+    }
 }
 
 #pragma mark -

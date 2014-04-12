@@ -7,7 +7,15 @@
 //
 
 #import "RYProfileViewController.h"
+
+// Data Managers
+#import "RYServices.h"
+
+// Data Objects
 #import "RYUser.h"
+
+// Custom UI
+#import "RYStyleSheet.h"
 
 @interface RYProfileViewController ()
 
@@ -28,6 +36,20 @@
 
 - (void) configureForUser:(RYUser *)user
 {
+    // Profile picture
+    [_profileImageView setImage:user.profileImage];
+    
+    // Edit button
+    if ([user.username isEqualToString:[RYServices loggedInUser].username])
+    {
+        
+    }
+    else
+    {
+        [_editButton removeFromSuperview];
+    }
+    
+    // Display name
     [_nameText setText:user.firstName];
 }
 

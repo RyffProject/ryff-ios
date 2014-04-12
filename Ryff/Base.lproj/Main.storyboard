@@ -127,8 +127,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1:15:13" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFk-1B-wHN">
-                                                    <rect key="frame" x="257" y="11" width="58" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFk-1B-wHN">
+                                                    <rect key="frame" x="263" y="11" width="43" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -165,9 +165,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqc-1A-sAw">
-                                <rect key="frame" x="254" y="20" width="46" height="30"/>
+                                <rect key="frame" x="254" y="20" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Edit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -184,7 +184,7 @@
                         <outlet property="groupsButton" destination="DqW-HZ-RBs" id="o5e-v3-Uft"/>
                         <outlet property="nameText" destination="Zhg-ve-WU7" id="Rnx-5Y-zEA"/>
                         <outlet property="otherButton" destination="brJ-07-KsM" id="Z44-7p-jkY"/>
-                        <outlet property="profilePhoto" destination="DD8-gk-7g6" id="3oj-im-CMp"/>
+                        <outlet property="profileImageView" destination="DD8-gk-7g6" id="6nk-KJ-4V3"/>
                         <outlet property="recentActivityButton" destination="O6D-ar-mNc" id="4a3-1n-Cp9"/>
                         <outlet property="riffTableView" destination="ZfJ-gr-mtb" id="i5H-og-pa1"/>
                     </connections>

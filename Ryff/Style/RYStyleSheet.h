@@ -16,5 +16,6 @@
 +(UIFont*)boldFont;
 
 +(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString*)imageName;
++(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 
 @end

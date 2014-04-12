@@ -8,6 +8,9 @@
 
 #import "RYCoreTabBarViewController.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data Objects
 #import "RYUser.h"
 
@@ -34,8 +37,8 @@
         {
             RYProfileViewController *profController = (RYProfileViewController*)vc;
             // Should be user's object
-            RYUser *patrick = [RYUser patrick];
-            [profController setUser:patrick];
+            RYUser *loggedInUser = [RYServices loggedInUser];
+            [profController setUser:loggedInUser];
         }
     }
 }
