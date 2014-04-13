@@ -11,6 +11,12 @@
 @class RYRiff;
 @class RMDownloadIndicator;
 
+enum LoadingStatus : NSUInteger {
+    STOP = 1,
+    PLAY = 2,
+    DOWNLOAD = 3
+};
+
 @interface RYRiffTrackTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
@@ -22,8 +28,8 @@
 // Duration objects
 @property (nonatomic, assign) NSInteger riffDuration;
 @property (nonatomic, assign) NSInteger durationCountdown;
-@property (nonatomic, assign) BOOL paused, playing, shouldBePlaying;
-@property (nonatomic, strong) NSTimer *durationTimer;
+@property (nonatomic, assign) enum LoadingStatus loadingStatus;
+@property (nonatomic, assign) enum LoadingStatus currentStatus;
 @property (nonatomic, strong) NSTimer *refreshTimer;
 
 - (void) configureForRiff:(RYRiff *)riff;

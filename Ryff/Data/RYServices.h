@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+// NSUserDefaults keys
 #define kLoggedInUserKey @"loggedInUser"
+#define kCoordLongitude @"lastUpdatedLongitude"
+#define kCoordLatitude @"lastUpdatedLatitude"
 
 #define host @"http://ryff.me/api/"
 
@@ -34,6 +37,7 @@
 + (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
 - (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
+- (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate;
 - (void) submitAuthenticatedRest_POST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
 
 @end

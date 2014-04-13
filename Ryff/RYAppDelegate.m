@@ -8,9 +8,6 @@
 
 #import "RYAppDelegate.h"
 
-// Associated View Controllers
-#import "RYRegister2ViewController.h"
-
 // Data Managers
 #import "RYServices.h"
 
@@ -20,16 +17,16 @@
 {
     // Override point for customization after application launch.
     
-    NSString *logggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
+    NSString *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
     
-    if (!logggedInUser)
+    if (!loggedInUser)
     {
         // present registration page
         UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:@"Main" bundle:NULL];
-        RYRegister2ViewController *regVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"registerVC"];
-        [regVC setModalPresentationStyle:UIModalPresentationFullScreen];
+        UINavigationController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"registrationNC"];
+        [navCon setModalPresentationStyle:UIModalPresentationFullScreen];
         [self.window makeKeyAndVisible];
-        [self.window.rootViewController presentViewController:regVC animated:YES completion:NULL];
+        [self.window.rootViewController presentViewController:navCon animated:NO completion:NULL];
     }
     return YES;
 }

@@ -10,9 +10,14 @@
 
 @interface RYRegister2ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameText;
-@property (weak, nonatomic) IBOutlet UITextField *passwordText;
-@property (weak, nonatomic) IBOutlet UITextField *emailText;
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *email;
+
+@property (weak, nonatomic) IBOutlet UIView *avatarOwnerView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
+@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
 
 - (IBAction)submitRegistration:(id)sender;
 

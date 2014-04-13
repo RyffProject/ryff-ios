@@ -61,6 +61,33 @@ static RYServices* _sharedInstance;
 #pragma mark -
 #pragma mark - Server
 
+- (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kRegistrationAction];
+    [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        if (image)
+        {
+            NSData *imageData = UIImagePNGRepresentation(image);
+            [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar" mimeType:@"image/png"];
+        }
+        
+    }  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        
+        if (dictionary[@"success"])
+            [delegate postSucceeded:responseObject];
+        else
+            [delegate postFailed];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+        [delegate postFailed];
+    }];
+}
+
 - (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
