@@ -35,19 +35,14 @@
 {
     // id
     NSNumber *user_id = [userDict valueForKey:@"id"];
-    
     //username
     NSString *username = [userDict objectForKey:@"username"];
-    
     //name
     NSString *name = [userDict objectForKey:@"name"];
-    
     // avatar
     NSString *avatarUrl = [userDict objectForKey:@"avatar"];
-    
     // bio
     NSString *bio = [userDict objectForKey:@"bio"];
-    
     
     // timestamp
     NSString *date_created = [userDict objectForKey:@"date_created"];

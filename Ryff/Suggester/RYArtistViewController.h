@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) RYUser *artist;
 
-- (void) friendStatus:(BOOL)friends;
 - (void) configureForArtist;
 
 @end

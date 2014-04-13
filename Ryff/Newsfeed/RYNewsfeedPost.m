@@ -14,31 +14,39 @@
 
 @implementation RYNewsfeedPost
 
-- (RYNewsfeedPost *)initWithUsername:(NSString *)username mainText:(NSString*)mainText riff:(RYRiff*)riff
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated
 {
     if (self = [super init])
     {
-        _username   = username;
-        _mainText   = mainText;
-        _riff       = riff;
+        _postId      = postId;
+        _user        = user;
+        _content     = content;
+        _riff        = riff;
+        _dateCreated = dateCreated;
     }
     return self;
 }
 
-+ (NSArray *)testNewsfeedPosts
++ (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict
 {
-    NSMutableArray *feedItems = [[NSMutableArray alloc] init];
+    NSNumber *postId = [postDict objectForKey:@"id"];
     
-    NSString *username = @"patrickCarney";
-    RYRiff *nextgirl = [[RYRiff alloc] initWithTitle:@"Next Girl" length:180 url:@"http://danielawrites.files.wordpress.com/2010/05/the-black-keys-next-girl.mp3"];
-    RYNewsfeedPost *testPost = [[RYNewsfeedPost alloc] initWithUsername:username mainText:@"A new song we've been working on..." riff:nextgirl];
-    [feedItems addObject:testPost];
+    NSDictionary *userDict = [postDict objectForKey:@"user"];
+    RYUser *user = [RYUser userFromDict:userDict];
     
-    RYRiff *psychoticGirl = [[RYRiff alloc] initWithTitle:@"Psychotic Girl" length:180 url:@"http://saharalotti.com/music/04%20Psychotic%20Girl.mp3"];
-    RYNewsfeedPost *testPost2 = [[RYNewsfeedPost alloc] initWithUsername:username mainText:@"Check this out! About no one in particular of course... :) Let's jam!" riff:psychoticGirl];
-    [feedItems addObject:testPost2];
+    NSString *content = [postDict objectForKey:@"content"];
     
-    return feedItems;
+    NSDictionary *riffDict = [postDict objectForKey:@"riff"];
+    RYRiff *riff = [RYRiff riffFromDict:riffDict];
+    
+    // dateCreated
+    NSString *date_created = [userDict objectForKey:@"date_created"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+    NSDate *date = [dateFormatter dateFromString:date_created];
+    
+    RYNewsfeedPost *newPost = [[RYNewsfeedPost alloc] initWithPostId:[postId integerValue] User:user Content:content riff:riff dateCreated:date];
+    return newPost;
 }
 
 @end

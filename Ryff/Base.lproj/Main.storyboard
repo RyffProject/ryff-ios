@@ -182,13 +182,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqW-HZ-RBs">
-                                <rect key="frame" x="187" y="128" width="51" height="30"/>
+                                <rect key="frame" x="187" y="128" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Groups">
+                                <state key="normal" title="Add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="groupsHit:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="qMv-Mh-hEm"/>
+                                    <action selector="addHit:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="8M3-9x-Mp4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-07-KsM">
@@ -217,8 +217,8 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="user.png" id="u1e-5L-l1D"/>
                     <connections>
                         <outlet property="aboutButton" destination="brJ-07-KsM" id="y9z-tW-aHO"/>
+                        <outlet property="addButton" destination="DqW-HZ-RBs" id="gwu-Q4-jf8"/>
                         <outlet property="editButton" destination="uqc-1A-sAw" id="lMF-Sm-SjS"/>
-                        <outlet property="groupsButton" destination="DqW-HZ-RBs" id="o5e-v3-Uft"/>
                         <outlet property="nameText" destination="Zhg-ve-WU7" id="Rnx-5Y-zEA"/>
                         <outlet property="profileImageView" destination="DD8-gk-7g6" id="6nk-KJ-4V3"/>
                         <outlet property="recentActivityButton" destination="O6D-ar-mNc" id="4a3-1n-Cp9"/>
@@ -315,7 +315,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TN8-j1-AYx">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TN8-j1-AYx">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>

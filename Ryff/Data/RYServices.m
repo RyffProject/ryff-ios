@@ -25,6 +25,7 @@
 @implementation RYServices
 
 static RYServices* _sharedInstance;
+static RYUser* _loggedInUser;
 
 + (RYServices *)sharedInstance
 {
@@ -37,7 +38,13 @@ static RYServices* _sharedInstance;
 
 + (RYUser *)loggedInUser
 {
-    return [RYUser patrick];
+    if (_loggedInUser == NULL)
+    {
+        NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+        if (userDict)
+            _loggedInUser = [RYUser userFromDict:userDict];
+    }
+    return _loggedInUser;
 }
 
 #pragma mark -
@@ -48,10 +55,10 @@ static RYServices* _sharedInstance;
                            [RYStyleSheet boldFont], NSFontAttributeName, nil];
     NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
                               [RYStyleSheet baseFont], NSFontAttributeName, nil];
-    const NSRange range = NSMakeRange(0,post.username.length);
+    const NSRange range = NSMakeRange(0,post.user.username.length);
     
     // Create the attributed string (text + attributes)
-    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.username,post.mainText];
+    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.user.username,post.content];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
                                                                                        attributes:subAttrs];
     [attributedText setAttributes:attrs range:range];
@@ -201,5 +208,8 @@ static RYServices* _sharedInstance;
         [delegate actionFailed];
     }];
 }
+
+#pragma mark -
+#pragma mark - Newsfeed
 
 @end

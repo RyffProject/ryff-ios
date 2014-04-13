@@ -22,12 +22,15 @@
 enum VisualStatus : NSUInteger {
     ABOUT = 1,
     ACTIVITY = 2,
-    GROUPS = 3
+    RECORD = 3
 };
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, assign) enum VisualStatus visualStatus;
+
+@property (nonatomic, strong) AVAudioRecorder *recorder;
+@property (nonatomic, assign) BOOL isRecording;
 
 @end
 
@@ -86,9 +89,9 @@ enum VisualStatus : NSUInteger {
     [_tableView reloadData];
 }
 
-- (IBAction)groupsHit:(id)sender
+- (IBAction)addHit:(id)sender
 {
-    [self setVisualStatus:GROUPS];
+    [self setVisualStatus:RECORD];
     [self clearRiffDownloading];
     [_tableView reloadData];
 }
@@ -98,6 +101,37 @@ enum VisualStatus : NSUInteger {
     [self setVisualStatus:ABOUT];
     [self clearRiffDownloading];
     [_tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark - Recordings
+
+- (void) prepForRecording
+{
+    // Should disable stuff first
+    // Set the audio file
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"riff.m4a",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    
+    // Setup audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    
+    // Define the recorder setting
+    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
+    
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    
+    // Initiate and prepare the recorder
+    _recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+    _recorder.delegate = self;
+    _recorder.meteringEnabled = YES;
+    [_recorder prepareToRecord];
 }
 
 #pragma mark -
@@ -115,9 +149,9 @@ enum VisualStatus : NSUInteger {
     {
         sectionCount = _user.activity.count;
     }
-    else if (_visualStatus == GROUPS)
+    else if (_visualStatus == RECORD)
     {
-        
+        sectionCount = 1;
     }
     
     return sectionCount;
@@ -143,9 +177,9 @@ enum VisualStatus : NSUInteger {
         RYNewsfeedPost *post = [_user.activity objectAtIndex:section];
         rowCount = (post.riff) ? 2 : 1;
     }
-    else if (_visualStatus == GROUPS)
+    else if (_visualStatus == RECORD)
     {
-        
+        rowCount = 2;
     }
     
     return rowCount;
@@ -177,9 +211,9 @@ enum VisualStatus : NSUInteger {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
         }
     }
-    else if (_visualStatus == GROUPS)
+    else if (_visualStatus == RECORD)
     {
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
     }
     
     if (!cell)
@@ -220,9 +254,25 @@ enum VisualStatus : NSUInteger {
             [cell.textLabel setAttributedText:attributedText];
         }
     }
-    else if (_visualStatus == GROUPS)
+    else if (_visualStatus == RECORD)
     {
-        
+        if (indexPath.row == 0)
+        {
+            if (!_isRecording)
+            {
+                [cell.textLabel setText:@"Record a riff"];
+                [cell.imageView setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"mic"]];
+            }
+            else
+            {
+                [cell.textLabel setText:@"Recording.."];
+                [cell.imageView setImage:[RYStyleSheet maskWithColor:[UIColor redColor] forImageNamed:@"dot"]];
+            }
+        }
+        else
+        {
+            [cell.textLabel setText:@"Details"];
+        }
     }
 }
 
@@ -314,6 +364,10 @@ enum VisualStatus : NSUInteger {
             // open new view controller for chosen user
             
         }
+    }
+    else if (_visualStatus == RECORD)
+    {
+        
     }
 }
 

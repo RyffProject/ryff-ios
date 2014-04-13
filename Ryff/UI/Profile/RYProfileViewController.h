@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UIButton *recentActivityButton;
-@property (weak, nonatomic) IBOutlet UIButton *groupsButton;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -25,7 +25,7 @@
 
 - (IBAction)editHit:(id)sender;
 - (IBAction)activityHit:(id)sender;
-- (IBAction)groupsHit:(id)sender;
+- (IBAction)addHit:(id)sender;
 - (IBAction)aboutHit:(id)sender;
 
 @end

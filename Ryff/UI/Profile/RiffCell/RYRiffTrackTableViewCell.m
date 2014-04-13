@@ -43,8 +43,8 @@
 - (void) configureForRiff:(RYRiff *)riff
 {
     [_riffTitleText setText:riff.title];
-    _riffDuration = riff.length;
-    _durationCountdown = riff.length;
+    _riffDuration = riff.duration;
+    _durationCountdown = riff.duration;
     
     [self setLoadingStatus:STOP];
     [self setCurrentStatus:STOP];

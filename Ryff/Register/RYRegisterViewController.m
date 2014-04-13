@@ -19,12 +19,18 @@
 #import "RYServices.h"
 #import "RYLocationServices.h"
 
+// Data Managers
+#import "SSKeychain.h"
+
 @interface RYRegisterViewController () <POSTDelegate, LocationDelegate, UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) UIImage *avatarImage;
 @property (nonatomic, strong) NSNumber *longitude;
 @property (nonatomic, strong) NSNumber *latitude;
+
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
 
 @end
 
@@ -44,6 +50,7 @@
     [super viewDidLoad];
     
     // Prep for keyboard notifications
+    [self registerForKeyboardNotifications];
     
 }
 
@@ -96,13 +103,13 @@
 
 - (IBAction)submitRegistration:(id)sender
 {
-    NSString *username  = _usernameText.text;
-    NSString *password  = _passwordText.text;
+    _username  = _usernameText.text;
+    _password           = _passwordText.text;
     NSString *email     = _emailText.text;
     NSString *bio       = _bioText.text;
     NSString *name      = _nameText.text;
     
-    if (username.length > 0 && password.length > 0 && email.length > 0)
+    if (_username.length > 0 && _password.length > 0 && email.length > 0)
     {
         if (_latitude && _longitude)
         {
@@ -111,8 +118,8 @@
             NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
             
             requestDict[@"email"]       = email;
-            requestDict[@"username"]    = username;
-            requestDict[@"password"]    = password;
+            requestDict[@"username"]    = _username;
+            requestDict[@"password"]    = _password;
             requestDict[@"bio"]         = bio;
             requestDict[@"name"]        = name;
             requestDict[@"longitude"]   = _longitude;
@@ -153,6 +160,8 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [SSKeychain setPassword:_password forService:@"ryff" account:_username];
     }
     
     [self hideHUD];
@@ -296,7 +305,7 @@
     // get active text field
     CGPoint textOrigin = CGPointMake(0, 0);
     for (UIView *view in self.view.subviews) {
-        if (view.isFirstResponder && [view isKindOfClass:[UITextField class]])
+        if (view.isFirstResponder)
         {
             textOrigin = view.frame.origin;
         }

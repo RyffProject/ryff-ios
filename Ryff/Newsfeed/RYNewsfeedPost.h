@@ -13,12 +13,15 @@
 
 @interface RYNewsfeedPost : NSObject
 
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *mainText;
+@property (nonatomic, assign) NSInteger postId;
+@property (nonatomic, strong) RYUser *user;
+@property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) RYRiff *riff;
+@property (nonatomic, strong) NSDate *dateCreated;
 
-- (RYNewsfeedPost *)initWithUsername:(NSString *)username mainText:(NSString*)mainText riff:(RYRiff*)riff;
 
-+ (NSArray *)testNewsfeedPosts;
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated;
+
++ (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict;
 
 @end

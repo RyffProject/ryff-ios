@@ -22,7 +22,7 @@
     [super viewDidLoad];
     
     // set up test data
-    self.feedItems = [RYNewsfeedPost testNewsfeedPosts];
+    self.feedItems = @[];
     self.isPlaying = NO;
 }
 

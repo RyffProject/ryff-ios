@@ -11,9 +11,11 @@
 @interface RYRiff : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, assign) NSTimeInterval length;
+@property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, strong) NSString *URL;
 
-- (RYRiff*)initWithTitle:(NSString*)title length:(NSTimeInterval)length url:(NSString*)url;
+- (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSString*)url;
+
++ (RYRiff*)riffFromDict:(NSDictionary*)riffDict;
 
 @end
