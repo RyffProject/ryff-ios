@@ -230,6 +230,10 @@ static RYUser* _loggedInUser;
     RYUser *userObject = [RYUser userFromDict:userDict];
     NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
     
+    if (!content)
+        content = @"";
+    if (!duration)
+        duration = @0;
     NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId], @"content":content, @"title":title,@"duration":duration};
     
     NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];

@@ -72,11 +72,11 @@
     if (index < ([_artists count] - 1))
     {
         index++;
-        RYArtistViewController *newVC = [[RYArtistViewController alloc] init];
+        UINavigationController *navCon = (UINavigationController*)[self viewControllerAtIndex:index];
+        RYArtistViewController *newVC = [navCon.viewControllers firstObject];
         [newVC setArtist:[_artists objectAtIndex:index]];
-        UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:newVC];
         
-        NSArray *viewControllers = @[navCont];
+        NSArray *viewControllers = @[navCon];
         [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
 }

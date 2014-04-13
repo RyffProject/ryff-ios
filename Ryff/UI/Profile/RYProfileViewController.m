@@ -55,10 +55,6 @@ enum VisualStatus : NSUInteger {
     [_recentActivityButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"newsfeed"] forState:UIControlStateNormal];
     [_addButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"plus"] forState:UIControlStateNormal];
     [_aboutButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"user"] forState:UIControlStateNormal];
-    
-    UITapGestureRecognizer *backgroundTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
-    [self.view addGestureRecognizer:backgroundTap];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -95,13 +91,6 @@ enum VisualStatus : NSUInteger {
     
     // prep activity
     [self setFeedItems:user.activity];
-}
-
-#pragma mark - TextFields
-
-- (void)backgroundTapped:(id)sender
-{
-    [self.view endEditing:YES];
 }
 
 #pragma mark -
@@ -312,8 +301,6 @@ enum VisualStatus : NSUInteger {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    [cell setBounds:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
     if (_visualStatus == ABOUT)
     {
@@ -340,10 +327,13 @@ enum VisualStatus : NSUInteger {
     else if (_visualStatus == RECORD)
     {
         if (indexPath.row == 0)
+        {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        }
         else
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"TextBlockCell" forIndexPath:indexPath];
+            cell = [[RYTextBlockTableViewCell alloc] init];
         }
     }
     
@@ -403,7 +393,10 @@ enum VisualStatus : NSUInteger {
         }
         else
         {
-            RYTextBlockTableViewCell *textCell = [tableView dequeueReusableCellWithIdentifier:@"TextBlockCell" forIndexPath:indexPath];
+            RYTextBlockTableViewCell *textCell = [[RYTextBlockTableViewCell alloc] init];
+            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 88)];
+            [textCell addSubview:textView];
+            [textCell setTextView:textView];
             [textCell.textView setText:@"Details"];
         }
     }
@@ -413,17 +406,19 @@ enum VisualStatus : NSUInteger {
 {
     CGFloat height = 44.0f;
     
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    
-    if (indexPath.row == 1 || post.riff == NULL)
+    if (_visualStatus == ACTIVITY)
     {
-        CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
-        NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
-        CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        height = MAX(result.size.height+20, height);
+        RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
+        if (indexPath.row == 1 || post.riff == NULL)
+        {
+            CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
+            NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
+            CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+            height = MAX(result.size.height+20, height);
+        }
     }
     
-    if (_visualStatus == ABOUT)
+    else if (_visualStatus == ABOUT)
     {
         // Bio Section
         if (indexPath.section == 0)
