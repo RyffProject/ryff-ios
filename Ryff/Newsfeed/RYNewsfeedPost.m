@@ -36,8 +36,12 @@
     
     NSString *content = [postDict objectForKey:@"content"];
     
-    NSDictionary *riffDict = [postDict objectForKey:@"riff"];
-    RYRiff *riff = [RYRiff riffFromDict:riffDict];
+    RYRiff *riff;
+    id riffResponse = [postDict objectForKey:@"riff"];
+    if ([riffResponse isKindOfClass:[NSDictionary class]])
+    {
+        riff = [RYRiff riffFromDict:riffResponse];
+    }
     
     // dateCreated
     NSString *date_created = [userDict objectForKey:@"date_created"];

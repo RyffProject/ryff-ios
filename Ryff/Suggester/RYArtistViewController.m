@@ -129,7 +129,7 @@
 
 - (void) nextHit:(UIBarButtonItem*)sender
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"next" object:nil]];
 }
 
 @end

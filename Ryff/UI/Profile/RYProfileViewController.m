@@ -28,7 +28,7 @@ enum VisualStatus : NSUInteger {
     RECORD = 3
 };
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, RiffDelegate>
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, RiffDelegate, POSTDelegate>
 
 @property (nonatomic, assign) enum VisualStatus visualStatus;
 
@@ -55,12 +55,21 @@ enum VisualStatus : NSUInteger {
     [_recentActivityButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"newsfeed"] forState:UIControlStateNormal];
     [_addButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"plus"] forState:UIControlStateNormal];
     [_aboutButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"user"] forState:UIControlStateNormal];
+    
+    UITapGestureRecognizer *backgroundTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    [self.view addGestureRecognizer:backgroundTap];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self clearRiffDownloading];
+    
+    // Remove Gestures
+    for (UIGestureRecognizer *recognizer in self.view.gestureRecognizers) {
+        [self.view removeGestureRecognizer:recognizer];
+    }
 }
 
 - (void) configureForUser:(RYUser *)user
@@ -88,6 +97,13 @@ enum VisualStatus : NSUInteger {
     [self setFeedItems:user.activity];
 }
 
+#pragma mark - TextFields
+
+- (void)backgroundTapped:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
 #pragma mark -
 #pragma mark - Button Actions
 
@@ -101,6 +117,10 @@ enum VisualStatus : NSUInteger {
     [self setVisualStatus:ACTIVITY];
     [self clearRiffDownloading];
     [_tableView reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        [[RYServices sharedInstance] getMyPostsForDelegate:self];
+    });
 }
 
 - (IBAction)addHit:(id)sender
@@ -115,13 +135,6 @@ enum VisualStatus : NSUInteger {
     [self setVisualStatus:ABOUT];
     [self clearRiffDownloading];
     [_tableView reloadData];
-}
-
-#pragma mark - TextFields
-
-- (void)backgroundTapped:(id)sender
-{
-    [self.view endEditing:YES];
 }
 
 #pragma mark -
@@ -188,7 +201,7 @@ enum VisualStatus : NSUInteger {
 
 - (void) processRiff
 {
-    [[RYServices sharedInstance] postRiffWithContent:_riffContent ForDelegate:self];
+    [[RYServices sharedInstance] postRiffWithContent:_riffContent title:@"riff" duration:0 ForDelegate:self];
 }
 
 - (void) cleanupRiff
@@ -201,6 +214,33 @@ enum VisualStatus : NSUInteger {
             NSLog(@"Error removing file at path: %@", error.localizedDescription);
         }
     }
+}
+
+#pragma mark -
+#pragma mark - POSTDelegate
+//specifically for fetching my posts
+- (void) connectionFailed
+{
+    
+}
+- (void) postFailed:(NSString*)reason
+{
+    
+}
+- (void) postSucceeded:(id)response
+{
+    NSDictionary *responseDict = response;
+    NSArray *posts = [responseDict objectForKey:@"posts"];
+    
+    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *postDict in posts)
+    {
+        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
+        [myPosts addObject:post];
+    }
+    [self setFeedItems:myPosts];
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -231,7 +271,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        sectionCount = _user.activity.count;
+        sectionCount = self.feedItems.count;
     }
     else if (_visualStatus == RECORD)
     {
@@ -258,7 +298,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        RYNewsfeedPost *post = [_user.activity objectAtIndex:section];
+        RYNewsfeedPost *post = [self.feedItems objectAtIndex:section];
         rowCount = (post.riff) ? 2 : 1;
     }
     else if (_visualStatus == RECORD)
@@ -272,8 +312,9 @@ enum VisualStatus : NSUInteger {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
+    [cell setBounds:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (_visualStatus == ABOUT)
     {
         if (indexPath.section == 0)
@@ -284,6 +325,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
+        RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
         if (post.riff && indexPath.row == 0)
         {
             RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:@"RiffCell" forIndexPath:indexPath];

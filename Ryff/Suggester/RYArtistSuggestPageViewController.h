@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSArray *artists;
 
+- (void) goToNextPage;
+
 @end

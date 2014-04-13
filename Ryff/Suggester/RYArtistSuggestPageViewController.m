@@ -33,11 +33,15 @@
     [super viewWillAppear:animated];
     [[RYServices sharedInstance] setArtistsDelegate:self];
     [[RYServices sharedInstance] moreArtistsOfCount:kArtistGroupSize];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToNextPage) name:@"next" object:nil];
 }
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[RYServices sharedInstance] setArtistsDelegate:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -55,6 +59,25 @@
         // initialize the list
         NSArray *newVCs = @[[self viewControllerAtIndex:0]];
         [self setViewControllers:newVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
+}
+
+#pragma mark -
+#pragma mark - UI
+- (void) goToNextPage
+{
+    UINavigationController *currentNC = [self.viewControllers objectAtIndex:0];
+    RYArtistViewController *currentPage = [currentNC.viewControllers firstObject];
+    NSInteger index = currentPage.pageIndex;
+    if (index < ([_artists count] - 1))
+    {
+        index++;
+        RYArtistViewController *newVC = [[RYArtistViewController alloc] init];
+        [newVC setArtist:[_artists objectAtIndex:index]];
+        UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:newVC];
+        
+        NSArray *viewControllers = @[navCont];
+        [self setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
 }
 

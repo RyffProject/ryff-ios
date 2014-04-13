@@ -19,6 +19,10 @@
 #define kAddFriendAction @"add-friend.php"
 #define kDeleteFriendAction @"delete-friend.php"
 #define kPostRiffAction @"add-post.php"
+#define kGetPosts @"get-posts.php"
+#define kGetPeople @"get-user.php"
+#define kGetNearby @"get-users-nearby.php"
+#define kGetFriendsPosts @"get-friend-posts.php"
 
 // Web service dictionary keys
 #define kUserObjectKey @"user"
@@ -69,5 +73,8 @@
 
 // Posts
 + (NSURL*)pathForRiff;
-- (void) postRiffWithContent:(NSString*)content ForDelegate:(id<RiffDelegate>)riffDelegate;
+- (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate;
+- (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate;
+- (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate;
+
 @end

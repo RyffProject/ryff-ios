@@ -11,7 +11,7 @@
 // Data Managers
 #import "RYServices.h"
 
-@interface RYNewsfeedTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RYNewsfeedTableViewController () <UITableViewDataSource, UITableViewDelegate, POSTDelegate>
 
 @end
 
@@ -29,12 +29,42 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        [[RYServices sharedInstance] getFriendPostsForDelegate:self];
+    });
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self clearRiffDownloading];
+}
+
+#pragma mark -
+#pragma mark - Post Delegate
+- (void) connectionFailed
+{
+    
+}
+- (void) postFailed:(NSString*)reason
+{
+    
+}
+- (void) postSucceeded:(id)response
+{
+    NSDictionary *responseDict = response;
+    NSArray *posts = [responseDict objectForKey:@"posts"];
+    
+    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *postDict in posts)
+    {
+        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
+        [myPosts addObject:post];
+    }
+    [self setFeedItems:myPosts];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

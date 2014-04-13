@@ -222,7 +222,7 @@ static RYUser* _loggedInUser;
     return outputFileURL;
 }
 
-- (void) postRiffWithContent:(NSString*)content ForDelegate:(id<RiffDelegate>)riffDelegate
+- (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -230,7 +230,7 @@ static RYUser* _loggedInUser;
     RYUser *userObject = [RYUser userFromDict:userDict];
     NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
     
-    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId], @"content":content};
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId], @"content":content, @"title":title,@"duration":duration};
     
     NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];
     [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -251,6 +251,53 @@ static RYUser* _loggedInUser;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [riffDelegate riffPostFailed];
+    }];
+}
+
+- (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetPosts];
+    [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        if (dictionary[@"success"])
+            [delegate postSucceeded:responseObject];
+        else
+            [delegate postFailed:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+        [delegate postFailed:[error localizedDescription]];
+    }];
+}
+- (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetFriendsPosts];
+    [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        if (dictionary[@"success"])
+            [delegate postSucceeded:responseObject];
+        else
+            [delegate postFailed:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+        [delegate postFailed:[error localizedDescription]];
     }];
 }
 
