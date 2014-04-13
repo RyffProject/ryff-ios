@@ -46,11 +46,22 @@
     
     // timestamp
     NSString *date_created = [userDict objectForKey:@"date_created"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
-    NSDate *date = [dateFormatter dateFromString:date_created];
+    NSDate *date = [NSDate date];
     
-    RYUser *newUser = [[RYUser alloc] initWithUser:[user_id integerValue] username:username firstName:name profileImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarUrl]]] bio:bio dateCreated:date];
+    if (date_created)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+        date = [dateFormatter dateFromString:date_created];
+    }
+    
+    UIImage *avatar = nil;
+    if (avatarUrl)
+    {
+        avatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarUrl]]];
+    }
+    
+    RYUser *newUser = [[RYUser alloc] initWithUser:[user_id integerValue] username:username firstName:name profileImage:avatar bio:bio dateCreated:date];
     return newUser;
 }
 

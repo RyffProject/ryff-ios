@@ -154,13 +154,42 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Artist Suggester
 
+- (void) parseArtists:(NSArray*)artistsArray
+{
+    NSMutableArray *objectiveArtists = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < artistsArray.count; i++)
+    {
+        NSDictionary *artistDict = artistsArray[i];
+        RYUser *user = [RYUser userFromDict:artistDict];
+        [objectiveArtists addObject:user];
+        
+        if (_artistsDelegate)
+            [_artistsDelegate retrievedArtists:objectiveArtists];
+    }
+}
+
 - (void) moreArtistsOfCount:(NSInteger)numArtists
 {
-    // server request here
-    NSArray *testArtists = @[[RYUser patrick],[RYUser patrick],[RYUser patrick],[RYUser patrick],[RYUser patrick]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    if (_artistsDelegate)
-        [_artistsDelegate retrievedArtists:testArtists];
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetNearby];
+    [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        if (dictionary[@"success"])
+        {
+            NSArray *artists = dictionary[@"users"];
+            [self parseArtists:artists];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+    }];
 }
 - (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate
 {
