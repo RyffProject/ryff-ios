@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSMutableData *riffData;
 @property (nonatomic, strong) NSURLConnection *riffConnection;
 @property (nonatomic, assign) CGFloat totalBytes;
-@property (nonatomic, strong) RYRiffTrackTableViewCell *currentlyPlayingCell;
+@property (nonatomic, weak) RYRiffTrackTableViewCell *currentlyPlayingCell;
 @property (nonatomic, assign) BOOL isDownloading, isPlaying;
 
 @property (nonatomic, strong) UITableView *riffTableView;

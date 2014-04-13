@@ -13,16 +13,21 @@
 #define kCoordLongitude @"lastUpdatedLongitude"
 #define kCoordLatitude @"lastUpdatedLatitude"
 
+// Server paths
 #define host @"http://ryff.me/api/"
-
 #define kRegistrationAction @"create-user.php"
 
+// Web service dictionary keys
+#define kUserObjectKey @"user"
+
 @protocol POSTDelegate <NSObject>
-
 - (void) connectionFailed;
-- (void) postFailed;
+- (void) postFailed:(NSString*)reason;
 - (void) postSucceeded:(id)response;
+@end
 
+@protocol ArtistsFetchDelegate <NSObject>
+- (void) retrievedArtists:(NSArray*)artists;
 @end
 
 @class RYUser;
@@ -30,14 +35,20 @@
 
 @interface RYServices : NSObject
 
-+ (RYServices *)sharedInstance;
 
++ (RYServices *)sharedInstance;
 + (RYUser *) loggedInUser;
 
 + (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
+// Server stuff
+
 - (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
 - (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate;
 - (void) submitAuthenticatedRest_POST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
+
+// Artist Suggester
+- (void) moreArtistsExcluding:(NSArray*)userIds;
+- (void) addFriend:(NSInteger)userId;
 
 @end

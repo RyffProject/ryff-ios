@@ -10,4 +10,6 @@
 
 @interface RYArtistSuggestPageViewController : UIPageViewController
 
+@property (nonatomic, strong) NSArray *artists;
+
 @end

@@ -24,6 +24,22 @@
     // Configure the view for the selected state
 }
 
+- (void) awakeFromNib
+{
+    if (_refreshTimer)
+    {
+        [_refreshTimer invalidate];
+        _refreshTimer = nil;
+    }
+    
+    // Setup timer and duration countdown
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                     target:self
+                                                   selector:@selector(refreshTimerHit:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+}
+
 - (void) configureForRiff:(RYRiff *)riff
 {
     [_riffTitleText setText:riff.title];
@@ -52,13 +68,6 @@
     // Set up timer
     _durationCountdown = _riffDuration;
     [self keepPlaying];
-    
-    // Setup timer and duration countdown
-    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                      target:self
-                                                    selector:@selector(refreshTimerHit:)
-                                                    userInfo:nil
-                                                     repeats:YES];
 }
 
 - (void) keepPlaying
@@ -172,11 +181,21 @@
     {
         // change stuff!
         if (_loadingStatus == PLAY)
+        {
             [self stylePlaying];
+            _currentStatus = _loadingStatus;
+        }
         else if (_loadingStatus == STOP)
+        {
             [self styleStop];
+            _currentStatus = _loadingStatus;
+        }
         else if (_loadingStatus == DOWNLOAD)
+        {
             [self styleDownloading];
+            _currentStatus = _loadingStatus;
+        }
+        
     }
     
     if (_currentStatus == PLAY)

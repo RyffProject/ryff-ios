@@ -44,8 +44,6 @@
     [_avatarImageView.layer setCornerRadius:50.0f];
     [_avatarImageView setClipsToBounds:YES];
     
-    
-    
     //give avatar tap gesture recognizer
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarTapped:)];
@@ -102,8 +100,6 @@
     }
 }
 
-
-
 #pragma mark -
 #pragma mark - POSTDelegate
 
@@ -111,15 +107,24 @@
 {
     
 }
-- (void) postFailed
+- (void) postFailed:(NSString*)reason
 {
     [self hideHUD];
-    BlockAlertView *postWarning = [[BlockAlertView alloc] initWithTitle:@"Post Error" message:@"Something went wrong connecting to our service.." delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+    BlockAlertView *postWarning = [[BlockAlertView alloc] initWithTitle:@"Post Error" message:[NSString stringWithFormat:@"Error: %@", reason] delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
     [postWarning show];
 }
 - (void) postSucceeded:(id)response
 {
     NSLog(@"Success: %@",response);
+    
+    NSDictionary *responseDict = response;
+    NSDictionary *userDict = [responseDict objectForKey:kUserObjectKey];
+    if (userDict)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Successfully Registered!" forDuration:1.0];
     [self performSelector:@selector(dismissViewController) withObject:self afterDelay:1.5];
@@ -151,6 +156,10 @@
         if (buttonIndex != alertView.cancelButtonIndex)
         {
             [[RYLocationServices sharedInstance] requestLocationCoordinatesForDelegate:self];
+        }
+        else
+        {
+            
         }
     }];
     [locationWarning show];

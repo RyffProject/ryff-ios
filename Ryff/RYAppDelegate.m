@@ -17,7 +17,7 @@
 {
     // Override point for customization after application launch.
     
-    NSString *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
+    NSDictionary *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
     
     if (!loggedInUser)
     {

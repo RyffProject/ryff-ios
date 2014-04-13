@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface RYArtistViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UITextView *bioText;
 @property (weak, nonatomic) IBOutlet UITableView *riffTableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *bandCollectionView;
+
+@property (nonatomic, assign) NSInteger pageIndex;
 
 @end

@@ -145,6 +145,7 @@
         else
         {
             //playing another, switch riff
+            [self.currentlyPlayingCell setLoadingStatus:STOP];
             [self clearRiffDownloading];
             
             self.isPlaying = YES;

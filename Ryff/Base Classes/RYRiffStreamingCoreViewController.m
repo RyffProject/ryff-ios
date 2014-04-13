@@ -21,7 +21,7 @@
 - (void) startRiffDownload:(RYRiff*)riff
 {
     _isDownloading = YES;
-    [_currentlyPlayingCell startDownloading];
+    [_currentlyPlayingCell setLoadingStatus:DOWNLOAD];
     
     NSURL *riffURL = [NSURL URLWithString:riff.URL];
     NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
@@ -50,7 +50,6 @@
 
 - (void) clearRiffDownloading
 {
-    [_currentlyPlayingCell clearAudio];
     _currentlyPlayingCell = nil;
     _totalBytes = 0;
     _riffData = nil;

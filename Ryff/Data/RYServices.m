@@ -80,11 +80,10 @@ static RYServices* _sharedInstance;
         if (dictionary[@"success"])
             [delegate postSucceeded:responseObject];
         else
-            [delegate postFailed];
+            [delegate postFailed:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Post error: %@",[error localizedDescription]);
-        [delegate postFailed];
+        [delegate postFailed:[error localizedDescription]];
     }];
 }
 
@@ -100,11 +99,11 @@ static RYServices* _sharedInstance;
         if (dictionary[@"success"])
             [delegate postSucceeded:responseObject];
         else
-            [delegate postFailed];
+            [delegate postFailed:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Post error: %@",[error localizedDescription]);
-        [delegate postFailed];
+        [delegate postFailed:nil];
     }];
 }
 
@@ -141,28 +140,20 @@ static RYServices* _sharedInstance;
      success:^(AFHTTPRequestOperation *operation, id responseObject){
          [delegate postSucceeded:responseObject];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-         [delegate postFailed];
+         [delegate postFailed:[error localizedDescription]];
      }];
 }
 
+#pragma mark -
+#pragma mark - Artist Suggester
 
-
-
-/*
-- (NSMutableDictionary*) jsonDict
+- (void) moreArtistsExcluding:(NSArray*)userIds ofLength:(NSInteger)numArtists
 {
-    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    result[@"serial_id"] = self.serialID;
-    result[@"latitude"] = [NSNumber numberWithDouble: self.location.latitude];
-    result[@"longitude"] = [NSNumber numberWithDouble: self.location.longitude];
-    result[@"name"] = self.name;
-    if ([self hasPhoto])
-    {
-        result[@"photo-jpeg"] = [UIImageJPEGRepresentation(self.photo, 0.5)
-                                 base64EncodedStringWithOptions: NSDataBase64Encoding76CharacterLineLength];
-    }
-    return result;
+    
 }
-*/
+- (void) addFriend:(NSInteger)userId
+{
+    
+}
 
 @end
