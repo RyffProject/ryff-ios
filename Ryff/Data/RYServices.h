@@ -48,7 +48,8 @@
 - (void) submitAuthenticatedRest_POST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
 
 // Artist Suggester
-- (void) moreArtistsExcluding:(NSArray*)userIds;
+@property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
+- (void) moreArtistsOfCount:(NSInteger)numArtists;
 - (void) addFriend:(NSInteger)userId;
 
 @end

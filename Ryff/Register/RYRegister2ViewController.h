@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCoreViewController.h"
 
-@interface RYRegister2ViewController : UIViewController
+@interface RYRegister2ViewController : RYCoreViewController
 
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;

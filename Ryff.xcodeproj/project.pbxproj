@@ -26,6 +26,8 @@
 		830BBCE018FA401700A9C53F /* friend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCDC18FA401700A9C53F /* friend@2x.png */; };
 		830BBCE118FA401700A9C53F /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCDD18FA401700A9C53F /* next.png */; };
 		830BBCE218FA401700A9C53F /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCDE18FA401700A9C53F /* next@2x.png */; };
+		830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE418FA57F200A9C53F /* RYCoreViewController.m */; };
+		830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */; };
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
@@ -124,6 +126,10 @@
 		830BBCDC18FA401700A9C53F /* friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friend@2x.png"; sourceTree = "<group>"; };
 		830BBCDD18FA401700A9C53F /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		830BBCDE18FA401700A9C53F /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
+		830BBCE318FA57F200A9C53F /* RYCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreViewController.h; sourceTree = "<group>"; };
+		830BBCE418FA57F200A9C53F /* RYCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreViewController.m; sourceTree = "<group>"; };
+		830BBCE618FA589F00A9C53F /* RYCorePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCorePageViewController.h; sourceTree = "<group>"; };
+		830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCorePageViewController.m; sourceTree = "<group>"; };
 		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
 		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
 		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
@@ -294,6 +300,8 @@
 				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
 				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
 				83DBCA7318F9856800262496 /* RMDownloadIndicator.m */,
+				830BBCE318FA57F200A9C53F /* RYCoreViewController.h */,
+				830BBCE418FA57F200A9C53F /* RYCoreViewController.m */,
 			);
 			name = Custom;
 			path = UI/Custom;
@@ -304,6 +312,8 @@
 			children = (
 				83DBCA7918F99E3F00262496 /* RYRiffStreamingCoreViewController.h */,
 				83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */,
+				830BBCE618FA589F00A9C53F /* RYCorePageViewController.h */,
+				830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */,
 			);
 			path = "Base Classes";
 			sourceTree = "<group>";
@@ -750,11 +760,13 @@
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
 				830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */,
+				830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				83FCD1EC18F9741400A493F0 /* AFHTTPSessionManager.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
+				830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */,
 				830BBCD518FA14F500A9C53F /* UIImage+Thumbnail.m in Sources */,
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,

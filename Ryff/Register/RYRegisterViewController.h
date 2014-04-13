@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCoreViewController.h"
 
-@interface RYRegisterViewController : UIViewController
+@interface RYRegisterViewController : RYCoreViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;

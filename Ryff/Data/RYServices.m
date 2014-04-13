@@ -147,13 +147,17 @@ static RYServices* _sharedInstance;
 #pragma mark -
 #pragma mark - Artist Suggester
 
-- (void) moreArtistsExcluding:(NSArray*)userIds ofLength:(NSInteger)numArtists
+- (void) moreArtistsOfCount:(NSInteger)numArtists
 {
+    // server request here
+    NSArray *testArtists = @[[RYUser patrick],[RYUser patrick],[RYUser patrick],[RYUser patrick],[RYUser patrick]];
     
+    if (_artistsDelegate)
+        [_artistsDelegate retrievedArtists:testArtists];
 }
 - (void) addFriend:(NSInteger)userId
 {
-    
+    // server request here
 }
 
 @end

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCoreViewController.h"
 
-@interface RYArtistViewController : UIViewController
+@class RYUser;
+
+@interface RYArtistViewController : RYCoreViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
@@ -17,5 +20,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *bandCollectionView;
 
 @property (nonatomic, assign) NSInteger pageIndex;
+
+@property (nonatomic, strong) RYUser *artist;
+
+- (void) configureForArtist;
 
 @end

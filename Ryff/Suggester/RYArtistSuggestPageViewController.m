@@ -8,18 +8,55 @@
 
 #import "RYArtistSuggestPageViewController.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data Objects
 #import "RYUser.h"
 
 // Associated View Controllers
 #import "RYArtistViewController.h"
 
-@interface RYArtistSuggestPageViewController ()
+// Custom UI
+#import "RYStyleSheet.h"
+
+#define kArtistGroupSize 5
+
+@interface RYArtistSuggestPageViewController () <ArtistsFetchDelegate>
 
 @end
 
 @implementation RYArtistSuggestPageViewController
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[RYServices sharedInstance] setArtistsDelegate:self];
+    [[RYServices sharedInstance] moreArtistsOfCount:kArtistGroupSize];
+}
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[RYServices sharedInstance] setArtistsDelegate:nil];
+}
+
+#pragma mark -
+#pragma mark - Artists Fetch Delegate
+
+- (void) retrievedArtists:(NSArray *)artists
+{
+    if (!_artists)
+        _artists = @[];
+    
+    _artists = [_artists arrayByAddingObjectsFromArray:artists];
+    
+    if ([self.viewControllers firstObject] == NULL)
+    {
+        // initialize the list
+        NSArray *newVCs = @[[self viewControllerAtIndex:0]];
+        [self setViewControllers:newVCs direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
+}
 
 #pragma mark - Page View Controller Data Source
 
@@ -32,6 +69,7 @@
     // Create a new view controller and pass suitable data.
     UINavigationController *artistNC = [self.storyboard instantiateViewControllerWithIdentifier:@"ArtistNC"];
     RYArtistViewController *artistPage = [[artistNC viewControllers] firstObject];
+    [artistPage setArtist:[_artists objectAtIndex:index]];
     [artistPage setPageIndex:index];
     
     return artistNC;
@@ -55,6 +93,11 @@
     
     if (index == NSNotFound) {
         return nil;
+    }
+    
+    if (index >= _artists.count-3)
+    {
+        [[RYServices sharedInstance] moreArtistsOfCount:kArtistGroupSize];
     }
     
     index++;

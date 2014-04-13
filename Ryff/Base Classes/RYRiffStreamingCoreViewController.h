@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCoreViewController.h"
 
 // Media
 #import <AudioToolbox/AudioToolbox.h>
@@ -24,7 +25,7 @@
 @class AVAudioPlayer;
 @class RYRiffTrackTableViewCell;
 
-@interface RYRiffStreamingCoreViewController : UIViewController
+@interface RYRiffStreamingCoreViewController : RYCoreViewController
 
 // Audio
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;

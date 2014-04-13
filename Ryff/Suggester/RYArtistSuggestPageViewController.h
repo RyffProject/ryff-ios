@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCorePageViewController.h"
 
-@interface RYArtistSuggestPageViewController : UIPageViewController
+@interface RYArtistSuggestPageViewController : RYCorePageViewController
 
 @property (nonatomic, strong) NSArray *artists;
 
