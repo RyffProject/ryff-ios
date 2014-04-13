@@ -229,6 +229,94 @@
             </objects>
             <point key="canvasLocation" x="653" y="-138"/>
         </scene>
+        <!--Riff Edit View Controller - New Riff-->
+        <scene sceneID="0E8-MA-wsj">
+            <objects>
+                <viewController id="Gxs-Yb-gjy" customClass="RYRiffEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HaX-SM-hbH"/>
+                        <viewControllerLayoutGuide type="bottom" id="5X3-fx-jwd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fij-b8-ZGk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Riff Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVW-N5-9On">
+                                <rect key="frame" x="20" y="100" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ou-md-eOO">
+                                <rect key="frame" x="20" y="183" width="280" height="365"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nFY-5r-nAe">
+                                <rect key="frame" x="58" y="159" width="205" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iA9-oL-V0m">
+                                <rect key="frame" x="20" y="145" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playPauseHit:" destination="Gxs-Yb-gjy" eventType="touchUpInside" id="wqr-qE-Qj4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2c2-co-RR7">
+                                <rect key="frame" x="277" y="145" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playPauseHit:" destination="Gxs-Yb-gjy" eventType="touchUpInside" id="Zcq-PL-l4l"/>
+                                    <action selector="restart:" destination="Gxs-Yb-gjy" eventType="touchUpInside" id="rfw-fu-UMA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJX-wk-n4B">
+                                <rect key="frame" x="258" y="169" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Riff" id="DRf-21-Qip">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="zkn-Ct-Utu">
+                            <connections>
+                                <action selector="cancelHit:" destination="Gxs-Yb-gjy" id="AMP-lS-RUG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="T0I-SR-af3">
+                            <connections>
+                                <action selector="saveHit:" destination="Gxs-Yb-gjy" id="4JH-ed-Yu8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="zkn-Ct-Utu" id="hNH-A4-sog"/>
+                        <outlet property="descriptionTextView" destination="3ou-md-eOO" id="55Z-ug-vgB"/>
+                        <outlet property="durationTextLabel" destination="iJX-wk-n4B" id="syX-IG-QYl"/>
+                        <outlet property="playButton" destination="iA9-oL-V0m" id="3eF-Ke-nuS"/>
+                        <outlet property="progressBar" destination="nFY-5r-nAe" id="QaO-nd-ukn"/>
+                        <outlet property="restartButton" destination="2c2-co-RR7" id="nuP-Ze-CHU"/>
+                        <outlet property="riffTitleTextField" destination="RVW-N5-9On" id="xmX-hn-zXs"/>
+                        <outlet property="saveButton" destination="T0I-SR-af3" id="wbM-B7-Y3F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4yG-ek-esL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1446" y="-138"/>
+        </scene>
         <!--Band View Controller-->
         <scene sceneID="WcO-KY-Y4J">
             <objects>
@@ -281,7 +369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rl6-t1-Zcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1424" y="-138"/>
+            <point key="canvasLocation" x="2610" y="-148"/>
         </scene>
         <!--Core Tab Bar View Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -534,7 +622,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJU-kl-Bjt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="-138"/>
+            <point key="canvasLocation" x="2234" y="-148"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pzd-xI-MfG">
@@ -571,6 +659,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d2G-uY-ar2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-96" y="850"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nSl-6Z-opb">
+            <objects>
+                <navigationController storyboardIdentifier="riffEditNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3nk-va-j71" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nf1-Ed-Gx0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gxs-Yb-gjy" kind="relationship" relationship="rootViewController" id="bBt-Vo-gZN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mcd-M6-lox" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056" y="-138"/>
         </scene>
     </scenes>
     <resources>

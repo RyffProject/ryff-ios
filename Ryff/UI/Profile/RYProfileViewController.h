@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RYRiffStreamingCoreViewController.h"
 
+#import "RYServices.h"
+
 @class RYUser;
 
-@interface RYProfileViewController : RYRiffStreamingCoreViewController
+@interface RYProfileViewController : RYRiffStreamingCoreViewController <RiffDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;

@@ -1,5 +1,5 @@
 //
-//  RYTextBlockTableViewCell.h
+//  UIImage+Color.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/13/14.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RYTextBlockTableViewCell : UITableViewCell
+@interface UIImage (Color)
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+- (UIImage *)imageWithOverlayColor:(UIColor *)color;
 
 @end

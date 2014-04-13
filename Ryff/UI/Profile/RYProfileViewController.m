@@ -8,9 +8,6 @@
 
 #import "RYProfileViewController.h"
 
-// Data Managers
-#import "RYServices.h"
-
 // Data Objects
 #import "RYUser.h"
 #import "RYNewsfeedPost.h"
@@ -19,8 +16,11 @@
 #import "RYStyleSheet.h"
 #import "RYRiffTrackTableViewCell.h"
 #import "BlockAlertView.h"
-#import "RYTextBlockTableViewCell.h"
 #import "UIViewController+Extras.h"
+#import "UIImage+Color.h"
+
+// Associated View Controllers
+#import "RYRiffEditViewController.h"
 
 enum VisualStatus : NSUInteger {
     ABOUT = 1,
@@ -28,7 +28,7 @@ enum VisualStatus : NSUInteger {
     RECORD = 3
 };
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, RiffDelegate, POSTDelegate>
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate>
 
 @property (nonatomic, assign) enum VisualStatus visualStatus;
 
@@ -52,9 +52,9 @@ enum VisualStatus : NSUInteger {
     [self setVisualStatus:ABOUT];
     [_tableView reloadData];
     
-    [_recentActivityButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"newsfeed"] forState:UIControlStateNormal];
-    [_addButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"plus"] forState:UIControlStateNormal];
-    [_aboutButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"user"] forState:UIControlStateNormal];
+    [_recentActivityButton setImage:[[UIImage imageNamed:@"newsfeed"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
+    [_addButton setImage:[[UIImage imageNamed:@"plus"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
+    [_aboutButton setImage:[[UIImage imageNamed:@"user"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -179,7 +179,7 @@ enum VisualStatus : NSUInteger {
         [recordConfirmation setClickedButtonBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex != alertView.cancelButtonIndex)
             {
-                [self processRiff];
+                [self presentRiffEdit];
             }
         }];
         [recordConfirmation show];
@@ -188,9 +188,13 @@ enum VisualStatus : NSUInteger {
     [self.tableView reloadData];
 }
 
-- (void) processRiff
+- (void) presentRiffEdit
 {
-    [[RYServices sharedInstance] postRiffWithContent:_riffContent title:@"riff" duration:0 ForDelegate:self];
+    UINavigationController *navCon = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffEditNC"];
+    RYRiffEditViewController *riffEdit = [navCon.viewControllers firstObject];
+    RYRiff *newRiff = [RYRiff riffWithURL:[RYServices pathForRiff]];
+    [riffEdit configureWithRiff:newRiff];
+    [self presentViewController:navCon animated:YES completion:nil];
 }
 
 - (void) cleanupRiff
@@ -292,7 +296,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == RECORD)
     {
-        rowCount = 2;
+        rowCount = 1;
     }
     
     return rowCount;
@@ -331,10 +335,6 @@ enum VisualStatus : NSUInteger {
             cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
             [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         }
-        else
-        {
-            cell = [[RYTextBlockTableViewCell alloc] init];
-        }
     }
     
     if (!cell)
@@ -357,6 +357,11 @@ enum VisualStatus : NSUInteger {
             [cell.textLabel setText:_user.bio];
             [cell.textLabel setFont:[RYStyleSheet longFont]];
         }
+        else if (indexPath.section == 1)
+        {
+            // Groups
+            [cell.textLabel setText:@"Drummer, Los Angeles"];
+        }
     }
     else if (_visualStatus == ACTIVITY)
     {
@@ -364,7 +369,7 @@ enum VisualStatus : NSUInteger {
         if (post.riff && indexPath.row == 0)
         {
             RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
-            UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+            UIImage *maskedImage = [UIImage imageNamed:@"play.png"];
             [riffCell.statusImageView setImage:maskedImage];
             
             [riffCell configureForRiff:post.riff];
@@ -383,21 +388,13 @@ enum VisualStatus : NSUInteger {
             if (!_isRecording)
             {
                 [cell.textLabel setText:@"Record a riff"];
-                [cell.imageView setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"mic"]];
+                [cell.imageView setImage:[[UIImage imageNamed:@"mic"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
             }
             else
             {
                 [cell.textLabel setText:@"Recording.."];
-                [cell.imageView setImage:[RYStyleSheet maskWithColor:[UIColor redColor] forImageNamed:@"dot"]];
+                [cell.imageView setImage:[[UIImage imageNamed:@"dot"] imageWithOverlayColor:[UIColor redColor]]];
             }
-        }
-        else
-        {
-            RYTextBlockTableViewCell *textCell = [[RYTextBlockTableViewCell alloc] init];
-            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 88)];
-            [textCell addSubview:textView];
-            [textCell setTextView:textView];
-            [textCell.textView setText:@"Details"];
         }
     }
 }
@@ -429,11 +426,6 @@ enum VisualStatus : NSUInteger {
             CGRect result = [_user.bio boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil];
             height = MAX(result.size.height+20, height);
         }
-    }
-    else if (_visualStatus == RECORD)
-    {
-        if (indexPath.row == 1)
-            height = 88.0f;
     }
     
     return height;
@@ -505,8 +497,6 @@ enum VisualStatus : NSUInteger {
             //riff
             [self recordButtonHit];
         }
-        RYTextBlockTableViewCell *textBlockCell = (RYTextBlockTableViewCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        [self setRiffContent:textBlockCell.textView.text];
     }
 }
 

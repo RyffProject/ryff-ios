@@ -8,6 +8,9 @@
 
 #import "RYNewsfeedTableViewController.h"
 
+// UI
+#import "UIImage+Color.h"
+
 // Data Managers
 #import "RYServices.h"
 
@@ -104,7 +107,7 @@
     if (post.riff && indexPath.row == 0)
     {
         RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
-        UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+        UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
         [riffCell.statusImageView setImage:maskedImage];
         
         [riffCell configureForRiff:post.riff];

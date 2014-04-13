@@ -17,6 +17,7 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
+#import "UIImage+Color.h"
 
 @interface RYArtistViewController () <FriendsDelegate>
 
@@ -86,7 +87,7 @@
     {
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
-            UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Cylindric_%d",imNum]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%d",imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*i];
             [images addObject:loadingImage];
         }
@@ -103,20 +104,20 @@
 
 - (void) friendConfirmed
 {
-    [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"checkmark"]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     _friends = YES;
 }
 - (void) friendDeleted
 {
-    [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"friend"]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     _friends = NO;
 }
 - (void) actionFailed
 {
     if (_friends)
-        [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"checkmark"]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     else
-        [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"friend"]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
 }
 
 - (void) toggleFriendStatus

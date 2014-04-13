@@ -29,6 +29,7 @@
     return [UIFont systemFontOfSize:13.0f];
 }
 
+/*
 +(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString *)imageName
 {
     return [self maskWithColor:color forImage:[UIImage imageNamed:imageName]];
@@ -59,6 +60,7 @@
     
     return colored;
 }
+ */
 
 + (UIImage *)image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians
 {

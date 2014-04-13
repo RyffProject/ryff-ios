@@ -12,6 +12,7 @@
 #import "RYStyleSheet.h"
 #import "UIViewController+Extras.h"
 #import "UIImage+Thumbnail.h"
+#import "UIImage+Color.h"
 #import "BlockAlertView.h"
 
 // Associated View Controllers
@@ -63,7 +64,7 @@
     [_avatarImageView.layer setCornerRadius:50.0f];
     [_avatarImageView setClipsToBounds:YES];
     
-    [_submitButton.imageView setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"next"]];
+    [_submitButton.imageView setImage:[[UIImage imageNamed:@"next"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     
     //give avatar tap gesture recognizer
     UITapGestureRecognizer *singleFingerTap =

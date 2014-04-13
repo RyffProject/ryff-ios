@@ -14,6 +14,7 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "RMDownloadIndicator.h"
+#import "UIImage+Color.h"
 
 @implementation RYRiffTrackTableViewCell
 
@@ -136,7 +137,7 @@
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
             NSInteger rotateVar = [rotation integerValue];
-            UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
             [images addObject:loadingImage];
         }
@@ -155,7 +156,7 @@
         [_downloadIndicator removeFromSuperview];
         _downloadIndicator = nil;
     }
-    UIImage *maskedImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"play.png"];
+    UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
     [_statusImageView setImage:maskedImage];
 }
 - (void) styleDownloading
