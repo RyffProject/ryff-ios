@@ -18,6 +18,9 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "RYRiffTrackTableViewCell.h"
+#import "BlockAlertView.h"
+#import "RYTextBlockTableViewCell.h"
+#import "UIViewController+Extras.h"
 
 enum VisualStatus : NSUInteger {
     ABOUT = 1,
@@ -25,22 +28,33 @@ enum VisualStatus : NSUInteger {
     RECORD = 3
 };
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, RiffDelegate>
 
 @property (nonatomic, assign) enum VisualStatus visualStatus;
 
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, assign) BOOL isRecording;
+@property (nonatomic, strong) NSString *riffContent;
 
 @end
 
 @implementation RYProfileViewController
+
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    [self prepForRecording];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self configureForUser:_user];
     [self setVisualStatus:ABOUT];
     [_tableView reloadData];
+    
+    [_recentActivityButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"newsfeed"] forState:UIControlStateNormal];
+    [_addButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"plus"] forState:UIControlStateNormal];
+    [_aboutButton setImage:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"user"] forState:UIControlStateNormal];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -103,6 +117,13 @@ enum VisualStatus : NSUInteger {
     [_tableView reloadData];
 }
 
+#pragma mark - TextFields
+
+- (void)backgroundTapped:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
 #pragma mark -
 #pragma mark - Recordings
 
@@ -132,6 +153,69 @@ enum VisualStatus : NSUInteger {
     _recorder.delegate = self;
     _recorder.meteringEnabled = YES;
     [_recorder prepareToRecord];
+}
+
+- (void) recordButtonHit
+{
+    if (!_recorder.recording)
+    {
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
+        // Start recording
+        [_recorder record];
+        _isRecording = true;
+    }
+    else
+    {
+        [_recorder stop];
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        _isRecording = false;
+        
+        BlockAlertView *recordConfirmation = [[BlockAlertView alloc] initWithTitle:@"Got it." message:@"Would you like to post this riff?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Post", nil];
+        [recordConfirmation setClickedButtonBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex != alertView.cancelButtonIndex)
+            {
+                [self processRiff];
+            }
+        }];
+        [recordConfirmation show];
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void) processRiff
+{
+    [[RYServices sharedInstance] postRiffWithContent:_riffContent ForDelegate:self];
+}
+
+- (void) cleanupRiff
+{
+    NSURL *outputFileURL = [RYServices pathForRiff];
+    NSError *error;
+    if ([[NSFileManager defaultManager] isDeletableFileAtPath:[outputFileURL path]]) {
+        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:[outputFileURL path] error:&error];
+        if (!success) {
+            NSLog(@"Error removing file at path: %@", error.localizedDescription);
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark - Riff Post Delegate
+
+- (void) riffPostSucceeded
+{
+    [self cleanupRiff];
+    [self showCheckHUDWithTitle:@"Posted!" forDuration:1.0f];
+}
+- (void) riffPostFailed
+{
+    [self cleanupRiff];
+    BlockAlertView *failureAlert = [[BlockAlertView alloc] initWithTitle:@"Couldn't Post" message:@"Something went wrong while processing that request" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [failureAlert show];
 }
 
 #pragma mark -
@@ -213,7 +297,12 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == RECORD)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+        if (indexPath.row == 0)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+        else
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"TextBlockCell" forIndexPath:indexPath];
+        }
     }
     
     if (!cell)
@@ -225,6 +314,7 @@ enum VisualStatus : NSUInteger {
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Almost universal themes
+    [cell.imageView setImage:nil];
     [cell.textLabel setFont:[RYStyleSheet baseFont]];
     
     if (_visualStatus == ABOUT)
@@ -271,7 +361,8 @@ enum VisualStatus : NSUInteger {
         }
         else
         {
-            [cell.textLabel setText:@"Details"];
+            RYTextBlockTableViewCell *textCell = [tableView dequeueReusableCellWithIdentifier:@"TextBlockCell" forIndexPath:indexPath];
+            [textCell.textView setText:@"Details"];
         }
     }
 }
@@ -301,6 +392,11 @@ enum VisualStatus : NSUInteger {
             CGRect result = [_user.bio boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil];
             height = MAX(result.size.height+20, height);
         }
+    }
+    else if (_visualStatus == RECORD)
+    {
+        if (indexPath.row == 1)
+            height = 88.0f;
     }
     
     return height;
@@ -367,7 +463,13 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == RECORD)
     {
-        
+        if (indexPath.row == 0)
+        {
+            //riff
+            [self recordButtonHit];
+        }
+        RYTextBlockTableViewCell *textBlockCell = (RYTextBlockTableViewCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [self setRiffContent:textBlockCell.textView.text];
     }
 }
 

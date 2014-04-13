@@ -18,6 +18,7 @@
 #define kRegistrationAction @"create-user.php"
 #define kAddFriendAction @"add-friend.php"
 #define kDeleteFriendAction @"delete-friend.php"
+#define kPostRiffAction @"add-post.php"
 
 // Web service dictionary keys
 #define kUserObjectKey @"user"
@@ -36,6 +37,11 @@
 - (void) friendConfirmed;
 - (void) friendDeleted;
 - (void) actionFailed;
+@end
+
+@protocol RiffDelegate <NSObject>
+- (void) riffPostSucceeded;
+- (void) riffPostFailed;
 @end
 
 @class RYUser;
@@ -61,4 +67,7 @@
 - (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
 - (void) deleteFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
 
+// Posts
++ (NSURL*)pathForRiff;
+- (void) postRiffWithContent:(NSString*)content ForDelegate:(id<RiffDelegate>)riffDelegate;
 @end

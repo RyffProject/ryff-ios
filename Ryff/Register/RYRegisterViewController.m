@@ -80,6 +80,11 @@
 {
     [super viewWillDisappear:animated];
     [[RYLocationServices sharedInstance] setLocationDelegate:nil];
+    
+    // Remove Gestures
+    for (UIGestureRecognizer *recognizer in self.view.gestureRecognizers) {
+        [self.view removeGestureRecognizer:recognizer];
+    }
 }
 
 #pragma mark -
@@ -125,7 +130,7 @@
             requestDict[@"longitude"]   = _longitude;
             requestDict[@"latitude"]    = _latitude;
             
-            [[RYServices sharedInstance] registerUserWithPOSTDict:requestDict avatar:[UIImage imageNamed:@"patrickCarney"] forDelegate:self];
+            [[RYServices sharedInstance] registerUserWithPOSTDict:requestDict avatar:_avatarImage forDelegate:self];
             //[[RYServices sharedInstance] submitPOST:kRegistrationAction withDict:requestDict forDelegate:self];
             
             [self showHUDWithTitle:@"Registering"];
@@ -253,7 +258,7 @@
 	
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    _avatarImageView = info[UIImagePickerControllerOriginalImage];
+    _avatarImage = info[UIImagePickerControllerOriginalImage];
     CGFloat avatarSize = 100.f;
     [_avatarImageView setImage:[_avatarImage createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)]];
     [self.avatarImageView setImage:_avatarImage];
@@ -300,7 +305,7 @@
     // If active text field is hidden by keyboard, scroll it so it's visible
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
+    aRect.size.height -= (kbSize.height + 44);
     
     // get active text field
     CGPoint textOrigin = CGPointMake(0, 0);
@@ -312,8 +317,12 @@
     }
     
     if (!CGRectContainsPoint(aRect, textOrigin) ) {
+        /*
         CGPoint scrollPoint = CGPointMake(0.0, textOrigin.y-kbSize.height);
         [_scrollView setContentOffset:scrollPoint animated:YES];
+         */
+        [_scrollView setFrame:aRect];
+        [_scrollView setContentSize:self.view.frame.size];
     }
 }
 
@@ -323,5 +332,7 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     _scrollView.contentInset = contentInsets;
     _scrollView.scrollIndicatorInsets = contentInsets;
+    
+    [_scrollView setFrame:self.view.frame];
 }
 @end

@@ -212,4 +212,46 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Newsfeed
 
++ (NSURL*)pathForRiff
+{
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"riff.m4a",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    return outputFileURL;
+}
+
+- (void) postRiffWithContent:(NSString*)content ForDelegate:(id<RiffDelegate>)riffDelegate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId], @"content":content};
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];
+    [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYServices pathForRiff] path]])
+        {
+            NSData *musicData = [NSData dataWithContentsOfFile:[[RYServices pathForRiff] path]];
+            [formData appendPartWithFileData:musicData name:@"riff" fileName:@"riff" mimeType:@"audio/mp4"];
+        }
+        
+    }  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        
+        if (dictionary[@"success"])
+            [riffDelegate riffPostSucceeded];
+        else
+            [riffDelegate riffPostFailed];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [riffDelegate riffPostFailed];
+    }];
+}
+
 @end

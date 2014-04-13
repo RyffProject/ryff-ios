@@ -37,6 +37,11 @@
 		830BBD0118FA97EA00A9C53F /* dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFD18FA97EA00A9C53F /* dot@2x.png */; };
 		830BBD0218FA97EA00A9C53F /* mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFE18FA97EA00A9C53F /* mic.png */; };
 		830BBD0318FA97EA00A9C53F /* mic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFF18FA97EA00A9C53F /* mic@2x.png */; };
+		830BBD0918FAA95700A9C53F /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0518FAA95700A9C53F /* plus.png */; };
+		830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0618FAA95700A9C53F /* plus@2x.png */; };
+		830BBD0B18FAA95700A9C53F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0718FAA95700A9C53F /* share.png */; };
+		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
+		830BBD1018FAB00200A9C53F /* RYTextBlockTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBD0F18FAB00200A9C53F /* RYTextBlockTableViewCell.m */; };
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
@@ -147,6 +152,12 @@
 		830BBCFD18FA97EA00A9C53F /* dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dot@2x.png"; path = "../dot@2x.png"; sourceTree = "<group>"; };
 		830BBCFE18FA97EA00A9C53F /* mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mic.png; path = ../mic.png; sourceTree = "<group>"; };
 		830BBCFF18FA97EA00A9C53F /* mic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mic@2x.png"; path = "../mic@2x.png"; sourceTree = "<group>"; };
+		830BBD0518FAA95700A9C53F /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		830BBD0618FAA95700A9C53F /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
+		830BBD0718FAA95700A9C53F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		830BBD0818FAA95700A9C53F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		830BBD0E18FAB00200A9C53F /* RYTextBlockTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTextBlockTableViewCell.h; sourceTree = "<group>"; };
+		830BBD0F18FAB00200A9C53F /* RYTextBlockTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTextBlockTableViewCell.m; sourceTree = "<group>"; };
 		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
 		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
 		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
@@ -325,6 +336,15 @@
 			path = record;
 			sourceTree = "<group>";
 		};
+		830BBD0D18FAAFEC00A9C53F /* BlockCell */ = {
+			isa = PBXGroup;
+			children = (
+				830BBD0E18FAB00200A9C53F /* RYTextBlockTableViewCell.h */,
+				830BBD0F18FAB00200A9C53F /* RYTextBlockTableViewCell.m */,
+			);
+			path = BlockCell;
+			sourceTree = "<group>";
+		};
 		83DBCA6B18F97A2A00262496 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +467,7 @@
 		83FCD17318F909CB00A493F0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				830BBD0D18FAAFEC00A9C53F /* BlockCell */,
 				83FCD19B18F91A3F00A493F0 /* GroupCell */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
@@ -563,6 +584,10 @@
 		83FCD1A918F93E6C00A493F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				830BBD0518FAA95700A9C53F /* plus.png */,
+				830BBD0618FAA95700A9C53F /* plus@2x.png */,
+				830BBD0718FAA95700A9C53F /* share.png */,
+				830BBD0818FAA95700A9C53F /* share@2x.png */,
 				830BBD0418FA97F200A9C53F /* record */,
 				830BBCDB18FA401700A9C53F /* friend.png */,
 				830BBCDC18FA401700A9C53F /* friend@2x.png */,
@@ -717,6 +742,7 @@
 				830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
 				830BBD0118FA97EA00A9C53F /* dot@2x.png in Resources */,
+				830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
 				83FCD1D418F9683D00A493F0 /* Loading_3.png in Resources */,
 				83FCD1B518F93FBF00A493F0 /* newsfeed@2x.png in Resources */,
@@ -724,11 +750,13 @@
 				830BBCE118FA401700A9C53F /* next.png in Resources */,
 				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
 				830BBCDA18FA196300A9C53F /* userBig@2x.png in Resources */,
+				830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */,
 				83FCD1C818F95CBC00A493F0 /* patrickCarney.png in Resources */,
 				830BBCD918FA196300A9C53F /* userBig.png in Resources */,
 				83FCD1D518F9683D00A493F0 /* Loading_3@2x.png in Resources */,
 				830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */,
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
+				830BBD0B18FAA95700A9C53F /* share.png in Resources */,
 				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
 				830BBD0018FA97EA00A9C53F /* dot.png in Resources */,
@@ -740,6 +768,7 @@
 				830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */,
 				830BBCDF18FA401700A9C53F /* friend.png in Resources */,
 				83FCD1D218F9683D00A493F0 /* Loading_2.png in Resources */,
+				830BBD0918FAA95700A9C53F /* plus.png in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,6 +856,7 @@
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
 				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
+				830BBD1018FAB00200A9C53F /* RYTextBlockTableViewCell.m in Sources */,
 				83FCD1BF18F9425400A493F0 /* RYUser.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				83FCD1ED18F9741400A493F0 /* AFNetworkReachabilityManager.m in Sources */,
