@@ -8,6 +8,9 @@
 
 #import "RYArtistViewController.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data objects
 #import "RYUser.h"
 
@@ -15,7 +18,7 @@
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
 
-@interface RYArtistViewController ()
+@interface RYArtistViewController () <FriendsDelegate>
 
 @end
 
@@ -46,6 +49,21 @@
 }
 
 #pragma mark -
+#pragma mark - Setup UI
+
+- (void) setupFriendBarButtonItem:(UIImage*)image;
+{
+    UIButton* newButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    [newButton addTarget:self action:@selector(friendsHit:)
+       forControlEvents:UIControlEventTouchUpInside];
+    [newButton setImage:image forState:UIControlStateNormal];
+    newButton.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    UIBarButtonItem *butt4 = [[UIBarButtonItem alloc]initWithCustomView:newButton];
+    
+    [self.navigationItem setLeftBarButtonItem:butt4];
+}
+
+#pragma mark -
 #pragma mark - Prep
 
 - (void) configureForArtist
@@ -60,7 +78,53 @@
 
 - (void) friendsHit:(UIBarButtonItem*)sender
 {
+    NSInteger numImages = 3;
+    NSMutableArray *images = [[NSMutableArray alloc] init];
     
+    // load all rotations of these images
+    for (NSInteger i = 0; i < 4; i++)
+    {
+        for (NSInteger imNum = 1; imNum <= numImages; imNum++)
+        {
+            UIImage *loadingImage = [RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:[NSString stringWithFormat:@"Cylindric_%d",imNum]];
+            loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*i];
+            [images addObject:loadingImage];
+        }
+    }
+    
+    UIImage *workingCycle = [UIImage animatedImageWithImages:images duration:1.5];
+    [self setupFriendBarButtonItem:workingCycle];
+    
+    [self toggleFriendStatus];
+}
+
+#pragma mark -
+#pragma mark - Friend Delegate
+
+- (void) friendConfirmed
+{
+    [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"checkmark"]];
+    _friends = YES;
+}
+- (void) friendDeleted
+{
+    [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"friend"]];
+    _friends = NO;
+}
+- (void) actionFailed
+{
+    if (_friends)
+        [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"checkmark"]];
+    else
+        [self setupFriendBarButtonItem:[RYStyleSheet maskWithColor:[RYStyleSheet baseColor] forImageNamed:@"friend"]];
+}
+
+- (void) toggleFriendStatus
+{
+    if (!_friends)
+        [[RYServices sharedInstance] addFriend:_artist.userId forDelegate:self];
+    else
+        [[RYServices sharedInstance] deleteFriend:_artist.userId forDelegate:self];
 }
 
 - (void) nextHit:(UIBarButtonItem*)sender

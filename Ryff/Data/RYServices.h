@@ -16,6 +16,8 @@
 // Server paths
 #define host @"http://ryff.me/api/"
 #define kRegistrationAction @"create-user.php"
+#define kAddFriendAction @"add-friend.php"
+#define kDeleteFriendAction @"delete-friend.php"
 
 // Web service dictionary keys
 #define kUserObjectKey @"user"
@@ -28,6 +30,12 @@
 
 @protocol ArtistsFetchDelegate <NSObject>
 - (void) retrievedArtists:(NSArray*)artists;
+@end
+
+@protocol FriendsDelegate <NSObject>
+- (void) friendConfirmed;
+- (void) friendDeleted;
+- (void) actionFailed;
 @end
 
 @class RYUser;
@@ -50,6 +58,7 @@
 // Artist Suggester
 @property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
 - (void) moreArtistsOfCount:(NSInteger)numArtists;
-- (void) addFriend:(NSInteger)userId;
+- (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
+- (void) deleteFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
 
 @end

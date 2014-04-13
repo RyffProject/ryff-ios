@@ -17,12 +17,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UITextView *bioText;
 @property (weak, nonatomic) IBOutlet UITableView *riffTableView;
-@property (weak, nonatomic) IBOutlet UICollectionView *bandCollectionView;
 
 @property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, assign) BOOL friends;
 
 @property (nonatomic, strong) RYUser *artist;
 
+- (void) friendStatus:(BOOL)friends;
 - (void) configureForArtist;
 
 @end

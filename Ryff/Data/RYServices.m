@@ -155,9 +155,51 @@ static RYServices* _sharedInstance;
     if (_artistsDelegate)
         [_artistsDelegate retrievedArtists:testArtists];
 }
-- (void) addFriend:(NSInteger)userId
+- (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate
 {
-    // server request here
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kAddFriendAction];
+    [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        if (dictionary[@"success"])
+            [delegate friendConfirmed];
+        else
+            [delegate actionFailed];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+        [delegate actionFailed];
+    }];
+}
+- (void) deleteFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+    
+    NSString *action = [NSString stringWithFormat:@"%@%@",host,kDeleteFriendAction];
+    [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dictionary = responseObject;
+        if (dictionary[@"success"])
+            [delegate friendDeleted];
+        else
+            [delegate actionFailed];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Post error: %@",[error localizedDescription]);
+        [delegate actionFailed];
+    }];
 }
 
 @end

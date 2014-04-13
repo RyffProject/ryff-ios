@@ -28,6 +28,11 @@
 		830BBCE218FA401700A9C53F /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCDE18FA401700A9C53F /* next@2x.png */; };
 		830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE418FA57F200A9C53F /* RYCoreViewController.m */; };
 		830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */; };
+		830BBCEF18FA786800A9C53F /* Cylindric_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEA18FA786800A9C53F /* Cylindric_1.png */; };
+		830BBCF018FA786800A9C53F /* Cylindric_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEB18FA786800A9C53F /* Cylindric_1@2x.png */; };
+		830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEC18FA786800A9C53F /* Cylindric_2.png */; };
+		830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */; };
+		830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */; };
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
@@ -53,7 +58,6 @@
 		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
 		83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19518F9170700A493F0 /* RYArtistViewController.m */; };
 		83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */; };
-		83FCD19F18F91FC000A493F0 /* RYRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
 		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
 		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
@@ -130,6 +134,11 @@
 		830BBCE418FA57F200A9C53F /* RYCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreViewController.m; sourceTree = "<group>"; };
 		830BBCE618FA589F00A9C53F /* RYCorePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCorePageViewController.h; sourceTree = "<group>"; };
 		830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCorePageViewController.m; sourceTree = "<group>"; };
+		830BBCEA18FA786800A9C53F /* Cylindric_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cylindric_1.png; sourceTree = "<group>"; };
+		830BBCEB18FA786800A9C53F /* Cylindric_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_1@2x.png"; sourceTree = "<group>"; };
+		830BBCEC18FA786800A9C53F /* Cylindric_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cylindric_2.png; sourceTree = "<group>"; };
+		830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_2@2x.png"; sourceTree = "<group>"; };
+		830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_3@2x.png"; sourceTree = "<group>"; };
 		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
 		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
 		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
@@ -171,8 +180,6 @@
 		83FCD19518F9170700A493F0 /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = ../RYArtistViewController.m; sourceTree = "<group>"; };
 		83FCD19818F91A1F00A493F0 /* RYGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYGroupTableViewCell.h; path = ../RiffCell/RYGroupTableViewCell.h; sourceTree = "<group>"; };
 		83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYGroupTableViewCell.m; path = ../RiffCell/RYGroupTableViewCell.m; sourceTree = "<group>"; };
-		83FCD19D18F91FC000A493F0 /* RYRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRegister2ViewController.h; sourceTree = "<group>"; };
-		83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegister2ViewController.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
@@ -285,6 +292,18 @@
 				830BBCD118FA142000A9C53F /* BlockAlertView.m */,
 			);
 			path = BlockAlert;
+			sourceTree = "<group>";
+		};
+		830BBCE918FA786800A9C53F /* Cylindric */ = {
+			isa = PBXGroup;
+			children = (
+				830BBCEA18FA786800A9C53F /* Cylindric_1.png */,
+				830BBCEB18FA786800A9C53F /* Cylindric_1@2x.png */,
+				830BBCEC18FA786800A9C53F /* Cylindric_2.png */,
+				830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */,
+				830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */,
+			);
+			path = Cylindric;
 			sourceTree = "<group>";
 		};
 		83DBCA6B18F97A2A00262496 /* Custom */ = {
@@ -494,8 +513,6 @@
 			children = (
 				830BBCCB18FA0FC500A9C53F /* RYRegisterViewController.h */,
 				830BBCCC18FA0FC500A9C53F /* RYRegisterViewController.m */,
-				83FCD19D18F91FC000A493F0 /* RYRegister2ViewController.h */,
-				83FCD19E18F91FC000A493F0 /* RYRegister2ViewController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -552,6 +569,7 @@
 		83FCD1C918F9683D00A493F0 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
+				830BBCE918FA786800A9C53F /* Cylindric */,
 				83FCD1CA18F9683D00A493F0 /* Loading_1.png */,
 				83FCD1CB18F9683D00A493F0 /* Loading_1@2x.png */,
 				83FCD1CC18F9683D00A493F0 /* Loading_2.png */,
@@ -669,11 +687,13 @@
 			files = (
 				830BBCE018FA401700A9C53F /* friend@2x.png in Resources */,
 				83FCD1B418F93FBF00A493F0 /* newsfeed.png in Resources */,
+				830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */,
 				83FCD1D118F9683D00A493F0 /* Loading_1@2x.png in Resources */,
 				83FCD1C518F94AC400A493F0 /* play.png in Resources */,
 				830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */,
 				830BBCC318FA081600A9C53F /* checkmark.png in Resources */,
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
+				830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
 				83FCD1D418F9683D00A493F0 /* Loading_3.png in Resources */,
@@ -689,8 +709,11 @@
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
 				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
+				830BBCF018FA786800A9C53F /* Cylindric_1@2x.png in Resources */,
 				83FCD1D018F9683D00A493F0 /* Loading_1.png in Resources */,
+				830BBCEF18FA786800A9C53F /* Cylindric_1.png in Resources */,
 				830BBCE218FA401700A9C53F /* next@2x.png in Resources */,
+				830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */,
 				830BBCDF18FA401700A9C53F /* friend.png in Resources */,
 				83FCD1D218F9683D00A493F0 /* Loading_2.png in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
@@ -755,7 +778,6 @@
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
-				83FCD19F18F91FC000A493F0 /* RYRegister2ViewController.m in Sources */,
 				83FCD1C218F943AE00A493F0 /* RYRiff.m in Sources */,
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
