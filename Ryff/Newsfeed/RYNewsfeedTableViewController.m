@@ -33,9 +33,7 @@
 {
     [super viewWillAppear:animated];
     
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        [[RYServices sharedInstance] getFriendPostsForDelegate:self];
-    });
+    [[RYServices sharedInstance] getFriendPostsForDelegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

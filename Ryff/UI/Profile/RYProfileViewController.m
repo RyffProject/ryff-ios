@@ -107,9 +107,7 @@ enum VisualStatus : NSUInteger {
     [self clearRiffDownloading];
     [_tableView reloadData];
     
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        [[RYServices sharedInstance] getMyPostsForDelegate:self];
-    });
+    [[RYServices sharedInstance] getMyPostsForDelegate:self];
 }
 
 - (IBAction)addHit:(id)sender
@@ -369,7 +367,7 @@ enum VisualStatus : NSUInteger {
         if (post.riff && indexPath.row == 0)
         {
             RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
-            UIImage *maskedImage = [UIImage imageNamed:@"play.png"];
+            UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
             [riffCell.statusImageView setImage:maskedImage];
             
             [riffCell configureForRiff:post.riff];
