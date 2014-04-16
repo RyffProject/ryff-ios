@@ -13,13 +13,14 @@
 
 // Data objects
 #import "RYUser.h"
+#import "RYNewsfeedPost.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
 #import "UIImage+Color.h"
 
-@interface RYArtistViewController () <FriendsDelegate>
+@interface RYArtistViewController () <FriendsDelegate, POSTDelegate>
 
 @end
 
@@ -28,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.riffTableView = _tableView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,6 +49,12 @@
     [self.navigationItem setRightBarButtonItem:next];
     
     [self configureForArtist];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[RYServices sharedInstance] getUserPostsForUser:_artist.userId Delegate:self];
 }
 
 #pragma mark -
@@ -131,6 +139,33 @@
 - (void) nextHit:(UIBarButtonItem*)sender
 {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"next" object:nil]];
+}
+
+#pragma mark -
+#pragma mark - POSTDelegate (for user posts)
+
+- (void) connectionFailed
+{
+    
+}
+- (void) postFailed:(NSString*)reason
+{
+    
+}
+- (void) postSucceeded:(id)response
+{
+    NSDictionary *responseDict = response;
+    NSArray *posts = [responseDict objectForKey:@"posts"];
+    
+    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *postDict in posts)
+    {
+        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
+        [myPosts addObject:post];
+    }
+    [self setFeedItems:myPosts];
+    [_tableView reloadData];
 }
 
 @end

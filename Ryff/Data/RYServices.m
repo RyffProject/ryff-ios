@@ -133,10 +133,10 @@ static RYUser* _loggedInUser;
         NSDictionary *artistDict = artistsArray[i];
         RYUser *user = [RYUser userFromDict:artistDict];
         [objectiveArtists addObject:user];
-        
-        if (_artistsDelegate)
-            [_artistsDelegate retrievedArtists:objectiveArtists];
     }
+    
+    if (_artistsDelegate)
+        [_artistsDelegate retrievedArtists:objectiveArtists];
 }
 
 - (void) moreArtistsOfCount:(NSInteger)numArtists
@@ -319,6 +319,42 @@ static RYUser* _loggedInUser;
             }];
         });
 }
+
+- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate
+{
+    if (![RYServices loggedInUser])
+        return;
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    if (userObject.username && password)
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":[NSNumber numberWithInt:userId]};
+            
+            NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetPosts];
+            [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dictionary = responseObject;
+                if (delegate)
+                {
+                    if (dictionary[@"success"])
+                        [delegate postSucceeded:responseObject];
+                    else
+                        [delegate postFailed:nil];
+                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Post error: %@",[error localizedDescription]);
+                if (delegate)
+                    [delegate postFailed:[error localizedDescription]];
+            }];
+        });
+}
+
 - (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate
 {
     if (![RYServices loggedInUser])

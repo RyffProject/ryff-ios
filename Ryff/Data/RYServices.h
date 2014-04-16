@@ -74,6 +74,7 @@
 + (NSURL*)pathForRiff;
 - (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate;
 - (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate;
+- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate;
 - (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate;
 
 @end

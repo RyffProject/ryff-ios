@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RYCoreViewController.h"
+#import "RYRiffStreamingCoreViewController.h"
 
 @class RYUser;
 
-@interface RYArtistViewController : RYCoreViewController
+@interface RYArtistViewController : RYRiffStreamingCoreViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UITextView *bioText;
-@property (weak, nonatomic) IBOutlet UITableView *riffTableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) BOOL friends;
