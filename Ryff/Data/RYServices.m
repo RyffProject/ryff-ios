@@ -66,11 +66,10 @@ static RYUser* _loggedInUser;
 }
 
 #pragma mark -
-#pragma mark - Server
+#pragma mark - Registration
 
 - (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate
 {
-    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -97,16 +96,16 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate
+
+- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate
 {
-    if (![RYServices loggedInUser])
-        return;
-    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        //manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
-        NSString *action = [NSString stringWithFormat:@"%@%@",host,actionDestination];
+        NSString *action = [NSString stringWithFormat:@"%@%@",host,kLogIn];
+        
+        NSDictionary *params = @{@"auth_username":username,@"auth_password":password};
+        
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             
@@ -116,8 +115,7 @@ static RYUser* _loggedInUser;
                 [delegate postFailed:nil];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Post error: %@",[error localizedDescription]);
-            [delegate postFailed:nil];
+            [delegate postFailed:[error localizedDescription]];
         }];
     });
 }
@@ -184,7 +182,7 @@ static RYUser* _loggedInUser;
     
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userId]};
 
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kAddFriendAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

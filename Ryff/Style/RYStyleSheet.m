@@ -8,11 +8,17 @@
 
 #import "RYStyleSheet.h"
 
+#import "UIColor+Hex.h"
+
 @implementation RYStyleSheet
 
 +(UIColor*)baseColor
 {
-    return [UIColor orangeColor];
+    return [UIColor colorWithHexString:@"ffc000"];
+}
++(UIColor*)backgroundColor
+{
+    return [UIColor colorWithHexString:@"565b6e"];
 }
 
 +(UIFont *)baseFont
@@ -29,38 +35,13 @@
     return [UIFont systemFontOfSize:13.0f];
 }
 
-/*
-+(UIImage *) maskWithColor:(UIColor *)color forImageNamed:(NSString *)imageName
++(UIFont*)titleFont
 {
-    return [self maskWithColor:color forImage:[UIImage imageNamed:imageName]];
+    return [UIFont systemFontOfSize:20.0f];
 }
 
-+(UIImage *) maskWithColor:(UIColor *)color forImage:(UIImage*)image
-{
-    CGRect rect = CGRectMake(0.0f, 0.0f, image.size.width, image.size.height);
-    
-    if (UIGraphicsBeginImageContextWithOptions) {
-        CGFloat imageScale = 1.0f;
-        UIGraphicsBeginImageContextWithOptions(image.size, NO, imageScale);
-    }
-    else {
-        UIGraphicsBeginImageContext(image.size);
-    }
-    
-    [image drawInRect:rect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetBlendMode(context, kCGBlendModeSourceIn);
-    
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextFillRect(context, rect);
-    
-    UIImage *colored = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return colored;
-}
- */
+#pragma mark -
+#pragma mark - Images
 
 + (UIImage *)image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians
 {

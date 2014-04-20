@@ -16,6 +16,7 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+#import "UIImage+Color.h"
 
 // Associated View Controller
 #import "RYProfileViewController.h"
@@ -30,16 +31,6 @@
 {
     [super viewDidLoad];
     [self.tabBar setTintColor:[RYStyleSheet baseColor]];
-    
-    for (UIViewController *vc in self.viewControllers)
-    {
-        if ([vc isKindOfClass:[RYProfileViewController class]])
-        {
-            RYProfileViewController *profController = (RYProfileViewController*)vc;
-            // Should be user's object
-            RYUser *loggedInUser = [RYServices loggedInUser];
-            [profController setUser:loggedInUser];
-        }
-    }
+    [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] imageWithOverlayColor:[RYStyleSheet backgroundColor]]];
 }
 @end

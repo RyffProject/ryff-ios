@@ -75,6 +75,8 @@
     UITapGestureRecognizer *backgroundTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
     [self.view addGestureRecognizer:backgroundTap];
+    
+    [self.view setBackgroundColor:[RYStyleSheet baseColor]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -132,7 +134,6 @@
             requestDict[@"latitude"]    = _latitude;
             
             [[RYServices sharedInstance] registerUserWithPOSTDict:requestDict avatar:_avatarImage forDelegate:self];
-            //[[RYServices sharedInstance] submitPOST:kRegistrationAction withDict:requestDict forDelegate:self];
             
             [self showHUDWithTitle:@"Registering"];
         }
@@ -153,7 +154,7 @@
 - (void) postFailed:(NSString*)reason
 {
     [self hideHUD];
-    BlockAlertView *postWarning = [[BlockAlertView alloc] initWithTitle:@"Post Error" message:[NSString stringWithFormat:@"Error: %@", reason] delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+    UIAlertView *postWarning = [[UIAlertView alloc] initWithTitle:@"Post Error" message:[NSString stringWithFormat:@"Error: %@", reason] delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
     [postWarning show];
 }
 - (void) postSucceeded:(id)response

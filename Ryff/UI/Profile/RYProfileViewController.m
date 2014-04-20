@@ -48,6 +48,8 @@ enum VisualStatus : NSUInteger {
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    _user = [RYServices loggedInUser];
+    
     [self configureForUser:_user];
     [self setVisualStatus:ABOUT];
     [_tableView reloadData];

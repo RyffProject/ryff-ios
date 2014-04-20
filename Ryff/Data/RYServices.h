@@ -15,6 +15,7 @@
 
 // Server paths
 #define host @"http://ryff.me/api/"
+#define kLogIn @"login.php"
 #define kRegistrationAction @"create-user.php"
 #define kAddFriendAction @"add-friend.php"
 #define kDeleteFriendAction @"delete-friend.php"
@@ -59,10 +60,9 @@
 
 + (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
-// Server stuff
-
-- (void) submitPOST:(NSString *)actionDestination withDict:(NSDictionary*)jsonDict forDelegate:(id<POSTDelegate>)delegate;
+// Registration
 - (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate;
+- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
 
 // Artist Suggester
 @property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;

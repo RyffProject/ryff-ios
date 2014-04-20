@@ -11,10 +11,12 @@
 @interface RYStyleSheet : NSObject
 
 +(UIColor*)baseColor;
++(UIColor*)backgroundColor;
 
 +(UIFont*)baseFont;
 +(UIFont*)boldFont;
 +(UIFont*)longFont;
++(UIFont*)titleFont;
 
 +(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 

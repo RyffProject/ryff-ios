@@ -23,7 +23,7 @@
     {
         // present registration page
         UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:@"Main" bundle:NULL];
-        UINavigationController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"registrationNC"];
+        UINavigationController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"registrationRootNC"];
         [navCon setModalPresentationStyle:UIModalPresentationFullScreen];
         [self.window makeKeyAndVisible];
         [self.window.rootViewController presentViewController:navCon animated:NO completion:NULL];
