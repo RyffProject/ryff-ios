@@ -22,6 +22,8 @@
 #import "RYRiff.h"
 #import "RYUser.h"
 
+#define kRyffCellReuseID @"RiffCell"
+
 @class AVAudioPlayer;
 @class RYRiffTrackTableViewCell;
 

@@ -24,6 +24,15 @@
 
 @implementation RYRiffTrackTableViewCell
 
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        [self setBackgroundColor:[UIColor clearColor]];
+    }
+    return self;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:NO animated:NO];

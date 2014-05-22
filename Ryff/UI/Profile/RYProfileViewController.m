@@ -42,12 +42,15 @@ enum VisualStatus : NSUInteger {
 
 - (void) viewDidLoad
 {
+    self.riffTableView = _tableView;
     [super viewDidLoad];
     [self prepForRecording];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     _user = [RYServices loggedInUser];
     
     [self configureForUser:_user];

@@ -29,8 +29,6 @@
 @property (nonatomic, retain) AVAudioPlayer *player;
 @property (nonatomic, strong) RYRiff *riff;
 @property (nonatomic, strong) NSTimer *updateTimer;
-@property (nonatomic, assign) BOOL updatedDescription;
-
 @end
 
 @implementation RYRiffEditViewController
@@ -55,7 +53,6 @@
     _riff = riff;
     
     [_descriptionTextView setText:@"Riff Description"];
-    _updatedDescription = NO;
 }
 
 #pragma mark -
@@ -68,8 +65,15 @@
     
     // Design
     [_progressBar setProgress:0];
-    [_playButton setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
-    [_restartButton setImage:[[UIImage imageNamed:@"return"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
+    
+    [_playButton setTitle:@"" forState:UIControlStateNormal];
+    [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_playButton setTintColor:[RYStyleSheet baseColor]];
+    
+    [_restartButton setTitle:@"" forState:UIControlStateNormal];
+    [_restartButton setImage:[UIImage imageNamed:@"reset"] forState:UIControlStateNormal];
+    [_restartButton setTintColor:[RYStyleSheet baseColor]];
+    
     [_cancelButton setImage:[[UIImage imageNamed:@"back"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     [_saveButton setImage:[[UIImage imageNamed:@"cloud"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     
@@ -166,8 +170,6 @@
 
 - (BOOL) readyForSubmission
 {
-    if (!_updatedDescription)
-        return NO;
     if (_riffTitleTextField.text.length == 0)
         return NO;
     return YES;
@@ -187,14 +189,6 @@
             [self processRiff];
         }];
     }
-}
-
-#pragma mark -
-#pragma mark - TextView Delegate
-
-- (void) textViewDidChange:(UITextView *)textView
-{
-    _updatedDescription = YES;
 }
 
 #pragma mark -

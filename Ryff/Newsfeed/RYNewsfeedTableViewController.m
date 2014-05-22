@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad
 {
+    self.riffTableView = _tableView;
     [super viewDidLoad];
     
     // set up test data
@@ -32,7 +33,9 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    [self.tableView setBackgroundColor:[RYStyleSheet backgroundColor]];
     [[RYServices sharedInstance] getFriendPostsForDelegate:self];
 }
 

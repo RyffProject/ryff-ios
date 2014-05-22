@@ -28,8 +28,8 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.riffTableView = _tableView;
+    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated

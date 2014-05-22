@@ -26,9 +26,17 @@
 #pragma mark -
 #pragma mark - View Controller Lifecycle
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffTrackTableViewCell" bundle:NULL] forCellReuseIdentifier:kRyffCellReuseID];
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -163,13 +171,15 @@
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (post.riff && indexPath.row == 0)
     {
-        RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:@"RiffCell" forIndexPath:indexPath];
+        RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:kRyffCellReuseID forIndexPath:indexPath];
         cell = (UITableViewCell*) riffCell;
     }
     else
     {
         // user post
         cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+        if (cell == NULL)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BasicCell"];
     }
     return cell;
 }

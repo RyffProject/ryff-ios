@@ -47,6 +47,7 @@
 		830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0618FAA95700A9C53F /* plus@2x.png */; };
 		830BBD0B18FAA95700A9C53F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0718FAA95700A9C53F /* share.png */; };
 		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
+		832BC5CF192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BC5CE192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib */; };
 		83C6CA7918FAECE500412469 /* RYRiffEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */; };
 		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
@@ -160,8 +161,8 @@
 		830BBCDC18FA401700A9C53F /* friend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friend@2x.png"; sourceTree = "<group>"; };
 		830BBCDD18FA401700A9C53F /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		830BBCDE18FA401700A9C53F /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
-		830BBCE318FA57F200A9C53F /* RYCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreViewController.h; sourceTree = "<group>"; };
-		830BBCE418FA57F200A9C53F /* RYCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreViewController.m; sourceTree = "<group>"; };
+		830BBCE318FA57F200A9C53F /* RYCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYCoreViewController.h; path = ../UI/Custom/RYCoreViewController.h; sourceTree = "<group>"; };
+		830BBCE418FA57F200A9C53F /* RYCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYCoreViewController.m; path = ../UI/Custom/RYCoreViewController.m; sourceTree = "<group>"; };
 		830BBCE618FA589F00A9C53F /* RYCorePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCorePageViewController.h; sourceTree = "<group>"; };
 		830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCorePageViewController.m; sourceTree = "<group>"; };
 		830BBCEA18FA786800A9C53F /* Cylindric_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cylindric_1.png; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 		830BBD0618FAA95700A9C53F /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
 		830BBD0718FAA95700A9C53F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		830BBD0818FAA95700A9C53F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		832BC5CE192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffTrackTableViewCell.xib; sourceTree = "<group>"; };
 		83C6CA7718FAECE500412469 /* RYRiffEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffEditViewController.h; sourceTree = "<group>"; };
 		83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffEditViewController.m; sourceTree = "<group>"; };
 		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -395,8 +397,6 @@
 				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
 				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
 				83DBCA7318F9856800262496 /* RMDownloadIndicator.m */,
-				830BBCE318FA57F200A9C53F /* RYCoreViewController.h */,
-				830BBCE418FA57F200A9C53F /* RYCoreViewController.m */,
 				83C6CA7A18FAF95C00412469 /* UIImage+Color.h */,
 				83C6CA7B18FAF95C00412469 /* UIImage+Color.m */,
 			);
@@ -411,6 +411,8 @@
 				83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */,
 				830BBCE618FA589F00A9C53F /* RYCorePageViewController.h */,
 				830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */,
+				830BBCE318FA57F200A9C53F /* RYCoreViewController.h */,
+				830BBCE418FA57F200A9C53F /* RYCoreViewController.m */,
 			);
 			path = "Base Classes";
 			sourceTree = "<group>";
