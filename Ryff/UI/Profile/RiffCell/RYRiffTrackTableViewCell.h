@@ -14,7 +14,8 @@
 enum LoadingStatus : NSUInteger {
     STOP = 1,
     PLAY = 2,
-    DOWNLOAD = 3
+    PAUSE = 3,
+    DOWNLOAD = 4
 };
 
 @interface RYRiffTrackTableViewCell : UITableViewCell
@@ -27,16 +28,13 @@ enum LoadingStatus : NSUInteger {
 
 // Duration objects
 @property (nonatomic, assign) NSInteger riffDuration;
-@property (nonatomic, assign) NSInteger durationCountdown;
-@property (nonatomic, assign) enum LoadingStatus loadingStatus;
-@property (nonatomic, assign) enum LoadingStatus currentStatus;
-@property (nonatomic, strong) NSTimer *refreshTimer;
 
 - (void) configureForRiff:(RYRiff *)riff;
 - (void) startDownloading;
 - (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;
 - (void) finishDownloading:(BOOL)success;
 - (void) shouldPause:(BOOL)shouldPause;
+- (void) updateTimeRemaining:(NSInteger)secondsRemaining;
 - (void) clearAudio;
 
 @end

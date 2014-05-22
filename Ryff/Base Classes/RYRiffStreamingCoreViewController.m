@@ -15,11 +15,27 @@
 // Data Managers
 #import "RYServices.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate>
+
+@property (nonatomic, strong) NSTimer *updateTimer;
 
 @end
 
 @implementation RYRiffStreamingCoreViewController
+
+#pragma mark -
+#pragma mark - View Controller Lifecycle
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self clearRiff];
+}
 
 
 #pragma mark -
@@ -28,7 +44,7 @@
 - (void) startRiffDownload:(RYRiff*)riff
 {
     _isDownloading = YES;
-    [_currentlyPlayingCell setLoadingStatus:DOWNLOAD];
+    [_currentlyPlayingCell startDownloading];
     
     NSURL *riffURL = [NSURL URLWithString:riff.URL];
     NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
@@ -38,10 +54,11 @@
 
 - (void) startRiffPlaying:(NSData*)riffData
 {
-    if (_isPlaying)
+    if (!_isPlaying)
     {
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithData:riffData error:&error];
+        [_audioPlayer setDelegate:self];
         _audioPlayer.numberOfLoops = 0;
         _audioPlayer.volume = 1.0f;
         [_audioPlayer prepareToPlay];
@@ -52,18 +69,41 @@
         {
             [_audioPlayer play];
         }
+        
+        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                             target:self
+                                                           selector:@selector(updateTimeLeft)
+                                                           userInfo:nil
+                                                            repeats:YES];
+        _isPlaying = YES;
     }
 }
 
-- (void) clearRiffDownloading
+- (void) clearRiff
 {
+    [_updateTimer invalidate];
+    _updateTimer = nil;
+    [_currentlyPlayingCell clearAudio];
     _currentlyPlayingCell = nil;
+    [_audioPlayer stop];
+    _audioPlayer = nil;
     _totalBytes = 0;
     _riffData = nil;
     _riffConnection = nil;
     _audioPlayer = nil;
     _isPlaying = NO;
     _isDownloading = NO;
+}
+
+#pragma mark -
+#pragma mark - Timer UI Update
+
+- (void)updateTimeLeft
+{
+    NSTimeInterval timeLeft = _audioPlayer.duration - _audioPlayer.currentTime;
+    
+    // update your UI with timeLeft
+    [self.currentlyPlayingCell updateTimeRemaining:timeLeft];
 }
 
 #pragma mark -
@@ -83,7 +123,8 @@
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [_currentlyPlayingCell finishDownloading:NO];
-    [self clearRiffDownloading];
+    [self clearRiff];
+    _isDownloading = NO;
 }
 
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -91,6 +132,14 @@
     [_currentlyPlayingCell finishDownloading:YES];
     [self startRiffPlaying:_riffData];
     _isDownloading = NO;
+}
+
+#pragma mark -
+#pragma mark - AVAudioPlayerDelegate
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self clearRiff];
 }
 
 
@@ -172,20 +221,19 @@
     if (post.riff && indexPath.row == 0)
     {
         // if not playing, begin
-        if (!self.isPlaying)
+        if (!self.isPlaying && !self.isDownloading)
         {
-            self.isPlaying = YES;
             self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             [self startRiffDownload:post.riff];
             return;
         }
         
         // stop any downloads
-        else if (self.isDownloading)
-            [self clearRiffDownloading];
+        if (self.isDownloading)
+            [self clearRiff];
         
         // already playing
-        else if ([tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
+        if (self.isPlaying && [tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
         {
             //currently playing this track, pause it
             if (self.audioPlayer.isPlaying)
@@ -199,13 +247,11 @@
                 [self.currentlyPlayingCell shouldPause:NO];
             }
         }
-        else
+        else if (self.isPlaying)
         {
             //playing another, switch riff
-            [self.currentlyPlayingCell setLoadingStatus:STOP];
-            [self clearRiffDownloading];
+            [self clearRiff];
             
-            self.isPlaying = YES;
             self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
             [self startRiffDownload:post.riff];
         }

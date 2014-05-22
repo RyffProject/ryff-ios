@@ -39,7 +39,6 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self clearRiffDownloading];
 }
 
 #pragma mark -

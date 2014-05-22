@@ -99,13 +99,13 @@
     {
         NSInteger seconds = (NSInteger)_player.currentTime % 60;
         NSInteger minutes = (NSInteger)_player.currentTime / 60;
-        [_durationTextLabel setText:[NSString stringWithFormat:@"%02d:%02d",minutes,seconds]];
+        [_durationTextLabel setText:[NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds]];
     }
     else
     {
         NSInteger seconds = (NSInteger)_player.duration % 60;
         NSInteger minutes = (NSInteger)_player.duration / 60;
-        [_durationTextLabel setText:[NSString stringWithFormat:@"%02d:%02d",minutes,seconds]];
+        [_durationTextLabel setText:[NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds]];
         [self stylePlayButton:NO];
     }
 }
@@ -123,7 +123,7 @@
     
     NSInteger seconds = (NSInteger)_player.duration % 60;
     NSInteger minutes = (NSInteger)_player.duration / 60;
-    [_durationTextLabel setText:[NSString stringWithFormat:@"%02d:%02d",minutes,seconds]];
+    [_durationTextLabel setText:[NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds]];
     
     // Check out what's wrong in case that the player doesn't init.
     if (error) {
@@ -214,7 +214,7 @@
             for (NSInteger imNum = 1; imNum <= numImages; imNum++)
             {
                 NSInteger rotateVar = [rotation integerValue];
-                UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%d",imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
+                UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
                 loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
                 [images addObject:loadingImage];
             }

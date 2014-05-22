@@ -39,7 +39,6 @@
 @property (nonatomic, strong) NSArray *feedItems;
 
 - (void) startRiffDownload:(RYRiff*)riff;
-- (void) startRiffPlaying:(NSData*)riffData;
-- (void) clearRiffDownloading;
+- (void) clearRiff;
 
 @end

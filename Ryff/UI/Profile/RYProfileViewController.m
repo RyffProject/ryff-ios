@@ -62,7 +62,6 @@ enum VisualStatus : NSUInteger {
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self clearRiffDownloading];
     
     // Remove Gestures
     for (UIGestureRecognizer *recognizer in self.view.gestureRecognizers) {
@@ -106,7 +105,7 @@ enum VisualStatus : NSUInteger {
 - (IBAction)activityHit:(id)sender
 {
     [self setVisualStatus:ACTIVITY];
-    [self clearRiffDownloading];
+    [self clearRiff];
     [_tableView reloadData];
     
     [[RYServices sharedInstance] getMyPostsForDelegate:self];
@@ -115,14 +114,14 @@ enum VisualStatus : NSUInteger {
 - (IBAction)addHit:(id)sender
 {
     [self setVisualStatus:RECORD];
-    [self clearRiffDownloading];
+    [self clearRiff];
     [_tableView reloadData];
 }
 
 - (IBAction)aboutHit:(id)sender
 {
     [self setVisualStatus:ABOUT];
-    [self clearRiffDownloading];
+    [self clearRiff];
     [_tableView reloadData];
 }
 
@@ -445,9 +444,8 @@ enum VisualStatus : NSUInteger {
         if (post.riff && indexPath.row == 0)
         {
             // if not playing, begin
-            if (!self.isPlaying)
+            if (!self.isPlaying && !self.isDownloading)
             {
-                self.isPlaying = YES;
                 self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
                 [self startRiffDownload:post.riff];
                 return;
@@ -456,11 +454,11 @@ enum VisualStatus : NSUInteger {
             // stop any downloads
             else if (self.isDownloading)
             {
-                [self clearRiffDownloading];
+                [self clearRiff];
             }
             
             // already playing
-            else if ([tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
+            else if (self.isPlaying && [tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
             {
                 //currently playing this track, pause it
                 if (self.audioPlayer.isPlaying)
@@ -477,9 +475,8 @@ enum VisualStatus : NSUInteger {
             else
             {
                 //playing another, switch riff
-                [self clearRiffDownloading];
+                [self clearRiff];
                 
-                self.isPlaying = YES;
                 self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
                 [self startRiffDownload:post.riff];
             }

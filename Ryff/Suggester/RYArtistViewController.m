@@ -95,7 +95,7 @@
     {
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
-            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%d",imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*i];
             [images addObject:loadingImage];
         }
