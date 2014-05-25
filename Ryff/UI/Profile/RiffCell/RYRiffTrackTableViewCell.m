@@ -24,29 +24,15 @@
 
 @implementation RYRiffTrackTableViewCell
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (void) awakeFromNib
 {
-    if (self = [super initWithCoder:aDecoder])
-    {
-        [self setBackgroundColor:[UIColor clearColor]];
-    }
-    return self;
+    [_riffTitleText setFont:[RYStyleSheet regularFont]];
+    [_riffLengthText setFont:[RYStyleSheet lightFont]];
+    [self setBackgroundColor:[UIColor clearColor]];
+    [_backgroundImageView setImage:[self riffCellTopBackgroundImage]];
+    [_backgroundImageView setFrame:_wrapperView.bounds];
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:NO animated:NO];
-    if (selected)
-    {
-        
-    }
-    else
-    {
-        
-    }
-    // Configure the view for the selected state
-}
-
 
 - (void) configureForRiff:(RYRiff *)riff
 {
@@ -197,7 +183,7 @@
 }
 - (void) styleDownloading
 {
-    _downloadIndicator = [[RMDownloadIndicator alloc]initWithFrame:_statusImageView.frame type:kRMFilledIndicator];
+    _downloadIndicator = [[RMDownloadIndicator alloc] initWithFrame:_statusImageView.frame type:kRMFilledIndicator];
     [_downloadIndicator setBackgroundColor:[UIColor clearColor]];
     [_downloadIndicator setFillColor:[RYStyleSheet baseColor]];
     [_downloadIndicator setStrokeColor:[RYStyleSheet baseColor]];
@@ -208,6 +194,29 @@
     // and hide imageView
     [_statusImageView setImage:nil];
     [_statusImageView setAnimationImages:nil];
+}
+
+#pragma mark -
+#pragma mark - Cell Utilities
+#pragma mark -
+#pragma mark - Riff Cell
+
+/*
+ Create the background image for a riff uitableviewcell
+ */
+- (UIImage *)riffCellTopBackgroundImage
+{
+    UIImage *background;
+    float currentVersion = 6.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= currentVersion)
+    {
+        //device have iOS 6 or above
+        background = [[UIImage imageNamed:@"riffCellBack.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 15, 15)  resizingMode:UIImageResizingModeStretch];
+    }else{
+        //device have iOS 5.1 or belove
+        background = [[UIImage imageNamed: @"riffCellBack.png"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0];
+    }
+    return background;
 }
 
 @end

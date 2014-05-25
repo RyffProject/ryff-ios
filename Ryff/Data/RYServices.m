@@ -54,11 +54,11 @@ static RYUser* _loggedInUser;
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                            [RYStyleSheet boldFont], NSFontAttributeName, nil];
     NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [RYStyleSheet baseFont], NSFontAttributeName, nil];
+                              [RYStyleSheet regularFont], NSFontAttributeName, nil];
     const NSRange range = NSMakeRange(0,post.user.username.length);
     
     // Create the attributed string (text + attributes)
-    NSString *fullText = [NSString stringWithFormat:@"%@ %@",post.user.username,post.content];
+    NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.user.username,post.content];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
                                                                                        attributes:subAttrs];
     [attributedText setAttributes:attrs range:range];

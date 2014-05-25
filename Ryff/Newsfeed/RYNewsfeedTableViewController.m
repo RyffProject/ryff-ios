@@ -33,9 +33,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    [self.tableView setBackgroundColor:[RYStyleSheet backgroundColor]];
     [[RYServices sharedInstance] getFriendPostsForDelegate:self];
 }
 

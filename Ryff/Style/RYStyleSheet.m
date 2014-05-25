@@ -21,27 +21,38 @@
     return [UIColor colorWithHexString:@"565b6e"];
 }
 
-+(UIFont *)baseFont
++(UIFont *)fontFamily
 {
-    return [UIFont systemFontOfSize:17.0f];
+    return [UIFont fontWithName:@"Lato" size:18.0f];
+}
+
++(UIFont *)regularFont
+{
+    return [UIFont fontWithName:@"Lato-Regular" size:18.0f];
 }
 
 +(UIFont *)boldFont
 {
-    return  [UIFont boldSystemFontOfSize:20.0f];
+    return [UIFont fontWithName:@"Lato-Bold" size:18.0f];
 }
-+(UIFont *)longFont
+
++(UIFont *)lightFont
 {
-    return [UIFont systemFontOfSize:13.0f];
+    return [UIFont fontWithName:@"Lato-Light" size:18.0f];
+}
+
++(UIFont *)italicFont
+{
+    return [UIFont fontWithName:@"Lato-Italic" size:18.0f];
 }
 
 +(UIFont*)titleFont
 {
-    return [UIFont systemFontOfSize:20.0f];
+    return [UIFont fontWithName:@"Lato-Bold" size:20.0f];
 }
 
 #pragma mark -
-#pragma mark - Images
+#pragma mark - Image Utilities
 
 + (UIImage *)image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians
 {

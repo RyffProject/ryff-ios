@@ -8,11 +8,21 @@
 
 #import "RYCorePageViewController.h"
 
+// Custom UI
+#import "RYStyleSheet.h"
+
 @interface RYCorePageViewController ()
 
 @end
 
 @implementation RYCorePageViewController
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+}
 
 - (BOOL)prefersStatusBarHidden
 {

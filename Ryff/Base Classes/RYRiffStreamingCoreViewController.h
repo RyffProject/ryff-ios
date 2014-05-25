@@ -15,6 +15,7 @@
 
 // Custom UI
 #import "RYRiffTrackTableViewCell.h"
+#import "RYRiffCellBodyTableViewCell.h"
 #import "RYStyleSheet.h"
 
 // Data Objects
@@ -22,7 +23,8 @@
 #import "RYRiff.h"
 #import "RYUser.h"
 
-#define kRyffCellReuseID @"RiffCell"
+#define kRiffTitleCellReuseID @"RiffTitleCell"
+#define kRiffBodyCellReuseID @"RiffBodyCell"
 
 @class AVAudioPlayer;
 @class RYRiffTrackTableViewCell;

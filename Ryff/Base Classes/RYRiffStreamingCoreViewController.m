@@ -10,6 +10,8 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+
+// UI Categories
 #import "UIImage+Color.h"
 
 // Data Managers
@@ -30,13 +32,17 @@
 {
     [super viewDidLoad];
     
-    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffTrackTableViewCell" bundle:NULL] forCellReuseIdentifier:kRyffCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffTrackTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffTitleCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellBodyTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffBodyCellReuseID];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.riffTableView setBackgroundColor:[RYStyleSheet backgroundColor]];
+    
+    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -130,6 +136,7 @@
 
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSLog(@"%@",[error localizedDescription]);
     [_currentlyPlayingCell finishDownloading:NO];
     [self clearRiff];
     _isDownloading = NO;
@@ -171,15 +178,13 @@
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (post.riff && indexPath.row == 0)
     {
-        RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:kRyffCellReuseID forIndexPath:indexPath];
-        cell = (UITableViewCell*) riffCell;
+        // Title & riff
+        cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID forIndexPath:indexPath];
     }
     else
     {
-        // user post
-        cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
-        if (cell == NULL)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BasicCell"];
+        // User post: cell body
+        cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
     }
     return cell;
 }
@@ -189,17 +194,17 @@
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (post.riff && indexPath.row == 0)
     {
-        RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
+        RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
         UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
-        [riffCell.statusImageView setImage:maskedImage];
+        [riffTitleCell.statusImageView setImage:maskedImage];
         
-        [riffCell configureForRiff:post.riff];
+        [riffTitleCell configureForRiff:post.riff];
     }
     else
     {
         NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
-        
-        [cell.textLabel setAttributedText:attributedText];
+        RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
+        [riffBodyCell configureWithAttributedString:attributedText];
     }
 }
 
@@ -210,7 +215,7 @@
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (indexPath.row == 1 || post.riff == NULL)
     {
-        CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
+        CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
         NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
         CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         height = MAX(result.size.height+20, height);

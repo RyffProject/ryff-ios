@@ -48,6 +48,8 @@
 		830BBD0B18FAA95700A9C53F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0718FAA95700A9C53F /* share.png */; };
 		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
 		832BC5CF192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BC5CE192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib */; };
+		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
+		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
 		83C6CA7918FAECE500412469 /* RYRiffEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */; };
 		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
@@ -59,6 +61,12 @@
 		83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7318F9856800262496 /* RMDownloadIndicator.m */; };
 		83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7618F9859000262496 /* RMDisplayLabel.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
+		83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */; };
+		83ED34CB193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */; };
+		83ED34CE19316E5D00FEB018 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */; };
+		83ED34CF19316E5D00FEB018 /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */; };
+		83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */; };
+		83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
 		83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
@@ -111,6 +119,8 @@
 		83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1E518F9741400A493F0 /* AFURLRequestSerialization.m */; };
 		83FCD1F118F9741400A493F0 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1E718F9741400A493F0 /* AFURLResponseSerialization.m */; };
 		83FCD1F218F9741400A493F0 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1E918F9741400A493F0 /* AFURLSessionManager.m */; };
+		83FE255A19315D79009FC978 /* riffCellBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FE255819315D79009FC978 /* riffCellBack.png */; };
+		83FE255B19315D79009FC978 /* riffCellBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FE255919315D79009FC978 /* riffCellBack@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +189,8 @@
 		830BBD0718FAA95700A9C53F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		830BBD0818FAA95700A9C53F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		832BC5CE192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffTrackTableViewCell.xib; sourceTree = "<group>"; };
+		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
+		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
 		83C6CA7718FAECE500412469 /* RYRiffEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffEditViewController.h; sourceTree = "<group>"; };
 		83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffEditViewController.m; sourceTree = "<group>"; };
 		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -195,6 +207,13 @@
 		83DBCA7618F9859000262496 /* RMDisplayLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDisplayLabel.m; sourceTree = "<group>"; };
 		83DBCA7918F99E3F00262496 /* RYRiffStreamingCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamingCoreViewController.h; sourceTree = "<group>"; };
 		83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamingCoreViewController.m; sourceTree = "<group>"; };
+		83ED34C71931639800FEB018 /* RYRiffCellBodyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCellBodyTableViewCell.h; sourceTree = "<group>"; };
+		83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCellBodyTableViewCell.m; sourceTree = "<group>"; };
+		83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellBodyTableViewCell.xib; sourceTree = "<group>"; };
+		83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
+		83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
+		83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
+		83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83FCD13D18F907C400A493F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -276,6 +295,8 @@
 		83FCD1E718F9741400A493F0 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		83FCD1E818F9741400A493F0 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		83FCD1E918F9741400A493F0 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		83FE255819315D79009FC978 /* riffCellBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riffCellBack.png; sourceTree = "<group>"; };
+		83FE255919315D79009FC978 /* riffCellBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "riffCellBack@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,6 +543,10 @@
 			children = (
 				83FCD17818F90C1500A493F0 /* RYRiffTrackTableViewCell.h */,
 				83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */,
+				832BC5CE192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib */,
+				83ED34C71931639800FEB018 /* RYRiffCellBodyTableViewCell.h */,
+				83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */,
+				83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */,
 			);
 			name = RiffCell;
 			path = ../UI/Profile/RiffCell;
@@ -617,6 +642,10 @@
 		83FCD1A518F9393500A493F0 /* Style */ = {
 			isa = PBXGroup;
 			children = (
+				83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */,
+				83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */,
+				83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */,
+				83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */,
 				83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */,
 				83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */,
 				830185FC1900AEB300093EFA /* UIColor+Hex.h */,
@@ -628,6 +657,10 @@
 		83FCD1A918F93E6C00A493F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				83FE255819315D79009FC978 /* riffCellBack.png */,
+				83FE255919315D79009FC978 /* riffCellBack@2x.png */,
+				83BC52C5193159260085FADF /* cellBody.png */,
+				83BC52C6193159260085FADF /* cellBody@2x.png */,
 				830185FF1900B1CD00093EFA /* tabBar.png */,
 				830186001900B1CD00093EFA /* tabBar@2x.png */,
 				830185F81900ADB000093EFA /* ryff.png */,
@@ -791,11 +824,14 @@
 				83FCD1D118F9683D00A493F0 /* Loading_1@2x.png in Resources */,
 				830BBD0318FA97EA00A9C53F /* mic@2x.png in Resources */,
 				83FCD1C518F94AC400A493F0 /* play.png in Resources */,
+				83BC52C7193159260085FADF /* cellBody.png in Resources */,
 				830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */,
 				830BBCC318FA081600A9C53F /* checkmark.png in Resources */,
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
+				83FE255B19315D79009FC978 /* riffCellBack@2x.png in Resources */,
 				830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
+				83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */,
 				830BBD0118FA97EA00A9C53F /* dot@2x.png in Resources */,
 				830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
@@ -807,6 +843,7 @@
 				83C6CA8418FAFF5200412469 /* back@2x.png in Resources */,
 				83FCD1AB18F93E6C00A493F0 /* user.png in Resources */,
 				830BBCE118FA401700A9C53F /* next.png in Resources */,
+				83FE255A19315D79009FC978 /* riffCellBack.png in Resources */,
 				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
 				830BBCDA18FA196300A9C53F /* userBig@2x.png in Resources */,
 				830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */,
@@ -814,6 +851,7 @@
 				830BBCD918FA196300A9C53F /* userBig.png in Resources */,
 				83FCD1D518F9683D00A493F0 /* Loading_3@2x.png in Resources */,
 				830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */,
+				83ED34CF19316E5D00FEB018 /* Lato-RegIta.ttf in Resources */,
 				830185FA1900ADB000093EFA /* ryff.png in Resources */,
 				830185FB1900ADB000093EFA /* ryff@2x.png in Resources */,
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
@@ -821,15 +859,20 @@
 				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
 				830BBD0018FA97EA00A9C53F /* dot.png in Resources */,
+				83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */,
 				830BBD0218FA97EA00A9C53F /* mic.png in Resources */,
 				830BBCF018FA786800A9C53F /* Cylindric_1@2x.png in Resources */,
 				83FCD1D018F9683D00A493F0 /* Loading_1.png in Resources */,
 				830BBCEF18FA786800A9C53F /* Cylindric_1.png in Resources */,
 				830BBCE218FA401700A9C53F /* next@2x.png in Resources */,
 				830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */,
+				83BC52C8193159260085FADF /* cellBody@2x.png in Resources */,
+				832BC5CF192DBE2A00686D61 /* RYRiffTrackTableViewCell.xib in Resources */,
 				830BBCDF18FA401700A9C53F /* friend.png in Resources */,
 				83FCD1D218F9683D00A493F0 /* Loading_2.png in Resources */,
 				830BBD0918FAA95700A9C53F /* plus.png in Resources */,
+				83ED34CE19316E5D00FEB018 /* Lato-Lig.ttf in Resources */,
+				83ED34CB193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
 				83C6CA8518FAFF5200412469 /* cloud.png in Resources */,
 			);
@@ -882,6 +925,7 @@
 				83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
 				83FCD1F218F9741400A493F0 /* AFURLSessionManager.m in Sources */,
+				83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */,
 				83FCD1F118F9741400A493F0 /* AFURLResponseSerialization.m in Sources */,
 				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
 				83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */,

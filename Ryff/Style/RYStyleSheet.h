@@ -13,10 +13,12 @@
 +(UIColor*)baseColor;
 +(UIColor*)backgroundColor;
 
-+(UIFont*)baseFont;
-+(UIFont*)boldFont;
-+(UIFont*)longFont;
-+(UIFont*)titleFont;
++(UIFont *)fontFamily;
++(UIFont *)regularFont;
++(UIFont *)boldFont;
++(UIFont *)lightFont;
++(UIFont *)italicFont;
++(UIFont *)titleFont;
 
 +(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 

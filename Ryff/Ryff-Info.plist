@@ -40,6 +40,13 @@
 			<false/>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-RegIta.ttf</string>
+		<string>Lato-Lig.ttf</string>
+		<string>Lato-Bol.ttf</string>
+		<string>Lato-Reg.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

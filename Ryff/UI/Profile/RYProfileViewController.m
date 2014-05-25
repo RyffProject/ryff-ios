@@ -321,13 +321,13 @@ enum VisualStatus : NSUInteger {
         RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
         if (post.riff && indexPath.row == 0)
         {
-            RYRiffTrackTableViewCell *riffCell = [tableView dequeueReusableCellWithIdentifier:@"RiffCell" forIndexPath:indexPath];
-            cell = riffCell;
+            // riff title cell
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID forIndexPath:indexPath];
         }
         else
         {
-            // text post
-            cell = [tableView dequeueReusableCellWithIdentifier:@"BasicCell" forIndexPath:indexPath];
+            // riff body cell
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
         }
     }
     else if (_visualStatus == RECORD)
@@ -349,7 +349,7 @@ enum VisualStatus : NSUInteger {
 {
     // Almost universal themes
     [cell.imageView setImage:nil];
-    [cell.textLabel setFont:[RYStyleSheet baseFont]];
+    [cell.textLabel setFont:[RYStyleSheet regularFont]];
     
     if (_visualStatus == ABOUT)
     {
@@ -357,7 +357,7 @@ enum VisualStatus : NSUInteger {
         {
             //biography
             [cell.textLabel setText:_user.bio];
-            [cell.textLabel setFont:[RYStyleSheet longFont]];
+            [cell.textLabel setFont:[RYStyleSheet lightFont]];
         }
         else if (indexPath.section == 1)
         {
@@ -379,8 +379,8 @@ enum VisualStatus : NSUInteger {
         else
         {
             NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
-            
-            [cell.textLabel setAttributedText:attributedText];
+            RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
+            [riffBodyCell configureWithAttributedString:attributedText];
         }
     }
     else if (_visualStatus == RECORD)
@@ -410,7 +410,7 @@ enum VisualStatus : NSUInteger {
         RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
         if (indexPath.row == 1 || post.riff == NULL)
         {
-            CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
+            CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
             NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
             CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
             height = MAX(result.size.height+20, height);
@@ -424,7 +424,7 @@ enum VisualStatus : NSUInteger {
         {
             CGSize constraint = CGSizeMake(self.view.frame.size.width, 20000);
             NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [RYStyleSheet longFont], NSFontAttributeName, nil];
+                                   [RYStyleSheet lightFont], NSFontAttributeName, nil];
             CGRect result = [_user.bio boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil];
             height = MAX(result.size.height+20, height);
         }

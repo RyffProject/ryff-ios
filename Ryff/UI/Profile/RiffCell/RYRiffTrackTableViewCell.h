@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define kRiffTitleCellPadding 20.0f
+
 @class RYRiff;
 @class RMDownloadIndicator;
 
@@ -20,9 +22,11 @@ enum LoadingStatus : NSUInteger {
 
 @interface RYRiffTrackTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
 @property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
 @property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @property (nonatomic, strong) RMDownloadIndicator *downloadIndicator;
 
