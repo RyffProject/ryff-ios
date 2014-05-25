@@ -28,7 +28,6 @@
 {
     [_riffTitleText setFont:[RYStyleSheet regularFont]];
     [_riffLengthText setFont:[RYStyleSheet lightFont]];
-    [self setBackgroundColor:[UIColor clearColor]];
     [_backgroundImageView setImage:[self riffCellTopBackgroundImage]];
     [_backgroundImageView setFrame:_wrapperView.bounds];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -38,6 +37,8 @@
 {
     [_riffTitleText setText:riff.title];
     _riffDuration = riff.duration;
+    
+    [self setBackgroundColor:[UIColor clearColor]];
     
     [self setCurrentStatus:STOP];
     [self resetDurationText];

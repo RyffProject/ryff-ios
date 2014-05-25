@@ -24,6 +24,15 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile~ipad</key>
+	<string>Main-iPad</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-RegIta.ttf</string>
+		<string>Lato-Lig.ttf</string>
+		<string>Lato-Bol.ttf</string>
+		<string>Lato-Reg.ttf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -40,13 +49,6 @@
 			<false/>
 		</dict>
 	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Lato-RegIta.ttf</string>
-		<string>Lato-Lig.ttf</string>
-		<string>Lato-Bol.ttf</string>
-		<string>Lato-Reg.ttf</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

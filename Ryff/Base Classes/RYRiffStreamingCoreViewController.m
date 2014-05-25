@@ -39,10 +39,9 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.riffTableView setBackgroundColor:[RYStyleSheet backgroundColor]];
-    
-    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

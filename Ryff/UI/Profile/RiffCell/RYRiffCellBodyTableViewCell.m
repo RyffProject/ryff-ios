@@ -18,13 +18,13 @@
     [_backgroundImageView setImage:[self riffCellBottomBackgroundImage]];
     [_backgroundImageView setBounds:_wrapperView.bounds];
     [_riffTextLabel setFont:[RYStyleSheet regularFont]];
-    [self setBackgroundColor:[UIColor clearColor]];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 - (void) configureWithAttributedString:(NSAttributedString*)attributedString
 {
     [_riffTextLabel setAttributedText:attributedString];
+    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 #pragma mark -

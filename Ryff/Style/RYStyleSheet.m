@@ -14,7 +14,7 @@
 
 +(UIColor*)baseColor
 {
-    return [UIColor colorWithHexString:@"ffc000"];
+    return [UIColor colorWithHexString:@"ffc800"];
 }
 +(UIColor*)backgroundColor
 {
