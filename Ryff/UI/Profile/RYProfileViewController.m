@@ -266,7 +266,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        sectionCount = self.feedItems.count;
+        sectionCount = [super numberOfSectionsInTableView:tableView];
     }
     else if (_visualStatus == RECORD)
     {
@@ -293,8 +293,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        RYNewsfeedPost *post = [self.feedItems objectAtIndex:section];
-        rowCount = (post.riff) ? 2 : 1;
+        rowCount = [super tableView:tableView numberOfRowsInSection:section];
     }
     else if (_visualStatus == RECORD)
     {
@@ -318,17 +317,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-        if (post.riff && indexPath.row == 0)
-        {
-            // riff title cell
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID forIndexPath:indexPath];
-        }
-        else
-        {
-            // riff body cell
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
-        }
+        cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     else if (_visualStatus == RECORD)
     {
@@ -367,21 +356,7 @@ enum VisualStatus : NSUInteger {
     }
     else if (_visualStatus == ACTIVITY)
     {
-        RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-        if (post.riff && indexPath.row == 0)
-        {
-            RYRiffTrackTableViewCell *riffCell = (RYRiffTrackTableViewCell*)cell;
-            UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
-            [riffCell.statusImageView setImage:maskedImage];
-            
-            [riffCell configureForRiff:post.riff];
-        }
-        else
-        {
-            NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
-            RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
-            [riffBodyCell configureWithAttributedString:attributedText];
-        }
+        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     }
     else if (_visualStatus == RECORD)
     {
@@ -407,14 +382,7 @@ enum VisualStatus : NSUInteger {
     
     if (_visualStatus == ACTIVITY)
     {
-        RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-        if (indexPath.row == 1 || post.riff == NULL)
-        {
-            CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
-            NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
-            CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            height = MAX(result.size.height+20, height);
-        }
+        height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     
     else if (_visualStatus == ABOUT)
@@ -440,55 +408,10 @@ enum VisualStatus : NSUInteger {
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
     if (_visualStatus == ACTIVITY)
     {
         // Riff row
-        if (post.riff && indexPath.row == 0)
-        {
-            // if not playing, begin
-            if (!self.isPlaying && !self.isDownloading)
-            {
-                self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-                [self startRiffDownload:post.riff];
-                return;
-            }
-            
-            // stop any downloads
-            else if (self.isDownloading)
-            {
-                [self clearRiff];
-            }
-            
-            // already playing
-            else if (self.isPlaying && [tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
-            {
-                //currently playing this track, pause it
-                if (self.audioPlayer.isPlaying)
-                {
-                    [self.audioPlayer pause];
-                    [self.currentlyPlayingCell shouldPause:YES];
-                }
-                else
-                {
-                    [self.audioPlayer play];
-                    [self.currentlyPlayingCell shouldPause:NO];
-                }
-            }
-            else
-            {
-                //playing another, switch riff
-                [self clearRiff];
-                
-                self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-                [self startRiffDownload:post.riff];
-            }
-        }
-        else
-        {
-            // open new view controller for chosen user
-            
-        }
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     else if (_visualStatus == RECORD)
     {

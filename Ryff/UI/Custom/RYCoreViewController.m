@@ -22,6 +22,9 @@
     [super viewWillAppear:animated];
     
     [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+    
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet backgroundColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 
 - (BOOL)prefersStatusBarHidden

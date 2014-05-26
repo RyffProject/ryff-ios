@@ -21,6 +21,9 @@
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
+// Data
+@property (nonatomic, assign) NSInteger openRiffDetailsSection; // section where there the extra riff details section is open
+
 @end
 
 @implementation RYRiffStreamingCoreViewController
@@ -33,7 +36,10 @@
     [super viewDidLoad];
     
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffTrackTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffTitleCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RyRiffDetailsTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffDetailsCellReuseID];
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellBodyTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffBodyCellReuseID];
+    
+    _openRiffDetailsSection = -1;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -168,6 +174,13 @@
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:section];
     NSInteger numCells = (post.riff) ? 2 : 1;
+    
+    if (section == _openRiffDetailsSection)
+    {
+        // riff details are open, should have extra row
+        numCells++;
+    }
+    
     return numCells;
 }
 
@@ -175,6 +188,8 @@
 {
     UITableViewCell *cell;
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
+    NSInteger riffAdjust = (post.riff) ? 1 : 0;
+    
     if (post.riff && indexPath.row == 0)
     {
         // Title & riff
@@ -182,8 +197,16 @@
     }
     else
     {
-        // User post: cell body
-        cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
+        if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
+        {
+            // riff details
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID forIndexPath:indexPath];
+        }
+        else
+        {
+            // User post: cell body
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
+        }
     }
     return cell;
 }
@@ -191,6 +214,8 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
+    NSInteger riffAdjust = (post.riff) ? 1 : 0;
+    
     if (post.riff && indexPath.row == 0)
     {
         RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
@@ -201,9 +226,19 @@
     }
     else
     {
-        NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
-        RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
-        [riffBodyCell configureWithAttributedString:attributedText];
+        if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
+        {
+            // riff details cell
+            RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
+            [riffDetailsCell configure];
+        }
+        else
+        {
+            // riff body cell
+            NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
+            RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
+            [riffBodyCell configureWithAttributedString:attributedText];
+        }
     }
 }
 
@@ -212,13 +247,18 @@
     CGFloat height = 44.0f;
     
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    if (indexPath.row == 1 || post.riff == NULL)
+    NSInteger bodyRow = (post.riff) ? 1 : 0;
+    if (indexPath.section == _openRiffDetailsSection)
+        bodyRow++;
+    
+    if (indexPath.row == bodyRow)
     {
         CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
         NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
         CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         height = MAX(result.size.height+20, height);
     }
+    
     return height;
 }
 
@@ -272,8 +312,34 @@
     }
     else
     {
-        // open new view controller for chosen user
+        // Should open that section with more options
+        NSInteger oldOpenSection = _openRiffDetailsSection;
         
+        [self.riffTableView beginUpdates];
+        
+        if (_openRiffDetailsSection >= 0)
+        {
+            RYNewsfeedPost *oldPost = [self.feedItems objectAtIndex:_openRiffDetailsSection];
+            NSInteger rowForBody = (oldPost.riff) ? 2 : 1;
+            
+            UITableViewRowAnimation rowAnimation = (rowForBody == 2) ? UITableViewRowAnimationTop : UITableViewRowAnimationMiddle;
+            // should close the currently open riff
+            [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:rowAnimation];
+            _openRiffDetailsSection = -1;
+        }
+        
+        if (oldOpenSection != indexPath.section)
+        {
+            // riff selected wasn't already open, should open it
+            NSInteger rowForBody = (post.riff) ? 2 : 1;
+            
+            UITableViewRowAnimation rowAnimation = (rowForBody == 2) ? UITableViewRowAnimationTop : UITableViewRowAnimationMiddle;
+            // insert new row
+            _openRiffDetailsSection = indexPath.section;
+            [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:indexPath.section]] withRowAnimation:rowAnimation];
+        }
+        
+        [self.riffTableView endUpdates];
     }
 }
 

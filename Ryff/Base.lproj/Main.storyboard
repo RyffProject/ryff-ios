@@ -561,10 +561,10 @@
             </objects>
             <point key="canvasLocation" x="2760" y="-148"/>
         </scene>
-        <!--Core Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="Pzd-xI-MfG">
             <objects>
-                <navigationController storyboardIdentifier="ArtistNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eHm-lz-8Ga" customClass="RYCoreNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ArtistNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eHm-lz-8Ga" sceneMemberID="viewController">
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
