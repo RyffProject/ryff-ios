@@ -15,14 +15,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Present main storyboard
+    NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";
+    UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
+    [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
+    [self.window makeKeyAndVisible];
     
     NSDictionary *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
     
     if (!loggedInUser)
     {
         // present registration page
-        UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:@"Main" bundle:NULL];
         UINavigationController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"registrationRootNC"];
         [navCon setModalPresentationStyle:UIModalPresentationFullScreen];
         [self.window makeKeyAndVisible];

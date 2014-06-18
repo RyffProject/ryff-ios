@@ -49,9 +49,12 @@
 		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
 		8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */; };
 		8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */; };
+		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
+		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
+		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
 		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
-		83C6CA7918FAECE500412469 /* RYRiffEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */; };
+		83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */; };
 		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
 		83C6CA8418FAFF5200412469 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7E18FAFF5200412469 /* back@2x.png */; };
@@ -91,7 +94,7 @@
 		83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD14418F907C400A493F0 /* InfoPlist.strings */; };
 		83FCD14818F907C400A493F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD14718F907C400A493F0 /* main.m */; };
 		83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD14B18F907C400A493F0 /* RYAppDelegate.m */; };
-		83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD14D18F907C400A493F0 /* Main.storyboard */; };
+		83FCD14F18F907C400A493F0 /* MainIphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD14D18F907C400A493F0 /* MainIphone.storyboard */; };
 		83FCD15718F907C400A493F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD15618F907C400A493F0 /* Images.xcassets */; };
 		83FCD15E18F907C400A493F0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD15D18F907C400A493F0 /* XCTest.framework */; };
 		83FCD15F18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
@@ -209,10 +212,15 @@
 		8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RyRiffDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		8314E33019330506007F8B44 /* RyRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RyRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
 		8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RyRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
+		8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateViewController.h; sourceTree = "<group>"; };
+		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
+		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
+		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
+		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
 		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
-		83C6CA7718FAECE500412469 /* RYRiffEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffEditViewController.h; sourceTree = "<group>"; };
-		83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffEditViewController.m; sourceTree = "<group>"; };
+		83C6CA7718FAECE500412469 /* RYRiffReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffReviewViewController.h; sourceTree = "<group>"; };
+		83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffReviewViewController.m; sourceTree = "<group>"; };
 		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		83C6CA7B18FAF95C00412469 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		83C6CA7D18FAFF5200412469 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
@@ -261,7 +269,7 @@
 		83FCD14918F907C400A493F0 /* Ryff-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ryff-Prefix.pch"; sourceTree = "<group>"; };
 		83FCD14A18F907C400A493F0 /* RYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RYAppDelegate.h; sourceTree = "<group>"; };
 		83FCD14B18F907C400A493F0 /* RYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RYAppDelegate.m; sourceTree = "<group>"; };
-		83FCD14E18F907C400A493F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83FCD14E18F907C400A493F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainIphone.storyboard; sourceTree = "<group>"; };
 		83FCD15618F907C400A493F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		83FCD15C18F907C400A493F0 /* RyffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RyffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD15D18F907C400A493F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -433,11 +441,23 @@
 			path = record;
 			sourceTree = "<group>";
 		};
+		835516731951314400CF2C23 /* RiffCreate */ = {
+			isa = PBXGroup;
+			children = (
+				835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */,
+				835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */,
+			);
+			path = RiffCreate;
+			sourceTree = "<group>";
+		};
 		83C6CA7618FAECD200412469 /* RiffEdit */ = {
 			isa = PBXGroup;
 			children = (
-				83C6CA7718FAECE500412469 /* RYRiffEditViewController.h */,
-				83C6CA7818FAECE500412469 /* RYRiffEditViewController.m */,
+				835516731951314400CF2C23 /* RiffCreate */,
+				8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */,
+				8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */,
+				83C6CA7718FAECE500412469 /* RYRiffReviewViewController.h */,
+				83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */,
 			);
 			path = RiffEdit;
 			sourceTree = "<group>";
@@ -556,7 +576,8 @@
 				83FCD1A018F921AB00A493F0 /* Data */,
 				83FCD14A18F907C400A493F0 /* RYAppDelegate.h */,
 				83FCD14B18F907C400A493F0 /* RYAppDelegate.m */,
-				83FCD14D18F907C400A493F0 /* Main.storyboard */,
+				8397133E1936DD1100913996 /* Main.storyboard */,
+				83FCD14D18F907C400A493F0 /* MainIphone.storyboard */,
 				83FCD19018F915DE00A493F0 /* Suggester */,
 				83FCD18C18F9142600A493F0 /* Newsfeed */,
 				83FCD17318F909CB00A493F0 /* Profile */,
@@ -947,7 +968,7 @@
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
 				830BBD0B18FAA95700A9C53F /* share.png in Resources */,
 				83ED34F71931851600FEB018 /* iTunesArtwork@2x.png in Resources */,
-				83FCD14F18F907C400A493F0 /* Main.storyboard in Resources */,
+				83FCD14F18F907C400A493F0 /* MainIphone.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
 				830BBD0018FA97EA00A9C53F /* dot.png in Resources */,
 				83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */,
@@ -970,6 +991,7 @@
 				83ED34F41931851600FEB018 /* AppIcon76x76.png in Resources */,
 				83ED34F31931851600FEB018 /* AppIcon72x72@2x.png in Resources */,
 				83ED34CB193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib in Resources */,
+				8397133F1936DD1100913996 /* Main.storyboard in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
 				83C6CA8518FAFF5200412469 /* cloud.png in Resources */,
 			);
@@ -995,7 +1017,7 @@
 				83FCD1EE18F9741400A493F0 /* AFSecurityPolicy.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				83FCD1EB18F9741400A493F0 /* AFHTTPRequestOperationManager.m in Sources */,
-				83C6CA7918FAECE500412469 /* RYRiffEditViewController.m in Sources */,
+				83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */,
 				830BBCCD18FA0FC500A9C53F /* RYRegisterViewController.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83FCD1EA18F9741400A493F0 /* AFHTTPRequestOperation.m in Sources */,
@@ -1021,7 +1043,9 @@
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
+				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83FCD1F218F9741400A493F0 /* AFURLSessionManager.m in Sources */,
+				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
 				83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */,
 				83FCD1F118F9741400A493F0 /* AFURLResponseSerialization.m in Sources */,
 				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
@@ -1074,12 +1098,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		83FCD14D18F907C400A493F0 /* Main.storyboard */ = {
+		83FCD14D18F907C400A493F0 /* MainIphone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				83FCD14E18F907C400A493F0 /* Base */,
 			);
-			name = Main.storyboard;
+			name = MainIphone.storyboard;
 			sourceTree = "<group>";
 		};
 		83FCD16618F907C400A493F0 /* InfoPlist.strings */ = {

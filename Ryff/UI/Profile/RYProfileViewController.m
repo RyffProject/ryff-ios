@@ -20,7 +20,8 @@
 #import "UIImage+Color.h"
 
 // Associated View Controllers
-#import "RYRiffEditViewController.h"
+#import "RYRiffReviewViewController.h"
+#import "RYRiffCreateViewController.h"
 
 enum VisualStatus : NSUInteger {
     ABOUT = 1,
@@ -44,7 +45,7 @@ enum VisualStatus : NSUInteger {
 {
     self.riffTableView = _tableView;
     [super viewDidLoad];
-    [self prepForRecording];
+    //[self prepForRecording];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,9 +117,8 @@ enum VisualStatus : NSUInteger {
 
 - (IBAction)addHit:(id)sender
 {
-    [self setVisualStatus:RECORD];
-    [self clearRiff];
-    [_tableView reloadData];
+    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
 - (IBAction)aboutHit:(id)sender
@@ -193,7 +193,7 @@ enum VisualStatus : NSUInteger {
 - (void) presentRiffEdit
 {
     UINavigationController *navCon = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffEditNC"];
-    RYRiffEditViewController *riffEdit = [navCon.viewControllers firstObject];
+    RYRiffReviewViewController *riffEdit = [navCon.viewControllers firstObject];
     RYRiff *newRiff = [RYRiff riffWithURL:[RYServices pathForRiff]];
     [riffEdit configureWithRiff:newRiff];
     [self presentViewController:navCon animated:YES completion:nil];

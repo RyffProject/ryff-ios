@@ -14,3 +14,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define isIpad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+#define isIOS7 floor((NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)

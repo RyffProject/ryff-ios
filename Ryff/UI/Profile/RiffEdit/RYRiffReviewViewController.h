@@ -1,5 +1,5 @@
 //
-//  RYRiffEditViewController.h
+//  RYRiffReviewViewController.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/13/14.
@@ -11,7 +11,7 @@
 
 @class RYRiff;
 
-@interface RYRiffEditViewController : RYCoreViewController
+@interface RYRiffReviewViewController : RYCoreViewController
 
 - (void) configureWithRiff:(RYRiff *)riff;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;

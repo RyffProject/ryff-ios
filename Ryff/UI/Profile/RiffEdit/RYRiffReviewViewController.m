@@ -1,12 +1,12 @@
 //
-//  RYRiffEditViewController.m
+//  RYRiffReviewViewController.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/13/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYRiffEditViewController.h"
+#import "RYRiffReviewViewController.h"
 
 // Data Managers
 #import "RYServices.h"
@@ -24,14 +24,14 @@
 // Media
 #import <AVFoundation/AVFoundation.h>
 
-@interface RYRiffEditViewController () <AVAudioPlayerDelegate, UITextViewDelegate>
+@interface RYRiffReviewViewController () <AVAudioPlayerDelegate, UITextViewDelegate>
 
 @property (nonatomic, retain) AVAudioPlayer *player;
 @property (nonatomic, strong) RYRiff *riff;
 @property (nonatomic, strong) NSTimer *updateTimer;
 @end
 
-@implementation RYRiffEditViewController
+@implementation RYRiffReviewViewController
 
 - (void) viewDidLoad
 {

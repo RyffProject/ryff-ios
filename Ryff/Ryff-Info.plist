@@ -31,8 +31,6 @@
 		<string>Lato-Bol.ttf</string>
 		<string>Lato-Reg.ttf</string>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
