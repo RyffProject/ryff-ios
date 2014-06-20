@@ -9,7 +9,7 @@
 #import "RYRiffCreateViewController.h"
 
 // Data Managers
-#import "RYServices.h"
+#import "RYMediaEditor.h"
 
 // Custom UI
 #import "RYRiffCreateTableViewCell.h"
@@ -42,7 +42,6 @@
     [super viewDidLoad];
     
     _audioPlayers = [[NSArray alloc] init];
-    [self prepForRecording];
     
     [_tableView setAllowsSelection:NO];
 }
@@ -54,21 +53,20 @@
 {
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     
-    if (!_recorder.recording)
+    if (!_recorder.isRecording)
     {
         // start recording
+        [self prepForRecording];
         [audioSession setActive:YES error:nil];
-        [_recorder record];
-        
-        [(UIButton*)sender setTitle:@"Recording..." forState:UIControlStateNormal];
+        if ([_recorder record])
+            [(UIButton*)sender setTitle:@"Recording..." forState:UIControlStateNormal];
     }
     else
     {
         // stop recording
         [_recorder stop];
         [audioSession setActive:NO error:nil];
-        NSData *trackData = [NSData dataWithContentsOfFile:[[RYServices pathForRiff] path]];
-        [self addTrack:trackData];
+        [self addTrack:_recorder.url];
         
         [(UIButton*)sender setTitle:@"Record" forState:UIControlStateNormal];
     }
@@ -87,14 +85,23 @@
         [audioPlayer play];
     }
 }
+- (IBAction)exportButtonHit:(id)sender
+{
+    NSMutableArray *urlArray = [[NSMutableArray alloc] initWithCapacity:_audioPlayers.count];
+    for (AVAudioPlayer *audioPlayer in _audioPlayers)
+    {
+        [urlArray addObject:[NSURL fileURLWithPath:[audioPlayer.url path]]];
+    }
+    [[RYMediaEditor sharedInstance] mergeAudioData:urlArray];
+}
 
 #pragma mark -
 #pragma mark - Data
 
-- (void) addTrack:(NSData*)newTrack
+- (void) addTrack:(NSURL*)trackURL
 {
     NSError *error = nil;
-    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithData:newTrack error:&error];
+    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:trackURL error:&error];
     [audioPlayer setEnableRate:YES];
     [audioPlayer prepareToPlay];
     
@@ -104,10 +111,13 @@
 
 #pragma mark - Recording
 
+/*
+ Prepare to record one track (called every time there's a new track)
+ */
 - (void) prepForRecording
 {
     // Set the audio file
-    NSURL *outputFileURL = [RYServices pathForRiff];
+    NSURL *outputFileURL = [RYMediaEditor pathForNextTrack];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -137,7 +147,8 @@
     {
         AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
         [audioPlayer setCurrentTime:0];
-        [audioPlayer play];
+        if ([audioPlayer play])
+            NSLog(@"playing");
     }
 }
 
@@ -150,10 +161,17 @@
 {
     if (trackIndex < _audioPlayers.count)
     {
-        NSMutableArray *players = [_audioPlayers mutableCopy];
-        [players removeObjectAtIndex:trackIndex];
-        _audioPlayers = players;
-        [self.tableView reloadData];
+        NSMutableArray *players    = [_audioPlayers mutableCopy];
+        AVAudioPlayer *audioPlayer = [players objectAtIndex:trackIndex];
+        
+        NSError *error = nil;
+        if ([[NSFileManager defaultManager] removeItemAtURL:audioPlayer.url error:&error])
+        {
+            // removed track
+            [players removeObjectAtIndex:trackIndex];
+            _audioPlayers = players;
+            [self.tableView reloadData];
+        }
     }
 }
 

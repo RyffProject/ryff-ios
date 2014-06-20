@@ -119,7 +119,7 @@
 
 - (void) prepAudio
 {
-    NSURL *pathAsURL = [RYServices pathForRiff];
+    NSURL *pathAsURL = [RYServices urlForRiff];
     
     // Init the audio player.
     NSError *error;

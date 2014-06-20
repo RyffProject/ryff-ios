@@ -194,14 +194,14 @@ enum VisualStatus : NSUInteger {
 {
     UINavigationController *navCon = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffEditNC"];
     RYRiffReviewViewController *riffEdit = [navCon.viewControllers firstObject];
-    RYRiff *newRiff = [RYRiff riffWithURL:[RYServices pathForRiff]];
+    RYRiff *newRiff = [RYRiff riffWithURL:[RYServices urlForRiff]];
     [riffEdit configureWithRiff:newRiff];
     [self presentViewController:navCon animated:YES completion:nil];
 }
 
 - (void) cleanupRiff
 {
-    NSURL *outputFileURL = [RYServices pathForRiff];
+    NSURL *outputFileURL = [RYServices urlForRiff];
     NSError *error;
     if ([[NSFileManager defaultManager] isDeletableFileAtPath:[outputFileURL path]]) {
         BOOL success = [[NSFileManager defaultManager] removeItemAtPath:[outputFileURL path] error:&error];

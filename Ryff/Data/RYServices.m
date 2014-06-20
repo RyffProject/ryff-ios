@@ -233,7 +233,7 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Newsfeed
 
-+ (NSURL*)pathForRiff
++ (NSURL*)urlForRiff
 {
     NSArray *pathComponents = [NSArray arrayWithObjects:
                                [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
@@ -267,9 +267,9 @@ static RYUser* _loggedInUser;
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];
             [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 
-                if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYServices pathForRiff] path]])
+                if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYServices urlForRiff] path]])
                 {
-                    NSData *musicData = [NSData dataWithContentsOfFile:[[RYServices pathForRiff] path]];
+                    NSData *musicData = [NSData dataWithContentsOfFile:[[RYServices urlForRiff] path]];
                     [formData appendPartWithFileData:musicData name:@"riff" fileName:@"riff" mimeType:@"audio/mp4"];
                 }
                 
