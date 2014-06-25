@@ -19,13 +19,24 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+
+// Categories
 #import "UIImage+Color.h"
+#import "UIViewController+Extras.h"
 
 // Media
 #import <AVFoundation/AVFoundation.h>
 
-@interface RYRiffReviewViewController () <AVAudioPlayerDelegate, UITextViewDelegate>
+@interface RYRiffReviewViewController () <AVAudioPlayerDelegate, UITextViewDelegate, RiffDelegate>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UITextField *riffTitleTextField;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UISlider *progressSlider;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UILabel *durationTextLabel;
 
+// Data
 @property (nonatomic, retain) AVAudioPlayer *player;
 @property (nonatomic, strong) RYRiff *riff;
 @property (nonatomic, strong) NSTimer *updateTimer;
@@ -64,20 +75,16 @@
     [_descriptionTextView setText:@"Description"];
     
     // Design
-    [_progressBar setProgress:0];
+    [_progressSlider setValue:0];
     
     [_playButton setTitle:@"" forState:UIControlStateNormal];
     [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [_playButton setTintColor:[RYStyleSheet baseColor]];
     
-    [_restartButton setTitle:@"" forState:UIControlStateNormal];
-    [_restartButton setImage:[UIImage imageNamed:@"reset"] forState:UIControlStateNormal];
-    [_restartButton setTintColor:[RYStyleSheet baseColor]];
-    
     [_cancelButton setImage:[[UIImage imageNamed:@"back"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     [_saveButton setImage:[[UIImage imageNamed:@"cloud"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
     
-    [_progressBar setTintColor:[RYStyleSheet baseColor]];
+    [_progressSlider setTintColor:[RYStyleSheet baseColor]];
     
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelHit:)];
     [cancel setImage:[UIImage imageNamed:@"back"]];
@@ -96,7 +103,7 @@
 {
     //progress bar
     CGFloat progress = (_player.currentTime / _player.duration);
-    [_progressBar setProgress:progress];
+    [_progressSlider setValue:progress];
     
     //length text
     if (_player.playing)
@@ -141,18 +148,21 @@
     [_player setDelegate:self];
 }
 
-- (void) processRiff
+- (BOOL) readyForSubmission
 {
-    RYProfileViewController *prof = (RYProfileViewController*)self.presentingViewController;
-    [[RYServices sharedInstance] postRiffWithContent:_descriptionTextView.text title:_riffTitleTextField.text duration:[NSNumber numberWithFloat:_player.duration] ForDelegate:prof];
+    if (_riffTitleTextField.text.length == 0)
+        return NO;
+    return YES;
 }
 
-- (IBAction)restart:(id)sender
+- (void) processRiff
 {
-    if (_player.playing)
-        [_player pause];
-    [_player playAtTime:0];
+    [self showHUDWithTitle:@"Uploading"];
+    [[RYServices sharedInstance] postRiffWithContent:_descriptionTextView.text title:_riffTitleTextField.text duration:[NSNumber numberWithFloat:_player.duration] ForDelegate:self];
 }
+
+#pragma mark -
+#pragma mark - Actions
 
 - (IBAction)playPauseHit:(id)sender
 {
@@ -168,13 +178,11 @@
     }
 }
 
-- (BOOL) readyForSubmission
+- (IBAction)progressSliderChanged:(id)sender
 {
-    if (_riffTitleTextField.text.length == 0)
-        return NO;
-    return YES;
+    CGFloat newTime = ((UISlider*)sender).value*_player.duration;
+    [_player setCurrentTime:newTime];
 }
-
 
 - (IBAction)cancelHit:(id)sender
 {
@@ -185,9 +193,7 @@
 {
     if ([self readyForSubmission])
     {
-        [self dismissViewControllerAnimated:YES completion:^{
-            [self processRiff];
-        }];
+        [self processRiff];
     }
 }
 
@@ -224,6 +230,22 @@
     {
         [_playButton setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
     }
+}
+
+#pragma mark -
+#pragma mark - RiffDelegate
+
+- (void) riffPostSucceeded
+{
+    [self hideHUD];
+    [self showCheckHUDWithTitle:@"Posted" forDuration:1.5f];
+}
+
+- (void) riffPostFailed
+{
+    [self hideHUD];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Error Uploading" message:@"Something went wrong uploading, try again later." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [errorAlert show];
 }
 
 @end

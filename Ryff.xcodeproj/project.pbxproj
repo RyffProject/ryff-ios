@@ -49,6 +49,7 @@
 		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
 		8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */; };
 		8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */; };
+		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
@@ -213,6 +214,8 @@
 		8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RyRiffDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		8314E33019330506007F8B44 /* RyRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RyRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
 		8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RyRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
+		834039FB195A44E90001EA53 /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+block.h"; path = "../../Global Helpers/NSObject+block.h"; sourceTree = "<group>"; };
+		834039FC195A44E90001EA53 /* NSObject+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+block.m"; path = "../../Global Helpers/NSObject+block.m"; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateViewController.h; sourceTree = "<group>"; };
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
@@ -468,6 +471,8 @@
 		83DBCA6B18F97A2A00262496 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				834039FB195A44E90001EA53 /* NSObject+block.h */,
+				834039FC195A44E90001EA53 /* NSObject+block.m */,
 				830BBCD318FA14F500A9C53F /* UIImage+Thumbnail.h */,
 				830BBCD418FA14F500A9C53F /* UIImage+Thumbnail.m */,
 				830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */,
@@ -507,13 +512,6 @@
 				83E56B631953A0A900EF054C /* RYUser.m */,
 			);
 			path = Objects;
-			sourceTree = "<group>";
-		};
-		83ED34D319317B8000FEB018 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
 			sourceTree = "<group>";
 		};
 		83ED34D61931851600FEB018 /* Icon */ = {
@@ -581,7 +579,6 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
-				83ED34D319317B8000FEB018 /* iPad */,
 				83DBCA7818F99E2000262496 /* Base Classes */,
 				83DBCA6B18F97A2A00262496 /* Custom */,
 				83FCD1D618F9741400A493F0 /* AFNetworking */,
@@ -1038,6 +1035,7 @@
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
 				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
+				834039FD195A44E90001EA53 /* NSObject+block.m in Sources */,
 				83E56B651953A0A900EF054C /* RYUser.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
 				830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */,

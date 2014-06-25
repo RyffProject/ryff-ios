@@ -11,15 +11,24 @@
 // Data Managers
 #import "RYMediaEditor.h"
 
+// Data Objects
+#import "RYRiff.h"
+
 // Custom UI
 #import "RYRiffCreateTableViewCell.h"
 #import "BlockAlertView.h"
+
+// Associated View Controller
+#import "RYRiffReviewViewController.h"
+
+// Categories
+#import "UIViewController+Extras.h"
 
 // Media
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate>
+@interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
@@ -57,6 +66,10 @@
     {
         // start recording
         [self prepForRecording];
+        
+        // play all tracks
+        [self playAllButtonHit:nil];
+        
         [audioSession setActive:YES error:nil];
         if ([_recorder record])
             [(UIButton*)sender setTitle:@"Recording..." forState:UIControlStateNormal];
@@ -87,12 +100,7 @@
 }
 - (IBAction)exportButtonHit:(id)sender
 {
-    NSMutableArray *urlArray = [[NSMutableArray alloc] initWithCapacity:_audioPlayers.count];
-    for (AVAudioPlayer *audioPlayer in _audioPlayers)
-    {
-        [urlArray addObject:[NSURL fileURLWithPath:[audioPlayer.url path]]];
-    }
-    [[RYMediaEditor sharedInstance] mergeAudioData:urlArray];
+    [self mergeTracks];
 }
 
 #pragma mark -
@@ -191,6 +199,46 @@
         AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
         [audioPlayer setRate:playbackSpeed];
     }
+}
+
+#pragma mark -
+#pragma mark - MediaEditor
+
+- (void) mergeTracks
+{
+    NSMutableArray *urlArray = [[NSMutableArray alloc] initWithCapacity:_audioPlayers.count];
+    for (AVAudioPlayer *audioPlayer in _audioPlayers)
+    {
+        [urlArray addObject:[NSURL fileURLWithPath:[audioPlayer.url path]]];
+    }
+    [self showHUDWithTitle:@"Exporting"];
+    [[RYMediaEditor sharedInstance] setMergeDelegate:self];
+    [[RYMediaEditor sharedInstance] mergeAudioData:urlArray];
+}
+
+#pragma mark - MergeAudioDelegate
+
+- (void) mergeSucceeded:(NSURL *)newTrackURL
+{
+    [self hideHUD];
+    [self showCheckHUDWithTitle:@"Riff Created" forDuration:1.0f];
+    
+    [self performBlock:^{
+        
+        // Create new riff and present riff edit VC
+        RYRiff *newRiff = [RYRiff riffWithURL:newTrackURL];
+        RYRiffReviewViewController *riffEdit = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"Riff-Review-VC"];
+        [riffEdit configureWithRiff:newRiff];
+        [self.navigationController pushViewController:riffEdit animated:YES];
+        
+    } afterDelay:1.0f];
+}
+
+- (void) mergeFailed:(NSString *)reason
+{
+    [self hideHUD];
+    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Action Failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [failureAlert show];
 }
 
 #pragma mark -

@@ -50,7 +50,10 @@ static RYMediaEditor *_sharedInstance;
 }
 
 /*
- 
+ Merges audio tracks into one file, and notifies _mergeDelegate of success/failure
+ PARAMETERS:
+ -trackURLS: NSArray of urls for component tracks to merge.
+ RETURNS: NSURL for new audio file.
  */
 - (void) mergeAudioData:(NSArray*)trackURLs
 {
@@ -84,14 +87,29 @@ static RYMediaEditor *_sharedInstance;
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
         
         if (AVAssetExportSessionStatusCompleted == exportSession.status) {
-            NSLog(@"AVAssetExportSessionStatusCompleted");
+            if (_mergeDelegate && [_mergeDelegate respondsToSelector:@selector(mergeSucceeded:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_mergeDelegate mergeSucceeded:[RYServices urlForRiff]];
+                });
+            }
         } else if (AVAssetExportSessionStatusFailed == exportSession.status) {
             // a failure may happen because of an event out of your control
             // for example, an interruption like a phone call comming in
             // make sure and handle this case appropriately
-            NSLog(@"AVAssetExportSessionStatusFailed");
+            if (_mergeDelegate && [_mergeDelegate respondsToSelector:@selector(mergeFailed:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_mergeDelegate mergeFailed:[NSString stringWithFormat:@"Audio export failed: %@",[exportSession.error localizedDescription]]];
+                });
+            }
         } else {
-            NSLog(@"Export Session Status: %ld", (long)exportSession.status);
+            if (_mergeDelegate && [_mergeDelegate respondsToSelector:@selector(mergeFailed:)])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_mergeDelegate mergeFailed:[NSString stringWithFormat:@"Could not export, exportSessionStatus: %ld",(long)exportSession.status]];
+                });
+            }
         }
     }];
 }

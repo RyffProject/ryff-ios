@@ -9,25 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "RYRiffStreamingCoreViewController.h"
 
-#import "RYServices.h"
-
 @class RYUser;
 
-@interface RYProfileViewController : RYRiffStreamingCoreViewController <RiffDelegate>
-
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (weak, nonatomic) IBOutlet UILabel *nameText;
-@property (weak, nonatomic) IBOutlet UIButton *recentActivityButton;
-@property (weak, nonatomic) IBOutlet UIButton *addButton;
-@property (weak, nonatomic) IBOutlet UIButton *aboutButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface RYProfileViewController : RYRiffStreamingCoreViewController
 
 @property (nonatomic, strong) RYUser *user;
-
-- (IBAction)editHit:(id)sender;
-- (IBAction)activityHit:(id)sender;
-- (IBAction)addHit:(id)sender;
-- (IBAction)aboutHit:(id)sender;
 
 @end

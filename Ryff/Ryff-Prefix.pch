@@ -17,3 +17,5 @@
 
 #define isIpad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 #define isIOS7 floor((NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
+
+#import "NSObject+block.h"

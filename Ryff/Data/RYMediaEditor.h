@@ -10,7 +10,14 @@
 
 #define kMediaFileType @".m4a"
 
+@protocol MergeAudioDelegate <NSObject>
+- (void) mergeSucceeded:(NSURL*)newTrackURL;
+- (void) mergeFailed:(NSString*)reason;
+@end
+
 @interface RYMediaEditor : NSObject
+
+@property (nonatomic, weak) id<MergeAudioDelegate> mergeDelegate;
 
 + (instancetype) sharedInstance;
 
