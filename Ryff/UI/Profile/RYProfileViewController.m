@@ -26,7 +26,7 @@
 #import "RYRiffReviewViewController.h"
 #import "RYRiffCreateViewController.h"
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate>
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
@@ -62,19 +62,9 @@
     [self configureForUser:_user];
     [_tableView reloadData];
     
-    [_recentActivityButton setImage:[[UIImage imageNamed:@"newsfeed"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
-    [_addButton setImage:[[UIImage imageNamed:@"plus"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
-    [_aboutButton setImage:[[UIImage imageNamed:@"user"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // Remove Gestures
-    for (UIGestureRecognizer *recognizer in self.view.gestureRecognizers) {
-        [self.view removeGestureRecognizer:recognizer];
-    }
+    [_recentActivityButton setTintColor:[RYStyleSheet baseColor]];
+    [_addButton setTintColor:[RYStyleSheet baseColor]];
+    [_aboutButton setTintColor:[RYStyleSheet baseColor]];
 }
 
 - (void) configureForUser:(RYUser *)user
@@ -85,12 +75,9 @@
     [_profileImageView setClipsToBounds:YES];
     
     // Edit button
-    if ([user.username isEqualToString:[RYServices loggedInUser].username])
+    if (![user.username isEqualToString:[RYServices loggedInUser].username])
     {
-        
-    }
-    else
-    {
+        // remove edit button
         [_editButton removeFromSuperview];
     }
     
@@ -112,6 +99,7 @@
 
 - (IBAction)activityHit:(id)sender
 {
+    
 }
 
 - (IBAction)addHit:(id)sender
@@ -123,8 +111,7 @@
 
 - (IBAction)aboutHit:(id)sender
 {
-    [self clearRiff];
-    [_tableView reloadData];
+    
 }
 
 #pragma mark -

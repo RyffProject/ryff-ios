@@ -151,7 +151,7 @@ static RYUser* _loggedInUser;
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId)};
             
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetNearby];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -182,7 +182,7 @@ static RYUser* _loggedInUser;
     
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userId]};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userId)};
 
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kAddFriendAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -213,7 +213,7 @@ static RYUser* _loggedInUser;
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId]};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId)};
             
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kDeleteFriendAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -262,7 +262,7 @@ static RYUser* _loggedInUser;
                     
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                     
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":[NSNumber numberWithInt:userObject.userId], @"content":content, @"title":title,@"duration":duration};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId), @"content":content, @"title":title,@"duration":duration};
             
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];
             [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -332,7 +332,7 @@ static RYUser* _loggedInUser;
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":[NSNumber numberWithInt:userId]};
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":@(userId)};
             
             NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetPosts];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
