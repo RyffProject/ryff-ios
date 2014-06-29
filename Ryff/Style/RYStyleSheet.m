@@ -12,13 +12,24 @@
 
 @implementation RYStyleSheet
 
-+(UIColor*)baseColor
++(UIColor*)actionColor
 {
-    return [UIColor colorWithHexString:@"ffc800"];
+    return [UIColor colorWithHexString:@"fda028"];
 }
+
++(UIColor*)actionHighlightedColor
+{
+    return [UIColor colorWithHexString:@"fdcd28"];
+}
+
++(UIColor*)foregroundColor
+{
+    return [UIColor colorWithHexString:@"484752"];
+}
+
 +(UIColor*)backgroundColor
 {
-    return [UIColor colorWithHexString:@"565b6e"];
+    return [UIColor colorWithHexString:@"518eaf"];
 }
 
 +(UIFont *)fontFamily

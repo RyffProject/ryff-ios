@@ -18,4 +18,7 @@
 #define isIpad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 #define isIOS7 floor((NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
 
+#define kRegularFont @"Lato-Regular"
+#define kBoldFont @"Lato-Bold"
+
 #import "NSObject+block.h"

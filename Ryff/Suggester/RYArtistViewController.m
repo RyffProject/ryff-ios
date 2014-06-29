@@ -39,13 +39,13 @@
     // setup navbar buttons
     UIBarButtonItem *friends = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(friendsHit:)];
     [friends setImage:[UIImage imageNamed:@"friend"]];
-    [friends setTintColor:[RYStyleSheet baseColor]];
+    [friends setTintColor:[RYStyleSheet actionColor]];
     [self.navigationItem setLeftBarButtonItem:friends];
     
     // setup navbar buttons
     UIBarButtonItem *next = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(nextHit:)];
     [next setImage:[UIImage imageNamed:@"next"]];
-    [next setTintColor:[RYStyleSheet baseColor]];
+    [next setTintColor:[RYStyleSheet actionColor]];
     [self.navigationItem setRightBarButtonItem:next];
     
     [self configureForArtist];
@@ -95,7 +95,7 @@
     {
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
-            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet actionColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*i];
             [images addObject:loadingImage];
         }
@@ -112,20 +112,20 @@
 
 - (void) friendConfirmed
 {
-    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     _friends = YES;
 }
 - (void) friendDeleted
 {
-    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     _friends = NO;
 }
 - (void) actionFailed
 {
     if (_friends)
-        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     else
-        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
 }
 
 - (void) toggleFriendStatus

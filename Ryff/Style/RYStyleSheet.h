@@ -10,7 +10,9 @@
 
 @interface RYStyleSheet : NSObject
 
-+(UIColor*)baseColor;
++(UIColor*)actionColor;
++(UIColor*)actionHighlightedColor;
++(UIColor*)foregroundColor;
 +(UIColor*)backgroundColor;
 
 +(UIFont *)fontFamily;

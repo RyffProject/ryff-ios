@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185F319009C3A00093EFA /* RYLoginViewController.m */; };
-		830185F71900A24700093EFA /* RYRootRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185F61900A24700093EFA /* RYRootRegistrationViewController.m */; };
 		830185FA1900ADB000093EFA /* ryff.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185F81900ADB000093EFA /* ryff.png */; };
 		830185FB1900ADB000093EFA /* ryff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185F91900ADB000093EFA /* ryff@2x.png */; };
 		830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185FD1900AEB300093EFA /* UIColor+Hex.m */; };
@@ -23,7 +22,6 @@
 		830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCC218FA081600A9C53F /* checkmark@2x.png */; };
 		830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCC718FA0A5800A9C53F /* RYLocationServices.m */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
-		830BBCCD18FA0FC500A9C53F /* RYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCCC18FA0FC500A9C53F /* RYRegisterViewController.m */; };
 		830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCD118FA142000A9C53F /* BlockAlertView.m */; };
 		830BBCD518FA14F500A9C53F /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCD418FA14F500A9C53F /* UIImage+Thumbnail.m */; };
 		830BBCD918FA196300A9C53F /* userBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCD718FA196300A9C53F /* userBig.png */; };
@@ -52,6 +50,8 @@
 		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
+		836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AA195FB3C3005938F5 /* UIView+Styling.m */; };
+		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
 		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
@@ -159,8 +159,6 @@
 /* Begin PBXFileReference section */
 		830185F219009C3A00093EFA /* RYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginViewController.h; sourceTree = "<group>"; };
 		830185F319009C3A00093EFA /* RYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginViewController.m; sourceTree = "<group>"; };
-		830185F51900A24700093EFA /* RYRootRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRootRegistrationViewController.h; sourceTree = "<group>"; };
-		830185F61900A24700093EFA /* RYRootRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRootRegistrationViewController.m; sourceTree = "<group>"; };
 		830185F81900ADB000093EFA /* ryff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ryff.png; sourceTree = "<group>"; };
 		830185F91900ADB000093EFA /* ryff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ryff@2x.png"; sourceTree = "<group>"; };
 		830185FC1900AEB300093EFA /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -182,8 +180,6 @@
 		830BBCC618FA0A5800A9C53F /* RYLocationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLocationServices.h; sourceTree = "<group>"; };
 		830BBCC718FA0A5800A9C53F /* RYLocationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLocationServices.m; sourceTree = "<group>"; };
 		830BBCC918FA0C2300A9C53F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		830BBCCB18FA0FC500A9C53F /* RYRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRegisterViewController.h; sourceTree = "<group>"; };
-		830BBCCC18FA0FC500A9C53F /* RYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegisterViewController.m; sourceTree = "<group>"; };
 		830BBCD018FA142000A9C53F /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlertView.h; sourceTree = "<group>"; };
 		830BBCD118FA142000A9C53F /* BlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlertView.m; sourceTree = "<group>"; };
 		830BBCD318FA14F500A9C53F /* UIImage+Thumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnail.h"; sourceTree = "<group>"; };
@@ -220,6 +216,10 @@
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
+		836461A9195FB3C3005938F5 /* UIView+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Styling.h"; sourceTree = "<group>"; };
+		836461AA195FB3C3005938F5 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
+		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
+		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
 		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
@@ -233,10 +233,10 @@
 		83C6CA8018FAFF5200412469 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud@2x.png"; sourceTree = "<group>"; };
 		83C6CA8118FAFF5200412469 /* reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset.png; sourceTree = "<group>"; };
 		83C6CA8218FAFF5200412469 /* reset@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset@2x.png"; sourceTree = "<group>"; };
-		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDownloadIndicator.h; sourceTree = "<group>"; };
-		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDownloadIndicator.m; sourceTree = "<group>"; };
-		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDisplayLabel.h; sourceTree = "<group>"; };
-		83DBCA7618F9859000262496 /* RMDisplayLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDisplayLabel.m; sourceTree = "<group>"; };
+		83DBCA7218F9856800262496 /* RMDownloadIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDownloadIndicator.h; path = Ryff/UI/Custom/RMDownloadIndicator.h; sourceTree = SOURCE_ROOT; };
+		83DBCA7318F9856800262496 /* RMDownloadIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDownloadIndicator.m; path = Ryff/UI/Custom/RMDownloadIndicator.m; sourceTree = SOURCE_ROOT; };
+		83DBCA7518F9859000262496 /* RMDisplayLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDisplayLabel.h; path = ../RMDisplayLabel.h; sourceTree = "<group>"; };
+		83DBCA7618F9859000262496 /* RMDisplayLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDisplayLabel.m; path = ../RMDisplayLabel.m; sourceTree = "<group>"; };
 		83DBCA7918F99E3F00262496 /* RYRiffStreamingCoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamingCoreViewController.h; sourceTree = "<group>"; };
 		83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamingCoreViewController.m; sourceTree = "<group>"; };
 		83E56B601953A0A900EF054C /* RYRiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiff.h; sourceTree = "<group>"; };
@@ -380,6 +380,8 @@
 			children = (
 				830185F219009C3A00093EFA /* RYLoginViewController.h */,
 				830185F319009C3A00093EFA /* RYLoginViewController.m */,
+				836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */,
+				836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -403,7 +405,8 @@
 				830BBCB818FA055900A9C53F /* MBProgressHUD.h */,
 				830BBCB918FA055900A9C53F /* MBProgressHUD.m */,
 			);
-			path = MBProgressHUD;
+			name = MBProgressHUD;
+			path = ../UI/Custom/MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		830BBCC518FA0A4500A9C53F /* Location */ = {
@@ -456,6 +459,18 @@
 			path = RiffCreate;
 			sourceTree = "<group>";
 		};
+		836461A8195FB37B005938F5 /* RMDownload */ = {
+			isa = PBXGroup;
+			children = (
+				83DBCA7518F9859000262496 /* RMDisplayLabel.h */,
+				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
+				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
+				83DBCA7318F9856800262496 /* RMDownloadIndicator.m */,
+			);
+			name = RMDownload;
+			path = ../UI/Custom/RMDownload;
+			sourceTree = "<group>";
+		};
 		83C6CA7618FAECD200412469 /* RiffEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +483,7 @@
 			path = RiffEdit;
 			sourceTree = "<group>";
 		};
-		83DBCA6B18F97A2A00262496 /* Custom */ = {
+		83DBCA6B18F97A2A00262496 /* Global Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				834039FB195A44E90001EA53 /* NSObject+block.h */,
@@ -478,15 +493,12 @@
 				830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */,
 				830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */,
 				830BBCCF18FA142000A9C53F /* BlockAlert */,
-				830BBCB618FA055900A9C53F /* MBProgressHUD */,
-				83DBCA7518F9859000262496 /* RMDisplayLabel.h */,
-				83DBCA7618F9859000262496 /* RMDisplayLabel.m */,
-				83DBCA7218F9856800262496 /* RMDownloadIndicator.h */,
-				83DBCA7318F9856800262496 /* RMDownloadIndicator.m */,
 				83C6CA7A18FAF95C00412469 /* UIImage+Color.h */,
 				83C6CA7B18FAF95C00412469 /* UIImage+Color.m */,
+				836461A9195FB3C3005938F5 /* UIView+Styling.h */,
+				836461AA195FB3C3005938F5 /* UIView+Styling.m */,
 			);
-			name = Custom;
+			name = "Global Helpers";
 			path = UI/Custom;
 			sourceTree = "<group>";
 		};
@@ -580,7 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				83DBCA7818F99E2000262496 /* Base Classes */,
-				83DBCA6B18F97A2A00262496 /* Custom */,
+				83DBCA6B18F97A2A00262496 /* Global Helpers */,
 				83FCD1D618F9741400A493F0 /* AFNetworking */,
 				83FCD1A918F93E6C00A493F0 /* Images */,
 				83FCD1A518F9393500A493F0 /* Style */,
@@ -727,10 +739,6 @@
 			isa = PBXGroup;
 			children = (
 				830185F119009C2B00093EFA /* Login */,
-				830BBCCB18FA0FC500A9C53F /* RYRegisterViewController.h */,
-				830BBCCC18FA0FC500A9C53F /* RYRegisterViewController.m */,
-				830185F51900A24700093EFA /* RYRootRegistrationViewController.h */,
-				830185F61900A24700093EFA /* RYRootRegistrationViewController.m */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -752,6 +760,8 @@
 		83FCD1A518F9393500A493F0 /* Style */ = {
 			isa = PBXGroup;
 			children = (
+				836461A8195FB37B005938F5 /* RMDownload */,
+				830BBCB618FA055900A9C53F /* MBProgressHUD */,
 				83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */,
 				83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */,
 				83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */,
@@ -1028,7 +1038,6 @@
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				83FCD1EB18F9741400A493F0 /* AFHTTPRequestOperationManager.m in Sources */,
 				83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */,
-				830BBCCD18FA0FC500A9C53F /* RYRegisterViewController.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83FCD1EA18F9741400A493F0 /* AFHTTPRequestOperation.m in Sources */,
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
@@ -1043,6 +1052,7 @@
 				83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
+				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
 				83FCD1EC18F9741400A493F0 /* AFHTTPSessionManager.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
@@ -1066,10 +1076,10 @@
 				83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */,
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
-				830185F71900A24700093EFA /* RYRootRegistrationViewController.m in Sources */,
 				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,
+				836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */,
 				83FCD1ED18F9741400A493F0 /* AFNetworkReachabilityManager.m in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,
 			);
@@ -1145,7 +1155,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1183,7 +1194,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

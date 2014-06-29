@@ -79,22 +79,22 @@
     
     [_playButton setTitle:@"" forState:UIControlStateNormal];
     [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [_playButton setTintColor:[RYStyleSheet baseColor]];
+    [_playButton setTintColor:[RYStyleSheet actionColor]];
     
-    [_cancelButton setImage:[[UIImage imageNamed:@"back"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
-    [_saveButton setImage:[[UIImage imageNamed:@"cloud"] imageWithOverlayColor:[RYStyleSheet baseColor]]];
+    [_cancelButton setImage:[[UIImage imageNamed:@"back"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
+    [_saveButton setImage:[[UIImage imageNamed:@"cloud"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     
-    [_progressSlider setTintColor:[RYStyleSheet baseColor]];
+    [_progressSlider setTintColor:[RYStyleSheet actionColor]];
     
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelHit:)];
     [cancel setImage:[UIImage imageNamed:@"back"]];
-    [cancel setTintColor:[RYStyleSheet baseColor]];
+    [cancel setTintColor:[RYStyleSheet actionColor]];
     [cancel setAction:@selector(cancelHit:)];
     [self.navigationItem setLeftBarButtonItem:cancel];
     
     UIBarButtonItem *save = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(saveHit:)];
     [save setImage:[UIImage imageNamed:@"cloud"]];
-    [save setTintColor:[RYStyleSheet baseColor]];
+    [save setTintColor:[RYStyleSheet actionColor]];
     [save setAction:@selector(saveHit:)];
     [self.navigationItem setRightBarButtonItem:save];
 }
@@ -214,7 +214,7 @@
             for (NSInteger imNum = 1; imNum <= numImages; imNum++)
             {
                 NSInteger rotateVar = [rotation integerValue];
-                UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
+                UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet actionColor]];
                 loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
                 [images addObject:loadingImage];
             }
@@ -228,7 +228,7 @@
     }
     else
     {
-        [_playButton setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet baseColor]] forState:UIControlStateNormal];
+        [_playButton setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet actionColor]] forState:UIControlStateNormal];
     }
 }
 

@@ -27,8 +27,7 @@
     if (!loggedInUser)
     {
         // present registration page
-        UINavigationController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"registrationRootNC"];
-        [navCon setModalPresentationStyle:UIModalPresentationFullScreen];
+        UIViewController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginVC"];
         [self.window makeKeyAndVisible];
         [self.window.rootViewController presentViewController:navCon animated:NO completion:NULL];
     }

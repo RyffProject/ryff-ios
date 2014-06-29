@@ -62,9 +62,9 @@
     [self configureForUser:_user];
     [_tableView reloadData];
     
-    [_recentActivityButton setTintColor:[RYStyleSheet baseColor]];
-    [_addButton setTintColor:[RYStyleSheet baseColor]];
-    [_aboutButton setTintColor:[RYStyleSheet baseColor]];
+    [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
+    [_addButton setTintColor:[RYStyleSheet actionColor]];
+    [_aboutButton setTintColor:[RYStyleSheet actionColor]];
 }
 
 - (void) configureForUser:(RYUser *)user

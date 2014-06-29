@@ -156,7 +156,7 @@
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
             NSInteger rotateVar = [rotation integerValue];
-            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet baseColor]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Loading_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet actionColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*rotateVar];
             [images addObject:loadingImage];
         }
@@ -179,15 +179,15 @@
     }
     [_statusImageView setImage:nil];
     [_statusImageView setAnimationImages:nil];
-    UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet baseColor]];
+    UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet actionColor]];
     [_statusImageView setImage:maskedImage];
 }
 - (void) styleDownloading
 {
     _downloadIndicator = [[RMDownloadIndicator alloc] initWithFrame:_statusImageView.frame type:kRMFilledIndicator];
     [_downloadIndicator setBackgroundColor:[UIColor clearColor]];
-    [_downloadIndicator setFillColor:[RYStyleSheet baseColor]];
-    [_downloadIndicator setStrokeColor:[RYStyleSheet baseColor]];
+    [_downloadIndicator setFillColor:[RYStyleSheet actionColor]];
+    [_downloadIndicator setStrokeColor:[RYStyleSheet actionColor]];
     _downloadIndicator.radiusPercent = 0.45;
     [self.contentView addSubview:_downloadIndicator];
     [_downloadIndicator loadIndicator];
