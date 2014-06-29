@@ -12,6 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 
-- (void) configure;
+- (void) configureWithTitle:(NSString*)title;
 
 @end

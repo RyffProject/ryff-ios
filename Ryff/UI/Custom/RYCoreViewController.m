@@ -23,7 +23,7 @@
     
     [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
     
-    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet backgroundColor]];
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet foregroundColor]];
     [self.navigationController.navigationBar setTranslucent:NO];
 }
 

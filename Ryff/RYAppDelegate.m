@@ -11,6 +11,9 @@
 // Data Managers
 #import "RYServices.h"
 
+// Frameworks
+#import "SSKeychain.h"
+
 @implementation RYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -24,7 +27,7 @@
     
     NSDictionary *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
     
-    if (!loggedInUser)
+    if (!loggedInUser || ![SSKeychain passwordForService:@"ryff" account:[loggedInUser objectForKey:@"username"]])
     {
         // present registration page
         UIViewController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginVC"];

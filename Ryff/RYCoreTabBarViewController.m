@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [self.tabBar setTintColor:[RYStyleSheet actionColor]];
     [self.tabBar setTranslucent:NO];
-    [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] imageWithOverlayColor:[RYStyleSheet backgroundColor]]];
+    [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] imageWithOverlayColor:[RYStyleSheet foregroundColor]]];
 }
 
 @end

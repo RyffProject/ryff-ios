@@ -16,10 +16,10 @@
 
 @implementation RYLoginTableViewCell
 
-- (void) configure
+- (void) configureWithTitle:(NSString*)title
 {
     [_loginLabel setFont:[UIFont fontWithName:kBoldFont size:24.0f]];
-    [_loginLabel setText:@"Log In"];
+    [_loginLabel setText:title];
     [self.contentView roundBottom];
 }
 

@@ -31,6 +31,15 @@
 
 @property (weak, nonatomic) IBOutlet UIView *tapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *wrapperView;
+@property (weak, nonatomic) IBOutlet UIButton *userTypeButton;
+
+// Data
+
+@property (nonatomic, assign) BOOL newUser;
+
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
 
 @end
 
@@ -43,7 +52,13 @@
 {
     [super viewDidLoad];
     
+    _newUser = NO;
+    
     [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+    
+    [_userTypeButton.titleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    [_userTypeButton setTintColor:[UIColor whiteColor]];
+    [_userTypeButton setTitle:@"Returning User" forState:UIControlStateNormal];
     
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap:)];
     [_tapView addGestureRecognizer:backgroundTapGesture];
@@ -72,15 +87,15 @@
     [self.view endEditing:YES];
     
     UITableViewCell *usernameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kUsernameRow inSection:0]];
-    NSString *username            = ((UITextField*)[usernameCell viewWithTag:6]).text;
+    _username                     = ((UITextField*)[usernameCell viewWithTag:6]).text;
     
     UITableViewCell *passwordCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:kPasswordRow inSection:0]];
-    NSString *password            = ((UITextField*)[passwordCell viewWithTag:6]).text;
+    _password                     = ((UITextField*)[passwordCell viewWithTag:6]).text;
     
-    if (username.length && password.length)
+    if (_username.length && _password.length)
     {
         //submit
-        [[RYServices sharedInstance] logInUserWithUsername:username Password:password forDelegate:self];
+        [[RYServices sharedInstance] logInUserWithUsername:_username Password:_password forDelegate:self];
         [self showHUDWithTitle:@"Logging in"];
     }
     else
@@ -89,6 +104,20 @@
         [emptyAlert show];
     }
 }
+
+/*
+ User wants to switch between Log In and Register
+ */
+- (IBAction)userTypeButtonHit:(id)sender
+{
+    _newUser = !_newUser;
+    
+    NSString *buttonTitle = _newUser ? @"New User" : @"Returning User";
+    [_userTypeButton setTitle:buttonTitle forState:UIControlStateNormal];
+    
+    [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kLoginRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 
 #pragma mark -
 #pragma mark - POSTDelegate
@@ -107,12 +136,13 @@
 
 - (void) postSucceeded:(id)response
 {
-    
     NSDictionary *responseDict = response;
     NSDictionary *userDict = [responseDict objectForKey:kUserObjectKey];
     if (userDict)
     {
         [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
+        
+        [SSKeychain setPassword:_password forService:@"ryff" account:_username];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
@@ -181,9 +211,10 @@
             
             UITextField *usernameField = (UITextField*)[cell viewWithTag:6];
             [usernameField setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-            usernameField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+            usernameField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor],
                                                                                                                       NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]}];
             [usernameField setSecureTextEntry:NO];
+            [usernameField setTintColor:[UIColor whiteColor]];
             
             [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet backgroundColor]];
             
@@ -195,16 +226,18 @@
             [cell.contentView setBackgroundColor:[RYStyleSheet foregroundColor]];
             
             UITextField *passwordField = (UITextField*)[cell viewWithTag:6];
-            passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+            passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor],
                                                                                                                       NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]}];
             [passwordField setSecureTextEntry:YES];
+            [passwordField setTintColor:[UIColor whiteColor]];
             
             [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet backgroundColor]];
             break;
         }
         case kLoginRow:
         {
-            [((RYLoginTableViewCell*)cell) configure];
+            NSString *cellTitle = _newUser ? @"Register" : @"Log In";
+            [((RYLoginTableViewCell*)cell) configureWithTitle:cellTitle];
         }
             
         default:
@@ -237,7 +270,10 @@
         CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
         NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
         [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
-            [_tableView setCenter:CGPointMake(self.view.center.x, self.view.center.y - (keyboardRect.size.height/2))];
+            if (isIpad)
+                [_wrapperView setCenter:CGPointMake(self.view.center.x, self.view.center.y - (keyboardRect.size.height/2))];
+            else
+                [_wrapperView setCenter:CGPointMake(self.view.center.x, self.view.center.y - (keyboardRect.size.height/2) + 50)];
         } completion:nil];
     }
 }
@@ -251,7 +287,7 @@
     CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
     [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
-        [_tableView setCenter:self.view.center];
+        [_wrapperView setCenter:self.view.center];
     } completion:nil];
 }
 
