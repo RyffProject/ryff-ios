@@ -44,7 +44,8 @@ static RYMediaEditor *_sharedInstance;
     NSInteger trackNum = 0;
     do {
         trackNum++;
-        trackPath = [NSURL URLWithString:[trackDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track%ld%@",(long)trackNum,kMediaFileType]]];
+        NSString *trackString = [[trackDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track%ld%@",(long)trackNum,kMediaFileType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
+        trackPath = [NSURL URLWithString:trackString];
     } while ([[NSFileManager defaultManager] fileExistsAtPath:[trackPath path]]);
     return trackPath;
 }

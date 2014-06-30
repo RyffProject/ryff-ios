@@ -50,21 +50,23 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    [[RYServices sharedInstance] getMyPostsForDelegate:self];
+    _user = [RYServices loggedInUser];
+    
+    [self configureForUser:_user];
+    [_tableView reloadData];
+    
+    [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
+    
+    [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
+    [_addButton setTintColor:[RYStyleSheet actionColor]];
+    [_aboutButton setTintColor:[RYStyleSheet actionColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    _user = [RYServices loggedInUser];
-    
-    [self configureForUser:_user];
-    [_tableView reloadData];
-    
-    [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
-    [_addButton setTintColor:[RYStyleSheet actionColor]];
-    [_aboutButton setTintColor:[RYStyleSheet actionColor]];
+    [[RYServices sharedInstance] getMyPostsForDelegate:self];
 }
 
 - (void) configureForUser:(RYUser *)user
@@ -105,8 +107,7 @@
 - (IBAction)addHit:(id)sender
 {
     RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffCreateVC];
-    [self presentViewController:navController animated:YES completion:nil];
+    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
 - (IBAction)aboutHit:(id)sender

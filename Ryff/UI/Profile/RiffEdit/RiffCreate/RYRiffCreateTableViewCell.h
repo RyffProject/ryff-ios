@@ -11,7 +11,6 @@
 @protocol RiffCreateCellDelegate <NSObject>
 
 - (void) playTrack:(NSInteger)trackIndex;
-- (void) editTrack:(NSInteger)trackIndex;
 - (void) deleteTrack:(NSInteger)trackIndex;
 - (void) changeTrack:(NSInteger)trackIndex volume:(CGFloat)newVolume;
 - (void) changeTrack:(NSInteger)trackIndex playbackSpeed:(CGFloat)playbackSpeed;
@@ -20,7 +19,9 @@
 
 @interface RYRiffCreateTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) id<RiffCreateCellDelegate> riffCreateDelegate;
-@property (nonatomic, assign) NSInteger trackIndex;
+- (void) configureForTrackIndex:(NSInteger)trackIndex forDelegate:(id<RiffCreateCellDelegate>)delegate lastRowInSection:(BOOL)lastRowInSection;
+
+- (void) stylePlaying;
+- (void) stylePaused;
 
 @end

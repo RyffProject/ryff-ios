@@ -40,6 +40,7 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     
+    [self styleStop];
     [self setCurrentStatus:STOP];
     [self resetDurationText];
 }
@@ -179,7 +180,7 @@
     }
     [_statusImageView setImage:nil];
     [_statusImageView setAnimationImages:nil];
-    UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet actionColor]];
+    UIImage *maskedImage = [[UIImage imageNamed:@"playRound.png"] imageWithOverlayColor:[RYStyleSheet actionColor]];
     [_statusImageView setImage:maskedImage];
 }
 - (void) styleDownloading

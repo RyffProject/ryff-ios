@@ -37,12 +37,6 @@
 		830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEC18FA786800A9C53F /* Cylindric_2.png */; };
 		830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */; };
 		830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */; };
-		830BBD0018FA97EA00A9C53F /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFC18FA97EA00A9C53F /* dot.png */; };
-		830BBD0118FA97EA00A9C53F /* dot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFD18FA97EA00A9C53F /* dot@2x.png */; };
-		830BBD0218FA97EA00A9C53F /* mic.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFE18FA97EA00A9C53F /* mic.png */; };
-		830BBD0318FA97EA00A9C53F /* mic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCFF18FA97EA00A9C53F /* mic@2x.png */; };
-		830BBD0918FAA95700A9C53F /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0518FAA95700A9C53F /* plus.png */; };
-		830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0618FAA95700A9C53F /* plus@2x.png */; };
 		830BBD0B18FAA95700A9C53F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0718FAA95700A9C53F /* share.png */; };
 		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
 		8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */; };
@@ -55,6 +49,16 @@
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
 		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
+		83C6A5EE1960EB9600BB3D1A /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5EC1960EB9600BB3D1A /* record.png */; };
+		83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5ED1960EB9600BB3D1A /* record@2x.png */; };
+		83C6A5F21960EC5200BB3D1A /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F01960EC5200BB3D1A /* plus.png */; };
+		83C6A5F31960EC5200BB3D1A /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F11960EC5200BB3D1A /* plus@2x.png */; };
+		83C6A5FA1960F99300BB3D1A /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F41960F99300BB3D1A /* delete.png */; };
+		83C6A5FB1960F99300BB3D1A /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F51960F99300BB3D1A /* delete@2x.png */; };
+		83C6A6021960FFF100BB3D1A /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A6001960FFF100BB3D1A /* pause.png */; };
+		83C6A6031960FFF100BB3D1A /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A6011960FFF100BB3D1A /* pause@2x.png */; };
+		83C6A60619610BBF00BB3D1A /* playRound.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A60419610BBF00BB3D1A /* playRound.png */; };
+		83C6A60719610BBF00BB3D1A /* playRound@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A60519610BBF00BB3D1A /* playRound@2x.png */; };
 		83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */; };
 		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
@@ -113,7 +117,6 @@
 		83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */; };
 		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
 		83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19518F9170700A493F0 /* RYArtistViewController.m */; };
-		83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
 		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
 		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
@@ -199,12 +202,6 @@
 		830BBCEC18FA786800A9C53F /* Cylindric_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cylindric_2.png; sourceTree = "<group>"; };
 		830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_2@2x.png"; sourceTree = "<group>"; };
 		830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_3@2x.png"; sourceTree = "<group>"; };
-		830BBCFC18FA97EA00A9C53F /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = ../dot.png; sourceTree = "<group>"; };
-		830BBCFD18FA97EA00A9C53F /* dot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dot@2x.png"; path = "../dot@2x.png"; sourceTree = "<group>"; };
-		830BBCFE18FA97EA00A9C53F /* mic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mic.png; path = ../mic.png; sourceTree = "<group>"; };
-		830BBCFF18FA97EA00A9C53F /* mic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mic@2x.png"; path = "../mic@2x.png"; sourceTree = "<group>"; };
-		830BBD0518FAA95700A9C53F /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
-		830BBD0618FAA95700A9C53F /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
 		830BBD0718FAA95700A9C53F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		830BBD0818FAA95700A9C53F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RyRiffDetailsTableViewCell.xib; sourceTree = "<group>"; };
@@ -223,6 +220,16 @@
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
 		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
+		83C6A5EC1960EB9600BB3D1A /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
+		83C6A5ED1960EB9600BB3D1A /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
+		83C6A5F01960EC5200BB3D1A /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		83C6A5F11960EC5200BB3D1A /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
+		83C6A5F41960F99300BB3D1A /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		83C6A5F51960F99300BB3D1A /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		83C6A6001960FFF100BB3D1A /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		83C6A6011960FFF100BB3D1A /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		83C6A60419610BBF00BB3D1A /* playRound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playRound.png; sourceTree = "<group>"; };
+		83C6A60519610BBF00BB3D1A /* playRound@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playRound@2x.png"; sourceTree = "<group>"; };
 		83C6CA7718FAECE500412469 /* RYRiffReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffReviewViewController.h; sourceTree = "<group>"; };
 		83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffReviewViewController.m; sourceTree = "<group>"; };
 		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -302,8 +309,6 @@
 		83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYArtistSuggestPageViewController.m; sourceTree = "<group>"; };
 		83FCD19418F9170700A493F0 /* RYArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYArtistViewController.h; path = ../RYArtistViewController.h; sourceTree = "<group>"; };
 		83FCD19518F9170700A493F0 /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = ../RYArtistViewController.m; sourceTree = "<group>"; };
-		83FCD19818F91A1F00A493F0 /* RYGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYGroupTableViewCell.h; path = ../RiffCell/RYGroupTableViewCell.h; sourceTree = "<group>"; };
-		83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYGroupTableViewCell.m; path = ../RiffCell/RYGroupTableViewCell.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
@@ -437,17 +442,6 @@
 				830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */,
 			);
 			path = Cylindric;
-			sourceTree = "<group>";
-		};
-		830BBD0418FA97F200A9C53F /* record */ = {
-			isa = PBXGroup;
-			children = (
-				830BBCFC18FA97EA00A9C53F /* dot.png */,
-				830BBCFD18FA97EA00A9C53F /* dot@2x.png */,
-				830BBCFE18FA97EA00A9C53F /* mic.png */,
-				830BBCFF18FA97EA00A9C53F /* mic@2x.png */,
-			);
-			path = record;
 			sourceTree = "<group>";
 		};
 		835516731951314400CF2C23 /* RiffCreate */ = {
@@ -648,7 +642,6 @@
 			isa = PBXGroup;
 			children = (
 				83C6CA7618FAECD200412469 /* RiffEdit */,
-				83FCD19B18F91A3F00A493F0 /* GroupCell */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				83FCD18518F9119B00A493F0 /* RYBandsCollectionViewCell.h */,
@@ -726,15 +719,6 @@
 			path = Artist;
 			sourceTree = "<group>";
 		};
-		83FCD19B18F91A3F00A493F0 /* GroupCell */ = {
-			isa = PBXGroup;
-			children = (
-				83FCD19818F91A1F00A493F0 /* RYGroupTableViewCell.h */,
-				83FCD19918F91A1F00A493F0 /* RYGroupTableViewCell.m */,
-			);
-			path = GroupCell;
-			sourceTree = "<group>";
-		};
 		83FCD19C18F91FA000A493F0 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -777,6 +761,16 @@
 		83FCD1A918F93E6C00A493F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				83C6A60419610BBF00BB3D1A /* playRound.png */,
+				83C6A60519610BBF00BB3D1A /* playRound@2x.png */,
+				83C6A6001960FFF100BB3D1A /* pause.png */,
+				83C6A6011960FFF100BB3D1A /* pause@2x.png */,
+				83C6A5F41960F99300BB3D1A /* delete.png */,
+				83C6A5F51960F99300BB3D1A /* delete@2x.png */,
+				83C6A5F01960EC5200BB3D1A /* plus.png */,
+				83C6A5F11960EC5200BB3D1A /* plus@2x.png */,
+				83C6A5EC1960EB9600BB3D1A /* record.png */,
+				83C6A5ED1960EB9600BB3D1A /* record@2x.png */,
 				83ED34D61931851600FEB018 /* Icon */,
 				83FE255819315D79009FC978 /* riffCellBack.png */,
 				83FE255919315D79009FC978 /* riffCellBack@2x.png */,
@@ -792,11 +786,8 @@
 				83C6CA8018FAFF5200412469 /* cloud@2x.png */,
 				83C6CA8118FAFF5200412469 /* reset.png */,
 				83C6CA8218FAFF5200412469 /* reset@2x.png */,
-				830BBD0518FAA95700A9C53F /* plus.png */,
-				830BBD0618FAA95700A9C53F /* plus@2x.png */,
 				830BBD0718FAA95700A9C53F /* share.png */,
 				830BBD0818FAA95700A9C53F /* share@2x.png */,
-				830BBD0418FA97F200A9C53F /* record */,
 				830BBCDB18FA401700A9C53F /* friend.png */,
 				830BBCDC18FA401700A9C53F /* friend@2x.png */,
 				830BBCDD18FA401700A9C53F /* next.png */,
@@ -943,10 +934,13 @@
 				830186011900B1CD00093EFA /* tabBar.png in Resources */,
 				83FCD1B418F93FBF00A493F0 /* newsfeed.png in Resources */,
 				830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */,
+				83C6A6031960FFF100BB3D1A /* pause@2x.png in Resources */,
 				83FCD1D118F9683D00A493F0 /* Loading_1@2x.png in Resources */,
 				83ED34ED1931851600FEB018 /* AppIcon50x50@2x.png in Resources */,
-				830BBD0318FA97EA00A9C53F /* mic@2x.png in Resources */,
 				83ED34F11931851600FEB018 /* AppIcon60x60@2x.png in Resources */,
+				83C6A5EE1960EB9600BB3D1A /* record.png in Resources */,
+				83C6A5F21960EC5200BB3D1A /* plus.png in Resources */,
+				83C6A5F31960EC5200BB3D1A /* plus@2x.png in Resources */,
 				83FCD1C518F94AC400A493F0 /* play.png in Resources */,
 				83BC52C7193159260085FADF /* cellBody.png in Resources */,
 				830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */,
@@ -958,8 +952,7 @@
 				830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
 				83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */,
-				830BBD0118FA97EA00A9C53F /* dot@2x.png in Resources */,
-				830BBD0A18FAA95700A9C53F /* plus@2x.png in Resources */,
+				83C6A60719610BBF00BB3D1A /* playRound@2x.png in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
 				83FCD1D418F9683D00A493F0 /* Loading_3.png in Resources */,
 				83ED34F51931851600FEB018 /* AppIcon76x76@2x.png in Resources */,
@@ -977,35 +970,37 @@
 				830BBCDA18FA196300A9C53F /* userBig@2x.png in Resources */,
 				830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */,
 				83FCD1C818F95CBC00A493F0 /* patrickCarney.png in Resources */,
+				83C6A6021960FFF100BB3D1A /* pause.png in Resources */,
 				830BBCD918FA196300A9C53F /* userBig.png in Resources */,
 				83FCD1D518F9683D00A493F0 /* Loading_3@2x.png in Resources */,
 				830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */,
 				83ED34CF19316E5D00FEB018 /* Lato-RegIta.ttf in Resources */,
 				83ED34EF1931851600FEB018 /* AppIcon57x57@2x.png in Resources */,
 				830185FA1900ADB000093EFA /* ryff.png in Resources */,
+				83C6A60619610BBF00BB3D1A /* playRound.png in Resources */,
 				830185FB1900ADB000093EFA /* ryff@2x.png in Resources */,
 				83ED34F61931851600FEB018 /* iTunesArtwork.png in Resources */,
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
+				83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */,
 				830BBD0B18FAA95700A9C53F /* share.png in Resources */,
 				83ED34F71931851600FEB018 /* iTunesArtwork@2x.png in Resources */,
 				83FCD14F18F907C400A493F0 /* MainIphone.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
-				830BBD0018FA97EA00A9C53F /* dot.png in Resources */,
 				83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */,
-				830BBD0218FA97EA00A9C53F /* mic.png in Resources */,
 				830BBCF018FA786800A9C53F /* Cylindric_1@2x.png in Resources */,
 				83FCD1D018F9683D00A493F0 /* Loading_1.png in Resources */,
 				8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */,
 				83ED34E81931851600FEB018 /* AppIcon29x29.png in Resources */,
+				83C6A5FA1960F99300BB3D1A /* delete.png in Resources */,
 				830BBCEF18FA786800A9C53F /* Cylindric_1.png in Resources */,
 				830BBCE218FA401700A9C53F /* next@2x.png in Resources */,
 				830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */,
 				83ED34F01931851600FEB018 /* AppIcon60x60.png in Resources */,
 				83BC52C8193159260085FADF /* cellBody@2x.png in Resources */,
 				83ED34EA1931851600FEB018 /* AppIcon40x40.png in Resources */,
+				83C6A5FB1960F99300BB3D1A /* delete@2x.png in Resources */,
 				830BBCDF18FA401700A9C53F /* friend.png in Resources */,
 				83FCD1D218F9683D00A493F0 /* Loading_2.png in Resources */,
-				830BBD0918FAA95700A9C53F /* plus.png in Resources */,
 				83ED34CE19316E5D00FEB018 /* Lato-Lig.ttf in Resources */,
 				83ED34EE1931851600FEB018 /* AppIcon57x57.png in Resources */,
 				83ED34F41931851600FEB018 /* AppIcon76x76.png in Resources */,
@@ -1043,7 +1038,6 @@
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
-				83FCD19A18F91A1F00A493F0 /* RYGroupTableViewCell.m in Sources */,
 				834039FD195A44E90001EA53 /* NSObject+block.m in Sources */,
 				83E56B651953A0A900EF054C /* RYUser.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,

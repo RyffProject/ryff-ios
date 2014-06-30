@@ -219,9 +219,6 @@
     if (post.riff && indexPath.row == 0)
     {
         RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
-        UIImage *maskedImage = [[UIImage imageNamed:@"play.png"] imageWithOverlayColor:[RYStyleSheet actionColor]];
-        [riffTitleCell.statusImageView setImage:maskedImage];
-        
         [riffTitleCell configureForRiff:post.riff];
     }
     else

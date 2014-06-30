@@ -9,17 +9,17 @@
 #import "RYRiffCreateViewController.h"
 
 // Data Managers
+#import "RYServices.h"
 #import "RYMediaEditor.h"
 
 // Data Objects
 #import "RYRiff.h"
 
 // Custom UI
+#import "RYStyleSheet.h"
 #import "RYRiffCreateTableViewCell.h"
 #import "BlockAlertView.h"
 
-// Associated View Controller
-#import "RYRiffReviewViewController.h"
 
 // Categories
 #import "UIViewController+Extras.h"
@@ -28,16 +28,25 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate>
+@interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate, RiffDelegate, UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *imageWrapper;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *addTrackButton;
 @property (weak, nonatomic) IBOutlet UIButton *playAllButton;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UIButton *uploadButton;
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
 // Data
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSArray *audioPlayers;
+
+@property (nonatomic, assign) BOOL playingAll;
+
+@property (nonatomic, assign) CGFloat riffDuration;
 
 @end
 
@@ -52,7 +61,40 @@
     
     _audioPlayers = [[NSArray alloc] init];
     
+    [_titleTextField setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_titleTextField setTintColor:[UIColor whiteColor]];
+    _titleTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Title" attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor],
+                                                                                                              NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]}];
+    [_descriptionTextView setTintColor:[UIColor whiteColor]];
+    
+    [_imageWrapper setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [_recordButton setTintColor:[RYStyleSheet actionColor]];
+    [_addTrackButton setTintColor:[RYStyleSheet actionColor]];
+    [_playAllButton setTintColor:[RYStyleSheet actionColor]];
+    [_backButton setTintColor:[RYStyleSheet actionColor]];
+    [_uploadButton setTintColor:[RYStyleSheet actionColor]];
+    
     [_tableView setAllowsSelection:NO];
+    [_tableView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageWrapperTapped:)];
+    [_imageWrapper addGestureRecognizer:tapGesture];
+    
+    [self prepForRecording];
+}
+
+- (IBAction)backButtonHit:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark - GestureRecognizer Delegate
+
+- (void) imageWrapperTapped:(UITapGestureRecognizer*)sender
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark -
@@ -60,6 +102,9 @@
 
 - (IBAction)recordButtonHit:(id)sender
 {
+    [self.view endEditing:YES];
+    
+    _playingAll = NO;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     
     if (!_recorder.isRecording)
@@ -68,11 +113,11 @@
         [self prepForRecording];
         
         // play all tracks
-        [self playAllButtonHit:nil];
+        [self playAllTracks:YES];
         
         [audioSession setActive:YES error:nil];
         if ([_recorder record])
-            [(UIButton*)sender setTitle:@"Recording..." forState:UIControlStateNormal];
+            [(UIButton*)sender setTintColor:[RYStyleSheet actionHighlightedColor]];
     }
     else
     {
@@ -81,26 +126,78 @@
         [audioSession setActive:NO error:nil];
         [self addTrack:_recorder.url];
         
-        [(UIButton*)sender setTitle:@"Record" forState:UIControlStateNormal];
+        [self playAllTracks:NO];
+        
+        [(UIButton*)sender setTintColor:[RYStyleSheet actionColor]];
     }
 }
 
 - (IBAction)addTrackButtonHit:(id)sender
 {
-    
+    [self.view endEditing:YES];
 }
 
 - (IBAction)playAllButtonHit:(id)sender
 {
-    for (AVAudioPlayer *audioPlayer in _audioPlayers)
+    [self.view endEditing:YES];
+    
+    if (_playingAll)
     {
-        [audioPlayer setCurrentTime:0];
-        [audioPlayer play];
+        [_playAllButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        [self playAllTracks:NO];
+    }
+    else
+    {
+        [_playAllButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        [self playAllTracks:YES];
     }
 }
 - (IBAction)exportButtonHit:(id)sender
 {
-    [self mergeTracks];
+    [self.view endEditing:YES];
+    
+    if (_titleTextField.text.length > 0)
+        [self mergeTracks];
+    else
+    {
+        UIAlertView *noTitleAlert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"You forgot to name your riff!" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [noTitleAlert show];
+    }
+}
+
+#pragma mark - Action Helpers
+
+/*
+ Helper method to either play all (YES) or pause all (NO) tracks
+ */
+- (void) playAllTracks:(BOOL)playAll
+{
+    if (playAll)
+    {
+        // should play
+        for (NSInteger i = 0; i < _audioPlayers.count; i++)
+        {
+            AVAudioPlayer *audioPlayer = _audioPlayers[i];
+            [audioPlayer setCurrentTime:0];
+            [audioPlayer play];
+            
+            [[self cellForTrack:i] stylePlaying];
+            _playingAll = YES;
+        }
+    }
+    else
+    {
+        // should pause
+        for (NSInteger i = 0; i < _audioPlayers.count; i++)
+        {
+            AVAudioPlayer *audioPlayer = _audioPlayers[i];
+            [audioPlayer setCurrentTime:0];
+            [audioPlayer pause];
+            
+            [[self cellForTrack:i] stylePaused];
+            _playingAll = NO;
+        }
+    }
 }
 
 #pragma mark -
@@ -153,33 +250,51 @@
 {
     if (trackIndex < _audioPlayers.count)
     {
+        _playingAll = NO;
+        
         AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
-        [audioPlayer setCurrentTime:0];
-        if ([audioPlayer play])
-            NSLog(@"playing");
+        if (audioPlayer.playing)
+        {
+            // is playing, should pause
+            [[self cellForTrack:trackIndex] stylePaused];
+            [audioPlayer pause];
+        }
+        else
+        {
+            // is pause, should play
+            [[self cellForTrack:trackIndex] stylePlaying];
+            [audioPlayer setCurrentTime:0];
+            [audioPlayer play];
+        }
     }
-}
-
-- (void) editTrack:(NSInteger)trackIndex
-{
-    
 }
 
 - (void) deleteTrack:(NSInteger)trackIndex
 {
     if (trackIndex < _audioPlayers.count)
     {
-        NSMutableArray *players    = [_audioPlayers mutableCopy];
-        AVAudioPlayer *audioPlayer = [players objectAtIndex:trackIndex];
-        
-        NSError *error = nil;
-        if ([[NSFileManager defaultManager] removeItemAtURL:audioPlayer.url error:&error])
-        {
-            // removed track
-            [players removeObjectAtIndex:trackIndex];
-            _audioPlayers = players;
-            [self.tableView reloadData];
-        }
+        BlockAlertView *blockAlert = [[BlockAlertView alloc] initWithTitle:@"Remove" message:@"Delete track from device?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove Track", nil];
+        [blockAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex != alertView.cancelButtonIndex)
+            {
+                // delete file
+                NSMutableArray *players    = [_audioPlayers mutableCopy];
+                AVAudioPlayer *audioPlayer = [players objectAtIndex:trackIndex];
+                
+                NSError *error = nil;
+                if ([[NSFileManager defaultManager] removeItemAtURL:[audioPlayer.url filePathURL] error:&error])
+                {
+                    // removed track
+                    [_tableView beginUpdates];
+                    [players removeObjectAtIndex:trackIndex];
+                    _audioPlayers = players;
+                    NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
+                    [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self.tableView reloadData];
+                }
+            }
+        }];
+        [blockAlert show];
     }
 }
 
@@ -206,11 +321,14 @@
 
 - (void) mergeTracks
 {
+    CGFloat greatestDuration = 0.f;
     NSMutableArray *urlArray = [[NSMutableArray alloc] initWithCapacity:_audioPlayers.count];
     for (AVAudioPlayer *audioPlayer in _audioPlayers)
     {
         [urlArray addObject:[NSURL fileURLWithPath:[audioPlayer.url path]]];
+        greatestDuration = MAX(audioPlayer.duration, greatestDuration);
     }
+    _riffDuration = greatestDuration;
     [self showHUDWithTitle:@"Exporting"];
     [[RYMediaEditor sharedInstance] setMergeDelegate:self];
     [[RYMediaEditor sharedInstance] mergeAudioData:urlArray];
@@ -223,22 +341,43 @@
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Riff Created" forDuration:1.0f];
     
-    [self performBlock:^{
-        
-        // Create new riff and present riff edit VC
-        RYRiff *newRiff = [RYRiff riffWithURL:newTrackURL];
-        RYRiffReviewViewController *riffEdit = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"Riff-Review-VC"];
-        [riffEdit configureWithRiff:newRiff];
-        [self.navigationController pushViewController:riffEdit animated:YES];
-        
-    } afterDelay:1.0f];
+    [[RYServices sharedInstance] postRiffWithContent:_descriptionTextView.text title:_titleTextField.text duration:@(_riffDuration) ForDelegate:self];
 }
 
 - (void) mergeFailed:(NSString *)reason
 {
     [self hideHUD];
-    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Action Failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Audio Merge Failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [failureAlert show];
+}
+
+#pragma mark -
+#pragma mark - RiffDelegate
+
+- (void) riffPostSucceeded
+{
+    [self hideHUD];
+    [self showCheckHUDWithTitle:@"Posted" forDuration:1.5f];
+    
+    [self performBlock:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } afterDelay:1.5f];
+}
+
+- (void) riffPostFailed
+{
+    [self hideHUD];
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"Something went wrong uploading riff." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+#pragma mark - 
+#pragma mark - UITableView Helpers
+
+- (RYRiffCreateTableViewCell*)cellForTrack:(NSInteger)trackIndex
+{
+    NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
+    return (RYRiffCreateTableViewCell*)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:cellRow inSection:0]];
 }
 
 #pragma mark -
@@ -266,15 +405,13 @@
     return cell;
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    RYRiffCreateTableViewCell *trackCell = (RYRiffCreateTableViewCell*)cell;
-    [trackCell setTrackIndex:(_audioPlayers.count - indexPath.row - 1)];
-    [trackCell setRiffCreateDelegate:self];
-}
-
 #pragma mark -
 #pragma mark - UITableView Delegate
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(RYRiffCreateTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BOOL lastInRow = (indexPath.row == _audioPlayers.count-1);
+    [cell configureForTrackIndex:(_audioPlayers.count - indexPath.row - 1) forDelegate:self lastRowInSection:lastInRow];}
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
