@@ -21,8 +21,6 @@
 
 + (instancetype) sharedInstance;
 
-+ (NSURL*) pathForNextTrack;
-
 - (void) mergeAudioData:(NSArray*)trackURLs;
 
 @end

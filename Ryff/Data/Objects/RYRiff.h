@@ -12,9 +12,9 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) NSTimeInterval duration;
-@property (nonatomic, strong) NSString *URL;
+@property (nonatomic, strong) NSURL *URL;
 
-- (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSString*)url;
+- (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSURL*)url;
 
 + (RYRiff*)riffFromDict:(NSDictionary*)riffDict;
 + (RYRiff*)riffWithURL:(NSURL*)url;

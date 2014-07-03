@@ -245,7 +245,7 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5ol-ix-e0z">
                                                     <rect key="frame" x="20" y="24" width="28" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="play.png"/>
                                                     <connections>
                                                         <action selector="playButtonHit:" destination="Ey5-Qh-nHO" eventType="touchUpInside" id="oe4-Tm-eEA"/>
@@ -253,7 +253,7 @@
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zU3-jW-8Xt">
                                                     <rect key="frame" x="713" y="20" width="35" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="delete.png"/>
                                                     <connections>
                                                         <action selector="deleteButtonHit:" destination="Ey5-Qh-nHO" eventType="touchUpInside" id="ApV-nK-hWP"/>
@@ -269,7 +269,7 @@
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playback Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PfC-Qg-hA4">
                                                     <rect key="frame" x="449" y="48" width="105" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -284,7 +284,7 @@
                                                 </slider>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="1nQ-Pd-Vt5">
                                                     <rect key="frame" x="401" y="20" width="200" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="playbackSpeedSliderChanged:" destination="Ey5-Qh-nHO" eventType="valueChanged" id="plJ-Tj-Ut0"/>
                                                     </connections>
@@ -302,10 +302,36 @@
                                             <outlet property="deleteButton" destination="zU3-jW-8Xt" id="Z5E-Ow-pMG"/>
                                             <outlet property="playButton" destination="5ol-ix-e0z" id="GCG-f9-AFn"/>
                                             <outlet property="playbackLabel" destination="PfC-Qg-hA4" id="y9a-Ed-vQD"/>
-                                            <outlet property="playbackSpeedSlider" destination="y1U-Is-j75" id="jxd-FC-cXL"/>
+                                            <outlet property="playbackSpeedSlider" destination="1nQ-Pd-Vt5" id="0ng-0b-2kb"/>
                                             <outlet property="separatorView" destination="ZGy-Ng-hzy" id="FwF-0K-66p"/>
                                             <outlet property="volumeLabel" destination="AAQ-40-vfV" id="UMk-Kq-O4E"/>
                                             <outlet property="volumeSlider" destination="0Gb-Yd-a7M" id="Hea-lh-bMn"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrackDownloadCell" rowHeight="80" id="YLh-9c-1P7" customClass="RYTrackDownloadTableViewCell">
+                                        <rect key="frame" x="0.0" y="102" width="768" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLh-9c-1P7" id="Hlb-uq-dHu">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="vYe-KY-4vM">
+                                                    <rect key="frame" x="20" y="57" width="728" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </progressView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DQF-MZ-ofP">
+                                                    <rect key="frame" x="0.0" y="28" width="768" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="DQF-MZ-ofP" id="zLQ-Cd-HJU"/>
+                                            <outlet property="progressView" destination="vYe-KY-4vM" id="nC9-sM-lWu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

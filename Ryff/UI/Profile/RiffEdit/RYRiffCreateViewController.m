@@ -11,6 +11,7 @@
 // Data Managers
 #import "RYServices.h"
 #import "RYMediaEditor.h"
+#import "RYDataManager.h"
 
 // Data Objects
 #import "RYRiff.h"
@@ -18,6 +19,7 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "RYRiffCreateTableViewCell.h"
+#import "RYTrackDownloadTableViewCell.h"
 #import "BlockAlertView.h"
 
 
@@ -27,6 +29,9 @@
 // Media
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+
+#define kDownloadSection (_audioPlayers && _audioPlayers.count > 0) ? 1 : 0
+#define kTrackSection 0
 
 @interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate, RiffDelegate, UIGestureRecognizerDelegate>
 
@@ -42,15 +47,34 @@
 
 // Data
 @property (nonatomic, strong) AVAudioRecorder *recorder;
-@property (nonatomic, strong) NSArray *audioPlayers;
+@property (nonatomic, strong) NSMutableArray *audioPlayers;
+@property (nonatomic, strong) NSMutableArray *downloadingRiffs;
 
 @property (nonatomic, assign) BOOL playingAll;
+@property (nonatomic, assign) BOOL safeToUpdateTable;
 
 @property (nonatomic, assign) CGFloat riffDuration;
 
 @end
 
 @implementation RYRiffCreateViewController
+
+/*
+ Start this view controller with these tracks already populating _audioPlayers. This is used when reposting riffs.
+ PARAMETERS:
+ -arrayOfRiffs: array of riffs to include
+ */
+- (void) includeRiffs:(NSArray*)arrayOfRiffs
+{
+    _downloadingRiffs = _downloadingRiffs ? _downloadingRiffs : [[NSMutableArray alloc] initWithCapacity:arrayOfRiffs.count];
+    for (RYRiff *riff in arrayOfRiffs)
+    {
+        // have to download track
+        [_downloadingRiffs addObject:riff];
+        [[RYDataManager sharedInstance] saveRiffAsTrack:riff.URL forDelegate:self];
+    }
+    [_tableView reloadData];
+}
 
 #pragma mark -
 #pragma mark - UIViewController Life Cycle
@@ -59,7 +83,8 @@
 {
     [super viewDidLoad];
     
-    _audioPlayers = [[NSArray alloc] init];
+    _audioPlayers      = [[NSMutableArray alloc] init];
+    _safeToUpdateTable = YES;
     
     [_titleTextField setBackgroundColor:[RYStyleSheet foregroundColor]];
     [_titleTextField setTintColor:[UIColor whiteColor]];
@@ -80,8 +105,14 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageWrapperTapped:)];
     [_imageWrapper addGestureRecognizer:tapGesture];
+    [_tableView addGestureRecognizer:tapGesture];
     
     [self prepForRecording];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [_tableView reloadData];
 }
 
 - (IBAction)backButtonHit:(id)sender
@@ -156,13 +187,8 @@
 {
     [self.view endEditing:YES];
     
-    if (_titleTextField.text.length > 0)
+    if (_audioPlayers.count > 0)
         [self mergeTracks];
-    else
-    {
-        UIAlertView *noTitleAlert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"You forgot to name your riff!" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [noTitleAlert show];
-    }
 }
 
 #pragma mark - Action Helpers
@@ -203,6 +229,9 @@
 #pragma mark -
 #pragma mark - Data
 
+/*
+ Helper method to add a track both to the data model and to the table view
+ */
 - (void) addTrack:(NSURL*)trackURL
 {
     NSError *error = nil;
@@ -210,8 +239,15 @@
     [audioPlayer setEnableRate:YES];
     [audioPlayer prepareToPlay];
     
-    _audioPlayers = [_audioPlayers arrayByAddingObject:audioPlayer];
-    [self.tableView reloadData];
+    if (_safeToUpdateTable)
+    {
+        _safeToUpdateTable = NO;
+        [_tableView beginUpdates];
+        [_audioPlayers addObject:audioPlayer];
+        [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:kTrackSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView endUpdates];
+        _safeToUpdateTable = YES;
+    }
 }
 
 #pragma mark - Recording
@@ -222,7 +258,7 @@
 - (void) prepForRecording
 {
     // Set the audio file
-    NSURL *outputFileURL = [RYMediaEditor pathForNextTrack];
+    NSURL *outputFileURL = [RYDataManager urlForNextTrack];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -282,15 +318,17 @@
                 AVAudioPlayer *audioPlayer = [players objectAtIndex:trackIndex];
                 
                 NSError *error = nil;
-                if ([[NSFileManager defaultManager] removeItemAtURL:[audioPlayer.url filePathURL] error:&error])
+                if (_safeToUpdateTable && [[NSFileManager defaultManager] removeItemAtURL:[audioPlayer.url filePathURL] error:&error])
                 {
                     // removed track
+                    _safeToUpdateTable = NO;
                     [_tableView beginUpdates];
                     [players removeObjectAtIndex:trackIndex];
                     _audioPlayers = players;
                     NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
-                    [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [self.tableView reloadData];
+                    [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellRow inSection:kTrackSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [_tableView endUpdates];
+                    _safeToUpdateTable = YES;
                 }
             }
         }];
@@ -314,6 +352,51 @@
         AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
         [audioPlayer setRate:playbackSpeed];
     }
+}
+
+#pragma mark -
+#pragma mark - TrackDownloadDelegate (DataManager)
+
+- (void) track:(NSURL *)trackURL DownloadProgressed:(CGFloat)progress
+{
+    // change cell's progress view
+    RYTrackDownloadTableViewCell *trackCell = (RYTrackDownloadTableViewCell*)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self indexForDownloadingURL:trackURL] inSection:kDownloadSection]];
+    [trackCell.progressView setProgress:progress];
+}
+
+- (void) track:(NSURL *)trackURL DownloadFailed:(NSString *)reason
+{
+    // show alert and remove downloading cell
+    NSInteger trackIdx = [self indexForDownloadingURL:trackURL];
+    _safeToUpdateTable = NO;
+    [_tableView beginUpdates];
+    
+    [_downloadingRiffs removeObjectAtIndex:trackIdx];
+    [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:trackIdx inSection:kDownloadSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [_tableView endUpdates];
+    _safeToUpdateTable = YES;
+    
+    UIAlertView *downloadFailedAlert = [[UIAlertView alloc] initWithTitle:@"Download Failed" message:@"Please check network settings" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [downloadFailedAlert show];
+}
+
+- (void) track:(NSURL *)trackURL FinishedDownloading:(NSURL *)localURL
+{
+    NSInteger trackIdx = [self indexForDownloadingURL:trackURL];
+    
+    if (_safeToUpdateTable)
+    {
+        _safeToUpdateTable = NO;
+        [_tableView beginUpdates];
+        
+        [_downloadingRiffs removeObjectAtIndex:trackIdx];
+        [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:trackIdx inSection:kDownloadSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+        [_tableView endUpdates];
+        _safeToUpdateTable = YES;
+    }
+    [self addTrack:localURL];
 }
 
 #pragma mark -
@@ -374,10 +457,37 @@
 #pragma mark - 
 #pragma mark - UITableView Helpers
 
+/*
+ Helper method to get a relevant riff downloading cell for a given URL
+ */
+- (NSInteger)indexForDownloadingURL:(NSURL*)downloadingURL
+{
+    NSInteger index = -1;
+    for (NSInteger trackIdx = 0; trackIdx < _downloadingRiffs.count; trackIdx++)
+    {
+        RYRiff *riff = _downloadingRiffs[trackIdx];
+        if ([riff.URL isEqual:downloadingURL])
+        {
+            // found the right index
+            index = trackIdx;
+            break;
+        }
+    }
+    return index;
+}
+
+/*
+ Helper method to get a relevant track cell for a given track index in _audioPlayers.
+ */
 - (RYRiffCreateTableViewCell*)cellForTrack:(NSInteger)trackIndex
 {
-    NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
-    return (RYRiffCreateTableViewCell*)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:cellRow inSection:0]];
+    RYRiffCreateTableViewCell *cell;
+    if (trackIndex < _audioPlayers.count)
+    {
+        NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
+        cell = (RYRiffCreateTableViewCell*)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:cellRow inSection:kTrackSection]];
+    }
+    return cell;
 }
 
 #pragma mark -
@@ -390,28 +500,50 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _downloadingRiffs ? 1 : 2;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _audioPlayers.count;
+    NSInteger numRows;
+    if (section == kDownloadSection)
+        numRows = _downloadingRiffs.count;
+    else
+        numRows = _audioPlayers.count;
+    return numRows;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RiffCreateCell" forIndexPath:indexPath];
+    UITableViewCell *cell;
+    if (indexPath.section == kDownloadSection)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"TrackDownloadCell" forIndexPath:indexPath];
+    else
+        cell = [tableView dequeueReusableCellWithIdentifier:@"RiffCreateCell" forIndexPath:indexPath];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setBackgroundColor:[UIColor clearColor]];
     return cell;
 }
 
 #pragma mark -
 #pragma mark - UITableView Delegate
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(RYRiffCreateTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BOOL lastInRow = (indexPath.row == _audioPlayers.count-1);
-    [cell configureForTrackIndex:(_audioPlayers.count - indexPath.row - 1) forDelegate:self lastRowInSection:lastInRow];}
+    if (indexPath.section == kDownloadSection)
+    {
+        // downloading row
+        RYRiff *relevantRiff = _downloadingRiffs[indexPath.row];
+        [((RYTrackDownloadTableViewCell*)cell).descriptionLabel setText:relevantRiff.title];
+    }
+    else
+    {
+        // track cell
+        RYRiffCreateTableViewCell *trackCell = (RYRiffCreateTableViewCell*)cell;
+        BOOL lastInRow = (indexPath.row == _audioPlayers.count-1);
+        [trackCell configureForTrackIndex:(_audioPlayers.count - indexPath.row - 1) forDelegate:self lastRowInSection:lastInRow];
+    }
+}
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

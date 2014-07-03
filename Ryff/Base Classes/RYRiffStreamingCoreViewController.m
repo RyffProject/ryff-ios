@@ -11,13 +11,16 @@
 // Custom UI
 #import "RYStyleSheet.h"
 
+// Associated View Controllers
+#import "RYRiffCreateViewController.h"
+
 // UI Categories
 #import "UIImage+Color.h"
 
 // Data Managers
 #import "RYServices.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RYRiffDetailsCellDelegate>
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
@@ -65,7 +68,7 @@
     _isDownloading = YES;
     [_currentlyPlayingCell startDownloading];
     
-    NSURL *riffURL = [NSURL URLWithString:riff.URL];
+    NSURL *riffURL = riff.URL;
     NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
     _riffData = [[NSMutableData alloc] initWithLength:0];
     _riffConnection = [[NSURLConnection alloc] initWithRequest:dataRequest delegate:self startImmediately:YES];
@@ -162,8 +165,34 @@
     [self clearRiff];
 }
 
+#pragma mark -
+#pragma mark - RYRiffDetailsCellDelegate
+// actions by details cell
 
-#pragma mark - Table view data source
+/*
+ Upvote button hit. Should apply upvote to the relevant riff.
+ */
+- (void) upvoteHit:(NSInteger)riffIndex
+{
+    
+}
+
+/*
+ Repost button hit. Should open a new RYRiffCreateVC with the relevant riff.
+ */
+- (void) repostHit:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    if (post.riff)
+    {
+        RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+        [riffCreateVC includeRiffs:@[post.riff]];
+        [self presentViewController:riffCreateVC animated:YES completion:nil];
+    }
+}
+
+#pragma mark -
+#pragma mark - TableView Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -227,7 +256,7 @@
         {
             // riff details cell
             RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
-            [riffDetailsCell configure];
+            [riffDetailsCell configureForIndex:indexPath.section WithDelegate:self];
         }
         else
         {
@@ -260,7 +289,7 @@
 }
 
 #pragma mark -
-#pragma mark - UITableView Delegate
+#pragma mark - TableView Delegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

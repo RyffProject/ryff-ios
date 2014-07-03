@@ -28,29 +28,6 @@ static RYMediaEditor *_sharedInstance;
 }
 
 /*
- Helper function that gives NSURL to next available track path, incrementing name of track (track3.m4a, for example) until not taken.
- */
-+ (NSURL*) pathForNextTrack
-{
-    NSURL *trackPath;
-    
-    NSString *documentDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *trackDir        = [documentDirPath stringByAppendingPathComponent:@"UserTracks"];
-    NSError *error            = nil;
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:trackDir isDirectory:nil])
-        [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:&error];
-    
-    NSInteger trackNum = 0;
-    do {
-        trackNum++;
-        NSString *trackString = [[trackDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track%ld%@",(long)trackNum,kMediaFileType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
-        trackPath = [NSURL URLWithString:trackString];
-    } while ([[NSFileManager defaultManager] fileExistsAtPath:[trackPath path]]);
-    return trackPath;
-}
-
-/*
  Merges audio tracks into one file, and notifies _mergeDelegate of success/failure
  PARAMETERS:
  -trackURLS: NSArray of urls for component tracks to merge.

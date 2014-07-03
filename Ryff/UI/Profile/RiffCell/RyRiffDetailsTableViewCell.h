@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RYRiffDetailsCellDelegate <NSObject>
+
+- (void) upvoteHit:(NSInteger)riffIndex;
+- (void) repostHit:(NSInteger)riffIndex;
+
+@end
+
 @interface RyRiffDetailsTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *wrapperView;
-
-- (void) configure;
+- (void) configureForIndex:(NSInteger)riffIndex WithDelegate:(id<RYRiffDetailsCellDelegate>)delegate;
 
 @end

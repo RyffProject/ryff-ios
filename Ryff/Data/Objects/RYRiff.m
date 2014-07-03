@@ -10,13 +10,13 @@
 
 @implementation RYRiff
 
-- (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSString*)url
+- (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSURL*)url
 {
     if (self = [super init])
     {
-        _title  = title;
+        _title    = title;
         _duration = duration;
-        _URL    = url;
+        _URL      = url;
     }
     return self;
 }
@@ -25,7 +25,7 @@
 {
     NSString *title     = [riffDict objectForKey:@"title"];
     NSNumber *duration  = [riffDict objectForKey:@"duration"];
-    NSString *url       = [riffDict objectForKey:@"link"];
+    NSURL *url          = [NSURL URLWithString:[riffDict objectForKey:@"link"]];
     
     RYRiff *newRiff = [[RYRiff alloc] initWithTitle:title duration:[duration floatValue] url:url];
     return newRiff;
@@ -33,7 +33,7 @@
 
 + (RYRiff*)riffWithURL:(NSURL*)url
 {
-    RYRiff *newRiff = [[RYRiff alloc] initWithTitle:@"" duration:0 url:[url path]];
+    RYRiff *newRiff = [[RYRiff alloc] initWithTitle:@"" duration:0 url:url];
     return newRiff;
 }
 
