@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Eeb-PW-CFb">
-                                <rect key="frame" x="113" y="10" width="40" height="24"/>
+                                <rect key="frame" x="113" y="7" width="40" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="repost.png"/>
                                 <connections>
@@ -26,11 +26,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EgS-JO-8FJ">
-                                <rect key="frame" x="42" y="10" width="30" height="24"/>
+                                <rect key="frame" x="42" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="upvote.png"/>
                                 <connections>
                                     <action selector="upvoteHit:" destination="H2g-4B-KVC" eventType="touchUpInside" id="rC2-7O-xEr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KyQ-De-f40">
+                                <rect key="frame" x="262.5" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="delete.png"/>
+                                <connections>
+                                    <action selector="deleteHit:" destination="H2g-4B-KVC" eventType="touchUpInside" id="UYk-vh-yqA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -40,6 +48,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="deleteButton" destination="KyQ-De-f40" id="NOJ-DY-VZd"/>
                 <outlet property="repostButton" destination="Eeb-PW-CFb" id="cFc-N3-6pI"/>
                 <outlet property="upvoteButton" destination="EgS-JO-8FJ" id="Ykp-JT-XKM"/>
                 <outlet property="wrapperView" destination="UDF-Xo-1K4" id="ZHL-H4-g1X"/>
@@ -47,6 +56,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delete.png" width="45" height="46"/>
         <image name="repost.png" width="40" height="24"/>
         <image name="upvote.png" width="40" height="42"/>
     </resources>

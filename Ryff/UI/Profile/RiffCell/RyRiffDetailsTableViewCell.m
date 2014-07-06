@@ -8,6 +8,13 @@
 
 #import "RyRiffDetailsTableViewCell.h"
 
+// Data Managers
+#import "RYServices.h"
+
+// Data Objects
+#import "RYNewsfeedPost.h"
+#import "RYUser.h"
+
 // Custom UI
 #import "RYStyleSheet.h"
 
@@ -16,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
 @property (weak, nonatomic) IBOutlet UIButton *repostButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 // Data
 @property (nonatomic, weak) id<RYRiffDetailsCellDelegate> delegate;
@@ -30,13 +38,17 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     [_upvoteButton setTintColor:[RYStyleSheet actionColor]];
     [_repostButton setTintColor:[RYStyleSheet actionColor]];
+    [_deleteButton setTintColor:[RYStyleSheet actionColor]];
 }
 
-- (void) configureForIndex:(NSInteger)riffIndex WithDelegate:(id<RYRiffDetailsCellDelegate>)delegate
+- (void) configureForPost:(RYNewsfeedPost*)post Index:(NSInteger)riffIndex WithDelegate:(id<RYRiffDetailsCellDelegate>)delegate
 {
     [self setBackgroundColor:[UIColor clearColor]];
     _delegate  = delegate;
     _riffIndex = riffIndex;
+    
+    if (![post.user.username isEqualToString:[RYServices loggedInUser].username])
+        [_deleteButton setHidden:YES];
 }
 
 #pragma mark -
@@ -52,6 +64,12 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(repostHit:)])
         [_delegate repostHit:_riffIndex];
+}
+
+- (IBAction)deleteHit:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(deleteHit:)])
+        [_delegate deleteHit:_riffIndex];
 }
 
 @end

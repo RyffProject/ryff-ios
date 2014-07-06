@@ -68,27 +68,19 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Registration
 
-- (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate
+- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         NSString *action = [NSString stringWithFormat:@"%@%@",host,kRegistrationAction];
-        [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            
-            if (image)
-            {
-                NSData *imageData = UIImagePNGRepresentation(image);
-                [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar" mimeType:@"image/png"];
-            }
-            
-        }  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             
             if (dictionary[@"success"])
                 [delegate postSucceeded:responseObject];
             else
-                [delegate postFailed:nil];
+                [delegate postFailed:responseObject];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [delegate postFailed:[error localizedDescription]];
@@ -112,12 +104,76 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
                 [delegate postSucceeded:responseObject];
             else
-                [delegate postFailed:nil];
+                [delegate postFailed:responseObject];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [delegate postFailed:[error localizedDescription]];
         }];
     });
+}
+
+#pragma mark - 
+#pragma mark - Edit User
+
+// not set up yet
+- (void) editUser:(RYUser*)user
+{
+    if (![RYServices loggedInUser])
+        return;
+    
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:user.username];
+    
+    if (user.username && password)
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            
+            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpdateUserAction];
+            
+            NSDictionary *params = @{@"auth_username":user.username,@"auth_password":password};
+            
+            [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dictionary = responseObject;
+                
+                if (dictionary[@"success"])
+                    NSLog(@"edit succeeded");
+                else
+                    NSLog(@"edit failed but post succeeded");
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"edit failed");
+            }];
+        });
+}
+
+- (void) deletePost:(RYNewsfeedPost*)post
+{
+    if (![RYServices loggedInUser])
+        return;
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    if (userObject.username && password)
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            
+            NSString *action = [NSString stringWithFormat:@"%@%@",host,kDeletePostAction];
+            
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id" : @(post.postId)};
+            
+            [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dictionary = responseObject;
+                
+                if (dictionary[@"success"])
+                    NSLog(@"delete post succeeded");
+                else
+                    NSLog(@"delete post failed but POST succeeded");
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"delete post failed");
+            }];
+        });
 }
 
 #pragma mark -
@@ -380,6 +436,36 @@ static RYUser* _loggedInUser;
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Post error: %@",[error localizedDescription]);
                 [delegate postFailed:[error localizedDescription]];
+            }];
+        });
+}
+
+- (void) upvotePost:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate
+{
+    if (![RYServices loggedInUser])
+        return;
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    if (userObject.username && password)
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":@(postID)};
+            
+            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpvotePostAction];
+            [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dictionary = responseObject;
+                if (dictionary[@"success"] && delegate)
+                    [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary]];
+                else
+                    [delegate upvoteFailed:dictionary[@"error"]];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [delegate upvoteFailed:[error localizedDescription]];
             }];
         });
 }

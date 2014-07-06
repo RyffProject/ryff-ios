@@ -103,9 +103,10 @@
     [_tableView setBackgroundColor:[RYStyleSheet foregroundColor]];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageWrapperTapped:)];
-    [_imageWrapper addGestureRecognizer:tapGesture];
-    [_tableView addGestureRecognizer:tapGesture];
+    UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageWrapperTapped:)];
+    [_imageWrapper addGestureRecognizer:imageTapGesture];
+    UITapGestureRecognizer *tableTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewTapped:)];
+    [_tableView addGestureRecognizer:tableTapGesture];
     
     [self prepForRecording];
 }
@@ -124,6 +125,11 @@
 #pragma mark - GestureRecognizer Delegate
 
 - (void) imageWrapperTapped:(UITapGestureRecognizer*)sender
+{
+    [self.view endEditing:YES];
+}
+
+- (void) tableViewTapped:(UITapGestureRecognizer*)sender
 {
     [self.view endEditing:YES];
 }
@@ -235,11 +241,12 @@
 - (void) addTrack:(NSURL*)trackURL
 {
     NSError *error = nil;
+    //NSURL *fileUrl = [trackURL fileReferenceURL]; // for local file
     AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:trackURL error:&error];
     [audioPlayer setEnableRate:YES];
     [audioPlayer prepareToPlay];
     
-    if (_safeToUpdateTable)
+    if (audioPlayer && _safeToUpdateTable)
     {
         _safeToUpdateTable = NO;
         [_tableView beginUpdates];
@@ -282,32 +289,32 @@
 #pragma mark - RiffCreateCell Delegate
 
 
-- (void) playTrack:(NSInteger)trackIndex
+- (void) playTrack:(AVAudioPlayer *)player
 {
-    if (trackIndex < _audioPlayers.count)
+    if ([_audioPlayers containsObject:player])
     {
         _playingAll = NO;
+        NSInteger trackIndex = [_audioPlayers indexOfObject:player];
         
-        AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
-        if (audioPlayer.playing)
+        if (player.playing)
         {
             // is playing, should pause
             [[self cellForTrack:trackIndex] stylePaused];
-            [audioPlayer pause];
+            [player pause];
         }
         else
         {
             // is pause, should play
             [[self cellForTrack:trackIndex] stylePlaying];
-            [audioPlayer setCurrentTime:0];
-            [audioPlayer play];
+            [player setCurrentTime:0];
+            [player play];
         }
     }
 }
 
-- (void) deleteTrack:(NSInteger)trackIndex
+- (void) deleteTrack:(AVAudioPlayer *)player
 {
-    if (trackIndex < _audioPlayers.count)
+    if ([_audioPlayers containsObject:player])
     {
         BlockAlertView *blockAlert = [[BlockAlertView alloc] initWithTitle:@"Remove" message:@"Delete track from device?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove Track", nil];
         [blockAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
@@ -315,20 +322,20 @@
             {
                 // delete file
                 NSMutableArray *players    = [_audioPlayers mutableCopy];
-                AVAudioPlayer *audioPlayer = [players objectAtIndex:trackIndex];
                 
                 NSError *error = nil;
-                if (_safeToUpdateTable && [[NSFileManager defaultManager] removeItemAtURL:[audioPlayer.url filePathURL] error:&error])
+                if (_safeToUpdateTable && [[NSFileManager defaultManager] removeItemAtURL:[player.url filePathURL] error:&error])
                 {
                     // removed track
                     _safeToUpdateTable = NO;
                     [_tableView beginUpdates];
+                    NSInteger trackIndex = [_audioPlayers indexOfObject:player];
+                    NSInteger cellRow    = _audioPlayers.count - trackIndex - 1;
                     [players removeObjectAtIndex:trackIndex];
-                    _audioPlayers = players;
-                    NSInteger cellRow = _audioPlayers.count - trackIndex - 1;
+                    _audioPlayers        = players;
                     [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cellRow inSection:kTrackSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
                     [_tableView endUpdates];
-                    _safeToUpdateTable = YES;
+                    _safeToUpdateTable   = YES;
                 }
             }
         }];
@@ -336,22 +343,16 @@
     }
 }
 
-- (void) changeTrack:(NSInteger)trackIndex volume:(CGFloat)newVolume
+- (void) changeTrack:(AVAudioPlayer *)player volume:(CGFloat)newVolume
 {
-    if (trackIndex < _audioPlayers.count)
-    {
-        AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
-        [audioPlayer setVolume:newVolume];
-    }
+    if ([_audioPlayers containsObject:player])
+        [player setVolume:newVolume];
 }
 
-- (void) changeTrack:(NSInteger)trackIndex playbackSpeed:(CGFloat)playbackSpeed
+- (void) changeTrack:(AVAudioPlayer *)player playbackSpeed:(CGFloat)playbackSpeed
 {
-    if (trackIndex < _audioPlayers.count)
-    {
-        AVAudioPlayer *audioPlayer = _audioPlayers[trackIndex];
-        [audioPlayer setRate:playbackSpeed];
-    }
+    if ([_audioPlayers containsObject:player])
+        [player setRate:playbackSpeed];
 }
 
 #pragma mark -
@@ -541,7 +542,8 @@
         // track cell
         RYRiffCreateTableViewCell *trackCell = (RYRiffCreateTableViewCell*)cell;
         BOOL lastInRow = (indexPath.row == _audioPlayers.count-1);
-        [trackCell configureForTrackIndex:(_audioPlayers.count - indexPath.row - 1) forDelegate:self lastRowInSection:lastInRow];
+        AVAudioPlayer *associatedPlayer = _audioPlayers[(_audioPlayers.count - indexPath.row - 1)];
+        [trackCell configureForAudioPlayer:associatedPlayer forDelegate:self lastRowInSection:lastInRow];
     }
 }
 

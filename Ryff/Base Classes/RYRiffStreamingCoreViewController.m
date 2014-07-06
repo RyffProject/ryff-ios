@@ -10,6 +10,7 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+#import "BlockAlertView.h"
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
@@ -20,7 +21,7 @@
 // Data Managers
 #import "RYServices.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RYRiffDetailsCellDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RYRiffDetailsCellDelegate, UpvoteDelegate>
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
@@ -174,7 +175,8 @@
  */
 - (void) upvoteHit:(NSInteger)riffIndex
 {
-    
+    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    [[RYServices sharedInstance] upvotePost:post.postId forDelegate:self];
 }
 
 /*
@@ -189,6 +191,55 @@
         [riffCreateVC includeRiffs:@[post.riff]];
         [self presentViewController:riffCreateVC animated:YES completion:nil];
     }
+}
+
+/*
+ Delete post button hit. Should have services do so
+ */
+- (void) deleteHit:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    BlockAlertView *deleteAlert = [[BlockAlertView alloc] initWithTitle:@"Delete Riff?" message:[NSString stringWithFormat:@"Are you sure you wish to delete %@?",post.riff.title] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+    [deleteAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+        
+        if (buttonIndex != alertView.cancelButtonIndex)
+        {
+            // delete post
+            NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
+            [mutableFeedItems removeObjectAtIndex:riffIndex];
+            [_riffTableView beginUpdates];
+            _feedItems = mutableFeedItems;
+            [_riffTableView deleteSections:[NSIndexSet indexSetWithIndex:riffIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            _openRiffDetailsSection = -1;
+            [_riffTableView endUpdates];
+            [[RYServices sharedInstance] deletePost:post];
+        }
+    }];
+    [deleteAlert show];
+}
+
+#pragma mark -
+#pragma mark - Upvotes
+
+- (void) upvoteSucceeded:(RYNewsfeedPost *)updatedPost
+{
+    for (NSInteger postIdx = 0; postIdx < _feedItems.count; postIdx++)
+    {
+        RYNewsfeedPost *oldPost = _feedItems[postIdx];
+        if (oldPost.postId == updatedPost.postId)
+        {
+            // found the old post, replace it and update UI
+            NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
+            [mutableFeedItems replaceObjectAtIndex:postIdx withObject:updatedPost];
+            [_riffTableView reloadSections:[NSIndexSet indexSetWithIndex:postIdx] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
+}
+
+- (void) upvoteFailed:(NSString *)reason
+{
+    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [upvoteFailedAlert show];
 }
 
 #pragma mark -
@@ -247,24 +298,22 @@
     
     if (post.riff && indexPath.row == 0)
     {
+        // title cell
         RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
         [riffTitleCell configureForRiff:post.riff];
     }
+    else if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
+    {
+        // riff details cell
+        RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
+        [riffDetailsCell configureForPost:post Index:indexPath.section WithDelegate:self];
+    }
     else
     {
-        if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
-        {
-            // riff details cell
-            RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
-            [riffDetailsCell configureForIndex:indexPath.section WithDelegate:self];
-        }
-        else
-        {
-            // riff body cell
-            NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
-            RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
-            [riffBodyCell configureWithAttributedString:attributedText];
-        }
+        // riff body cell
+        NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
+        RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
+        [riffBodyCell configureWithAttributedString:attributedText];
     }
 }
 
