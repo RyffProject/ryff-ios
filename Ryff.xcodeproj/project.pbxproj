@@ -47,6 +47,9 @@
 		831B96051964D9CE003A8616 /* upvote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B96031964D9CE003A8616 /* upvote@2x.png */; };
 		831B96081964DEC6003A8616 /* RYDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B96071964DEC6003A8616 /* RYDataManager.m */; };
 		831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */; };
+		833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D541975DFF10002A2BE /* SGImageCache.m */; };
+		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
+		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
 		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
@@ -221,6 +224,12 @@
 		831B96071964DEC6003A8616 /* RYDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYDataManager.m; sourceTree = "<group>"; };
 		831B96091964E428003A8616 /* RYTrackDownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTrackDownloadTableViewCell.h; sourceTree = "<group>"; };
 		831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTrackDownloadTableViewCell.m; sourceTree = "<group>"; };
+		833E1D531975DFF10002A2BE /* SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCache.h; sourceTree = "<group>"; };
+		833E1D541975DFF10002A2BE /* SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCache.m; sourceTree = "<group>"; };
+		833E1D551975DFF10002A2BE /* SGImageCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCacheTask.h; sourceTree = "<group>"; };
+		833E1D561975DFF10002A2BE /* SGImageCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCacheTask.m; sourceTree = "<group>"; };
+		833E1D571975DFF10002A2BE /* UIImageView+SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SGImageCache.h"; sourceTree = "<group>"; };
+		833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SGImageCache.m"; sourceTree = "<group>"; };
 		834039FB195A44E90001EA53 /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+block.h"; path = "../../Global Helpers/NSObject+block.h"; sourceTree = "<group>"; };
 		834039FC195A44E90001EA53 /* NSObject+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+block.m"; path = "../../Global Helpers/NSObject+block.m"; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateViewController.h; sourceTree = "<group>"; };
@@ -458,6 +467,28 @@
 			path = Cylindric;
 			sourceTree = "<group>";
 		};
+		833E1D511975DFA90002A2BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				833E1D521975DFF10002A2BE /* SGImageCache */,
+				83FCD1D618F9741400A493F0 /* AFNetworking */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		833E1D521975DFF10002A2BE /* SGImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				833E1D531975DFF10002A2BE /* SGImageCache.h */,
+				833E1D541975DFF10002A2BE /* SGImageCache.m */,
+				833E1D551975DFF10002A2BE /* SGImageCacheTask.h */,
+				833E1D561975DFF10002A2BE /* SGImageCacheTask.m */,
+				833E1D571975DFF10002A2BE /* UIImageView+SGImageCache.h */,
+				833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */,
+			);
+			path = SGImageCache;
+			sourceTree = "<group>";
+		};
 		835516731951314400CF2C23 /* RiffCreate */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,9 +632,9 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
+				833E1D511975DFA90002A2BE /* Frameworks */,
 				83DBCA7818F99E2000262496 /* Base Classes */,
 				83DBCA6B18F97A2A00262496 /* Global Helpers */,
-				83FCD1D618F9741400A493F0 /* AFNetworking */,
 				83FCD1A918F93E6C00A493F0 /* Images */,
 				83FCD1A518F9393500A493F0 /* Style */,
 				83FCD1A018F921AB00A493F0 /* Data */,
@@ -869,7 +900,8 @@
 				83FCD1E818F9741400A493F0 /* AFURLSessionManager.h */,
 				83FCD1E918F9741400A493F0 /* AFURLSessionManager.m */,
 			);
-			path = AFNetworking;
+			name = AFNetworking;
+			path = ../AFNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1074,6 +1106,8 @@
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
 				83FCD1EC18F9741400A493F0 /* AFHTTPSessionManager.m in Sources */,
+				833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */,
+				833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
 				830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */,
@@ -1091,6 +1125,7 @@
 				83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */,
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				83FCD1F118F9741400A493F0 /* AFURLResponseSerialization.m in Sources */,
+				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
 				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
 				8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
