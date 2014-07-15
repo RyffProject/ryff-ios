@@ -94,9 +94,19 @@
     
     if (_username.length && _password.length)
     {
-        //submit
-        [[RYServices sharedInstance] logInUserWithUsername:_username Password:_password forDelegate:self];
-        [self showHUDWithTitle:@"Logging in"];
+        if (_newUser)
+        {
+            // register
+            NSDictionary *parameters = @{@"username" : _username, @"password" : _password};
+            [[RYServices sharedInstance] registerUserWithPOSTDict:parameters forDelegate:self];
+            [self showHUDWithTitle:@"Registering"];
+        }
+        else
+        {
+            // log in
+            [[RYServices sharedInstance] logInUserWithUsername:_username Password:_password forDelegate:self];
+            [self showHUDWithTitle:@"Logging in"];
+        }
     }
     else
     {
@@ -147,7 +157,7 @@
     }
     
     [self hideHUD];
-    [self showCheckHUDWithTitle:@"Welcome back" forDuration:0.5];
+    [self showCheckHUDWithTitle:@"Welcome" forDuration:0.5];
     
     [self performSelector:@selector(dismissViewController) withObject:nil afterDelay:0.5];
 }

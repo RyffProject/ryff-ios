@@ -68,7 +68,6 @@
 		83C6A6031960FFF100BB3D1A /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A6011960FFF100BB3D1A /* pause@2x.png */; };
 		83C6A60619610BBF00BB3D1A /* playRound.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A60419610BBF00BB3D1A /* playRound.png */; };
 		83C6A60719610BBF00BB3D1A /* playRound@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A60519610BBF00BB3D1A /* playRound@2x.png */; };
-		83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */; };
 		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
 		83C6CA8418FAFF5200412469 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7E18FAFF5200412469 /* back@2x.png */; };
@@ -253,8 +252,6 @@
 		83C6A6011960FFF100BB3D1A /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
 		83C6A60419610BBF00BB3D1A /* playRound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playRound.png; sourceTree = "<group>"; };
 		83C6A60519610BBF00BB3D1A /* playRound@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playRound@2x.png"; sourceTree = "<group>"; };
-		83C6CA7718FAECE500412469 /* RYRiffReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffReviewViewController.h; sourceTree = "<group>"; };
-		83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffReviewViewController.m; sourceTree = "<group>"; };
 		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		83C6CA7B18FAF95C00412469 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		83C6CA7D18FAFF5200412469 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
@@ -518,8 +515,6 @@
 				835516731951314400CF2C23 /* RiffCreate */,
 				8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */,
 				8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */,
-				83C6CA7718FAECE500412469 /* RYRiffReviewViewController.h */,
-				83C6CA7818FAECE500412469 /* RYRiffReviewViewController.m */,
 			);
 			path = RiffEdit;
 			sourceTree = "<group>";
@@ -1090,7 +1085,6 @@
 				83FCD1EE18F9741400A493F0 /* AFSecurityPolicy.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				83FCD1EB18F9741400A493F0 /* AFHTTPRequestOperationManager.m in Sources */,
-				83C6CA7918FAECE500412469 /* RYRiffReviewViewController.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83FCD1EA18F9741400A493F0 /* AFHTTPRequestOperation.m in Sources */,
 				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,

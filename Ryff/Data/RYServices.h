@@ -9,24 +9,29 @@
 #import <Foundation/Foundation.h>
 
 // NSUserDefaults keys
-#define kLoggedInUserKey @"loggedInUser"
-#define kCoordLongitude @"lastUpdatedLongitude"
-#define kCoordLatitude @"lastUpdatedLatitude"
+#define kLoggedInUserKey    @"loggedInUser"
+#define kCoordLongitude     @"lastUpdatedLongitude"
+#define kCoordLatitude      @"lastUpdatedLatitude"
 
 // Server paths
-#define host @"http://ryff.me/api/"
-#define kLogIn @"login.php"
+#define host                @"http://ryff.me/api/"
+#define kLogIn              @"login.php"
 #define kRegistrationAction @"create-user.php"
-#define kAddFriendAction @"add-friend.php"
+#define kUpdateUserAction   @"update-user.php"
+#define kAddFriendAction    @"add-friend.php"
 #define kDeleteFriendAction @"delete-friend.php"
-#define kPostRiffAction @"add-post.php"
-#define kGetPosts @"get-posts.php"
-#define kGetPeople @"get-user.php"
-#define kGetNearby @"get-users-nearby.php"
-#define kGetFriendsPosts @"get-friend-posts.php"
+#define kPostRiffAction     @"add-post.php"
+#define kUpvotePostAction   @"add-upvote.inc.php"
+#define kDeletePostAction   @"delete-post.php"
+#define kGetPosts           @"get-posts.php"
+#define kGetPeople          @"get-user.php"
+#define kGetNearby          @"get-users-nearby.php"
+#define kGetFriendsPosts    @"get-friend-posts.php"
 
 // Web service dictionary keys
-#define kUserObjectKey @"user"
+#define kUserObjectKey      @"user"
+
+@class RYNewsfeedPost;
 
 @protocol POSTDelegate <NSObject>
 - (void) connectionFailed;
@@ -49,6 +54,11 @@
 - (void) riffPostFailed;
 @end
 
+@protocol UpvoteDelegate <NSObject>
+- (void) upvoteSucceeded:(RYNewsfeedPost*)updatedPost;
+- (void) upvoteFailed:(NSString*)reason;
+@end
+
 @class RYUser;
 @class RYNewsfeedPost;
 
@@ -61,8 +71,12 @@
 + (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
 // Registration
-- (void) registerUserWithPOSTDict:(NSDictionary*)params avatar:(UIImage*)image forDelegate:(id<POSTDelegate>)delegate;
+- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate;
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
+
+// Edit User
+- (void) editUser:(RYUser*)user;
+- (void) deletePost:(RYNewsfeedPost*)post;
 
 // Artist Suggester
 @property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
@@ -76,5 +90,6 @@
 - (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate;
 - (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate;
+- (void) upvotePost:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
 
 @end

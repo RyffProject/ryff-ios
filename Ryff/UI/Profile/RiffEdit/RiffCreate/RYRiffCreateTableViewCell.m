@@ -22,17 +22,17 @@
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 // Data
-@property (nonatomic, assign) NSInteger trackIndex;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, weak) id<RiffCreateCellDelegate> riffCreateDelegate;
 
 @end
 
 @implementation RYRiffCreateTableViewCell
 
-- (void) configureForTrackIndex:(NSInteger)trackIndex forDelegate:(id<RiffCreateCellDelegate>)delegate lastRowInSection:(BOOL)lastRowInSection
+- (void) configureForAudioPlayer:(AVAudioPlayer*)player forDelegate:(id<RiffCreateCellDelegate>)delegate lastRowInSection:(BOOL)lastRowInSection
 {
     _riffCreateDelegate = delegate;
-    _trackIndex         = trackIndex;
+    _audioPlayer        = player;
     
     if (lastRowInSection)
         [_separatorView setBackgroundColor:[UIColor clearColor]];
@@ -70,27 +70,27 @@
 - (IBAction)playButtonHit:(id)sender
 {
     if (_riffCreateDelegate && [_riffCreateDelegate respondsToSelector:@selector(playTrack:)])
-        [_riffCreateDelegate playTrack:_trackIndex];
+        [_riffCreateDelegate playTrack:_audioPlayer];
 }
 
 - (IBAction)deleteButtonHit:(id)sender
 {
     if (_riffCreateDelegate && [_riffCreateDelegate respondsToSelector:@selector(deleteTrack:)])
-        [_riffCreateDelegate deleteTrack:_trackIndex];
+        [_riffCreateDelegate deleteTrack:_audioPlayer];
 }
 
 - (IBAction)volumeSliderChanged:(id)sender
 {
     UISlider *volumeSlider = sender;
     if (_riffCreateDelegate && [_riffCreateDelegate respondsToSelector:@selector(changeTrack:volume:)])
-        [_riffCreateDelegate changeTrack:_trackIndex volume:volumeSlider.value];
+        [_riffCreateDelegate changeTrack:_audioPlayer volume:volumeSlider.value];
 }
 
 - (IBAction)playbackSpeedSliderChanged:(id)sender
 {
     UISlider *playbackSlider = sender;
     if (_riffCreateDelegate && [_riffCreateDelegate respondsToSelector:@selector(changeTrack:playbackSpeed:)])
-        [_riffCreateDelegate changeTrack:_trackIndex playbackSpeed:playbackSlider.value];
+        [_riffCreateDelegate changeTrack:_audioPlayer playbackSpeed:playbackSlider.value];
 }
 
 @end

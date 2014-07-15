@@ -23,23 +23,20 @@
 #import "UIImage+Color.h"
 
 // Associated View Controllers
-#import "RYRiffReviewViewController.h"
 #import "RYRiffCreateViewController.h"
 
 @interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UIButton *recentActivityButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-// Data
-@property (nonatomic, strong) AVAudioRecorder *recorder;
-@property (nonatomic, assign) BOOL isRecording;
-@property (nonatomic, strong) NSString *riffContent;
 
 @end
 
@@ -56,6 +53,12 @@
     [_tableView reloadData];
     
     [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
+    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
+    [_editImageLabel setTextColor:[UIColor whiteColor]];
+    [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
+    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_imageWrapperView.layer setCornerRadius:100.0f];
+    [_imageWrapperView setClipsToBounds:YES];
     
     [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
     [_addButton setTintColor:[RYStyleSheet actionColor]];
@@ -73,8 +76,6 @@
 {
     // Profile picture
     [_profileImageView setImage:user.profileImage];
-    [_profileImageView.layer setCornerRadius:50.0f];
-    [_profileImageView setClipsToBounds:YES];
     
     // Edit button
     if (![user.username isEqualToString:[RYServices loggedInUser].username])
@@ -85,7 +86,6 @@
     
     // Display name
     [_nameText setText:user.firstName];
-    
     
     // prep activity
     [self setFeedItems:user.activity];

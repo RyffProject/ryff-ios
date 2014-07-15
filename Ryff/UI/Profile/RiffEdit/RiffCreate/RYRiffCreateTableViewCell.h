@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class AVAudioPlayer;
+
 @protocol RiffCreateCellDelegate <NSObject>
 
-- (void) playTrack:(NSInteger)trackIndex;
-- (void) deleteTrack:(NSInteger)trackIndex;
-- (void) changeTrack:(NSInteger)trackIndex volume:(CGFloat)newVolume;
-- (void) changeTrack:(NSInteger)trackIndex playbackSpeed:(CGFloat)playbackSpeed;
+- (void) playTrack:(AVAudioPlayer*)player;
+- (void) deleteTrack:(AVAudioPlayer*)player;
+- (void) changeTrack:(AVAudioPlayer*)player volume:(CGFloat)newVolume;
+- (void) changeTrack:(AVAudioPlayer*)player playbackSpeed:(CGFloat)playbackSpeed;
 
 @end
 
 @interface RYRiffCreateTableViewCell : UITableViewCell
 
-- (void) configureForTrackIndex:(NSInteger)trackIndex forDelegate:(id<RiffCreateCellDelegate>)delegate lastRowInSection:(BOOL)lastRowInSection;
+- (void) configureForAudioPlayer:(AVAudioPlayer*)player forDelegate:(id<RiffCreateCellDelegate>)delegate lastRowInSection:(BOOL)lastRowInSection;
 
 - (void) stylePlaying;
 - (void) stylePaused;
