@@ -19,6 +19,9 @@
 #import "RYStyleSheet.h"
 #import "RYRiffTrackTableViewCell.h"
 #import "BlockAlertView.h"
+
+// Categories
+#import "UIImage+Thumbnail.h"
 #import "UIViewController+Extras.h"
 #import "UIImage+Color.h"
 
@@ -28,12 +31,12 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate, UIGestureRecognizerDelegate>
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
 @property (weak, nonatomic) IBOutlet UIButton *recentActivityButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
@@ -41,7 +44,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // Data
-@property (nonatomic, assign) BOOL loggedInProfile;
+@property (nonatomic, assign) BOOL isLoggedInProfile;
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
 
 @end
 
@@ -59,7 +63,7 @@
     
     [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
     
-    if (_loggedInProfile)
+    if (_isLoggedInProfile)
     {
         [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
         [_editImageLabel setTextColor:[UIColor whiteColor]];
@@ -73,6 +77,8 @@
     }
     else
     {
+        // not logged in user, remove settings button
+        [_settingsButton removeFromSuperview];
         [_editImageLabel setHidden:YES];
     }
     
@@ -92,20 +98,13 @@
 {
     // configure for editing if looking at the logged in user's profile
     if (user.userId == [RYServices loggedInUser].userId)
-        _loggedInProfile = YES;
+        _isLoggedInProfile = YES;
     
     // Profile picture
     if (user.avatarURL)
         [_profileImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
     else
         [_profileImageView setImage:[UIImage imageNamed:@"user"]];
-    
-    // Edit button
-    if (![user.username isEqualToString:[RYServices loggedInUser].username])
-    {
-        // remove edit button
-        [_editButton removeFromSuperview];
-    }
     
     // Display name
     [_nameText setText:user.firstName];
@@ -117,7 +116,7 @@
 #pragma mark -
 #pragma mark - Actions
 
-- (IBAction)editHit:(id)sender
+- (IBAction)settingsHit:(id)sender
 {
     
 }
@@ -142,7 +141,7 @@
 
 - (void) editImageTapped:(UITapGestureRecognizer*)sender
 {
-    
+    [self presentProfilePictureOptions];
 }
 
 #pragma mark -
@@ -171,6 +170,84 @@
     }
     [self setFeedItems:myPosts];
     [self.tableView reloadData];
+}
+
+#pragma mark - 
+#pragma mark - User Avatar Photo Picking
+
+- (void)presentProfilePictureOptions
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSLog(@"No camera detected!");
+        [self pickPhoto];
+        return;
+    }
+    
+    BlockAlertView *photoChoice = [[BlockAlertView alloc] initWithTitle:@"Profile Picture" message:@"Select a new profile picture." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Take a Photo", @"From Library", nil];
+    [photoChoice setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 1)
+        {
+            // take photo
+            [self takePhoto];
+        }
+        else if (buttonIndex == 2)
+        {
+            // choose from library
+            [self pickPhoto];
+        }
+    }];
+    [photoChoice show];
+}
+
+-(UIImagePickerController *) imagePicker
+{
+    if (_imagePicker == nil) {
+        _imagePicker = [[UIImagePickerController alloc] init];
+        _imagePicker.delegate = self;
+    }
+    return _imagePicker;
+}
+
+-(void) takePhoto
+{
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+-(void) pickPhoto
+{
+    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    CGFloat avatarSize = 200.f;
+    UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
+    [_profileImageView setImage:avatarImage];
+    
+    [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
+}
+
+#pragma mark -
+#pragma mark - UserUpdateDelegate
+
+- (void) updateSucceeded:(RYUser *)newUser
+{
+    [self configureForUser:newUser];
+    [_tableView reloadData];
+    
+    [[RYServices sharedInstance] getMyPostsForDelegate:self];
+}
+
+- (void) updateFailed:(NSString *)reason
+{
+    UIAlertView *updateFailedAlert = [[UIAlertView alloc] initWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [updateFailedAlert show];
 }
 
 @end

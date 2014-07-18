@@ -45,6 +45,7 @@
     [_backgroundImageView setImage:[self riffCellTopBackgroundImage]];
     [_backgroundImageView setFrame:_wrapperView.bounds];
     [_avatarImageView.layer setCornerRadius:_avatarImageView.frame.size.height/2];
+    [_avatarImageView setClipsToBounds:YES];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 

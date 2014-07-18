@@ -200,14 +200,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OGd-Ag-gyN">
-                                <rect key="frame" x="698" y="50" width="30" height="30"/>
+                                <rect key="frame" x="685" y="50" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Edit">
+                                <state key="normal" title="Settings">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="editHit:" destination="4Bh-7S-RXL" eventType="touchUpInside" id="gbN-OR-8oJ"/>
+                                    <action selector="settingsHit:" destination="4Bh-7S-RXL" eventType="touchUpInside" id="sTM-6z-kxl"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Jfb-Ph-0rE">
@@ -235,12 +235,12 @@
                     <connections>
                         <outlet property="aboutButton" destination="Lnp-z7-Aj9" id="j5i-9h-qGj"/>
                         <outlet property="addButton" destination="m1e-73-nUg" id="cYY-84-FMd"/>
-                        <outlet property="editButton" destination="OGd-Ag-gyN" id="PqK-6l-FX9"/>
                         <outlet property="editImageLabel" destination="hh4-I0-36w" id="lre-Fu-4GR"/>
                         <outlet property="imageWrapperView" destination="MN6-e7-shy" id="vyM-ex-dIs"/>
                         <outlet property="nameText" destination="n7L-WU-Rbg" id="d1M-kJ-FIU"/>
                         <outlet property="profileImageView" destination="k6q-rK-l7x" id="mtP-kR-i93"/>
                         <outlet property="recentActivityButton" destination="GCj-UL-MkO" id="27M-iN-hd3"/>
+                        <outlet property="settingsButton" destination="OGd-Ag-gyN" id="etW-cz-lAV"/>
                         <outlet property="tableView" destination="Jfb-Ph-0rE" id="9RF-T8-8TA"/>
                     </connections>
                 </viewController>

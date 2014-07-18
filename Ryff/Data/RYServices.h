@@ -32,6 +32,7 @@
 #define kUserObjectKey      @"user"
 
 @class RYNewsfeedPost;
+@class RYUser;
 
 @protocol POSTDelegate <NSObject>
 - (void) connectionFailed;
@@ -59,6 +60,11 @@
 - (void) upvoteFailed:(NSString*)reason;
 @end
 
+@protocol UpdateUserDelegate <NSObject>
+- (void) updateSucceeded:(RYUser*)newUser;
+- (void) updateFailed:(NSString*)reason;
+@end
+
 @class RYUser;
 @class RYNewsfeedPost;
 
@@ -75,6 +81,7 @@
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
 
 // Edit User
+- (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;
 - (void) editUser:(RYUser*)user;
 - (void) deletePost:(RYNewsfeedPost*)post;
 

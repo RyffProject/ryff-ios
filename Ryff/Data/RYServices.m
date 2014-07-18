@@ -11,6 +11,7 @@
 // Data Objects
 #import "RYUser.h"
 #import "RYNewsfeedPost.h"
+#import "RYRiff.h"
 
 // Data Systems
 #import "SSKeychain.h"
@@ -112,11 +113,50 @@ static RYUser* _loggedInUser;
     });
 }
 
-#pragma mark - 
+#pragma mark -
 #pragma mark - Edit User
 
+- (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate
+{
+    if (![RYServices loggedInUser])
+        return;
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    if (userObject.username && password)
+    {
+        dispatch_async(dispatch_get_global_queue(2, 0), ^{
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpdateUserAction];
+            NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
+            
+            [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                
+                if (avatar)
+                {
+                    NSData *imageData = UIImagePNGRepresentation(avatar);
+                    [formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar" mimeType:@"image/png"];
+                }
+                
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *dictionary = responseObject;
+                
+                if (dictionary[@"success"])
+                    [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+                else
+                    [delegate updateFailed:responseObject];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [delegate updateFailed:[error localizedDescription]];
+            }];
+        });
+    }
+}
+
 // not set up yet
-- (void) editUser:(RYUser*)user
+- (void) editUserInfo:(RYUser*)user
 {
     if (![RYServices loggedInUser])
         return;
@@ -154,7 +194,10 @@ static RYUser* _loggedInUser;
     RYUser *userObject = [RYUser userFromDict:userDict];
     NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
     
+    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Post delete failed" message:[NSString stringWithFormat:@"Something went wrong and post was not deleted: %@",post.riff.title] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    
     if (userObject.username && password)
+    {
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
@@ -165,15 +208,14 @@ static RYUser* _loggedInUser;
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 
-                if (dictionary[@"success"])
-                    NSLog(@"delete post succeeded");
-                else
-                    NSLog(@"delete post failed but POST succeeded");
+                if (!dictionary[@"success"])
+                    [failureAlert show];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"delete post failed");
+                [failureAlert show];
             }];
         });
+    }
 }
 
 #pragma mark -
