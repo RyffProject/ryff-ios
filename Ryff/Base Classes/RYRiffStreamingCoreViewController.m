@@ -300,7 +300,7 @@
     {
         // title cell
         RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
-        [riffTitleCell configureForRiff:post.riff];
+        [riffTitleCell configureForPost:post];
     }
     else if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
     {
@@ -319,9 +319,10 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 44.0f;
-    
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
+    
+    CGFloat height = (indexPath.row == 0 && post.riff) ? 50.0f : 44.0f;
+    
     NSInteger bodyRow = (post.riff) ? 1 : 0;
     if (indexPath.section == _openRiffDetailsSection)
         bodyRow++;

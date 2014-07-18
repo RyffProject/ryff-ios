@@ -22,6 +22,9 @@
 #import "UIViewController+Extras.h"
 #import "UIImage+Color.h"
 
+// Frameworks
+#import "UIImageView+SGImageCache.h"
+
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 
@@ -92,7 +95,10 @@
         _loggedInProfile = YES;
     
     // Profile picture
-    [_profileImageView setImage:user.profileImage];
+    if (user.avatarURL)
+        [_profileImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    else
+        [_profileImageView setImage:[UIImage imageNamed:@"user"]];
     
     // Edit button
     if (![user.username isEqualToString:[RYServices loggedInUser].username])

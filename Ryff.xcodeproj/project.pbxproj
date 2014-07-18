@@ -63,6 +63,7 @@
 		838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AB197994B700DDD26C /* MGWeakHandler.m */; };
 		838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AD197994B700DDD26C /* NSObject+MGEvents.m */; };
 		838808B5197994B700DDD26C /* UIControl+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AF197994B700DDD26C /* UIControl+MGEvents.m */; };
+		838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808B719799B0300DDD26C /* RYArtistViewController.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
 		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
@@ -132,7 +133,6 @@
 		83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18A18F9134B00A493F0 /* RYBandViewController.m */; };
 		83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */; };
 		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
-		83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19518F9170700A493F0 /* RYArtistViewController.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
 		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
 		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
@@ -264,6 +264,8 @@
 		838808AD197994B700DDD26C /* NSObject+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MGEvents.m"; sourceTree = "<group>"; };
 		838808AE197994B700DDD26C /* UIControl+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+MGEvents.h"; sourceTree = "<group>"; };
 		838808AF197994B700DDD26C /* UIControl+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+MGEvents.m"; sourceTree = "<group>"; };
+		838808B619799B0300DDD26C /* RYArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYArtistViewController.h; path = Ryff/Suggester/RYArtistViewController.h; sourceTree = SOURCE_ROOT; };
+		838808B719799B0300DDD26C /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = Ryff/Suggester/RYArtistViewController.m; sourceTree = SOURCE_ROOT; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
 		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
@@ -352,8 +354,6 @@
 		83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedTableViewController.m; sourceTree = "<group>"; };
 		83FCD19118F9166000A493F0 /* RYArtistSuggestPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYArtistSuggestPageViewController.h; sourceTree = "<group>"; };
 		83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYArtistSuggestPageViewController.m; sourceTree = "<group>"; };
-		83FCD19418F9170700A493F0 /* RYArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYArtistViewController.h; path = ../RYArtistViewController.h; sourceTree = "<group>"; };
-		83FCD19518F9170700A493F0 /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = ../RYArtistViewController.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
@@ -805,8 +805,8 @@
 		83FCD19718F9178B00A493F0 /* Artist */ = {
 			isa = PBXGroup;
 			children = (
-				83FCD19418F9170700A493F0 /* RYArtistViewController.h */,
-				83FCD19518F9170700A493F0 /* RYArtistViewController.m */,
+				838808B619799B0300DDD26C /* RYArtistViewController.h */,
+				838808B719799B0300DDD26C /* RYArtistViewController.m */,
 			);
 			path = Artist;
 			sourceTree = "<group>";
@@ -1174,7 +1174,6 @@
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				83FCD1F118F9741400A493F0 /* AFURLResponseSerialization.m in Sources */,
 				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
-				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
 				8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */,
 				838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
@@ -1185,6 +1184,7 @@
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
 				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
+				838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,

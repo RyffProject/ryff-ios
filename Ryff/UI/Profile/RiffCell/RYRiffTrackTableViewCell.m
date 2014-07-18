@@ -10,13 +10,27 @@
 
 // Data Objects
 #import "RYRiff.h"
+#import "RYUser.h"
+#import "RYNewsfeedPost.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
 #import "RMDownloadIndicator.h"
 #import "UIImage+Color.h"
 
+// Frameworks
+#import "UIImageView+SGImageCache.h"
+
 @interface RYRiffTrackTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *wrapperView;
+@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
+@property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
+@property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+@property (nonatomic, strong) RMDownloadIndicator *downloadIndicator;
 
 @property (nonatomic, assign) enum LoadingStatus currentStatus;
 
@@ -30,13 +44,19 @@
     [_riffLengthText setFont:[RYStyleSheet lightFont]];
     [_backgroundImageView setImage:[self riffCellTopBackgroundImage]];
     [_backgroundImageView setFrame:_wrapperView.bounds];
+    [_avatarImageView.layer setCornerRadius:_avatarImageView.frame.size.height/2];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
-- (void) configureForRiff:(RYRiff *)riff
+- (void) configureForPost:(RYNewsfeedPost *)post
 {
-    [_riffTitleText setText:riff.title];
-    _riffDuration = riff.duration;
+    [_riffTitleText setText:post.riff.title];
+    _riffDuration = post.riff.duration;
+    
+    if (post.user.avatarURL)
+        [_avatarImageView setImageForURL:post.user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    else
+        [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
     
     [self setBackgroundColor:[UIColor clearColor]];
     

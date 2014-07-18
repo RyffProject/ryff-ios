@@ -12,6 +12,7 @@
 
 @class RYRiff;
 @class RMDownloadIndicator;
+@class RYNewsfeedPost;
 
 enum LoadingStatus : NSUInteger {
     STOP = 1,
@@ -22,18 +23,10 @@ enum LoadingStatus : NSUInteger {
 
 @interface RYRiffTrackTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *wrapperView;
-@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
-@property (weak, nonatomic) IBOutlet UILabel *riffTitleText;
-@property (weak, nonatomic) IBOutlet UILabel *riffLengthText;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
-
-@property (nonatomic, strong) RMDownloadIndicator *downloadIndicator;
-
 // Duration objects
 @property (nonatomic, assign) NSInteger riffDuration;
 
-- (void) configureForRiff:(RYRiff *)riff;
+- (void) configureForPost:(RYNewsfeedPost *)post;
 - (void) startDownloading;
 - (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;
 - (void) finishDownloading:(BOOL)success;

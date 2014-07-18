@@ -13,14 +13,14 @@
 
 @implementation RYUser
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username firstName:(NSString *)firstName profileImage:(UIImage *)profileImage bio:(NSString*)bio dateCreated:(NSDate *)dateCreated
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username firstName:(NSString *)firstName avatarURL:(NSString*)avatarURL bio:(NSString*)bio dateCreated:(NSDate *)dateCreated
 {
     if (self = [super init])
     {
         _userId         = userId;
         _username       = username;
         _firstName      = firstName;
-        _profileImage   = profileImage;
+        _avatarURL      = avatarURL;
         _bio            = bio;
     }
     return self;
@@ -29,7 +29,7 @@
 // Test User
 +(RYUser*)patrick
 {
-    return [[RYUser alloc] initWithUser:12 username:@"patrickCarney" firstName:@"Patrick" profileImage:[UIImage imageNamed:@"patrickCarney"] bio:@"I'm an American musician best known as the drummer for The Black Keys, a blues rock band from Akron, Ohio. I also have a side-project rock band called Drummer." dateCreated:[NSDate date]];
+    return [[RYUser alloc] initWithUser:12 username:@"patrickCarney" firstName:@"Patrick" avatarURL:@"http://en.wikipedia.org/wiki/File:The_Black_Keys_at_MOG,_SXSW_2010.jpg" bio:@"I'm an American musician best known as the drummer for The Black Keys, a blues rock band from Akron, Ohio. I also have a side-project rock band called Drummer." dateCreated:[NSDate date]];
 }
 + (RYUser *)userFromDict:(NSDictionary*)userDict
 {
@@ -55,13 +55,7 @@
         date = [dateFormatter dateFromString:date_created];
     }
     
-    UIImage *avatar = nil;
-    if (avatarUrl)
-    {
-        avatar = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:avatarUrl]]];
-    }
-    
-    RYUser *newUser = [[RYUser alloc] initWithUser:[user_id integerValue] username:username firstName:name profileImage:avatar bio:bio dateCreated:date];
+    RYUser *newUser = [[RYUser alloc] initWithUser:[user_id integerValue] username:username firstName:name avatarURL:avatarUrl bio:bio dateCreated:date];
     return newUser;
 }
 

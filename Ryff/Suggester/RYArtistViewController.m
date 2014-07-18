@@ -20,6 +20,9 @@
 #import "BlockAlertView.h"
 #import "UIImage+Color.h"
 
+// Frameworks
+#import "UIImageView+SGImageCache.h"
+
 @interface RYArtistViewController () <FriendsDelegate, POSTDelegate>
 
 @end
@@ -77,7 +80,10 @@
 
 - (void) configureForArtist
 {
-    [_profileImage setImage:_artist.profileImage];
+    if (_artist.avatarURL)
+        [_profileImage setImageForURL:_artist.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    else
+        [_profileImage setImage:[UIImage imageNamed:@"user"]];
     [_nameText setText:_artist.firstName];
     [_bioText setText:_artist.bio];
 }
