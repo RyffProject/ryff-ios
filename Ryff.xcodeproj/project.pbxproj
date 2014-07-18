@@ -55,6 +55,14 @@
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AA195FB3C3005938F5 /* UIView+Styling.m */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
+		838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089D1979940400DDD26C /* SGActivityIndicator.m */; };
+		838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089F1979940400DDD26C /* SGHTTPRequest.m */; };
+		838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808A4197994B700DDD26C /* MGBlockWrapper.m */; };
+		838808B1197994B700DDD26C /* MGDeallocAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808A6197994B700DDD26C /* MGDeallocAction.m */; };
+		838808B2197994B700DDD26C /* MGObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808A9197994B700DDD26C /* MGObserver.m */; };
+		838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AB197994B700DDD26C /* MGWeakHandler.m */; };
+		838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AD197994B700DDD26C /* NSObject+MGEvents.m */; };
+		838808B5197994B700DDD26C /* UIControl+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AF197994B700DDD26C /* UIControl+MGEvents.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		83BC52C7193159260085FADF /* cellBody.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C5193159260085FADF /* cellBody.png */; };
 		83BC52C8193159260085FADF /* cellBody@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83BC52C6193159260085FADF /* cellBody@2x.png */; };
@@ -239,6 +247,23 @@
 		836461AA195FB3C3005938F5 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
 		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
+		8388089C1979940400DDD26C /* SGActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActivityIndicator.h; sourceTree = "<group>"; };
+		8388089D1979940400DDD26C /* SGActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGActivityIndicator.m; sourceTree = "<group>"; };
+		8388089E1979940400DDD26C /* SGHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHTTPRequest.h; sourceTree = "<group>"; };
+		8388089F1979940400DDD26C /* SGHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHTTPRequest.m; sourceTree = "<group>"; };
+		838808A3197994B700DDD26C /* MGBlockWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBlockWrapper.h; sourceTree = "<group>"; };
+		838808A4197994B700DDD26C /* MGBlockWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBlockWrapper.m; sourceTree = "<group>"; };
+		838808A5197994B700DDD26C /* MGDeallocAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDeallocAction.h; sourceTree = "<group>"; };
+		838808A6197994B700DDD26C /* MGDeallocAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDeallocAction.m; sourceTree = "<group>"; };
+		838808A7197994B700DDD26C /* MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEvents.h; sourceTree = "<group>"; };
+		838808A8197994B700DDD26C /* MGObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGObserver.h; sourceTree = "<group>"; };
+		838808A9197994B700DDD26C /* MGObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGObserver.m; sourceTree = "<group>"; };
+		838808AA197994B700DDD26C /* MGWeakHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGWeakHandler.h; sourceTree = "<group>"; };
+		838808AB197994B700DDD26C /* MGWeakHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGWeakHandler.m; sourceTree = "<group>"; };
+		838808AC197994B700DDD26C /* NSObject+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MGEvents.h"; sourceTree = "<group>"; };
+		838808AD197994B700DDD26C /* NSObject+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MGEvents.m"; sourceTree = "<group>"; };
+		838808AE197994B700DDD26C /* UIControl+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+MGEvents.h"; sourceTree = "<group>"; };
+		838808AF197994B700DDD26C /* UIControl+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+MGEvents.m"; sourceTree = "<group>"; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		83BC52C5193159260085FADF /* cellBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellBody.png; sourceTree = "<group>"; };
 		83BC52C6193159260085FADF /* cellBody@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellBody@2x.png"; sourceTree = "<group>"; };
@@ -467,6 +492,7 @@
 		833E1D511975DFA90002A2BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				838808A2197994B700DDD26C /* MGEvents */,
 				833E1D521975DFF10002A2BE /* SGImageCache */,
 				83FCD1D618F9741400A493F0 /* AFNetworking */,
 			);
@@ -476,6 +502,10 @@
 		833E1D521975DFF10002A2BE /* SGImageCache */ = {
 			isa = PBXGroup;
 			children = (
+				8388089C1979940400DDD26C /* SGActivityIndicator.h */,
+				8388089D1979940400DDD26C /* SGActivityIndicator.m */,
+				8388089E1979940400DDD26C /* SGHTTPRequest.h */,
+				8388089F1979940400DDD26C /* SGHTTPRequest.m */,
 				833E1D531975DFF10002A2BE /* SGImageCache.h */,
 				833E1D541975DFF10002A2BE /* SGImageCache.m */,
 				833E1D551975DFF10002A2BE /* SGImageCacheTask.h */,
@@ -507,6 +537,26 @@
 			);
 			name = RMDownload;
 			path = ../UI/Custom/RMDownload;
+			sourceTree = "<group>";
+		};
+		838808A2197994B700DDD26C /* MGEvents */ = {
+			isa = PBXGroup;
+			children = (
+				838808A3197994B700DDD26C /* MGBlockWrapper.h */,
+				838808A4197994B700DDD26C /* MGBlockWrapper.m */,
+				838808A5197994B700DDD26C /* MGDeallocAction.h */,
+				838808A6197994B700DDD26C /* MGDeallocAction.m */,
+				838808A7197994B700DDD26C /* MGEvents.h */,
+				838808A8197994B700DDD26C /* MGObserver.h */,
+				838808A9197994B700DDD26C /* MGObserver.m */,
+				838808AA197994B700DDD26C /* MGWeakHandler.h */,
+				838808AB197994B700DDD26C /* MGWeakHandler.m */,
+				838808AC197994B700DDD26C /* NSObject+MGEvents.h */,
+				838808AD197994B700DDD26C /* NSObject+MGEvents.m */,
+				838808AE197994B700DDD26C /* UIControl+MGEvents.h */,
+				838808AF197994B700DDD26C /* UIControl+MGEvents.m */,
+			);
+			path = MGEvents;
 			sourceTree = "<group>";
 		};
 		83C6CA7618FAECD200412469 /* RiffEdit */ = {
@@ -1083,6 +1133,7 @@
 				83FCD18718F9119B00A493F0 /* RYBandsCollectionViewCell.m in Sources */,
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				83FCD1EE18F9741400A493F0 /* AFSecurityPolicy.m in Sources */,
+				838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				83FCD1EB18F9741400A493F0 /* AFHTTPRequestOperationManager.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
@@ -1106,6 +1157,8 @@
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
 				830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */,
 				830BBCD518FA14F500A9C53F /* UIImage+Thumbnail.m in Sources */,
+				838808B2197994B700DDD26C /* MGObserver.m in Sources */,
+				838808B5197994B700DDD26C /* UIControl+MGEvents.m in Sources */,
 				83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */,
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,
@@ -1113,6 +1166,7 @@
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83FCD1F018F9741400A493F0 /* AFURLRequestSerialization.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
+				838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */,
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83FCD1F218F9741400A493F0 /* AFURLSessionManager.m in Sources */,
 				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
@@ -1122,13 +1176,17 @@
 				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
 				83FCD19618F9170700A493F0 /* RYArtistViewController.m in Sources */,
 				8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */,
+				838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
 				83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */,
+				838808B1197994B700DDD26C /* MGDeallocAction.m in Sources */,
 				831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */,
+				838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */,
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
 				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
+				838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,
 				836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */,
 				83FCD1ED18F9741400A493F0 /* AFNetworkReachabilityManager.m in Sources */,

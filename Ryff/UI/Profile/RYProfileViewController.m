@@ -25,8 +25,7 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 
-@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate>
-
+@interface RYProfileViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, UITextFieldDelegate, POSTDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -37,6 +36,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+// Data
+@property (nonatomic, assign) BOOL loggedInProfile;
 
 @end
 
@@ -53,12 +55,23 @@
     [_tableView reloadData];
     
     [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
-    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
-    [_editImageLabel setTextColor:[UIColor whiteColor]];
-    [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
-    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
-    [_imageWrapperView.layer setCornerRadius:100.0f];
-    [_imageWrapperView setClipsToBounds:YES];
+    
+    if (_loggedInProfile)
+    {
+        [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
+        [_editImageLabel setTextColor:[UIColor whiteColor]];
+        [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
+        [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
+        [_imageWrapperView.layer setCornerRadius:100.0f];
+        [_imageWrapperView setClipsToBounds:YES];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
+        [_imageWrapperView addGestureRecognizer:tapGesture];
+    }
+    else
+    {
+        [_editImageLabel setHidden:YES];
+    }
     
     [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
     [_addButton setTintColor:[RYStyleSheet actionColor]];
@@ -74,6 +87,10 @@
 
 - (void) configureForUser:(RYUser *)user
 {
+    // configure for editing if looking at the logged in user's profile
+    if (user.userId == [RYServices loggedInUser].userId)
+        _loggedInProfile = YES;
+    
     // Profile picture
     [_profileImageView setImage:user.profileImage];
     
@@ -92,7 +109,7 @@
 }
 
 #pragma mark -
-#pragma mark - Button Actions
+#pragma mark - Actions
 
 - (IBAction)editHit:(id)sender
 {
@@ -111,6 +128,13 @@
 }
 
 - (IBAction)aboutHit:(id)sender
+{
+    
+}
+
+#pragma mark - Edit Profile
+
+- (void) editImageTapped:(UITapGestureRecognizer*)sender
 {
     
 }

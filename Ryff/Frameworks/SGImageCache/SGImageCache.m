@@ -4,7 +4,7 @@
 
 #import "SGImageCache.h"
 #import "SGImageCacheTask.h"
-#import <MGEvents/MGEvents.h>
+#import "MGEvents.h"
 
 #define FOLDER_NAME @"generic_images_cache"
 #define MAX_RETRIES 5
