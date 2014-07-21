@@ -24,16 +24,6 @@
     UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
     [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
     [self.window makeKeyAndVisible];
-    
-    NSDictionary *loggedInUser = [[NSUserDefaults standardUserDefaults] valueForKey:kLoggedInUserKey];
-    
-    if (!loggedInUser || ![SSKeychain passwordForService:@"ryff" account:[loggedInUser objectForKey:@"username"]])
-    {
-        // present registration page
-        UIViewController *navCon  = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-        [self.window makeKeyAndVisible];
-        [self.window.rootViewController presentViewController:navCon animated:NO completion:NULL];
-    }
     return YES;
 }
 							

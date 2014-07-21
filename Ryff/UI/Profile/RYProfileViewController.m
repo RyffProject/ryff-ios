@@ -139,6 +139,13 @@
 
 #pragma mark - Edit Profile
 
+// Present log in if user requests action that requires an account
+- (void) presentLogIn
+{
+    UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
+    [self presentViewController:navCon animated:YES completion:nil];
+}
+
 - (void) editImageTapped:(UITapGestureRecognizer*)sender
 {
     [self presentProfilePictureOptions];

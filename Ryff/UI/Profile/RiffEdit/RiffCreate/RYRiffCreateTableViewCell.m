@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 // Data
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, weak) AVAudioPlayer *audioPlayer;
 @property (nonatomic, weak) id<RiffCreateCellDelegate> riffCreateDelegate;
 
 @end
