@@ -30,6 +30,7 @@
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
+#import "RYLoginViewController.h"
 
 @interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -118,12 +119,13 @@
 
 - (IBAction)settingsHit:(id)sender
 {
-    
+    RYLoginViewController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
+    [self presentViewController:loginVC animated:YES completion:nil];
 }
 
 - (IBAction)activityHit:(id)sender
 {
-    
+
 }
 
 - (IBAction)addHit:(id)sender

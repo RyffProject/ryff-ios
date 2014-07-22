@@ -26,10 +26,7 @@
     [self.window makeKeyAndVisible];
     
     if (![[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:kApiRoot]].count)
-    {
-        NSString *success = [[RYServices sharedInstance] attemptBackgroundLogIn] ? @"YES" : @"NO";
-        NSLog(@"attempted new cookie: %@",success);
-    }
+        [[RYServices sharedInstance] attemptBackgroundLogIn];
     
     return YES;
 }
