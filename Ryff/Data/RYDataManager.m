@@ -60,7 +60,7 @@ static RYDataManager *_sharedInstance;
     NSURL* localURL = [RYDataManager urlForNextTrack];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:[localURL path] append:NO];
     
-    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         if (delegate && [delegate respondsToSelector:@selector(track:DownloadProgressed:)])
         {
             CGFloat downloadProgress = totalBytesRead / (CGFloat)totalBytesExpectedToRead;

@@ -21,7 +21,7 @@
 #define kAddFriendAction    @"add-friend.php"
 #define kDeleteFriendAction @"delete-friend.php"
 #define kPostRiffAction     @"add-post.php"
-#define kUpvotePostAction   @"add-upvote.inc.php"
+#define kUpvotePostAction   @"add-upvote.php"
 #define kDeletePostAction   @"delete-post.php"
 #define kGetPosts           @"get-posts.php"
 #define kGetPeople          @"get-user.php"

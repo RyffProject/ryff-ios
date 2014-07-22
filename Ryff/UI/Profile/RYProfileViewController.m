@@ -235,7 +235,7 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
-    CGFloat avatarSize = 200.f;
+    CGFloat avatarSize = 400.f;
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
     [_profileImageView setImage:avatarImage];
     

@@ -15,6 +15,7 @@
 
 // Data Systems
 #import "SSKeychain.h"
+#import "SGImageCache.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -140,8 +141,6 @@ static RYUser* _loggedInUser;
     if (![RYServices loggedInUser])
         return;
     
-    [self attemptBackgroundLogIn];
-    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpdateUserAction];
@@ -158,7 +157,10 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             
             if (dictionary[@"success"])
+            {
+                [SGImageCache flushImagesOlderThan:0.1];
                 [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+            }
             else
                 [delegate updateFailed:responseObject];
             

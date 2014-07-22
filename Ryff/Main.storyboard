@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GT5-hx-xKb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GT5-hx-xKb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller - Log In-->
+        <!--Log In-->
         <scene sceneID="EKD-5p-Cwf">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YdO-9g-msK" customClass="RYLoginViewController" sceneMemberID="viewController">
@@ -111,7 +111,7 @@
             </objects>
             <point key="canvasLocation" x="-1154" y="-84"/>
         </scene>
-        <!--Newsfeed Table View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="38f-DM-crI">
             <objects>
                 <viewController id="Yqq-Ja-uip" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
@@ -140,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="1151" y="-1479"/>
         </scene>
-        <!--Profile View Controller - First-->
+        <!--First-->
         <scene sceneID="dg9-Cd-bo7">
             <objects>
                 <viewController title="First" id="4Bh-7S-RXL" customClass="RYProfileViewController" sceneMemberID="viewController">
@@ -248,7 +248,7 @@
             </objects>
             <point key="canvasLocation" x="1151" y="-230"/>
         </scene>
-        <!--Riff Create View Controller - Create Riff-->
+        <!--Create Riff-->
         <scene sceneID="OeC-Me-qwo">
             <objects>
                 <viewController storyboardIdentifier="RiffCreateVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o3c-8f-o5U" customClass="RYRiffCreateViewController" sceneMemberID="viewController">
@@ -518,7 +518,7 @@
             </objects>
             <point key="canvasLocation" x="128" y="-70"/>
         </scene>
-        <!--Artist Suggest Page View Controller - Artists-->
+        <!--Artists-->
         <scene sceneID="56Q-O6-kPQ">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="B11-cl-E0p" customClass="RYArtistSuggestPageViewController" sceneMemberID="viewController">
@@ -603,7 +603,6 @@
             <objects>
                 <navigationController storyboardIdentifier="ArtistNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YUa-Zj-BKM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <size key="freeformSize" width="320" height="568"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="phK-Fe-ONj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -632,6 +631,9 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination">
+            <size key="portraitSize" width="768" height="1024"/>
+            <size key="landscapeSize" width="1024" height="768"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>
