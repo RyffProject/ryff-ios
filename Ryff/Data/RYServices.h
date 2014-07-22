@@ -28,9 +28,6 @@
 #define kGetNearby          @"get-users-nearby.php"
 #define kGetFriendsPosts    @"get-friend-posts.php"
 
-// Web service dictionary keys
-#define kUserObjectKey      @"user"
-
 @class RYNewsfeedPost;
 @class RYUser;
 

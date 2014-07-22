@@ -147,7 +147,7 @@
 - (void) postSucceeded:(id)response
 {
     NSDictionary *responseDict = response;
-    NSDictionary *userDict = [responseDict objectForKey:kUserObjectKey];
+    NSDictionary *userDict = [responseDict objectForKey:@"user"];
     if (userDict)
     {
         [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
