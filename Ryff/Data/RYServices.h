@@ -14,7 +14,7 @@
 #define kCoordLatitude      @"lastUpdatedLatitude"
 
 // Server paths
-#define host                @"http://ryff.me/api/"
+#define kApiRoot            @"http://ryff.me/api/"
 #define kLogIn              @"login.php"
 #define kRegistrationAction @"create-user.php"
 #define kUpdateUserAction   @"update-user.php"
@@ -79,10 +79,11 @@
 // Registration
 - (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate;
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
+- (BOOL) attemptBackgroundLogIn;
 
 // Edit User
 - (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;
-- (void) editUser:(RYUser*)user;
+- (void) editUserInfo:(RYUser*)user;
 - (void) deletePost:(RYNewsfeedPost*)post;
 
 // Artist Suggester

@@ -24,6 +24,13 @@
     UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
     [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
     [self.window makeKeyAndVisible];
+    
+    if (![[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:kApiRoot]].count)
+    {
+        NSString *success = [[RYServices sharedInstance] attemptBackgroundLogIn] ? @"YES" : @"NO";
+        NSLog(@"attempted new cookie: %@",success);
+    }
+    
     return YES;
 }
 							

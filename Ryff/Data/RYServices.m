@@ -74,7 +74,7 @@ static RYUser* _loggedInUser;
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
-        NSString *action = [NSString stringWithFormat:@"%@%@",host,kRegistrationAction];
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kRegistrationAction];
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             
@@ -95,7 +95,7 @@ static RYUser* _loggedInUser;
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
-        NSString *action = [NSString stringWithFormat:@"%@%@",host,kLogIn];
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kLogIn];
         
         NSDictionary *params = @{@"auth_username":username,@"auth_password":password};
         
@@ -111,6 +111,25 @@ static RYUser* _loggedInUser;
             [delegate postFailed:[error localizedDescription]];
         }];
     });
+}
+
+/*
+ Try logging in with saved information, if available
+ */
+- (BOOL) attemptBackgroundLogIn
+{
+    BOOL success = NO;
+    
+    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
+    RYUser *userObject = [RYUser userFromDict:userDict];
+    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    
+    if (userObject.username && password)
+    {
+        success = YES;
+        [self logInUserWithUsername:userObject.username Password:password forDelegate:nil];
+    }
+    return success;
 }
 
 #pragma mark -
@@ -129,7 +148,7 @@ static RYUser* _loggedInUser;
     {
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpdateUserAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpdateUserAction];
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
             
             [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -167,7 +186,7 @@ static RYUser* _loggedInUser;
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpdateUserAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpdateUserAction];
             
             NSDictionary *params = @{@"auth_username":user.username,@"auth_password":password};
             
@@ -201,7 +220,7 @@ static RYUser* _loggedInUser;
         dispatch_async(dispatch_get_global_queue(2, 0), ^{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kDeletePostAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kDeletePostAction];
             
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id" : @(post.postId)};
             
@@ -251,7 +270,7 @@ static RYUser* _loggedInUser;
             
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId)};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetNearby];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetNearby];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"])
@@ -282,7 +301,7 @@ static RYUser* _loggedInUser;
             
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userId)};
 
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kAddFriendAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kAddFriendAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"])
@@ -313,7 +332,7 @@ static RYUser* _loggedInUser;
     
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId)};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kDeleteFriendAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kDeleteFriendAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"])
@@ -362,7 +381,7 @@ static RYUser* _loggedInUser;
                     
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password,@"id":@(userObject.userId), @"content":content, @"title":title,@"duration":duration};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kPostRiffAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kPostRiffAction];
             [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 
                 if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYServices urlForRiff] path]])
@@ -401,7 +420,7 @@ static RYUser* _loggedInUser;
     
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetPosts];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetPosts];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"])
@@ -432,7 +451,7 @@ static RYUser* _loggedInUser;
             
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":@(userId)};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetPosts];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetPosts];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (delegate)
@@ -467,7 +486,7 @@ static RYUser* _loggedInUser;
     
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kGetFriendsPosts];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetFriendsPosts];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"])
@@ -498,7 +517,7 @@ static RYUser* _loggedInUser;
             
             NSDictionary *params = @{@"auth_username":userObject.username,@"auth_password":password, @"id":@(postID)};
             
-            NSString *action = [NSString stringWithFormat:@"%@%@",host,kUpvotePostAction];
+            NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpvotePostAction];
             [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSDictionary *dictionary = responseObject;
                 if (dictionary[@"success"] && delegate)
