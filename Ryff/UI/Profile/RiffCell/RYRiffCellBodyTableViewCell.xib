@@ -14,15 +14,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="JTD-Kp-Mva">
-                        <rect key="frame" x="60" y="0.0" width="250" height="44.5"/>
+                        <rect key="frame" x="60" y="0.0" width="250" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qIg-09-efH">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="44.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Riff Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h3A-UX-cbm">
-                                <rect key="frame" x="10" y="0.0" width="230" height="44.5"/>
+                                <rect key="frame" x="10" y="0.0" width="230" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>

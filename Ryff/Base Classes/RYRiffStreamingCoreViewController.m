@@ -316,19 +316,19 @@
     if (post.riff && indexPath.row == 0)
     {
         // Title & riff
-        cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID];
     }
     else
     {
         if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
         {
             // riff details
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID forIndexPath:indexPath];
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
         }
         else
         {
             // User post: cell body
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID];
         }
     }
     return cell;

@@ -75,6 +75,8 @@
         [_editImageLabel setHidden:YES];
         [_settingsButton setHidden:YES];
     }
+    
+    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 #pragma mark - Actions

@@ -34,6 +34,7 @@
 #import "RYLoginViewController.h"
 
 #define kProfileCellReuseID @"profileCell"
+#define kNumberCustomRows 1
 
 @interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
@@ -255,13 +256,13 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1 + [super numberOfSectionsInTableView:tableView];
+    return kNumberCustomRows + [super numberOfSectionsInTableView:tableView];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger numRows;
-    if (section == 0)
+    if (section < kNumberCustomRows)
         numRows = 1;
     else
         numRows = [super tableView:tableView numberOfRowsInSection:(section-1)];
@@ -271,7 +272,7 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.section == 0)
+    if (indexPath.section < kNumberCustomRows)
         cell = [_tableView dequeueReusableCellWithIdentifier:kProfileCellReuseID];
     else
         cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
@@ -281,7 +282,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height;
-    if (indexPath.section == 0)
+    if (indexPath.section < kNumberCustomRows)
         height = 260.0f;
     else
         height = [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
@@ -292,7 +293,7 @@
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section < kNumberCustomRows)
     {
         [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:tableView];
     }
@@ -304,7 +305,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section < kNumberCustomRows)
     {
         
     }
