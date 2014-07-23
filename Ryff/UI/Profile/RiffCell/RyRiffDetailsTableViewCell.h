@@ -11,15 +11,14 @@
 @class RYNewsfeedPost;
 
 @protocol RYRiffDetailsCellDelegate <NSObject>
-
 - (void) upvoteHit:(NSInteger)riffIndex;
 - (void) repostHit:(NSInteger)riffIndex;
 - (void) deleteHit:(NSInteger)riffIndex;
-
+- (void) longPress:(NSInteger)riffIndex;
 @end
 
 @interface RyRiffDetailsTableViewCell : UITableViewCell
 
-- (void) configureForPost:(RYNewsfeedPost*)post Index:(NSInteger)riffIndex WithDelegate:(id<RYRiffDetailsCellDelegate>)delegate;
+- (void) configureForPost:(RYNewsfeedPost*)post index:(NSInteger)riffIndex withDelegate:(id<RYRiffDetailsCellDelegate>)delegate;
 
 @end

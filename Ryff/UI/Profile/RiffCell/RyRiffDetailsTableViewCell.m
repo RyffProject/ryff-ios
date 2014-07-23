@@ -41,7 +41,7 @@
     [_deleteButton setTintColor:[RYStyleSheet actionColor]];
 }
 
-- (void) configureForPost:(RYNewsfeedPost*)post Index:(NSInteger)riffIndex WithDelegate:(id<RYRiffDetailsCellDelegate>)delegate
+- (void) configureForPost:(RYNewsfeedPost*)post index:(NSInteger)riffIndex withDelegate:(id<RYRiffDetailsCellDelegate>)delegate
 {
     [self setBackgroundColor:[UIColor clearColor]];
     _delegate  = delegate;

@@ -218,6 +218,48 @@
     [deleteAlert show];
 }
 
+- (void) longPress:(NSInteger)riffIndex
+{
+    // Should open that section with more options
+    [self openRiffDetailsForSection:riffIndex];
+}
+
+#pragma mark - RiffCell Actions
+
+/*
+ Open/close details for riff at given index. Will close the currently open one (_openRiffDetailsSection), and open the one at riffIndex if that wasn't just open
+ */
+- (void) openRiffDetailsForSection:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    
+    [self.riffTableView beginUpdates];
+    
+    NSInteger oldOpen = _openRiffDetailsSection;
+    
+    if (_openRiffDetailsSection >= 0)
+    {
+        RYNewsfeedPost *oldPost = [self.feedItems objectAtIndex:_openRiffDetailsSection];
+        NSInteger rowForBody = (oldPost.riff) ? 2 : 1;
+        
+        // should close the currently open riff
+        [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:UITableViewRowAnimationMiddle];
+        _openRiffDetailsSection = -1;
+    }
+    
+    if (oldOpen != riffIndex)
+    {
+        // riff selected wasn't already open, should open it
+        NSInteger rowForBody = (post.riff) ? 2 : 1;
+        
+        // insert new row
+        _openRiffDetailsSection = riffIndex;
+        [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:riffIndex]] withRowAnimation:UITableViewRowAnimationMiddle];
+    }
+    
+    [self.riffTableView endUpdates];
+}
+
 #pragma mark -
 #pragma mark - Upvotes
 
@@ -307,14 +349,14 @@
     {
         // riff details cell
         RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
-        [riffDetailsCell configureForPost:post Index:indexPath.section WithDelegate:self];
+        [riffDetailsCell configureForPost:post index:indexPath.section withDelegate:self];
     }
     else
     {
         // riff body cell
         NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
         RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
-        [riffBodyCell configureWithAttributedString:attributedText];
+        [riffBodyCell configureWithAttributedString:attributedText index:indexPath.section delegate:self];
     }
 }
 
@@ -389,32 +431,8 @@
     }
     else
     {
-        // Should open that section with more options
-        NSInteger oldOpenSection = _openRiffDetailsSection;
-        
-        [self.riffTableView beginUpdates];
-        
-        if (_openRiffDetailsSection >= 0)
-        {
-            RYNewsfeedPost *oldPost = [self.feedItems objectAtIndex:_openRiffDetailsSection];
-            NSInteger rowForBody = (oldPost.riff) ? 2 : 1;
-            
-            // should close the currently open riff
-            [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:UITableViewRowAnimationMiddle];
-            _openRiffDetailsSection = -1;
-        }
-        
-        if (oldOpenSection != indexPath.section)
-        {
-            // riff selected wasn't already open, should open it
-            NSInteger rowForBody = (post.riff) ? 2 : 1;
-            
-            // insert new row
-            _openRiffDetailsSection = indexPath.section;
-            [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationMiddle];
-        }
-        
-        [self.riffTableView endUpdates];
+        // open riff details VC
+        [self openRiffDetailsForSection:indexPath.section];
     }
 }
 

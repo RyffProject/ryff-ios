@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RyRiffDetailsTableViewCell.h"
 
 #define kRiffBodyCellPadding 20.0f
 
@@ -16,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *riffTextLabel;
 
-- (void) configureWithAttributedString:(NSAttributedString*)attributedString;
+- (void) configureWithAttributedString:(NSAttributedString*)attributedString index:(NSInteger)riffIndex delegate:(id<RYRiffDetailsCellDelegate>)delegate;
 
 @end

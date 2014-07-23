@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameText;
+@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
 @property (weak, nonatomic) IBOutlet UIButton *recentActivityButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
@@ -89,7 +90,10 @@
     _isLoggedInProfile = (_user && (_user.userId == [RYServices loggedInUser].userId));
     
     // Display name
-    [_nameText setText:_user.firstName];
+    [_nameText setText:_user.nickname];
+    
+    // Bio/Description
+    [_bioTextView setText:_user.bio];
     
     // prep activity
     [self setFeedItems:_user.activity];

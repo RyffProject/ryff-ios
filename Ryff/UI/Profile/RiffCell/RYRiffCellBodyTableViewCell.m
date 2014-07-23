@@ -11,6 +11,13 @@
 // Custom UI
 #import "RYStyleSheet.h"
 
+@interface RYRiffCellBodyTableViewCell () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) id<RYRiffDetailsCellDelegate> delegate;
+@property (nonatomic, assign) NSInteger riffIndex;
+
+@end
+
 @implementation RYRiffCellBodyTableViewCell
 
 - (void) awakeFromNib
@@ -19,12 +26,29 @@
     [_backgroundImageView setBounds:_wrapperView.bounds];
     [_riffTextLabel setFont:[RYStyleSheet regularFont]];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self addGestureRecognizer:longPress];
 }
 
-- (void) configureWithAttributedString:(NSAttributedString*)attributedString
+- (void) configureWithAttributedString:(NSAttributedString*)attributedString index:(NSInteger)riffIndex delegate:(id<RYRiffDetailsCellDelegate>)delegate
 {
     [_riffTextLabel setAttributedText:attributedString];
     [self setBackgroundColor:[UIColor clearColor]];
+    _riffIndex = riffIndex;
+    _delegate  = delegate;
+}
+
+#pragma mark - Actions
+
+- (void) longPress:(UILongPressGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        // only call on gesture start
+        if (_delegate && [_delegate respondsToSelector:@selector(longPress:)])
+            [_delegate longPress:_riffIndex];
+    }
 }
 
 #pragma mark -

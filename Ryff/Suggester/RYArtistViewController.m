@@ -84,7 +84,7 @@
         [_profileImage setImageForURL:_artist.avatarURL placeholder:[UIImage imageNamed:@"user"]];
     else
         [_profileImage setImage:[UIImage imageNamed:@"user"]];
-    [_nameText setText:_artist.firstName];
+    [_nameText setText:_artist.nickname];
     [_bioText setText:_artist.bio];
 }
 

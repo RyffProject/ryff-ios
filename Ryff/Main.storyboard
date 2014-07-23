@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GT5-hx-xKb">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
@@ -236,6 +235,7 @@
                     <connections>
                         <outlet property="aboutButton" destination="Lnp-z7-Aj9" id="j5i-9h-qGj"/>
                         <outlet property="addButton" destination="m1e-73-nUg" id="cYY-84-FMd"/>
+                        <outlet property="bioTextView" destination="68G-iW-dri" id="8Nt-lD-2Uy"/>
                         <outlet property="editImageLabel" destination="hh4-I0-36w" id="lre-Fu-4GR"/>
                         <outlet property="imageWrapperView" destination="MN6-e7-shy" id="vyM-ex-dIs"/>
                         <outlet property="nameText" destination="n7L-WU-Rbg" id="d1M-kJ-FIU"/>

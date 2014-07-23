@@ -11,18 +11,20 @@
 @interface RYUser : NSObject
 
 @property (nonatomic, assign) NSInteger userId;
-@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *nickname;
 @property (nonatomic, strong) NSString *avatarURL;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *bio;
 @property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, assign) NSInteger karma;
 
-@property (nonatomic, strong) NSSet *groups;
+@property (nonatomic, strong) NSSet *genres;
+@property (nonatomic, strong) NSSet *instruments;
 @property (nonatomic, strong) NSArray *activity; // NSArray of NewsfeedPost objects
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username firstName:(NSString *)firstName avatarURL:(NSString*)avatarURL bio:(NSString*)bio dateCreated:(NSDate *)dateCreated;
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated genres:(NSSet*)genres instruments:(NSSet*)instruments;
 
-+ (RYUser *)patrick;
 + (RYUser *)userFromDict:(NSDictionary*)userDict;
 
 @end

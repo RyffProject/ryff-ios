@@ -13,49 +13,41 @@
 
 @implementation RYUser
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username firstName:(NSString *)firstName avatarURL:(NSString*)avatarURL bio:(NSString*)bio dateCreated:(NSDate *)dateCreated
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated genres:(NSSet*)genres instruments:(NSSet*)instruments
 {
     if (self = [super init])
     {
         _userId         = userId;
         _username       = username;
-        _firstName      = firstName;
+        _nickname       = nickname;
         _avatarURL      = avatarURL;
+        _karma          = karma;
         _bio            = bio;
+        _genres         = genres;
+        _instruments    = instruments;
     }
     return self;
 }
 
-// Test User
-+(RYUser*)patrick
-{
-    return [[RYUser alloc] initWithUser:12 username:@"patrickCarney" firstName:@"Patrick" avatarURL:@"http://en.wikipedia.org/wiki/File:The_Black_Keys_at_MOG,_SXSW_2010.jpg" bio:@"I'm an American musician best known as the drummer for The Black Keys, a blues rock band from Akron, Ohio. I also have a side-project rock band called Drummer." dateCreated:[NSDate date]];
-}
 + (RYUser *)userFromDict:(NSDictionary*)userDict
 {
-    // id
-    NSNumber *user_id = [userDict valueForKey:@"id"];
-    //username
-    NSString *username = [userDict objectForKey:@"username"];
-    //name
-    NSString *name = [userDict objectForKey:@"name"];
-    // avatar
-    NSString *avatarUrl = [userDict objectForKey:@"avatar"];
-    // bio
-    NSString *bio = [userDict objectForKey:@"bio"];
+    NSNumber *userId        = [userDict objectForKey:@"id"];
+    NSString *username      = [userDict objectForKey:@"username"];
+    NSString *name          = [userDict objectForKey:@"name"];
+    NSString *avatarUrl     = [userDict objectForKey:@"avatar"];
+    NSNumber *karma         = [userDict objectForKey:@"karma"];
+    NSString *bio           = [userDict objectForKey:@"bio"];
+    NSString *dateCreated   = [userDict objectForKey:@"date_created"];
+    NSDate *date            = [NSDate date];
     
-    // timestamp
-    NSString *date_created = [userDict objectForKey:@"date_created"];
-    NSDate *date = [NSDate date];
-    
-    if (date_created)
+    if (dateCreated)
     {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
-        date = [dateFormatter dateFromString:date_created];
+        date = [dateFormatter dateFromString:dateCreated];
     }
     
-    RYUser *newUser = [[RYUser alloc] initWithUser:[user_id integerValue] username:username firstName:name avatarURL:avatarUrl bio:bio dateCreated:date];
+    RYUser *newUser = [[RYUser alloc] initWithUser:[userId intValue] username:username nickname:name avatarURL:avatarUrl karma:[karma intValue] bio:bio dateCreated:date genres:nil instruments:nil];
     return newUser;
 }
 
