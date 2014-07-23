@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
-        <!--Newsfeed Table View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="DOq-cI-7TO">
             <objects>
                 <viewController id="ee7-vj-bAK" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
             </objects>
             <point key="canvasLocation" x="1179" y="-797"/>
         </scene>
-        <!--Profile View Controller - First-->
+        <!--First-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
                 <viewController title="First" id="CZ4-MO-1fc" customClass="RYProfileViewController" sceneMemberID="viewController">
@@ -123,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="1626" y="-138"/>
         </scene>
-        <!--Riff Edit View Controller - New Riff-->
+        <!--New Riff-->
         <scene sceneID="0E8-MA-wsj">
             <objects>
                 <viewController id="Gxs-Yb-gjy" customClass="RYRiffEditViewController" sceneMemberID="viewController">
@@ -277,7 +277,7 @@
             </objects>
             <point key="canvasLocation" x="556" y="126"/>
         </scene>
-        <!--Artist Suggest Page View Controller - Artists-->
+        <!--Artists-->
         <scene sceneID="k0F-C4-ha5">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="4in-ld-7O3" customClass="RYArtistSuggestPageViewController" sceneMemberID="viewController">
@@ -423,7 +423,7 @@
             </objects>
             <point key="canvasLocation" x="2486" y="-138"/>
         </scene>
-        <!--Login View Controller - Log In-->
+        <!--Log In-->
         <scene sceneID="k4O-tZ-0Ux">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v0l-i6-yJW" customClass="RYLoginViewController" sceneMemberID="viewController">
@@ -534,12 +534,15 @@
     <resources>
         <image name="artists.png" width="30" height="30"/>
         <image name="newsfeed.png" width="30" height="30"/>
-        <image name="plus.png" width="30" height="30"/>
+        <image name="plus.png" width="45" height="45"/>
         <image name="user.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>

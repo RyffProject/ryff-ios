@@ -18,7 +18,6 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "RYRiffTrackTableViewCell.h"
-#import "RYProfileInfoTableViewCell.h"
 #import "BlockAlertView.h"
 
 // Categories
@@ -33,11 +32,15 @@
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
 
-#define kProfileCellReuseID @"profileCell"
-#define kNumberCustomRows 1
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
-
+@property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameText;
+@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // Data
@@ -52,6 +55,18 @@
 {
     self.riffTableView = _tableView;
     [super viewDidLoad];
+    
+    [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
+    [_bioTextView setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    
+    [_addButton setTintColor:[RYStyleSheet actionColor]];
+    
+    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
+    [_editImageLabel setTextColor:[UIColor whiteColor]];
+    [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
+    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
+    [_imageWrapperView setClipsToBounds:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,9 +87,43 @@
     [self setFeedItems:_user.activity];
     
     if (_user)
+    {
+        // configure for editing if looking at the logged in user's profile
+        if (_user.userId == [RYServices loggedInUser].userId)
+            _isLoggedInProfile = YES;
+        
+        // Profile picture
+        if (_user.avatarURL)
+            [_profileImageView setImageForURL:_user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+        else
+            [_profileImageView setImage:[UIImage imageNamed:@"user"]];
+        
+        [_nameText setText:(_user.nickname && _user.nickname.length > 0 ? _user.nickname : _user.username)];
+        [_bioTextView setText:_user.bio];
+        
+        // prep activity
+        [self setFeedItems:_user.activity];
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId Delegate:self];
+        
+        if (_isLoggedInProfile)
+        {
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
+            [_imageWrapperView addGestureRecognizer:tapGesture];
+        }
+        else
+        {
+            // not logged in user, remove settings button
+            [_editImageLabel setHidden:YES];
+            [_settingsButton removeFromSuperview];
+        }
+    }
     else
+    {
+        // guest
+        [_editImageLabel setHidden:YES];
+        [_profileImageView setImage:[UIImage imageNamed:@"user"]];
         self.feedItems = nil;
+    }
     
     [self.tableView reloadData];
 }
@@ -82,7 +131,7 @@
 #pragma mark -
 #pragma mark - Actions
 
-- (void) settingsAction:(CGRect)presentingFrame
+- (IBAction)settingsHit:(id)sender
 {
     if (!_user)
     {
@@ -94,27 +143,19 @@
         // user
         UIActionSheet *settingsSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Sign Out", @"Change Avatar", @"Edit Profile",  nil];
         if (isIpad)
-        {
-            CGRect convertedFrame = [_tableView convertRect:presentingFrame toView:self.view];
-            [settingsSheet showFromRect:convertedFrame inView:self.view animated:YES];
-        }
+            [settingsSheet showFromRect:_settingsButton.frame inView:self.view animated:YES];
         else
             [settingsSheet showInView:self.view];
     }
+
 }
 
-- (void) addNewRiff
+- (IBAction)addHit:(id)sender
 {
     RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
-
-- (void) editImageAction
-{
-    if (_isLoggedInProfile)
-        [self presentProfilePictureOptions];
-}
-
+    
 #pragma mark - Edit Profile
 
 // Present log in if user requests action that requires an account
@@ -122,6 +163,11 @@
 {
     UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
     [self presentViewController:navCon animated:YES completion:nil];
+}
+
+- (void) editImageTapped:(UITapGestureRecognizer*)sender
+{
+    [self presentProfilePictureOptions];
 }
 
 #pragma mark - Settings
@@ -228,6 +274,7 @@
     
     CGFloat avatarSize = 400.f;
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
+    [_profileImageView setImage:avatarImage];
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
 }
@@ -238,81 +285,12 @@
 - (void) updateSucceeded:(RYUser *)newUser
 {
     [self configureForUser:newUser];
-    [_tableView reloadData];
-    
-    [[RYServices sharedInstance] getMyPostsForDelegate:self];
 }
 
 - (void) updateFailed:(NSString *)reason
 {
     UIAlertView *updateFailedAlert = [[UIAlertView alloc] initWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     [updateFailedAlert show];
-}
-
-#pragma mark -
-#pragma mark - RYRiffStreamingCoreViewController Override
-
-#pragma mark - TableView datasource
-
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return kNumberCustomRows + [super numberOfSectionsInTableView:tableView];
-}
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger numRows;
-    if (section < kNumberCustomRows)
-        numRows = 1;
-    else
-        numRows = [super tableView:tableView numberOfRowsInSection:(section-1)];
-    return numRows;
-}
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell;
-    if (indexPath.section < kNumberCustomRows)
-        cell = [_tableView dequeueReusableCellWithIdentifier:kProfileCellReuseID];
-    else
-        cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
-    return cell;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat height;
-    if (indexPath.section < kNumberCustomRows)
-        height = 260.0f;
-    else
-        height = [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
-    return height;
-}
-
-#pragma mark - TableView delegate
-
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section < kNumberCustomRows)
-    {
-        [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:tableView];
-    }
-    else
-    {
-        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
-    }
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section < kNumberCustomRows)
-    {
-        
-    }
-    else
-    {
-        [super tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:(indexPath.section-1)]];
-    }
 }
 
 @end

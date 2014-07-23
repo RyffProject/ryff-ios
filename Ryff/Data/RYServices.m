@@ -378,27 +378,6 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate
-{
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetPosts];
-        [manager POST:action parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *dictionary = responseObject;
-            if (dictionary[@"success"])
-                [delegate postSucceeded:responseObject];
-            else
-                [delegate postFailed:nil];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Post error: %@",[error localizedDescription]);
-            [delegate postFailed:[error localizedDescription]];
-        }];
-    });
-}
-
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
