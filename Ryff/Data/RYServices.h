@@ -78,6 +78,7 @@
 - (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate;
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
 - (BOOL) attemptBackgroundLogIn;
+- (void) logOut;
 
 // Edit User
 - (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;

@@ -32,7 +32,7 @@
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -57,35 +57,18 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    _user = [RYServices loggedInUser];
-    
-    [self configureForUser:_user];
-    [_tableView reloadData];
-    
     [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
-    
-    if (_isLoggedInProfile)
-    {
-        [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
-        [_editImageLabel setTextColor:[UIColor whiteColor]];
-        [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
-        [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
-        [_imageWrapperView.layer setCornerRadius:100.0f];
-        [_imageWrapperView setClipsToBounds:YES];
-        
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
-        [_imageWrapperView addGestureRecognizer:tapGesture];
-    }
-    else
-    {
-        // not logged in user, remove settings button
-        [_settingsButton removeFromSuperview];
-        [_editImageLabel setHidden:YES];
-    }
     
     [_recentActivityButton setTintColor:[RYStyleSheet actionColor]];
     [_addButton setTintColor:[RYStyleSheet actionColor]];
     [_aboutButton setTintColor:[RYStyleSheet actionColor]];
+    
+    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
+    [_editImageLabel setTextColor:[UIColor whiteColor]];
+    [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
+    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
+    [_imageWrapperView setClipsToBounds:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -93,25 +76,51 @@
     [super viewWillAppear:animated];
     
     [[RYServices sharedInstance] getMyPostsForDelegate:self];
+    
+    [self configureForUser:_user];
+    [self.tableView reloadData];
 }
 
 - (void) configureForUser:(RYUser *)user
 {
-    // configure for editing if looking at the logged in user's profile
-    if (user.userId == [RYServices loggedInUser].userId)
-        _isLoggedInProfile = YES;
-    
-    // Profile picture
-    if (user.avatarURL)
-        [_profileImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    _user = user ? user : [RYServices loggedInUser];
+    if (_user)
+    {
+        // configure for editing if looking at the logged in user's profile
+        if (_user.userId == [RYServices loggedInUser].userId)
+            _isLoggedInProfile = YES;
+        
+        // Profile picture
+        if (_user.avatarURL)
+            [_profileImageView setImageForURL:_user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+        else
+            [_profileImageView setImage:[UIImage imageNamed:@"user"]];
+        
+        // Display name
+        [_nameText setText:_user.firstName];
+        
+        // prep activity
+        [self setFeedItems:_user.activity];
+        
+        if (_isLoggedInProfile)
+        {
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
+            [_imageWrapperView addGestureRecognizer:tapGesture];
+        }
+        else
+        {
+            // not logged in user, remove settings button
+            [_editImageLabel setHidden:YES];
+            [_settingsButton removeFromSuperview];
+        }
+    }
     else
+    {
+        // guest
+        [_editImageLabel setHidden:YES];
         [_profileImageView setImage:[UIImage imageNamed:@"user"]];
-    
-    // Display name
-    [_nameText setText:user.firstName];
-    
-    // prep activity
-    [self setFeedItems:user.activity];
+        self.feedItems = nil;
+    }
 }
 
 #pragma mark -
@@ -119,8 +128,18 @@
 
 - (IBAction)settingsHit:(id)sender
 {
-    RYLoginViewController *loginVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
-    [self presentViewController:loginVC animated:YES completion:nil];
+    if (!_user)
+    {
+        [self presentLogIn];
+    }
+    else
+    {
+        UIActionSheet *settingsSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Sign Out", @"Change Avatar", @"Edit Profile",  nil];
+        if (isIpad)
+            [settingsSheet showFromRect:_settingsButton.frame inView:self.view animated:YES];
+        else
+            [settingsSheet showInView:self.view];
+    }
 }
 
 - (IBAction)activityHit:(id)sender
@@ -151,6 +170,32 @@
 - (void) editImageTapped:(UITapGestureRecognizer*)sender
 {
     [self presentProfilePictureOptions];
+}
+
+#pragma mark - Settings
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        // sign out
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [[RYServices sharedInstance] logOut];
+            [self configureForUser:nil];
+        } );
+    }
+    else if (buttonIndex == 1)
+    {
+        // update avatar
+        [self performBlock:^{
+            // delayed because of display bug, to address later
+            [self presentProfilePictureOptions];
+        } afterDelay:0.5f];
+    }
+    else
+    {
+        // edit profile
+    }
 }
 
 #pragma mark -

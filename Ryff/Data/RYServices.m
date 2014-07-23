@@ -133,6 +133,17 @@ static RYUser* _loggedInUser;
     return success;
 }
 
+- (void) logOut
+{
+    [SSKeychain deletePasswordForService:@"ryff" account:[RYServices loggedInUser].username];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kLoggedInUserKey];
+    _loggedInUser = nil;
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *each in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:each];
+    }
+}
+
 #pragma mark -
 #pragma mark - Edit User
 
