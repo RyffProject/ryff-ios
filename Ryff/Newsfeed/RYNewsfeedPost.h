@@ -18,9 +18,10 @@
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) RYRiff *riff;
 @property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, assign) BOOL isUpvoted;
+@property (nonatomic, assign) NSInteger upvotes;
 
-
-- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated;
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted upvotes:(NSInteger)upvotes;
 
 + (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict;
 

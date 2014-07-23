@@ -14,7 +14,7 @@
 
 @implementation RYNewsfeedPost
 
-- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted upvotes:(NSInteger)upvotes
 {
     if (self = [super init])
     {
@@ -23,6 +23,8 @@
         _content     = content;
         _riff        = riff;
         _dateCreated = dateCreated;
+        _isUpvoted   = isUpvoted;
+        _upvotes     = upvotes;
     }
     return self;
 }
@@ -49,7 +51,10 @@
     [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
     NSDate *date = [dateFormatter dateFromString:date_created];
     
-    RYNewsfeedPost *newPost = [[RYNewsfeedPost alloc] initWithPostId:[postId integerValue] User:user Content:content riff:riff dateCreated:date];
+    BOOL isUpvoted = [postDict[@"is_upvoted"] boolValue];
+    NSInteger upvotes = [postDict[@"upvotes"] intValue];
+    
+    RYNewsfeedPost *newPost = [[RYNewsfeedPost alloc] initWithPostId:[postId integerValue] User:user Content:content riff:riff dateCreated:date isUpvoted:isUpvoted upvotes:upvotes];
     return newPost;
 }
 

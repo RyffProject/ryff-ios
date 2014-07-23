@@ -49,6 +49,11 @@
     
     if (![post.user.username isEqualToString:[RYServices loggedInUser].username])
         [_deleteButton setHidden:YES];
+    
+    if (post.isUpvoted)
+        [_upvoteButton setTintColor:[RYStyleSheet actionHighlightedColor]];
+    else
+        [_upvoteButton setTintColor:[RYStyleSheet actionColor]];
 }
 
 #pragma mark -

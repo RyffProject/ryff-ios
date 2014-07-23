@@ -22,6 +22,7 @@
 #define kDeleteFriendAction @"delete-friend.php"
 #define kPostRiffAction     @"add-post.php"
 #define kUpvotePostAction   @"add-upvote.php"
+#define kDeleteUpvoteAction @"delete-upvote.php"
 #define kDeletePostAction   @"delete-post.php"
 #define kGetPosts           @"get-posts.php"
 #define kGetPeople          @"get-user.php"
@@ -95,6 +96,6 @@
 - (void) getMyPostsForDelegate:(id<POSTDelegate>)delegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate;
 - (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate;
-- (void) upvotePost:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
+- (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
 
 @end

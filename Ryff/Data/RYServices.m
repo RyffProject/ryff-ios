@@ -436,7 +436,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) upvotePost:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate
+- (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -444,11 +444,11 @@ static RYUser* _loggedInUser;
         
         NSDictionary *params = @{@"id":@(postID)};
         
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpvotePostAction];
+        NSString *action = shouldUpvote ? [NSString stringWithFormat:@"%@%@",kApiRoot,kUpvotePostAction] : [NSString stringWithFormat:@"%@%@",kApiRoot,kDeleteUpvoteAction];
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"] && delegate)
-                [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary]];
+                [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary[@"post"]]];
             else
                 [delegate upvoteFailed:dictionary[@"error"]];
             

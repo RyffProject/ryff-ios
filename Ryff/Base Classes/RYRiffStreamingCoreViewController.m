@@ -176,7 +176,7 @@
 - (void) upvoteHit:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
-    [[RYServices sharedInstance] upvotePost:post.postId forDelegate:self];
+    [[RYServices sharedInstance] upvote:!post.isUpvoted post:post.postId forDelegate:self];
 }
 
 /*
@@ -231,6 +231,7 @@
             // found the old post, replace it and update UI
             NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
             [mutableFeedItems replaceObjectAtIndex:postIdx withObject:updatedPost];
+            _feedItems = mutableFeedItems;
             [_riffTableView reloadSections:[NSIndexSet indexSetWithIndex:postIdx] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
