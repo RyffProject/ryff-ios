@@ -272,20 +272,22 @@
 -(void)onKeyboardAppear:(NSNotification *)notification
 {
     // position of keyboard before animation
-    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGPoint viewCenter;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+        viewCenter = CGPointMake(0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.height/2);
+    else
+        viewCenter = CGPointMake(0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.width/2);
     
-    if (keyboardRect.origin.y + keyboardRect.size.height > self.view.center.y)
-    {
-        // keyboard to show at bottom of screen, adjust accordingly
-        CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-        NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
-        [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
-            if (isIpad)
-                [_wrapperView setCenter:CGPointMake(self.view.center.x, self.view.center.y - (keyboardRect.size.height/2))];
-            else
-                [_wrapperView setCenter:CGPointMake(self.view.center.x, self.view.center.y - (keyboardRect.size.height/2) + 50)];
-        } completion:nil];
-    }
+    // keyboard to show at bottom of screen, adjust accordingly
+    CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
+        if (isIpad)
+            [_wrapperView setCenter:viewCenter];
+        else
+            [_wrapperView setCenter:CGPointMake(viewCenter.x, viewCenter.y + 50)];
+    } completion:nil];
 }
 
 /*
@@ -293,11 +295,17 @@
  */
 -(void)onKeyboardHide:(NSNotification *)notification
 {
+    CGPoint viewCenter;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+        viewCenter = CGPointMake(0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height));
+    else
+        viewCenter = CGPointMake(0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height));
+    
     // keyboard to show at bottom of screen, adjust accordingly
     CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
     [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
-        [_wrapperView setCenter:self.view.center];
+        [_wrapperView setCenter:viewCenter];
     } completion:nil];
 }
 

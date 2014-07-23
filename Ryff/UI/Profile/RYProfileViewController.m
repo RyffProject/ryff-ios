@@ -69,58 +69,62 @@
     [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
     [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
     [_imageWrapperView setClipsToBounds:YES];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
+    [_imageWrapperView addGestureRecognizer:tapGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [[RYServices sharedInstance] getMyPostsForDelegate:self];
-    
     [self configureForUser:_user];
-    [self.tableView reloadData];
 }
 
 - (void) configureForUser:(RYUser *)user
 {
     _user = user ? user : [RYServices loggedInUser];
+    
+    // configure for editing if looking at the logged in user's profile
+    _isLoggedInProfile = (_user && (_user.userId == [RYServices loggedInUser].userId));
+    
+    // Display name
+    [_nameText setText:_user.firstName];
+    
+    // prep activity
+    [self setFeedItems:_user.activity];
+    
     if (_user)
     {
-        // configure for editing if looking at the logged in user's profile
-        if (_user.userId == [RYServices loggedInUser].userId)
-            _isLoggedInProfile = YES;
-        
         // Profile picture
         if (_user.avatarURL)
             [_profileImageView setImageForURL:_user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
         else
             [_profileImageView setImage:[UIImage imageNamed:@"user"]];
         
-        // Display name
-        [_nameText setText:_user.firstName];
-        
-        // prep activity
-        [self setFeedItems:_user.activity];
-        
         if (_isLoggedInProfile)
         {
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
-            [_imageWrapperView addGestureRecognizer:tapGesture];
+            [_editImageLabel setHidden:NO];
+            [_settingsButton setHidden:NO];
         }
         else
         {
             // not logged in user, remove settings button
             [_editImageLabel setHidden:YES];
-            [_settingsButton removeFromSuperview];
+            [_settingsButton setHidden:YES];
         }
+        
+        [[RYServices sharedInstance] getUserPostsForUser:_user.userId Delegate:self];
     }
     else
     {
         // guest
+        _isLoggedInProfile = NO;
         [_editImageLabel setHidden:YES];
         [_profileImageView setImage:[UIImage imageNamed:@"user"]];
         self.feedItems = nil;
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark -
@@ -169,7 +173,8 @@
 
 - (void) editImageTapped:(UITapGestureRecognizer*)sender
 {
-    [self presentProfilePictureOptions];
+    if (_isLoggedInProfile)
+        [self presentProfilePictureOptions];
 }
 
 #pragma mark - Settings
@@ -179,18 +184,13 @@
     if (buttonIndex == 0)
     {
         // sign out
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [[RYServices sharedInstance] logOut];
-            [self configureForUser:nil];
-        } );
+        [[RYServices sharedInstance] logOut];
+        [self configureForUser:nil];
     }
     else if (buttonIndex == 1)
     {
         // update avatar
-        [self performBlock:^{
-            // delayed because of display bug, to address later
-            [self presentProfilePictureOptions];
-        } afterDelay:0.5f];
+        [self presentProfilePictureOptions];
     }
     else
     {
@@ -201,7 +201,6 @@
 #pragma mark -
 #pragma mark - POSTDelegate
 
-//specifically for fetching my posts
 - (void) connectionFailed
 {
     

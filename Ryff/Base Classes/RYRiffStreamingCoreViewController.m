@@ -399,9 +399,8 @@
             RYNewsfeedPost *oldPost = [self.feedItems objectAtIndex:_openRiffDetailsSection];
             NSInteger rowForBody = (oldPost.riff) ? 2 : 1;
             
-            UITableViewRowAnimation rowAnimation = (rowForBody == 2) ? UITableViewRowAnimationTop : UITableViewRowAnimationMiddle;
             // should close the currently open riff
-            [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:rowAnimation];
+            [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:UITableViewRowAnimationMiddle];
             _openRiffDetailsSection = -1;
         }
         
@@ -410,10 +409,9 @@
             // riff selected wasn't already open, should open it
             NSInteger rowForBody = (post.riff) ? 2 : 1;
             
-            UITableViewRowAnimation rowAnimation = (rowForBody == 2) ? UITableViewRowAnimationTop : UITableViewRowAnimationMiddle;
             // insert new row
             _openRiffDetailsSection = indexPath.section;
-            [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:indexPath.section]] withRowAnimation:rowAnimation];
+            [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationMiddle];
         }
         
         [self.riffTableView endUpdates];
