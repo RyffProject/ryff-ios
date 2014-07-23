@@ -47,6 +47,7 @@
 		831B96051964D9CE003A8616 /* upvote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B96031964D9CE003A8616 /* upvote@2x.png */; };
 		831B96081964DEC6003A8616 /* RYDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B96071964DEC6003A8616 /* RYDataManager.m */; };
 		831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */; };
+		832AC3B3197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */; };
 		833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D541975DFF10002A2BE /* SGImageCache.m */; };
 		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
 		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
@@ -239,6 +240,8 @@
 		831B96071964DEC6003A8616 /* RYDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYDataManager.m; sourceTree = "<group>"; };
 		831B96091964E428003A8616 /* RYTrackDownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTrackDownloadTableViewCell.h; sourceTree = "<group>"; };
 		831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTrackDownloadTableViewCell.m; sourceTree = "<group>"; };
+		832AC3B1197F9CD2006EEB8F /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
+		832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
 		833E1D531975DFF10002A2BE /* SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCache.h; sourceTree = "<group>"; };
 		833E1D541975DFF10002A2BE /* SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCache.m; sourceTree = "<group>"; };
 		833E1D551975DFF10002A2BE /* SGImageCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCacheTask.h; sourceTree = "<group>"; };
@@ -814,6 +817,8 @@
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				83FCD18518F9119B00A493F0 /* RYBandsCollectionViewCell.h */,
 				83FCD18618F9119B00A493F0 /* RYBandsCollectionViewCell.m */,
+				832AC3B1197F9CD2006EEB8F /* RYProfileInfoTableViewCell.h */,
+				832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */,
 			);
 			name = Profile;
 			path = UI/Profile;
@@ -1215,6 +1220,7 @@
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
+				832AC3B3197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m in Sources */,
 				83CCC91C197EFCBF00FD1B4B /* UIProgressView+AFNetworking.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */,
