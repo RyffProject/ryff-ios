@@ -11,8 +11,6 @@
 
 @class RYUser;
 
-@interface RYProfileViewController : RYRiffStreamingCoreViewController
-
-@property (nonatomic, strong) RYUser *user;
+@interface RYProfileViewController : UITableViewController
 
 @end

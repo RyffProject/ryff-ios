@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class RYNewsfeedPost;
+
 @interface RYStyleSheet : NSObject
 
 +(UIColor*)actionColor;
@@ -23,5 +25,7 @@
 +(UIFont *)titleFont;
 
 +(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
+
++ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
 
 @end

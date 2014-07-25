@@ -8,6 +8,11 @@
 
 #import "RYStyleSheet.h"
 
+// Data Objects
+#import "RYNewsfeedPost.h"
+#import "RYUser.h"
+
+// Categories
 #import "UIColor+Hex.h"
 
 @implementation RYStyleSheet
@@ -90,6 +95,25 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
+#pragma mark -
+#pragma mark - Extras
+
++ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post
+{
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [RYStyleSheet boldFont], NSFontAttributeName, nil];
+    NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [RYStyleSheet regularFont], NSFontAttributeName, nil];
+    const NSRange range = NSMakeRange(0,post.user.username.length);
+    
+    // Create the attributed string (text + attributes)
+    NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.user.username,post.content];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
+                                                                                       attributes:subAttrs];
+    [attributedText setAttributes:attrs range:range];
+    return attributedText;
 }
 
 @end

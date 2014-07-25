@@ -17,8 +17,9 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
-#import "RYRiffTrackTableViewCell.h"
 #import "BlockAlertView.h"
+#import "RYProfileInfoTableViewCell.h"
+#import "RYProfilePostTableViewCell.h"
 
 // Categories
 #import "UIImage+Thumbnail.h"
@@ -32,7 +33,10 @@
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+#define kProfileInfoCellReuseID @"ProfileInfoCell"
+#define kProfilePostCellReuseID @"ProfilePostCell"
+
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, ProfilePostCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -44,7 +48,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 // Data
-@property (nonatomic, assign) BOOL isLoggedInProfile;
+@property (nonatomic, strong) RYUser *user;
+@property (nonatomic, strong) NSArray *feedItems;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 
 @end
@@ -53,7 +58,6 @@
 
 - (void) viewDidLoad
 {
-    self.riffTableView = _tableView;
     [super viewDidLoad];
     
     [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
@@ -80,50 +84,11 @@
 {
     _user = user ? user : [RYServices loggedInUser];
     
-    // configure for editing if looking at the logged in user's profile
-    _isLoggedInProfile = (_user && (_user.userId == [RYServices loggedInUser].userId));
-    
     // prep activity
     [self setFeedItems:_user.activity];
     
     if (_user)
-    {
-        // configure for editing if looking at the logged in user's profile
-        if (_user.userId == [RYServices loggedInUser].userId)
-            _isLoggedInProfile = YES;
-        
-        // Profile picture
-        if (_user.avatarURL)
-            [_profileImageView setImageForURL:_user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
-        else
-            [_profileImageView setImage:[UIImage imageNamed:@"user"]];
-        
-        [_nameText setText:(_user.nickname && _user.nickname.length > 0 ? _user.nickname : _user.username)];
-        [_bioTextView setText:_user.bio];
-        
-        // prep activity
-        [self setFeedItems:_user.activity];
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId Delegate:self];
-        
-        if (_isLoggedInProfile)
-        {
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
-            [_imageWrapperView addGestureRecognizer:tapGesture];
-        }
-        else
-        {
-            // not logged in user, remove settings button
-            [_editImageLabel setHidden:YES];
-            [_settingsButton removeFromSuperview];
-        }
-    }
-    else
-    {
-        // guest
-        [_editImageLabel setHidden:YES];
-        [_profileImageView setImage:[UIImage imageNamed:@"user"]];
-        self.feedItems = nil;
-    }
     
     [self.tableView reloadData];
 }
@@ -131,7 +96,9 @@
 #pragma mark -
 #pragma mark - Actions
 
-- (IBAction)settingsHit:(id)sender
+#pragma mark - ProfileInfoCell Delegate
+
+- (void) settingsAction:(CGRect)presentingFrame
 {
     if (!_user)
     {
@@ -143,35 +110,67 @@
         // user
         UIActionSheet *settingsSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Sign Out", @"Change Avatar", @"Edit Profile",  nil];
         if (isIpad)
-            [settingsSheet showFromRect:_settingsButton.frame inView:self.view animated:YES];
+        {
+            CGRect convertedRect = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
+            CGRect realFrame = CGRectMake(convertedRect.origin.x + presentingFrame.origin.x, convertedRect.origin.y + presentingFrame.origin.y, presentingFrame.size.width, presentingFrame.size.height);
+            [settingsSheet showFromRect:realFrame inView:self.view animated:YES];
+        }
         else
             [settingsSheet showInView:self.view];
     }
 
 }
 
-- (IBAction)addHit:(id)sender
+- (void) addNewRiff
 {
     RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
-    
-#pragma mark - Edit Profile
 
-// Present log in if user requests action that requires an account
-- (void) presentLogIn
-{
-    UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
-    [self presentViewController:navCon animated:YES completion:nil];
-}
-
-- (void) editImageTapped:(UITapGestureRecognizer*)sender
+- (void) editImageAction
 {
     [self presentProfilePictureOptions];
 }
 
-#pragma mark - Settings
+#pragma mark - ProfilePost Delegate
 
+/*
+ Download/play/pause riff track for post corresponding to riffIndex
+ */
+- (void) playerControlAction:(NSInteger)riffIndex
+{
+    
+}
+
+/*
+ Upvote post corresponding to riffIndex
+ */
+- (void) upvoteAction:(NSInteger)riffIndex
+{
+    
+}
+
+/*
+ Repost post corresponding to riffIndex
+ */
+- (void) repostAction:(NSInteger)riffIndex
+{
+    
+}
+
+/*
+ Follow user for post corresponding to riffIndex
+ */
+- (void) followAction:(NSInteger)riffIndex
+{
+    
+}
+
+#pragma mark - Edit Profile
+
+/*
+ Settings actionsheet -> sign out, update avatar, edit profile
+ */
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
@@ -189,6 +188,13 @@
     {
         // edit profile
     }
+}
+
+// Present log in if user requests action that requires an account
+- (void) presentLogIn
+{
+    UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
+    [self presentViewController:navCon animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -218,7 +224,77 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - 
+#pragma mark -
+#pragma mark - TableView data source
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numRows = 0;
+    if (section == 0)
+        numRows = 1;
+    else if (section == 1)
+        numRows = _feedItems.count;
+    return numRows;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    if (indexPath.section == 0)
+        cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
+    else if (indexPath.section == 1)
+        cell = [tableView dequeueReusableCellWithIdentifier:kProfilePostCellReuseID forIndexPath:indexPath];
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    if (indexPath.section == 0)
+    {
+        // profile info
+        height = 260;
+    }
+    else if (indexPath.section == 1)
+    {
+        // profile post -> calculate size with attributed text for post description
+        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        height = kProfileCellHeightMinusPostText + [post.content boundingRectWithSize:CGSizeMake(kProfileCellPostLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
+        height = MAX(height, 80);
+    }
+    return height;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0f;
+}
+
+#pragma mark - TableView delegate
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        // profile info
+        [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:self.tableView];
+    }
+    else if (indexPath.section == 1)
+    {
+        // profile post
+        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        [((RYProfilePostTableViewCell*)cell) configureForPost:post riffIndex:indexPath.row delegate:self];
+    }
+}
+
+#pragma mark -
 #pragma mark - User Avatar Photo Picking
 
 - (void)presentProfilePictureOptions

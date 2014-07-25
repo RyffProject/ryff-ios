@@ -354,7 +354,7 @@
     else
     {
         // riff body cell
-        NSAttributedString *attributedText = [RYServices createAttributedTextWithPost:post];
+        NSAttributedString *attributedText = [RYStyleSheet createAttributedTextWithPost:post];
         RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
         [riffBodyCell configureWithAttributedString:attributedText index:indexPath.section delegate:self];
     }
@@ -373,7 +373,7 @@
     if (indexPath.row == bodyRow)
     {
         CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
-        NSAttributedString *mainText = [RYServices createAttributedTextWithPost:post];
+        NSAttributedString *mainText = [RYStyleSheet createAttributedTextWithPost:post];
         CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         height = MAX(result.size.height+20, height);
     }

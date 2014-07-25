@@ -72,8 +72,6 @@
 + (RYServices *)sharedInstance;
 + (RYUser *) loggedInUser;
 
-+ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
-
 // Registration
 - (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate;
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;

@@ -37,8 +37,6 @@
 		830BBCF118FA786800A9C53F /* Cylindric_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEC18FA786800A9C53F /* Cylindric_2.png */; };
 		830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */; };
 		830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */; };
-		830BBD0B18FAA95700A9C53F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0718FAA95700A9C53F /* share.png */; };
-		830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBD0818FAA95700A9C53F /* share@2x.png */; };
 		8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */; };
 		8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */; };
 		831B96001964D8C5003A8616 /* repost.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B95FE1964D8C5003A8616 /* repost.png */; };
@@ -47,7 +45,6 @@
 		831B96051964D9CE003A8616 /* upvote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B96031964D9CE003A8616 /* upvote@2x.png */; };
 		831B96081964DEC6003A8616 /* RYDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B96071964DEC6003A8616 /* RYDataManager.m */; };
 		831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */; };
-		832AC3B3197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */; };
 		833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D541975DFF10002A2BE /* SGImageCache.m */; };
 		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
 		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
@@ -56,6 +53,8 @@
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AA195FB3C3005938F5 /* UIView+Styling.m */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
+		837E9AC31981DA4D0052E006 /* RYProfilePostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */; };
+		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089D1979940400DDD26C /* SGActivityIndicator.m */; };
 		838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089F1979940400DDD26C /* SGHTTPRequest.m */; };
 		838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808A4197994B700DDD26C /* MGBlockWrapper.m */; };
@@ -147,7 +146,6 @@
 		83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD17518F909DB00A493F0 /* RYProfileViewController.m */; };
 		83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */; };
 		83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */; };
-		83FCD18718F9119B00A493F0 /* RYBandsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18618F9119B00A493F0 /* RYBandsCollectionViewCell.m */; };
 		83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18A18F9134B00A493F0 /* RYBandViewController.m */; };
 		83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */; };
 		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
@@ -163,7 +161,6 @@
 		83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */; };
 		83FCD1C518F94AC400A493F0 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1C318F94AC400A493F0 /* play.png */; };
 		83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1C418F94AC400A493F0 /* play@2x.png */; };
-		83FCD1C818F95CBC00A493F0 /* patrickCarney.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1C718F95CBC00A493F0 /* patrickCarney.png */; };
 		83FCD1D018F9683D00A493F0 /* Loading_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1CA18F9683D00A493F0 /* Loading_1.png */; };
 		83FCD1D118F9683D00A493F0 /* Loading_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1CB18F9683D00A493F0 /* Loading_1@2x.png */; };
 		83FCD1D218F9683D00A493F0 /* Loading_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1CC18F9683D00A493F0 /* Loading_2.png */; };
@@ -227,8 +224,6 @@
 		830BBCEC18FA786800A9C53F /* Cylindric_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cylindric_2.png; sourceTree = "<group>"; };
 		830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_2@2x.png"; sourceTree = "<group>"; };
 		830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_3@2x.png"; sourceTree = "<group>"; };
-		830BBD0718FAA95700A9C53F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
-		830BBD0818FAA95700A9C53F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RyRiffDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		8314E33019330506007F8B44 /* RyRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RyRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
 		8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RyRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
@@ -240,8 +235,6 @@
 		831B96071964DEC6003A8616 /* RYDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYDataManager.m; sourceTree = "<group>"; };
 		831B96091964E428003A8616 /* RYTrackDownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTrackDownloadTableViewCell.h; sourceTree = "<group>"; };
 		831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTrackDownloadTableViewCell.m; sourceTree = "<group>"; };
-		832AC3B1197F9CD2006EEB8F /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
-		832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
 		833E1D531975DFF10002A2BE /* SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCache.h; sourceTree = "<group>"; };
 		833E1D541975DFF10002A2BE /* SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCache.m; sourceTree = "<group>"; };
 		833E1D551975DFF10002A2BE /* SGImageCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCacheTask.h; sourceTree = "<group>"; };
@@ -258,6 +251,10 @@
 		836461AA195FB3C3005938F5 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
 		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
+		837E9AC11981DA4D0052E006 /* RYProfilePostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfilePostTableViewCell.h; sourceTree = "<group>"; };
+		837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfilePostTableViewCell.m; sourceTree = "<group>"; };
+		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
+		837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
 		8388089C1979940400DDD26C /* SGActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActivityIndicator.h; sourceTree = "<group>"; };
 		8388089D1979940400DDD26C /* SGActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGActivityIndicator.m; sourceTree = "<group>"; };
 		8388089E1979940400DDD26C /* SGHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHTTPRequest.h; sourceTree = "<group>"; };
@@ -393,8 +390,6 @@
 		83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffTrackTableViewCell.m; sourceTree = "<group>"; };
 		83FCD17F18F90F8F00A493F0 /* RYSearchPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSearchPageViewController.h; sourceTree = "<group>"; };
 		83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYSearchPageViewController.m; sourceTree = "<group>"; };
-		83FCD18518F9119B00A493F0 /* RYBandsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYBandsCollectionViewCell.h; sourceTree = "<group>"; };
-		83FCD18618F9119B00A493F0 /* RYBandsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYBandsCollectionViewCell.m; sourceTree = "<group>"; };
 		83FCD18918F9134B00A493F0 /* RYBandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYBandViewController.h; sourceTree = "<group>"; };
 		83FCD18A18F9134B00A493F0 /* RYBandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYBandViewController.m; sourceTree = "<group>"; };
 		83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedTableViewController.h; sourceTree = "<group>"; };
@@ -417,7 +412,6 @@
 		83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedPost.m; sourceTree = "<group>"; };
 		83FCD1C318F94AC400A493F0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		83FCD1C418F94AC400A493F0 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
-		83FCD1C718F95CBC00A493F0 /* patrickCarney.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patrickCarney.png; sourceTree = "<group>"; };
 		83FCD1CA18F9683D00A493F0 /* Loading_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading_1.png; sourceTree = "<group>"; };
 		83FCD1CB18F9683D00A493F0 /* Loading_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Loading_1@2x.png"; sourceTree = "<group>"; };
 		83FCD1CC18F9683D00A493F0 /* Loading_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading_2.png; sourceTree = "<group>"; };
@@ -815,10 +809,10 @@
 				83C6CA7618FAECD200412469 /* RiffEdit */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
-				83FCD18518F9119B00A493F0 /* RYBandsCollectionViewCell.h */,
-				83FCD18618F9119B00A493F0 /* RYBandsCollectionViewCell.m */,
-				832AC3B1197F9CD2006EEB8F /* RYProfileInfoTableViewCell.h */,
-				832AC3B2197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m */,
+				837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */,
+				837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */,
+				837E9AC11981DA4D0052E006 /* RYProfilePostTableViewCell.h */,
+				837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */,
 			);
 			name = Profile;
 			path = UI/Profile;
@@ -965,8 +959,6 @@
 				83C6CA8018FAFF5200412469 /* cloud@2x.png */,
 				83C6CA8118FAFF5200412469 /* reset.png */,
 				83C6CA8218FAFF5200412469 /* reset@2x.png */,
-				830BBD0718FAA95700A9C53F /* share.png */,
-				830BBD0818FAA95700A9C53F /* share@2x.png */,
 				830BBCDB18FA401700A9C53F /* friend.png */,
 				830BBCDC18FA401700A9C53F /* friend@2x.png */,
 				830BBCDD18FA401700A9C53F /* next.png */,
@@ -974,7 +966,6 @@
 				830BBCD718FA196300A9C53F /* userBig.png */,
 				830BBCD818FA196300A9C53F /* userBig@2x.png */,
 				83FCD1C918F9683D00A493F0 /* Loading */,
-				83FCD1C718F95CBC00A493F0 /* patrickCarney.png */,
 				83FCD1C318F94AC400A493F0 /* play.png */,
 				83FCD1C418F94AC400A493F0 /* play@2x.png */,
 				83FCD1B218F93FBF00A493F0 /* newsfeed.png */,
@@ -1122,8 +1113,6 @@
 				83FE255A19315D79009FC978 /* riffCellBack.png in Resources */,
 				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
 				830BBCDA18FA196300A9C53F /* userBig@2x.png in Resources */,
-				830BBD0C18FAA95700A9C53F /* share@2x.png in Resources */,
-				83FCD1C818F95CBC00A493F0 /* patrickCarney.png in Resources */,
 				831B96001964D8C5003A8616 /* repost.png in Resources */,
 				83C6A6021960FFF100BB3D1A /* pause.png in Resources */,
 				830BBCD918FA196300A9C53F /* userBig.png in Resources */,
@@ -1137,7 +1126,6 @@
 				83ED34F61931851600FEB018 /* iTunesArtwork.png in Resources */,
 				83FCD1C618F94AC400A493F0 /* play@2x.png in Resources */,
 				83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */,
-				830BBD0B18FAA95700A9C53F /* share.png in Resources */,
 				83ED34F71931851600FEB018 /* iTunesArtwork@2x.png in Resources */,
 				83FCD14F18F907C400A493F0 /* MainIphone.storyboard in Resources */,
 				83FCD1D318F9683D00A493F0 /* Loading_2@2x.png in Resources */,
@@ -1185,7 +1173,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				83CCC919197EFCBF00FD1B4B /* UIAlertView+AFNetworking.m in Sources */,
-				83FCD18718F9119B00A493F0 /* RYBandsCollectionViewCell.m in Sources */,
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
@@ -1206,6 +1193,7 @@
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
 				833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */,
+				837E9AC31981DA4D0052E006 /* RYProfilePostTableViewCell.m in Sources */,
 				833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
@@ -1220,7 +1208,6 @@
 				83DBCA7418F9856800262496 /* RMDownloadIndicator.m in Sources */,
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
-				832AC3B3197F9CD2006EEB8F /* RYProfileInfoTableViewCell.m in Sources */,
 				83CCC91C197EFCBF00FD1B4B /* UIProgressView+AFNetworking.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */,
@@ -1232,6 +1219,7 @@
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
 				83CCC911197EFCBF00FD1B4B /* AFNetworkReachabilityManager.m in Sources */,
+				837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */,
 				838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */,

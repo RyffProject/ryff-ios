@@ -28,8 +28,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addRiffButton;
 
+// Data
 @property (nonatomic, weak) id<ProfileInfoCellDelegate> delegate;
 @property (nonatomic, weak) UITableView *parentTable;
+@property (nonatomic, assign) BOOL isLoggedInProfile;
 
 @end
 
@@ -58,6 +60,9 @@
 {
     _delegate = delegate;
     
+    // configure for editing if looking at the logged in user's profile
+    _isLoggedInProfile = (user && (user.userId == [RYServices loggedInUser].userId));
+    
     // Profile picture
     if (user.avatarURL)
         [_avatarImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
@@ -75,8 +80,6 @@
         [_editImageLabel setHidden:YES];
         [_settingsButton setHidden:YES];
     }
-    
-    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 #pragma mark - Actions
@@ -85,8 +88,7 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(settingsAction:)])
     {
-        CGRect presentingRect = [self convertRect:_settingsButton.frame toView:_parentTable];
-        [_delegate settingsAction:presentingRect];
+        [_delegate settingsAction:_settingsButton.frame];
     }
 }
 
