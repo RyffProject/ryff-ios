@@ -17,12 +17,15 @@
 #import "RYStyleSheet.h"
 #import "RYServices.h"
 
+// UI Objects
+#import "RYPlayControl.h"
+
 @interface RYProfilePostTableViewCell () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
-@property (weak, nonatomic) IBOutlet UIView *playerControlView;
+@property (weak, nonatomic) IBOutlet RYPlayControl *playerControlView;
 @property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
 @property (weak, nonatomic) IBOutlet UIButton *repostButton;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
@@ -44,6 +47,8 @@
     [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
     [_postLabel setFont:kProfileCellPostFont];
+    
+    [_playerControlView configureWithFrame:_playerControlView.bounds];
 }
 
 - (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate
@@ -71,6 +76,12 @@
         [_followButton setHidden:NO];
     
     [_upvotesLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
+    
+    [_playerControlView animateOuterProgress:0.5f];
+    
+    [self performBlock:^{
+        [_playerControlView animatePlaying];
+    } afterDelay:1.0f];
 }
 
 #pragma mark -
