@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#define kProfileCellPostLabelRatio isIpad ? (683/768) : (683/768)
-#define kProfileCellHeightMinusPostText 52.0f
-#define kProfileCellPostFont [UIFont fontWithName:kRegularFont size:21.0f]
+#define kProfilePostCellLabelRatio isIpad ? (683/768) : (683/768)
+#define kProfilePostCellHeightMinusText 52.0f
+#define kProfilePostCellMinimumHeight 80.0f
+#define kProfilePostCellFont [UIFont fontWithName:kRegularFont size:21.0f]
 
 @protocol ProfilePostCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;

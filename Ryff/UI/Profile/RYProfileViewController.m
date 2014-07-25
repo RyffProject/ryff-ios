@@ -248,7 +248,7 @@
     if (indexPath.section == 0)
         cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
     else if (indexPath.section == 1)
-        cell = [tableView dequeueReusableCellWithIdentifier:kProfilePostCellReuseID forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:kProfilePostCellReuseID];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
@@ -257,17 +257,20 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 0;
+    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    
     if (indexPath.section == 0)
     {
-        // profile info
-        height = 260;
+        // profile info -> calculate size with user bio
+        height = kProfileInfoCellHeightMinusText + [post.user.bio boundingRectWithSize:CGSizeMake(kProfileInfoCellLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
+        height = MAX(height, kProfileInfoCellMinimumHeight);
+        
     }
     else if (indexPath.section == 1)
     {
         // profile post -> calculate size with attributed text for post description
-        RYNewsfeedPost *post = _feedItems[indexPath.row];
-        height = kProfileCellHeightMinusPostText + [post.content boundingRectWithSize:CGSizeMake(kProfileCellPostLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height;
-        height = MAX(height, 80);
+        height = kProfilePostCellHeightMinusText + [post.content boundingRectWithSize:CGSizeMake(kProfilePostCellLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:kProfilePostCellFont} context:nil].size.height;
+        height = MAX(height, kProfilePostCellMinimumHeight);
     }
     return height;
 }

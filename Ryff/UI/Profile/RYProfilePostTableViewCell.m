@@ -46,7 +46,7 @@
     
     [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_postLabel setFont:kProfileCellPostFont];
+    [_postLabel setFont:kProfilePostCellFont];
     
     [_playerControlView configureWithFrame:_playerControlView.bounds];
 }
@@ -58,6 +58,7 @@
     
     NSString *userText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_userLabel setText:userText];
+    [_postLabel setText:post.riff.title];
     
     if (post.isUpvoted)
     {

@@ -42,6 +42,7 @@
     [super awakeFromNib];
     
     [_nameLabel setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
+    [_bioTextView setFont:kProfileInfoCellFont];
     
     [_addRiffButton setTintColor:[RYStyleSheet actionColor]];
     
@@ -68,6 +69,10 @@
         [_avatarImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
+    
+    NSString *userString = (user && user.nickname.length > 0) ? user.nickname : user.username;
+    [_nameLabel setText:userString];
+    [_bioTextView setText:user.bio];
     
     if (user.userId == [RYServices loggedInUser].userId)
     {

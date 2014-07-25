@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define kProfileInfoCellLabelRatio isIpad ? (510/768) : (510/768)
+#define kProfileInfoCellHeightMinusText 176.0f
+#define kProfileInfoCellMinimumHeight 260.0f
+#define kProfileInfoCellFont [UIFont fontWithName:kRegularFont size:18.0f]
+
 @protocol ProfileInfoCellDelegate <NSObject>
 - (void) settingsAction:(CGRect)presentingFrame;
 - (void) addNewRiff;
