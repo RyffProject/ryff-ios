@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RYRiffStreamingCoreViewController.h"
 
 @class RYUser;
 

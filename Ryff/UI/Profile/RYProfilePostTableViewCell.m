@@ -46,19 +46,18 @@
     
     [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_postLabel setFont:kProfilePostCellFont];
     
     [_playerControlView configureWithFrame:_playerControlView.bounds];
 }
 
-- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate
+- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate
 {
     _riffIndex = riffIndex;
     _delegate  = delegate;
     
     NSString *userText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_userLabel setText:userText];
-    [_postLabel setText:post.riff.title];
+    [_postLabel setAttributedText:attributedText];
     
     if (post.isUpvoted)
     {
@@ -78,6 +77,8 @@
     
     [_upvotesLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
     
+    [self setBackgroundColor:[UIColor clearColor]];
+     
     [_playerControlView animateOuterProgress:0.5f];
     
     [self performBlock:^{

@@ -10,6 +10,7 @@
 
 // Data Objects
 #import "RYNewsfeedPost.h"
+#import "RYRiff.h"
 #import "RYUser.h"
 
 // Categories
@@ -100,7 +101,8 @@
 #pragma mark -
 #pragma mark - Extras
 
-+ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post
+// Username: post content
++ (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post
 {
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                            [RYStyleSheet boldFont], NSFontAttributeName, nil];
@@ -110,6 +112,23 @@
     
     // Create the attributed string (text + attributes)
     NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.user.username,post.content];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
+                                                                                       attributes:subAttrs];
+    [attributedText setAttributes:attrs range:range];
+    return attributedText;
+}
+
+// post title: post content
++ (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post
+{
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [RYStyleSheet boldFont], NSFontAttributeName, nil];
+    NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [RYStyleSheet regularFont], NSFontAttributeName, nil];
+    const NSRange range = NSMakeRange(0,post.riff.title.length);
+    
+    // Create the attributed string (text + attributes)
+    NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.riff.title,post.content];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
                                                                                        attributes:subAttrs];
     [attributedText setAttributes:attrs range:range];

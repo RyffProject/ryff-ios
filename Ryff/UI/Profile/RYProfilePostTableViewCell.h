@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define kProfilePostCellLabelRatio isIpad ? (683/768) : (683/768)
+#define kProfilePostCellLabelRatio isIpad ? (683.0f/768.0f) : (683.0f/768.0f)
 #define kProfilePostCellHeightMinusText 52.0f
 #define kProfilePostCellMinimumHeight 80.0f
-#define kProfilePostCellFont [UIFont fontWithName:kRegularFont size:21.0f]
 
 @protocol ProfilePostCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;
@@ -28,6 +27,6 @@
 
 @property (nonatomic, assign) NSInteger riffIndex;
 
-- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate;
+- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate;
 
 @end

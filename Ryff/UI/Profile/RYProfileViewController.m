@@ -38,15 +38,6 @@
 
 @interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, ProfilePostCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
-@property (weak, nonatomic) IBOutlet UILabel *nameText;
-@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
-@property (weak, nonatomic) IBOutlet UIButton *addButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 // Data
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) NSArray *feedItems;
@@ -60,17 +51,7 @@
 {
     [super viewDidLoad];
     
-    [_nameText setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
-    [_bioTextView setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
-    
-    [_addButton setTintColor:[RYStyleSheet actionColor]];
-    
-    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
-    [_editImageLabel setTextColor:[UIColor whiteColor]];
-    [_editImageLabel setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.4]];
-    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
-    [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
-    [_imageWrapperView setClipsToBounds:YES];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -257,20 +238,22 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 0;
-    RYNewsfeedPost *post = _feedItems[indexPath.row];
     
     if (indexPath.section == 0)
     {
         // profile info -> calculate size with user bio
-        height = kProfileInfoCellHeightMinusText + [post.user.bio boundingRectWithSize:CGSizeMake(kProfileInfoCellLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
+        CGFloat widthRatio = kProfileInfoCellLabelRatio;
+        height = kProfileInfoCellHeightMinusText + [_user.bio boundingRectWithSize:CGSizeMake(widthRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
         height = MAX(height, kProfileInfoCellMinimumHeight);
         
     }
     else if (indexPath.section == 1)
     {
         // profile post -> calculate size with attributed text for post description
-        height = kProfilePostCellHeightMinusText + [post.content boundingRectWithSize:CGSizeMake(kProfilePostCellLabelRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:kProfilePostCellFont} context:nil].size.height;
-        height = MAX(height, kProfilePostCellMinimumHeight);
+        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        CGFloat widthRatio = kProfilePostCellLabelRatio;
+        height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(widthRatio*self.tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+        height = MAX(height+kProfilePostCellHeightMinusText, kProfilePostCellMinimumHeight);
     }
     return height;
 }
@@ -293,7 +276,7 @@
     {
         // profile post
         RYNewsfeedPost *post = _feedItems[indexPath.row];
-        [((RYProfilePostTableViewCell*)cell) configureForPost:post riffIndex:indexPath.row delegate:self];
+        [((RYProfilePostTableViewCell*)cell) configureForPost:post attributedText:[RYStyleSheet createProfileAttributedTextWithPost:post] riffIndex:indexPath.row delegate:self];
     }
 }
 
@@ -353,7 +336,6 @@
     
     CGFloat avatarSize = 400.f;
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
-    [_profileImageView setImage:avatarImage];
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
 }

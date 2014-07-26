@@ -26,6 +26,7 @@
 
 +(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 
-+ (NSAttributedString *)createAttributedTextWithPost:(RYNewsfeedPost *)post;
++ (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post;
++ (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post;
 
 @end
