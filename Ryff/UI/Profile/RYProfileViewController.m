@@ -13,6 +13,7 @@
 
 // Data Objects
 #import "RYUser.h"
+#import "RYRiff.h"
 #import "RYNewsfeedPost.h"
 
 // Custom UI
@@ -28,6 +29,7 @@
 
 // Frameworks
 #import "UIImageView+SGImageCache.h"
+#import <AVFoundation/AVFoundation.h>
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
@@ -36,12 +38,19 @@
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 #define kProfilePostCellReuseID @"ProfilePostCell"
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, ProfilePostCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, ProfilePostCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 // Data
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) NSArray *feedItems;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) RYProfilePostTableViewCell *currentlyPlayingCell;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, assign) BOOL isDownloading;
+@property (nonatomic, strong) NSMutableData *riffData;
+@property (nonatomic, assign) CGFloat totalBytes;
+@property (nonatomic, strong) NSURLConnection *riffConnection;
+@property (nonatomic, strong) NSTimer *updateTimer;
 
 @end
 
@@ -59,6 +68,13 @@
     [super viewWillAppear:animated];
     
     [self configureForUser:_user];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self clearRiff];
 }
 
 - (void) configureForUser:(RYUser *)user
@@ -120,7 +136,42 @@
  */
 - (void) playerControlAction:(NSInteger)riffIndex
 {
+    RYNewsfeedPost *post = _feedItems[riffIndex];
+    // if not playing, begin
+    if (!_audioPlayer && !self.isDownloading)
+    {
+        self.currentlyPlayingCell = (RYProfilePostTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:1]];
+        [self startRiffDownload:post.riff];
+        return;
+    }
     
+    // stop any downloads
+    if (self.isDownloading)
+        [self clearRiff];
+    
+    // already playing
+    if (_audioPlayer && _audioPlayer.isPlaying && [self.tableView indexPathForCell:self.currentlyPlayingCell].section == riffIndex)
+    {
+        //currently playing this track, pause it
+        if (self.audioPlayer.isPlaying)
+        {
+            [self.audioPlayer pause];
+            [self.currentlyPlayingCell shouldPause:YES];
+        }
+        else
+        {
+            [self.audioPlayer play];
+            [self.currentlyPlayingCell shouldPause:NO];
+        }
+    }
+    else if (_audioPlayer && _audioPlayer.isPlaying)
+    {
+        //playing another, switch riff
+        [self clearRiff];
+        
+        self.currentlyPlayingCell = (RYProfilePostTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:1]];
+        [self startRiffDownload:post.riff];
+    }
 }
 
 /*
@@ -203,6 +254,105 @@
     }
     [self setFeedItems:myPosts];
     [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark - Riff Downloading / Playing
+
+- (void) startRiffDownload:(RYRiff*)riff
+{
+    _isDownloading = YES;
+    [_currentlyPlayingCell startDownloading];
+    
+    NSURL *riffURL = riff.URL;
+    NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
+    _riffData = [[NSMutableData alloc] initWithLength:0];
+    _riffConnection = [[NSURLConnection alloc] initWithRequest:dataRequest delegate:self startImmediately:YES];
+}
+
+- (void) startRiffPlaying:(NSData*)riffData
+{
+    if (!_audioPlayer.isPlaying)
+    {
+        NSError *error;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithData:riffData error:&error];
+        [_audioPlayer setDelegate:self];
+        _audioPlayer.numberOfLoops = 0;
+        _audioPlayer.volume = 1.0f;
+        [_audioPlayer prepareToPlay];
+        
+        if (_audioPlayer == nil)
+            NSLog(@"Error: %@", [error localizedDescription]);
+        else
+        {
+            [_audioPlayer play];
+        }
+        
+        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+    }
+}
+
+- (void) clearRiff
+{
+    [_updateTimer invalidate];
+    _updateTimer = nil;
+    [_currentlyPlayingCell clearAudio];
+    _currentlyPlayingCell = nil;
+    [_audioPlayer stop];
+    _audioPlayer = nil;
+    _totalBytes = 0;
+    _riffData = nil;
+    _riffConnection = nil;
+    _audioPlayer = nil;
+    _isDownloading = NO;
+}
+
+#pragma mark -
+#pragma mark - Timer UI Update
+
+- (void)updateTimeLeft
+{
+    CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
+    
+    // update your UI with timeLeft
+    [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
+}
+
+#pragma mark -
+#pragma mark - Riff Download Delegate
+
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [_riffData setLength:0];
+    [self setTotalBytes:response.expectedContentLength];
+}
+
+- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [_riffData appendData:data];
+    [_currentlyPlayingCell updateDownloadIndicatorWithBytes:_riffData.length outOf:_totalBytes];
+}
+
+- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSLog(@"%@",[error localizedDescription]);
+    [_currentlyPlayingCell finishDownloading:NO];
+    [self clearRiff];
+    _isDownloading = NO;
+}
+
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [_currentlyPlayingCell finishDownloading:YES];
+    [self startRiffPlaying:_riffData];
+    _isDownloading = NO;
+}
+
+#pragma mark -
+#pragma mark - AVAudioPlayerDelegate
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self clearRiff];
 }
 
 #pragma mark -

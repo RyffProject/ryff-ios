@@ -303,7 +303,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="followButton" destination="nno-kA-YKq" id="mgX-0m-8Wi"/>
-                                    <outlet property="playerControlView" destination="03Q-Lg-LU6" id="qSc-c9-mr5"/>
+                                    <outlet property="playControlView" destination="03Q-Lg-LU6" id="Rft-O7-RFo"/>
                                     <outlet property="postLabel" destination="fwj-5m-bBp" id="kqM-N4-NMK"/>
                                     <outlet property="repostButton" destination="sIM-ZE-h3U" id="w2T-rX-v9Y"/>
                                     <outlet property="upvoteButton" destination="ptD-rw-hOU" id="uhJ-i6-4qW"/>

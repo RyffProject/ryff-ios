@@ -29,4 +29,11 @@
 
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate;
 
+- (void) startDownloading;
+- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;
+- (void) finishDownloading:(BOOL)success;
+- (void) shouldPause:(BOOL)shouldPause;
+- (void) updateTimeRemaining:(CGFloat)playProgress;
+- (void) clearAudio;
+
 @end

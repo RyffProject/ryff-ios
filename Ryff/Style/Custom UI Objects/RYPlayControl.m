@@ -38,7 +38,7 @@
     _circleShape.strokeColor    = [RYStyleSheet actionColor].CGColor;
     _circleShape.fillColor      = nil;
     _circleShape.lineWidth      = outerStrokeWidth;
-    _circleShape.strokeEnd      = 1.0f;
+    _circleShape.strokeEnd      = 0.0f;
     [self.layer addSublayer:_circleShape];
     
     
@@ -47,7 +47,7 @@
     _innerCircleShape.strokeColor    = [RYStyleSheet actionColor].CGColor;
     _innerCircleShape.fillColor      = nil;
     _innerCircleShape.lineWidth      = innerStrokeWidth;
-    _innerCircleShape.strokeEnd      = 0.2f;
+    _innerCircleShape.strokeEnd      = 0.0f;
     _innerCircleShape.anchorPoint    = (CGPoint){0.5, 0.5};
     _innerCircleShape.bounds         = frame;
     _innerCircleShape.position       = circleCenter;
@@ -74,6 +74,12 @@
     [self doRotation];
     [_rotationAnimationTimer invalidate];
     _rotationAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:kAnimationDuration target:self selector:@selector(rotationAnimationTimerTick:) userInfo:nil repeats:YES];
+}
+
+- (void) stopPlaying
+{
+    [_rotationAnimationTimer invalidate];
+    [_innerCircleShape removeAnimationForKey:@"transform.rotation"];
 }
 
 #pragma mark - Internal

@@ -25,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postLabel;
-@property (weak, nonatomic) IBOutlet RYPlayControl *playerControlView;
+@property (weak, nonatomic) IBOutlet RYPlayControl *playControlView;
 @property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
 @property (weak, nonatomic) IBOutlet UIButton *repostButton;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
@@ -38,8 +38,8 @@
 - (void) awakeFromNib
 {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
-    [_playerControlView addGestureRecognizer:tapGesture];
-    [_playerControlView setBackgroundColor:[UIColor clearColor]];
+    [_playControlView addGestureRecognizer:tapGesture];
+    [_playControlView setBackgroundColor:[UIColor clearColor]];
     
     [_repostButton setTintColor:[RYStyleSheet actionColor]];
     [_followButton setTintColor:[RYStyleSheet actionColor]];
@@ -47,7 +47,7 @@
     [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
     
-    [_playerControlView configureWithFrame:_playerControlView.bounds];
+    [_playControlView configureWithFrame:_playControlView.bounds];
 }
 
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate
@@ -78,12 +78,6 @@
     [_upvotesLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
     
     [self setBackgroundColor:[UIColor clearColor]];
-     
-    [_playerControlView animateOuterProgress:0.5f];
-    
-    [self performBlock:^{
-        [_playerControlView animatePlaying];
-    } afterDelay:1.0f];
 }
 
 #pragma mark -
@@ -113,6 +107,53 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(playerControlAction:)])
         [_delegate playerControlAction:_riffIndex];
+}
+
+#pragma mark -
+#pragma mark - Media
+
+- (void) startDownloading
+{
+    
+}
+
+- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes
+{
+    CGFloat progress = bytesFinished / totalBytes;
+    [_playControlView animateOuterProgress:progress];
+}
+
+- (void) finishDownloading:(BOOL)success
+{
+    if (success)
+    {
+        [_playControlView animateOuterProgress:1.0f];
+        [_playControlView animatePlaying];
+    }
+    else
+    {
+        [_playControlView animateOuterProgress:0.0f];
+    }
+}
+
+- (void) shouldPause:(BOOL)shouldPause
+{
+    if (shouldPause)
+        [_playControlView stopPlaying];
+    else
+        [_playControlView animatePlaying];
+}
+
+- (void) updateTimeRemaining:(CGFloat)playProgress
+{
+    [_playControlView animateInnerProgress:playProgress];
+}
+
+- (void) clearAudio
+{
+    [_playControlView stopPlaying];
+    [_playControlView animateInnerProgress:0.0f];
+    [_playControlView animateOuterProgress:0.0f];
 }
 
 @end

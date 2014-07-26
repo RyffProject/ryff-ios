@@ -12,5 +12,6 @@
 - (void) animateOuterProgress:(CGFloat)progress;
 - (void) animateInnerProgress:(CGFloat)progress;
 - (void) animatePlaying;
+- (void) stopPlaying;
 
 @end
