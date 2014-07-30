@@ -12,13 +12,15 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
+#import "UIImage+Color.h"
 
-#define kAnimationDuration 1.0f
+#define kAnimationDuration 1.5f
 
 @interface RYPlayControl ()
 
 @property (nonatomic, strong) CAShapeLayer *circleShape;
 @property (nonatomic, strong) CAShapeLayer *innerCircleShape;
+@property (nonatomic, strong) UIImageView *centerImageView;
 
 // Data
 @property (nonatomic, strong) NSTimer *rotationAnimationTimer;
@@ -52,6 +54,12 @@
     _innerCircleShape.bounds         = frame;
     _innerCircleShape.position       = circleCenter;
     [self.layer addSublayer:_innerCircleShape];
+    
+    CGFloat strokeWidth = 1.5*(outerStrokeWidth + innerStrokeWidth);
+    CGRect imageFrame   = CGRectMake(strokeWidth, strokeWidth, frame.size.width-2*strokeWidth, frame.size.height-2*strokeWidth);
+    _centerImageView    = [[UIImageView alloc] initWithFrame:imageFrame];
+    [self addSubview:_centerImageView];
+    [self styleCenterImagePlaying:NO];
 }
 
 #pragma mark - 
@@ -71,6 +79,7 @@
 {
     [self animateOuterProgress:1.0f];
     
+    [self styleCenterImagePlaying:YES];
     [self doRotation];
     [_rotationAnimationTimer invalidate];
     _rotationAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:kAnimationDuration target:self selector:@selector(rotationAnimationTimerTick:) userInfo:nil repeats:YES];
@@ -80,9 +89,21 @@
 {
     [_rotationAnimationTimer invalidate];
     [_innerCircleShape removeAnimationForKey:@"transform.rotation"];
+    [self styleCenterImagePlaying:NO];
 }
 
 #pragma mark - Internal
+
+/**
+ Style the center image with either a play or pause icon, depending on current state (playing = YES -> style for currently playing)
+ */
+- (void) styleCenterImagePlaying:(BOOL)playing
+{
+    if (playing)
+        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
+    else
+        [_centerImageView setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
+}
 
 - (void) rotationAnimationTimerTick:(NSTimer*)timer
 {

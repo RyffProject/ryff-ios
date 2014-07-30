@@ -150,7 +150,7 @@
         [self clearRiff];
     
     // already playing
-    if (_audioPlayer && _audioPlayer.isPlaying && [self.tableView indexPathForCell:self.currentlyPlayingCell].section == riffIndex)
+    if (_audioPlayer && [self.tableView indexPathForCell:self.currentlyPlayingCell].row == riffIndex)
     {
         //currently playing this track, pause it
         if (self.audioPlayer.isPlaying)
@@ -288,7 +288,7 @@
             [_audioPlayer play];
         }
         
-        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
+        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     }
 }
 
