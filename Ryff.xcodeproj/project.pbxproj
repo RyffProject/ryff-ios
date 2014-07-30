@@ -38,8 +38,6 @@
 		830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCED18FA786800A9C53F /* Cylindric_2@2x.png */; };
 		830BBCF318FA786800A9C53F /* Cylindric_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */; };
 		8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8310F5A91981F92300250172 /* RYPlayControl.m */; };
-		8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */; };
-		8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */; };
 		831B96001964D8C5003A8616 /* repost.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B95FE1964D8C5003A8616 /* repost.png */; };
 		831B96011964D8C5003A8616 /* repost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B95FF1964D8C5003A8616 /* repost@2x.png */; };
 		831B96041964D9CE003A8616 /* upvote.png in Resources */ = {isa = PBXBuildFile; fileRef = 831B96021964D9CE003A8616 /* upvote.png */; };
@@ -50,11 +48,12 @@
 		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
 		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
 		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
+		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
+		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AA195FB3C3005938F5 /* UIView+Styling.m */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
-		837E9AC31981DA4D0052E006 /* RYProfilePostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089D1979940400DDD26C /* SGActivityIndicator.m */; };
 		838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089F1979940400DDD26C /* SGHTTPRequest.m */; };
@@ -108,11 +107,8 @@
 		83E56B641953A0A900EF054C /* RYRiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B611953A0A900EF054C /* RYRiff.m */; };
 		83E56B651953A0A900EF054C /* RYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B631953A0A900EF054C /* RYUser.m */; };
 		83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B671953A0DA00EF054C /* RYMediaEditor.m */; };
-		83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */; };
-		83ED34CB193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */; };
 		83ED34CE19316E5D00FEB018 /* Lato-Lig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */; };
 		83ED34CF19316E5D00FEB018 /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */; };
-		83ED34D519317D0F00FEB018 /* RYRiffTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34D419317D0F00FEB018 /* RYRiffTrackTableViewCell.xib */; };
 		83ED34E81931851600FEB018 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34D81931851600FEB018 /* AppIcon29x29.png */; };
 		83ED34E91931851600FEB018 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34D91931851600FEB018 /* AppIcon29x29@2x.png */; };
 		83ED34EA1931851600FEB018 /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34DA1931851600FEB018 /* AppIcon40x40.png */; };
@@ -145,7 +141,6 @@
 		83FCD16818F907C400A493F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD16618F907C400A493F0 /* InfoPlist.strings */; };
 		83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD16918F907C400A493F0 /* RyffTests.m */; };
 		83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD17518F909DB00A493F0 /* RYProfileViewController.m */; };
-		83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */; };
 		83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */; };
 		83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18A18F9134B00A493F0 /* RYBandViewController.m */; };
 		83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */; };
@@ -227,9 +222,6 @@
 		830BBCEE18FA786800A9C53F /* Cylindric_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cylindric_3@2x.png"; sourceTree = "<group>"; };
 		8310F5A81981F92300250172 /* RYPlayControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPlayControl.h; sourceTree = "<group>"; };
 		8310F5A91981F92300250172 /* RYPlayControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPlayControl.m; sourceTree = "<group>"; };
-		8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RyRiffDetailsTableViewCell.xib; sourceTree = "<group>"; };
-		8314E33019330506007F8B44 /* RyRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RyRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
-		8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RyRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
 		831B95FE1964D8C5003A8616 /* repost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repost.png; sourceTree = "<group>"; };
 		831B95FF1964D8C5003A8616 /* repost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "repost@2x.png"; sourceTree = "<group>"; };
 		831B96021964D9CE003A8616 /* upvote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upvote.png; sourceTree = "<group>"; };
@@ -246,6 +238,9 @@
 		833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SGImageCache.m"; sourceTree = "<group>"; };
 		834039FB195A44E90001EA53 /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+block.h"; path = "../../Global Helpers/NSObject+block.h"; sourceTree = "<group>"; };
 		834039FC195A44E90001EA53 /* NSObject+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+block.m"; path = "../../Global Helpers/NSObject+block.m"; sourceTree = "<group>"; };
+		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
+		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
+		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateViewController.h; sourceTree = "<group>"; };
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
@@ -254,8 +249,6 @@
 		836461AA195FB3C3005938F5 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
 		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
-		837E9AC11981DA4D0052E006 /* RYProfilePostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfilePostTableViewCell.h; sourceTree = "<group>"; };
-		837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfilePostTableViewCell.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
 		837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
 		8388089C1979940400DDD26C /* SGActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActivityIndicator.h; sourceTree = "<group>"; };
@@ -346,12 +339,8 @@
 		83E56B631953A0A900EF054C /* RYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUser.m; sourceTree = "<group>"; };
 		83E56B661953A0DA00EF054C /* RYMediaEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMediaEditor.h; sourceTree = "<group>"; };
 		83E56B671953A0DA00EF054C /* RYMediaEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYMediaEditor.m; sourceTree = "<group>"; };
-		83ED34C71931639800FEB018 /* RYRiffCellBodyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCellBodyTableViewCell.h; sourceTree = "<group>"; };
-		83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCellBodyTableViewCell.m; sourceTree = "<group>"; };
-		83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellBodyTableViewCell.xib; sourceTree = "<group>"; };
 		83ED34CC19316E5D00FEB018 /* Lato-Lig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Lig.ttf"; sourceTree = "<group>"; };
 		83ED34CD19316E5D00FEB018 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
-		83ED34D419317D0F00FEB018 /* RYRiffTrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffTrackTableViewCell.xib; sourceTree = "<group>"; };
 		83ED34D81931851600FEB018 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		83ED34D91931851600FEB018 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
 		83ED34DA1931851600FEB018 /* AppIcon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40.png; sourceTree = "<group>"; };
@@ -389,8 +378,6 @@
 		83FCD16918F907C400A493F0 /* RyffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyffTests.m; sourceTree = "<group>"; };
 		83FCD17418F909DB00A493F0 /* RYProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileViewController.h; sourceTree = "<group>"; };
 		83FCD17518F909DB00A493F0 /* RYProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileViewController.m; sourceTree = "<group>"; };
-		83FCD17818F90C1500A493F0 /* RYRiffTrackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffTrackTableViewCell.h; sourceTree = "<group>"; };
-		83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffTrackTableViewCell.m; sourceTree = "<group>"; };
 		83FCD17F18F90F8F00A493F0 /* RYSearchPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSearchPageViewController.h; sourceTree = "<group>"; };
 		83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYSearchPageViewController.m; sourceTree = "<group>"; };
 		83FCD18918F9134B00A493F0 /* RYBandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYBandViewController.h; sourceTree = "<group>"; };
@@ -823,8 +810,6 @@
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */,
 				837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */,
-				837E9AC11981DA4D0052E006 /* RYProfilePostTableViewCell.h */,
-				837E9AC21981DA4D0052E006 /* RYProfilePostTableViewCell.m */,
 			);
 			name = Profile;
 			path = UI/Profile;
@@ -833,15 +818,9 @@
 		83FCD17718F90BE700A493F0 /* RiffCell */ = {
 			isa = PBXGroup;
 			children = (
-				83FCD17818F90C1500A493F0 /* RYRiffTrackTableViewCell.h */,
-				83FCD17918F90C1500A493F0 /* RYRiffTrackTableViewCell.m */,
-				83ED34D419317D0F00FEB018 /* RYRiffTrackTableViewCell.xib */,
-				8314E33019330506007F8B44 /* RyRiffDetailsTableViewCell.h */,
-				8314E33119330506007F8B44 /* RyRiffDetailsTableViewCell.m */,
-				8314E32E193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib */,
-				83ED34C71931639800FEB018 /* RYRiffCellBodyTableViewCell.h */,
-				83ED34C81931639800FEB018 /* RYRiffCellBodyTableViewCell.m */,
-				83ED34CA193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib */,
+				834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */,
+				834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */,
+				834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */,
 			);
 			name = RiffCell;
 			path = ../UI/Profile/RiffCell;
@@ -1085,6 +1064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83ED34E91931851600FEB018 /* AppIcon29x29@2x.png in Resources */,
+				834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */,
 				830186021900B1CD00093EFA /* tabBar@2x.png in Resources */,
 				830BBCE018FA401700A9C53F /* friend@2x.png in Resources */,
 				83C6CA8718FAFF5200412469 /* reset.png in Resources */,
@@ -1104,7 +1084,6 @@
 				83ED34F21931851600FEB018 /* AppIcon72x72.png in Resources */,
 				830BBCC318FA081600A9C53F /* checkmark.png in Resources */,
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
-				83ED34D519317D0F00FEB018 /* RYRiffTrackTableViewCell.xib in Resources */,
 				83FE255B19315D79009FC978 /* riffCellBack@2x.png in Resources */,
 				830BBCF218FA786800A9C53F /* Cylindric_2@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
@@ -1146,7 +1125,6 @@
 				830BBCF018FA786800A9C53F /* Cylindric_1@2x.png in Resources */,
 				83FCD1D018F9683D00A493F0 /* Loading_1.png in Resources */,
 				831B96041964D9CE003A8616 /* upvote.png in Resources */,
-				8314E32F193304EA007F8B44 /* RyRiffDetailsTableViewCell.xib in Resources */,
 				83ED34E81931851600FEB018 /* AppIcon29x29.png in Resources */,
 				83C6A5FA1960F99300BB3D1A /* delete.png in Resources */,
 				830BBCEF18FA786800A9C53F /* Cylindric_1.png in Resources */,
@@ -1163,7 +1141,6 @@
 				83ED34F41931851600FEB018 /* AppIcon76x76.png in Resources */,
 				83ED34F31931851600FEB018 /* AppIcon72x72@2x.png in Resources */,
 				831B96011964D8C5003A8616 /* repost@2x.png in Resources */,
-				83ED34CB193163C900FEB018 /* RYRiffCellBodyTableViewCell.xib in Resources */,
 				8397133F1936DD1100913996 /* Main.storyboard in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
 				83C6CA8518FAFF5200412469 /* cloud.png in Resources */,
@@ -1207,7 +1184,6 @@
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
 				833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */,
-				837E9AC31981DA4D0052E006 /* RYProfilePostTableViewCell.m in Sources */,
 				833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
@@ -1229,25 +1205,23 @@
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83CCC913197EFCBF00FD1B4B /* AFURLConnectionOperation.m in Sources */,
 				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
-				83ED34C91931639800FEB018 /* RYRiffCellBodyTableViewCell.m in Sources */,
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
 				83CCC911197EFCBF00FD1B4B /* AFNetworkReachabilityManager.m in Sources */,
 				837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
-				8314E33219330506007F8B44 /* RyRiffDetailsTableViewCell.m in Sources */,
 				838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
 				83FCD18B18F9134B00A493F0 /* RYBandViewController.m in Sources */,
 				838808B1197994B700DDD26C /* MGDeallocAction.m in Sources */,
 				831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */,
 				83CCC90E197EFCBF00FD1B4B /* AFHTTPRequestOperation.m in Sources */,
+				834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */,
 				83CCC912197EFCBF00FD1B4B /* AFSecurityPolicy.m in Sources */,
 				838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */,
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83CCC91D197EFCBF00FD1B4B /* UIRefreshControl+AFNetworking.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
-				83FCD17A18F90C1500A493F0 /* RYRiffTrackTableViewCell.m in Sources */,
 				83CCC916197EFCBF00FD1B4B /* AFURLSessionManager.m in Sources */,
 				83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */,
 				838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */,

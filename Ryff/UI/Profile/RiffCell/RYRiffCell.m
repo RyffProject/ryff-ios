@@ -1,12 +1,12 @@
 //
-//  RYProfileTableViewCell.m
+//  RYRiffCell.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 7/24/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYProfilePostTableViewCell.h"
+#import "RYRiffCell.h"
 
 // Data Objects
 #import "RYNewsfeedPost.h"
@@ -20,7 +20,7 @@
 // UI Objects
 #import "RYPlayControl.h"
 
-@interface RYProfilePostTableViewCell () <UIGestureRecognizerDelegate>
+@interface RYRiffCell () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation RYProfilePostTableViewCell
+@implementation RYRiffCell
 
 - (void) awakeFromNib
 {
@@ -50,7 +50,7 @@
     [_playControlView configureWithFrame:_playControlView.bounds];
 }
 
-- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate
+- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
 {
     _riffIndex = riffIndex;
     _delegate  = delegate;

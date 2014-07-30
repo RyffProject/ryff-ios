@@ -21,7 +21,7 @@
 // Data Managers
 #import "RYServices.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RYRiffDetailsCellDelegate, UpvoteDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate, UpvoteDelegate>
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
@@ -39,10 +39,9 @@
 {
     [super viewDidLoad];
     
-    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffTrackTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffTitleCellReuseID];
-    [self.riffTableView registerNib:[UINib nibWithNibName:@"RyRiffDetailsTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffDetailsCellReuseID];
-    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellBodyTableViewCell" bundle:NULL] forCellReuseIdentifier:kRiffBodyCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
     
+    _riffSection = 0;
     _openRiffDetailsSection = -1;
 }
 
@@ -77,7 +76,7 @@
 
 - (void) startRiffPlaying:(NSData*)riffData
 {
-    if (!_isPlaying)
+    if (!_audioPlayer.isPlaying)
     {
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithData:riffData error:&error];
@@ -93,12 +92,7 @@
             [_audioPlayer play];
         }
         
-        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                             target:self
-                                                           selector:@selector(updateTimeLeft)
-                                                           userInfo:nil
-                                                            repeats:YES];
-        _isPlaying = YES;
+        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     }
 }
 
@@ -114,7 +108,6 @@
     _riffData = nil;
     _riffConnection = nil;
     _audioPlayer = nil;
-    _isPlaying = NO;
     _isDownloading = NO;
 }
 
@@ -123,10 +116,10 @@
 
 - (void)updateTimeLeft
 {
-    NSTimeInterval timeLeft = _audioPlayer.duration - _audioPlayer.currentTime;
+    CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
     
     // update your UI with timeLeft
-    [self.currentlyPlayingCell updateTimeRemaining:timeLeft];
+    [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
 }
 
 #pragma mark -
@@ -166,23 +159,64 @@
     [self clearRiff];
 }
 
-#pragma mark -
-#pragma mark - RYRiffDetailsCellDelegate
-// actions by details cell
+#pragma mark - ProfilePost Delegate
 
 /*
- Upvote button hit. Should apply upvote to the relevant riff.
+ Download/play/pause riff track for post corresponding to riffIndex
  */
-- (void) upvoteHit:(NSInteger)riffIndex
+- (void) playerControlAction:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = _feedItems[riffIndex];
+    // if not playing, begin
+    if (!_audioPlayer && !self.isDownloading)
+    {
+        self.currentlyPlayingCell = (RYRiffCell*)[self.riffTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:_riffSection]];
+        [self startRiffDownload:post.riff];
+        return;
+    }
+    
+    // stop any downloads
+    if (self.isDownloading)
+        [self clearRiff];
+    
+    // already playing
+    if (_audioPlayer && [self.riffTableView indexPathForCell:self.currentlyPlayingCell].row == riffIndex)
+    {
+        //currently playing this track, pause it
+        if (self.audioPlayer.isPlaying)
+        {
+            [self.audioPlayer pause];
+            [self.currentlyPlayingCell shouldPause:YES];
+        }
+        else
+        {
+            [self.audioPlayer play];
+            [self.currentlyPlayingCell shouldPause:NO];
+        }
+    }
+    else if (_audioPlayer && _audioPlayer.isPlaying)
+    {
+        //playing another, switch riff
+        [self clearRiff];
+        
+        self.currentlyPlayingCell = (RYRiffCell*)[self.riffTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:_riffSection]];
+        [self startRiffDownload:post.riff];
+    }
+}
+
+/*
+ Upvote post corresponding to riffIndex
+ */
+- (void) upvoteAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
     [[RYServices sharedInstance] upvote:!post.isUpvoted post:post.postId forDelegate:self];
 }
 
 /*
- Repost button hit. Should open a new RYRiffCreateVC with the relevant riff.
+ Repost post corresponding to riffIndex
  */
-- (void) repostHit:(NSInteger)riffIndex
+- (void) repostAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
     if (post.riff)
@@ -194,71 +228,37 @@
 }
 
 /*
- Delete post button hit. Should have services do so
+ Follow user for post corresponding to riffIndex
  */
-- (void) deleteHit:(NSInteger)riffIndex
+- (void) followAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
-    BlockAlertView *deleteAlert = [[BlockAlertView alloc] initWithTitle:@"Delete Riff?" message:[NSString stringWithFormat:@"Are you sure you wish to delete %@?",post.riff.title] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
-    [deleteAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
-        
-        if (buttonIndex != alertView.cancelButtonIndex)
-        {
-            // delete post
-            NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
-            [mutableFeedItems removeObjectAtIndex:riffIndex];
-            [_riffTableView beginUpdates];
-            _feedItems = mutableFeedItems;
-            [_riffTableView deleteSections:[NSIndexSet indexSetWithIndex:riffIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-            _openRiffDetailsSection = -1;
-            [_riffTableView endUpdates];
-            [[RYServices sharedInstance] deletePost:post];
-        }
-    }];
-    [deleteAlert show];
+    
 }
 
-- (void) longPress:(NSInteger)riffIndex
-{
-    // Should open that section with more options
-    [self openRiffDetailsForSection:riffIndex];
-}
-
-#pragma mark - RiffCell Actions
-
-/*
- Open/close details for riff at given index. Will close the currently open one (_openRiffDetailsSection), and open the one at riffIndex if that wasn't just open
- */
-- (void) openRiffDetailsForSection:(NSInteger)riffIndex
-{
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
-    
-    [self.riffTableView beginUpdates];
-    
-    NSInteger oldOpen = _openRiffDetailsSection;
-    
-    if (_openRiffDetailsSection >= 0)
-    {
-        RYNewsfeedPost *oldPost = [self.feedItems objectAtIndex:_openRiffDetailsSection];
-        NSInteger rowForBody = (oldPost.riff) ? 2 : 1;
-        
-        // should close the currently open riff
-        [self.riffTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:_openRiffDetailsSection]] withRowAnimation:UITableViewRowAnimationMiddle];
-        _openRiffDetailsSection = -1;
-    }
-    
-    if (oldOpen != riffIndex)
-    {
-        // riff selected wasn't already open, should open it
-        NSInteger rowForBody = (post.riff) ? 2 : 1;
-        
-        // insert new row
-        _openRiffDetailsSection = riffIndex;
-        [self.riffTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rowForBody-1 inSection:riffIndex]] withRowAnimation:UITableViewRowAnimationMiddle];
-    }
-    
-    [self.riffTableView endUpdates];
-}
+///*
+// Delete post button hit. Should have services do so
+// */
+//- (void) deleteHit:(NSInteger)riffIndex
+//{
+//    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+//    BlockAlertView *deleteAlert = [[BlockAlertView alloc] initWithTitle:@"Delete Riff?" message:[NSString stringWithFormat:@"Are you sure you wish to delete %@?",post.riff.title] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+//    [deleteAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+//        
+//        if (buttonIndex != alertView.cancelButtonIndex)
+//        {
+//            // delete post
+//            NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
+//            [mutableFeedItems removeObjectAtIndex:riffIndex];
+//            [_riffTableView beginUpdates];
+//            _feedItems = mutableFeedItems;
+//            [_riffTableView deleteSections:[NSIndexSet indexSetWithIndex:riffIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            _openRiffDetailsSection = -1;
+//            [_riffTableView endUpdates];
+//            [[RYServices sharedInstance] deletePost:post];
+//        }
+//    }];
+//    [deleteAlert show];
+//}
 
 #pragma mark -
 #pragma mark - Upvotes
@@ -290,93 +290,26 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.feedItems.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:section];
-    NSInteger numCells = (post.riff) ? 2 : 1;
-    
-    if (section == _openRiffDetailsSection)
-    {
-        // riff details are open, should have extra row
-        numCells++;
-    }
-    
-    return numCells;
+    return _feedItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    NSInteger riffAdjust = (post.riff) ? 1 : 0;
-    
-    if (post.riff && indexPath.row == 0)
-    {
-        // Title & riff
-        cell = [tableView dequeueReusableCellWithIdentifier:kRiffTitleCellReuseID forIndexPath:indexPath];
-    }
-    else
-    {
-        if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
-        {
-            // riff details
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID forIndexPath:indexPath];
-        }
-        else
-        {
-            // User post: cell body
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffBodyCellReuseID forIndexPath:indexPath];
-        }
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    NSInteger riffAdjust = (post.riff) ? 1 : 0;
-    
-    if (post.riff && indexPath.row == 0)
-    {
-        // title cell
-        RYRiffTrackTableViewCell *riffTitleCell = (RYRiffTrackTableViewCell*)cell;
-        [riffTitleCell configureForPost:post];
-    }
-    else if (indexPath.section == _openRiffDetailsSection && indexPath.row == riffAdjust)
-    {
-        // riff details cell
-        RyRiffDetailsTableViewCell *riffDetailsCell = (RyRiffDetailsTableViewCell*)cell;
-        [riffDetailsCell configureForPost:post index:indexPath.section withDelegate:self];
-    }
-    else
-    {
-        // riff body cell
-        NSAttributedString *attributedText = [RYStyleSheet createNewsfeedAttributedTextWithPost:post];
-        RYRiffCellBodyTableViewCell *riffBodyCell = (RYRiffCellBodyTableViewCell*)cell;
-        [riffBodyCell configureWithAttributedString:attributedText index:indexPath.section delegate:self];
-    }
+    return [tableView dequeueReusableCellWithIdentifier:kRiffCellReuseID];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    
-    CGFloat height = (indexPath.row == 0 && post.riff) ? 50.0f : 44.0f;
-    
-    NSInteger bodyRow = (post.riff) ? 1 : 0;
-    if (indexPath.section == _openRiffDetailsSection)
-        bodyRow++;
-    
-    if (indexPath.row == bodyRow)
-    {
-        CGSize constraint = CGSizeMake(self.view.frame.size.width-kRiffBodyCellPadding, 20000);
-        NSAttributedString *mainText = [RYStyleSheet createNewsfeedAttributedTextWithPost:post];
-        CGRect result = [mainText boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        height = MAX(result.size.height+20, height);
-    }
+    // profile post -> calculate size with attributed text for post description
+    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    CGFloat widthRatio = kRiffCellLabelRatio;
+    CGFloat height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(widthRatio*self.riffTableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+    height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
     
     return height;
 }
@@ -384,57 +317,15 @@
 #pragma mark -
 #pragma mark - TableView Delegate
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:indexPath.section];
-    
-    // Riff row
-    if (post.riff && indexPath.row == 0)
-    {
-        // if not playing, begin
-        if (!self.isPlaying && !self.isDownloading)
-        {
-            self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-            [self startRiffDownload:post.riff];
-            return;
-        }
-        
-        // stop any downloads
-        if (self.isDownloading)
-            [self clearRiff];
-        
-        // already playing
-        if (self.isPlaying && [tableView indexPathForCell:self.currentlyPlayingCell].section == indexPath.section)
-        {
-            //currently playing this track, pause it
-            if (self.audioPlayer.isPlaying)
-            {
-                [self.audioPlayer pause];
-                [self.currentlyPlayingCell shouldPause:YES];
-            }
-            else
-            {
-                [self.audioPlayer play];
-                [self.currentlyPlayingCell shouldPause:NO];
-            }
-        }
-        else if (self.isPlaying)
-        {
-            //playing another, switch riff
-            [self clearRiff];
-            
-            self.currentlyPlayingCell = (RYRiffTrackTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-            [self startRiffDownload:post.riff];
-        }
-    }
-    else
-    {
-        // open riff details VC
-        [self openRiffDetailsForSection:indexPath.section];
-    }
+    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    [((RYRiffCell*)cell) configureForPost:post attributedText:[RYStyleSheet createProfileAttributedTextWithPost:post] riffIndex:indexPath.row delegate:self];
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_riffSection] animated:YES];
+}
 
 @end

@@ -1,5 +1,5 @@
 //
-//  RYProfileTableViewCell.h
+//  RYRiffCell.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 7/24/14.
@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#define kProfilePostCellLabelRatio isIpad ? (683.0f/768.0f) : (683.0f/768.0f)
-#define kProfilePostCellHeightMinusText 52.0f
-#define kProfilePostCellMinimumHeight 80.0f
+#define kRiffCellLabelRatio isIpad ? (683.0f/768.0f) : (683.0f/768.0f)
+#define kRiffCellHeightMinusText 52.0f
+#define kRiffCellMinimumHeight 80.0f
 
-@protocol ProfilePostCellDelegate <NSObject>
+@protocol RiffCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;
 - (void) upvoteAction:(NSInteger)riffIndex;
 - (void) repostAction:(NSInteger)riffIndex;
@@ -21,13 +21,13 @@
 
 @class RYNewsfeedPost;
 
-@interface RYProfilePostTableViewCell : UITableViewCell
+@interface RYRiffCell : UITableViewCell
 
-@property (nonatomic, weak) id<ProfilePostCellDelegate> delegate;
+@property (nonatomic, weak) id<RiffCellDelegate> delegate;
 
 @property (nonatomic, assign) NSInteger riffIndex;
 
-- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<ProfilePostCellDelegate>)delegate;
+- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
 
 - (void) startDownloading;
 - (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;

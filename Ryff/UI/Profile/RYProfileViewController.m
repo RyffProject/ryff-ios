@@ -11,16 +11,10 @@
 // Data Managers
 #import "RYServices.h"
 
-// Data Objects
-#import "RYUser.h"
-#import "RYRiff.h"
-#import "RYNewsfeedPost.h"
-
 // Custom UI
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
 #import "RYProfileInfoTableViewCell.h"
-#import "RYProfilePostTableViewCell.h"
 
 // Categories
 #import "UIImage+Thumbnail.h"
@@ -36,21 +30,14 @@
 #import "RYLoginViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
-#define kProfilePostCellReuseID @"ProfilePostCell"
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, ProfilePostCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
-@property (nonatomic, strong) NSArray *feedItems;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (nonatomic, strong) RYProfilePostTableViewCell *currentlyPlayingCell;
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic, assign) BOOL isDownloading;
-@property (nonatomic, strong) NSMutableData *riffData;
-@property (nonatomic, assign) CGFloat totalBytes;
-@property (nonatomic, strong) NSURLConnection *riffConnection;
-@property (nonatomic, strong) NSTimer *updateTimer;
 
 @end
 
@@ -58,8 +45,10 @@
 
 - (void) viewDidLoad
 {
+    self.riffTableView = _tableView;
     [super viewDidLoad];
     
+    self.riffSection = 1;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
@@ -129,75 +118,6 @@
     [self presentProfilePictureOptions];
 }
 
-#pragma mark - ProfilePost Delegate
-
-/*
- Download/play/pause riff track for post corresponding to riffIndex
- */
-- (void) playerControlAction:(NSInteger)riffIndex
-{
-    RYNewsfeedPost *post = _feedItems[riffIndex];
-    // if not playing, begin
-    if (!_audioPlayer && !self.isDownloading)
-    {
-        self.currentlyPlayingCell = (RYProfilePostTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:1]];
-        [self startRiffDownload:post.riff];
-        return;
-    }
-    
-    // stop any downloads
-    if (self.isDownloading)
-        [self clearRiff];
-    
-    // already playing
-    if (_audioPlayer && [self.tableView indexPathForCell:self.currentlyPlayingCell].row == riffIndex)
-    {
-        //currently playing this track, pause it
-        if (self.audioPlayer.isPlaying)
-        {
-            [self.audioPlayer pause];
-            [self.currentlyPlayingCell shouldPause:YES];
-        }
-        else
-        {
-            [self.audioPlayer play];
-            [self.currentlyPlayingCell shouldPause:NO];
-        }
-    }
-    else if (_audioPlayer && _audioPlayer.isPlaying)
-    {
-        //playing another, switch riff
-        [self clearRiff];
-        
-        self.currentlyPlayingCell = (RYProfilePostTableViewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:1]];
-        [self startRiffDownload:post.riff];
-    }
-}
-
-/*
- Upvote post corresponding to riffIndex
- */
-- (void) upvoteAction:(NSInteger)riffIndex
-{
-    
-}
-
-/*
- Repost post corresponding to riffIndex
- */
-- (void) repostAction:(NSInteger)riffIndex
-{
-    
-}
-
-/*
- Follow user for post corresponding to riffIndex
- */
-- (void) followAction:(NSInteger)riffIndex
-{
-    
-}
-
 #pragma mark - Edit Profile
 
 /*
@@ -257,110 +177,11 @@
 }
 
 #pragma mark -
-#pragma mark - Riff Downloading / Playing
-
-- (void) startRiffDownload:(RYRiff*)riff
-{
-    _isDownloading = YES;
-    [_currentlyPlayingCell startDownloading];
-    
-    NSURL *riffURL = riff.URL;
-    NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
-    _riffData = [[NSMutableData alloc] initWithLength:0];
-    _riffConnection = [[NSURLConnection alloc] initWithRequest:dataRequest delegate:self startImmediately:YES];
-}
-
-- (void) startRiffPlaying:(NSData*)riffData
-{
-    if (!_audioPlayer.isPlaying)
-    {
-        NSError *error;
-        _audioPlayer = [[AVAudioPlayer alloc] initWithData:riffData error:&error];
-        [_audioPlayer setDelegate:self];
-        _audioPlayer.numberOfLoops = 0;
-        _audioPlayer.volume = 1.0f;
-        [_audioPlayer prepareToPlay];
-        
-        if (_audioPlayer == nil)
-            NSLog(@"Error: %@", [error localizedDescription]);
-        else
-        {
-            [_audioPlayer play];
-        }
-        
-        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-    }
-}
-
-- (void) clearRiff
-{
-    [_updateTimer invalidate];
-    _updateTimer = nil;
-    [_currentlyPlayingCell clearAudio];
-    _currentlyPlayingCell = nil;
-    [_audioPlayer stop];
-    _audioPlayer = nil;
-    _totalBytes = 0;
-    _riffData = nil;
-    _riffConnection = nil;
-    _audioPlayer = nil;
-    _isDownloading = NO;
-}
-
-#pragma mark -
-#pragma mark - Timer UI Update
-
-- (void)updateTimeLeft
-{
-    CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
-    
-    // update your UI with timeLeft
-    [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
-}
-
-#pragma mark -
-#pragma mark - Riff Download Delegate
-
-- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [_riffData setLength:0];
-    [self setTotalBytes:response.expectedContentLength];
-}
-
-- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_riffData appendData:data];
-    [_currentlyPlayingCell updateDownloadIndicatorWithBytes:_riffData.length outOf:_totalBytes];
-}
-
-- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    NSLog(@"%@",[error localizedDescription]);
-    [_currentlyPlayingCell finishDownloading:NO];
-    [self clearRiff];
-    _isDownloading = NO;
-}
-
-- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [_currentlyPlayingCell finishDownloading:YES];
-    [self startRiffPlaying:_riffData];
-    _isDownloading = NO;
-}
-
-#pragma mark -
-#pragma mark - AVAudioPlayerDelegate
-
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    [self clearRiff];
-}
-
-#pragma mark -
 #pragma mark - TableView data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1 + [super numberOfSectionsInTableView:tableView];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -369,7 +190,7 @@
     if (section == 0)
         numRows = 1;
     else if (section == 1)
-        numRows = _feedItems.count;
+        numRows = [super tableView:tableView numberOfRowsInSection:self.riffSection];
     return numRows;
 }
 
@@ -377,11 +198,13 @@
 {
     UITableViewCell *cell;
     if (indexPath.section == 0)
+    {
         cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
     else if (indexPath.section == 1)
-        cell = [tableView dequeueReusableCellWithIdentifier:kProfilePostCellReuseID];
+        cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -399,11 +222,7 @@
     }
     else if (indexPath.section == 1)
     {
-        // profile post -> calculate size with attributed text for post description
-        RYNewsfeedPost *post = _feedItems[indexPath.row];
-        CGFloat widthRatio = kProfilePostCellLabelRatio;
-        height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(widthRatio*self.tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
-        height = MAX(height+kProfilePostCellHeightMinusText, kProfilePostCellMinimumHeight);
+        height = [super tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     }
     return height;
 }
@@ -424,10 +243,16 @@
     }
     else if (indexPath.section == 1)
     {
-        // profile post
-        RYNewsfeedPost *post = _feedItems[indexPath.row];
-        [((RYProfilePostTableViewCell*)cell) configureForPost:post attributedText:[RYStyleSheet createProfileAttributedTextWithPost:post] riffIndex:indexPath.row delegate:self];
+        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     }
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1)
+        [super tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
 }
 
 #pragma mark -

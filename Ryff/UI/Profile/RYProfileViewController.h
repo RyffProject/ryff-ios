@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYRiffStreamingCoreViewController.h"
 
 @class RYUser;
 
-@interface RYProfileViewController : UITableViewController
+@interface RYProfileViewController : RYRiffStreamingCoreViewController
+
+- (void) configureForUser:(RYUser *)user;
 
 @end

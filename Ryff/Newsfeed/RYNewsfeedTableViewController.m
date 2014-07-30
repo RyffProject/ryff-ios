@@ -27,14 +27,14 @@
     
     // set up test data
     self.feedItems = @[];
-    self.isPlaying = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [[RYServices sharedInstance] getFriendPostsForDelegate:self];
+//    [[RYServices sharedInstance] getFriendPostsForDelegate:self];
+    [[RYServices sharedInstance] getUserPostsForUser:7 Delegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

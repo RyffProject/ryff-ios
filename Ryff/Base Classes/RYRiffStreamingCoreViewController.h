@@ -14,9 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 // Custom UI
-#import "RYRiffTrackTableViewCell.h"
-#import "RyRiffDetailsTableViewCell.h"
-#import "RYRiffCellBodyTableViewCell.h"
+#import "RYRiffCell.h"
 #import "RYStyleSheet.h"
 
 // Data Objects
@@ -24,12 +22,9 @@
 #import "RYRiff.h"
 #import "RYUser.h"
 
-#define kRiffTitleCellReuseID @"RiffTitleCell"
-#define kRiffDetailsCellReuseID @"RiffDetailsCell"
-#define kRiffBodyCellReuseID @"RiffBodyCell"
+#define kRiffCellReuseID @"RiffCell"
 
 @class AVAudioPlayer;
-@class RYRiffTrackTableViewCell;
 
 @interface RYRiffStreamingCoreViewController : RYCoreViewController
 
@@ -38,11 +33,12 @@
 @property (nonatomic, strong) NSMutableData *riffData;
 @property (nonatomic, strong) NSURLConnection *riffConnection;
 @property (nonatomic, assign) CGFloat totalBytes;
-@property (nonatomic, weak) RYRiffTrackTableViewCell *currentlyPlayingCell;
-@property (nonatomic, assign) BOOL isDownloading, isPlaying;
+@property (nonatomic, weak) RYRiffCell *currentlyPlayingCell;
+@property (nonatomic, assign) BOOL isDownloading;
 
 @property (nonatomic, strong) UITableView *riffTableView;
 @property (nonatomic, strong) NSArray *feedItems;
+@property (nonatomic, assign) NSInteger riffSection;
 
 - (void) startRiffDownload:(RYRiff*)riff;
 - (void) clearRiff;
