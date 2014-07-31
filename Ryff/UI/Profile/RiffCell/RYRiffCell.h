@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kRiffCellLabelRatio isIpad ? (683.0f/768.0f) : (683.0f/768.0f)
+#define kRiffCellWidthMinusText isIpad ? 85.0f : 85.0f
 #define kRiffCellHeightMinusText 52.0f
 #define kRiffCellMinimumHeight 80.0f
 

@@ -24,6 +24,7 @@
 #define kUpvotePostAction   @"add-upvote.php"
 #define kDeleteUpvoteAction @"delete-upvote.php"
 #define kDeletePostAction   @"delete-post.php"
+#define kGetPostFamily      @"get-post-family.php"
 #define kGetPosts           @"get-posts.php"
 #define kGetPeople          @"get-user.php"
 #define kGetNearby          @"get-users-nearby.php"
@@ -32,10 +33,9 @@
 @class RYNewsfeedPost;
 @class RYUser;
 
-@protocol POSTDelegate <NSObject>
-- (void) connectionFailed;
+@protocol PostDelegate <NSObject>
 - (void) postFailed:(NSString*)reason;
-- (void) postSucceeded:(id)response;
+- (void) postSucceeded:(NSArray*)posts;
 @end
 
 @protocol ArtistsFetchDelegate <NSObject>
@@ -59,7 +59,7 @@
 @end
 
 @protocol UpdateUserDelegate <NSObject>
-- (void) updateSucceeded:(RYUser*)newUser;
+- (void) updateSucceeded:(NSDictionary*)userDict;
 - (void) updateFailed:(NSString*)reason;
 @end
 
@@ -73,8 +73,8 @@
 + (RYUser *) loggedInUser;
 
 // Registration
-- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate;
-- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate;
+- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<UpdateUserDelegate>)delegate;
+- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate;
 - (BOOL) attemptBackgroundLogIn;
 - (void) logOut;
 
@@ -83,7 +83,7 @@
 - (void) editUserInfo:(RYUser*)user;
 - (void) deletePost:(RYNewsfeedPost*)post;
 
-// Artist Suggester
+// Discover
 @property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
 - (void) moreArtistsOfCount:(NSInteger)numArtists;
 - (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
@@ -92,8 +92,9 @@
 // Posts
 + (NSURL*)urlForRiff;
 - (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate;
-- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate;
-- (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate;
+- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
+- (void) getFriendPostsForDelegate:(id<PostDelegate>)delegate;
 - (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
+- (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
 
 @end

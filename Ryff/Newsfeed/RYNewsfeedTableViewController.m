@@ -14,7 +14,7 @@
 // Data Managers
 #import "RYServices.h"
 
-@interface RYNewsfeedTableViewController () <POSTDelegate>
+@interface RYNewsfeedTableViewController () <PostDelegate>
 
 @end
 
@@ -44,27 +44,14 @@
 
 #pragma mark -
 #pragma mark - Post Delegate
-- (void) connectionFailed
-{
-    
-}
+
 - (void) postFailed:(NSString*)reason
 {
     
 }
-- (void) postSucceeded:(id)response
+- (void) postSucceeded:(NSArray *)posts
 {
-    NSDictionary *responseDict = response;
-    NSArray *posts = [responseDict objectForKey:@"posts"];
-    
-    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *postDict in posts)
-    {
-        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
-        [myPosts addObject:post];
-    }
-    [self setFeedItems:myPosts];
+    [self setFeedItems:posts];
     [self.tableView reloadData];
 }
 

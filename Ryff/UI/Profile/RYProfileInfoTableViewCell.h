@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kProfileInfoCellLabelRatio isIpad ? (510.0f/768.0f) : (510.0f/768.0f)
+#define kProfileInfoCellWidthMinusText isIpad ? 258.0f : 258.0f
 #define kProfileInfoCellHeightMinusText 176.0f
 #define kProfileInfoCellMinimumHeight 260.0f
 #define kProfileInfoCellFont [UIFont fontWithName:kRegularFont size:18.0f]

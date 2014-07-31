@@ -14,6 +14,7 @@
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
+#import "RYRiffDetailsViewController.h"
 
 // UI Categories
 #import "UIImage+Color.h"
@@ -274,7 +275,7 @@
             NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
             [mutableFeedItems replaceObjectAtIndex:postIdx withObject:updatedPost];
             _feedItems = mutableFeedItems;
-            [_riffTableView reloadSections:[NSIndexSet indexSetWithIndex:postIdx] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [_riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
 }
@@ -305,11 +306,16 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // profile post -> calculate size with attributed text for post description
-    RYNewsfeedPost *post = _feedItems[indexPath.row];
-    CGFloat widthRatio = kRiffCellLabelRatio;
-    CGFloat height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(widthRatio*self.riffTableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
-    height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
+    CGFloat height = 0;
+    
+    if (indexPath.row < _feedItems.count)
+    {
+        // profile post -> calculate size with attributed text for post description
+        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        CGFloat widthMinusText = kRiffCellWidthMinusText;
+        height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+        height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
+    }
     
     return height;
 }
@@ -326,6 +332,12 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_riffSection] animated:YES];
+    
+    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+    RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
+    [riffDetails configureForPost:post];
+    [self presentViewController:riffDetails animated:YES completion:nil];
 }
 
 @end

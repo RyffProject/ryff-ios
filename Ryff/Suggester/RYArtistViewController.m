@@ -23,7 +23,7 @@
 // Frameworks
 #import "UIImageView+SGImageCache.h"
 
-@interface RYArtistViewController () <FriendsDelegate, POSTDelegate>
+@interface RYArtistViewController () <FriendsDelegate, PostDelegate>
 
 @end
 
@@ -148,29 +148,16 @@
 }
 
 #pragma mark -
-#pragma mark - POSTDelegate (for user posts)
+#pragma mark - PostDelegate
 
-- (void) connectionFailed
-{
-    
-}
 - (void) postFailed:(NSString*)reason
 {
     
 }
-- (void) postSucceeded:(id)response
+
+- (void) postSucceeded:(NSArray*)posts
 {
-    NSDictionary *responseDict = response;
-    NSArray *posts = [responseDict objectForKey:@"posts"];
-    
-    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *postDict in posts)
-    {
-        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
-        [myPosts addObject:post];
-    }
-    [self setFeedItems:myPosts];
+    [self setFeedItems:posts];
     [_tableView reloadData];
 }
 

@@ -52,7 +52,7 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Registration
 
-- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<POSTDelegate>)delegate
+- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<UpdateUserDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -62,18 +62,18 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             
             if (dictionary[@"success"])
-                [delegate postSucceeded:responseObject];
+                [delegate updateSucceeded:dictionary[@"user"]];
             else
-                [delegate postFailed:responseObject];
+                [delegate updateFailed:responseObject];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate postFailed:[error localizedDescription]];
+            [delegate updateFailed:[error localizedDescription]];
         }];
     });
 }
 
 
-- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<POSTDelegate>)delegate
+- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -86,12 +86,12 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             
             if (dictionary[@"success"])
-                [delegate postSucceeded:responseObject];
+                [delegate updateSucceeded:dictionary[@"user"]];
             else
-                [delegate postFailed:responseObject];
+                [delegate updateFailed:responseObject];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate postFailed:[error localizedDescription]];
+            [delegate updateFailed:[error localizedDescription]];
         }];
     });
 }
@@ -152,7 +152,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 [SGImageCache flushImagesOlderThan:0.1];
-                [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+                [delegate updateSucceeded:dictionary[@"user"]];
             }
             else
                 [delegate updateFailed:responseObject];
@@ -360,7 +360,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<POSTDelegate>)delegate
+- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -374,7 +374,10 @@ static RYUser* _loggedInUser;
             if (delegate)
             {
                 if (dictionary[@"success"])
-                    [delegate postSucceeded:responseObject];
+                {
+                    NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                    [delegate postSucceeded:posts];
+                }
                 else
                     [delegate postFailed:nil];
             }
@@ -387,7 +390,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getFriendPostsForDelegate:(id<POSTDelegate>)delegate
+- (void) getFriendPostsForDelegate:(id<PostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -397,7 +400,10 @@ static RYUser* _loggedInUser;
         [manager POST:action parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
-                [delegate postSucceeded:responseObject];
+            {
+                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                [delegate postSucceeded:posts];
+            }
             else
                 [delegate postFailed:nil];
             
@@ -426,6 +432,33 @@ static RYUser* _loggedInUser;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [delegate upvoteFailed:[error localizedDescription]];
+        }];
+    });
+}
+
+
+
+- (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *params = @{@"id":@(postID)};
+        
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetPostFamily];
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dictionary = responseObject;
+            if (dictionary[@"success"])
+            {
+                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                [delegate postSucceeded:posts];
+            }
+            else
+                [delegate postFailed:dictionary[@"error"]];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [delegate postFailed:[error localizedDescription]];
         }];
     });
 }

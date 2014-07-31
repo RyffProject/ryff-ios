@@ -27,7 +27,7 @@
 #define kPasswordRow 1
 #define kLoginRow 2
 
-@interface RYLoginViewController () <POSTDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface RYLoginViewController () <UpdateUserDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -130,31 +130,21 @@
 
 
 #pragma mark -
-#pragma mark - POSTDelegate
+#pragma mark - UpdateUserDelegate
 
-- (void) connectionFailed
-{
-    
-}
-
-- (void) postFailed:(NSString*)reason
+- (void) updateFailed:(NSString*)reason
 {
     [self hideHUD];
     UIAlertView *postWarning = [[UIAlertView alloc] initWithTitle:@"Post Error" message:[NSString stringWithFormat:@"Error: %@", reason] delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
     [postWarning show];
 }
 
-- (void) postSucceeded:(id)response
+- (void) updateSucceeded:(NSDictionary*)userDict
 {
-    NSDictionary *responseDict = response;
-    NSDictionary *userDict = [responseDict objectForKey:@"user"];
-    if (userDict)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
-        
-        [SSKeychain setPassword:_password forService:@"ryff" account:_username];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
+    
+    [SSKeychain setPassword:_password forService:@"ryff" account:_username];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Welcome" forDuration:0.5];

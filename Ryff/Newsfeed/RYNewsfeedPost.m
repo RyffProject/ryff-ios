@@ -58,4 +58,17 @@
     return newPost;
 }
 
++ (NSArray *)newsfeedPostsFromDictArray:(NSArray *)dictArray
+{
+    NSMutableArray *posts = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *postDict in dictArray)
+    {
+        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
+        [posts addObject:post];
+    }
+    
+    return posts;
+}
+
 @end

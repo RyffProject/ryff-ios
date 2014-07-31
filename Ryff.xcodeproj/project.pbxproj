@@ -47,6 +47,8 @@
 		833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D541975DFF10002A2BE /* SGImageCache.m */; };
 		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
 		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
+		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
+		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
 		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
@@ -236,6 +238,10 @@
 		833E1D561975DFF10002A2BE /* SGImageCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCacheTask.m; sourceTree = "<group>"; };
 		833E1D571975DFF10002A2BE /* UIImageView+SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SGImageCache.h"; sourceTree = "<group>"; };
 		833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SGImageCache.m"; sourceTree = "<group>"; };
+		833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffDetailsViewController.h; path = ../RYRiffDetailsViewController.h; sourceTree = "<group>"; };
+		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
+		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
+		833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
 		834039FB195A44E90001EA53 /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+block.h"; path = "../../Global Helpers/NSObject+block.h"; sourceTree = "<group>"; };
 		834039FC195A44E90001EA53 /* NSObject+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+block.m"; path = "../../Global Helpers/NSObject+block.m"; sourceTree = "<group>"; };
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
@@ -398,8 +404,8 @@
 		83FCD1B318F93FBF00A493F0 /* newsfeed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newsfeed@2x.png"; sourceTree = "<group>"; };
 		83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreTabBarViewController.h; sourceTree = "<group>"; };
 		83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreTabBarViewController.m; sourceTree = "<group>"; };
-		83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedPost.h; sourceTree = "<group>"; };
-		83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedPost.m; sourceTree = "<group>"; };
+		83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYNewsfeedPost.h; path = ../../Newsfeed/RYNewsfeedPost.h; sourceTree = "<group>"; };
+		83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYNewsfeedPost.m; path = ../../Newsfeed/RYNewsfeedPost.m; sourceTree = "<group>"; };
 		83FCD1C318F94AC400A493F0 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		83FCD1C418F94AC400A493F0 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		83FCD1CA18F9683D00A493F0 /* Loading_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Loading_1.png; sourceTree = "<group>"; };
@@ -536,6 +542,17 @@
 				833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */,
 			);
 			path = SGImageCache;
+			sourceTree = "<group>";
+		};
+		833FC1AF1989E467002491C8 /* RiffDetails */ = {
+			isa = PBXGroup;
+			children = (
+				833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */,
+				833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */,
+				833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */,
+				833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */,
+			);
+			path = RiffDetails;
 			sourceTree = "<group>";
 		};
 		835516731951314400CF2C23 /* RiffCreate */ = {
@@ -680,6 +697,8 @@
 				83E56B611953A0A900EF054C /* RYRiff.m */,
 				83E56B621953A0A900EF054C /* RYUser.h */,
 				83E56B631953A0A900EF054C /* RYUser.m */,
+				83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */,
+				83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -850,10 +869,9 @@
 			isa = PBXGroup;
 			children = (
 				83FCD17718F90BE700A493F0 /* RiffCell */,
+				833FC1AF1989E467002491C8 /* RiffDetails */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
 				83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */,
-				83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */,
-				83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */,
 			);
 			path = Newsfeed;
 			sourceTree = "<group>";
@@ -1204,6 +1222,7 @@
 				83CCC915197EFCBF00FD1B4B /* AFURLResponseSerialization.m in Sources */,
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83CCC913197EFCBF00FD1B4B /* AFURLConnectionOperation.m in Sources */,
+				833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */,
 				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */,
@@ -1227,6 +1246,7 @@
 				838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */,
+				833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,
 				836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,

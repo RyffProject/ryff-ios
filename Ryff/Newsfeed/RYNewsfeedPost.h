@@ -24,5 +24,6 @@
 - (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted upvotes:(NSInteger)upvotes;
 
 + (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict;
++ (NSArray *)newsfeedPostsFromDictArray:(NSArray *)dictArray;
 
 @end

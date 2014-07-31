@@ -31,7 +31,7 @@
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
-@interface RYProfileViewController () <POSTDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -152,27 +152,13 @@
 #pragma mark -
 #pragma mark - POSTDelegate
 
-- (void) connectionFailed
-{
-    
-}
 - (void) postFailed:(NSString*)reason
 {
     
 }
-- (void) postSucceeded:(id)response
+- (void) postSucceeded:(NSArray *)posts
 {
-    NSDictionary *responseDict = response;
-    NSArray *posts = [responseDict objectForKey:@"posts"];
-    
-    NSMutableArray *myPosts = [[NSMutableArray alloc] init];
-    
-    for (NSDictionary *postDict in posts)
-    {
-        RYNewsfeedPost *post = [RYNewsfeedPost newsfeedPostWithDict:postDict];
-        [myPosts addObject:post];
-    }
-    [self setFeedItems:myPosts];
+    [self setFeedItems:posts];
     [self.tableView reloadData];
 }
 
@@ -215,8 +201,8 @@
     if (indexPath.section == 0)
     {
         // profile info -> calculate size with user bio
-        CGFloat widthRatio = kProfileInfoCellLabelRatio;
-        height = kProfileInfoCellHeightMinusText + [_user.bio boundingRectWithSize:CGSizeMake(widthRatio*tableView.frame.size.width, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
+        CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
+        height = kProfileInfoCellHeightMinusText + [_user.bio boundingRectWithSize:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
         height = MAX(height, kProfileInfoCellMinimumHeight);
         
     }
@@ -318,8 +304,9 @@
 #pragma mark -
 #pragma mark - UserUpdateDelegate
 
-- (void) updateSucceeded:(RYUser *)newUser
+- (void) updateSucceeded:(NSDictionary*)userDict
 {
+    RYUser *newUser = [RYUser userFromDict:userDict];
     [self configureForUser:newUser];
 }
 
