@@ -17,6 +17,7 @@
         _title    = title;
         _duration = duration;
         _URL      = url;
+        _fileName = [[url pathComponents] lastObject];
     }
     return self;
 }

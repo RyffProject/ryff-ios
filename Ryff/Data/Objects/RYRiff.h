@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) NSString *fileName;
 
 - (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSURL*)url;
 

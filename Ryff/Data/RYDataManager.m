@@ -14,6 +14,8 @@
 // Frameworks
 #import "AFHTTPRequestOperation.h"
 
+#define kRiffDirectory @"http://ryff.me/riffs/"
+
 @implementation RYDataManager
 
 static RYDataManager *_sharedInstance;
@@ -50,9 +52,9 @@ static RYDataManager *_sharedInstance;
 }
 
 /*
- Helper method to save a remote riff file to the device, as a track for use in creating a new riff.
+ Helper method to save a remote riff file to the device, as a track for use in creating a new riff or for riff details
  */
-- (void) saveRiffAsTrack:(NSURL*)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate
+- (void) saveRiffAt:(NSURL*)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:riffURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -77,6 +79,34 @@ static RYDataManager *_sharedInstance;
             [delegate track:riffURL DownloadFailed:[error localizedDescription]];
     }];
     [operation start];
+}
+
+#pragma mark -
+#pragma mark - Riff Caching
+
+- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success))callback
+{
+    NSString *tempPath = NSTemporaryDirectory();
+    NSString *filePath = [tempPath stringByAppendingPathComponent:fileName];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        callback(true);
+    else
+    {
+        // start file downloading
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[kRiffDirectory stringByAppendingPathComponent:fileName]]];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        
+        operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            callback(true);
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            callback(false);
+        }];
+        [operation start];
+    }
 }
 
 @end

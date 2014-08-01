@@ -144,7 +144,7 @@
         <!--Profile View Controller - Profile-->
         <scene sceneID="09g-f5-Xph">
             <objects>
-                <tableViewController id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

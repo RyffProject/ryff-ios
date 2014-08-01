@@ -10,9 +10,13 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYDataManager.h"
 
 // Custom UI
 #import "RYRiffDetailsTableViewCell.h"
+
+// Associated View Controllers
+#import "RYProfileViewController.h"
 
 #define kRiffDetailsCellReuseID @"riffDetails"
 
@@ -48,6 +52,9 @@
 - (void) configureForPost:(RYNewsfeedPost *)post
 {
     _post = post;
+    [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:^(BOOL success) {
+        if (
+    }];
 }
 
 #pragma mark -
@@ -89,12 +96,25 @@
 
 - (void) avatarTapAction
 {
-    
+    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
+    [profileVC configureForUser:_post.user];
+    if (self.navigationController)
+        [self.navigationController pushViewController:profileVC animated:YES];
+    else
+        [self presentViewController:profileVC animated:YES completion:nil];
 }
 
 - (void) playControlAction
 {
-    
+    if (self.audioPlayer)
+    {
+        
+    }
+    else
+    {
+        
+    }
 }
 
 #pragma mark -
