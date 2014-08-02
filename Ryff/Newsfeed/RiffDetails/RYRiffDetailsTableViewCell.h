@@ -13,12 +13,12 @@
 #define kRiffDetailsWidthMinusText isIpad ? 85.0f : 85.0f
 
 @protocol RiffDetailsDelegate <NSObject>
-- (void) upvoteAction;
-- (void) repostAction;
-- (void) followAction;
-- (void) progressSliderChanged:(CGFloat)newProgress;
-- (void) avatarTapAction;
-- (void) playControlAction;
+- (void) riffUpvoteAction;
+- (void) riffRepostAction;
+- (void) riffFollowAction;
+- (void) riffProgressSliderChanged:(CGFloat)newProgress;
+- (void) riffAvatarTapAction;
+- (void) riffPlayControlAction;
 @end
 
 @class RYNewsfeedPost;
@@ -26,5 +26,7 @@
 @interface RYRiffDetailsTableViewCell : UITableViewCell
 
 - (void) configureWithPost:(RYNewsfeedPost *)post delegate:(id<RiffDetailsDelegate>)delegate;
+- (void) setPlayProgress:(CGFloat)progress;
+- (void) shouldPause:(BOOL)pause;
 
 @end

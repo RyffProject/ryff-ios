@@ -21,6 +21,6 @@
 + (NSURL*) urlForNextTrack;
 
 - (void) saveRiffAt:(NSURL*)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate;
-- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success))callback;
+- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion;
 
 @end

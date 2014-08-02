@@ -84,13 +84,13 @@ static RYDataManager *_sharedInstance;
 #pragma mark -
 #pragma mark - Riff Caching
 
-- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success))callback
+- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion
 {
     NSString *tempPath = NSTemporaryDirectory();
     NSString *filePath = [tempPath stringByAppendingPathComponent:fileName];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        callback(true);
+        completion(true, filePath);
     else
     {
         // start file downloading
@@ -100,10 +100,10 @@ static RYDataManager *_sharedInstance;
         operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            callback(true);
+            completion(true, filePath);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            callback(false);
+            completion(false, nil);
         }];
         [operation start];
     }

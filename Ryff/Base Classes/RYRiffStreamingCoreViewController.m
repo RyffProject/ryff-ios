@@ -19,10 +19,7 @@
 // UI Categories
 #import "UIImage+Color.h"
 
-// Data Managers
-#import "RYServices.h"
-
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate, UpvoteDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate>
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
@@ -41,6 +38,8 @@
     [super viewDidLoad];
     
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
+    
+    _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     
     _riffSection = 0;
     _openRiffDetailsSection = -1;
@@ -92,15 +91,11 @@
         {
             [_audioPlayer play];
         }
-        
-        _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
     }
 }
 
 - (void) clearRiff
 {
-    [_updateTimer invalidate];
-    _updateTimer = nil;
     [_currentlyPlayingCell clearAudio];
     _currentlyPlayingCell = nil;
     [_audioPlayer stop];
@@ -117,10 +112,13 @@
 
 - (void)updateTimeLeft
 {
-    CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
-    
-    // update your UI with timeLeft
-    [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
+    if (_audioPlayer && [_audioPlayer isPlaying])
+    {
+        CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
+        
+        // update your UI with timeLeft
+        [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
+    }
 }
 
 #pragma mark -
@@ -336,7 +334,8 @@
     RYNewsfeedPost *post = _feedItems[indexPath.row];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post];
+#warning set correct playback time
+    [riffDetails configureForPost:post atPlaybackPosition:0];
     [self presentViewController:riffDetails animated:YES completion:nil];
 }
 

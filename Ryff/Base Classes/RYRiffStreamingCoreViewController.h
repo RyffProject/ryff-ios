@@ -17,6 +17,9 @@
 #import "RYRiffCell.h"
 #import "RYStyleSheet.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data Objects
 #import "RYNewsfeedPost.h"
 #import "RYRiff.h"
@@ -26,7 +29,7 @@
 
 @class AVAudioPlayer;
 
-@interface RYRiffStreamingCoreViewController : RYCoreViewController
+@interface RYRiffStreamingCoreViewController : RYCoreViewController <UpvoteDelegate>
 
 // Audio
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -42,6 +45,7 @@
 
 - (void) startRiffDownload:(RYRiff*)riff;
 - (void) clearRiff;
+- (void)updateTimeLeft;
 
 // Table Override Methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;

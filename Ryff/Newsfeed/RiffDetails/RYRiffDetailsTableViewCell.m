@@ -99,43 +99,56 @@
     [_karmaLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
 }
 
+- (void) setPlayProgress:(CGFloat)progress
+{
+    [_progressSlider setValue:progress];
+}
+
+- (void) shouldPause:(BOOL)pause
+{
+    if (pause)
+        [_playControl stopPlaying];
+    else
+        [_playControl animatePlaying];
+}
+
 #pragma mark -
 #pragma mark - Actions
 
 - (IBAction)upvoteButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction)])
-        [_delegate upvoteAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffUpvoteAction)])
+        [_delegate riffUpvoteAction];
 }
 
 - (IBAction)repostButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(repostAction)])
-        [_delegate repostAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffRepostAction)])
+        [_delegate riffRepostAction];
 }
 
 - (IBAction)followButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(followAction)])
-        [_delegate followAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffFollowAction)])
+        [_delegate riffFollowAction];
 }
 
 - (IBAction)progressSliderChanged:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(progressSliderChanged:)])
-        [_delegate progressSliderChanged:((UISlider *)sender).value];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffProgressSliderChanged:)])
+        [_delegate riffProgressSliderChanged:((UISlider *)sender).value];
 }
 
 - (void) playControlHit:(UITapGestureRecognizer *)tapGesture
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(playControlAction)])
-        [_delegate playControlAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffPlayControlAction)])
+        [_delegate riffPlayControlAction];
 }
 
 - (void) avatarImageTapped:(UITapGestureRecognizer *)tapGesture
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(avatarTapAction)])
-        [_delegate avatarTapAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffAvatarTapAction)])
+        [_delegate riffAvatarTapAction];
 }
 
 @end
