@@ -42,10 +42,10 @@
 - (void) retrievedArtists:(NSArray*)artists;
 @end
 
-@protocol FriendsDelegate <NSObject>
-- (void) friendConfirmed;
-- (void) friendDeleted;
-- (void) actionFailed;
+@protocol FollowDelegate <NSObject>
+- (void) followConfirmed:(NSInteger)userID;
+- (void) unfollowConfirmed:(NSInteger)userID;
+- (void) followFailed;
 @end
 
 @protocol RiffDelegate <NSObject>
@@ -68,7 +68,6 @@
 
 @interface RYServices : NSObject
 
-
 + (RYServices *)sharedInstance;
 + (RYUser *) loggedInUser;
 
@@ -86,14 +85,14 @@
 // Discover
 @property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
 - (void) moreArtistsOfCount:(NSInteger)numArtists;
-- (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
-- (void) deleteFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate;
+- (void) follow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
+- (void) unfollow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
 
 // Posts
 + (NSURL*)urlForRiff;
 - (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
-- (void) getFriendPostsForDelegate:(id<PostDelegate>)delegate;
+- (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate;
 - (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
 

@@ -37,10 +37,9 @@ static RYDataManager *_sharedInstance;
     
     NSString *documentDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString *trackDir        = [documentDirPath stringByAppendingPathComponent:@"UserTracks"];
-    NSError *error            = nil;
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:trackDir isDirectory:nil])
-        [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:&error];
+        [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:NULL];
     
     NSInteger trackNum = 0;
     do {

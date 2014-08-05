@@ -40,7 +40,7 @@
     if (_clickedButtonBlock != NULL)
         _clickedButtonBlock(self, buttonIndex);
     
-    if ([_secondaryDelegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
+    if (_secondaryDelegate && [_secondaryDelegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)])
         [_secondaryDelegate alertView:alertView clickedButtonAtIndex:buttonIndex];
 }
 
@@ -49,7 +49,7 @@
     if (_willDismissBlock != NULL)
         _willDismissBlock(self, buttonIndex);
     
-    if ([_secondaryDelegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
+    if (_secondaryDelegate && [_secondaryDelegate respondsToSelector:@selector(alertView:willDismissWithButtonIndex:)])
         [_secondaryDelegate alertView:alertView willDismissWithButtonIndex:buttonIndex];
 }
 
@@ -58,7 +58,7 @@
     if (_didDismissBlock != NULL)
         _didDismissBlock(self, buttonIndex);
     
-    if ([_secondaryDelegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
+    if (_secondaryDelegate && [_secondaryDelegate respondsToSelector:@selector(alertView:didDismissWithButtonIndex:)])
         [_secondaryDelegate alertView:alertView didDismissWithButtonIndex:buttonIndex];
 }
 

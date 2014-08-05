@@ -19,7 +19,7 @@ typedef void(^JLAlertBlock)(BlockAlertView* alertView, NSInteger buttonIndex);
     JLAlertBlock _didDismissBlock;
 }
 
-@property (nonatomic, strong) id<UIAlertViewDelegate> secondaryDelegate;
+@property (nonatomic, weak) id<UIAlertViewDelegate> secondaryDelegate;
 
 - (void) setClickedButtonBlock:(JLAlertBlock) clickedButtonBlock;
 - (void) setWillDismissBlock:(JLAlertBlock) willDismissBlock;

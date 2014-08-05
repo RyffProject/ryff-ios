@@ -56,6 +56,8 @@
 - (void) configureForPost:(RYNewsfeedPost *)post atPlaybackPosition:(CGFloat)playbackPosition
 {
     _post = post;
+    [self setTitle:post.riff.title];
+    
     [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:^(BOOL success, NSString *localPath) {
         if (success)
         {
@@ -70,6 +72,14 @@
         }
     }];
 }
+
+#pragma mark - Actions
+
+- (IBAction)backButtonHit:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark -
 #pragma mark - Media Overrides

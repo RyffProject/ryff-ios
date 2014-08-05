@@ -53,9 +53,8 @@ static RYMediaEditor *_sharedInstance;
     
     NSString *outputPath = [[RYServices urlForRiff] path];
     
-    NSError *deleteError = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:outputPath])
-        [[NSFileManager defaultManager] removeItemAtPath:outputPath error:&deleteError];
+        [[NSFileManager defaultManager] removeItemAtPath:outputPath error:NULL];
     
     // configure export session  output with all our parameters
     exportSession.outputURL = [NSURL fileURLWithPath:outputPath]; // output path

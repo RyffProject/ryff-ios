@@ -336,7 +336,9 @@
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
 #warning set correct playback time
     [riffDetails configureForPost:post atPlaybackPosition:0];
-    [self presentViewController:riffDetails animated:YES completion:nil];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end

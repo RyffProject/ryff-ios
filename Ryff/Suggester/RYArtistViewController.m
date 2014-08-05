@@ -23,7 +23,7 @@
 // Frameworks
 #import "UIImageView+SGImageCache.h"
 
-@interface RYArtistViewController () <FriendsDelegate, PostDelegate>
+@interface RYArtistViewController () <FollowDelegate, PostDelegate>
 
 @end
 
@@ -116,17 +116,17 @@
 #pragma mark -
 #pragma mark - Friend Delegate
 
-- (void) friendConfirmed
+- (void) followConfirmed:(NSInteger)userID
 {
     [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     _friends = YES;
 }
-- (void) friendDeleted
+- (void) unfollowConfirmed:(NSInteger)userID
 {
     [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
     _friends = NO;
 }
-- (void) actionFailed
+- (void) followFailed
 {
     if (_friends)
         [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
@@ -137,9 +137,9 @@
 - (void) toggleFriendStatus
 {
     if (!_friends)
-        [[RYServices sharedInstance] addFriend:_artist.userId forDelegate:self];
+        [[RYServices sharedInstance] follow:_artist.userId forDelegate:self];
     else
-        [[RYServices sharedInstance] deleteFriend:_artist.userId forDelegate:self];
+        [[RYServices sharedInstance] unfollow:_artist.userId forDelegate:self];
 }
 
 - (void) nextHit:(UIBarButtonItem*)sender

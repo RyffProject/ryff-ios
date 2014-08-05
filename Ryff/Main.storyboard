@@ -242,7 +242,7 @@
             </objects>
             <point key="canvasLocation" x="1273" y="-164"/>
         </scene>
-        <!--Riff Details View Controller-->
+        <!--Riff Details View Controller - Riff Details-->
         <scene sceneID="rot-Eb-TkR">
             <objects>
                 <tableViewController storyboardIdentifier="riffDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YPv-4z-4S8" customClass="RYRiffDetailsViewController" sceneMemberID="viewController">
@@ -252,7 +252,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riffDetails" rowHeight="150" id="UCk-gW-Mgs" customClass="RYRiffDetailsTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="768" height="150"/>
+                                <rect key="frame" x="0.0" y="86" width="768" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UCk-gW-Mgs" id="Fd1-Nz-u6D">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="149"/>
@@ -363,13 +363,20 @@
                             <outlet property="delegate" destination="YPv-4z-4S8" id="5TT-jj-5e5"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Riff Details" id="d9A-sz-fNA">
+                        <barButtonItem key="leftBarButtonItem" image="back.png" id="k0Q-4M-Kd4">
+                            <connections>
+                                <action selector="backButtonHit:" destination="YPv-4z-4S8" id="v1L-7Z-lxg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="9HB-gx-wae" id="hHG-rL-1jM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlP-sl-zo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2435" y="-164"/>
+            <point key="canvasLocation" x="3083" y="-156"/>
         </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
@@ -569,7 +576,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZF-bj-J8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="-164"/>
+            <point key="canvasLocation" x="5008" y="-164"/>
         </scene>
         <!--Band View Controller-->
         <scene sceneID="8AK-w1-3aq">
@@ -738,6 +745,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0K-Yh-RX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="2240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oH6-1U-yxB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Bw-DF-4Sx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJn-8v-QMo">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YPv-4z-4S8" kind="relationship" relationship="rootViewController" id="BYW-DL-tSB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fo0-Oq-NIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2231" y="-156"/>
         </scene>
     </scenes>
     <resources>

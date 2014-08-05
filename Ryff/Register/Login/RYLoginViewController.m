@@ -35,7 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *userTypeButton;
 
 // Data
-
 @property (nonatomic, assign) BOOL newUser;
 
 @property (nonatomic, strong) NSString *username;
@@ -72,6 +71,13 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)dismissViewController

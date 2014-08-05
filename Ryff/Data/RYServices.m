@@ -72,7 +72,6 @@ static RYUser* _loggedInUser;
     });
 }
 
-
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
@@ -254,7 +253,7 @@ static RYUser* _loggedInUser;
         }];
     });
 }
-- (void) addFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate
+- (void) follow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
 
@@ -266,17 +265,17 @@ static RYUser* _loggedInUser;
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
-                [delegate friendConfirmed];
+                [delegate followConfirmed:userId];
             else
-                [delegate actionFailed];
+                [delegate followFailed];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Post error: %@",[error localizedDescription]);
-            [delegate actionFailed];
+            [delegate followFailed];
         }];
     });
 }
-- (void) deleteFriend:(NSInteger)userId forDelegate:(id<FriendsDelegate>)delegate
+- (void) unfollow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate
 {
     if (![RYServices loggedInUser])
         return;
@@ -294,13 +293,13 @@ static RYUser* _loggedInUser;
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
-                [delegate friendDeleted];
+                [delegate unfollowConfirmed:userId];
             else
-                [delegate actionFailed];
+                [delegate followFailed];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Post error: %@",[error localizedDescription]);
-            [delegate actionFailed];
+            [delegate followFailed];
         }];
     });
 }
@@ -390,7 +389,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getFriendPostsForDelegate:(id<PostDelegate>)delegate
+- (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         

@@ -240,9 +240,8 @@
  */
 - (void) addTrack:(NSURL*)trackURL
 {
-    NSError *error = nil;
     //NSURL *fileUrl = [trackURL fileReferenceURL]; // for local file
-    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:trackURL error:&error];
+    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:trackURL error:NULL];
     [audioPlayer setEnableRate:YES];
     [audioPlayer prepareToPlay];
     
@@ -323,8 +322,7 @@
                 // delete file
                 NSMutableArray *players    = [_audioPlayers mutableCopy];
                 
-                NSError *error = nil;
-                if (_safeToUpdateTable && [[NSFileManager defaultManager] removeItemAtURL:[player.url filePathURL] error:&error])
+                if (_safeToUpdateTable && [[NSFileManager defaultManager] removeItemAtURL:[player.url filePathURL] error:NULL])
                 {
                     // removed track
                     _safeToUpdateTable = NO;

@@ -64,6 +64,9 @@
     
     UITapGestureRecognizer *avatarGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarImageTapped:)];
     [_avatarImageView addGestureRecognizer:avatarGesture];
+    [_avatarImageView setUserInteractionEnabled:YES];
+    [_avatarImageView.layer setCornerRadius:_avatarImageView.frame.size.width/2];
+    [_avatarImageView setClipsToBounds:YES];
 }
 
 - (void) configureWithPost:(RYNewsfeedPost *)post delegate:(id<RiffDetailsDelegate>)delegate
