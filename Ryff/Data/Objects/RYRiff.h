@@ -18,6 +18,5 @@
 - (RYRiff*)initWithTitle:(NSString*)title duration:(NSTimeInterval)duration url:(NSURL*)url;
 
 + (RYRiff*)riffFromDict:(NSDictionary*)riffDict;
-+ (RYRiff*)riffWithURL:(NSURL*)url;
 
 @end

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="8YX-ce-x5E">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Newsfeed-->
+        <!--Newsfeed Table View Controller - Newsfeed-->
         <scene sceneID="DOq-cI-7TO">
             <objects>
                 <viewController id="ee7-vj-bAK" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="o2d-X1-M4Y">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -33,7 +33,7 @@
             </objects>
             <point key="canvasLocation" x="1179" y="-797"/>
         </scene>
-        <!--First-->
+        <!--Profile View Controller - First-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
                 <viewController title="First" id="CZ4-MO-1fc" customClass="RYProfileViewController" sceneMemberID="viewController">
@@ -123,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="1626" y="-138"/>
         </scene>
-        <!--New Riff-->
+        <!--Riff Edit View Controller - New Riff-->
         <scene sceneID="0E8-MA-wsj">
             <objects>
                 <viewController id="Gxs-Yb-gjy" customClass="RYRiffEditViewController" sceneMemberID="viewController">
@@ -277,7 +277,7 @@
             </objects>
             <point key="canvasLocation" x="556" y="126"/>
         </scene>
-        <!--Artists-->
+        <!--Artist Suggest Page View Controller - Artists-->
         <scene sceneID="k0F-C4-ha5">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="4in-ld-7O3" customClass="RYArtistSuggestPageViewController" sceneMemberID="viewController">
@@ -423,7 +423,7 @@
             </objects>
             <point key="canvasLocation" x="2486" y="-138"/>
         </scene>
-        <!--Log In-->
+        <!--Login View Controller - Log In-->
         <scene sceneID="k4O-tZ-0Ux">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="v0l-i6-yJW" customClass="RYLoginViewController" sceneMemberID="viewController">
@@ -540,9 +540,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4">
-            <size key="portraitSize" width="320" height="568"/>
-            <size key="landscapeSize" width="568" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

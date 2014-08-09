@@ -32,10 +32,4 @@
     return newRiff;
 }
 
-+ (RYRiff*)riffWithURL:(NSURL*)url
-{
-    RYRiff *newRiff = [[RYRiff alloc] initWithTitle:@"" duration:0 url:url];
-    return newRiff;
-}
-
 @end

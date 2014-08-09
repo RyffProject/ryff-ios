@@ -48,6 +48,14 @@ void backgroundDo(void(^block)()) {
     return [NSFileManager.defaultManager fileExistsAtPath:[self.cache pathForURL:url]];
 }
 
++ (BOOL) removeImageForURL:(NSString *)url
+{
+    if ([self haveImageForURL:url])
+        return [[NSFileManager defaultManager] removeItemAtPath:[self.cache pathForURL:url] error:NULL];
+    else
+        return false;
+}
+
 + (UIImage *)imageForURL:(NSString *)url {
     if ([UIDevice.currentDevice.systemVersion hasPrefix:@"8"]) {
         return [UIImage imageNamed:[self.cache pathForURL:url]];

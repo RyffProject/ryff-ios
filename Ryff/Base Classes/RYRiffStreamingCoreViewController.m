@@ -19,7 +19,7 @@
 // UI Categories
 #import "UIImage+Color.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate>
+@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate, FollowDelegate>
 
 @property (nonatomic, strong) NSTimer *updateTimer;
 
@@ -150,6 +150,35 @@
     _isDownloading = NO;
 }
 
+#pragma mark - Follow Delegate
+
+- (void) followConfirmed:(NSInteger)userID
+{
+    for (RYNewsfeedPost *post in self.feedItems)
+    {
+        if (post.user.userId == userID)
+            post.user.isFollowing = YES;
+    }
+    
+    [self.riffTableView reloadData];
+}
+
+- (void) unfollowConfirmed:(NSInteger)userID
+{
+    for (RYNewsfeedPost *post in self.feedItems)
+    {
+        if (post.user.userId == userID)
+            post.user.isFollowing = NO;
+    }
+    
+    [self.riffTableView reloadData];
+}
+
+- (void) followFailed
+{
+    
+}
+
 #pragma mark -
 #pragma mark - AVAudioPlayerDelegate
 
@@ -231,7 +260,11 @@
  */
 - (void) followAction:(NSInteger)riffIndex
 {
-    
+    RYNewsfeedPost *post = self.feedItems[riffIndex];
+    if (post.user.isFollowing)
+        [[RYServices sharedInstance] unfollow:post.user.userId forDelegate:self];
+    else
+        [[RYServices sharedInstance] follow:post.user.userId forDelegate:self];
 }
 
 ///*

@@ -145,13 +145,8 @@
     [postWarning show];
 }
 
-- (void) updateSucceeded:(NSDictionary*)userDict
+- (void) updateSucceeded:(RYUser*)user
 {
-    [[NSUserDefaults standardUserDefaults] setObject:userDict forKey:kLoggedInUserKey];
-    
-    [SSKeychain setPassword:_password forService:@"ryff" account:_username];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Welcome" forDuration:0.5];
     

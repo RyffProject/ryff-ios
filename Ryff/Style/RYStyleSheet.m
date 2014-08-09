@@ -20,22 +20,22 @@
 
 +(UIColor*)actionColor
 {
-    return [UIColor colorWithHexString:@"fda028"];
+    return [UIColor colorWithHexString:@"fe9900"];
 }
 
 +(UIColor*)actionHighlightedColor
 {
-    return [UIColor colorWithHexString:@"fdcd28"];
+    return [UIColor colorWithHexString:@"fed100"];
 }
 
 +(UIColor*)foregroundColor
 {
-    return [UIColor colorWithHexString:@"484752"];
+    return [UIColor colorWithHexString:@"383838"];
 }
 
 +(UIColor*)backgroundColor
 {
-    return [UIColor colorWithHexString:@"518eaf"];
+    return [UIColor colorWithHexString:@"00a7d1"];
 }
 
 +(UIFont *)fontFamily

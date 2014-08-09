@@ -13,7 +13,7 @@
 
 @implementation RYUser
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated genres:(NSSet*)genres instruments:(NSSet*)instruments
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
 {
     if (self = [super init])
     {
@@ -23,8 +23,10 @@
         _avatarURL      = avatarURL;
         _karma          = karma;
         _bio            = bio;
-        _genres         = genres;
-        _instruments    = instruments;
+        _isFollowing    = isFollowing;
+        _numFollowers   = numFollowers;
+        _numFollowing   = numFollowing;
+        _tags           = tags;
     }
     return self;
 }
@@ -38,16 +40,27 @@
     NSNumber *karma         = [userDict objectForKey:@"karma"];
     NSString *bio           = [userDict objectForKey:@"bio"];
     NSString *dateCreated   = [userDict objectForKey:@"date_created"];
-    NSDate *date            = [NSDate date];
+    BOOL isFollowing        = [[userDict objectForKey:@"is_following"] boolValue];
+    NSInteger numFollowers  = [[userDict objectForKey:@"num_followers"] intValue];
+    NSInteger numFollowing  = [[userDict objectForKey:@"num_following"] intValue];
+    NSArray *tags           = [userDict objectForKey:@"tags"];
     
+    NSDate *date;
     if (dateCreated)
     {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+        [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
         date = [dateFormatter dateFromString:dateCreated];
     }
     
-    RYUser *newUser = [[RYUser alloc] initWithUser:[userId intValue] username:username nickname:name avatarURL:avatarUrl karma:[karma intValue] bio:bio dateCreated:date genres:nil instruments:nil];
+    RYUser *newUser = [[RYUser alloc] initWithUser:userId.intValue username:username nickname:name avatarURL:avatarUrl karma:karma.intValue bio:bio dateCreated:date isFollowing:isFollowing numFollowers:numFollowers numFollowing:numFollowing tags:tags];
+    return newUser;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    // We'll ignore the zone for now
+    RYUser *newUser = [[RYUser alloc] initWithUser:self.userId username:self.username nickname:self.nickname avatarURL:self.avatarURL karma:self.karma bio:self.bio dateCreated:self.dateCreated isFollowing:self.isFollowing numFollowers:self.numFollowers numFollowing:self.numFollowing tags:self.tags];
     return newUser;
 }
 

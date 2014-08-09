@@ -33,8 +33,7 @@
 {
     [super viewWillAppear:animated];
     
-//    [[RYServices sharedInstance] getFriendPostsForDelegate:self];
-    [[RYServices sharedInstance] getUserPostsForUser:7 Delegate:self];
+    [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -45,10 +44,6 @@
 #pragma mark -
 #pragma mark - Post Delegate
 
-- (void) postFailed:(NSString*)reason
-{
-    
-}
 - (void) postSucceeded:(NSArray *)posts
 {
     [self setFeedItems:posts];

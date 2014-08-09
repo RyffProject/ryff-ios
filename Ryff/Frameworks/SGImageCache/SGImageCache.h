@@ -47,6 +47,12 @@ Fetch an image from cache if available, or remote it not.
 */
 + (void)getImageForURL:(NSString *)url thenDo:(SGCacheFetchCompletion)completion;
 
+
+/**
+ Added to remove specific image from cache
+ */
++ (BOOL) removeImageForURL:(NSString *)url;
+
 /**
 Fetch an image from cache if available, or remote it not.
 

@@ -25,8 +25,7 @@
     [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
     [self.window makeKeyAndVisible];
     
-    if (![[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:kApiRoot]].count)
-        [[RYServices sharedInstance] attemptBackgroundLogIn];
+    [[RYServices sharedInstance] attemptBackgroundLogIn];
     
     return YES;
 }

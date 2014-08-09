@@ -14,12 +14,12 @@
 #define kCoordLatitude      @"lastUpdatedLatitude"
 
 // Server paths
-#define kApiRoot            @"http://ryff.me/api/"
+#define kApiRoot            @"https://ryff.me/api/"
 #define kLogIn              @"login.php"
 #define kRegistrationAction @"create-user.php"
 #define kUpdateUserAction   @"update-user.php"
-#define kAddFriendAction    @"add-friend.php"
-#define kDeleteFriendAction @"delete-friend.php"
+#define kAddFriendAction    @"follow.php"
+#define kDeleteFriendAction @"unfollow.php"
 #define kPostRiffAction     @"add-post.php"
 #define kUpvotePostAction   @"add-upvote.php"
 #define kDeleteUpvoteAction @"delete-upvote.php"
@@ -28,14 +28,15 @@
 #define kGetPosts           @"get-posts.php"
 #define kGetPeople          @"get-user.php"
 #define kGetNearby          @"get-users-nearby.php"
-#define kGetFriendsPosts    @"get-friend-posts.php"
+#define kGetNewsfeedPosts   @"get-news-feed.php"
 
 @class RYNewsfeedPost;
 @class RYUser;
 
 @protocol PostDelegate <NSObject>
-- (void) postFailed:(NSString*)reason;
 - (void) postSucceeded:(NSArray*)posts;
+@optional
+- (void) postFailed:(NSString*)reason;
 @end
 
 @protocol ArtistsFetchDelegate <NSObject>
@@ -45,21 +46,25 @@
 @protocol FollowDelegate <NSObject>
 - (void) followConfirmed:(NSInteger)userID;
 - (void) unfollowConfirmed:(NSInteger)userID;
+@optional
 - (void) followFailed;
 @end
 
 @protocol RiffDelegate <NSObject>
 - (void) riffPostSucceeded;
+@optional
 - (void) riffPostFailed;
 @end
 
 @protocol UpvoteDelegate <NSObject>
 - (void) upvoteSucceeded:(RYNewsfeedPost*)updatedPost;
+@optional
 - (void) upvoteFailed:(NSString*)reason;
 @end
 
 @protocol UpdateUserDelegate <NSObject>
-- (void) updateSucceeded:(NSDictionary*)userDict;
+- (void) updateSucceeded:(RYUser*)user;
+@optional
 - (void) updateFailed:(NSString*)reason;
 @end
 
@@ -79,7 +84,7 @@
 
 // Edit User
 - (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;
-- (void) editUserInfo:(RYUser*)user;
+- (void) editUserInfo:(RYUser*)user forDelegate:(id<UpdateUserDelegate>)delegate;
 - (void) deletePost:(RYNewsfeedPost*)post;
 
 // Discover
@@ -90,7 +95,7 @@
 
 // Posts
 + (NSURL*)urlForRiff;
-- (void) postRiffWithContent:(NSString*)content title:(NSString*)title duration:(NSNumber*)duration ForDelegate:(id<RiffDelegate>)riffDelegate;
+- (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs ForDelegate:(id<RiffDelegate>)riffDelegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
 - (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate;
 - (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;

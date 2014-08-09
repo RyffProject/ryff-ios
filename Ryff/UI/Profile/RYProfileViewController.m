@@ -71,7 +71,7 @@
     _user = user ? user : [RYServices loggedInUser];
     
     // prep activity
-    [self setFeedItems:_user.activity];
+    self.feedItems = nil;
     
     if (_user)
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId Delegate:self];
@@ -116,6 +116,11 @@
 - (void) editImageAction
 {
     [self presentProfilePictureOptions];
+}
+
+- (void) followersAction
+{
+#warning should present view controller with followers
 }
 
 #pragma mark - Edit Profile
@@ -202,7 +207,12 @@
     {
         // profile info -> calculate size with user bio
         CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
-        height = kProfileInfoCellHeightMinusText + [_user.bio boundingRectWithSize:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:kProfileInfoCellFont} context:nil].size.height;
+        
+        UITextView *sizingView = [[UITextView alloc] init];
+        [sizingView setFont:kProfileInfoCellFont];
+        [sizingView setText:_user.bio];
+        CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
+        height = resultSize.height + kProfileInfoCellHeightMinusText;
         height = MAX(height, kProfileInfoCellMinimumHeight);
         
     }
@@ -304,10 +314,10 @@
 #pragma mark -
 #pragma mark - UserUpdateDelegate
 
-- (void) updateSucceeded:(NSDictionary*)userDict
+- (void) updateSucceeded:(RYUser*)user
 {
-    RYUser *newUser = [RYUser userFromDict:userDict];
-    [self configureForUser:newUser];
+    [self configureForUser:user];
+    [self showCheckHUDWithTitle:@"Updated Profile" forDuration:1.0f];
 }
 
 - (void) updateFailed:(NSString *)reason
