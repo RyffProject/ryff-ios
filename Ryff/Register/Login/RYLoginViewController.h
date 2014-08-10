@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RYCoreViewController.h"
 
-@interface RYLoginViewController : UIViewController
+@interface RYLoginViewController : RYCoreViewController
 
 @end

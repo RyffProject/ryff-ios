@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "RYCoreViewController.h"
 #import "RYDataManager.h"
 
-@interface RYRiffCreateViewController : UIViewController <TrackDownloadDelegate>
+@interface RYRiffCreateViewController : RYCoreViewController <TrackDownloadDelegate>
 
 - (void) includeRiffs:(NSArray*)arrayOfRiffs;
 

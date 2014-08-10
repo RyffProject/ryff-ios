@@ -23,8 +23,13 @@
     
     [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
     
-    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet foregroundColor]];
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet backgroundColor]];
     [self.navigationController.navigationBar setTranslucent:NO];
+    
+    NSDictionary *navbarTitleAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                            NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]};
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleAttributes];
 }
 
 - (BOOL)prefersStatusBarHidden
