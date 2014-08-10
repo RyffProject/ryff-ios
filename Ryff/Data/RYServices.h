@@ -94,7 +94,6 @@
 - (void) unfollow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
 
 // Posts
-+ (NSURL*)urlForRiff;
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs ForDelegate:(id<RiffDelegate>)riffDelegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
 - (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate;

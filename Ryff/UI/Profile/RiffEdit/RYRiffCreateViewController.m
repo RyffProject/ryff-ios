@@ -71,7 +71,7 @@
     {
         // have to download track
         [_downloadingRiffs addObject:riff];
-        [[RYDataManager sharedInstance] saveRiffAt:riff.URL forDelegate:self];
+        [[RYDataManager sharedInstance] saveRiffAt:riff.URL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
     }
     [_tableView reloadData];
 }

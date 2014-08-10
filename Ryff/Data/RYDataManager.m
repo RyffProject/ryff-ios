@@ -11,6 +11,9 @@
 // Data Managers
 #import "RYMediaEditor.h"
 
+// Data Objects
+#import "RYRiff.h"
+
 // Frameworks
 #import "AFHTTPRequestOperation.h"
 
@@ -28,10 +31,31 @@ static RYDataManager *_sharedInstance;
     return _sharedInstance;
 }
 
++ (NSURL *)urlForRiff
+{
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"riff.m4a",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    return outputFileURL;
+}
+
++ (NSURL *)urlForTempRiff:(NSString *)fileName
+{
+    NSString *documentDirPath = NSTemporaryDirectory();
+    NSString *trackDir        = [documentDirPath stringByAppendingPathComponent:@"Riffs"];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:trackDir isDirectory:nil])
+        [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:NULL];
+    
+    return [NSURL URLWithString:[trackDir stringByAppendingPathComponent:fileName]];
+}
+
 /*
  Helper function that gives NSURL to next available track path, incrementing name of track (track3.m4a, for example) until not taken.
  */
-+ (NSURL*) urlForNextTrack
++ (NSURL *)urlForNextTrack
 {
     NSURL *trackPath;
     
@@ -50,15 +74,31 @@ static RYDataManager *_sharedInstance;
     return trackPath;
 }
 
+- (void) fetchTempRiff:(RYRiff *)riff forDelegate:(id<TrackDownloadDelegate>)delegate
+{
+    NSURL *localURL = [RYDataManager urlForTempRiff:riff.fileName];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[localURL path]])
+    {
+        // don't need to download
+        if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
+            [delegate track:riff.URL FinishedDownloading:localURL];
+    }
+    else
+    {
+        // start download
+        [self saveRiffAt:riff.URL toLocalURL:localURL forDelegate:delegate];
+    }
+}
+
 /*
  Helper method to save a remote riff file to the device, as a track for use in creating a new riff or for riff details
  */
-- (void) saveRiffAt:(NSURL*)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate
+- (void) saveRiffAt:(NSURL*)riffURL toLocalURL:(NSURL *)localURL forDelegate:(id<TrackDownloadDelegate>)delegate
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:riffURL];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
-    NSURL* localURL = [RYDataManager urlForNextTrack];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:[localURL path] append:NO];
     
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {

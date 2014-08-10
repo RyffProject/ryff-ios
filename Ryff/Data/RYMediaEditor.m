@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYDataManager.h"
 
 // Media Frameworks
 #import <AVFoundation/AVFoundation.h>
@@ -51,7 +52,7 @@ static RYMediaEditor *_sharedInstance;
                                            exportSessionWithAsset:composition
                                            presetName:AVAssetExportPresetAppleM4A];
     
-    NSString *outputPath = [[RYServices urlForRiff] path];
+    NSString *outputPath = [[RYDataManager urlForRiff] path];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:outputPath])
         [[NSFileManager defaultManager] removeItemAtPath:outputPath error:NULL];
@@ -67,7 +68,7 @@ static RYMediaEditor *_sharedInstance;
             if (_mergeDelegate && [_mergeDelegate respondsToSelector:@selector(mergeSucceeded:)])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [_mergeDelegate mergeSucceeded:[RYServices urlForRiff]];
+                    [_mergeDelegate mergeSucceeded:[RYDataManager urlForRiff]];
                 });
             }
         } else if (AVAssetExportSessionStatusFailed == exportSession.status) {

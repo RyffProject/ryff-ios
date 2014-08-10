@@ -29,4 +29,6 @@
 + (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post;
 + (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post;
 
++ (NSString *)convertSecondsToDisplayTime:(CGFloat)totalSeconds;
+
 @end

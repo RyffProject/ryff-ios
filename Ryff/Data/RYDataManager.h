@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class RYRiff;
+
 @protocol TrackDownloadDelegate <NSObject>
-- (void) track:(NSURL*)trackURL DownloadProgressed:(CGFloat)rogress;
+- (void) track:(NSURL*)trackURL DownloadProgressed:(CGFloat)progress;
 - (void) track:(NSURL*)trackURL FinishedDownloading:(NSURL*)localURL;
+@optional
 - (void) track:(NSURL*)trackURL DownloadFailed:(NSString*)reason;
 @end
 
@@ -18,9 +21,12 @@
 
 + (instancetype) sharedInstance;
 
-+ (NSURL*) urlForNextTrack;
++ (NSURL *)urlForRiff;
++ (NSURL *)urlForTempRiff:(NSString *)fileName;
++ (NSURL *)urlForNextTrack;
 
-- (void) saveRiffAt:(NSURL*)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate;
+- (void) fetchTempRiff:(RYRiff *)riff forDelegate:(id<TrackDownloadDelegate>)delegate;
+- (void) saveRiffAt:(NSURL*)riffURL toLocalURL:(NSURL *)localURL forDelegate:(id<TrackDownloadDelegate>)delegate;
 - (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion;
 
 @end

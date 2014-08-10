@@ -135,4 +135,21 @@
     return attributedText;
 }
 
++ (NSString *)convertSecondsToDisplayTime:(CGFloat)totalSeconds
+{
+    NSInteger hours = (totalSeconds / 3600);
+    totalSeconds -= (hours * 3600);
+    
+    NSInteger minutes = (totalSeconds / 60);
+    NSInteger seconds = (totalSeconds - (minutes * 60));
+    
+    NSString* displayTime;
+    if (hours > 0)
+        displayTime = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
+    else if (hours == 0)
+        displayTime = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
+    
+    return displayTime;
+}
+
 @end

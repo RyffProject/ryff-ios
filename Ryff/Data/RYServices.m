@@ -339,16 +339,6 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Newsfeed
 
-+ (NSURL*)urlForRiff
-{
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"riff.m4a",
-                               nil];
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
-    return outputFileURL;
-}
-
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs ForDelegate:(id<RiffDelegate>)riffDelegate
 {
     if (![RYServices loggedInUser])

@@ -431,7 +431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlP-sl-zo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3173" y="1028"/>
+            <point key="canvasLocation" x="3073" y="-1494"/>
         </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
@@ -631,7 +631,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZF-bj-J8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4130" y="1028"/>
+            <point key="canvasLocation" x="2374" y="-164"/>
         </scene>
         <!--Core Tab Bar View Controller-->
         <scene sceneID="2sG-6P-io0">
@@ -647,6 +647,7 @@
                         <segue destination="Yqq-Ja-uip" kind="relationship" relationship="viewControllers" id="bfU-Fs-oGp"/>
                         <segue destination="fpf-wb-Diq" kind="relationship" relationship="viewControllers" id="0lm-cH-smf"/>
                         <segue destination="B11-cl-E0p" kind="relationship" relationship="viewControllers" id="JGk-Pz-6Ea"/>
+                        <segue destination="xfH-zl-6Gm" kind="relationship" relationship="viewControllers" id="Bnq-i6-buY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTj-jY-nIR" sceneMemberID="firstResponder"/>
@@ -662,6 +663,158 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcr-6O-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1151" y="1040"/>
+        </scene>
+        <!--Audio Deck View Controller - AudioDeck-->
+        <scene sceneID="3jB-7M-2Yb">
+            <objects>
+                <viewController storyboardIdentifier="audioDeck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xfH-zl-6Gm" customClass="RYAudioDeckViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bf3-HX-llO">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wV3-0q-bCb">
+                                <rect key="frame" x="30" y="266" width="708" height="758"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="audioDeckCell" rowHeight="50" id="Ctx-59-yBM" customClass="RYAudioDeckTableViewCell">
+                                        <rect key="frame" x="0.0" y="55" width="708" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ctx-59-yBM" id="cEh-VO-Pky">
+                                            <rect key="frame" x="0.0" y="0.0" width="708" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="TNp-3C-E0o">
+                                                    <rect key="frame" x="0.0" y="7" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" id="sg2-iN-aIA" customClass="RYPlayControl">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </view>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Is-fM-avz">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abattoir" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jPQ-3l-Y9G">
+                                                    <rect key="frame" x="55" y="0.0" width="200" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lay It Down" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eLc-ss-WMc">
+                                                    <rect key="frame" x="275.00000700403388" y="0.0" width="305" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:38" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZfN-iD-REV">
+                                                    <rect key="frame" x="600" y="0.0" width="100" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="artistLabel" destination="jPQ-3l-Y9G" id="09Q-9O-ajT"/>
+                                            <outlet property="durationLabel" destination="ZfN-iD-REV" id="Leb-Kh-ekJ"/>
+                                            <outlet property="playControl" destination="sg2-iN-aIA" id="zYq-Bb-8Qx"/>
+                                            <outlet property="riffTitleLabel" destination="eLc-ss-WMc" id="UIQ-nZ-hWT"/>
+                                            <outlet property="statusWrapperView" destination="TNp-3C-E0o" id="QwT-ZB-CWx"/>
+                                            <outlet property="trackIndexLabel" destination="2Is-fM-avz" id="ICD-gW-wwd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xfH-zl-6Gm" id="dHE-1J-Vws"/>
+                                    <outlet property="delegate" destination="xfH-zl-6Gm" id="HHg-sZ-045"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="S9D-5B-EtV">
+                                <rect key="frame" x="246" y="58" width="275" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZiA-a2-RoD">
+                                        <rect key="frame" x="115" y="20" width="44" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        <state key="normal" image="pause.png"/>
+                                        <connections>
+                                            <action selector="playButtonHit:" destination="xfH-zl-6Gm" eventType="touchUpInside" id="HVs-Om-YgP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="58y-Av-DXR">
+                                        <rect key="frame" x="210" y="20" width="45" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="next.png"/>
+                                        <connections>
+                                            <action selector="nextButtonHit:" destination="xfH-zl-6Gm" eventType="touchUpInside" id="IId-KD-uKB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lNF-74-pWu">
+                                        <rect key="frame" x="20" y="20" width="45" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="repost.png"/>
+                                        <connections>
+                                            <action selector="repostButtonHit:" destination="xfH-zl-6Gm" eventType="touchUpInside" id="hJn-py-aDQ"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="9Mu-Wy-Zbk">
+                                        <rect key="frame" x="0.0" y="73" width="275" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="volumeSliderChanged:" destination="xfH-zl-6Gm" eventType="valueChanged" id="QXc-n2-YCM"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="59A-qr-gDK">
+                                        <rect key="frame" x="0.0" y="111" width="275" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gOu-Kh-rON">
+                                <rect key="frame" x="30" y="216" width="708" height="31"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="playbackSliderChanged:" destination="xfH-zl-6Gm" eventType="touchUpInside" id="hnV-03-PKu"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="AudioDeck" id="5Ya-9F-QGh"/>
+                    <connections>
+                        <outlet property="controlWrapperView" destination="S9D-5B-EtV" id="oji-9P-3wa"/>
+                        <outlet property="nextButton" destination="58y-Av-DXR" id="2Bg-5T-f3n"/>
+                        <outlet property="nowPlayingLabel" destination="59A-qr-gDK" id="xaR-0t-GSG"/>
+                        <outlet property="playButton" destination="ZiA-a2-RoD" id="XYM-l2-Qlj"/>
+                        <outlet property="playbackSlider" destination="gOu-Kh-rON" id="9qU-Ae-GGy"/>
+                        <outlet property="repostButton" destination="lNF-74-pWu" id="WaM-Ce-x5K"/>
+                        <outlet property="tableView" destination="wV3-0q-bCb" id="yJR-dC-QcX"/>
+                        <outlet property="volumeSlider" destination="9Mu-Wy-Zbk" id="zwt-Bf-D59"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ykp-Mh-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1161" y="2432"/>
         </scene>
         <!--Artist View Controller-->
         <scene sceneID="KbV-ow-Csx">
@@ -713,7 +866,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I3P-w6-hLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1986" y="2240"/>
+            <point key="canvasLocation" x="3298" y="1040"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pXX-sl-qTQ">
@@ -731,7 +884,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0K-Yh-RX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="2240"/>
+            <point key="canvasLocation" x="2388" y="1040"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oH6-1U-yxB">
@@ -749,7 +902,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fo0-Oq-NIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2283" y="1028"/>
+            <point key="canvasLocation" x="2183" y="-1494"/>
         </scene>
     </scenes>
     <resources>
@@ -759,9 +912,12 @@
         <image name="delete.png" width="45" height="46"/>
         <image name="friend.png" width="30" height="30"/>
         <image name="newsfeed.png" width="30" height="30"/>
+        <image name="next.png" width="30" height="30"/>
+        <image name="pause.png" width="45" height="55"/>
         <image name="play.png" width="45" height="52"/>
         <image name="plus.png" width="45" height="45"/>
         <image name="record.png" width="45" height="45"/>
+        <image name="repost.png" width="40" height="24"/>
         <image name="reset.png" width="30" height="30"/>
         <image name="upvote.png" width="40" height="42"/>
         <image name="user.png" width="30" height="30"/>

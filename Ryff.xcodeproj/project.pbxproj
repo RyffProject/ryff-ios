@@ -136,6 +136,9 @@
 		83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA11F31995CD23002610E8 /* FLEXHierarchyTableViewCell.m */; };
 		83CA12281995CD23002610E8 /* FLEXHierarchyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA11F51995CD23002610E8 /* FLEXHierarchyTableViewController.m */; };
 		83CA12291995CD23002610E8 /* FLEXImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA11F71995CD23002610E8 /* FLEXImagePreviewViewController.m */; };
+		83CA122D19981070002610E8 /* RYAudioDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA122C19981070002610E8 /* RYAudioDeckViewController.m */; };
+		83CA123019981087002610E8 /* RYAudioDeckManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA122F19981087002610E8 /* RYAudioDeckManager.m */; };
+		83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA123219981702002610E8 /* RYAudioDeckTableViewCell.m */; };
 		83CCC90E197EFCBF00FD1B4B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC8EA197EFCBF00FD1B4B /* AFHTTPRequestOperation.m */; };
 		83CCC90F197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC8EC197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m */; };
 		83CCC910197EFCBF00FD1B4B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC8EE197EFCBF00FD1B4B /* AFHTTPSessionManager.m */; };
@@ -448,6 +451,12 @@
 		83CA11F51995CD23002610E8 /* FLEXHierarchyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLEXHierarchyTableViewController.m; sourceTree = "<group>"; };
 		83CA11F61995CD23002610E8 /* FLEXImagePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLEXImagePreviewViewController.h; sourceTree = "<group>"; };
 		83CA11F71995CD23002610E8 /* FLEXImagePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLEXImagePreviewViewController.m; sourceTree = "<group>"; };
+		83CA122B19981070002610E8 /* RYAudioDeckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAudioDeckViewController.h; sourceTree = "<group>"; };
+		83CA122C19981070002610E8 /* RYAudioDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAudioDeckViewController.m; sourceTree = "<group>"; };
+		83CA122E19981087002610E8 /* RYAudioDeckManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAudioDeckManager.h; sourceTree = "<group>"; };
+		83CA122F19981087002610E8 /* RYAudioDeckManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAudioDeckManager.m; sourceTree = "<group>"; };
+		83CA123119981702002610E8 /* RYAudioDeckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYAudioDeckTableViewCell.h; sourceTree = "<group>"; };
+		83CA123219981702002610E8 /* RYAudioDeckTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYAudioDeckTableViewCell.m; sourceTree = "<group>"; };
 		83CCC8E9197EFCBF00FD1B4B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		83CCC8EA197EFCBF00FD1B4B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		83CCC8EB197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -925,6 +934,19 @@
 			path = "View Hierarchy";
 			sourceTree = "<group>";
 		};
+		83CA122A19981059002610E8 /* AudioDeck */ = {
+			isa = PBXGroup;
+			children = (
+				83CA122E19981087002610E8 /* RYAudioDeckManager.h */,
+				83CA122F19981087002610E8 /* RYAudioDeckManager.m */,
+				83CA122B19981070002610E8 /* RYAudioDeckViewController.h */,
+				83CA122C19981070002610E8 /* RYAudioDeckViewController.m */,
+				83CA123119981702002610E8 /* RYAudioDeckTableViewCell.h */,
+				83CA123219981702002610E8 /* RYAudioDeckTableViewCell.m */,
+			);
+			path = AudioDeck;
+			sourceTree = "<group>";
+		};
 		83CCC8E8197EFCBF00FD1B4B /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1106,6 +1128,7 @@
 				83FCD14D18F907C400A493F0 /* MainIphone.storyboard */,
 				83FCD19018F915DE00A493F0 /* Suggester */,
 				83FCD18C18F9142600A493F0 /* Newsfeed */,
+				83CA122A19981059002610E8 /* AudioDeck */,
 				83FCD17318F909CB00A493F0 /* Profile */,
 				83FCD17E18F90F2A00A493F0 /* Search */,
 				83FCD19C18F91FA000A493F0 /* Register */,
@@ -1562,6 +1585,7 @@
 				83CA11FB1995CD23002610E8 /* FLEXArgumentInputJSONObjectView.m in Sources */,
 				83DBCA7718F9859000262496 /* RMDisplayLabel.m in Sources */,
 				83CCC91C197EFCBF00FD1B4B /* UIProgressView+AFNetworking.m in Sources */,
+				83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */,
 				83CA120A1995CD23002610E8 /* FLEXExplorerToolbar.m in Sources */,
 				83CA121B1995CD23002610E8 /* FLEXDictionaryExplorerViewController.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
@@ -1571,6 +1595,7 @@
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83CA12101995CD23002610E8 /* FLEXFileBrowserSearchOperation.m in Sources */,
 				83CCC913197EFCBF00FD1B4B /* AFURLConnectionOperation.m in Sources */,
+				83CA123019981087002610E8 /* RYAudioDeckManager.m in Sources */,
 				83CA12151995CD23002610E8 /* FLEXLiveObjectsTableViewController.m in Sources */,
 				833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */,
 				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
@@ -1594,6 +1619,7 @@
 				834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */,
 				83CA11FC1995CD23002610E8 /* FLEXArgumentInputNotSupportedView.m in Sources */,
 				83CCC912197EFCBF00FD1B4B /* AFSecurityPolicy.m in Sources */,
+				83CA122D19981070002610E8 /* RYAudioDeckViewController.m in Sources */,
 				83CA12021995CD23002610E8 /* FLEXArgumentInputView.m in Sources */,
 				83CA12291995CD23002610E8 /* FLEXImagePreviewViewController.m in Sources */,
 				838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */,
