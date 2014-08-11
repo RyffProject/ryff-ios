@@ -184,6 +184,10 @@ static RYAudioDeckManager *_sharedInstance;
     }
     
     // start download
+    [_downloadQueue addObject:post];
+    if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
+        [_delegate riffPlaylistUpdated];
+    
     [[RYDataManager sharedInstance] fetchTempRiff:post.riff forDelegate:self];
 }
 
@@ -210,6 +214,20 @@ static RYAudioDeckManager *_sharedInstance;
             return;
         }
     }
+}
+
+- (NSInteger) idxOfDownload:(RYNewsfeedPost *)post
+{
+    NSInteger idx = -1;
+    for (RYNewsfeedPost *existingPost in _downloadQueue)
+    {
+        if (existingPost.postId == post.postId)
+        {
+            idx = [_downloadQueue indexOfObject:existingPost];
+            break;
+        }
+    }
+    return idx;
 }
 
 #pragma mark - Data

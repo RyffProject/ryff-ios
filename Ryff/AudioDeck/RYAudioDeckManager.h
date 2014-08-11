@@ -27,6 +27,7 @@
 // Media Control
 - (void) playTrack:(BOOL)playTrack;
 - (void) setPlaybackProgress:(CGFloat)progress;
+- (void) setVolume:(CGFloat)volume;
 - (void) skipTrack;
 
 // Media
@@ -38,6 +39,7 @@
 - (void) forcePostToTop:(RYNewsfeedPost *)post;
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post;
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post;
+- (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
 
 // Data
 - (RYNewsfeedPost *)currentlyPlayingPost;

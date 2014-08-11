@@ -12,8 +12,9 @@
 
 @interface RYAudioDeckTableViewCell : UITableViewCell
 
-- (void) configureForRif:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx;
+- (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx;
 - (void) stylePlaying:(BOOL)playing;
+- (void) styleDownloading:(BOOL)downloading;
 - (void) updateDownloadProgress:(CGFloat)progress;
 
 @end

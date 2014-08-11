@@ -261,10 +261,12 @@
 - (void) followAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = self.feedItems[riffIndex];
-    if (post.user.isFollowing)
-        [[RYServices sharedInstance] unfollow:post.user.userId forDelegate:self];
-    else
-        [[RYServices sharedInstance] follow:post.user.userId forDelegate:self];
+    [[RYAudioDeckManager sharedInstance] addPostToPlaylist:post];
+    
+//    if (post.user.isFollowing)
+//        [[RYServices sharedInstance] unfollow:post.user.userId forDelegate:self];
+//    else
+//        [[RYServices sharedInstance] follow:post.user.userId forDelegate:self];
 }
 
 ///*

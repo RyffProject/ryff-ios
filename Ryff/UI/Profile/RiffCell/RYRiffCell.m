@@ -70,16 +70,16 @@
         [_upvotesLabel setTextColor:[RYStyleSheet actionColor]];
     }
     
-    if (post.user && (post.user.userId == [RYServices loggedInUser].userId))
-        [_followButton setHidden:YES];
-    else
-    {
-        [_followButton setHidden:NO];
-        if (post.user.isFollowing)
-            [_followButton setTintColor:[RYStyleSheet actionHighlightedColor]];
-        else
-            [_followButton setTintColor:[RYStyleSheet actionColor]];
-    }
+//    if (post.user && (post.user.userId == [RYServices loggedInUser].userId))
+//        [_followButton setHidden:YES];
+//    else
+//    {
+//        [_followButton setHidden:NO];
+//        if (post.user.isFollowing)
+//            [_followButton setTintColor:[RYStyleSheet actionHighlightedColor]];
+//        else
+//            [_followButton setTintColor:[RYStyleSheet actionColor]];
+//    }
     
     [_upvotesLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
     

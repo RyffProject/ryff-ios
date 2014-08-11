@@ -8,6 +8,9 @@
 
 #import "RYServices.h"
 
+// Data Managers
+#import "RYDataManager.h"
+
 // Data Objects
 #import "RYUser.h"
 #import "RYNewsfeedPost.h"
@@ -365,9 +368,9 @@ static RYUser* _loggedInUser;
         NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kPostRiffAction];
         [manager POST:action parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             
-            if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYServices urlForRiff] path]])
+            if ([[NSFileManager defaultManager] fileExistsAtPath:[[RYDataManager urlForRiff] path]])
             {
-                NSData *musicData = [NSData dataWithContentsOfFile:[[RYServices urlForRiff] path]];
+                NSData *musicData = [NSData dataWithContentsOfFile:[[RYDataManager urlForRiff] path]];
                 [formData appendPartWithFileData:musicData name:@"riff" fileName:@"riff" mimeType:@"audio/mp4"];
             }
             
