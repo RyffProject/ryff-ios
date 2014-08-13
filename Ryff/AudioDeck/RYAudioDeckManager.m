@@ -18,6 +18,8 @@
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
 
+#define kAudioDeckVolumeKey @"PreferredAudioDeckVolume"
+
 @interface RYAudioDeckManager () <AVAudioPlayerDelegate, TrackDownloadDelegate>
 
 // both data arrays populated with RYNewsfeedPost objects
@@ -27,6 +29,8 @@
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, assign) CGFloat globalVolume;
+
+@property (nonatomic, strong) NSTimer *updatePlaybackTimer;
 
 @end
 
@@ -40,12 +44,21 @@ static RYAudioDeckManager *_sharedInstance;
         _sharedInstance = [RYAudioDeckManager allocWithZone:NULL];
         _sharedInstance.downloadQueue = [[NSMutableArray alloc] init];
         _sharedInstance.riffPlaylist  = [[NSMutableArray alloc] init];
+        
+        NSNumber *preferredVolume = [[NSUserDefaults standardUserDefaults] objectForKey:kAudioDeckVolumeKey];
+        if (preferredVolume)
+            _sharedInstance.globalVolume = preferredVolume.floatValue;
+        else
+            _sharedInstance.globalVolume = 1.0f;
+        
+        _sharedInstance.updatePlaybackTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:_sharedInstance selector:@selector(updatePlaybackProgress:) userInfo:nil repeats:YES];
     }
     return _sharedInstance;
 }
 
 #pragma mark -
 #pragma mark - Media Control
+
 - (void) playTrack:(BOOL)playTrack
 {
     if (playTrack)
@@ -116,6 +129,7 @@ static RYAudioDeckManager *_sharedInstance;
     {
         // confirmed that media file exists
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:localURL error:NULL];
+        _audioPlayer.delegate = self;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         
@@ -161,6 +175,18 @@ static RYAudioDeckManager *_sharedInstance;
     
     if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
         [_delegate trackChanged];
+}
+
+- (void) updatePlaybackProgress:(NSTimer *)timer
+{
+    if (_audioPlayer && _audioPlayer.isPlaying)
+    {
+        if (_delegate && [_delegate respondsToSelector:@selector(post:playbackTimeChanged:progress:)])
+        {
+            CGFloat progress = _audioPlayer.currentTime / _audioPlayer.duration;
+            [_delegate post:_currentlyPlayingPost playbackTimeChanged:_audioPlayer.currentTime progress:progress];
+        }
+    }
 }
 
 #pragma mark -

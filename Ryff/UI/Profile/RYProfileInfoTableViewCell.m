@@ -58,7 +58,7 @@
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bioTextView setFont:kProfileInfoCellFont];
     
-    [_addRiffButton setTintColor:[RYStyleSheet actionColor]];
+    [_addRiffButton setTintColor:[RYStyleSheet audioActionColor]];
     
     [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
     [_editImageLabel setTextColor:[UIColor whiteColor]];

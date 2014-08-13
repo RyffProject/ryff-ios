@@ -37,7 +37,7 @@
     _circleShape      = [CAShapeLayer layer];
     CGPoint circleCenter        = CGPointMake(frame.size.width/2, frame.size.height/2);
     _circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-outerStrokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-    _circleShape.strokeColor    = [RYStyleSheet actionColor].CGColor;
+    _circleShape.strokeColor    = [RYStyleSheet audioActionColor].CGColor;
     _circleShape.fillColor      = nil;
     _circleShape.lineWidth      = outerStrokeWidth;
     _circleShape.strokeEnd      = 0.0f;
@@ -46,7 +46,7 @@
     
     _innerCircleShape                = [CAShapeLayer layer];
     _innerCircleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-innerStrokeWidth-outerStrokeWidth) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-    _innerCircleShape.strokeColor    = [RYStyleSheet actionColor].CGColor;
+    _innerCircleShape.strokeColor    = [RYStyleSheet audioActionColor].CGColor;
     _innerCircleShape.fillColor      = nil;
     _innerCircleShape.lineWidth      = innerStrokeWidth;
     _innerCircleShape.strokeEnd      = 0.0f;
@@ -100,9 +100,9 @@
 - (void) styleCenterImagePlaying:(BOOL)playing
 {
     if (playing)
-        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
+        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
     else
-        [_centerImageView setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet actionColor]]];
+        [_centerImageView setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
 }
 
 - (void) rotationAnimationTimerTick:(NSTimer*)timer

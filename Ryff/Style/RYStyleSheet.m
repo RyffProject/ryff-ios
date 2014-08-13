@@ -18,52 +18,62 @@
 
 @implementation RYStyleSheet
 
-+(UIColor*)actionColor
++ (UIColor *)audioActionColor
 {
     return [UIColor colorWithHexString:@"fe9900"];
 }
 
-+(UIColor*)actionHighlightedColor
++ (UIColor *)audioActionHighlightedColor
 {
     return [UIColor colorWithHexString:@"fed100"];
 }
 
-+(UIColor*)foregroundColor
++ (UIColor *)postActionColor
+{
+    return [UIColor colorWithHexString:@"fff"];
+}
+
++ (UIColor *)postActionHighlightedColor
+{
+    return [UIColor colorWithHexString:@"fff"];
+}
+
++ (UIColor*)foregroundColor
 {
     return [UIColor colorWithHexString:@"383838"];
 }
 
-+(UIColor*)backgroundColor
++ (UIColor*)backgroundColor
 {
     return [UIColor colorWithHexString:@"00a7d1"];
 }
 
-+(UIFont *)fontFamily
++ (UIFont *)fontFamily
 {
     return [UIFont fontWithName:@"Lato" size:18.0f];
 }
 
-+(UIFont *)regularFont
++ (UIFont *)regularFont
 {
     return [UIFont fontWithName:@"Lato-Regular" size:18.0f];
 }
 
-+(UIFont *)boldFont
++ (UIFont *)boldFont
 {
     return [UIFont fontWithName:@"Lato-Bold" size:18.0f];
 }
 
-+(UIFont *)lightFont
++ (UIFont *)lightFont
 {
     return [UIFont fontWithName:@"Lato-Light" size:18.0f];
 }
 
-+(UIFont *)italicFont
++ (UIFont *)italicFont
 {
     return [UIFont fontWithName:@"Lato-Italic" size:18.0f];
 }
 
-+(UIFont*)titleFont
++ (UIFont*)titleFont
 {
     return [UIFont fontWithName:@"Lato-Bold" size:20.0f];
 }

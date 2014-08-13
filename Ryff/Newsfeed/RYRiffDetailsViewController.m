@@ -24,7 +24,6 @@
 @interface RYRiffDetailsViewController () <PostDelegate, RiffDetailsDelegate, UpvoteDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) AVAudioPlayer *riffPlayer;
 
 @property (nonatomic, weak) RYRiffDetailsTableViewCell *riffDetailsCell;
 
@@ -53,24 +52,12 @@
 
 #pragma mark - Configuring
 
-- (void) configureForPost:(RYNewsfeedPost *)post atPlaybackPosition:(CGFloat)playbackPosition
+- (void) configureForPost:(RYNewsfeedPost *)post
 {
     _post = post;
     [self setTitle:post.riff.title];
     
-    [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:^(BOOL success, NSString *localPath) {
-        if (success)
-        {
-            NSError *error = nil;
-            _riffPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:localPath] error:&error];
-            if (!error && playbackPosition > 0)
-            {
-                // resume playing at appropriate point
-                [self clearRiff];
-                [_riffPlayer playAtTime:playbackPosition];
-            }
-        }
-    }];
+    [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:nil];
 }
 
 #pragma mark - Actions
@@ -78,27 +65,6 @@
 - (IBAction)backButtonHit:(id)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-#pragma mark -
-#pragma mark - Media Overrides
-
-- (void) clearRiff
-{
-    [_riffPlayer stop];
-    [_riffDetailsCell setPlayProgress:0.0f];
-    [super clearRiff];
-}
-
-- (void) updateTimeLeft
-{
-    if (_riffPlayer && [_riffPlayer isPlaying])
-    {
-        CGFloat progress = _riffPlayer.currentTime / _riffPlayer.duration;
-        [_riffDetailsCell setPlayProgress:progress];
-    }
-    [super updateTimeLeft];
 }
 
 #pragma mark -
@@ -123,8 +89,7 @@
 
 - (void) riffProgressSliderChanged:(CGFloat)newProgress
 {
-    if (_riffPlayer && [_riffPlayer isPlaying])
-        [_riffPlayer playAtTime:newProgress*_riffPlayer.duration];
+    
 }
 
 - (void) riffAvatarTapAction
@@ -140,20 +105,7 @@
 
 - (void) riffPlayControlAction
 {
-    if (_riffPlayer)
-    {
-        if ([_riffPlayer isPlaying])
-        {
-            [_riffPlayer pause];
-            [_riffDetailsCell shouldPause:YES];
-        }
-        else
-        {
-            [super clearRiff];
-            [_riffPlayer play];
-            [_riffDetailsCell shouldPause:NO];
-        }
-    }
+    
 }
 
 #pragma mark -

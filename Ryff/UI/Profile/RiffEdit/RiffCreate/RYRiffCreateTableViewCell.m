@@ -39,10 +39,10 @@
     else
         [_separatorView setBackgroundColor:[RYStyleSheet backgroundColor]];
     
-    [_playButton setTintColor:[RYStyleSheet actionColor]];
-    [_deleteButton setTintColor:[RYStyleSheet actionColor]];
-    [_volumeSlider setTintColor:[RYStyleSheet actionColor]];
-    [_playbackSpeedSlider setTintColor:[RYStyleSheet actionColor]];
+    [_playButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_deleteButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
+    [_playbackSpeedSlider setTintColor:[RYStyleSheet audioActionColor]];
     
     [_playbackLabel setFont:[UIFont fontWithName:kRegularFont size:14.0f]];
     [_playbackLabel setTextColor:[UIColor whiteColor]];

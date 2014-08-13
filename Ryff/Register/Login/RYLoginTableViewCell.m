@@ -26,9 +26,9 @@
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     if (highlighted)
-        [self.contentView setBackgroundColor:[RYStyleSheet actionHighlightedColor]];
+        [self.contentView setBackgroundColor:[RYStyleSheet audioActionHighlightedColor]];
     else
-        [self.contentView setBackgroundColor:[RYStyleSheet actionColor]];
+        [self.contentView setBackgroundColor:[RYStyleSheet audioActionColor]];
 }
 
 @end

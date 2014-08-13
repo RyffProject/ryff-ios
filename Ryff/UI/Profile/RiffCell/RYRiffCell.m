@@ -41,8 +41,8 @@
     [_playControlView addGestureRecognizer:tapGesture];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
     
-    [_repostButton setTintColor:[RYStyleSheet actionColor]];
-    [_followButton setTintColor:[RYStyleSheet actionColor]];
+    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_followButton setTintColor:[RYStyleSheet audioActionColor]];
     
     [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
@@ -61,13 +61,13 @@
     
     if (post.isUpvoted)
     {
-        [_upvoteButton setTintColor:[RYStyleSheet actionHighlightedColor]];
-        [_upvotesLabel setTextColor:[RYStyleSheet actionHighlightedColor]];
+        [_upvoteButton setTintColor:[RYStyleSheet audioActionHighlightedColor]];
+        [_upvotesLabel setTextColor:[RYStyleSheet audioActionHighlightedColor]];
     }
     else
     {
-        [_upvoteButton setTintColor:[RYStyleSheet actionColor]];
-        [_upvotesLabel setTextColor:[RYStyleSheet actionColor]];
+        [_upvoteButton setTintColor:[RYStyleSheet audioActionColor]];
+        [_upvotesLabel setTextColor:[RYStyleSheet audioActionColor]];
     }
     
 //    if (post.user && (post.user.userId == [RYServices loggedInUser].userId))

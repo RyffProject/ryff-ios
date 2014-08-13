@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tabBar setTintColor:[RYStyleSheet actionColor]];
+    [self.tabBar setTintColor:[RYStyleSheet audioActionColor]];
     [self.tabBar setTranslucent:NO];
     [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] imageWithOverlayColor:[RYStyleSheet foregroundColor]]];
 }

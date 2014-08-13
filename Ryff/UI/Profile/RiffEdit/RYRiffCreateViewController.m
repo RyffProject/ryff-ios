@@ -93,11 +93,11 @@
     [_descriptionTextView setTintColor:[UIColor whiteColor]];
     
     [_imageWrapper setBackgroundColor:[RYStyleSheet backgroundColor]];
-    [_recordButton setTintColor:[RYStyleSheet actionColor]];
-    [_addTrackButton setTintColor:[RYStyleSheet actionColor]];
-    [_playAllButton setTintColor:[RYStyleSheet actionColor]];
-    [_backButton setTintColor:[RYStyleSheet actionColor]];
-    [_uploadButton setTintColor:[RYStyleSheet actionColor]];
+    [_recordButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_addTrackButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_playAllButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_backButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_uploadButton setTintColor:[RYStyleSheet audioActionColor]];
     
     [_tableView setAllowsSelection:NO];
     [_tableView setBackgroundColor:[RYStyleSheet foregroundColor]];
@@ -154,7 +154,7 @@
         
         [audioSession setActive:YES error:nil];
         if ([_recorder record])
-            [(UIButton*)sender setTintColor:[RYStyleSheet actionHighlightedColor]];
+            [(UIButton*)sender setTintColor:[RYStyleSheet audioActionHighlightedColor]];
     }
     else
     {
@@ -165,7 +165,7 @@
         
         [self playAllTracks:NO];
         
-        [(UIButton*)sender setTintColor:[RYStyleSheet actionColor]];
+        [(UIButton*)sender setTintColor:[RYStyleSheet audioActionColor]];
     }
 }
 

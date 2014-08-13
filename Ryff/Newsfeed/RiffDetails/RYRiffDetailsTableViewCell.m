@@ -49,9 +49,9 @@
 {
     [super awakeFromNib];
     
-    [_repostButton setTintColor:[RYStyleSheet actionColor]];
-    [_followButton setTintColor:[RYStyleSheet actionColor]];
-    [_progressSlider setTintColor:[RYStyleSheet actionColor]];
+    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_followButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_progressSlider setTintColor:[RYStyleSheet audioActionColor]];
     
     [_karmaLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
@@ -85,13 +85,13 @@
     
     if (post.isUpvoted)
     {
-        [_upvoteButton setTintColor:[RYStyleSheet actionHighlightedColor]];
-        [_karmaLabel setTextColor:[RYStyleSheet actionHighlightedColor]];
+        [_upvoteButton setTintColor:[RYStyleSheet audioActionHighlightedColor]];
+        [_karmaLabel setTextColor:[RYStyleSheet audioActionHighlightedColor]];
     }
     else
     {
-        [_upvoteButton setTintColor:[RYStyleSheet actionColor]];
-        [_karmaLabel setTextColor:[RYStyleSheet actionColor]];
+        [_upvoteButton setTintColor:[RYStyleSheet audioActionColor]];
+        [_karmaLabel setTextColor:[RYStyleSheet audioActionColor]];
     }
     
     if (post.user && (post.user.userId == [RYServices loggedInUser].userId))

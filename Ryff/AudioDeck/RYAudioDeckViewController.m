@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYAudioDeckManager.h"
+#import "RYStyleSheet.h"
 
 // Data Objects
 #import "RYNewsfeedPost.h"
@@ -41,6 +42,18 @@
 #pragma mark -
 #pragma mark - ViewController Lifecycle
 
+- (void) viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [_playButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_nextButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
+    [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
+    [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -49,9 +62,22 @@
     [self styleFromAudioDeck];
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[RYAudioDeckManager sharedInstance] setDelegate:nil];
+}
+
 - (void) styleFromAudioDeck
 {
+    if ([[RYAudioDeckManager sharedInstance] isPlaying])
+        [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     
+    [_volumeSlider setValue:[[RYAudioDeckManager sharedInstance] currentVolume]];
+    [_playbackSlider setValue:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
+    
+    [_nowPlayingLabel setText:[[RYAudioDeckManager sharedInstance] currentlyPlayingPost].riff.title];
 }
 
 #pragma mark -
@@ -179,7 +205,6 @@
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-#warning set correct playback time
     [riffDetails configureForPost:post atPlaybackPosition:0];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];

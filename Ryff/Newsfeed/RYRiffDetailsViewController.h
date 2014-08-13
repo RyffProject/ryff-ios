@@ -11,6 +11,6 @@
 
 @interface RYRiffDetailsViewController : RYRiffStreamingCoreViewController
 
-- (void) configureForPost:(RYNewsfeedPost *)post atPlaybackPosition:(CGFloat)playbackPosition;
+- (void) configureForPost:(RYNewsfeedPost *)post;
 
 @end

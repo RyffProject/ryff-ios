@@ -36,6 +36,15 @@
 {
     [super awakeFromNib];
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    [_trackIndexLabel setTextColor:[UIColor whiteColor]];
+    [_artistLabel setTextColor:[UIColor whiteColor]];
+    [_riffTitleLabel setTextColor:[UIColor whiteColor]];
+    [_durationLabel setTextColor:[UIColor whiteColor]];
+    [_trackIndexLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    [_artistLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    [_riffTitleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
 }
 
 - (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx

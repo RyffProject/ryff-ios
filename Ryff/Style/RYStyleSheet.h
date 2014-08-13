@@ -12,19 +12,21 @@
 
 @interface RYStyleSheet : NSObject
 
-+(UIColor*)actionColor;
-+(UIColor*)actionHighlightedColor;
-+(UIColor*)foregroundColor;
-+(UIColor*)backgroundColor;
++ (UIColor *)audioActionColor;
++ (UIColor *)audioActionHighlightedColor;
++ (UIColor *)postActionColor;
++ (UIColor *)postActionHighlightedColor;
++ (UIColor *)foregroundColor;
++ (UIColor *)backgroundColor;
 
-+(UIFont *)fontFamily;
-+(UIFont *)regularFont;
-+(UIFont *)boldFont;
-+(UIFont *)lightFont;
-+(UIFont *)italicFont;
-+(UIFont *)titleFont;
++ (UIFont *)fontFamily;
++ (UIFont *)regularFont;
++ (UIFont *)boldFont;
++ (UIFont *)lightFont;
++ (UIFont *)italicFont;
++ (UIFont *)titleFont;
 
-+(UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
++ (UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 
 + (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post;
 + (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post;
