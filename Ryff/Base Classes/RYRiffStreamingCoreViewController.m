@@ -19,9 +19,7 @@
 // UI Categories
 #import "UIImage+Color.h"
 
-@interface RYRiffStreamingCoreViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioPlayerDelegate, RiffCellDelegate, FollowDelegate>
-
-@property (nonatomic, strong) NSTimer *updateTimer;
+@interface RYRiffStreamingCoreViewController () <RiffCellDelegate, FollowDelegate>
 
 // Data
 @property (nonatomic, assign) NSInteger openRiffDetailsSection; // section where there the extra riff details section is open
@@ -39,8 +37,6 @@
     
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
     
-    _updateTimer= [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateTimeLeft) userInfo:nil repeats:YES];
-    
     _riffSection = 0;
     _openRiffDetailsSection = -1;
 }
@@ -51,103 +47,6 @@
     
     [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.riffTableView setBackgroundColor:[RYStyleSheet backgroundColor]];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self clearRiff];
-}
-
-
-#pragma mark -
-#pragma mark - Riff Downloading / Playing
-
-- (void) startRiffDownload:(RYRiff*)riff
-{
-    _isDownloading = YES;
-    [_currentlyPlayingCell startDownloading];
-    
-    NSURL *riffURL = riff.URL;
-    NSURLRequest *dataRequest = [NSURLRequest requestWithURL:riffURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:45];
-    _riffData = [[NSMutableData alloc] initWithLength:0];
-    _riffConnection = [[NSURLConnection alloc] initWithRequest:dataRequest delegate:self startImmediately:YES];
-}
-
-- (void) startRiffPlaying:(NSData*)riffData
-{
-    if (!_audioPlayer.isPlaying)
-    {
-        NSError *error;
-        _audioPlayer = [[AVAudioPlayer alloc] initWithData:riffData error:&error];
-        [_audioPlayer setDelegate:self];
-        _audioPlayer.numberOfLoops = 0;
-        _audioPlayer.volume = 1.0f;
-        [_audioPlayer prepareToPlay];
-        
-        if (_audioPlayer == nil)
-            NSLog(@"Error: %@", [error localizedDescription]);
-        else
-        {
-            [_audioPlayer play];
-        }
-    }
-}
-
-- (void) clearRiff
-{
-    [_currentlyPlayingCell clearAudio];
-    _currentlyPlayingCell = nil;
-    [_audioPlayer stop];
-    _audioPlayer = nil;
-    _totalBytes = 0;
-    _riffData = nil;
-    _riffConnection = nil;
-    _audioPlayer = nil;
-    _isDownloading = NO;
-}
-
-#pragma mark -
-#pragma mark - Timer UI Update
-
-- (void)updateTimeLeft
-{
-    if (_audioPlayer && [_audioPlayer isPlaying])
-    {
-        CGFloat timeProgress = _audioPlayer.currentTime / _audioPlayer.duration;
-        
-        // update your UI with timeLeft
-        [self.currentlyPlayingCell updateTimeRemaining:timeProgress];
-    }
-}
-
-#pragma mark -
-#pragma mark - Riff Download Delegate
-
-- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [_riffData setLength:0];
-    [self setTotalBytes:response.expectedContentLength];
-}
-
-- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [_riffData appendData:data];
-    [_currentlyPlayingCell updateDownloadIndicatorWithBytes:_riffData.length outOf:_totalBytes];
-}
-
-- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    NSLog(@"%@",[error localizedDescription]);
-    [_currentlyPlayingCell finishDownloading:NO];
-    [self clearRiff];
-    _isDownloading = NO;
-}
-
-- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [_currentlyPlayingCell finishDownloading:YES];
-    [self startRiffPlaying:_riffData];
-    _isDownloading = NO;
 }
 
 #pragma mark - Follow Delegate
@@ -179,14 +78,6 @@
     
 }
 
-#pragma mark -
-#pragma mark - AVAudioPlayerDelegate
-
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    [self clearRiff];
-}
-
 #pragma mark - ProfilePost Delegate
 
 /*
@@ -195,41 +86,7 @@
 - (void) playerControlAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = _feedItems[riffIndex];
-    // if not playing, begin
-    if (!_audioPlayer && !self.isDownloading)
-    {
-        self.currentlyPlayingCell = (RYRiffCell*)[self.riffTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:_riffSection]];
-        [self startRiffDownload:post.riff];
-        return;
-    }
     
-    // stop any downloads
-    if (self.isDownloading)
-        [self clearRiff];
-    
-    // already playing
-    if (_audioPlayer && [self.riffTableView indexPathForCell:self.currentlyPlayingCell].row == riffIndex)
-    {
-        //currently playing this track, pause it
-        if (self.audioPlayer.isPlaying)
-        {
-            [self.audioPlayer pause];
-            [self.currentlyPlayingCell shouldPause:YES];
-        }
-        else
-        {
-            [self.audioPlayer play];
-            [self.currentlyPlayingCell shouldPause:NO];
-        }
-    }
-    else if (_audioPlayer && _audioPlayer.isPlaying)
-    {
-        //playing another, switch riff
-        [self clearRiff];
-        
-        self.currentlyPlayingCell = (RYRiffCell*)[self.riffTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:riffIndex inSection:_riffSection]];
-        [self startRiffDownload:post.riff];
-    }
 }
 
 /*
@@ -370,7 +227,7 @@
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
 #warning set correct playback time
-    [riffDetails configureForPost:post atPlaybackPosition:0];
+    [riffDetails configureForPost:post];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
     [self presentViewController:navController animated:YES completion:nil];

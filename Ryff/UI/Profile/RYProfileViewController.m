@@ -59,13 +59,6 @@
     [self configureForUser:_user];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [self clearRiff];
-}
-
 - (void) configureForUser:(RYUser *)user
 {
     _user = user ? user : [RYServices loggedInUser];

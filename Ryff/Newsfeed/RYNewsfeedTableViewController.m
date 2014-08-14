@@ -33,7 +33,8 @@
 {
     [super viewWillAppear:animated];
     
-    [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
+//    [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
+    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId Delegate:self];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

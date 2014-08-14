@@ -205,7 +205,7 @@
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post atPlaybackPosition:0];
+    [riffDetails configureForPost:post];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
     [self presentViewController:navController animated:YES completion:nil];

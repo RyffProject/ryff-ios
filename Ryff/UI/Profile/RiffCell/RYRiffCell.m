@@ -24,12 +24,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
-@property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet RYPlayControl *playControlView;
-@property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
 @property (weak, nonatomic) IBOutlet UIButton *repostButton;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
-@property (weak, nonatomic) IBOutlet UILabel *upvotesLabel;
 
 @end
 
@@ -89,11 +85,11 @@
 #pragma mark -
 #pragma mark - Actions
 
-- (IBAction)upvoteHit:(id)sender
-{
-    if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction:)])
-        [_delegate upvoteAction:_riffIndex];
-}
+//- (IBAction)upvoteHit:(id)sender
+//{
+//    if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction:)])
+//        [_delegate upvoteAction:_riffIndex];
+//}
 
 - (IBAction)repostHit:(id)sender
 {

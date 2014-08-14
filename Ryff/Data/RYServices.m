@@ -407,7 +407,10 @@ static RYUser* _loggedInUser;
                     [delegate postSucceeded:posts];
                 }
                 else
-                    [delegate postFailed:nil];
+                {
+                    if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
+                        [delegate postFailed:nil];
+                }
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -463,8 +466,6 @@ static RYUser* _loggedInUser;
         }];
     });
 }
-
-
 
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate
 {
