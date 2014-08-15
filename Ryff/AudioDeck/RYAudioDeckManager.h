@@ -40,6 +40,7 @@
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post;
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post;
 - (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
+- (BOOL) playlistContainsPost:(NSInteger)postID;
 
 // Data
 - (RYNewsfeedPost *)currentlyPlayingPost;

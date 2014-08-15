@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="lsh-uq-4dC">
-                        <rect key="frame" x="59" y="2" width="575" height="451"/>
+                        <rect key="frame" x="59" y="5" width="575" height="440"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9II-YH-0HS">
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="tDx-1U-Pms">
-                                <rect key="frame" x="13" y="405" width="253" height="30"/>
+                                <rect key="frame" x="13" y="394" width="253" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Yxn-GF-2KK">
@@ -33,7 +33,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="upvote.png"/>
                                         <connections>
-                                            <action selector="upvoteHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="mjw-zu-Ckm"/>
+                                            <action selector="playlistAddHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="44e-bs-o7Q"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TbB-jV-mwf">
@@ -49,7 +49,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="friend.png"/>
                                         <connections>
-                                            <action selector="followHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="Wm6-9p-lsx"/>
+                                            <action selector="starHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="wAz-LN-1Qy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -78,18 +78,24 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1rb-I2-FWV">
-                                <rect key="frame" x="73" y="97" width="487" height="300"/>
+                                <rect key="frame" x="73" y="86" width="487" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="JVI-YC-dTz">
-                                <rect key="frame" x="73" y="44" width="411" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" id="JVI-YC-dTz">
+                                <rect key="frame" x="73" y="44" width="411" height="34"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IaF-hX-SsX">
+                                <rect key="frame" x="325" y="393.5" width="230" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -103,10 +109,18 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="followButton" destination="pyG-px-9wX" id="gtS-eB-wnk"/>
+                <outlet property="actionWrapperView" destination="tDx-1U-Pms" id="Fr4-aG-jOE"/>
+                <outlet property="avatarImageView" destination="Ayo-Aa-Lbo" id="ueE-w1-sxY"/>
+                <outlet property="durationLabel" destination="IaF-hX-SsX" id="AKN-Fq-26u"/>
                 <outlet property="playControlView" destination="exn-K0-h4z" id="cQk-OF-NqX"/>
+                <outlet property="playlistAddButton" destination="Yxn-GF-2KK" id="nTF-Pn-okd"/>
+                <outlet property="postImageView" destination="1rb-I2-FWV" id="qYj-xi-sag"/>
                 <outlet property="repostButton" destination="TbB-jV-mwf" id="WyU-g8-fLF"/>
-                <outlet property="upvoteButton" destination="Yxn-GF-2KK" id="lke-a9-fL3"/>
+                <outlet property="starButton" destination="pyG-px-9wX" id="ONZ-EI-A60"/>
+                <outlet property="textView" destination="JVI-YC-dTz" id="6wO-ji-PUd"/>
+                <outlet property="upvoteCountLabel" destination="rNE-nx-Cdq" id="D9W-4F-3HL"/>
+                <outlet property="upvoteImageView" destination="uVs-7N-KVK" id="Kz9-3X-GPC"/>
+                <outlet property="upvoteWrapperView" destination="BDC-d4-Xvh" id="vhi-Zl-WIj"/>
                 <outlet property="userLabel" destination="9II-YH-0HS" id="sMH-k7-a0U"/>
                 <outlet property="wrapperView" destination="lsh-uq-4dC" id="RzI-CR-Doa"/>
             </connections>

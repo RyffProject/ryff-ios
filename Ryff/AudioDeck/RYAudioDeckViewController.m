@@ -60,6 +60,7 @@
     
     [[RYAudioDeckManager sharedInstance] setDelegate:self];
     [self styleFromAudioDeck];
+    [self.tableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

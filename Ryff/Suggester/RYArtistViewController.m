@@ -101,7 +101,7 @@
     {
         for (NSInteger imNum = 1; imNum <= numImages; imNum++)
         {
-            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%ld",(long)imNum]] imageWithOverlayColor:[RYStyleSheet audioActionColor]];
+            UIImage *loadingImage = [[UIImage imageNamed:[NSString stringWithFormat:@"Cylindric_%ld",(long)imNum]] colorImage:[RYStyleSheet audioActionColor]];
             loadingImage = [RYStyleSheet image:loadingImage RotatedByRadians:M_PI_2*i];
             [images addObject:loadingImage];
         }
@@ -118,20 +118,20 @@
 
 - (void) followConfirmed:(NSInteger)userID
 {
-    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] colorImage:[RYStyleSheet audioActionColor]]];
     _friends = YES;
 }
 - (void) unfollowConfirmed:(NSInteger)userID
 {
-    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+    [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] colorImage:[RYStyleSheet audioActionColor]]];
     _friends = NO;
 }
 - (void) followFailed
 {
     if (_friends)
-        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"checkmark"] colorImage:[RYStyleSheet audioActionColor]]];
     else
-        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+        [self setupFriendBarButtonItem:[[UIImage imageNamed:@"friend"] colorImage:[RYStyleSheet audioActionColor]]];
 }
 
 - (void) toggleFriendStatus

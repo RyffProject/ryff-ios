@@ -112,20 +112,6 @@
     }
 }
 
-/*
- Follow user for post corresponding to riffIndex
- */
-- (void) followAction:(NSInteger)riffIndex
-{
-    RYNewsfeedPost *post = self.feedItems[riffIndex];
-    [[RYAudioDeckManager sharedInstance] addPostToPlaylist:post];
-    
-//    if (post.user.isFollowing)
-//        [[RYServices sharedInstance] unfollow:post.user.userId forDelegate:self];
-//    else
-//        [[RYServices sharedInstance] follow:post.user.userId forDelegate:self];
-}
-
 ///*
 // Delete post button hit. Should have services do so
 // */

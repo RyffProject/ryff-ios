@@ -15,17 +15,45 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
+#import "RYAudioDeckManager.h"
 #import "RYServices.h"
 
-// UI Objects
+// Custom UI
+#import "UIImage+Color.h"
 #import "RYPlayControl.h"
+
+// Frameworks
+#import "UIImageView+SGImageCache.h"
 
 @interface RYRiffCell () <UIGestureRecognizerDelegate>
 
+// Main
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+// Media
+@property (weak, nonatomic) IBOutlet UIImageView *postImageView;
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+
+// PlayControl
 @property (weak, nonatomic) IBOutlet RYPlayControl *playControlView;
+
+// Upvote
+@property (weak, nonatomic) IBOutlet UIView *upvoteWrapperView;
+@property (weak, nonatomic) IBOutlet UIImageView *upvoteImageView;
+@property (weak, nonatomic) IBOutlet UILabel *upvoteCountLabel;
+
+// Bottom Actions
+@property (weak, nonatomic) IBOutlet UIView *actionWrapperView;
+@property (weak, nonatomic) IBOutlet UIButton *playlistAddButton;
 @property (weak, nonatomic) IBOutlet UIButton *repostButton;
+@property (weak, nonatomic) IBOutlet UIButton *starButton;
+
+// Data
+@property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, strong) NSAttributedString *attributedPostString;
 
 @end
 
@@ -33,15 +61,24 @@
 
 - (void) awakeFromNib
 {
+    [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_textView setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_avatarImageView.layer setCornerRadius:10.0f];
+    [_avatarImageView setClipsToBounds:YES];
+    
+    [_postImageView.layer setCornerRadius:10.0f];
+    [_postImageView setClipsToBounds:YES];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
     [_playControlView addGestureRecognizer:tapGesture];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
     
-    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
-    [_followButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
+    [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     
-    [_upvotesLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
-    [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
+    
+    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
     
     [_playControlView configureWithFrame:_playControlView.bounds];
 }
@@ -50,46 +87,54 @@
 {
     _riffIndex = riffIndex;
     _delegate  = delegate;
+    _post      = post;
     
-    NSString *userText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
-    [_userLabel setText:userText];
-    [_postLabel setAttributedText:attributedText];
+    NSString *usernameText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
+    [_userLabel setText:usernameText];
+    [_textView setAttributedText:attributedText];
+    [_textView sizeToFit];
+    [_avatarImageView setImageForURL:post.user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
     
-    if (post.isUpvoted)
+    if (post.riff)
+        [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
+    
+    if (post.imageURL)
     {
-        [_upvoteButton setTintColor:[RYStyleSheet audioActionHighlightedColor]];
-        [_upvotesLabel setTextColor:[RYStyleSheet audioActionHighlightedColor]];
+        [_postImageView setHidden:NO];
+        [_postImageView setImageForURL:post.imageURL.path placeholder:[UIImage imageNamed:@"user"]];
     }
     else
     {
-        [_upvoteButton setTintColor:[RYStyleSheet audioActionColor]];
-        [_upvotesLabel setTextColor:[RYStyleSheet audioActionColor]];
+        [_postImageView setHidden:YES];
     }
     
-//    if (post.user && (post.user.userId == [RYServices loggedInUser].userId))
-//        [_followButton setHidden:YES];
-//    else
-//    {
-//        [_followButton setHidden:NO];
-//        if (post.user.isFollowing)
-//            [_followButton setTintColor:[RYStyleSheet actionHighlightedColor]];
-//        else
-//            [_followButton setTintColor:[RYStyleSheet actionColor]];
-//    }
+    BOOL inPlaylist         = [[RYAudioDeckManager sharedInstance] playlistContainsPost:post.postId];
+    UIColor *playlistColor  = inPlaylist ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
+    [_playlistAddButton setTintColor:playlistColor];
     
-    [_upvotesLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
+#warning future use
+//    BOOL starred            = post.isStarred;
+//    UIColor *starredColor   = starred ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
+//    [_starButton setTintColor:starredColor];
+    
+    UIColor *upvotedColor  = post.isUpvoted ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
+    [_upvoteCountLabel setTextColor:upvotedColor];
+    [_upvoteImageView setImage:[_upvoteImageView.image colorImage:upvotedColor]];
+    
+    [_upvoteCountLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
     
     [self setBackgroundColor:[UIColor clearColor]];
 }
 
+#pragma mark - Internal
+
 #pragma mark -
 #pragma mark - Actions
-
-//- (IBAction)upvoteHit:(id)sender
-//{
-//    if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction:)])
-//        [_delegate upvoteAction:_riffIndex];
-//}
+- (IBAction)playlistAddHit:(id)sender
+{
+    [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
+    [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+}
 
 - (IBAction)repostHit:(id)sender
 {
@@ -97,13 +142,18 @@
         [_delegate repostAction:_riffIndex];
 }
 
-- (IBAction)followHit:(id)sender
+- (IBAction)starHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(followAction:)])
-        [_delegate followAction:_riffIndex];
+    
 }
 
 #pragma mark - Gestures
+
+- (void)upvoteHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction:)])
+        [_delegate upvoteAction:_riffIndex];
+}
 
 - (void) playerControlHit:(UITapGestureRecognizer *)tapGesture
 {

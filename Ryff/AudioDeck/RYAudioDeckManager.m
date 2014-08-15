@@ -201,6 +201,9 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post
 {
+    if (!post)
+        return;
+    
     // make sure not already in playlist
     NSArray *processedPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
     for (RYNewsfeedPost *exitingPost in processedPosts)
@@ -254,6 +257,23 @@ static RYAudioDeckManager *_sharedInstance;
         }
     }
     return idx;
+}
+
+- (BOOL) playlistContainsPost:(NSInteger)postID
+{
+    BOOL postInPlaylist = NO;
+    
+    NSArray *allPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
+    for (RYNewsfeedPost *existingPost in allPosts)
+    {
+        if (existingPost.postId == postID)
+        {
+            postInPlaylist = YES;
+            break;
+        }
+    }
+    
+    return postInPlaylist;
 }
 
 #pragma mark - Data

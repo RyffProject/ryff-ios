@@ -10,7 +10,7 @@
 
 @implementation UIImage (Color)
 
-- (UIImage *)imageWithOverlayColor:(UIColor *)color
+- (UIImage *)colorImage:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     

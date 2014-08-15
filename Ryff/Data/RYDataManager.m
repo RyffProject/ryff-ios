@@ -128,7 +128,7 @@ static RYDataManager *_sharedInstance;
     NSString *tempPath = NSTemporaryDirectory();
     NSString *filePath = [tempPath stringByAppendingPathComponent:fileName];
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    if (completion && [[NSFileManager defaultManager] fileExistsAtPath:filePath])
         completion(true, filePath);
     else
     {
@@ -139,10 +139,12 @@ static RYDataManager *_sharedInstance;
         operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            completion(true, filePath);
+            if (completion)
+                completion(true, filePath);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            completion(false, nil);
+            if (completion)
+                completion(false, nil);
         }];
         [operation start];
     }

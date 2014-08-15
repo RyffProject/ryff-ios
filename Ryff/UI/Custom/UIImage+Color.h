@@ -10,6 +10,6 @@
 
 @interface UIImage (Color)
 
-- (UIImage *)imageWithOverlayColor:(UIColor *)color;
+- (UIImage *)colorImage:(UIColor *)color;
 
 @end

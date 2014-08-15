@@ -100,9 +100,9 @@
 - (void) styleCenterImagePlaying:(BOOL)playing
 {
     if (playing)
-        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] colorImage:[RYStyleSheet audioActionColor]]];
     else
-        [_centerImageView setImage:[[UIImage imageNamed:@"play"] imageWithOverlayColor:[RYStyleSheet audioActionColor]]];
+        [_centerImageView setImage:[[UIImage imageNamed:@"play"] colorImage:[RYStyleSheet audioActionColor]]];
 }
 
 - (void) rotationAnimationTimerTick:(NSTimer*)timer
