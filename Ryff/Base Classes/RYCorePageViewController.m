@@ -21,7 +21,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
 }
 
 - (BOOL)prefersStatusBarHidden

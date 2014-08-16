@@ -73,6 +73,8 @@
 - (void) styleFromAudioDeck
 {
     if ([[RYAudioDeckManager sharedInstance] isPlaying])
+        [_playButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+    else
         [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     
     [_volumeSlider setValue:[[RYAudioDeckManager sharedInstance] currentVolume]];

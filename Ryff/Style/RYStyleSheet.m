@@ -30,52 +30,27 @@
 
 + (UIColor *)postActionColor
 {
-    return [UIColor colorWithHexString:@"fff"];
+    return [UIColor colorWithHexString:@"b8b8b8"];
 }
 
 + (UIColor *)postActionHighlightedColor
 {
-    return [UIColor colorWithHexString:@"fff"];
+    return [UIColor colorWithHexString:@"00b6da"];
 }
 
-+ (UIColor*)foregroundColor
++ (UIColor *)tabBarColor
 {
     return [UIColor colorWithHexString:@"383838"];
 }
 
-+ (UIColor*)backgroundColor
++ (UIColor *)audioBackgroundColor
 {
-    return [UIColor colorWithHexString:@"00a7d1"];
+    return [UIColor colorWithHexString:@"282828"];
 }
 
-+ (UIFont *)fontFamily
++ (UIColor *)lightBackgroundColor
 {
-    return [UIFont fontWithName:@"Lato" size:18.0f];
-}
-
-+ (UIFont *)regularFont
-{
-    return [UIFont fontWithName:@"Lato-Regular" size:18.0f];
-}
-
-+ (UIFont *)boldFont
-{
-    return [UIFont fontWithName:@"Lato-Bold" size:18.0f];
-}
-
-+ (UIFont *)lightFont
-{
-    return [UIFont fontWithName:@"Lato-Light" size:18.0f];
-}
-
-+ (UIFont *)italicFont
-{
-    return [UIFont fontWithName:@"Lato-Italic" size:18.0f];
-}
-
-+ (UIFont*)titleFont
-{
-    return [UIFont fontWithName:@"Lato-Bold" size:20.0f];
+    return [UIColor colorWithHexString:@"e9e9e9"];
 }
 
 #pragma mark -
@@ -115,9 +90,9 @@
 + (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post
 {
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [RYStyleSheet boldFont], NSFontAttributeName, nil];
+                           [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
     NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [RYStyleSheet regularFont], NSFontAttributeName, nil];
+                              [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
     const NSRange range = NSMakeRange(0,post.user.username.length);
     
     // Create the attributed string (text + attributes)
@@ -132,9 +107,9 @@
 + (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post
 {
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [RYStyleSheet boldFont], NSFontAttributeName, nil];
+                           [UIFont fontWithName:kBoldFont size:18.0f], NSFontAttributeName, nil];
     NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [RYStyleSheet regularFont], NSFontAttributeName, nil];
+                              [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
     const NSRange range = NSMakeRange(0,post.riff.title.length);
     
     // Create the attributed string (text + attributes)

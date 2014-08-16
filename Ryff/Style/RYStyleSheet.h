@@ -16,15 +16,9 @@
 + (UIColor *)audioActionHighlightedColor;
 + (UIColor *)postActionColor;
 + (UIColor *)postActionHighlightedColor;
-+ (UIColor *)foregroundColor;
-+ (UIColor *)backgroundColor;
-
-+ (UIFont *)fontFamily;
-+ (UIFont *)regularFont;
-+ (UIFont *)boldFont;
-+ (UIFont *)lightFont;
-+ (UIFont *)italicFont;
-+ (UIFont *)titleFont;
++ (UIColor *)tabBarColor;
++ (UIColor *)audioBackgroundColor;
++ (UIColor *)lightBackgroundColor;
 
 + (UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 

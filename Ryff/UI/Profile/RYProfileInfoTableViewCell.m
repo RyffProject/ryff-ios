@@ -63,7 +63,7 @@
     [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
     [_editImageLabel setTextColor:[UIColor whiteColor]];
     [_editImageLabel setBackgroundColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.6]];
-    [_imageWrapperView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_imageWrapperView setBackgroundColor:[RYStyleSheet tabBarColor]];
     [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
     [_imageWrapperView setClipsToBounds:YES];
     

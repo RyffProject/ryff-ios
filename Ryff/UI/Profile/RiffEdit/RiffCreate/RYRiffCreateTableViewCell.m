@@ -37,7 +37,7 @@
     if (lastRowInSection)
         [_separatorView setBackgroundColor:[UIColor clearColor]];
     else
-        [_separatorView setBackgroundColor:[RYStyleSheet backgroundColor]];
+        [_separatorView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
     [_playButton setTintColor:[RYStyleSheet audioActionColor]];
     [_deleteButton setTintColor:[RYStyleSheet audioActionColor]];

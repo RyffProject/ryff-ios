@@ -86,13 +86,13 @@
     _audioPlayers      = [[NSMutableArray alloc] init];
     _safeToUpdateTable = YES;
     
-    [_titleTextField setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_titleTextField setBackgroundColor:[RYStyleSheet tabBarColor]];
     [_titleTextField setTintColor:[UIColor whiteColor]];
     _titleTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Title" attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor],
                                                                                                               NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]}];
     [_descriptionTextView setTintColor:[UIColor whiteColor]];
     
-    [_imageWrapper setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [_imageWrapper setBackgroundColor:[RYStyleSheet tabBarColor]];
     [_recordButton setTintColor:[RYStyleSheet audioActionColor]];
     [_addTrackButton setTintColor:[RYStyleSheet audioActionColor]];
     [_playAllButton setTintColor:[RYStyleSheet audioActionColor]];
@@ -100,7 +100,7 @@
     [_uploadButton setTintColor:[RYStyleSheet audioActionColor]];
     
     [_tableView setAllowsSelection:NO];
-    [_tableView setBackgroundColor:[RYStyleSheet foregroundColor]];
+    [_tableView setBackgroundColor:[RYStyleSheet tabBarColor]];
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageWrapperTapped:)];

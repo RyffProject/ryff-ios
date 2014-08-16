@@ -534,7 +534,7 @@
     <resources>
         <image name="artists.png" width="30" height="30"/>
         <image name="newsfeed.png" width="30" height="30"/>
-        <image name="plus.png" width="45" height="45"/>
+        <image name="plus.png" width="50" height="50"/>
         <image name="user.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -15,6 +15,7 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 #import "RYRiffDetailsViewController.h"
+#import "RYProfileViewController.h"
 
 // UI Categories
 #import "UIImage+Color.h"
@@ -46,7 +47,7 @@
     [super viewWillAppear:animated];
     
     [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [self.riffTableView setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [self.riffTableView setBackgroundColor:[RYStyleSheet lightBackgroundColor]];
 }
 
 #pragma mark - Follow Delegate
@@ -80,6 +81,15 @@
 
 #pragma mark - ProfilePost Delegate
 
+- (void) avatarAction:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = _feedItems[riffIndex];
+    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
+    [profileVC configureForUser:post.user];
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+
 /*
  Download/play/pause riff track for post corresponding to riffIndex
  */
@@ -96,6 +106,11 @@
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
     [[RYServices sharedInstance] upvote:!post.isUpvoted post:post.postId forDelegate:self];
+}
+
+- (void) starAction:(NSInteger)riffIndex
+{
+    
 }
 
 /*
@@ -212,11 +227,8 @@
     RYNewsfeedPost *post = _feedItems[indexPath.row];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-#warning set correct playback time
     [riffDetails configureForPost:post];
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
-    [self presentViewController:navController animated:YES completion:nil];
+    [self.navigationController pushViewController:riffDetails animated:YES];
 }
 
 @end

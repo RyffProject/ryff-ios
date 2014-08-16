@@ -69,16 +69,22 @@
     [_postImageView.layer setCornerRadius:10.0f];
     [_postImageView setClipsToBounds:YES];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
-    [_playControlView addGestureRecognizer:tapGesture];
+    UITapGestureRecognizer *playControlTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
+    [_playControlView addGestureRecognizer:playControlTap];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
+    
+    UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
+    [_avatarImageView addGestureRecognizer:avatarTap];
+    
+    UITapGestureRecognizer *upvoteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(upvoteHit:)];
+    [_upvoteWrapperView addGestureRecognizer:upvoteTap];
     
     [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     
     [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
     
-    [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
+    [_repostButton setTintColor:[RYStyleSheet postActionColor]];
     
     [_playControlView configureWithFrame:_playControlView.bounds];
 }
@@ -109,15 +115,13 @@
     }
     
     BOOL inPlaylist         = [[RYAudioDeckManager sharedInstance] playlistContainsPost:post.postId];
-    UIColor *playlistColor  = inPlaylist ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
+    UIColor *playlistColor  = inPlaylist ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
     [_playlistAddButton setTintColor:playlistColor];
     
-#warning future use
-//    BOOL starred            = post.isStarred;
-//    UIColor *starredColor   = starred ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
-//    [_starButton setTintColor:starredColor];
+    UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    [_starButton setTintColor:starredColor];
     
-    UIColor *upvotedColor  = post.isUpvoted ? [RYStyleSheet audioActionColor] : [RYStyleSheet audioActionHighlightedColor];
+    UIColor *upvotedColor  = post.isUpvoted ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
     [_upvoteCountLabel setTextColor:upvotedColor];
     [_upvoteImageView setImage:[_upvoteImageView.image colorImage:upvotedColor]];
     
@@ -144,10 +148,17 @@
 
 - (IBAction)starHit:(id)sender
 {
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(starAction:)])
+        [_delegate starAction:_riffIndex];
 }
 
 #pragma mark - Gestures
+
+- (void) avatarHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(avatarAction:)])
+        [_delegate avatarAction:_riffIndex];
+}
 
 - (void)upvoteHit:(UITapGestureRecognizer *)tapGesture
 {

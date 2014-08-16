@@ -53,7 +53,7 @@
     
     _newUser = NO;
     
-    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
     [_userTypeButton.titleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_userTypeButton setTintColor:[UIColor whiteColor]];
@@ -207,7 +207,7 @@
         case kUsernameRow:
         {
             // username input
-            [cell.contentView setBackgroundColor:[RYStyleSheet foregroundColor]];
+            [cell.contentView setBackgroundColor:[RYStyleSheet tabBarColor]];
             [cell.contentView roundTop];
             
             UITextField *usernameField = (UITextField*)[cell viewWithTag:6];
@@ -217,14 +217,14 @@
             [usernameField setSecureTextEntry:NO];
             [usernameField setTintColor:[UIColor whiteColor]];
             
-            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet backgroundColor]];
+            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
             
             break;
         }
         case kPasswordRow:
         {
             // password input
-            [cell.contentView setBackgroundColor:[RYStyleSheet foregroundColor]];
+            [cell.contentView setBackgroundColor:[RYStyleSheet tabBarColor]];
             
             UITextField *passwordField = (UITextField*)[cell viewWithTag:6];
             passwordField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: [UIColor lightTextColor],
@@ -232,7 +232,7 @@
             [passwordField setSecureTextEntry:YES];
             [passwordField setTintColor:[UIColor whiteColor]];
             
-            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet backgroundColor]];
+            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
             break;
         }
         case kLoginRow:

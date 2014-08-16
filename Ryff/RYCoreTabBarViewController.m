@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [self.tabBar setTintColor:[RYStyleSheet audioActionColor]];
     [self.tabBar setTranslucent:NO];
-    [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] colorImage:[RYStyleSheet foregroundColor]]];
+    [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] colorImage:[RYStyleSheet tabBarColor]]];
 }
 
 @end

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) RYRiff *riff;
 @property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, assign) BOOL isStarred;
 @property (nonatomic, assign) BOOL isUpvoted;
 @property (nonatomic, assign) NSInteger upvotes;
 

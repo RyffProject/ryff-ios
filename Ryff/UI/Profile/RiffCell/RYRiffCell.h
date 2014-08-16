@@ -15,8 +15,10 @@
 
 @protocol RiffCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;
+- (void) avatarAction:(NSInteger)riffIndex;
 - (void) upvoteAction:(NSInteger)riffIndex;
 - (void) repostAction:(NSInteger)riffIndex;
+- (void) starAction:(NSInteger)riffIndex;
 @end
 
 @class RYNewsfeedPost;

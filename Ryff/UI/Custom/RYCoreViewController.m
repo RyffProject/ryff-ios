@@ -21,9 +21,9 @@
 {
     [super viewWillAppear:animated];
     
-    [self.view setBackgroundColor:[RYStyleSheet backgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
-    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet backgroundColor]];
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet audioBackgroundColor]];
     [self.navigationController.navigationBar setTranslucent:NO];
     
     NSDictionary *navbarTitleAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
