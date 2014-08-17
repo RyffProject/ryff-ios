@@ -65,6 +65,14 @@
     [self styleCenterImagePlaying:NO];
 }
 
+- (void) setControlTintColor:(UIColor *)controlTintColor
+{
+    _controlTintColor = controlTintColor;
+    [_centerImageView setImage:[_centerImageView.image colorImage:_controlTintColor]];
+    _innerCircleShape.strokeColor = _controlTintColor.CGColor;
+    _circleShape.strokeColor      = _controlTintColor.CGColor;
+}
+
 #pragma mark - 
 #pragma mark - Animations
 

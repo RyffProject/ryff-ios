@@ -74,6 +74,8 @@
     [_playControlView addGestureRecognizer:playControlTap];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
     
+    [_playControlView configureWithFrame:_playControlView.bounds];
+    
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
     [_avatarImageView addGestureRecognizer:avatarTap];
     
@@ -86,8 +88,6 @@
     [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
     
     [_repostButton setTintColor:[RYStyleSheet postActionColor]];
-    
-    [_playControlView configureWithFrame:_playControlView.bounds];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
     
@@ -119,10 +119,6 @@
     {
         [_postImageView setHidden:YES];
     }
-    
-    BOOL inPlaylist         = [[RYAudioDeckManager sharedInstance] playlistContainsPost:post.postId];
-    UIColor *playlistColor  = inPlaylist ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
-    [_playlistAddButton setTintColor:playlistColor];
     
     UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
     [_starButton setTintColor:starredColor];
@@ -158,9 +154,15 @@
     }
     
     if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
+    {
         [_playControlView setControlTintColor:[RYStyleSheet audioActionColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    }
     else
+    {
         [_playControlView setControlTintColor:[RYStyleSheet postActionColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+    }
 }
 
 #pragma mark -
@@ -183,7 +185,7 @@
     {
         if ([notifDict[@"postID"] integerValue] == _post.postId && notifDict[@"progress"])
         {
-            CGFloat progress = [notifDict[@"progress"] integerValue];
+            CGFloat progress = [notifDict[@"progress"] floatValue];
             
             if (progress == 1.0f)
             {

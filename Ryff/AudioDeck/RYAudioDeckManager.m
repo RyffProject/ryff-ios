@@ -160,8 +160,6 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) playNextTrack
 {
-    [self stopPost];
-    
     if (_riffPlaylist.count > 0)
     {
         if (((RYNewsfeedPost*)_riffPlaylist[0]).postId == _currentlyPlayingPost.postId)
@@ -172,12 +170,16 @@ static RYAudioDeckManager *_sharedInstance;
             [self notifyPlaylistChanged];
         }
         
+        [self stopPost];
+        
         if (_riffPlaylist.count > 0)
         {
             // more in playlist -> start new track playing
             [self playPost:_riffPlaylist[0]];
         }
     }
+    else
+        [self stopPost];
 }
 
 - (void) updatePlaybackProgress:(NSTimer *)timer
@@ -200,9 +202,15 @@ static RYAudioDeckManager *_sharedInstance;
     [self stopPost];
     _currentlyPlayingPost = post;
     
-    if ([self idxInPlaylistOfPost:post] >= 0)
+    NSInteger idxInPlaylist = [self idxInPlaylistOfPost:post];
+    if (idxInPlaylist >= 0)
     {
         // already downloaded, play
+        [_riffPlaylist removeObjectAtIndex:idxInPlaylist];
+        [_riffPlaylist insertObject:post atIndex:0];
+        
+        [self notifyPlaylistChanged];
+        
         [self playPost:post];
     }
     else if ([self idxOfDownload:post] == -1)
@@ -359,10 +367,12 @@ static RYAudioDeckManager *_sharedInstance;
             {
                 [self playPost:_currentlyPlayingPost];
             }
-            else if (!_audioPlayer)
+            else
             {
                 [_riffPlaylist addObject:post];
-                [self playNextTrack];
+                
+                if (!_audioPlayer)
+                    [self playNextTrack];
             }
             
             NSDictionary *notifDict = @{@"postID": @(post.postId), @"progress": @(1.0f)};
