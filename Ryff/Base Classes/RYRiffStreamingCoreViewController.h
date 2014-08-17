@@ -24,7 +24,7 @@
 
 #define kRiffCellReuseID @"RiffCell"
 
-@interface RYRiffStreamingCoreViewController : RYCoreViewController <ActionDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface RYRiffStreamingCoreViewController : RYCoreViewController <ActionDelegate, RiffCellDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *riffTableView;
 @property (nonatomic, strong) NSArray *feedItems;

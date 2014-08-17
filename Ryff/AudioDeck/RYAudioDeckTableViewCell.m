@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
+#import "RYAudioDeckManager.h"
 
 // Data Objects
 #import "RYNewsfeedPost.h"
@@ -27,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *riffTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+
+// Data
+@property (nonatomic, strong) RYNewsfeedPost *post;
 
 @end
 
@@ -49,6 +53,8 @@
 
 - (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx
 {
+    _post = post;
+    
     NSString *artistText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_artistLabel setText:artistText];
     [_riffTitleLabel setText:post.riff.title];
@@ -90,6 +96,7 @@
     }
     else
     {
+        [self stylePlaying:NO];
         [_artistLabel setAlpha:1.0f];
         [_riffTitleLabel setAlpha:1.0f];
         [_durationLabel setAlpha:1.0f];

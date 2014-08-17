@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define kTrackChangedNotification @"AudioDeckTrackChanged"
+#define kPlaylistChangedNotification @"AudioDeckPlaylistChanged"
+#define kDownloadProgressNotification @"AudioDeckDownloadProgressChanged"
+
 @class RYNewsfeedPost;
 
 @protocol AudioDeckDelegate <NSObject>
@@ -40,6 +44,7 @@
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post;
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post;
 - (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
+- (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post;
 - (BOOL) playlistContainsPost:(NSInteger)postID;
 
 // Data

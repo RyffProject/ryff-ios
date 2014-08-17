@@ -20,7 +20,7 @@
 // UI Categories
 #import "UIImage+Color.h"
 
-@interface RYRiffStreamingCoreViewController () <RiffCellDelegate, FollowDelegate>
+@interface RYRiffStreamingCoreViewController () <FollowDelegate>
 
 // Data
 @property (nonatomic, assign) NSInteger openRiffDetailsSection; // section where there the extra riff details section is open
@@ -96,7 +96,16 @@
 - (void) playerControlAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = _feedItems[riffIndex];
-    
+    if (post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    {
+        // currently playing
+        BOOL shouldPlay = ![[RYAudioDeckManager sharedInstance] isPlaying];
+        [[RYAudioDeckManager sharedInstance] playTrack:shouldPlay];
+    }
+    else
+    {
+        [[RYAudioDeckManager sharedInstance] forcePostToTop:post];
+    }
 }
 
 /*
@@ -110,7 +119,8 @@
 
 - (void) starAction:(NSInteger)riffIndex
 {
-    
+    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    [[RYServices sharedInstance] star:!post.isStarred post:post forDelegate:self];
 }
 
 /*

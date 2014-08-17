@@ -72,8 +72,7 @@ static RYAudioDeckManager *_sharedInstance;
             [_audioPlayer pause];
     }
     
-    if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
-        [_delegate trackChanged];
+    [self notifyTrackChanged];
 }
 
 - (void) setPlaybackProgress:(CGFloat)progress
@@ -120,6 +119,14 @@ static RYAudioDeckManager *_sharedInstance;
 
 #pragma mark - Internal Helpers
 
+- (void) notifyTrackChanged
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
+        [_delegate trackChanged];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTrackChangedNotification object:@{@"trackChanged":@(true)}];
+}
+
 - (void) playPost:(RYNewsfeedPost *)post
 {
     NSURL *localURL = [RYDataManager urlForTempRiff:post.riff.fileName];
@@ -131,8 +138,7 @@ static RYAudioDeckManager *_sharedInstance;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         
-        if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
-            [_delegate trackChanged];
+        [self notifyTrackChanged];
     }
 }
 
@@ -142,15 +148,20 @@ static RYAudioDeckManager *_sharedInstance;
     {
         [_audioPlayer stop];
         _audioPlayer = nil;
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
-            [_delegate trackChanged];
     }
-    _currentlyPlayingPost = nil;
+    
+    if (_currentlyPlayingPost)
+    {
+        _currentlyPlayingPost = nil;
+        
+        [self notifyTrackChanged];
+    }
 }
 
 - (void) playNextTrack
 {
+    [self stopPost];
+    
     if (_riffPlaylist.count > 0)
     {
         if (((RYNewsfeedPost*)_riffPlaylist[0]).postId == _currentlyPlayingPost.postId)
@@ -158,11 +169,8 @@ static RYAudioDeckManager *_sharedInstance;
             // first track in playlist is also currently playing one -> should remove it
             [_riffPlaylist removeObjectAtIndex:0];
             
-            if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
-                [_delegate riffPlaylistUpdated];
+            [self notifyPlaylistChanged];
         }
-        
-        [self stopPost];
         
         if (_riffPlaylist.count > 0)
         {
@@ -170,9 +178,6 @@ static RYAudioDeckManager *_sharedInstance;
             [self playPost:_riffPlaylist[0]];
         }
     }
-    
-    if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
-        [_delegate trackChanged];
 }
 
 - (void) updatePlaybackProgress:(NSTimer *)timer
@@ -194,7 +199,17 @@ static RYAudioDeckManager *_sharedInstance;
 {
     [self stopPost];
     _currentlyPlayingPost = post;
-    [[RYDataManager sharedInstance] fetchTempRiff:post.riff forDelegate:self];
+    
+    if ([self idxInPlaylistOfPost:post] >= 0)
+    {
+        // already downloaded, play
+        [self playPost:post];
+    }
+    else if ([self idxOfDownload:post] == -1)
+    {
+        // not downloading yet either
+        [self addPostToPlaylist:post];
+    }
 }
 
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post
@@ -212,8 +227,8 @@ static RYAudioDeckManager *_sharedInstance;
     
     // start download
     [_downloadQueue addObject:post];
-    if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
-        [_delegate riffPlaylistUpdated];
+    
+    [self notifyPlaylistChanged];
     
     [[RYDataManager sharedInstance] fetchTempRiff:post.riff forDelegate:self];
 }
@@ -221,7 +236,7 @@ static RYAudioDeckManager *_sharedInstance;
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post
 {
     if (post.postId == _currentlyPlayingPost.postId)
-        [self stopPost];
+        [self playNextTrack];
     
     // remove from _riffPlaylist if there
     for (RYNewsfeedPost *exitingPost in _riffPlaylist)
@@ -229,6 +244,9 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.postId == exitingPost.postId)
         {
             [_riffPlaylist removeObject:exitingPost];
+            
+            [self notifyPlaylistChanged];
+            
             return;
         }
     }
@@ -238,6 +256,9 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.postId == exitingPost.postId)
         {
             [_downloadQueue removeObject:exitingPost];
+            
+            [self notifyPlaylistChanged];
+            
             return;
         }
     }
@@ -257,6 +278,20 @@ static RYAudioDeckManager *_sharedInstance;
     return idx;
 }
 
+- (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post
+{
+    NSInteger idx = -1;
+    for (RYNewsfeedPost *existingPost in _riffPlaylist)
+    {
+        if (existingPost.postId == post.postId)
+        {
+            idx = [_riffPlaylist indexOfObject:existingPost];
+            break;
+        }
+    }
+    return idx;
+}
+
 - (BOOL) playlistContainsPost:(NSInteger)postID
 {
     BOOL postInPlaylist = NO;
@@ -270,6 +305,9 @@ static RYAudioDeckManager *_sharedInstance;
             break;
         }
     }
+    
+    if (_currentlyPlayingPost.postId == postID)
+        postInPlaylist = YES;
     
     return postInPlaylist;
 }
@@ -302,6 +340,9 @@ static RYAudioDeckManager *_sharedInstance;
         {
             if (_delegate && [_delegate respondsToSelector:@selector(post:downloadProgressChanged:)])
                 [_delegate post:post downloadProgressChanged:progress];
+            
+            NSDictionary *notifDict = @{@"postID": @(post.postId), @"progress": @(progress)};
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadProgressNotification object:notifDict];
         }
     }
 }
@@ -313,23 +354,23 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.riff.URL == trackURL)
         {
             [_downloadQueue removeObject:post];
-            [_riffPlaylist addObject:post];
-            if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
-                [_delegate riffPlaylistUpdated];
             
-            if (!_audioPlayer)
+            if (trackURL == _currentlyPlayingPost.riff.URL)
+            {
+                [self playPost:_currentlyPlayingPost];
+            }
+            else if (!_audioPlayer)
+            {
+                [_riffPlaylist addObject:post];
                 [self playNextTrack];
+            }
             
-            return;
+            NSDictionary *notifDict = @{@"postID": @(post.postId), @"progress": @(1.0f)};
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadProgressNotification object:notifDict];
+            
+            [self notifyPlaylistChanged];
+            break;
         }
-    }
-    
-    // not in download queue, could be _currentlyPlayingTrack
-    if (trackURL == _currentlyPlayingPost.riff.URL)
-    {
-        // shortcutted track, should start playing
-        [self stopPost];
-        [self playPost:_currentlyPlayingPost];
     }
 }
 
@@ -340,12 +381,23 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.riff.URL == trackURL)
         {
             [_downloadQueue removeObject:post];
-            if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
-                [_delegate riffPlaylistUpdated];
+            
+            [self notifyPlaylistChanged];
             
             break;
         }
     }
+}
+
+#pragma mark - Internal
+
+- (void) notifyPlaylistChanged
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(riffPlaylistUpdated)])
+        [_delegate riffPlaylistUpdated];
+    
+    NSDictionary *postDict = @{@"downloadQueueChanged":@(true)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlaylistChangedNotification object:postDict];
 }
 
 #pragma mark -

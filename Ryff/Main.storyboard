@@ -152,7 +152,7 @@
         <scene sceneID="09g-f5-Xph">
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -780,6 +780,10 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="ILr-tD-1w4">
+                                        <rect key="frame" x="-2" y="73" width="279" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -802,7 +806,7 @@
                         <outlet property="playbackSlider" destination="gOu-Kh-rON" id="9qU-Ae-GGy"/>
                         <outlet property="repostButton" destination="lNF-74-pWu" id="WaM-Ce-x5K"/>
                         <outlet property="tableView" destination="wV3-0q-bCb" id="yJR-dC-QcX"/>
-                        <outlet property="volumeSlider" destination="9Mu-Wy-Zbk" id="zwt-Bf-D59"/>
+                        <outlet property="volumeSlider" destination="ILr-tD-1w4" id="rY7-Dq-JD6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ykp-Mh-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>

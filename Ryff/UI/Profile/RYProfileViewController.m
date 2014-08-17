@@ -67,7 +67,10 @@
     self.feedItems = nil;
     
     if (_user)
+    {
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
+        [self setTitle:_user.username];
+    }
     
     [self.tableView reloadData];
 }
@@ -161,6 +164,15 @@
 }
 
 #pragma mark -
+#pragma mark - Overrides
+
+- (void) avatarAction:(NSInteger)riffIndex
+{
+    RYNewsfeedPost *post = self.feedItems[riffIndex];
+    if (post.user.userId != [RYServices loggedInUser].userId)
+        [super avatarAction:riffIndex];
+}
+
 #pragma mark - TableView data source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

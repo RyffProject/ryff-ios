@@ -31,11 +31,4 @@
 
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
 
-- (void) startDownloading;
-- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes;
-- (void) finishDownloading:(BOOL)success;
-- (void) shouldPause:(BOOL)shouldPause;
-- (void) updateTimeRemaining:(CGFloat)playProgress;
-- (void) clearAudio;
-
 @end

@@ -54,6 +54,7 @@
 // Data
 @property (nonatomic, strong) RYNewsfeedPost *post;
 @property (nonatomic, strong) NSAttributedString *attributedPostString;
+@property (nonatomic, strong) NSTimer *updateTimer;
 
 @end
 
@@ -87,6 +88,10 @@
     [_repostButton setTintColor:[RYStyleSheet postActionColor]];
     
     [_playControlView configureWithFrame:_playControlView.bounds];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
 }
 
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
@@ -129,16 +134,103 @@
     [_upvoteCountLabel setText:[NSString stringWithFormat:@"%ld",(long)post.upvotes]];
     
     [self setBackgroundColor:[UIColor clearColor]];
+    
+    [self styleFromAudioDeck];
+}
+
+- (void) styleFromAudioDeck
+{
+    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    {
+        // currently downloading
+        [_playControlView animateDownloading];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
+    }
+    else if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId && [[RYAudioDeckManager sharedInstance] isPlaying])
+    {
+        // currently playing
+        [_playControlView animatePlaying];
+    }
+    else
+    {
+        [_playControlView stopPlaying];
+    }
+    
+    if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
+        [_playControlView setControlTintColor:[RYStyleSheet audioActionColor]];
+    else
+        [_playControlView setControlTintColor:[RYStyleSheet postActionColor]];
+}
+
+#pragma mark -
+#pragma mark - Notifications
+
+- (void) audioDeckPlaylistChanged:(NSNotification *)notification
+{
+    [self styleFromAudioDeck];
+}
+
+- (void) audioDeckTrackChanged:(NSNotification *)notification
+{
+    [self styleFromAudioDeck];
+}
+
+- (void) updateDownloadProgress:(NSNotification *)notification
+{
+    NSDictionary *notifDict = notification.userInfo;
+    if (notifDict[@"postID"])
+    {
+        if ([notifDict[@"postID"] integerValue] == _post.postId && notifDict[@"progress"])
+        {
+            CGFloat progress = [notifDict[@"progress"] integerValue];
+            
+            if (progress == 1.0f)
+            {
+                [[NSNotificationCenter defaultCenter] removeObserver:self name:kDownloadProgressNotification object:nil];
+                
+                [_updateTimer invalidate];
+                _updateTimer = nil;
+            }
+            else
+            {
+                [_playControlView animateOuterProgress:progress];
+            }
+        }
+    }
 }
 
 #pragma mark - Internal
+
+- (void) stylePlaybackProgressFromAudioDeck:(NSTimer *)timer
+{
+    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    {
+        // currently playing riff
+        [_playControlView animateInnerProgress:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
+    }
+    else
+    {
+        [timer invalidate];
+    }
+}
 
 #pragma mark -
 #pragma mark - Actions
 - (IBAction)playlistAddHit:(id)sender
 {
-    [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
-    [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
+    {
+        // playlist contains already
+        [[RYAudioDeckManager sharedInstance] removePostFromPlaylist:_post];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+    }
+    else
+    {
+        // add to playlist
+        [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    }
 }
 
 - (IBAction)repostHit:(id)sender
@@ -151,6 +243,8 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(starAction:)])
         [_delegate starAction:_riffIndex];
+    
+    [_starButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
 }
 
 #pragma mark - Gestures
@@ -174,53 +268,6 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(playerControlAction:)])
         [_delegate playerControlAction:_riffIndex];
-}
-
-#pragma mark -
-#pragma mark - Media
-
-- (void) startDownloading
-{
-    
-}
-
-- (void) updateDownloadIndicatorWithBytes:(CGFloat)bytesFinished outOf:(CGFloat)totalBytes
-{
-    CGFloat progress = bytesFinished / totalBytes;
-    [_playControlView animateOuterProgress:progress];
-}
-
-- (void) finishDownloading:(BOOL)success
-{
-    if (success)
-    {
-        [_playControlView animateOuterProgress:1.0f];
-        [_playControlView animatePlaying];
-    }
-    else
-    {
-        [_playControlView animateOuterProgress:0.0f];
-    }
-}
-
-- (void) shouldPause:(BOOL)shouldPause
-{
-    if (shouldPause)
-        [_playControlView stopPlaying];
-    else
-        [_playControlView animatePlaying];
-}
-
-- (void) updateTimeRemaining:(CGFloat)playProgress
-{
-    [_playControlView animateInnerProgress:playProgress];
-}
-
-- (void) clearAudio
-{
-    [_playControlView stopPlaying];
-    [_playControlView animateInnerProgress:0.0f];
-    [_playControlView animateOuterProgress:0.0f];
 }
 
 @end

@@ -31,13 +31,16 @@
 
 - (void) configureWithFrame:(CGRect)frame
 {
+    if (!_controlTintColor)
+        _controlTintColor = [RYStyleSheet audioActionColor];
+    
     CGFloat outerStrokeWidth = 3.0f;
     CGFloat innerStrokeWidth = 6.0f;
     
     _circleShape      = [CAShapeLayer layer];
     CGPoint circleCenter        = CGPointMake(frame.size.width/2, frame.size.height/2);
     _circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-outerStrokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-    _circleShape.strokeColor    = [RYStyleSheet audioActionColor].CGColor;
+    _circleShape.strokeColor    = _controlTintColor.CGColor;
     _circleShape.fillColor      = nil;
     _circleShape.lineWidth      = outerStrokeWidth;
     _circleShape.strokeEnd      = 0.0f;
@@ -46,7 +49,7 @@
     
     _innerCircleShape                = [CAShapeLayer layer];
     _innerCircleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-innerStrokeWidth-outerStrokeWidth) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-    _innerCircleShape.strokeColor    = [RYStyleSheet audioActionColor].CGColor;
+    _innerCircleShape.strokeColor    = _controlTintColor.CGColor;
     _innerCircleShape.fillColor      = nil;
     _innerCircleShape.lineWidth      = innerStrokeWidth;
     _innerCircleShape.strokeEnd      = 0.0f;
@@ -75,21 +78,42 @@
     [self animateFill:_innerCircleShape toStrokeEnd:progress];
 }
 
+- (void) animateDownloading
+{
+    if (_playControlState != DOWNLOADING)
+    {
+        [self stopPlaying];
+        [_centerImageView setImage:nil];
+        _innerCircleShape.strokeColor = _controlTintColor.CGColor;
+        _circleShape.strokeColor = _controlTintColor.CGColor;
+        
+        _playControlState = DOWNLOADING;
+    }
+}
+
 - (void) animatePlaying
 {
-    [self animateOuterProgress:1.0f];
-    
-    [self styleCenterImagePlaying:YES];
-    [self doRotation];
-    [_rotationAnimationTimer invalidate];
-    _rotationAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:kAnimationDuration target:self selector:@selector(rotationAnimationTimerTick:) userInfo:nil repeats:YES];
+    if (_playControlState != PLAYING)
+    {
+        [self animateOuterProgress:0.0f];
+        
+        [self styleCenterImagePlaying:YES];
+        [self doRotation];
+        [_rotationAnimationTimer invalidate];
+        _rotationAnimationTimer = [NSTimer scheduledTimerWithTimeInterval:kAnimationDuration target:self selector:@selector(rotationAnimationTimerTick:) userInfo:nil repeats:YES];
+    }
 }
 
 - (void) stopPlaying
 {
-    [_rotationAnimationTimer invalidate];
-    [_innerCircleShape removeAnimationForKey:@"transform.rotation"];
-    [self styleCenterImagePlaying:NO];
+    if (_playControlState != PAUSED)
+    {
+        [self animateOuterProgress:0.0f];
+        
+        [_rotationAnimationTimer invalidate];
+        [_innerCircleShape removeAnimationForKey:@"transform.rotation"];
+        [self styleCenterImagePlaying:NO];
+    }
 }
 
 #pragma mark - Internal
@@ -100,9 +124,15 @@
 - (void) styleCenterImagePlaying:(BOOL)playing
 {
     if (playing)
-        [_centerImageView setImage:[[UIImage imageNamed:@"pause"] colorImage:[RYStyleSheet audioActionColor]]];
+    {
+        _playControlState = PLAYING;
+        [_centerImageView setImage:[[UIImage imageNamed:@"playing"] colorImage:_controlTintColor]];
+    }
     else
-        [_centerImageView setImage:[[UIImage imageNamed:@"play"] colorImage:[RYStyleSheet audioActionColor]]];
+    {
+        _playControlState = PAUSED;
+        [_centerImageView setImage:[[UIImage imageNamed:@"play"] colorImage:_controlTintColor]];
+    }
 }
 
 - (void) rotationAnimationTimerTick:(NSTimer*)timer

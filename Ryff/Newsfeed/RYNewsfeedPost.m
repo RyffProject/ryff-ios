@@ -14,7 +14,7 @@
 
 @implementation RYNewsfeedPost
 
-- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted upvotes:(NSInteger)upvotes
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes
 {
     if (self = [super init])
     {
@@ -25,6 +25,7 @@
         _dateCreated = dateCreated;
         _isUpvoted   = isUpvoted;
         _upvotes     = upvotes;
+        _isStarred   = isStarred;
     }
     return self;
 }
@@ -54,7 +55,9 @@
     BOOL isUpvoted = [postDict[@"is_upvoted"] boolValue];
     NSInteger upvotes = [postDict[@"upvotes"] intValue];
     
-    RYNewsfeedPost *newPost = [[RYNewsfeedPost alloc] initWithPostId:[postId integerValue] User:user Content:content riff:riff dateCreated:date isUpvoted:isUpvoted upvotes:upvotes];
+    BOOL isStarred = [postDict[@"is_starred"] boolValue];
+    
+    RYNewsfeedPost *newPost = [[RYNewsfeedPost alloc] initWithPostId:[postId integerValue] User:user Content:content riff:riff dateCreated:date isUpvoted:isUpvoted isStarred:isStarred upvotes:upvotes];
     return newPost;
 }
 

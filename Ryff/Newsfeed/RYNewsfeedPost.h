@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSURL *imageURL;
 
-- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted upvotes:(NSInteger)upvotes;
+- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;
 
 + (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict;
 + (NSArray *)newsfeedPostsFromDictArray:(NSArray *)dictArray;
