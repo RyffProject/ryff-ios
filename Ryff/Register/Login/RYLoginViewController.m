@@ -57,7 +57,7 @@
     
     [_userTypeButton.titleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_userTypeButton setTintColor:[UIColor whiteColor]];
-    [_userTypeButton setTitle:@"Returning User" forState:UIControlStateNormal];
+    [_userTypeButton setTitle:@"New User" forState:UIControlStateNormal];
     
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap:)];
     [_tapView addGestureRecognizer:backgroundTapGesture];
@@ -128,7 +128,7 @@
 {
     _newUser = !_newUser;
     
-    NSString *buttonTitle = _newUser ? @"New User" : @"Returning User";
+    NSString *buttonTitle = _newUser ? @"Returning User" : @"New User";
     [_userTypeButton setTitle:buttonTitle forState:UIControlStateNormal];
     
     [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kLoginRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];

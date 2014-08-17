@@ -23,8 +23,9 @@
     
     [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
-    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet audioBackgroundColor]];
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet postActionHighlightedColor]];
     [self.navigationController.navigationBar setTranslucent:NO];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     NSDictionary *navbarTitleAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
                                             NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]};

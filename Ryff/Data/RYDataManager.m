@@ -128,8 +128,11 @@ static RYDataManager *_sharedInstance;
     NSString *tempPath = NSTemporaryDirectory();
     NSString *filePath = [tempPath stringByAppendingPathComponent:fileName];
     
-    if (completion && [[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        completion(true, filePath);
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        if (completion)
+            completion(true, filePath);
+    }
     else
     {
         // start file downloading
@@ -147,6 +150,18 @@ static RYDataManager *_sharedInstance;
                 completion(false, nil);
         }];
         [operation start];
+    }
+}
+
+- (void) clearCache
+{
+    NSString *directory = NSTemporaryDirectory();
+    NSError *error = nil;
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:&error]) {
+        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", directory, file] error:&error];
+        if (!success || error) {
+            NSLog(@"clearCache failed: %@",[error localizedDescription]);
+        }
     }
 }
 

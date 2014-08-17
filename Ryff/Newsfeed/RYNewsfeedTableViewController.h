@@ -13,4 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+- (void) configureWithTags:(NSArray *)tags;
+
 @end

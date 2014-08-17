@@ -42,7 +42,7 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                         </textField>
                                                         <view tag="8" contentMode="scaleToFill" id="WtI-Tl-gbb">
                                                             <rect key="frame" x="20" y="74" width="260" height="1"/>
@@ -124,11 +124,11 @@
             <objects>
                 <viewController id="Yqq-Ja-uip" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wPJ-wf-woh">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iLd-fg-1Ex">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -146,14 +146,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9Q-LC-pjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2125" y="-1479"/>
+            <point key="canvasLocation" x="2936" y="-1487"/>
         </scene>
         <!--Profile View Controller - Profile-->
         <scene sceneID="09g-f5-Xph">
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -294,7 +294,6 @@
                             <outlet property="delegate" destination="fpf-wb-Diq" id="TOF-03-N28"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Profile" image="user.png" id="ijD-mq-LaO"/>
                     <connections>
                         <outlet property="tableView" destination="fmo-fI-EJz" id="GIR-5b-N6h"/>
@@ -432,7 +431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlP-sl-zo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4047" y="-1494"/>
+            <point key="canvasLocation" x="5270" y="-1502"/>
         </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
@@ -645,7 +644,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ZG3-zP-onj" kind="relationship" relationship="viewControllers" id="bfU-Fs-oGp"/>
+                        <segue destination="FDM-f1-Nbn" kind="relationship" relationship="viewControllers" id="pJF-gC-hTC"/>
                         <segue destination="fpf-wb-Diq" kind="relationship" relationship="viewControllers" id="0lm-cH-smf"/>
                         <segue destination="B11-cl-E0p" kind="relationship" relationship="viewControllers" id="JGk-Pz-6Ea"/>
                         <segue destination="xfH-zl-6Gm" kind="relationship" relationship="viewControllers" id="Bnq-i6-buY"/>
@@ -670,21 +669,21 @@
             <objects>
                 <viewController storyboardIdentifier="audioDeck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xfH-zl-6Gm" customClass="RYAudioDeckViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bf3-HX-llO">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wV3-0q-bCb">
-                                <rect key="frame" x="30" y="266" width="708" height="758"/>
+                                <rect key="frame" x="30" y="266" width="310" height="758"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="audioDeckCell" rowHeight="50" id="Ctx-59-yBM" customClass="RYAudioDeckTableViewCell">
-                                        <rect key="frame" x="0.0" y="55" width="708" height="50"/>
+                                        <rect key="frame" x="0.0" y="55" width="310" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ctx-59-yBM" id="cEh-VO-Pky">
-                                            <rect key="frame" x="0.0" y="0.0" width="708" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="TNp-3C-E0o">
@@ -707,22 +706,22 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abattoir" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jPQ-3l-Y9G">
-                                                    <rect key="frame" x="55" y="0.0" width="200" height="49"/>
+                                                    <rect key="frame" x="43" y="0.0" width="90" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lay It Down" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eLc-ss-WMc">
-                                                    <rect key="frame" x="275" y="0.0" width="305" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="149" y="0.0" width="95.5" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:38" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZfN-iD-REV">
-                                                    <rect key="frame" x="600" y="0.0" width="100" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="253" y="0.0" width="49" height="49"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -746,7 +745,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="S9D-5B-EtV">
-                                <rect key="frame" x="246" y="58" width="275" height="150"/>
+                                <rect key="frame" x="47.5" y="58" width="275" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZiA-a2-RoD">
@@ -785,7 +784,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gOu-Kh-rON">
-                                <rect key="frame" x="30" y="216" width="708" height="31"/>
+                                <rect key="frame" x="30" y="216" width="310" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="playbackSliderChanged:" destination="xfH-zl-6Gm" eventType="touchUpInside" id="hnV-03-PKu"/>
@@ -808,7 +807,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ykp-Mh-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1161" y="2432"/>
+            <point key="canvasLocation" x="1151" y="2144"/>
         </scene>
         <!--Artist View Controller-->
         <scene sceneID="KbV-ow-Csx">
@@ -896,12 +895,49 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fo0-Oq-NIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3157" y="-1494"/>
+            <point key="canvasLocation" x="4380" y="-1502"/>
         </scene>
-        <!--Navigation Controller - Newsfeed-->
+        <!--Newsfeed Container View Controller - Newsfeed-->
+        <scene sceneID="ALe-Fa-Oq6">
+            <objects>
+                <viewController storyboardIdentifier="newsfeedContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FDM-f1-Nbn" customClass="RYNewsfeedContainerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cm1-6E-HQO">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView contentMode="scaleToFill" id="kND-ki-LRp">
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="ZG3-zP-onj" kind="embed" id="WaL-ib-GFa"/>
+                                </connections>
+                            </containerView>
+                            <containerView contentMode="scaleToFill" id="kjP-j4-ojW">
+                                <rect key="frame" x="398" y="0.0" width="370" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="xfH-zl-6Gm" kind="embed" id="pCS-sR-09U"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="493-zd-Scl"/>
+                    <connections>
+                        <outlet property="audioDeckContainerView" destination="kjP-j4-ojW" id="m4o-dn-xmt"/>
+                        <outlet property="newsfeedContainerView" destination="kND-ki-LRp" id="NY8-DA-rJ2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YZR-8p-FWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1348" y="-1415"/>
+        </scene>
+        <!--Newsfeed Navigation Controller - Newsfeed-->
         <scene sceneID="M7a-Md-3zP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="IcL-Wj-OB1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PDS-1E-JD9">
@@ -909,13 +945,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="EZB-fC-QJs">
+                        <rect key="frame" x="0.0" y="980" width="398" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Yqq-Ja-uip" kind="relationship" relationship="rootViewController" id="ldq-li-Aom"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wy9-iV-Ksa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151" y="-1479"/>
+            <point key="canvasLocation" x="2374" y="-1487"/>
         </scene>
     </scenes>
     <resources>
@@ -941,4 +981,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="pCS-sR-09U"/>
+    </inferredMetricsTieBreakers>
 </document>

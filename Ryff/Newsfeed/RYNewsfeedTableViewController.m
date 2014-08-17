@@ -14,7 +14,16 @@
 // Data Managers
 #import "RYServices.h"
 
+// Associated ViewControllers
+#import "RYAudioDeckViewController.h"
+
 @interface RYNewsfeedTableViewController () <PostDelegate>
+
+// Data
+@property (nonatomic, strong) NSArray *configurationTags;
+
+// iPad
+@property (nonatomic, strong) RYAudioDeckViewController *audioDeckVC;
 
 @end
 
@@ -33,13 +42,27 @@
 {
     [super viewWillAppear:animated];
     
-//    [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
-    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId Delegate:self];
+    if (_configurationTags)
+        [[RYServices sharedInstance] getPostsForTags:_configurationTags delegate:self];
+    else
+    {
+        
+//        [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
+        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId Delegate:self];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+}
+
+#pragma mark -
+#pragma mark - Configuration
+
+- (void) configureWithTags:(NSArray *)tags
+{
+    _configurationTags = tags;
 }
 
 #pragma mark -

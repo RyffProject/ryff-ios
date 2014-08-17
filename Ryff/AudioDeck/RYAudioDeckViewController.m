@@ -63,13 +63,6 @@
     [self.tableView reloadData];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[RYAudioDeckManager sharedInstance] setDelegate:nil];
-}
-
 - (void) styleFromAudioDeck
 {
     if ([[RYAudioDeckManager sharedInstance] isPlaying])
@@ -94,8 +87,6 @@
 
 - (IBAction)repostButtonHit:(id)sender
 {
-    [[RYAudioDeckManager sharedInstance] playTrack:NO];
-    
     RYNewsfeedPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
     RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
     [riffCreateVC includeRiffs:@[post.riff]];
@@ -175,11 +166,12 @@
         // riff playlist
         RYNewsfeedPost *post = [playlist objectAtIndex:indexPath.row];
         [audioCell configureForPost:post trackIdx:indexPath.row];
+        [audioCell styleDownloading:NO];
     }
     else
     {
         // download queue
-        NSInteger downloadIdx = indexPath.row-playlist.count-1;
+        NSInteger downloadIdx = indexPath.row-playlist.count;
         RYNewsfeedPost *post = [[[RYAudioDeckManager sharedInstance] downloadQueue] objectAtIndex:downloadIdx];
         [audioCell configureForPost:post trackIdx:-1];
         [audioCell styleDownloading:YES];
@@ -194,7 +186,7 @@
     
     RYNewsfeedPost *post;
     NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
-    if (indexPath.row >= playlist.count)
+    if (indexPath.row <= playlist.count)
     {
         // riff playlist
         post = [playlist objectAtIndex:indexPath.row];
@@ -202,13 +194,14 @@
     else
     {
         // riff download
-        NSInteger downloadIdx = indexPath.row-playlist.count-1;
+        NSInteger downloadIdx = indexPath.row-playlist.count;
         post = [[[RYAudioDeckManager sharedInstance] downloadQueue] objectAtIndex:downloadIdx];
     }
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
     [riffDetails configureForPost:post];
+    [riffDetails addBackButton];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
     [self presentViewController:navController animated:YES completion:nil];

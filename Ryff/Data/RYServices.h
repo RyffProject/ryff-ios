@@ -97,6 +97,7 @@
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs ForDelegate:(id<RiffDelegate>)riffDelegate;
 - (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
 - (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate;
+- (void) getPostsForTags:(NSArray *)tags delegate:(id<PostDelegate>)delegate;
 - (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
 

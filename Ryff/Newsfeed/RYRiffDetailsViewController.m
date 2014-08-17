@@ -50,6 +50,17 @@
     [self.tableView reloadData];
 }
 
+- (void) addBackButton
+{
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(dismissButtonHit:)];
+    [self.navigationItem setLeftBarButtonItem:backButton];
+}
+
+- (void) dismissButtonHit:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Configuring
 
 - (void) configureForPost:(RYNewsfeedPost *)post

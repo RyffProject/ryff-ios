@@ -12,6 +12,7 @@
 #import "RYServices.h"
 #import "RYMediaEditor.h"
 #import "RYDataManager.h"
+#import "RYAudioDeckManager.h"
 
 // Data Objects
 #import "RYRiff.h"
@@ -114,6 +115,8 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [_tableView reloadData];
+    
+    [[RYAudioDeckManager sharedInstance] playTrack:NO];
 }
 
 - (IBAction)backButtonHit:(id)sender

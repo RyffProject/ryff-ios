@@ -69,13 +69,11 @@ static RYAudioDeckManager *_sharedInstance;
     else
     {
         if (_audioPlayer.isPlaying)
-        {
             [_audioPlayer pause];
-            
-            if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
-                [_delegate trackChanged];
-        }
     }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(trackChanged)])
+        [_delegate trackChanged];
 }
 
 - (void) setPlaybackProgress:(CGFloat)progress

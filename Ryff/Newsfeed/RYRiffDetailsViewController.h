@@ -12,5 +12,6 @@
 @interface RYRiffDetailsViewController : RYRiffStreamingCoreViewController
 
 - (void) configureForPost:(RYNewsfeedPost *)post;
+- (void) addBackButton;
 
 @end

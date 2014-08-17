@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYDataManager.h"
 
 // Frameworks
 #import "SSKeychain.h"
@@ -26,6 +27,8 @@
     [self.window makeKeyAndVisible];
     
     [[RYServices sharedInstance] attemptBackgroundLogIn];
+    
+    [[RYDataManager sharedInstance] clearCache];
     
     return YES;
 }

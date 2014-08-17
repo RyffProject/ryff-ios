@@ -445,6 +445,32 @@ static RYUser* _loggedInUser;
     });
 }
 
+- (void) getPostsForTags:(NSArray *)tags delegate:(id<PostDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+#warning change action url
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetNewsfeedPosts];
+        NSDictionary *params = @{@"tags": tags};
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dictionary = responseObject;
+            if (dictionary[@"success"])
+            {
+                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                [delegate postSucceeded:posts];
+            }
+            else if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
+                [delegate postFailed:responseObject];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
+                [delegate postFailed:[error localizedDescription]];
+        }];
+    });
+}
+
 - (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
