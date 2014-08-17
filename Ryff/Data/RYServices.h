@@ -9,29 +9,47 @@
 #import <Foundation/Foundation.h>
 
 // NSUserDefaults keys
-#define kLoggedInUserKey    @"loggedInUser"
-#define kCoordLongitude     @"lastUpdatedLongitude"
-#define kCoordLatitude      @"lastUpdatedLatitude"
+#define kLoggedInUserKey        @"loggedInUser"
+#define kCoordLongitude         @"lastUpdatedLongitude"
+#define kCoordLatitude          @"lastUpdatedLatitude"
 
 // Server paths
-#define kApiRoot            @"https://ryff.me/api/"
-#define kLogIn              @"login.php"
-#define kRegistrationAction @"create-user.php"
-#define kUpdateUserAction   @"update-user.php"
-#define kAddFriendAction    @"follow.php"
-#define kDeleteFriendAction @"unfollow.php"
-#define kPostRiffAction     @"add-post.php"
-#define kUpvotePostAction   @"add-upvote.php"
-#define kDeleteUpvoteAction @"delete-upvote.php"
-#define kDeletePostAction   @"delete-post.php"
-#define kGetPostFamily      @"get-post-family.php"
-#define kGetPosts           @"get-posts.php"
-#define kGetPeople          @"get-user.php"
-#define kGetNearby          @"get-users-nearby.php"
-#define kGetNewsfeedPosts   @"get-news-feed.php"
+#define kApiRoot                @"https://ryff.me/api/"
+
+// Users
+#define kRegistrationAction     @"create-user.php"
+#define kUpdateUserAction       @"update-user.php"
+#define kLogIn                  @"login.php"
+#define kGetPeople              @"get-user.php"
+#define kGetNearby              @"get-users-nearby.php"
+
+// Posts
+#define kGetPosts               @"get-posts.php"
+#define kGetStarredPosts        @"get-starred-posts.php"
+#define kGetNewsfeedPosts       @"get-news-feed.php"
+#define kGetPostFamily          @"get-post-family.php"
+#define kSearchPostsNew         @"search-posts-new.php"
+#define kSearchPostsTop         @"search-posts-top.php"
+#define kSearchPostsTrending    @"search-posts-trending.php"
+
+// Actions
+#define kFollowUserAction       @"follow.php"
+#define kUnfollowUserAction     @"unfollow.php"
+#define kPostRiffAction         @"add-post.php"
+#define kDeletePostAction       @"delete-post.php"
+#define kUpvotePostAction       @"add-upvote.php"
+#define kDeleteUpvoteAction     @"delete-upvote.php"
+#define kStarPostAction         @"add-star.php"
+#define kUnstarPostAction       @"delete-star.php"
 
 @class RYNewsfeedPost;
 @class RYUser;
+
+typedef enum : NSUInteger {
+    NEW,
+    TOP,
+    TRENDING
+} SearchType;
 
 @protocol PostDelegate <NSObject>
 - (void) postSucceeded:(NSArray*)posts;
@@ -56,10 +74,12 @@
 - (void) riffPostFailed;
 @end
 
-@protocol UpvoteDelegate <NSObject>
+@protocol ActionDelegate <NSObject>
 - (void) upvoteSucceeded:(RYNewsfeedPost*)updatedPost;
+- (void) starSucceeded:(RYNewsfeedPost *)updatedPost;
 @optional
-- (void) upvoteFailed:(NSString*)reason;
+- (void) upvoteFailed:(NSString*)reason post:(RYNewsfeedPost *)oldPost;
+- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost;
 @end
 
 @protocol UpdateUserDelegate <NSObject>
@@ -88,17 +108,18 @@
 - (void) deletePost:(RYNewsfeedPost*)post;
 
 // Discover
-@property (nonatomic, weak) id <ArtistsFetchDelegate> artistsDelegate;
-- (void) moreArtistsOfCount:(NSInteger)numArtists;
-- (void) follow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
-- (void) unfollow:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
+- (void) follow:(BOOL)shouldFollow user:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
 
 // Posts
-- (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs ForDelegate:(id<RiffDelegate>)riffDelegate;
-- (void) getUserPostsForUser:(NSInteger)userId Delegate:(id<PostDelegate>)delegate;
-- (void) getNewsfeedPostsForDelegate:(id<PostDelegate>)delegate;
-- (void) getPostsForTags:(NSArray *)tags delegate:(id<PostDelegate>)delegate;
-- (void) upvote:(BOOL)shouldUpvote post:(NSInteger)postID forDelegate:(id<UpvoteDelegate>)delegate;
+- (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs image:(UIImage *)image ForDelegate:(id<RiffDelegate>)riffDelegate;
+- (void) getUserPostsForUser:(NSInteger)userId page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
+- (void) getNewsfeedPosts:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
+- (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
+- (void) getStarredPostsForUser:(NSInteger)userID delegate:(id<PostDelegate>)delegate;
+
+// Actions
+- (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
+- (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
 
 @end

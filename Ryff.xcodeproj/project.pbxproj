@@ -15,13 +15,11 @@
 		830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB018F9F54900A9C53F /* SSKeychain.m */; };
 		830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */; };
 		830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB918FA055900A9C53F /* MBProgressHUD.m */; };
-		830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */; };
 		830BBCC318FA081600A9C53F /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCC118FA081600A9C53F /* checkmark.png */; };
 		830BBCC418FA081600A9C53F /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCC218FA081600A9C53F /* checkmark@2x.png */; };
 		830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCC718FA0A5800A9C53F /* RYLocationServices.m */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
 		830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCD118FA142000A9C53F /* BlockAlertView.m */; };
-		830BBCD518FA14F500A9C53F /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCD418FA14F500A9C53F /* UIImage+Thumbnail.m */; };
 		830BBCD918FA196300A9C53F /* userBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCD718FA196300A9C53F /* userBig.png */; };
 		830BBCDA18FA196300A9C53F /* userBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCD818FA196300A9C53F /* userBig@2x.png */; };
 		830BBCDF18FA401700A9C53F /* friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCDB18FA401700A9C53F /* friend.png */; };
@@ -56,17 +54,18 @@
 		831B96081964DEC6003A8616 /* RYDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B96071964DEC6003A8616 /* RYDataManager.m */; };
 		831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */; };
 		831E5FFA19A03269007F3C31 /* RYNewsfeedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */; };
+		831E600319A04453007F3C31 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E5FFD19A04453007F3C31 /* UIImage+Color.m */; };
+		831E600419A04453007F3C31 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E600019A04453007F3C31 /* UIView+Styling.m */; };
+		831E600519A04453007F3C31 /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E600219A04453007F3C31 /* UIViewController+Extras.m */; };
 		833E1D591975DFF10002A2BE /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D541975DFF10002A2BE /* SGImageCache.m */; };
 		833E1D5A1975DFF10002A2BE /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D561975DFF10002A2BE /* SGImageCacheTask.m */; };
 		833E1D5B1975DFF10002A2BE /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 833E1D581975DFF10002A2BE /* UIImageView+SGImageCache.m */; };
 		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
 		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
-		834039FD195A44E90001EA53 /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 834039FC195A44E90001EA53 /* NSObject+block.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
-		836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AA195FB3C3005938F5 /* UIView+Styling.m */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089D1979940400DDD26C /* SGActivityIndicator.m */; };
@@ -77,14 +76,12 @@
 		838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AB197994B700DDD26C /* MGWeakHandler.m */; };
 		838808B4197994B700DDD26C /* NSObject+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AD197994B700DDD26C /* NSObject+MGEvents.m */; };
 		838808B5197994B700DDD26C /* UIControl+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808AF197994B700DDD26C /* UIControl+MGEvents.m */; };
-		838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838808B719799B0300DDD26C /* RYArtistViewController.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
 		83C6A5EE1960EB9600BB3D1A /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5EC1960EB9600BB3D1A /* record.png */; };
 		83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5ED1960EB9600BB3D1A /* record@2x.png */; };
 		83C6A5F21960EC5200BB3D1A /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F01960EC5200BB3D1A /* plus.png */; };
 		83C6A5F31960EC5200BB3D1A /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F11960EC5200BB3D1A /* plus@2x.png */; };
-		83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C6CA7B18FAF95C00412469 /* UIImage+Color.m */; };
 		83C6CA8318FAFF5200412469 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7D18FAFF5200412469 /* back.png */; };
 		83C6CA8418FAFF5200412469 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7E18FAFF5200412469 /* back@2x.png */; };
 		83C6CA8518FAFF5200412469 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6CA7F18FAFF5200412469 /* cloud.png */; };
@@ -202,9 +199,7 @@
 		83FCD16818F907C400A493F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD16618F907C400A493F0 /* InfoPlist.strings */; };
 		83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD16918F907C400A493F0 /* RyffTests.m */; };
 		83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD17518F909DB00A493F0 /* RYProfileViewController.m */; };
-		83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */; };
 		83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */; };
-		83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */; };
 		83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A218F921EA00A493F0 /* RYServices.m */; };
 		83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */; };
 		83FCD1AB18F93E6C00A493F0 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AA18F93E6C00A493F0 /* user.png */; };
@@ -240,8 +235,6 @@
 		830BBCB718FA055900A9C53F /* MBProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		830BBCB818FA055900A9C53F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		830BBCB918FA055900A9C53F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
-		830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
 		830BBCC118FA081600A9C53F /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		830BBCC218FA081600A9C53F /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
 		830BBCC618FA0A5800A9C53F /* RYLocationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLocationServices.h; sourceTree = "<group>"; };
@@ -249,8 +242,6 @@
 		830BBCC918FA0C2300A9C53F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		830BBCD018FA142000A9C53F /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlertView.h; sourceTree = "<group>"; };
 		830BBCD118FA142000A9C53F /* BlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlertView.m; sourceTree = "<group>"; };
-		830BBCD318FA14F500A9C53F /* UIImage+Thumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnail.h"; sourceTree = "<group>"; };
-		830BBCD418FA14F500A9C53F /* UIImage+Thumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Thumbnail.m"; sourceTree = "<group>"; };
 		830BBCD718FA196300A9C53F /* userBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userBig.png; sourceTree = "<group>"; };
 		830BBCD818FA196300A9C53F /* userBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userBig@2x.png"; sourceTree = "<group>"; };
 		830BBCDB18FA401700A9C53F /* friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend.png; sourceTree = "<group>"; };
@@ -291,6 +282,13 @@
 		831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTrackDownloadTableViewCell.m; sourceTree = "<group>"; };
 		831E5FF819A03269007F3C31 /* RYNewsfeedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedNavigationController.h; sourceTree = "<group>"; };
 		831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedNavigationController.m; sourceTree = "<group>"; };
+		831E5FFC19A04453007F3C31 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		831E5FFD19A04453007F3C31 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		831E5FFE19A04453007F3C31 /* UIImage+Thumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Thumbnail.h"; sourceTree = "<group>"; };
+		831E5FFF19A04453007F3C31 /* UIView+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Styling.h"; sourceTree = "<group>"; };
+		831E600019A04453007F3C31 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
+		831E600119A04453007F3C31 /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
+		831E600219A04453007F3C31 /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
 		833E1D531975DFF10002A2BE /* SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCache.h; sourceTree = "<group>"; };
 		833E1D541975DFF10002A2BE /* SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCache.m; sourceTree = "<group>"; };
 		833E1D551975DFF10002A2BE /* SGImageCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCacheTask.h; sourceTree = "<group>"; };
@@ -301,8 +299,6 @@
 		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
 		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
 		833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
-		834039FB195A44E90001EA53 /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+block.h"; path = "../../Global Helpers/NSObject+block.h"; sourceTree = "<group>"; };
-		834039FC195A44E90001EA53 /* NSObject+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+block.m"; path = "../../Global Helpers/NSObject+block.m"; sourceTree = "<group>"; };
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
 		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
@@ -310,8 +306,6 @@
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
-		836461A9195FB3C3005938F5 /* UIView+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Styling.h"; sourceTree = "<group>"; };
-		836461AA195FB3C3005938F5 /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
 		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -333,8 +327,6 @@
 		838808AD197994B700DDD26C /* NSObject+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MGEvents.m"; sourceTree = "<group>"; };
 		838808AE197994B700DDD26C /* UIControl+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+MGEvents.h"; sourceTree = "<group>"; };
 		838808AF197994B700DDD26C /* UIControl+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+MGEvents.m"; sourceTree = "<group>"; };
-		838808B619799B0300DDD26C /* RYArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYArtistViewController.h; path = Ryff/Suggester/RYArtistViewController.h; sourceTree = SOURCE_ROOT; };
-		838808B719799B0300DDD26C /* RYArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYArtistViewController.m; path = Ryff/Suggester/RYArtistViewController.m; sourceTree = SOURCE_ROOT; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedContainerViewController.h; sourceTree = "<group>"; };
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
@@ -342,8 +334,6 @@
 		83C6A5ED1960EB9600BB3D1A /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
 		83C6A5F01960EC5200BB3D1A /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		83C6A5F11960EC5200BB3D1A /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
-		83C6CA7A18FAF95C00412469 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
-		83C6CA7B18FAF95C00412469 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		83C6CA7D18FAFF5200412469 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		83C6CA7E18FAFF5200412469 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		83C6CA7F18FAFF5200412469 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
@@ -546,12 +536,8 @@
 		83FCD16918F907C400A493F0 /* RyffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyffTests.m; sourceTree = "<group>"; };
 		83FCD17418F909DB00A493F0 /* RYProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileViewController.h; sourceTree = "<group>"; };
 		83FCD17518F909DB00A493F0 /* RYProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileViewController.m; sourceTree = "<group>"; };
-		83FCD17F18F90F8F00A493F0 /* RYSearchPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSearchPageViewController.h; sourceTree = "<group>"; };
-		83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYSearchPageViewController.m; sourceTree = "<group>"; };
 		83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedTableViewController.h; sourceTree = "<group>"; };
 		83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedTableViewController.m; sourceTree = "<group>"; };
-		83FCD19118F9166000A493F0 /* RYArtistSuggestPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYArtistSuggestPageViewController.h; sourceTree = "<group>"; };
-		83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYArtistSuggestPageViewController.m; sourceTree = "<group>"; };
 		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
 		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
@@ -599,7 +585,8 @@
 				836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */,
 				836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */,
 			);
-			path = Login;
+			name = Login;
+			path = Register/Login;
 			sourceTree = "<group>";
 		};
 		830BBCAC18F9F54900A9C53F /* SSKeychain */ = {
@@ -640,7 +627,8 @@
 				830BBCD018FA142000A9C53F /* BlockAlertView.h */,
 				830BBCD118FA142000A9C53F /* BlockAlertView.m */,
 			);
-			path = BlockAlert;
+			name = BlockAlert;
+			path = ../UI/Custom/BlockAlert;
 			sourceTree = "<group>";
 		};
 		8310F5A71981F8BF00250172 /* Custom UI Objects */ = {
@@ -683,16 +671,33 @@
 			path = "1.0 images";
 			sourceTree = "<group>";
 		};
-		833E1D511975DFA90002A2BE /* Frameworks */ = {
+		831E5FFB19A04453007F3C31 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				831E5FFC19A04453007F3C31 /* UIImage+Color.h */,
+				831E5FFD19A04453007F3C31 /* UIImage+Color.m */,
+				831E5FFE19A04453007F3C31 /* UIImage+Thumbnail.h */,
+				831E5FFF19A04453007F3C31 /* UIView+Styling.h */,
+				831E600019A04453007F3C31 /* UIView+Styling.m */,
+				831E600119A04453007F3C31 /* UIViewController+Extras.h */,
+				831E600219A04453007F3C31 /* UIViewController+Extras.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		833E1D511975DFA90002A2BE /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				831E5FFB19A04453007F3C31 /* Categories */,
 				83CA118B1995CD23002610E8 /* FLEX */,
 				83EB8BA319959F5C0007837D /* DWTagList */,
 				83CCC8E8197EFCBF00FD1B4B /* AFNetworking */,
 				83CCC8FC197EFCBF00FD1B4B /* UIKit+AFNetworking */,
 				838808A2197994B700DDD26C /* MGEvents */,
 				833E1D521975DFF10002A2BE /* SGImageCache */,
+				830BBCCF18FA142000A9C53F /* BlockAlert */,
 			);
+			name = Extras;
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
@@ -774,7 +779,8 @@
 				8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */,
 				8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */,
 			);
-			path = RiffEdit;
+			name = RiffEdit;
+			path = UI/Profile/RiffEdit;
 			sourceTree = "<group>";
 		};
 		83CA118B1995CD23002610E8 /* FLEX */ = {
@@ -1004,25 +1010,6 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
-		83DBCA6B18F97A2A00262496 /* Global Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				834039FB195A44E90001EA53 /* NSObject+block.h */,
-				834039FC195A44E90001EA53 /* NSObject+block.m */,
-				830BBCD318FA14F500A9C53F /* UIImage+Thumbnail.h */,
-				830BBCD418FA14F500A9C53F /* UIImage+Thumbnail.m */,
-				830BBCBD18FA06AD00A9C53F /* UIViewController+Extras.h */,
-				830BBCBE18FA06AD00A9C53F /* UIViewController+Extras.m */,
-				830BBCCF18FA142000A9C53F /* BlockAlert */,
-				83C6CA7A18FAF95C00412469 /* UIImage+Color.h */,
-				83C6CA7B18FAF95C00412469 /* UIImage+Color.m */,
-				836461A9195FB3C3005938F5 /* UIView+Styling.h */,
-				836461AA195FB3C3005938F5 /* UIView+Styling.m */,
-			);
-			name = "Global Helpers";
-			path = UI/Custom;
-			sourceTree = "<group>";
-		};
 		83DBCA7818F99E2000262496 /* Base Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1123,9 +1110,8 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
-				833E1D511975DFA90002A2BE /* Frameworks */,
+				833E1D511975DFA90002A2BE /* Extras */,
 				83DBCA7818F99E2000262496 /* Base Classes */,
-				83DBCA6B18F97A2A00262496 /* Global Helpers */,
 				83FCD1A918F93E6C00A493F0 /* Images */,
 				83FCD1A518F9393500A493F0 /* Style */,
 				83FCD1A018F921AB00A493F0 /* Data */,
@@ -1133,12 +1119,11 @@
 				83FCD14B18F907C400A493F0 /* RYAppDelegate.m */,
 				8397133E1936DD1100913996 /* Main.storyboard */,
 				83FCD14D18F907C400A493F0 /* MainIphone.storyboard */,
-				83FCD19018F915DE00A493F0 /* Suggester */,
 				83FCD18C18F9142600A493F0 /* Newsfeed */,
 				83CA122A19981059002610E8 /* AudioDeck */,
 				83FCD17318F909CB00A493F0 /* Profile */,
-				83FCD17E18F90F2A00A493F0 /* Search */,
-				83FCD19C18F91FA000A493F0 /* Register */,
+				83C6CA7618FAECD200412469 /* RiffEdit */,
+				830185F119009C2B00093EFA /* Login */,
 				83FCD15618F907C400A493F0 /* Images.xcassets */,
 				83FCD14218F907C400A493F0 /* Supporting Files */,
 				83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */,
@@ -1179,7 +1164,6 @@
 		83FCD17318F909CB00A493F0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				83C6CA7618FAECD200412469 /* RiffEdit */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */,
@@ -1200,16 +1184,6 @@
 			path = ../UI/Profile/RiffCell;
 			sourceTree = "<group>";
 		};
-		83FCD17E18F90F2A00A493F0 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				83FCD17F18F90F8F00A493F0 /* RYSearchPageViewController.h */,
-				83FCD18018F90F8F00A493F0 /* RYSearchPageViewController.m */,
-			);
-			name = Search;
-			path = Ryff/UI/Search;
-			sourceTree = SOURCE_ROOT;
-		};
 		83FCD18C18F9142600A493F0 /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -1223,33 +1197,6 @@
 				831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */,
 			);
 			path = Newsfeed;
-			sourceTree = "<group>";
-		};
-		83FCD19018F915DE00A493F0 /* Suggester */ = {
-			isa = PBXGroup;
-			children = (
-				83FCD19718F9178B00A493F0 /* Artist */,
-				83FCD19118F9166000A493F0 /* RYArtistSuggestPageViewController.h */,
-				83FCD19218F9166000A493F0 /* RYArtistSuggestPageViewController.m */,
-			);
-			path = Suggester;
-			sourceTree = "<group>";
-		};
-		83FCD19718F9178B00A493F0 /* Artist */ = {
-			isa = PBXGroup;
-			children = (
-				838808B619799B0300DDD26C /* RYArtistViewController.h */,
-				838808B719799B0300DDD26C /* RYArtistViewController.m */,
-			);
-			path = Artist;
-			sourceTree = "<group>";
-		};
-		83FCD19C18F91FA000A493F0 /* Register */ = {
-			isa = PBXGroup;
-			children = (
-				830185F119009C2B00093EFA /* Login */,
-			);
-			path = Register;
 			sourceTree = "<group>";
 		};
 		83FCD1A018F921AB00A493F0 /* Data */ = {
@@ -1491,17 +1438,15 @@
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83CA12251995CD23002610E8 /* FLEXRuntimeUtility.m in Sources */,
-				83FCD19318F9166000A493F0 /* RYArtistSuggestPageViewController.m in Sources */,
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
-				83FCD18118F90F8F00A493F0 /* RYSearchPageViewController.m in Sources */,
+				831E600519A04453007F3C31 /* UIViewController+Extras.m in Sources */,
 				83CCC90F197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m in Sources */,
 				83CA11F91995CD23002610E8 /* FLEXArgumentInputFontsPickerView.m in Sources */,
 				83CA12041995CD23002610E8 /* FLEXDefaultEditorViewController.m in Sources */,
 				83CCC91A197EFCBF00FD1B4B /* UIButton+AFNetworking.m in Sources */,
-				834039FD195A44E90001EA53 /* NSObject+block.m in Sources */,
 				83CA12191995CD23002610E8 /* FLEXDefaultsExplorerViewController.m in Sources */,
 				83CA12241995CD23002610E8 /* FLEXResources.m in Sources */,
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,
@@ -1510,14 +1455,13 @@
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
 				83CA120B1995CD23002610E8 /* FLEXExplorerViewController.m in Sources */,
 				83CA120D1995CD23002610E8 /* FLEXToolbarItem.m in Sources */,
-				830BBCBF18FA06AD00A9C53F /* UIViewController+Extras.m in Sources */,
 				830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */,
-				83C6CA7C18FAF95C00412469 /* UIImage+Color.m in Sources */,
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
 				83CA121A1995CD23002610E8 /* FLEXDescriptionTableViewCell.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */,
+				831E600319A04453007F3C31 /* UIImage+Color.m in Sources */,
 				83CA12061995CD23002610E8 /* FLEXFieldEditorViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
@@ -1534,7 +1478,6 @@
 				830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */,
 				83CA12121995CD23002610E8 /* FLEXGlobalsTableViewController.m in Sources */,
 				83CA12201995CD23002610E8 /* FLEXSetExplorerViewController.m in Sources */,
-				830BBCD518FA14F500A9C53F /* UIImage+Thumbnail.m in Sources */,
 				83CA12051995CD23002610E8 /* FLEXFieldEditorView.m in Sources */,
 				838808B2197994B700DDD26C /* MGObserver.m in Sources */,
 				83CA120C1995CD23002610E8 /* FLEXManager.m in Sources */,
@@ -1554,6 +1497,7 @@
 				83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */,
 				83CA120A1995CD23002610E8 /* FLEXExplorerToolbar.m in Sources */,
 				83CA121B1995CD23002610E8 /* FLEXDictionaryExplorerViewController.m in Sources */,
+				831E600419A04453007F3C31 /* UIView+Styling.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				83CA11FD1995CD23002610E8 /* FLEXArgumentInputNumberView.m in Sources */,
 				838808B3197994B700DDD26C /* MGWeakHandler.m in Sources */,
@@ -1600,14 +1544,12 @@
 				83CA121E1995CD23002610E8 /* FLEXObjectExplorerFactory.m in Sources */,
 				83CA12171995CD23002610E8 /* FLEXArrayExplorerViewController.m in Sources */,
 				83CA121D1995CD23002610E8 /* FLEXImageExplorerViewController.m in Sources */,
-				838808B819799B0300DDD26C /* RYArtistViewController.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				838808B0197994B700DDD26C /* MGBlockWrapper.m in Sources */,
 				833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */,
 				83CA12091995CD23002610E8 /* FLEXPropertyEditorViewController.m in Sources */,
 				83CA12031995CD23002610E8 /* FLEXArgumentInputViewFactory.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,
-				836461AB195FB3C3005938F5 /* UIView+Styling.m in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

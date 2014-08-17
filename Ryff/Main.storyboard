@@ -431,7 +431,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlP-sl-zo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5270" y="-1502"/>
+            <point key="canvasLocation" x="4390" y="-1487"/>
         </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
@@ -654,10 +654,10 @@
             </objects>
             <point key="canvasLocation" x="128" y="-70"/>
         </scene>
-        <!--Artist Suggest Page View Controller - Discover-->
+        <!--Page View Controller - Discover-->
         <scene sceneID="56Q-O6-kPQ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="B11-cl-E0p" customClass="RYArtistSuggestPageViewController" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="B11-cl-E0p" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="artists.png" id="xvG-OF-nue"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcr-6O-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -809,76 +809,6 @@
             </objects>
             <point key="canvasLocation" x="1151" y="2144"/>
         </scene>
-        <!--Artist View Controller-->
-        <scene sceneID="KbV-ow-Csx">
-            <objects>
-                <viewController id="d7x-LO-tax" customClass="RYArtistViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="AWa-IV-EeK">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="O92-yT-FHE">
-                                <rect key="frame" x="50" y="100" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="hwH-AP-cog">
-                                <rect key="frame" x="258" y="168" width="490" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Chris" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="HFn-ov-WRc">
-                                <rect key="frame" x="258" y="100" width="490" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="NHt-Ky-lwc">
-                                <rect key="frame" x="0.0" y="308" width="768" height="766"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="d7x-LO-tax" id="EKi-zo-Q4C"/>
-                                    <outlet property="delegate" destination="d7x-LO-tax" id="bJQ-YH-rKL"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="A6Q-SN-DYC"/>
-                    <connections>
-                        <outlet property="bioText" destination="hwH-AP-cog" id="L05-A3-W0I"/>
-                        <outlet property="nameText" destination="HFn-ov-WRc" id="Xmf-Qy-rl6"/>
-                        <outlet property="profileImage" destination="O92-yT-FHE" id="Oi9-5j-4Lr"/>
-                        <outlet property="tableView" destination="NHt-Ky-lwc" id="F5c-YO-K0v"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I3P-w6-hLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3298" y="1040"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pXX-sl-qTQ">
-            <objects>
-                <navigationController storyboardIdentifier="ArtistNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YUa-Zj-BKM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="phK-Fe-ONj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="d7x-LO-tax" kind="relationship" relationship="rootViewController" id="rsq-aK-HIf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P0K-Yh-RX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2388" y="1040"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="oH6-1U-yxB">
             <objects>
@@ -895,7 +825,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fo0-Oq-NIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4380" y="-1502"/>
+            <point key="canvasLocation" x="3500" y="-1487"/>
         </scene>
         <!--Newsfeed Container View Controller - Newsfeed-->
         <scene sceneID="ALe-Fa-Oq6">

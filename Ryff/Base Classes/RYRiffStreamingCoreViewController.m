@@ -105,7 +105,7 @@
 - (void) upvoteAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
-    [[RYServices sharedInstance] upvote:!post.isUpvoted post:post.postId forDelegate:self];
+    [[RYServices sharedInstance] upvote:!post.isUpvoted post:post forDelegate:self];
 }
 
 - (void) starAction:(NSInteger)riffIndex
@@ -153,28 +153,50 @@
 //}
 
 #pragma mark -
-#pragma mark - Upvotes
+#pragma mark - Action Delegate
 
 - (void) upvoteSucceeded:(RYNewsfeedPost *)updatedPost
+{
+    [self reloadPost:updatedPost];
+}
+
+- (void) starSucceeded:(RYNewsfeedPost *)updatedPost
+{
+    [self reloadPost:updatedPost];
+}
+
+- (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+{
+    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [upvoteFailedAlert show];
+    
+    [self reloadPost:oldPost];
+}
+
+- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+{
+    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [upvoteFailedAlert show];
+    
+    [self reloadPost:oldPost];
+}
+
+#pragma mark - Internal Helpers
+
+- (void) reloadPost:(RYNewsfeedPost *)post
 {
     for (NSInteger postIdx = 0; postIdx < _feedItems.count; postIdx++)
     {
         RYNewsfeedPost *oldPost = _feedItems[postIdx];
-        if (oldPost.postId == updatedPost.postId)
+        if (oldPost.postId == post.postId)
         {
             // found the old post, replace it and update UI
             NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
-            [mutableFeedItems replaceObjectAtIndex:postIdx withObject:updatedPost];
+            [mutableFeedItems replaceObjectAtIndex:postIdx withObject:post];
             _feedItems = mutableFeedItems;
             [_riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }
-}
-
-- (void) upvoteFailed:(NSString *)reason
-{
-    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [upvoteFailedAlert show];
 }
 
 #pragma mark -

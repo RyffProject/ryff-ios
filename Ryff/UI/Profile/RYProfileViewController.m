@@ -67,7 +67,7 @@
     self.feedItems = nil;
     
     if (_user)
-        [[RYServices sharedInstance] getUserPostsForUser:_user.userId Delegate:self];
+        [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
     
     [self.tableView reloadData];
 }

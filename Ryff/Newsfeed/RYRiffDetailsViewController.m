@@ -21,7 +21,7 @@
 
 #define kRiffDetailsCellReuseID @"riffDetails"
 
-@interface RYRiffDetailsViewController () <PostDelegate, RiffDetailsDelegate, UpvoteDelegate>
+@interface RYRiffDetailsViewController () <PostDelegate, RiffDetailsDelegate, ActionDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -83,7 +83,7 @@
 
 - (void) riffUpvoteAction
 {
-    [[RYServices sharedInstance] upvote:YES post:_post.postId forDelegate:self];
+    [[RYServices sharedInstance] upvote:YES post:_post forDelegate:self];
 }
 
 - (void) riffRepostAction
@@ -133,12 +133,7 @@
     [_tableView reloadData];
 }
 
-#pragma mark - Upvote Delegate
-
-- (void) upvoteFailed:(NSString *)reason
-{
-    
-}
+#pragma mark - Action Delegate
 
 - (void) upvoteSucceeded:(RYNewsfeedPost *)updatedPost
 {
@@ -153,6 +148,31 @@
         // upvoted other riff in tableview
         [super upvoteSucceeded:updatedPost];
     }
+}
+
+- (void) starSucceeded:(RYNewsfeedPost *)updatedPost
+{
+    if (updatedPost.postId == _post.postId)
+    {
+        // upvoted main riff
+        _post = updatedPost;
+        [_riffDetailsCell configureWithPost:_post delegate:self];
+    }
+    else
+    {
+        // upvoted other riff in tableview
+        [super upvoteSucceeded:updatedPost];
+    }
+}
+
+- (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+{
+    
+}
+
+- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+{
+    
 }
 
 #pragma mark -
