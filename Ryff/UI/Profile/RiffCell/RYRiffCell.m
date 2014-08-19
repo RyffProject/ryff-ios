@@ -60,40 +60,6 @@
 
 @implementation RYRiffCell
 
-- (void) awakeFromNib
-{
-    [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_textView setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_avatarImageView.layer setCornerRadius:10.0f];
-    [_avatarImageView setClipsToBounds:YES];
-    
-    [_postImageView.layer setCornerRadius:10.0f];
-    [_postImageView setClipsToBounds:YES];
-    
-    UITapGestureRecognizer *playControlTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
-    [_playControlView addGestureRecognizer:playControlTap];
-    [_playControlView setBackgroundColor:[UIColor clearColor]];
-    
-    [_playControlView configureWithFrame:_playControlView.bounds];
-    
-    UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
-    [_avatarImageView addGestureRecognizer:avatarTap];
-    
-    UITapGestureRecognizer *upvoteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(upvoteHit:)];
-    [_upvoteWrapperView addGestureRecognizer:upvoteTap];
-    
-    [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
-    [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
-    
-    [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
-    
-    [_repostButton setTintColor:[RYStyleSheet postActionColor]];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
-}
-
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
 {
     _riffIndex = riffIndex;
@@ -132,6 +98,53 @@
     [self setBackgroundColor:[UIColor clearColor]];
     
     [self styleFromAudioDeck];
+}
+
+#pragma mark - Internal
+
+- (void) awakeFromNib
+{
+    [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_textView setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_avatarImageView.layer setCornerRadius:10.0f];
+    [_avatarImageView setClipsToBounds:YES];
+    
+    [_postImageView.layer setCornerRadius:10.0f];
+    [_postImageView setClipsToBounds:YES];
+    
+    UITapGestureRecognizer *playControlTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
+    [_playControlView addGestureRecognizer:playControlTap];
+    [_playControlView setBackgroundColor:[UIColor clearColor]];
+    
+    [_playControlView configureWithFrame:_playControlView.bounds];
+    
+    UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
+    [_avatarImageView addGestureRecognizer:avatarTap];
+    
+    UITapGestureRecognizer *upvoteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(upvoteHit:)];
+    [_upvoteWrapperView addGestureRecognizer:upvoteTap];
+    
+    [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
+    [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    
+    [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
+    
+    [_repostButton setTintColor:[RYStyleSheet postActionColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
+}
+
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    if (highlighted)
+    {
+        [_wrapperView setBackgroundColor:[RYStyleSheet selectedCellColor]];
+    }
+    else
+    {
+        [_wrapperView setBackgroundColor:[UIColor whiteColor]];
+    }
 }
 
 - (void) styleFromAudioDeck

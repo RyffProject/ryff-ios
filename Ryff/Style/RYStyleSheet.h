@@ -19,6 +19,7 @@
 + (UIColor *)tabBarColor;
 + (UIColor *)audioBackgroundColor;
 + (UIColor *)lightBackgroundColor;
++ (UIColor *)selectedCellColor;
 
 + (UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 

@@ -18,7 +18,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="D3h-PP-yiX">
-                                <rect key="frame" x="10" y="141.5" width="300" height="275"/>
+                                <rect key="frame" x="10" y="142" width="300" height="275"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hht-Ui-lCl">
@@ -571,7 +571,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SXn-5m-9Jv">
-                                        <rect key="frame" x="103.5" y="255" width="35" height="40"/>
+                                        <rect key="frame" x="104" y="255" width="35" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <state key="normal" image="play.png"/>
                                         <connections>
@@ -744,7 +744,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="Rdg-oG-oK4">
-                                <rect key="frame" x="22.5" y="58" width="275" height="150"/>
+                                <rect key="frame" x="23" y="58" width="275" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d0G-y6-OXg">

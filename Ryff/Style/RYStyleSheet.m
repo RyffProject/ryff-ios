@@ -53,6 +53,11 @@
     return [UIColor colorWithHexString:@"e9e9e9"];
 }
 
++ (UIColor *)selectedCellColor
+{
+    return [UIColor colorWithHexString:@"d9d9d9"];
+}
+
 #pragma mark -
 #pragma mark - Image Utilities
 
