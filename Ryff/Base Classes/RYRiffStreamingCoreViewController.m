@@ -204,7 +204,7 @@
             NSMutableArray *mutableFeedItems = [_feedItems mutableCopy];
             [mutableFeedItems replaceObjectAtIndex:postIdx withObject:post];
             _feedItems = mutableFeedItems;
-            [_riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [_riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
 }

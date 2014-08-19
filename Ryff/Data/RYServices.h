@@ -51,6 +51,11 @@ typedef enum : NSUInteger {
     TRENDING
 } SearchType;
 
+typedef enum : NSUInteger {
+    CHILDREN,
+    PARENTS,
+} FamilyType;
+
 @protocol PostDelegate <NSObject>
 - (void) postSucceeded:(NSArray*)posts;
 @optional
@@ -120,6 +125,6 @@ typedef enum : NSUInteger {
 // Actions
 - (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
-- (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
+- (void) getFamily:(FamilyType)familyType ForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
 
 @end

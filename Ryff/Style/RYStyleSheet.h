@@ -21,6 +21,7 @@
 + (UIColor *)lightBackgroundColor;
 
 + (UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
++ (void) styleProfileImageView:(UIView *)view;
 
 + (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post;
 + (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post;

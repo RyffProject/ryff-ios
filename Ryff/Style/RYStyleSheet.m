@@ -83,6 +83,12 @@
     return newImage;
 }
 
++ (void) styleProfileImageView:(UIView *)view
+{
+    [view.layer setCornerRadius:view.frame.size.width/2];
+    [view setClipsToBounds:YES];
+}
+
 #pragma mark -
 #pragma mark - Extras
 
