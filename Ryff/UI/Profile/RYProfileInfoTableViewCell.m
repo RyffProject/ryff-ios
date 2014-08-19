@@ -16,7 +16,7 @@
 #import "RYTag.h"
 
 // Frameworks
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+AFNetworking.h"
 #import "DWTagList.h"
 
 // Categories
@@ -91,7 +91,7 @@
     
     // Profile picture
     if (user.avatarURL)
-        [_avatarImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
     
@@ -125,6 +125,8 @@
         [_bioTextView setEditable:NO];
         [_nameField setEnabled:NO];
     }
+    
+    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 #pragma mark - Actions

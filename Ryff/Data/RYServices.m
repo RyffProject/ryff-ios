@@ -18,7 +18,7 @@
 
 // Data Systems
 #import "SSKeychain.h"
-#import "SGImageCache.h"
+#import "UIImageView+AFNetworking.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -169,7 +169,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 RYUser *updatedUser = [RYUser userFromDict:dictionary[@"user"]];
-                [SGImageCache removeImageForURL:[RYServices loggedInUser].avatarURL];
+                [UIImageView clearImageCacheForURL:[RYServices loggedInUser].avatarURL];
                 [delegate updateSucceeded:updatedUser];
             }
             else

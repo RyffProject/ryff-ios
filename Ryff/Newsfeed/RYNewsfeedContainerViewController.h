@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RYNewsfeedContainerViewController : UIViewController
+#import "RYCoreViewController.h"
+
+@interface RYNewsfeedContainerViewController : RYCoreViewController
 
 @end

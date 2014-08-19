@@ -19,7 +19,7 @@
 
 - (void) configureWithPost:(RYNewsfeedPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
 - (void) configureWithSampledPost:(RYNewsfeedPost *)post user:(RYUser *)user postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
-- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSString *)urlPath;
+- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSURL *)url;
 
 @property (nonatomic, weak) id<RiffDetailsDelegate> delegate;
 @property (nonatomic, assign) NSInteger postIdx;

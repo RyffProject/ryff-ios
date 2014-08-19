@@ -17,7 +17,7 @@
 #import "RYUser.h"
 
 // Categories
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface RYRiffDetailsTableViewCell () <UIGestureRecognizerDelegate>
 
@@ -59,19 +59,19 @@
         
         [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"2 minutes ago" attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
         
-        [_avatarImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     }
     
     [self setBackgroundColor:[UIColor clearColor]];
 }
 
-- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSString *)urlPath
+- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSURL *)url
 {
     _postIdx = -1;
     
     [_actionLabel setAttributedText:attString];
     [_timeLabel setText:@""];
-    [_avatarImageView setImageForURL:urlPath placeholder:[UIImage imageNamed:@"user"]];
+    [_avatarImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"user"]];
     
     [self setBackgroundColor:[UIColor clearColor]];
 }

@@ -14,7 +14,7 @@
 
 @implementation RYUser
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSURL*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
 {
     if (self = [super init])
     {
@@ -54,7 +54,7 @@
         date = [dateFormatter dateFromString:dateCreated];
     }
     
-    RYUser *newUser = [[RYUser alloc] initWithUser:userId.intValue username:username nickname:name avatarURL:avatarUrl karma:karma.intValue bio:bio dateCreated:date isFollowing:isFollowing numFollowers:numFollowers numFollowing:numFollowing tags:tags];
+    RYUser *newUser = [[RYUser alloc] initWithUser:userId.intValue username:username nickname:name avatarURL:[NSURL URLWithString:avatarUrl] karma:karma.intValue bio:bio dateCreated:date isFollowing:isFollowing numFollowers:numFollowers numFollowing:numFollowing tags:tags];
     return newUser;
 }
 

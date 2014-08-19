@@ -25,8 +25,6 @@
 #import "UIImage+Color.h"
 
 // Frameworks
-#import "SGImageCache.h"
-#import "UIImageView+SGImageCache.h"
 #import <AVFoundation/AVFoundation.h>
 
 // Associated View Controllers
@@ -335,7 +333,7 @@
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
-    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 #pragma mark -

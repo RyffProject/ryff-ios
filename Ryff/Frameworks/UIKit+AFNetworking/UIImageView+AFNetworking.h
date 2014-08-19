@@ -35,6 +35,8 @@
  */
 @interface UIImageView (AFNetworking)
 
++ (void)clearImageCacheForURL:(NSURL *)url;
+
 ///----------------------------
 /// @name Accessing Image Cache
 ///----------------------------
@@ -120,6 +122,8 @@
  The `AFImageCache` protocol is adopted by an object used to cache images loaded by the AFNetworking category on `UIImageView`.
  */
 @protocol AFImageCache
+
+- (void)clearCachedRequest:(NSURLRequest *)request;
 
 /**
  Returns a cached image for the specififed request, if available.

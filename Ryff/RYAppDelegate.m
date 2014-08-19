@@ -28,6 +28,7 @@
     
     [[RYServices sharedInstance] attemptBackgroundLogIn];
     
+    // Clear caches
     [[RYDataManager sharedInstance] clearCache];
     
     return YES;

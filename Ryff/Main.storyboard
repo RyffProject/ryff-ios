@@ -251,7 +251,7 @@
                                         <view contentMode="scaleToFill" id="5we-iT-jW7" customClass="DWTagList">
                                             <rect key="frame" x="429" y="200" width="319" height="50"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chris" textAlignment="center" minimumFontSize="17" id="cTM-sC-tYx">
                                             <rect key="frame" x="293" y="37" width="400" height="30"/>
@@ -260,8 +260,9 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                         </textField>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="addRiffButton" destination="t35-Hx-gX2" id="s48-lF-x1X"/>
                                     <outlet property="avatarImageView" destination="UYb-dB-8Cw" id="p26-F3-9iw"/>

@@ -22,10 +22,10 @@
 @property (nonatomic, strong) NSString *bio;
 @property (nonatomic, strong) NSArray *tags;
 @property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSString *avatarURL;
+@property (nonatomic, strong) NSURL *avatarURL;
 @property (nonatomic, strong) NSString *nickname;
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSString*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags;
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSURL*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags;
 + (RYUser *)userFromDict:(NSDictionary*)userDict;
 
 @end
