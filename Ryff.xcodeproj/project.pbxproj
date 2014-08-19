@@ -69,6 +69,7 @@
 		836F484419A04BAB00E948BE /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483D19A04BAB00E948BE /* UIImage+Thumbnail.m */; };
 		836F484519A04BAB00E948BE /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483F19A04BAB00E948BE /* UIView+Styling.m */; };
 		836F484619A04BAB00E948BE /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F484119A04BAB00E948BE /* UIViewController+Extras.m */; };
+		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		838808A01979940400DDD26C /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089D1979940400DDD26C /* SGActivityIndicator.m */; };
 		838808A11979940400DDD26C /* SGHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8388089F1979940400DDD26C /* SGHTTPRequest.m */; };
@@ -313,6 +314,8 @@
 		836F483F19A04BAB00E948BE /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836F484019A04BAB00E948BE /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
 		836F484119A04BAB00E948BE /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
+		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
+		837CCD1619A3E12D00F95FCA /* RYTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTag.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
 		837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
 		8388089C1979940400DDD26C /* SGActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActivityIndicator.h; sourceTree = "<group>"; };
@@ -1041,6 +1044,8 @@
 				83E56B631953A0A900EF054C /* RYUser.m */,
 				83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */,
 				83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */,
+				837CCD1519A3E12D00F95FCA /* RYTag.h */,
+				837CCD1619A3E12D00F95FCA /* RYTag.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -1461,6 +1466,7 @@
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,
 				83CA120E1995CD23002610E8 /* FLEXWindow.m in Sources */,
 				836F484219A04BAB00E948BE /* NSObject+block.m in Sources */,
+				837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */,
 				83E56B651953A0A900EF054C /* RYUser.m in Sources */,
 				83FCD1A818F9393F00A493F0 /* RYStyleSheet.m in Sources */,
 				83CA120B1995CD23002610E8 /* FLEXExplorerViewController.m in Sources */,

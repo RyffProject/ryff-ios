@@ -10,6 +10,7 @@
 
 // Data Objects
 #import "RYNewsfeedPost.h"
+#import "RYTag.h"
 
 @implementation RYUser
 
@@ -43,7 +44,7 @@
     BOOL isFollowing        = [[userDict objectForKey:@"is_following"] boolValue];
     NSInteger numFollowers  = [[userDict objectForKey:@"num_followers"] intValue];
     NSInteger numFollowing  = [[userDict objectForKey:@"num_following"] intValue];
-    NSArray *tags           = [userDict objectForKey:@"tags"];
+    NSArray *tags           = [RYTag tagsFromDictArray:[userDict objectForKey:@"tags"]];
     
     NSDate *date;
     if (dateCreated)

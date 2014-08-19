@@ -39,19 +39,39 @@
     [RYStyleSheet styleProfileImageView:_avatarImageView];
 }
 
-- (void) configureWithPost:(RYNewsfeedPost *)post actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
+- (void) configureWithPost:(RYNewsfeedPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
 {
-    _delegate = delegate;
+    [self configureWithSampledPost:post user:post.user postIdx:postIdx actionString:actionString delegate:delegate];
+}
+
+- (void) configureWithSampledPost:(RYNewsfeedPost *)post user:(RYUser *)user postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
+{
+    if (post)
+    {
+        _delegate = delegate;
+        _postIdx  = postIdx;
+        
+        NSMutableAttributedString *username = [[NSMutableAttributedString alloc] initWithString:user.username attributes:@{NSFontAttributeName: [UIFont fontWithName:kBoldFont size:18.0f]}];
+        NSAttributedString *action   = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ %@", actionString, post.riff.title] attributes:@{NSFontAttributeName : [UIFont fontWithName:kRegularFont size:18.0f]}];
+        
+        [username appendAttributedString:action];
+        [_actionLabel setAttributedText:username];
+        
+        [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"2 minutes ago" attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
+        
+        [_avatarImageView setImageForURL:user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    }
     
-    NSMutableAttributedString *username = [[NSMutableAttributedString alloc] initWithString:post.user.username attributes:@{NSFontAttributeName: [UIFont fontWithName:kBoldFont size:18.0f]}];
-    NSAttributedString *action   = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ %@", actionString, post.riff.title] attributes:@{NSFontAttributeName : [UIFont fontWithName:kRegularFont size:18.0f]}];
+    [self setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSString *)urlPath
+{
+    _postIdx = -1;
     
-    [username appendAttributedString:action];
-    [_actionLabel setAttributedText:username];
-    
-    [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"2 minutes ago" attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
-    
-    [_avatarImageView setImageForURL:post.user.avatarURL placeholder:[UIImage imageNamed:@"user"]];
+    [_actionLabel setAttributedText:attString];
+    [_timeLabel setText:@""];
+    [_avatarImageView setImageForURL:urlPath placeholder:[UIImage imageNamed:@"user"]];
     
     [self setBackgroundColor:[UIColor clearColor]];
 }
@@ -61,8 +81,8 @@
 
 - (void) avatarImageTapped:(UITapGestureRecognizer *)tapGesture
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(riffAvatarTapAction)])
-        [_delegate riffAvatarTapAction];
+    if (_postIdx >= 0 && _delegate && [_delegate respondsToSelector:@selector(riffAvatarTapAction:)])
+        [_delegate riffAvatarTapAction:_postIdx];
 }
 
 @end

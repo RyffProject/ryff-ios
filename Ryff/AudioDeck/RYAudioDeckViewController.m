@@ -200,7 +200,7 @@
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post];
+    [riffDetails configureForPost:post familyType:CHILDREN];
     [riffDetails addBackButton];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];

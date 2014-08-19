@@ -22,6 +22,7 @@
 - (void) addNewRiff;
 - (void) editImageAction;
 - (void) followersAction;
+- (void) tagSelected:(NSInteger)tagSelected;
 @end
 
 @interface RYProfileInfoTableViewCell : UITableViewCell

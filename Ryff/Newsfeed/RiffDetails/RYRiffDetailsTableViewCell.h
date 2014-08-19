@@ -9,15 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class RYNewsfeedPost;
+@class RYUser;
 
 @protocol RiffDetailsDelegate <NSObject>
-- (void) riffAvatarTapAction;
+- (void) riffAvatarTapAction:(NSInteger)postIdx;
 @end
 
 @interface RYRiffDetailsTableViewCell : UITableViewCell
 
-- (void) configureWithPost:(RYNewsfeedPost *)post actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
+- (void) configureWithPost:(RYNewsfeedPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
+- (void) configureWithSampledPost:(RYNewsfeedPost *)post user:(RYUser *)user postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
+- (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSString *)urlPath;
 
 @property (nonatomic, weak) id<RiffDetailsDelegate> delegate;
+@property (nonatomic, assign) NSInteger postIdx;
 
 @end

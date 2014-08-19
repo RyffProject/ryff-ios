@@ -13,6 +13,7 @@
 
 // Data Objects
 #import "RYUser.h"
+#import "RYTag.h"
 
 // Frameworks
 #import "UIImageView+SGImageCache.h"
@@ -21,7 +22,7 @@
 // Categories
 #import "UIViewController+Extras.h"
 
-@interface RYProfileInfoTableViewCell () <UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate>
+@interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -77,15 +78,8 @@
     [_nameField setDelegate:self];
     [_bioTextView setDelegate:self];
     
-    // test tags
     [_tagListView setAutomaticResize:YES];
-    NSArray *tags = [[NSMutableArray alloc] initWithObjects:@"Foo",
-              @"Tag Label 1",
-              @"Tag Label 2",
-              @"Tag Label 3",
-              @"Tag Label 4",
-              @"Long long long long long long Tag", nil];
-    [_tagListView setTags:tags];
+    [_tagListView setTagDelegate:self];
 }
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView
@@ -114,6 +108,7 @@
     [_bioTextView setText:user.bio];
     [_karmaCountLabel setText:[NSString stringWithFormat:@"%ld",(long)user.karma]];
     [_followersCountLabel setText:[NSString stringWithFormat:@"%ld",(long)user.numFollowers]];
+    [_tagListView setTags:[RYTag getTagTags:user.tags]];
     
     if (user.userId == [RYServices loggedInUser].userId)
     {
@@ -183,6 +178,15 @@
         newUser.nickname = _nameField.text;
         [[RYServices sharedInstance] editUserInfo:newUser forDelegate:_delegate];
     }
+}
+
+#pragma mark -
+#pragma mark - DWTagList Delegate
+
+- (void) selectedTag:(NSString *)tagName tagIndex:(NSInteger)tagIndex
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
+        [_delegate tagSelected:tagIndex];
 }
 
 @end

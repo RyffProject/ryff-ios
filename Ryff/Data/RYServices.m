@@ -544,7 +544,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getFamily:(FamilyType)familyType ForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate
+- (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -557,19 +557,16 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(postSucceeded:)])
-                {
-                    if (familyType == PARENTS)
-                        [delegate postSucceeded:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
-                    else if (familyType == CHILDREN)
-                        [delegate postSucceeded:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"children"]]];
-                }
+                if (delegate && [delegate respondsToSelector:@selector(childrenRetrieved:)])
+                    [delegate childrenRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"children"]]];
+                if (delegate && [delegate respondsToSelector:@selector(parentsRetrieved:)])
+                    [delegate parentsRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
             }
             else
-                [delegate postFailed:dictionary[@"error"]];
+                [delegate familyPostFailed:dictionary[@"error"]];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate postFailed:[error localizedDescription]];
+            [delegate familyPostFailed:[error localizedDescription]];
         }];
     });
 }

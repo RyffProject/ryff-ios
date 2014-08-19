@@ -62,6 +62,13 @@ typedef enum : NSUInteger {
 - (void) postFailed:(NSString*)reason;
 @end
 
+@protocol FamilyPostDelegate <NSObject>
+- (void) childrenRetrieved:(NSArray *)childPosts;
+- (void) parentsRetrieved:(NSArray *)parentPosts;
+@optional
+- (void) familyPostFailed:(NSString *)reason;
+@end
+
 @protocol ArtistsFetchDelegate <NSObject>
 - (void) retrievedArtists:(NSArray*)artists;
 @end
@@ -125,6 +132,6 @@ typedef enum : NSUInteger {
 // Actions
 - (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
-- (void) getFamily:(FamilyType)familyType ForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate;
+- (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
 
 @end

@@ -24,6 +24,7 @@
 // Optional
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) NSArray *tags;
 
 - (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;
 

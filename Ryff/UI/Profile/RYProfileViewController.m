@@ -11,6 +11,9 @@
 // Data Managers
 #import "RYServices.h"
 
+// Data Objects
+#import "RYTag.h"
+
 // Custom UI
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
@@ -29,6 +32,7 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
+#import "RYNewsfeedTableViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
@@ -118,6 +122,22 @@
 - (void) followersAction
 {
 #warning should present view controller with followers
+}
+
+- (void) tagSelected:(NSInteger)tagSelected
+{
+    if (tagSelected < _user.tags.count)
+    {
+        RYTag *tag = _user.tags[tagSelected];
+        
+        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+        RYNewsfeedTableViewController *feedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"newsfeedVC"];
+        [feedVC configureWithTags:@[tag.tag]];
+        if (self.navigationController)
+            [self.navigationController pushViewController:feedVC animated:YES];
+        else
+            [self presentViewController:feedVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Edit Profile

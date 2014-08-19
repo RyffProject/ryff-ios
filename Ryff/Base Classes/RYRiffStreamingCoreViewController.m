@@ -259,7 +259,7 @@
     RYNewsfeedPost *post = _feedItems[indexPath.row];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post];
+    [riffDetails configureForPost:post familyType:CHILDREN];
     [self.navigationController pushViewController:riffDetails animated:YES];
 }
 
