@@ -169,7 +169,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 RYUser *updatedUser = [RYUser userFromDict:dictionary[@"user"]];
-                [SGImageCache removeImageForURL:updatedUser.avatarURL];
+                [SGImageCache removeImageForURL:[RYServices loggedInUser].avatarURL];
                 [delegate updateSucceeded:updatedUser];
             }
             else
@@ -544,7 +544,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getFamilyForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate
+- (void) getFamily:(FamilyType)familyType ForPost:(NSInteger)postID delegate:(id<PostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -557,8 +557,13 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
-                [delegate postSucceeded:posts];
+                if (delegate && [delegate respondsToSelector:@selector(postSucceeded:)])
+                {
+                    if (familyType == PARENTS)
+                        [delegate postSucceeded:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
+                    else if (familyType == CHILDREN)
+                        [delegate postSucceeded:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"children"]]];
+                }
             }
             else
                 [delegate postFailed:dictionary[@"error"]];

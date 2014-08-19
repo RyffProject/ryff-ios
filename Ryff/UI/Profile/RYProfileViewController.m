@@ -22,6 +22,7 @@
 #import "UIImage+Color.h"
 
 // Frameworks
+#import "SGImageCache.h"
 #import "UIImageView+SGImageCache.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -196,11 +197,11 @@
     if (indexPath.section == 0)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     else if (indexPath.section == 1)
         cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -314,6 +315,7 @@
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
+    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark -

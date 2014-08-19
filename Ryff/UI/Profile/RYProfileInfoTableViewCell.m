@@ -25,7 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property (weak, nonatomic) IBOutlet UILabel *editImageLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bioTextView;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -60,12 +59,8 @@
     
     [_addRiffButton setTintColor:[RYStyleSheet audioActionColor]];
     
-    [_editImageLabel setFont:[UIFont fontWithName:kLightFont size:20.0f]];
-    [_editImageLabel setTextColor:[UIColor whiteColor]];
-    [_editImageLabel setBackgroundColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.6]];
     [_imageWrapperView setBackgroundColor:[RYStyleSheet tabBarColor]];
-    [_imageWrapperView.layer setCornerRadius:_imageWrapperView.frame.size.width/8];
-    [_imageWrapperView setClipsToBounds:YES];
+    [RYStyleSheet styleProfileImageView:_imageWrapperView];
     
     [_followersCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
     [_followersDescriptionLabel setFont:[UIFont fontWithName:kLightFont size:18.0f]];
@@ -122,7 +117,6 @@
     
     if (user.userId == [RYServices loggedInUser].userId)
     {
-        [_editImageLabel setHidden:NO];
         [_settingsButton setHidden:NO];
         
         [_bioTextView setEditable:YES];
@@ -131,7 +125,6 @@
     else
     {
         // not logged in user, remove settings button
-        [_editImageLabel setHidden:YES];
         [_settingsButton setHidden:YES];
         
         [_bioTextView setEditable:NO];

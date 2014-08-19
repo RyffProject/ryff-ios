@@ -425,7 +425,7 @@
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Riff Created" forDuration:1.0f];
     
-    [[RYServices sharedInstance] postRiffWithContent:_descriptionTextView.text title:_titleTextField.text duration:@(_riffDuration) parentIDs:nil image:nil ForDelegate:self];
+    [[RYServices sharedInstance] postRiffWithContent:_descriptionTextView.text title:_titleTextField.text duration:@(_riffDuration) parentIDs:@[@(3),@(4)] image:nil ForDelegate:self];
 }
 
 - (void) mergeFailed:(NSString *)reason

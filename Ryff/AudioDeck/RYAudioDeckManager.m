@@ -52,6 +52,8 @@ static RYAudioDeckManager *_sharedInstance;
             _sharedInstance.globalVolume = 1.0f;
         
         _sharedInstance.updatePlaybackTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:_sharedInstance selector:@selector(updatePlaybackProgress:) userInfo:nil repeats:YES];
+        
+        [[NSRunLoop currentRunLoop] addTimer:_sharedInstance.updatePlaybackTimer forMode:NSRunLoopCommonModes];
     }
     return _sharedInstance;
 }

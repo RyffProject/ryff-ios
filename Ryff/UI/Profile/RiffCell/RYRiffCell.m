@@ -106,8 +106,8 @@
 {
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
     [_textView setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_avatarImageView.layer setCornerRadius:10.0f];
-    [_avatarImageView setClipsToBounds:YES];
+    
+    [RYStyleSheet styleProfileImageView:_avatarImageView];
     
     [_postImageView.layer setCornerRadius:10.0f];
     [_postImageView setClipsToBounds:YES];

@@ -21,5 +21,6 @@
 #define kRegularFont @"Lato-Regular"
 #define kBoldFont @"Lato-Bold"
 #define kLightFont @"Lato-Light"
+#define kItalicFont @"Lato-Light"
 
 #import "NSObject+block.h"

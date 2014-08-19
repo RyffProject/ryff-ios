@@ -9,7 +9,6 @@
 #import "RYRiffDetailsViewController.h"
 
 // Data Managers
-#import "RYServices.h"
 #import "RYDataManager.h"
 
 // Custom UI
@@ -21,14 +20,15 @@
 
 #define kRiffDetailsCellReuseID @"riffDetails"
 
-@interface RYRiffDetailsViewController () <PostDelegate, RiffDetailsDelegate, ActionDelegate>
+@interface RYRiffDetailsViewController () <PostDelegate, RiffDetailsDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, weak) RYRiffDetailsTableViewCell *riffDetailsCell;
-
 // Data
 @property (nonatomic, strong) RYNewsfeedPost *post;
+
+// populated with Post objects
+@property (nonatomic, strong) NSArray *childrenPosts;
 
 @end
 
@@ -39,14 +39,14 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    self.riffSection = 1;
+    self.riffSection = 0;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [[RYServices sharedInstance] getFamilyForPost:_post.postId delegate:self];
+    [[RYServices sharedInstance] getFamily:CHILDREN ForPost:_post.postId delegate:self];
     [self.tableView reloadData];
 }
 
@@ -68,6 +68,8 @@
     _post = post;
     [self setTitle:post.riff.title];
     
+    self.feedItems = @[post];
+    
     [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:nil];
 }
 
@@ -81,28 +83,6 @@
 #pragma mark -
 #pragma mark - RiffDetailsDelegate
 
-- (void) riffUpvoteAction
-{
-    [[RYServices sharedInstance] upvote:YES post:_post forDelegate:self];
-}
-
-- (void) riffRepostAction
-{
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    [riffCreateVC includeRiffs:@[_post.riff]];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
-}
-
-- (void) riffFollowAction
-{
-    
-}
-
-- (void) riffProgressSliderChanged:(CGFloat)newProgress
-{
-    
-}
-
 - (void) riffAvatarTapAction
 {
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
@@ -112,11 +92,6 @@
         [self.navigationController pushViewController:profileVC animated:YES];
     else
         [self presentViewController:profileVC animated:YES completion:nil];
-}
-
-- (void) riffPlayControlAction
-{
-    
 }
 
 #pragma mark -
@@ -129,50 +104,8 @@
 
 - (void) postSucceeded:(NSArray*)posts
 {
-    self.feedItems = posts;
+    _childrenPosts = posts;
     [_tableView reloadData];
-}
-
-#pragma mark - Action Delegate
-
-- (void) upvoteSucceeded:(RYNewsfeedPost *)updatedPost
-{
-    if (updatedPost.postId == _post.postId)
-    {
-        // upvoted main riff
-        _post = updatedPost;
-        [_riffDetailsCell configureWithPost:_post delegate:self];
-    }
-    else
-    {
-        // upvoted other riff in tableview
-        [super upvoteSucceeded:updatedPost];
-    }
-}
-
-- (void) starSucceeded:(RYNewsfeedPost *)updatedPost
-{
-    if (updatedPost.postId == _post.postId)
-    {
-        // upvoted main riff
-        _post = updatedPost;
-        [_riffDetailsCell configureWithPost:_post delegate:self];
-    }
-    else
-    {
-        // upvoted other riff in tableview
-        [super upvoteSucceeded:updatedPost];
-    }
-}
-
-- (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
-{
-    
-}
-
-- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
-{
-    
 }
 
 #pragma mark -
@@ -189,7 +122,7 @@
     if (section == self.riffSection)
         numRows = [super tableView:tableView numberOfRowsInSection:0];
     else
-        numRows = 1;
+        numRows = _childrenPosts.count;
     return numRows;
 }
 
@@ -197,7 +130,7 @@
 {
     UITableViewCell *cell;
     if (indexPath.section == self.riffSection)
-        cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     else
         cell = [_tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
     return cell;
@@ -211,13 +144,21 @@
         height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
     else
     {
-        // riff details cell -> calculate size with attributed text for post description
-        CGFloat widthMinusText = kRiffDetailsWidthMinusText;
-        height = [[RYStyleSheet createProfileAttributedTextWithPost:_post] boundingRectWithSize:CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
-        height = MAX(height+kRiffDetailsCellHeightMinusText, kRiffDetailsCellMinimumHeight);
+        // riff details cell
+        height = 60;
     }
     
     return height;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 #pragma mark -
@@ -229,8 +170,10 @@
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     else
     {
-        _riffDetailsCell = (RYRiffDetailsTableViewCell *)cell;
-        [_riffDetailsCell configureWithPost:_post delegate:self];
+        NSString *actionString = @"riffed on";
+        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
+        RYRiffDetailsTableViewCell *detailsCell = (RYRiffDetailsTableViewCell *)cell;
+        [detailsCell configureWithPost:post actionString:actionString delegate:self];
     }
 }
 
@@ -238,8 +181,15 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == self.riffSection)
-        [super tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+    if (indexPath.section != self.riffSection)
+    {
+        // push new riff details vc
+        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
+        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+        RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
+        [riffDetails configureForPost:post];
+        [self.navigationController pushViewController:riffDetails animated:YES];
+    }
 }
 
 @end

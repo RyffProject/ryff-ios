@@ -8,25 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-#define kRiffDetailsCellHeightMinusText 120.0f
-#define kRiffDetailsCellMinimumHeight 150.0f
-#define kRiffDetailsWidthMinusText isIpad ? 85.0f : 85.0f
+@class RYNewsfeedPost;
 
 @protocol RiffDetailsDelegate <NSObject>
-- (void) riffUpvoteAction;
-- (void) riffRepostAction;
-- (void) riffFollowAction;
-- (void) riffProgressSliderChanged:(CGFloat)newProgress;
 - (void) riffAvatarTapAction;
-- (void) riffPlayControlAction;
 @end
-
-@class RYNewsfeedPost;
 
 @interface RYRiffDetailsTableViewCell : UITableViewCell
 
-- (void) configureWithPost:(RYNewsfeedPost *)post delegate:(id<RiffDetailsDelegate>)delegate;
-- (void) setPlayProgress:(CGFloat)progress;
-- (void) shouldPause:(BOOL)pause;
+- (void) configureWithPost:(RYNewsfeedPost *)post actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
+
+@property (nonatomic, weak) id<RiffDetailsDelegate> delegate;
 
 @end
