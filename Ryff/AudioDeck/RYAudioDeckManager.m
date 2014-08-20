@@ -65,8 +65,15 @@ static RYAudioDeckManager *_sharedInstance;
 {
     if (playTrack)
     {
-        if (_audioPlayer && !_audioPlayer.isPlaying)
-            [_audioPlayer play];
+        if (_audioPlayer)
+        {
+            if (!_audioPlayer.isPlaying)
+                [_audioPlayer play];
+        }
+        else
+        {
+            [self playNextTrack];
+        }
     }
     else
     {
@@ -243,6 +250,21 @@ static RYAudioDeckManager *_sharedInstance;
     [[RYDataManager sharedInstance] fetchTempRiff:post.riff forDelegate:self];
 }
 
+- (void) movePostFromPlaylistIndex:(NSInteger)playlistIdx toIndex:(NSInteger)newPlaylistIdx
+{
+    if (newPlaylistIdx < _riffPlaylist.count && playlistIdx < _riffPlaylist.count)
+    {
+        RYNewsfeedPost *post = _riffPlaylist[playlistIdx];
+        [_riffPlaylist removeObjectAtIndex:playlistIdx];
+        [_riffPlaylist insertObject:post atIndex:newPlaylistIdx];
+        
+        if (post.postId == _currentlyPlayingPost.postId)
+            [self stopPost];
+        
+        [self notifyPlaylistChanged];
+    }
+}
+
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post
 {
     if (post.postId == _currentlyPlayingPost.postId)
@@ -376,9 +398,6 @@ static RYAudioDeckManager *_sharedInstance;
                 if (!_audioPlayer)
                     [self playNextTrack];
             }
-            
-            NSDictionary *notifDict = @{@"postID": @(post.postId), @"progress": @(1.0f)};
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadProgressNotification object:notifDict];
             
             [self notifyPlaylistChanged];
             break;

@@ -114,7 +114,8 @@
 
 - (void) editImageAction
 {
-    [self presentProfilePictureOptions];
+    if (_user.userId == [RYServices loggedInUser].userId)
+        [self presentProfilePictureOptions];
 }
 
 - (void) followersAction

@@ -54,7 +54,6 @@
 // Data
 @property (nonatomic, strong) RYNewsfeedPost *post;
 @property (nonatomic, strong) NSAttributedString *attributedPostString;
-@property (nonatomic, strong) NSTimer *updateTimer;
 
 @end
 
@@ -134,6 +133,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
 }
 
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
@@ -149,22 +150,18 @@
 
 - (void) styleFromAudioDeck
 {
-    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
-    {
-        // currently downloading
-        [_playControlView animateDownloading];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
-    }
-    else if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId && [[RYAudioDeckManager sharedInstance] isPlaying])
+    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId && [[RYAudioDeckManager sharedInstance] isPlaying])
     {
         // currently playing
-        [_playControlView animatePlaying];
+        [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
     }
     else
-    {
-        [_playControlView stopPlaying];
-    }
+        [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
+    
+    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+        [_playControlView setCenterImage:nil];
+    else
+        [_playControlView setProgress:0.0f animated:NO];
     
     if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
     {
@@ -193,40 +190,14 @@
 
 - (void) updateDownloadProgress:(NSNotification *)notification
 {
-    NSDictionary *notifDict = notification.userInfo;
+    NSDictionary *notifDict = notification.object;
     if (notifDict[@"postID"])
     {
         if ([notifDict[@"postID"] integerValue] == _post.postId && notifDict[@"progress"])
         {
             CGFloat progress = [notifDict[@"progress"] floatValue];
-            
-            if (progress == 1.0f)
-            {
-                [[NSNotificationCenter defaultCenter] removeObserver:self name:kDownloadProgressNotification object:nil];
-                
-                [_updateTimer invalidate];
-                _updateTimer = nil;
-            }
-            else
-            {
-                [_playControlView animateOuterProgress:progress];
-            }
+            [_playControlView setProgress:progress animated:YES];
         }
-    }
-}
-
-#pragma mark - Internal
-
-- (void) stylePlaybackProgressFromAudioDeck:(NSTimer *)timer
-{
-    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
-    {
-        // currently playing riff
-        [_playControlView animateInnerProgress:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
-    }
-    else
-    {
-        [timer invalidate];
     }
 }
 

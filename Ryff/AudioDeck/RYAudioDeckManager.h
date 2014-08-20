@@ -42,6 +42,7 @@
 // Data Control
 - (void) forcePostToTop:(RYNewsfeedPost *)post;
 - (void) addPostToPlaylist:(RYNewsfeedPost *)post;
+- (void) movePostFromPlaylistIndex:(NSInteger)playlistIdx toIndex:(NSInteger)newPlaylistIdx;
 - (void) removePostFromPlaylist:(RYNewsfeedPost *)post;
 - (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
 - (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post;

@@ -52,6 +52,10 @@
     [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
+    
+    // long press to move cells
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
+    [self.tableView addGestureRecognizer:longPress];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -88,9 +92,12 @@
 - (IBAction)repostButtonHit:(id)sender
 {
     RYNewsfeedPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    [riffCreateVC includeRiffs:@[post.riff]];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
+    if (post)
+    {
+        RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+        [riffCreateVC includeRiffs:@[post.riff]];
+        [self presentViewController:riffCreateVC animated:YES completion:nil];
+    }
 }
 
 - (IBAction)nextButtonHit:(id)sender
@@ -119,19 +126,18 @@
 - (void) trackChanged
 {
     [self styleFromAudioDeck];
+    
+    RYNewsfeedPost *firstPost = [[[RYAudioDeckManager sharedInstance] riffPlaylist] firstObject];
+    if (firstPost.postId > 0 && firstPost.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    {
+        // should reload first row if it's playing right now
+        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void) post:(RYNewsfeedPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress
 {
     [_playbackSlider setValue:progress animated:YES];
-}
-
-- (void) post:(RYNewsfeedPost *)post downloadProgressChanged:(CGFloat)progress
-{
-    NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
-    NSInteger tableRow = playlist.count - 1 + [[RYAudioDeckManager sharedInstance] idxOfDownload:post];
-    RYAudioDeckTableViewCell *audioCell = (RYAudioDeckTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:tableRow inSection:0]];
-    [audioCell updateDownloadProgress:progress];
 }
 
 #pragma mark -
@@ -155,26 +161,43 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 0.01f; }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath { return YES; }
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath { return NO; }
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row < [[RYAudioDeckManager sharedInstance] riffPlaylist].count)
+        return YES;
+    else
+        return NO;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath { return UITableViewCellEditingStyleDelete; }
+
+
 #pragma mark - TableView Delegate
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RYAudioDeckTableViewCell *audioCell = (RYAudioDeckTableViewCell *)cell;
     NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
+    RYNewsfeedPost *post;
     if (indexPath.row < playlist.count)
     {
         // riff playlist
-        RYNewsfeedPost *post = [playlist objectAtIndex:indexPath.row];
-        [audioCell configureForPost:post trackIdx:indexPath.row];
-        [audioCell styleDownloading:NO];
+        post = [playlist objectAtIndex:indexPath.row];
     }
     else
     {
-        // download queue
         NSInteger downloadIdx = indexPath.row-playlist.count;
-        RYNewsfeedPost *post = [[[RYAudioDeckManager sharedInstance] downloadQueue] objectAtIndex:downloadIdx];
-        [audioCell configureForPost:post trackIdx:-1];
-        [audioCell styleDownloading:YES];
+        post = [[[RYAudioDeckManager sharedInstance] downloadQueue] objectAtIndex:downloadIdx];
+    }
+    
+    [audioCell configureForPost:post trackIdx:(indexPath.row+1)];
+    
+    if (indexPath == movingIndexPath)
+    {
+        // currently held with long press gesture
+        [audioCell setHidden:YES];
     }
 }
 
@@ -205,6 +228,142 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
+    if (proposedDestinationIndexPath.row >= playlist.count)
+    {
+        // only let users drop active rows onto the playlist, not download queue
+        proposedDestinationIndexPath = [NSIndexPath indexPathForRow:playlist.count-1 inSection:0];
+    }
+    
+    return proposedDestinationIndexPath;
+    
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [[RYAudioDeckManager sharedInstance] movePostFromPlaylistIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        RYNewsfeedPost *postToDelete;
+        
+        NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
+        NSArray *downloadQueue = [[RYAudioDeckManager sharedInstance] downloadQueue];
+        
+        if (indexPath.row < playlist.count)
+            postToDelete = playlist[indexPath.row];
+        else if (indexPath.row - playlist.count < downloadQueue.count)
+            postToDelete = downloadQueue[indexPath.row - playlist.count];
+        
+        [[RYAudioDeckManager sharedInstance] removePostFromPlaylist:postToDelete];
+    }
+}
+
+#pragma mark -
+#pragma mark - Long Press Reorder
+
+static UIView       *snapshot;        // A snapshot of the row user is moving.
+static NSIndexPath  *sourceIndexPath; // Initial index path, where gesture begins.
+static NSIndexPath  *movingIndexPath; // current moving index path
+- (void)longPressGesture:(UILongPressGestureRecognizer *)longPress
+{
+    CGPoint location = [longPress locationInView:self.tableView];
+    movingIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    
+    switch (longPress.state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
+            if (movingIndexPath)
+            {
+                sourceIndexPath = movingIndexPath;
+                
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:movingIndexPath];
+                
+                // Take a snapshot of the selected row using helper method.
+                snapshot = [self customSnapshotFromView:cell];
+                
+                // Add the snapshot as subview, centered at cell's center...
+                __block CGPoint center = cell.center;
+                snapshot.center = center;
+                snapshot.alpha = 0.0;
+                [self.tableView addSubview:snapshot];
+                [UIView animateWithDuration:0.25 animations:^{
+                    
+                    // Offset for gesture location.
+                    center.y = location.y;
+                    snapshot.center = center;
+                    snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                    snapshot.alpha = 0.98;
+                    cell.alpha = 0.0;
+                    
+                } completion:^(BOOL finished) {
+                    cell.hidden = YES;
+                }];
+            }
+            break;
+        }
+        case UIGestureRecognizerStateChanged:
+        {
+            CGPoint center = snapshot.center;
+            center.y = location.y;
+            snapshot.center = center;
+            
+            // Is destination valid and is it different from source?
+            if (movingIndexPath && ![movingIndexPath isEqual:sourceIndexPath])
+            {
+                [[RYAudioDeckManager sharedInstance] movePostFromPlaylistIndex:sourceIndexPath.row toIndex:movingIndexPath.row];
+                
+                [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:movingIndexPath];
+                sourceIndexPath = movingIndexPath;
+            }
+            break;
+        }
+        default:
+        {
+            // Clean up.
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:sourceIndexPath];
+            cell.hidden = NO;
+            cell.alpha = 0.0;
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                snapshot.center = cell.center;
+                snapshot.transform = CGAffineTransformIdentity;
+                snapshot.alpha = 0.0;
+                cell.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                sourceIndexPath = nil;
+                [snapshot removeFromSuperview];
+                snapshot = nil;
+                movingIndexPath = nil;
+            }];
+            break;
+        }
+    }
+}
+
+#pragma mark - Helper methods
+
+/**
+ Returns a customized snapshot of a given view.
+ */
+- (UIView *)customSnapshotFromView:(UIView *)inputView
+{
+    UIView *snapshot = [inputView snapshotViewAfterScreenUpdates:YES];
+    snapshot.layer.masksToBounds = NO;
+    snapshot.layer.cornerRadius = 0.0;
+    snapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshot.layer.shadowRadius = 5.0;
+    snapshot.layer.shadowOpacity = 0.4;
+    
+    return snapshot;
 }
 
 @end

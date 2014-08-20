@@ -49,6 +49,18 @@
     [_artistLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_riffTitleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    
+    [_playControl configureWithFrame:_playControl.frame];
+    [_playControl setControlTintColor:[UIColor whiteColor]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
+}
+
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [_playControl setProgress:0.0f animated:NO];
 }
 
 - (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx
@@ -60,28 +72,48 @@
     [_riffTitleLabel setText:post.riff.title];
     [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
     
-    if (trackIdx >= 0)
-        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)trackIdx]];
+    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    {
+        // currently downloading
+        [self styleDownloading:YES];
+    }
     else
-        [_trackIndexLabel setText:@""];
+    {
+        // in playlist
+        [self styleDownloading:NO];
+        
+        if (post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+        {
+            // currently playing or paused
+            [self hidePlaylistIndex:YES];
+            [_playControl setProgress:0.0f animated:NO];
+            if ([[RYAudioDeckManager sharedInstance] isPlaying])
+                [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
+            else
+                [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
+        }
+        else if (trackIdx > 0)
+        {
+            // just in playlist
+            [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)trackIdx]];
+            [self hidePlaylistIndex:NO];
+        }
+    }
     
-    [self stylePlaying:NO];
     [self setBackgroundColor:[UIColor clearColor]];
 }
 
-- (void) stylePlaying:(BOOL)playing
+- (void) hidePlaylistIndex:(BOOL)hidePlaylistIndex
 {
-    if (playing)
+    if (hidePlaylistIndex)
     {
         [_trackIndexLabel setHidden:YES];
         [_playControl setHidden:NO];
-        [_playControl animatePlaying];
     }
     else
     {
         [_trackIndexLabel setHidden:NO];
         [_playControl setHidden:YES];
-        [_playControl stopPlaying];
     }
 }
 
@@ -89,23 +121,31 @@
 {
     if (downloading)
     {
-        [self stylePlaying:YES];
+        [self hidePlaylistIndex:YES];
         [_artistLabel setAlpha:0.5f];
         [_riffTitleLabel setAlpha:0.5f];
         [_durationLabel setAlpha:0.5f];
+        [_playControl setCenterImage:nil];
     }
     else
     {
-        [self stylePlaying:NO];
         [_artistLabel setAlpha:1.0f];
         [_riffTitleLabel setAlpha:1.0f];
         [_durationLabel setAlpha:1.0f];
     }
 }
 
-- (void) updateDownloadProgress:(CGFloat)progress
+- (void) updateDownloadProgress:(NSNotification *)notification
 {
-    [_playControl animateOuterProgress:progress];
+    NSDictionary *notifDict = notification.object;
+    if (notifDict[@"postID"])
+    {
+        if ([notifDict[@"postID"] integerValue] == _post.postId && notifDict[@"progress"])
+        {
+            CGFloat progress = [notifDict[@"progress"] floatValue];
+            [_playControl setProgress:progress animated:YES];
+        }
+    }
 }
 
 @end

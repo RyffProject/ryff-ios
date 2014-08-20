@@ -130,7 +130,8 @@
     NSInteger sectionCount = 1;
     if (_familyType == CHILDREN)
     {
-        sectionCount += [super numberOfSectionsInTableView:tableView];
+        if (_childrenPosts.count > 0)
+            sectionCount++;
         if (_parentPosts.count > 0)
             sectionCount++;
     }
