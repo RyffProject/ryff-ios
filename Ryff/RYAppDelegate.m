@@ -11,6 +11,7 @@
 // Data Managers
 #import "RYServices.h"
 #import "RYDataManager.h"
+#import "RYAudioDeckManager.h"
 
 // Frameworks
 #import "SSKeychain.h"
@@ -59,6 +60,36 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark -
+#pragma mark - Media Control
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event
+{
+    RYAudioDeckManager *audioDeck = [RYAudioDeckManager sharedInstance];
+    if(event.type == UIEventTypeRemoteControl)
+    {
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlPlay:
+                [audioDeck playTrack:YES];
+                break;
+            case UIEventSubtypeRemoteControlPause:
+                [audioDeck playTrack:NO];
+                break;
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                [audioDeck playTrack:![audioDeck isPlaying]];
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:
+                [audioDeck skipTrack];
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                [audioDeck setPlaybackProgress:0.0f];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end

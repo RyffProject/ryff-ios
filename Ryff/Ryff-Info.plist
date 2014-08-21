@@ -58,6 +58,10 @@
 	<string>Photos selected for upload will never be used without your permission, and are deleted when removed from your account.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Locations used to find nearby users are never shared with third parties or used without your permission.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

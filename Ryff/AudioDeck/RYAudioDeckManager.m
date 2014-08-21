@@ -14,9 +14,11 @@
 // Data Objects
 #import "RYNewsfeedPost.h"
 #import "RYRiff.h"
+#import "RYUser.h"
 
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 #define kAudioDeckVolumeKey @"PreferredAudioDeckVolume"
 
@@ -54,6 +56,17 @@ static RYAudioDeckManager *_sharedInstance;
         _sharedInstance.updatePlaybackTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:_sharedInstance selector:@selector(updatePlaybackProgress:) userInfo:nil repeats:YES];
         
         [[NSRunLoop currentRunLoop] addTimer:_sharedInstance.updatePlaybackTimer forMode:NSRunLoopCommonModes];
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        NSError *setCategoryError = nil;
+        BOOL success = [audioSession setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
+        if (!success)
+            NSLog(@"error: %@",[setCategoryError localizedDescription]);
+        
+        NSError *activationError = nil;
+        success = [audioSession setActive:YES error:&activationError];
+        if (!success)
+            NSLog(@"error: %@",[activationError localizedDescription]);
     }
     return _sharedInstance;
 }
@@ -146,7 +159,9 @@ static RYAudioDeckManager *_sharedInstance;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         
+        [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
         [self notifyTrackChanged];
+        [self updateNowPlaying];
     }
 }
 
@@ -163,6 +178,7 @@ static RYAudioDeckManager *_sharedInstance;
         _currentlyPlayingPost = nil;
         
         [self notifyTrackChanged];
+        [self updateNowPlaying];
     }
 }
 
@@ -190,6 +206,25 @@ static RYAudioDeckManager *_sharedInstance;
         [self stopPost];
 }
 
+- (void) updateNowPlaying
+{
+    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
+    
+    if (playingInfoCenter && _currentlyPlayingPost)
+    {
+        NSString *artist = _currentlyPlayingPost.user.nickname.length > 0 ? _currentlyPlayingPost.user.nickname : _currentlyPlayingPost.user.username;
+        NSMutableDictionary *nowPlaying = [@{MPMediaItemPropertyArtist: artist,
+                                     MPMediaItemPropertyAlbumTitle: _currentlyPlayingPost.riff.title} mutableCopy];
+        if (_audioPlayer)
+        {
+            [nowPlaying setObject:@(_audioPlayer.duration) forKey:MPMediaItemPropertyPlaybackDuration];
+            [nowPlaying setObject:@(_audioPlayer.currentTime) forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+        }
+        
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nowPlaying];
+    }
+}
+
 - (void) updatePlaybackProgress:(NSTimer *)timer
 {
     if (_audioPlayer && _audioPlayer.isPlaying)
@@ -198,6 +233,7 @@ static RYAudioDeckManager *_sharedInstance;
         {
             CGFloat progress = _audioPlayer.currentTime / _audioPlayer.duration;
             [_delegate post:_currentlyPlayingPost playbackTimeChanged:_audioPlayer.currentTime progress:progress];
+            [self updateNowPlaying];
         }
     }
 }
