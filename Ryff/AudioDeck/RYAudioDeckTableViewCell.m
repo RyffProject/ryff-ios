@@ -31,6 +31,7 @@
 
 // Data
 @property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, assign) NSInteger trackIdx;
 
 @end
 
@@ -50,10 +51,12 @@
     [_riffTitleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     
-    [_playControl configureWithFrame:_playControl.frame];
+    [_playControl configureWithFrame:_playControl.frame centerImageInset:nil];
     [_playControl setControlTintColor:[UIColor whiteColor]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
 }
 
 - (void) prepareForReuse
@@ -66,41 +69,45 @@
 - (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx
 {
     _post = post;
+    _trackIdx = trackIdx;
     
     NSString *artistText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_artistLabel setText:artistText];
     [_riffTitleLabel setText:post.riff.title];
     [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
     
-    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    [self styleFromAudioDeck];
+    
+    [self setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void) styleFromAudioDeck
+{
+    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    {
+        // currently playing
+        [self hidePlaylistIndex:YES];
+        [self styleDownloading:NO];
+        
+        if ([[RYAudioDeckManager sharedInstance] isPlaying])
+            [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
+        else
+            [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
+    }
+    else if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
     {
         // currently downloading
         [self styleDownloading:YES];
+        [_playControl setCenterImage:nil];
     }
-    else
+    else if (_trackIdx > 0)
     {
-        // in playlist
+        // just in playlist
+        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)_trackIdx]];
+        [self hidePlaylistIndex:NO];
+        [_playControl setCenterImage:nil];
         [self styleDownloading:NO];
-        
-        if (post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
-        {
-            // currently playing or paused
-            [self hidePlaylistIndex:YES];
-            [_playControl setProgress:0.0f animated:NO];
-            if ([[RYAudioDeckManager sharedInstance] isPlaying])
-                [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
-            else
-                [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
-        }
-        else if (trackIdx > 0)
-        {
-            // just in playlist
-            [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)trackIdx]];
-            [self hidePlaylistIndex:NO];
-        }
     }
-    
-    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void) hidePlaylistIndex:(BOOL)hidePlaylistIndex
@@ -135,6 +142,9 @@
     }
 }
 
+#pragma mark -
+#pragma mark - Notifications
+
 - (void) updateDownloadProgress:(NSNotification *)notification
 {
     NSDictionary *notifDict = notification.object;
@@ -146,6 +156,11 @@
             [_playControl setProgress:progress animated:YES];
         }
     }
+}
+
+- (void) audioDeckTrackChanged:(NSNotification *)notification
+{
+    [self styleFromAudioDeck];
 }
 
 @end

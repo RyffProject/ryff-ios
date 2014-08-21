@@ -10,8 +10,8 @@
 #import <Security/Security.h>
 
 #if __IPHONE_7_0 || __MAC_10_9
-	// Keychain synchronization available at compile time
-	#define SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE 1
+// Keychain synchronization available at compile time
+#define SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE 1
 #endif
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
@@ -69,18 +69,18 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 /**
  Save the receiver's attributes as a keychain item. Existing items with the
  given account, service, and access group will first be deleted.
-
+ 
  @param error Populated should an error occur.
-
+ 
  @return `YES` if saving was successful, `NO` otherwise.
  */
 - (BOOL)save:(NSError **)error;
 
 /**
  Dete keychain items that match the given account, service, and access group.
-
+ 
  @param error Populated should an error occur.
-
+ 
  @return `YES` if saving was successful, `NO` otherwise.
  */
 - (BOOL)deleteItem:(NSError **)error;
@@ -93,9 +93,9 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 /**
  Fetch all keychain items that match the given account, service, and access
  group. The values of `password` and `passwordData` are ignored when fetching.
-
+ 
  @param error Populated should an error occur.
-
+ 
  @return An array of dictionaries that represent all matching keychain items or
  `nil` should an error occur.
  The order of the items is not determined.
@@ -107,9 +107,9 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  group. The `password` and `passwordData` properties will be populated unless
  an error occurs. The values of `password` and `passwordData` are ignored when
  fetching.
-
+ 
  @param error Populated should an error occur.
-
+ 
  @return `YES` if fetching was successful, `NO` otherwise.
  */
 - (BOOL)fetch:(NSError **)error;
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
 /**
- Returns a boolean indicating if keychain synchronization is available on the device at runtime. The #define 
+ Returns a boolean indicating if keychain synchronization is available on the device at runtime. The #define
  SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE is only for compile time. If you are checking for the presence of synchronization,
  you should use this method.
  

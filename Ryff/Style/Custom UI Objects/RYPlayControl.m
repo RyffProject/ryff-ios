@@ -23,7 +23,7 @@
 
 @implementation RYPlayControl
 
-- (void) configureWithFrame:(CGRect)frame
+- (void) configureWithFrame:(CGRect)frame centerImageInset:(NSNumber *)centerImageInset
 {
     if (!_controlTintColor)
         _controlTintColor = [RYStyleSheet audioActionColor];
@@ -39,7 +39,7 @@
     _circleShape.strokeEnd      = 0.0f;
     [self.layer addSublayer:_circleShape];
     
-    CGFloat inset = 2*outerStrokeWidth;
+    CGFloat inset = centerImageInset ? centerImageInset.floatValue : 2*outerStrokeWidth;
     CGRect imageFrame   = CGRectMake(inset, inset, frame.size.width-2*inset, frame.size.height-2*inset);
     _centerImageView    = [[UIImageView alloc] initWithFrame:imageFrame];
     _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -60,7 +60,7 @@
     else
     {
         [CATransaction begin];
-        [CATransaction setDisableActions:YES];
+        [CATransaction setAnimationDuration:0.0];
         _circleShape.strokeEnd = progress;
         [CATransaction commit];
     }

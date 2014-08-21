@@ -18,7 +18,6 @@
 @class RYUser;
 
 @protocol ProfileInfoCellDelegate <NSObject>
-- (void) settingsAction:(CGRect)presentingFrame;
 - (void) addNewRiff;
 - (void) editImageAction;
 - (void) followersAction;

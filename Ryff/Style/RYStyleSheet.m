@@ -90,7 +90,7 @@
 
 + (void) styleProfileImageView:(UIView *)view
 {
-    [view.layer setCornerRadius:view.frame.size.width/2];
+    [view.layer setCornerRadius:10];
     [view setClipsToBounds:YES];
 }
 

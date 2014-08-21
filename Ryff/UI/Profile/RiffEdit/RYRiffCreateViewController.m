@@ -443,8 +443,9 @@
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Posted" forDuration:1.5f];
     
+    __block RYRiffCreateViewController* blockSelf = self;
     [self performBlock:^{
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [blockSelf dismissViewControllerAnimated:YES completion:nil];
     } afterDelay:1.5f];
 }
 

@@ -14,5 +14,6 @@
 @interface RYProfileViewController : RYRiffStreamingCoreViewController
 
 - (void) configureForUser:(RYUser *)user;
+- (void) addSettingsOptions;
 
 @end

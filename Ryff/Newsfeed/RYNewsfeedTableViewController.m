@@ -10,6 +10,7 @@
 
 // UI
 #import "UIImage+Color.h"
+#import "UIViewController+Extras.h"
 
 // Data Managers
 #import "RYServices.h"
@@ -38,6 +39,8 @@
     // set up test data
     self.feedItems = @[];
     _searchType = NEW;
+    
+    [self addNewPostButtonToNavBar];
 }
 
 - (void) viewWillAppear:(BOOL)animated

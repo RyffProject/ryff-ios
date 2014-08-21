@@ -10,7 +10,7 @@
 
 @property (nonatomic, strong) UIColor *controlTintColor;
 
-- (void) configureWithFrame:(CGRect)frame;
+- (void) configureWithFrame:(CGRect)frame centerImageInset:(NSNumber *)centerImageInset;
 - (void) setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void) setCenterImage:(UIImage *)image;
 

@@ -35,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nowPlayingLabel;
 @property (weak, nonatomic) IBOutlet UISlider *playbackSlider;
 
+// Data
+@property (nonatomic, assign) BOOL progressSliderTouchActive;
+
 @end
 
 @implementation RYAudioDeckViewController
@@ -126,13 +129,6 @@
 - (void) trackChanged
 {
     [self styleFromAudioDeck];
-    
-    RYNewsfeedPost *firstPost = [[[RYAudioDeckManager sharedInstance] riffPlaylist] firstObject];
-    if (firstPost.postId > 0 && firstPost.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
-    {
-        // should reload first row if it's playing right now
-        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    }
 }
 
 - (void) post:(RYNewsfeedPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress

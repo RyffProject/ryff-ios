@@ -33,6 +33,16 @@
     [self.tabBar setTintColor:[RYStyleSheet audioActionColor]];
     [self.tabBar setTranslucent:NO];
     [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] colorImage:[RYStyleSheet tabBarColor]]];
+    
+    for (UIViewController *viewController in self.viewControllers)
+    {
+        if ([viewController isKindOfClass:[UINavigationController class]])
+        {
+            UIViewController *potentialProfile = ((UINavigationController*)viewController).viewControllers.firstObject;
+            if ([potentialProfile isKindOfClass:[RYProfileViewController class]])
+                [((RYProfileViewController *)potentialProfile) addSettingsOptions];
+        }
+    }
 }
 
 @end

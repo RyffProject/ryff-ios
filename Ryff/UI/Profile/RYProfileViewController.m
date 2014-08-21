@@ -37,6 +37,8 @@
 @interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIBarButtonItem *settingsBarButton;
+@property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -73,17 +75,29 @@
     {
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
         [self setTitle:_user.username];
+        
+        if (_user.userId == [RYServices loggedInUser].userId)
+            [self addNewPostButtonToNavBar];
     }
     
     [self.tableView reloadData];
 }
 
+- (void) addSettingsOptions
+{
+    if (self.navigationItem)
+    {
+        CGSize barButtonSize = CGSizeMake(30, 30);
+        _settingsBarButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"cloud"] createThumbnailToFillSize:barButtonSize] style:UIBarButtonItemStylePlain target:self action:@selector(settingsTapped:)];
+        _notificationsBarButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"rss"] createThumbnailToFillSize:barButtonSize] style:UIBarButtonItemStylePlain target:self action:@selector(notificationsTapped:)];
+        [self.navigationItem setLeftBarButtonItems:@[_settingsBarButton,_notificationsBarButton]];
+    }
+}
+
 #pragma mark -
 #pragma mark - Actions
 
-#pragma mark - ProfileInfoCell Delegate
-
-- (void) settingsAction:(CGRect)presentingFrame
+- (void) settingsTapped:(id)sender
 {
     if (!_user)
     {
@@ -96,15 +110,19 @@
         UIActionSheet *settingsSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Sign Out", @"Change Avatar", @"Edit Profile",  nil];
         if (isIpad)
         {
-            CGRect convertedRect = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
-            CGRect realFrame = CGRectMake(convertedRect.origin.x + presentingFrame.origin.x, convertedRect.origin.y + presentingFrame.origin.y, presentingFrame.size.width, presentingFrame.size.height);
-            [settingsSheet showFromRect:realFrame inView:self.view animated:YES];
+            [settingsSheet showFromBarButtonItem:_settingsBarButton animated:YES];
         }
         else
             [settingsSheet showInView:self.view];
     }
-
 }
+
+- (void) notificationsTapped:(id)sender
+{
+    NSLog(@"show notifications");
+}
+
+#pragma mark - ProfileInfoCell Delegate
 
 - (void) addNewRiff
 {

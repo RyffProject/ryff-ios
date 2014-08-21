@@ -115,7 +115,7 @@
     [_playControlView addGestureRecognizer:playControlTap];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
     
-    [_playControlView configureWithFrame:_playControlView.bounds];
+    [_playControlView configureWithFrame:_playControlView.bounds centerImageInset:@(_playControlView.frame.size.width/4)];
     
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
     [_avatarImageView addGestureRecognizer:avatarTap];

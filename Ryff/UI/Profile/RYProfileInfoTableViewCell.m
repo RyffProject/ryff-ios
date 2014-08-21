@@ -133,8 +133,8 @@
 
 - (IBAction)settingsButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(settingsAction:)])
-        [_delegate settingsAction:_settingsButton.frame];
+//    if (_delegate && [_delegate respondsToSelector:@selector(settingsAction:)])
+//        [_delegate settingsAction:_settingsButton.frame];
 }
 
 - (IBAction)addRiffButtonHit:(id)sender

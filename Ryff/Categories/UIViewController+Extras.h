@@ -8,10 +8,12 @@
 
 @interface UIViewController (Extras)
 
+// Navigation
+- (void) addNewPostButtonToNavBar;
+
+// HUD
 - (void) showHUDWithTitle:(NSString*) title;
-
 - (void) showCheckHUDWithTitle:(NSString *)title forDuration:(NSTimeInterval)duration;
-
 - (void) hideHUD;
 
 @end

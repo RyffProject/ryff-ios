@@ -8,12 +8,36 @@
 
 #import "UIViewController+Extras.h"
 
+// Custom UI
 #import "MBProgressHUD.h"
+
+// Categories
+#import "UIImage+Thumbnail.h"
+
+// Associated View Controllers
+#import "RYRiffCreateViewController.h"
 
 #define kHudTag 1912984
 
 @implementation UIViewController (Extras)
 
+#pragma mark -
+#pragma mark - Navigation
+
+- (void) addNewPostButtonToNavBar
+{
+    if (self.navigationItem)
+    {
+        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"plus"] createThumbnailToFillSize:CGSizeMake(30, 30)] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
+        [self.navigationItem setRightBarButtonItem:newPostButton];
+    }
+}
+
+- (void) newPost:(id)sender
+{
+    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    [self presentViewController:riffCreateVC animated:YES completion:nil];
+}
 
 #pragma mark -
 #pragma mark - HUD Methods

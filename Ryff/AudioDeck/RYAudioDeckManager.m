@@ -97,11 +97,9 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) setVolume:(CGFloat)volume
 {
+    _globalVolume = volume;
     if (_audioPlayer)
-    {
-        _globalVolume = volume;
         [_audioPlayer setVolume:_globalVolume];
-    }
 }
 
 - (void) skipTrack
@@ -144,6 +142,7 @@ static RYAudioDeckManager *_sharedInstance;
         // confirmed that media file exists
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:localURL error:NULL];
         _audioPlayer.delegate = self;
+        _audioPlayer.volume = _globalVolume;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         
