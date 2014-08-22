@@ -23,7 +23,7 @@
 #import "RYPlayControl.h"
 
 // Frameworks
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+SGImageCache.h"
 
 @interface RYRiffCell () <UIGestureRecognizerDelegate>
 
@@ -70,7 +70,7 @@
     [_textView setAttributedText:attributedText];
     CGSize textViewSize = [_textView sizeThatFits:CGSizeMake(_textView.frame.size.width, CGFLOAT_MAX)];
     [_textView setFrame:CGRectMake(_textView.frame.origin.x, _textView.frame.origin.y, _textView.frame.size.width, textViewSize.height)];
-    [_avatarImageView setImageWithURL:post.user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
+    [_avatarImageView setImageForURL:post.user.avatarURL.path placeholder:[UIImage imageNamed:@"user"]];
     
     if (post.riff)
         [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
@@ -78,7 +78,7 @@
     if (post.imageURL)
     {
         [_postImageView setHidden:NO];
-        [_postImageView setImageWithURL:post.imageURL placeholderImage:[UIImage imageNamed:@"user"]];
+        [_postImageView setImageForURL:post.imageURL.path placeholder:[UIImage imageNamed:@"user"]];
     }
     else
     {

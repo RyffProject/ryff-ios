@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83011B7519A7FF420017E7C5 /* SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7019A7FF420017E7C5 /* SGImageCache.m */; };
+		83011B7619A7FF420017E7C5 /* SGImageCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7219A7FF420017E7C5 /* SGImageCacheTask.m */; };
+		83011B7719A7FF420017E7C5 /* UIImageView+SGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7419A7FF420017E7C5 /* UIImageView+SGImageCache.m */; };
+		83011B8619A7FFA80017E7C5 /* MGBlockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7A19A7FFA80017E7C5 /* MGBlockWrapper.m */; };
+		83011B8719A7FFA80017E7C5 /* MGDeallocAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7C19A7FFA80017E7C5 /* MGDeallocAction.m */; };
+		83011B8819A7FFA80017E7C5 /* MGObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B7F19A7FFA80017E7C5 /* MGObserver.m */; };
+		83011B8919A7FFA80017E7C5 /* MGWeakHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B8119A7FFA80017E7C5 /* MGWeakHandler.m */; };
+		83011B8A19A7FFA80017E7C5 /* NSObject+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B8319A7FFA80017E7C5 /* NSObject+MGEvents.m */; };
+		83011B8B19A7FFA80017E7C5 /* UIControl+MGEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B8519A7FFA80017E7C5 /* UIControl+MGEvents.m */; };
+		83011B8E19A800A60017E7C5 /* SGHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B8D19A800A60017E7C5 /* SGHTTPRequest.m */; };
+		83011B9119A800BA0017E7C5 /* SGActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83011B9019A800BA0017E7C5 /* SGActivityIndicator.m */; };
 		830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185F319009C3A00093EFA /* RYLoginViewController.m */; };
 		830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185FD1900AEB300093EFA /* UIColor+Hex.m */; };
 		830186011900B1CD00093EFA /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185FF1900B1CD00093EFA /* tabBar.png */; };
@@ -213,6 +224,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		83011B6F19A7FF420017E7C5 /* SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCache.h; sourceTree = "<group>"; };
+		83011B7019A7FF420017E7C5 /* SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCache.m; sourceTree = "<group>"; };
+		83011B7119A7FF420017E7C5 /* SGImageCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGImageCacheTask.h; sourceTree = "<group>"; };
+		83011B7219A7FF420017E7C5 /* SGImageCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGImageCacheTask.m; sourceTree = "<group>"; };
+		83011B7319A7FF420017E7C5 /* UIImageView+SGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SGImageCache.h"; sourceTree = "<group>"; };
+		83011B7419A7FF420017E7C5 /* UIImageView+SGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SGImageCache.m"; sourceTree = "<group>"; };
+		83011B7919A7FFA80017E7C5 /* MGBlockWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBlockWrapper.h; sourceTree = "<group>"; };
+		83011B7A19A7FFA80017E7C5 /* MGBlockWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBlockWrapper.m; sourceTree = "<group>"; };
+		83011B7B19A7FFA80017E7C5 /* MGDeallocAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDeallocAction.h; sourceTree = "<group>"; };
+		83011B7C19A7FFA80017E7C5 /* MGDeallocAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDeallocAction.m; sourceTree = "<group>"; };
+		83011B7D19A7FFA80017E7C5 /* MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEvents.h; sourceTree = "<group>"; };
+		83011B7E19A7FFA80017E7C5 /* MGObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGObserver.h; sourceTree = "<group>"; };
+		83011B7F19A7FFA80017E7C5 /* MGObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGObserver.m; sourceTree = "<group>"; };
+		83011B8019A7FFA80017E7C5 /* MGWeakHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGWeakHandler.h; sourceTree = "<group>"; };
+		83011B8119A7FFA80017E7C5 /* MGWeakHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGWeakHandler.m; sourceTree = "<group>"; };
+		83011B8219A7FFA80017E7C5 /* NSObject+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MGEvents.h"; sourceTree = "<group>"; };
+		83011B8319A7FFA80017E7C5 /* NSObject+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MGEvents.m"; sourceTree = "<group>"; };
+		83011B8419A7FFA80017E7C5 /* UIControl+MGEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+MGEvents.h"; sourceTree = "<group>"; };
+		83011B8519A7FFA80017E7C5 /* UIControl+MGEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+MGEvents.m"; sourceTree = "<group>"; };
+		83011B8C19A800A60017E7C5 /* SGHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHTTPRequest.h; sourceTree = "<group>"; };
+		83011B8D19A800A60017E7C5 /* SGHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHTTPRequest.m; sourceTree = "<group>"; };
+		83011B8F19A800BA0017E7C5 /* SGActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGActivityIndicator.h; sourceTree = "<group>"; };
+		83011B9019A800BA0017E7C5 /* SGActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGActivityIndicator.m; sourceTree = "<group>"; };
 		830185F219009C3A00093EFA /* RYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginViewController.h; sourceTree = "<group>"; };
 		830185F319009C3A00093EFA /* RYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginViewController.m; sourceTree = "<group>"; };
 		830185FC1900AEB300093EFA /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -551,6 +585,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		83011B6E19A7FF420017E7C5 /* SGImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				83011B8F19A800BA0017E7C5 /* SGActivityIndicator.h */,
+				83011B9019A800BA0017E7C5 /* SGActivityIndicator.m */,
+				83011B8C19A800A60017E7C5 /* SGHTTPRequest.h */,
+				83011B8D19A800A60017E7C5 /* SGHTTPRequest.m */,
+				83011B6F19A7FF420017E7C5 /* SGImageCache.h */,
+				83011B7019A7FF420017E7C5 /* SGImageCache.m */,
+				83011B7119A7FF420017E7C5 /* SGImageCacheTask.h */,
+				83011B7219A7FF420017E7C5 /* SGImageCacheTask.m */,
+				83011B7319A7FF420017E7C5 /* UIImageView+SGImageCache.h */,
+				83011B7419A7FF420017E7C5 /* UIImageView+SGImageCache.m */,
+			);
+			path = SGImageCache;
+			sourceTree = "<group>";
+		};
+		83011B7819A7FFA80017E7C5 /* MGEvents */ = {
+			isa = PBXGroup;
+			children = (
+				83011B7919A7FFA80017E7C5 /* MGBlockWrapper.h */,
+				83011B7A19A7FFA80017E7C5 /* MGBlockWrapper.m */,
+				83011B7B19A7FFA80017E7C5 /* MGDeallocAction.h */,
+				83011B7C19A7FFA80017E7C5 /* MGDeallocAction.m */,
+				83011B7D19A7FFA80017E7C5 /* MGEvents.h */,
+				83011B7E19A7FFA80017E7C5 /* MGObserver.h */,
+				83011B7F19A7FFA80017E7C5 /* MGObserver.m */,
+				83011B8019A7FFA80017E7C5 /* MGWeakHandler.h */,
+				83011B8119A7FFA80017E7C5 /* MGWeakHandler.m */,
+				83011B8219A7FFA80017E7C5 /* NSObject+MGEvents.h */,
+				83011B8319A7FFA80017E7C5 /* NSObject+MGEvents.m */,
+				83011B8419A7FFA80017E7C5 /* UIControl+MGEvents.h */,
+				83011B8519A7FFA80017E7C5 /* UIControl+MGEvents.m */,
+			);
+			path = MGEvents;
+			sourceTree = "<group>";
+		};
 		830185F119009C2B00093EFA /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +724,8 @@
 				83EB8BA319959F5C0007837D /* DWTagList */,
 				83CCC8E8197EFCBF00FD1B4B /* AFNetworking */,
 				83CCC8FC197EFCBF00FD1B4B /* UIKit+AFNetworking */,
+				83011B6E19A7FF420017E7C5 /* SGImageCache */,
+				83011B7819A7FFA80017E7C5 /* MGEvents */,
 				830BBCCF18FA142000A9C53F /* BlockAlert */,
 			);
 			name = Extras;
@@ -1379,6 +1452,7 @@
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83CA12251995CD23002610E8 /* FLEXRuntimeUtility.m in Sources */,
+				83011B8619A7FFA80017E7C5 /* MGBlockWrapper.m in Sources */,
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
@@ -1390,6 +1464,7 @@
 				83CA12191995CD23002610E8 /* FLEXDefaultsExplorerViewController.m in Sources */,
 				83CA12241995CD23002610E8 /* FLEXResources.m in Sources */,
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,
+				83011B8719A7FFA80017E7C5 /* MGDeallocAction.m in Sources */,
 				83CA120E1995CD23002610E8 /* FLEXWindow.m in Sources */,
 				836F484219A04BAB00E948BE /* NSObject+block.m in Sources */,
 				837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */,
@@ -1400,6 +1475,7 @@
 				830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */,
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
+				83011B8919A7FFA80017E7C5 /* MGWeakHandler.m in Sources */,
 				83CA121A1995CD23002610E8 /* FLEXDescriptionTableViewCell.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */,
@@ -1409,6 +1485,7 @@
 				83CA12001995CD23002610E8 /* FLEXArgumentInputSwitchView.m in Sources */,
 				83CA11F81995CD23002610E8 /* FLEXArgumentInputColorView.m in Sources */,
 				836F484319A04BAB00E948BE /* UIImage+Color.m in Sources */,
+				83011B7519A7FF420017E7C5 /* SGImageCache.m in Sources */,
 				836F484619A04BAB00E948BE /* UIViewController+Extras.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
@@ -1418,12 +1495,14 @@
 				83CA11FE1995CD23002610E8 /* FLEXArgumentInputStringView.m in Sources */,
 				830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */,
 				83CA12121995CD23002610E8 /* FLEXGlobalsTableViewController.m in Sources */,
+				83011B8A19A7FFA80017E7C5 /* NSObject+MGEvents.m in Sources */,
 				83CA12201995CD23002610E8 /* FLEXSetExplorerViewController.m in Sources */,
 				83CA12051995CD23002610E8 /* FLEXFieldEditorView.m in Sources */,
 				83CA120C1995CD23002610E8 /* FLEXManager.m in Sources */,
 				83CA11FA1995CD23002610E8 /* FLEXArgumentInputFontView.m in Sources */,
 				83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */,
 				83CA121F1995CD23002610E8 /* FLEXObjectExplorerViewController.m in Sources */,
+				83011B7719A7FF420017E7C5 /* UIImageView+SGImageCache.m in Sources */,
 				83CCC910197EFCBF00FD1B4B /* AFHTTPSessionManager.m in Sources */,
 				83CCC91B197EFCBF00FD1B4B /* UIImageView+AFNetworking.m in Sources */,
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
@@ -1435,6 +1514,7 @@
 				83CCC91C197EFCBF00FD1B4B /* UIProgressView+AFNetworking.m in Sources */,
 				83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */,
 				83CA120A1995CD23002610E8 /* FLEXExplorerToolbar.m in Sources */,
+				83011B8819A7FFA80017E7C5 /* MGObserver.m in Sources */,
 				83CA121B1995CD23002610E8 /* FLEXDictionaryExplorerViewController.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				83CA11FD1995CD23002610E8 /* FLEXArgumentInputNumberView.m in Sources */,
@@ -1442,9 +1522,11 @@
 				83CCC915197EFCBF00FD1B4B /* AFURLResponseSerialization.m in Sources */,
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83CA12101995CD23002610E8 /* FLEXFileBrowserSearchOperation.m in Sources */,
+				83011B8E19A800A60017E7C5 /* SGHTTPRequest.m in Sources */,
 				83CCC913197EFCBF00FD1B4B /* AFURLConnectionOperation.m in Sources */,
 				83CA123019981087002610E8 /* RYAudioDeckManager.m in Sources */,
 				83CA12151995CD23002610E8 /* FLEXLiveObjectsTableViewController.m in Sources */,
+				83011B9119A800BA0017E7C5 /* SGActivityIndicator.m in Sources */,
 				833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */,
 				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
@@ -1452,6 +1534,7 @@
 				837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */,
 				83CA12011995CD23002610E8 /* FLEXArgumentInputTextView.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
+				83011B8B19A7FFA80017E7C5 /* UIControl+MGEvents.m in Sources */,
 				83CA12221995CD23002610E8 /* FLEXViewExplorerViewController.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
 				83CA12211995CD23002610E8 /* FLEXViewControllerExplorerViewController.m in Sources */,
@@ -1480,6 +1563,7 @@
 				83CA121D1995CD23002610E8 /* FLEXImageExplorerViewController.m in Sources */,
 				830BBCD218FA142000A9C53F /* BlockAlertView.m in Sources */,
 				833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */,
+				83011B7619A7FF420017E7C5 /* SGImageCacheTask.m in Sources */,
 				83CA12091995CD23002610E8 /* FLEXPropertyEditorViewController.m in Sources */,
 				83CA12031995CD23002610E8 /* FLEXArgumentInputViewFactory.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,

@@ -16,7 +16,7 @@
 #import "RYTag.h"
 
 // Frameworks
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+SGImageCache.h"
 #import "DWTagList.h"
 
 // Categories
@@ -91,7 +91,7 @@
     
     // Profile picture
     if (user.avatarURL)
-        [_avatarImageView setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
+        [_avatarImageView setImageForURL:user.avatarURL.path placeholder:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
     

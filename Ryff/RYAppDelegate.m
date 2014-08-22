@@ -72,7 +72,7 @@
     {
         switch (event.subtype) {
             case UIEventSubtypeRemoteControlPlay:
-                [audioDeck playTrack:YES];
+            [audioDeck playTrack:YES];
                 break;
             case UIEventSubtypeRemoteControlPause:
                 [audioDeck playTrack:NO];

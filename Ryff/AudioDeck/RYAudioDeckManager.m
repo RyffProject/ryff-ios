@@ -32,6 +32,8 @@
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, assign) CGFloat globalVolume;
 
+@property (nonatomic, strong) UIImage *nowPlayingArtwork;
+
 @property (nonatomic, strong) NSTimer *updatePlaybackTimer;
 
 @end
@@ -162,6 +164,8 @@ static RYAudioDeckManager *_sharedInstance;
         [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
         [self notifyTrackChanged];
         [self updateNowPlaying];
+        
+        
     }
 }
 
@@ -208,9 +212,7 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) updateNowPlaying
 {
-    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
-    
-    if (playingInfoCenter && _currentlyPlayingPost)
+    if (_currentlyPlayingPost)
     {
         NSString *artist = _currentlyPlayingPost.user.nickname.length > 0 ? _currentlyPlayingPost.user.nickname : _currentlyPlayingPost.user.username;
         NSMutableDictionary *nowPlaying = [@{MPMediaItemPropertyArtist: artist,
@@ -219,6 +221,8 @@ static RYAudioDeckManager *_sharedInstance;
         {
             [nowPlaying setObject:@(_audioPlayer.duration) forKey:MPMediaItemPropertyPlaybackDuration];
             [nowPlaying setObject:@(_audioPlayer.currentTime) forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+            if (_nowPlayingArtwork)
+                [nowPlaying setObject:[[MPMediaItemArtwork alloc] initWithImage:_nowPlayingArtwork] forKey:MPMediaItemPropertyArtwork];
         }
         
         [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nowPlaying];

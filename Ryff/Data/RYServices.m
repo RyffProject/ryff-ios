@@ -18,7 +18,6 @@
 
 // Data Systems
 #import "SSKeychain.h"
-#import "UIImageView+AFNetworking.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
