@@ -641,7 +641,9 @@
         <scene sceneID="56Q-O6-kPQ">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="B11-cl-E0p" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Discover" image="artists.png" id="xvG-OF-nue"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="globe.png" id="xvG-OF-nue">
+                        <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </tabBarItem>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcr-6O-aUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -785,7 +787,9 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="AudioDeck" image="playing.png" id="5Ya-9F-QGh"/>
+                    <tabBarItem key="tabBarItem" title="AudioDeck" image="playing.png" id="5Ya-9F-QGh">
+                        <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="controlWrapperView" destination="S9D-5B-EtV" id="oji-9P-3wa"/>
                         <outlet property="nextButton" destination="58y-Av-DXR" id="2Bg-5T-f3n"/>
@@ -883,7 +887,9 @@
         <scene sceneID="1rv-Yb-x91">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1aC-uB-qxi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Me" image="user.png" id="ijD-mq-LaO"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="userIcon.png" id="ijD-mq-LaO">
+                        <inset key="imageInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VKf-uC-1ga">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -900,10 +906,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="artists.png" width="30" height="30"/>
         <image name="back.png" width="30" height="30"/>
         <image name="cloud.png" width="50" height="33"/>
         <image name="delete.png" width="45" height="46"/>
+        <image name="globe.png" width="35" height="35"/>
         <image name="next.png" width="75" height="56"/>
         <image name="pause.png" width="50" height="50"/>
         <image name="play.png" width="50" height="57"/>
@@ -912,7 +918,7 @@
         <image name="record.png" width="45" height="45"/>
         <image name="remix.png" width="80" height="70"/>
         <image name="stream.png" width="50" height="27"/>
-        <image name="user.png" width="30" height="30"/>
+        <image name="userIcon.png" width="35" height="35"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
