@@ -51,18 +51,40 @@ void backgroundDo(void(^block)()) {
 }
 
 + (UIImage *)imageForURL:(NSString *)url {
-    if ([UIDevice.currentDevice.systemVersion hasPrefix:@"8"]) {
-        return [UIImage imageNamed:[self.cache pathForURL:url]];
-    } else {
-        return [UIImage imageNamed:[self.cache relativePathForURL:url]];
+    return [[UIImage alloc] initWithContentsOfFile:[self.cache pathForURL:url]];
+}
+
+// custom function to remove image for url and cancel any downloads
++ (BOOL) removeImageForURL:(NSString *)url
+{
+    BOOL success = NO;
+    
+    SGImageCacheTask *slowTask = [self existingSlowQueueTaskFor:url];
+    SGImageCacheTask *fastTask = [self existingFastQueueTaskFor:url];
+    [slowTask cancel];
+    [fastTask cancel];
+    
+    if ([self haveImageForURL:url])
+    {
+        NSString *path = [self.cache pathForURL:url];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+        {
+            NSError *removeError = nil;
+            success = [[NSFileManager defaultManager] removeItemAtPath:path error:&removeError];
+            if (removeError)
+                NSLog(@"removeImageForURL error: %@",[removeError localizedDescription]);
+        }
     }
+    
+    return success;
 }
 
 + (void)getImageForURL:(NSString *)url thenDo:(SGCacheFetchCompletion)completion {
     if (![url isKindOfClass:NSString.class] || !url.length) {
         return;
     }
-
+    
     backgroundDo(^{
         SGImageCacheTask *slowTask = [self existingSlowQueueTaskFor:url];
         SGImageCacheTask *fastTask = [self existingFastQueueTaskFor:url];

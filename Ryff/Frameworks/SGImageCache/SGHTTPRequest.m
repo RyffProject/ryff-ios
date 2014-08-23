@@ -161,6 +161,7 @@ SGHTTPLogging gLogging = SGHTTPLogNothing;
 
     NSURL *url = [NSURL URLWithString:baseURL];
     manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     gOperationManagers[key] = manager;
 
     //responses default to JSON

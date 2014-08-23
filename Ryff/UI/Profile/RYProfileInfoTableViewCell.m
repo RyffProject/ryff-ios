@@ -91,7 +91,7 @@
     
     // Profile picture
     if (user.avatarURL)
-        [_avatarImageView setImageForURL:user.avatarURL.path placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView setImageForURL:user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
     

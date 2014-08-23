@@ -25,6 +25,7 @@
 // Server
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
+#import "SGImageCache.h"
 
 @implementation RYServices
 
@@ -168,7 +169,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 RYUser *updatedUser = [RYUser userFromDict:dictionary[@"user"]];
-                [UIImageView clearImageCacheForURL:[RYServices loggedInUser].avatarURL];
+                [SGImageCache removeImageForURL:[RYServices loggedInUser].avatarURL.absoluteString];
                 [delegate updateSucceeded:updatedUser];
             }
             else

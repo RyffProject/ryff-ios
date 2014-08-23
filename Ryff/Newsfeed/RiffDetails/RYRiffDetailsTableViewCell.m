@@ -59,7 +59,7 @@
         
         [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"2 minutes ago" attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
         
-        [_avatarImageView setImageForURL:user.avatarURL.path placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView setImageForURL:user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     }
     
     [self setBackgroundColor:[UIColor clearColor]];
@@ -71,7 +71,7 @@
     
     [_actionLabel setAttributedText:attString];
     [_timeLabel setText:@""];
-    [_avatarImageView setImageForURL:url.path placeholder:[UIImage imageNamed:@"user"]];
+    [_avatarImageView setImageForURL:url.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     
     [self setBackgroundColor:[UIColor clearColor]];
 }
