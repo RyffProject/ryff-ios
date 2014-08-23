@@ -31,6 +31,7 @@
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
 #import "RYNewsfeedTableViewController.h"
+#import "RYUserListViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
@@ -138,7 +139,13 @@
 
 - (void) followersAction
 {
-#warning should present view controller with followers
+    if (_user.numFollowers > 0)
+    {
+        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+        RYUserListViewController *userList = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"userListVC"];
+        [userList configureWithFollowersForUser:_user];
+        [self.navigationController pushViewController:userList animated:YES];
+    }
 }
 
 - (void) tagSelected:(NSInteger)tagSelected

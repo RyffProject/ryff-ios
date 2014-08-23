@@ -58,6 +58,17 @@
     return newUser;
 }
 
++ (NSArray *) usersFromDictArray:(NSArray *)dictArray
+{
+    NSMutableArray *users = [[NSMutableArray alloc] initWithCapacity:dictArray.count];
+    for (NSDictionary *userDict in dictArray)
+    {
+        RYUser *newUser = [RYUser userFromDict:userDict];
+        [users addObject:newUser];
+    }
+    return users;
+}
+
 -(id)copyWithZone:(NSZone *)zone
 {
     // We'll ignore the zone for now

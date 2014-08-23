@@ -20,7 +20,7 @@
 // Custom UI
 #import "RYPlayControl.h"
 
-@interface RYAudioDeckTableViewCell ()
+@interface RYAudioDeckTableViewCell () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *statusWrapperView;
 @property (weak, nonatomic) IBOutlet RYPlayControl *playControl;
@@ -36,6 +36,9 @@
 @end
 
 @implementation RYAudioDeckTableViewCell
+
+#pragma mark -
+#pragma mark - Preparation
 
 - (void) awakeFromNib
 {
@@ -54,6 +57,9 @@
     [_playControl configureWithFrame:_playControl.frame centerImageInset:nil];
     [_playControl setControlTintColor:[UIColor whiteColor]];
     
+    UITapGestureRecognizer *playControlGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playControlHit:)];
+    [_statusWrapperView addGestureRecognizer:playControlGesture];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
@@ -65,6 +71,21 @@
     
     [_playControl setProgress:0.0f animated:NO];
 }
+
+#pragma mark -
+#pragma mark - Actions
+
+- (void) playControlHit:(UITapGestureRecognizer *)tapGesture
+{
+    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+    if (_post.postId == [audioManager currentlyPlayingPost].postId)
+        [audioManager playTrack:![audioManager isPlaying]];
+    else
+        [audioManager forcePostToTop:_post];
+}
+
+#pragma mark -
+#pragma mark - Styling
 
 - (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx
 {

@@ -19,6 +19,7 @@
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "SGImageCache.h"
 
 #define kAudioDeckVolumeKey @"PreferredAudioDeckVolume"
 
@@ -161,11 +162,18 @@ static RYAudioDeckManager *_sharedInstance;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         
+        if (post.imageURL || post.user.avatarURL.absoluteString.length > 0)
+        {
+            NSString *urlString = post.imageURL ? post.imageURL.absoluteString : post.user.avatarURL.absoluteString;
+            __block RYAudioDeckManager *blockSelf = self;
+            [SGImageCache getImageForURL:urlString thenDo:^(UIImage *image) {
+                blockSelf.nowPlayingArtwork = image;
+            }];
+        }
+        
         [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
         [self notifyTrackChanged];
         [self updateNowPlaying];
-        
-        
     }
 }
 

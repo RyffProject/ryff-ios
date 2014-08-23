@@ -47,19 +47,16 @@
 {
     [super viewWillAppear:animated];
     
-    if (_configurationTags)
-        [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:_searchType page:nil delegate:self];
-    else
-    {
-        
-//        [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
-        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
-    }
+    [self fetchContent];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -70,6 +67,18 @@
     _configurationTags = tags;
 }
 
+- (void) fetchContent
+{
+    if (_configurationTags)
+        [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:_searchType page:nil delegate:self];
+    else
+    {
+        
+//        [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
+        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
+    }
+}
+
 #pragma mark -
 #pragma mark - Post Delegate
 
@@ -77,6 +86,14 @@
 {
     [self setFeedItems:posts];
     [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark - Notifications
+
+- (void) userLoggedIn:(NSNotification *)notification
+{
+    [self fetchContent];
 }
 
 @end

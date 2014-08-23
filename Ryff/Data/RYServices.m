@@ -77,6 +77,7 @@ static RYUser* _loggedInUser;
             {
                 [self setLoggedInUser:dictionary[@"user"] username:params[@"username"] password:params[@"password"]];
                 [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
             }
             else
                 [delegate updateFailed:responseObject];
@@ -103,6 +104,7 @@ static RYUser* _loggedInUser;
             {
                 [self setLoggedInUser:dictionary[@"user"] username:username password:password];
                 [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
             }
             else
                 [delegate updateFailed:responseObject];
@@ -241,6 +243,40 @@ static RYUser* _loggedInUser;
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [failureAlert show];
+        }];
+    });
+}
+
+#pragma mark -
+#pragma mark - Users
+
+- (void) getFollowersForUser:(NSInteger)userID page:(NSNumber *)page delegate:(id<UsersDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        NSMutableDictionary *params = [@{@"id":@(userID)} mutableCopy];
+        if (page)
+            [params setObject:page forKey:@"page"];
+        
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetFollowersAction];
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dictionary = responseObject;
+            if (dictionary[@"success"])
+            {
+                if (delegate && [delegate respondsToSelector:@selector(retrievedUsers:)])
+                    [delegate retrievedUsers:[RYUser usersFromDictArray:dictionary[@"users"]]];
+            }
+            else
+            {
+                if (delegate && [delegate respondsToSelector:@selector(retrieveUsersFailed:)])
+                    [delegate retrieveUsersFailed:dictionary[@"error"]];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (delegate && [delegate respondsToSelector:@selector(retrieveUsersFailed:)])
+                [delegate retrieveUsersFailed:[error localizedDescription]];
         }];
     });
 }
@@ -497,7 +533,7 @@ static RYUser* _loggedInUser;
         NSString *action = shouldUpvote ? [NSString stringWithFormat:@"%@%@",kApiRoot,kUpvotePostAction] : [NSString stringWithFormat:@"%@%@",kApiRoot,kDeleteUpvoteAction];
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
-            if (dictionary[@"success"] && delegate)
+            if (dictionary[@"success"])
             {
                 if (delegate && [delegate respondsToSelector:@selector(upvoteSucceeded:)])
                     [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary[@"post"]]];

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// NSNotifications
+#define kLoggedInNotification   @"userLoggedIn"
+
 // NSUserDefaults keys
 #define kLoggedInUserKey        @"loggedInUser"
 #define kCoordLongitude         @"lastUpdatedLongitude"
@@ -16,12 +19,15 @@
 // Server paths
 #define kApiRoot                @"https://ryff.me/api/"
 
-// Users
+// Registration
 #define kRegistrationAction     @"create-user.php"
 #define kUpdateUserAction       @"update-user.php"
 #define kLogIn                  @"login.php"
+
+// Users
 #define kGetPeople              @"get-user.php"
 #define kGetNearby              @"get-users-nearby.php"
+#define kGetFollowersAction     @"get-following.php"
 
 // Posts
 #define kGetPosts               @"get-posts.php"
@@ -69,8 +75,10 @@ typedef enum : NSUInteger {
 - (void) familyPostFailed:(NSString *)reason;
 @end
 
-@protocol ArtistsFetchDelegate <NSObject>
-- (void) retrievedArtists:(NSArray*)artists;
+@protocol UsersDelegate <NSObject>
+- (void) retrievedUsers:(NSArray*)users;
+@optional
+- (void) retrieveUsersFailed:(NSString *)reason;
 @end
 
 @protocol FollowDelegate <NSObject>
@@ -118,6 +126,9 @@ typedef enum : NSUInteger {
 - (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;
 - (void) editUserInfo:(RYUser*)user forDelegate:(id<UpdateUserDelegate>)delegate;
 - (void) deletePost:(RYNewsfeedPost*)post;
+
+// Users
+- (void) getFollowersForUser:(NSInteger)userID page:(NSNumber *)page delegate:(id<UsersDelegate>)delegate;
 
 // Discover
 - (void) follow:(BOOL)shouldFollow user:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;

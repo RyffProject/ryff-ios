@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *nickname;
 
 - (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSURL*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags;
+
 + (RYUser *)userFromDict:(NSDictionary*)userDict;
++ (NSArray *) usersFromDictArray:(NSArray *)dictArray;
 
 @end

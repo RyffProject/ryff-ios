@@ -74,7 +74,11 @@
 {
     _post = post;
     _familyType = familyType;
-    [self setTitle:post.riff.title];
+    
+    if (_familyType == CHILDREN)
+        [self setTitle:post.riff.title];
+    else
+        [self setTitle:[NSString stringWithFormat:@"Sampled in %@",post.riff.title]];
     
     self.feedItems = @[post];
     
@@ -119,6 +123,9 @@
 - (void) parentsRetrieved:(NSArray *)parentPosts
 {
     _parentPosts = parentPosts;
+    if (_familyType == PARENTS)
+        self.feedItems = parentPosts;
+    
     [_tableView reloadData];
 }
 
@@ -159,7 +166,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.section == self.riffSection)
+    if (indexPath.section == self.riffSection || _familyType == PARENTS)
         cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     else
         cell = [_tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
@@ -170,7 +177,7 @@
 {
     CGFloat height = 0;
     
-    if (indexPath.section == self.riffSection)
+    if (indexPath.section == self.riffSection || _familyType == PARENTS)
         height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
     else
     {
@@ -198,7 +205,7 @@
 {
     NSInteger parentInfoSection = kParentPostsInfoSection;
     
-    if (indexPath.section == self.riffSection)
+    if (indexPath.section == self.riffSection || _familyType == PARENTS)
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
     else if (indexPath.section == parentInfoSection)
     {
@@ -235,7 +242,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSInteger parentInfoSection = kParentPostsInfoSection;
-    if (indexPath.section == parentInfoSection)
+    if (_familyType == PARENTS)
+    {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+    else if (indexPath.section == parentInfoSection)
     {
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
         RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];

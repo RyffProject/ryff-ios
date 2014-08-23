@@ -77,6 +77,8 @@
 		836F484419A04BAB00E948BE /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483D19A04BAB00E948BE /* UIImage+Thumbnail.m */; };
 		836F484519A04BAB00E948BE /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483F19A04BAB00E948BE /* UIView+Styling.m */; };
 		836F484619A04BAB00E948BE /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F484119A04BAB00E948BE /* UIViewController+Extras.m */; };
+		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
+		837C98DB19A82439002A9B34 /* RYUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
@@ -331,6 +333,10 @@
 		836F483F19A04BAB00E948BE /* UIView+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Styling.m"; sourceTree = "<group>"; };
 		836F484019A04BAB00E948BE /* UIViewController+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extras.h"; sourceTree = "<group>"; };
 		836F484119A04BAB00E948BE /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extras.m"; sourceTree = "<group>"; };
+		837C98D619A82411002A9B34 /* RYUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListViewController.h; sourceTree = "<group>"; };
+		837C98D719A82411002A9B34 /* RYUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListViewController.m; sourceTree = "<group>"; };
+		837C98D919A82439002A9B34 /* RYUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListTableViewCell.h; sourceTree = "<group>"; };
+		837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListTableViewCell.m; sourceTree = "<group>"; };
 		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
 		837CCD1619A3E12D00F95FCA /* RYTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTag.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -784,6 +790,17 @@
 			path = Ryff/Categories;
 			sourceTree = SOURCE_ROOT;
 		};
+		837C98D519A82403002A9B34 /* UserList */ = {
+			isa = PBXGroup;
+			children = (
+				837C98D619A82411002A9B34 /* RYUserListViewController.h */,
+				837C98D719A82411002A9B34 /* RYUserListViewController.m */,
+				837C98D919A82439002A9B34 /* RYUserListTableViewCell.h */,
+				837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */,
+			);
+			path = UserList;
+			sourceTree = "<group>";
+		};
 		83C6CA7618FAECD200412469 /* RiffEdit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1203,6 +1220,7 @@
 			children = (
 				83FCD17718F90BE700A493F0 /* RiffCell */,
 				833FC1AF1989E467002491C8 /* RiffDetails */,
+				837C98D519A82403002A9B34 /* UserList */,
 				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
 				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
@@ -1534,6 +1552,7 @@
 				837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */,
 				83CA12011995CD23002610E8 /* FLEXArgumentInputTextView.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
+				837C98DB19A82439002A9B34 /* RYUserListTableViewCell.m in Sources */,
 				83011B8B19A7FFA80017E7C5 /* UIControl+MGEvents.m in Sources */,
 				83CA12221995CD23002610E8 /* FLEXViewExplorerViewController.m in Sources */,
 				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
@@ -1547,6 +1566,7 @@
 				83CCC90E197EFCBF00FD1B4B /* AFHTTPRequestOperation.m in Sources */,
 				834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */,
 				83CA11FC1995CD23002610E8 /* FLEXArgumentInputNotSupportedView.m in Sources */,
+				837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */,
 				83CCC912197EFCBF00FD1B4B /* AFSecurityPolicy.m in Sources */,
 				83CA122D19981070002610E8 /* RYAudioDeckViewController.m in Sources */,
 				83CA12021995CD23002610E8 /* FLEXArgumentInputView.m in Sources */,
