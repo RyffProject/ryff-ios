@@ -53,8 +53,15 @@
     [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
     [_nextButton setTintColor:[RYStyleSheet audioActionColor]];
     [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
-    [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
+    [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
+    
+    // iOS 7 bug, must change thumb image to change thumbTintColor (image won't show if color set after)
+    [_volumeSlider setThumbImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_volumeSlider setThumbTintColor:[RYStyleSheet audioActionColor]];
+    
+    [_playbackSlider setThumbImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_playbackSlider setThumbTintColor:[RYStyleSheet audioActionColor]];
     
     // long press to move cells
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];

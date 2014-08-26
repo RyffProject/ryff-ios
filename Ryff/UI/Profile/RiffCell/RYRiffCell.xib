@@ -85,7 +85,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" selectable="NO" id="JVI-YC-dTz">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" id="JVI-YC-dTz" customClass="RYSocialTextView">
                                 <rect key="frame" x="73" y="44" width="411" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -119,8 +119,8 @@
                 <outlet property="playlistAddButton" destination="Yxn-GF-2KK" id="nTF-Pn-okd"/>
                 <outlet property="postImageView" destination="1rb-I2-FWV" id="qYj-xi-sag"/>
                 <outlet property="repostButton" destination="TbB-jV-mwf" id="WyU-g8-fLF"/>
+                <outlet property="socialTextView" destination="JVI-YC-dTz" id="s3a-uu-mAt"/>
                 <outlet property="starButton" destination="pyG-px-9wX" id="ONZ-EI-A60"/>
-                <outlet property="textView" destination="JVI-YC-dTz" id="6wO-ji-PUd"/>
                 <outlet property="upvoteCountLabel" destination="rNE-nx-Cdq" id="D9W-4F-3HL"/>
                 <outlet property="upvoteImageView" destination="uVs-7N-KVK" id="Kz9-3X-GPC"/>
                 <outlet property="upvoteWrapperView" destination="BDC-d4-Xvh" id="vhi-Zl-WIj"/>
@@ -131,7 +131,7 @@
     </objects>
     <resources>
         <image name="plus.png" width="50" height="50"/>
-        <image name="remix.png" width="80" height="70"/>
+        <image name="remix.png" width="45" height="40"/>
         <image name="star.png" width="50" height="50"/>
         <image name="upvote.png" width="38" height="50"/>
     </resources>

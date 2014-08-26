@@ -21,12 +21,15 @@
 @end
 
 @class RYNewsfeedPost;
+@class RYSocialTextView;
 
 @interface RYRiffCell : UITableViewCell
 
 @property (nonatomic, weak) id<RiffCellDelegate> delegate;
 
 @property (nonatomic, assign) NSInteger riffIndex;
+
+@property (weak, nonatomic) IBOutlet RYSocialTextView *socialTextView;
 
 - (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
 

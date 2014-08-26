@@ -250,6 +250,39 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Users
 
+- (void) getUserWithId:(NSNumber *)userID orUsername:(NSString *)username delegate:(id<UsersDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:1];
+        if (userID)
+            [params setObject:userID forKey:@"id"];
+        else if (username)
+            [params setObject:username forKey:@"username"];
+        
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetUser];
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dictionary = responseObject;
+            if (dictionary[@"success"])
+            {
+                if (delegate && [delegate respondsToSelector:@selector(retrievedUsers:)])
+                    [delegate retrievedUsers:@[[RYUser userFromDict:dictionary[@"user"]]]];
+            }
+            else
+            {
+                if (delegate && [delegate respondsToSelector:@selector(retrieveUsersFailed:)])
+                    [delegate retrieveUsersFailed:dictionary[@"error"]];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (delegate && [delegate respondsToSelector:@selector(retrieveUsersFailed:)])
+                [delegate retrieveUsersFailed:[error localizedDescription]];
+        }];
+    });
+}
+
 - (void) getFollowersForUser:(NSInteger)userID page:(NSNumber *)page delegate:(id<UsersDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{

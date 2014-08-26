@@ -11,6 +11,7 @@
 // Custom UI
 #import "RYStyleSheet.h"
 #import "BlockAlertView.h"
+#import "RYSocialTextView.h"
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
@@ -250,6 +251,7 @@
 {
     RYNewsfeedPost *post = _feedItems[indexPath.row];
     [((RYRiffCell*)cell) configureForPost:post attributedText:[RYStyleSheet createProfileAttributedTextWithPost:post] riffIndex:indexPath.row delegate:self];
+    [((RYRiffCell *)cell).socialTextView setUserInteractionEnabled:NO];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

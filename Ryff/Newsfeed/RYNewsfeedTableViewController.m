@@ -24,8 +24,10 @@
 @property (nonatomic, strong) ODRefreshControl *refreshControl;
 
 // Data
-@property (nonatomic, strong) NSArray *configurationTags;
 @property (nonatomic, assign) SearchType searchType;
+
+// array of strings
+@property (nonatomic, strong) NSArray *configurationTags;
 
 // iPad
 @property (nonatomic, strong) RYAudioDeckViewController *audioDeckVC;
@@ -47,6 +49,8 @@
     _refreshControl.tintColor = [RYStyleSheet postActionHighlightedColor];
     _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionHighlightedColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
+    
+    _tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
     
     [self addNewPostButtonToNavBar];
 }
@@ -115,5 +119,12 @@
 {
     [self fetchContent];
 }
+
+#pragma mark -
+#pragma mark - TableView Overrides
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 0.01f; }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { return [[UIView alloc] initWithFrame:CGRectZero]; }
 
 @end

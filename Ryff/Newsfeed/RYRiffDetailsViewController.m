@@ -13,16 +13,18 @@
 
 // Custom UI
 #import "RYRiffDetailsTableViewCell.h"
+#import "RYSocialTextView.h"
 
 // Associated View Controllers
 #import "RYProfileViewController.h"
 #import "RYRiffCreateViewController.h"
+#import "RYNewsfeedTableViewController.h"
 
 #define kRiffDetailsCellReuseID @"riffDetails"
 
 #define kParentPostsInfoSection (_parentPosts.count > 0 && _familyType == CHILDREN) ? 1 : -1
 
-@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate>
+@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -109,6 +111,25 @@
         else
             [self presentViewController:profileVC animated:YES completion:nil];
     }
+}
+
+#pragma mark -
+#pragma mark - SocialTextView Delegate
+
+- (void) presentProfileForUsername:(NSString *)username
+{
+    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
+    [profileVC configureForUsername:username];
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+
+- (void) presentNewsfeedForTag:(NSString *)tag
+{
+    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
+    RYNewsfeedTableViewController *newsfeedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"newsfeedVC"];
+    [newsfeedVC configureWithTags:@[tag]];
+    [self.navigationController pushViewController:newsfeedVC animated:YES];
 }
 
 #pragma mark -
@@ -206,7 +227,11 @@
     NSInteger parentInfoSection = kParentPostsInfoSection;
     
     if (indexPath.section == self.riffSection || _familyType == PARENTS)
+    {
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        [((RYRiffCell*)cell).socialTextView setUserInteractionEnabled:YES];
+        [((RYRiffCell*)cell).socialTextView setSocialDelegate:self];
+    }
     else if (indexPath.section == parentInfoSection)
     {
         NSMutableAttributedString *username = [[NSMutableAttributedString alloc] initWithString:_post.user.username attributes:@{NSFontAttributeName: [UIFont fontWithName:kBoldFont size:18.0f]}];

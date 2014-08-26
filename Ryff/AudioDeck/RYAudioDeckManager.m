@@ -391,6 +391,22 @@ static RYAudioDeckManager *_sharedInstance;
     return postInPlaylist;
 }
 
+- (BOOL) playlistContainsFile:(NSString *)fileName
+{
+    BOOL fileInPlaylist = NO;
+    
+    NSArray *allPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
+    for (RYNewsfeedPost *existingPost in allPosts)
+    {
+        if ([existingPost.riff.fileName isEqualToString:fileName])
+        {
+            fileInPlaylist = YES;
+            break;
+        }
+    }
+    return fileInPlaylist;
+}
+
 #pragma mark - Data
 
 - (RYNewsfeedPost *)currentlyPlayingPost

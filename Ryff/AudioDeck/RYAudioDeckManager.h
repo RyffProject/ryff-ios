@@ -47,6 +47,7 @@
 - (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
 - (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post;
 - (BOOL) playlistContainsPost:(NSInteger)postID;
+- (BOOL) playlistContainsFile:(NSString *)fileName;
 
 // Data
 - (RYNewsfeedPost *)currentlyPlayingPost;

@@ -35,7 +35,7 @@
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
-@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
@@ -48,6 +48,9 @@
 @end
 
 @implementation RYProfileViewController
+
+#pragma mark -
+#pragma mark - ViewController Lifecycle
 
 - (void) viewDidLoad
 {
@@ -64,6 +67,9 @@
     
     [self configureForUser:_user];
 }
+
+#pragma mark -
+#pragma mark - Configuration
 
 - (void) configureForUser:(RYUser *)user
 {
@@ -86,6 +92,11 @@
     }
     
     [self.tableView reloadData];
+}
+
+- (void) configureForUsername:(NSString *)username
+{
+    [[RYServices sharedInstance] getUserWithId:nil orUsername:username delegate:self];
 }
 
 - (void) addSettingsOptions
@@ -216,6 +227,16 @@
 {
     [self setFeedItems:posts];
     [self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark - Users Delegate
+
+// fetched user with username (from call sent by configureWithUsername:)
+- (void) retrievedUsers:(NSArray *)users
+{
+    RYUser *user = [users firstObject];
+    [self configureForUser:user];
 }
 
 #pragma mark -

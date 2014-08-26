@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYMediaEditor.h"
+#import "RYAudioDeckManager.h"
 
 // Data Objects
 #import "RYRiff.h"
@@ -153,14 +154,20 @@ static RYDataManager *_sharedInstance;
     }
 }
 
+/**
+ *  Clear cache, saving files which are currently in the AudioDeck playlist
+ */
 - (void) clearCache
 {
     NSString *directory = NSTemporaryDirectory();
     NSError *error = nil;
-    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:&error]) {
-        BOOL success = [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", directory, file] error:&error];
-        if (!success || error) {
-            NSLog(@"clearCache failed: %@",[error localizedDescription]);
+    for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:&error])
+    {
+        if (![[RYAudioDeckManager sharedInstance] playlistContainsFile:file])
+        {
+            [[NSFileManager defaultManager] removeItemAtPath:[directory stringByAppendingPathComponent:file] error:&error];
+            if (error)
+                NSLog(@"clearCache failed: %@",[error localizedDescription]);
         }
     }
 }

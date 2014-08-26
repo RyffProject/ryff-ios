@@ -38,6 +38,7 @@
 		830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE418FA57F200A9C53F /* RYCoreViewController.m */; };
 		830BBCE818FA589F00A9C53F /* RYCorePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */; };
 		8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8310F5A91981F92300250172 /* RYPlayControl.m */; };
+		8312628D19AD120D00532CA3 /* RYSocialTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312628C19AD120D00532CA3 /* RYSocialTextView.m */; };
 		831A88A9199EEEDD00C44CED /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 831A8891199EEEDD00C44CED /* next.png */; };
 		831A88AA199EEEDD00C44CED /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 831A8892199EEEDD00C44CED /* next@2x.png */; };
 		831A88AB199EEEDD00C44CED /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 831A8893199EEEDD00C44CED /* pause.png */; };
@@ -298,6 +299,8 @@
 		830BBCE718FA589F00A9C53F /* RYCorePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCorePageViewController.m; sourceTree = "<group>"; };
 		8310F5A81981F92300250172 /* RYPlayControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPlayControl.h; sourceTree = "<group>"; };
 		8310F5A91981F92300250172 /* RYPlayControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPlayControl.m; sourceTree = "<group>"; };
+		8312628B19AD120D00532CA3 /* RYSocialTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSocialTextView.h; sourceTree = "<group>"; };
+		8312628C19AD120D00532CA3 /* RYSocialTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYSocialTextView.m; sourceTree = "<group>"; };
 		831A8891199EEEDD00C44CED /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		831A8892199EEEDD00C44CED /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
 		831A8893199EEEDD00C44CED /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
@@ -725,6 +728,8 @@
 			children = (
 				8310F5A81981F92300250172 /* RYPlayControl.h */,
 				8310F5A91981F92300250172 /* RYPlayControl.m */,
+				8312628B19AD120D00532CA3 /* RYSocialTextView.h */,
+				8312628C19AD120D00532CA3 /* RYSocialTextView.m */,
 			);
 			path = "Custom UI Objects";
 			sourceTree = "<group>";
@@ -1583,6 +1588,7 @@
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 				836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */,
 				83CA12001995CD23002610E8 /* FLEXArgumentInputSwitchView.m in Sources */,
+				8312628D19AD120D00532CA3 /* RYSocialTextView.m in Sources */,
 				83CA11F81995CD23002610E8 /* FLEXArgumentInputColorView.m in Sources */,
 				836F484319A04BAB00E948BE /* UIImage+Color.m in Sources */,
 				83011B7519A7FF420017E7C5 /* SGImageCache.m in Sources */,

@@ -25,7 +25,7 @@
 #define kLogIn                  @"login.php"
 
 // Users
-#define kGetPeople              @"get-user.php"
+#define kGetUser                @"get-user.php"
 #define kGetNearby              @"get-users-nearby.php"
 #define kGetFollowersAction     @"get-following.php"
 
@@ -128,6 +128,7 @@ typedef enum : NSUInteger {
 - (void) deletePost:(RYNewsfeedPost*)post;
 
 // Users
+- (void) getUserWithId:(NSNumber *)userID orUsername:(NSString *)username delegate:(id<UsersDelegate>)delegate;
 - (void) getFollowersForUser:(NSInteger)userID page:(NSNumber *)page delegate:(id<UsersDelegate>)delegate;
 
 // Discover

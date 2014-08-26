@@ -19,8 +19,11 @@
 #import "RYServices.h"
 
 // Custom UI
-#import "UIImage+Color.h"
 #import "RYPlayControl.h"
+#import "RYSocialTextView.h"
+
+// Categories
+#import "UIImage+Color.h"
 
 // Frameworks
 #import "UIImageView+SGImageCache.h"
@@ -30,7 +33,6 @@
 // Main
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 // Media
@@ -67,9 +69,9 @@
     
     NSString *usernameText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_userLabel setText:usernameText];
-    [_textView setAttributedText:attributedText];
-    CGSize textViewSize = [_textView sizeThatFits:CGSizeMake(self.frame.size.width-kRiffCellWidthMinusText, CGFLOAT_MAX)];
-    [_textView setFrame:CGRectMake(_textView.frame.origin.x, _textView.frame.origin.y, _textView.frame.size.width, textViewSize.height)];
+    [_socialTextView loadAttributedContent:attributedText];
+    CGSize textViewSize = [_socialTextView sizeThatFits:CGSizeMake(self.frame.size.width-kRiffCellWidthMinusText, CGFLOAT_MAX)];
+    [_socialTextView setFrame:CGRectMake(_socialTextView.frame.origin.x, _socialTextView.frame.origin.y, _socialTextView.frame.size.width, textViewSize.height)];
     [_avatarImageView setImageForURL:post.user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     
     if (post.riff)
@@ -104,7 +106,6 @@
 - (void) awakeFromNib
 {
     [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
-    [_textView setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
     
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
