@@ -28,7 +28,7 @@
 {
     if (self.navigationItem)
     {
-        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"plus"] createThumbnailToFillSize:CGSizeMake(30, 30)] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
+        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"create"] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
         [self.navigationItem setRightBarButtonItem:newPostButton];
     }
 }

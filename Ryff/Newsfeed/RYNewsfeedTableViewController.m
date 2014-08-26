@@ -9,6 +9,7 @@
 #import "RYNewsfeedTableViewController.h"
 
 // UI
+#import "ODRefreshControl.h"
 #import "UIImage+Color.h"
 #import "UIViewController+Extras.h"
 
@@ -19,6 +20,8 @@
 #import "RYAudioDeckViewController.h"
 
 @interface RYNewsfeedTableViewController () <PostDelegate>
+
+@property (nonatomic, strong) ODRefreshControl *refreshControl;
 
 // Data
 @property (nonatomic, strong) NSArray *configurationTags;
@@ -39,6 +42,11 @@
     // set up test data
     self.feedItems = @[];
     _searchType = NEW;
+    
+    _refreshControl = [[ODRefreshControl alloc] initInScrollView:_tableView];
+    _refreshControl.tintColor = [RYStyleSheet postActionHighlightedColor];
+    _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionHighlightedColor];
+    [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
     [self addNewPostButtonToNavBar];
 }
@@ -77,6 +85,16 @@
 //        [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
         [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     }
+    [_refreshControl beginRefreshing];
+}
+
+- (void) refreshContent:(ODRefreshControl *)refreshControl
+{
+    double delayInSeconds = 3.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [refreshControl endRefreshing];
+    });
 }
 
 #pragma mark -
@@ -85,6 +103,8 @@
 - (void) postSucceeded:(NSArray *)posts
 {
     [self setFeedItems:posts];
+    
+    [_refreshControl endRefreshing];
     [self.tableView reloadData];
 }
 

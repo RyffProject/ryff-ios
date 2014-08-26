@@ -204,6 +204,10 @@
 		83ED34F71931851600FEB018 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83ED34E71931851600FEB018 /* iTunesArtwork@2x.png */; };
 		83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */; };
 		83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */; };
+		83FADE4519AC405200182155 /* create.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FADE4319AC405200182155 /* create.png */; };
+		83FADE4619AC405200182155 /* create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FADE4419AC405200182155 /* create@2x.png */; };
+		83FADE4A19AC52B300182155 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FADE4919AC52B300182155 /* ODRefreshControl.m */; };
+		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
 		83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
@@ -559,6 +563,11 @@
 		83ED34E71931851600FEB018 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		83FA50B51931524E00F1F3A7 /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		83FADE4319AC405200182155 /* create.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create.png; sourceTree = "<group>"; };
+		83FADE4419AC405200182155 /* create@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create@2x.png"; sourceTree = "<group>"; };
+		83FADE4819AC52B300182155 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		83FADE4919AC52B300182155 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		83FADE4B19AC54DA00182155 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83FCD13D18F907C400A493F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -599,6 +608,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */,
 				830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */,
 				83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */,
 				83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */,
@@ -722,6 +732,8 @@
 		831A8890199EEEDD00C44CED /* 1.0 images */ = {
 			isa = PBXGroup;
 			children = (
+				83FADE4319AC405200182155 /* create.png */,
+				83FADE4419AC405200182155 /* create@2x.png */,
 				837367EE19A8344600D9559D /* globe.png */,
 				837367EF19A8344600D9559D /* globe@2x.png */,
 				837367F019A8344600D9559D /* location.png */,
@@ -770,6 +782,7 @@
 				836F483719A04BAB00E948BE /* Categories */,
 				83CA118B1995CD23002610E8 /* FLEX */,
 				83EB8BA319959F5C0007837D /* DWTagList */,
+				83FADE4719AC52B200182155 /* ODRefreshControl */,
 				83CCC8E8197EFCBF00FD1B4B /* AFNetworking */,
 				83CCC8FC197EFCBF00FD1B4B /* UIKit+AFNetworking */,
 				83011B6E19A7FF420017E7C5 /* SGImageCache */,
@@ -1149,6 +1162,15 @@
 			path = "App Icon [Squared]";
 			sourceTree = "<group>";
 		};
+		83FADE4719AC52B200182155 /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				83FADE4819AC52B300182155 /* ODRefreshControl.h */,
+				83FADE4919AC52B300182155 /* ODRefreshControl.m */,
+			);
+			path = ODRefreshControl;
+			sourceTree = "<group>";
+		};
 		83FCD12F18F907C400A493F0 = {
 			isa = PBXGroup;
 			children = (
@@ -1171,6 +1193,7 @@
 		83FCD13A18F907C400A493F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83FADE4B19AC54DA00182155 /* QuartzCore.framework */,
 				830BBCC918FA0C2300A9C53F /* CoreLocation.framework */,
 				83FCD13B18F907C400A493F0 /* Foundation.framework */,
 				83FCD13D18F907C400A493F0 /* CoreGraphics.framework */,
@@ -1442,6 +1465,7 @@
 				831A88B6199EEEDD00C44CED /* rss@2x.png in Resources */,
 				83ED34F21931851600FEB018 /* AppIcon72x72.png in Resources */,
 				8373680419A8344600D9559D /* userAdd.png in Resources */,
+				83FADE4519AC405200182155 /* create.png in Resources */,
 				831A88AB199EEEDD00C44CED /* pause.png in Resources */,
 				831A88BF199EEEDD00C44CED /* x.png in Resources */,
 				831A88BE199EEEDD00C44CED /* upvote@2x.png in Resources */,
@@ -1484,6 +1508,7 @@
 				83ED34E81931851600FEB018 /* AppIcon29x29.png in Resources */,
 				83ED34F01931851600FEB018 /* AppIcon60x60.png in Resources */,
 				83ED34EA1931851600FEB018 /* AppIcon40x40.png in Resources */,
+				83FADE4619AC405200182155 /* create@2x.png in Resources */,
 				830BBCDF18FA401700A9C53F /* friend.png in Resources */,
 				831A88B5199EEEDD00C44CED /* rss.png in Resources */,
 				831A88B0199EEEDD00C44CED /* playing@2x.png in Resources */,
@@ -1529,6 +1554,7 @@
 				83011B8619A7FFA80017E7C5 /* MGBlockWrapper.m in Sources */,
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
+				83FADE4A19AC52B300182155 /* ODRefreshControl.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83CCC90F197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m in Sources */,

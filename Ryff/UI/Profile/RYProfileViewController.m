@@ -38,8 +38,8 @@
 @interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UIBarButtonItem *settingsBarButton;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
+@property (nonatomic, strong) UIBarButtonItem *messagesBarButton;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -92,17 +92,16 @@
 {
     if (self.navigationItem)
     {
-        CGSize barButtonSize = CGSizeMake(30, 30);
-        _settingsBarButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"cloud"] createThumbnailToFillSize:barButtonSize] style:UIBarButtonItemStylePlain target:self action:@selector(settingsTapped:)];
-        _notificationsBarButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"rss"] createThumbnailToFillSize:barButtonSize] style:UIBarButtonItemStylePlain target:self action:@selector(notificationsTapped:)];
-        [self.navigationItem setLeftBarButtonItems:@[_settingsBarButton,_notificationsBarButton]];
+        _notificationsBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notification"] style:UIBarButtonItemStylePlain target:self action:@selector(notificationsTapped:)];
+        _messagesBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"message"] style:UIBarButtonItemStylePlain target:self action:@selector(messagesTapped:)];
+        [self.navigationItem setLeftBarButtonItems:@[_notificationsBarButton,_messagesBarButton]];
     }
 }
 
 #pragma mark -
 #pragma mark - Actions
 
-- (void) settingsTapped:(id)sender
+- (void) settingsAction:(CGRect)presentingFrame
 {
     if (!_user)
     {
@@ -115,7 +114,9 @@
         UIActionSheet *settingsSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Sign Out", @"Change Avatar", @"Edit Profile",  nil];
         if (isIpad)
         {
-            [settingsSheet showFromBarButtonItem:_settingsBarButton animated:YES];
+            CGRect convertedRect = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
+            CGRect realFrame = CGRectMake(convertedRect.origin.x + presentingFrame.origin.x, convertedRect.origin.y + presentingFrame.origin.y, presentingFrame.size.width, presentingFrame.size.height);
+            [settingsSheet showFromRect:realFrame inView:self.view animated:YES];
         }
         else
             [settingsSheet showInView:self.view];
@@ -125,6 +126,11 @@
 - (void) notificationsTapped:(id)sender
 {
     NSLog(@"show notifications");
+}
+
+- (void) messagesTapped:(id)sender
+{
+    NSLog(@"show messages");
 }
 
 #pragma mark - ProfileInfoCell Delegate
