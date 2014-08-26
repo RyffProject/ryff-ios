@@ -85,24 +85,40 @@ void backgroundDo(void(^block)()) {
         return;
     }
     
-    backgroundDo(^{
-        SGImageCacheTask *slowTask = [self existingSlowQueueTaskFor:url];
-        SGImageCacheTask *fastTask = [self existingFastQueueTaskFor:url];
-
-        if (slowTask.isExecuting) { // reuse an executing slow task
-            [slowTask addCompletion:completion];
-            [slowTask addCompletions:fastTask.completions];
-            [fastTask cancel];
-        } else if (fastTask) { // reuse a fast task
-            [fastTask addCompletion:completion];
-            [fastTask addCompletions:slowTask.completions];
-            [slowTask cancel];
-        } else { // add a fresh task to fast queue
-            SGImageCacheTask *task = [self taskForURL:url attempt:1];
-            [task addCompletion:completion];
-            [self.cache.fastQueue addOperation:task];
+    if ([SGImageCache haveImageForURL:url])
+    {
+        // return local image
+        if ([NSThread isMainThread])
+            completion([SGImageCache imageForURL:url]);
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion([SGImageCache imageForURL:url]);
+            });
         }
-    });
+    }
+    else
+    {
+        // fetch remote image
+        backgroundDo(^{
+            SGImageCacheTask *slowTask = [self existingSlowQueueTaskFor:url];
+            SGImageCacheTask *fastTask = [self existingFastQueueTaskFor:url];
+            
+            if (slowTask.isExecuting) { // reuse an executing slow task
+                [slowTask addCompletion:completion];
+                [slowTask addCompletions:fastTask.completions];
+                [fastTask cancel];
+            } else if (fastTask) { // reuse a fast task
+                [fastTask addCompletion:completion];
+                [fastTask addCompletions:slowTask.completions];
+                [slowTask cancel];
+            } else { // add a fresh task to fast queue
+                SGImageCacheTask *task = [self taskForURL:url attempt:1];
+                [task addCompletion:completion];
+                [self.cache.fastQueue addOperation:task];
+            }
+        });
+    }
 }
 
 + (void)slowGetImageForURL:(NSString *)url thenDo:(SGCacheFetchCompletion)completion {

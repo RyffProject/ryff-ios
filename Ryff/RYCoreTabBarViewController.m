@@ -33,6 +33,7 @@
     [self.tabBar setTintColor:[RYStyleSheet audioActionColor]];
     [self.tabBar setTranslucent:NO];
     [self.tabBar setBackgroundImage:[[UIImage imageNamed:@"tabBar"] colorImage:[RYStyleSheet tabBarColor]]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:12.0f]} forState:UIControlStateNormal];
     
     for (UIViewController *viewController in self.viewControllers)
     {

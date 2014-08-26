@@ -80,6 +80,10 @@
         if (_user.userId == [RYServices loggedInUser].userId)
             [self addNewPostButtonToNavBar];
     }
+    else
+    {
+        [self setTitle:@"Me"];
+    }
     
     [self.tableView reloadData];
 }
