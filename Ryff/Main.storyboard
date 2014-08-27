@@ -861,6 +861,7 @@
         <scene sceneID="M7a-Md-3zP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="IcL-Wj-OB1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PDS-1E-JD9">

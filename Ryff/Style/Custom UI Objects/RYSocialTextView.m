@@ -110,7 +110,7 @@
 
 - (void) textViewDidChange:(UITextView *)textView
 {
-    NSAttributedString *styledString = [self highlightUsersAndTags:[textView.attributedText mutableCopy]];
+    NSAttributedString *styledString = [self highlightUsersAndTags:[textView.attributedText.string mutableCopy]];
     [self setAttributedText:styledString];
 }
 

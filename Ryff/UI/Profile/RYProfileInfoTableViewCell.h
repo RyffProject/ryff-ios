@@ -28,5 +28,6 @@
 @interface RYProfileInfoTableViewCell : UITableViewCell
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView;
+- (void) enableUserSettingOptions;
 
 @end

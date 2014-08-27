@@ -110,23 +110,21 @@
     [_followersCountLabel setText:[NSString stringWithFormat:@"%ld",(long)user.numFollowers]];
     [_tagListView setTags:[RYTag getTagTags:user.tags]];
     
-    if (user.userId == [RYServices loggedInUser].userId)
-    {
-        [_settingsButton setHidden:NO];
-        
-        [_bioTextView setEditable:YES];
-        [_nameField setEnabled:YES];
-    }
-    else
-    {
-        // not logged in user, remove settings button
-        [_settingsButton setHidden:YES];
-        
-        [_bioTextView setEditable:NO];
-        [_nameField setEnabled:NO];
-    }
+    [_settingsButton setHidden:YES];
+    [_bioTextView setEditable:NO];
+    [_nameField setEnabled:NO];
+    [_imageWrapperView setUserInteractionEnabled:NO];
     
     [self setBackgroundColor:[UIColor clearColor]];
+}
+
+// options only for logged in user in profile tab. Should be called after configureForUser: when preparing for display
+- (void) enableUserSettingOptions
+{
+    [_settingsButton setHidden:NO];
+    [_bioTextView setEditable:YES];
+    [_nameField setEnabled:YES];
+    [_imageWrapperView setUserInteractionEnabled:YES];
 }
 
 #pragma mark - Actions

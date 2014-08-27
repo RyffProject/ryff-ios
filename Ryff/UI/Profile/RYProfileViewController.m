@@ -45,6 +45,8 @@
 @property (nonatomic, strong) RYUser *user;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 
+@property (nonatomic, assign) BOOL profileTab;
+
 @end
 
 @implementation RYProfileViewController
@@ -82,9 +84,6 @@
     {
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
         [self setTitle:_user.username];
-        
-        if (_user.userId == [RYServices loggedInUser].userId)
-            [self addNewPostButtonToNavBar];
     }
     else
     {
@@ -106,6 +105,9 @@
         _notificationsBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notification"] style:UIBarButtonItemStylePlain target:self action:@selector(notificationsTapped:)];
         _messagesBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"message"] style:UIBarButtonItemStylePlain target:self action:@selector(messagesTapped:)];
         [self.navigationItem setLeftBarButtonItems:@[_notificationsBarButton,_messagesBarButton]];
+        
+        [self addNewPostButtonToNavBar];
+        _profileTab = YES;
     }
 }
 
@@ -304,11 +306,6 @@
     return height;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 30.0f;
-}
-
 #pragma mark - TableView delegate
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -317,6 +314,9 @@
     {
         // profile info
         [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:self.tableView];
+        
+        if (_profileTab)
+            [((RYProfileInfoTableViewCell*)cell) enableUserSettingOptions];
     }
     else if (indexPath.section == 1)
     {

@@ -50,8 +50,6 @@
     _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionHighlightedColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
-    _tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
-    
     [self addNewPostButtonToNavBar];
 }
 
@@ -60,6 +58,8 @@
     [super viewWillAppear:animated];
     
     [self fetchContent];
+    
+    _tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }
@@ -86,19 +86,15 @@
     else
     {
         
-//        [[RYServices sharedInstance] getNewsfeedPostsForDelegate:self];
-        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
+        [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
+//        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     }
     [_refreshControl beginRefreshing];
 }
 
 - (void) refreshContent:(ODRefreshControl *)refreshControl
 {
-    double delayInSeconds = 3.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [refreshControl endRefreshing];
-    });
+    [self fetchContent];
 }
 
 #pragma mark -

@@ -20,6 +20,9 @@
 #import "RYRiffCreateViewController.h"
 #import "RYNewsfeedTableViewController.h"
 
+// Categories
+#import "UIViewController+Extras.h"
+
 #define kRiffDetailsCellReuseID @"riffDetails"
 
 #define kParentPostsInfoSection (_parentPosts.count > 0 && _familyType == CHILDREN) ? 1 : -1
@@ -228,9 +231,10 @@
     
     if (indexPath.section == self.riffSection || _familyType == PARENTS)
     {
+        RYRiffCell *riffCell = (RYRiffCell*)cell;
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        [((RYRiffCell*)cell).socialTextView setUserInteractionEnabled:YES];
-        [((RYRiffCell*)cell).socialTextView setSocialDelegate:self];
+        [riffCell.socialTextView setUserInteractionEnabled:YES];
+        [riffCell.socialTextView setSocialDelegate:self];
     }
     else if (indexPath.section == parentInfoSection)
     {
