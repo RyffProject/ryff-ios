@@ -35,11 +35,10 @@
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
-@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
-@property (nonatomic, strong) UIBarButtonItem *messagesBarButton;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -103,8 +102,7 @@
     if (self.navigationItem)
     {
         _notificationsBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"notification"] style:UIBarButtonItemStylePlain target:self action:@selector(notificationsTapped:)];
-        _messagesBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"message"] style:UIBarButtonItemStylePlain target:self action:@selector(messagesTapped:)];
-        [self.navigationItem setLeftBarButtonItems:@[_notificationsBarButton,_messagesBarButton]];
+        [self.navigationItem setLeftBarButtonItems:@[_notificationsBarButton]];
         
         [self addNewPostButtonToNavBar];
         _profileTab = YES;
@@ -136,23 +134,25 @@
     }
 }
 
+- (void) messageAction
+{
+    
+}
+
+- (void) followAction
+{
+    if (_user.userId != [RYServices loggedInUser].userId)
+    {
+        [[RYServices sharedInstance] follow:!_user.isFollowing user:_user.userId forDelegate:self];
+    }
+}
+
 - (void) notificationsTapped:(id)sender
 {
     NSLog(@"show notifications");
 }
 
-- (void) messagesTapped:(id)sender
-{
-    NSLog(@"show messages");
-}
-
 #pragma mark - ProfileInfoCell Delegate
-
-- (void) addNewRiff
-{
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
-}
 
 - (void) editImageAction
 {
@@ -242,6 +242,21 @@
 }
 
 #pragma mark -
+#pragma mark - Follow Delegate
+
+- (void) follow:(BOOL)following confirmedForUser:(RYUser *)user
+{
+    _user = user;
+    [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void) followFailed:(NSString *)reason
+{
+    NSLog(@"follow user failed: %@",reason);
+    [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+#pragma mark -
 #pragma mark - Overrides
 
 - (void) avatarAction:(NSInteger)riffIndex
@@ -297,7 +312,6 @@
         CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
         height = resultSize.height + kProfileInfoCellHeightMinusText;
         height = MAX(height, kProfileInfoCellMinimumHeight);
-        
     }
     else if (indexPath.section == 1)
     {

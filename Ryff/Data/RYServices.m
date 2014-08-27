@@ -322,29 +322,26 @@ static RYUser* _loggedInUser;
     if (![RYServices loggedInUser])
         return;
     
-    NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
-    RYUser *userObject = [RYUser userFromDict:userDict];
-    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-        NSDictionary *params = @{@"id":@(userObject.userId)};
+        NSDictionary *params = @{@"id":@(userId)};
         
         NSString *action = shouldFollow ? [NSString stringWithFormat:@"%@%@",kApiRoot,kFollowUserAction] : [NSString stringWithFormat:@"%@%@",kApiRoot,kUnfollowUserAction];
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(unfollowConfirmed:)])
-                    [delegate unfollowConfirmed:userId];
+                if (delegate && [delegate respondsToSelector:@selector(follow:confirmedForUser:)])
+                    [delegate follow:shouldFollow confirmedForUser:[RYUser userFromDict:dictionary[@"user"]]];
             }
-            else if (delegate && [delegate respondsToSelector:@selector(followFailed)])
-                [delegate followFailed];
+            else if (delegate && [delegate respondsToSelector:@selector(followFailed:)])
+                [delegate followFailed:dictionary[@"error"]];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (delegate && [delegate respondsToSelector:@selector(followFailed)])
-                [delegate followFailed];
+            if (delegate && [delegate respondsToSelector:@selector(followFailed:)])
+                [delegate followFailed:[error localizedDescription]];
         }];
     });
 }

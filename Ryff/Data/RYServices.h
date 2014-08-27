@@ -39,8 +39,8 @@
 #define kSearchPostsTrending    @"search-posts-trending.php"
 
 // Actions
-#define kFollowUserAction       @"follow.php"
-#define kUnfollowUserAction     @"unfollow.php"
+#define kFollowUserAction       @"add-follow.php"
+#define kUnfollowUserAction     @"delete-follow.php"
 #define kPostRiffAction         @"add-post.php"
 #define kDeletePostAction       @"delete-post.php"
 #define kUpvotePostAction       @"add-upvote.php"
@@ -82,10 +82,9 @@ typedef enum : NSUInteger {
 @end
 
 @protocol FollowDelegate <NSObject>
-- (void) followConfirmed:(NSInteger)userID;
-- (void) unfollowConfirmed:(NSInteger)userID;
+- (void) follow:(BOOL)following confirmedForUser:(RYUser *)user;
 @optional
-- (void) followFailed;
+- (void) followFailed:(NSString *)reason;
 @end
 
 @protocol RiffDelegate <NSObject>

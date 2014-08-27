@@ -26,12 +26,12 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIButton *userActionButton;
 @property (weak, nonatomic) IBOutlet UITextView *bioTextView;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UIButton *addRiffButton;
 @property (weak, nonatomic) IBOutlet DWTagList *tagListView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *messageButton;
 
 @property (weak, nonatomic) IBOutlet UIView *karmaWrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *karmaCountLabel;
@@ -42,9 +42,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *followersDescriptionLabel;
 
 // Data
+@property (nonatomic, strong) RYUser *user;
 @property (nonatomic, weak) id<ProfileInfoCellDelegate, UpdateUserDelegate> delegate;
 @property (nonatomic, weak) UITableView *parentTable;
 @property (nonatomic, assign) BOOL isLoggedInProfile;
+@property (nonatomic, assign) BOOL forProfileTab;
 
 @end
 
@@ -58,10 +60,8 @@
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bioTextView setFont:kProfileInfoCellFont];
     
-    [_addRiffButton setTintColor:[RYStyleSheet audioActionColor]];
-    
-    [_imageWrapperView setBackgroundColor:[RYStyleSheet tabBarColor]];
-    [RYStyleSheet styleProfileImageView:_imageWrapperView];
+    [_avatarImageView setBackgroundColor:[RYStyleSheet tabBarColor]];
+    [RYStyleSheet styleProfileImageView:_avatarImageView];
     
     [_followersCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
     [_followersDescriptionLabel setFont:[UIFont fontWithName:kLightFont size:18.0f]];
@@ -70,7 +70,7 @@
     [_karmaDescriptionLabel setFont:[UIFont fontWithName:kLightFont size:18.0f]];
     
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
-    [_imageWrapperView addGestureRecognizer:avatarTap];
+    [_avatarImageView addGestureRecognizer:avatarTap];
     
     UITapGestureRecognizer *followersTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(followersTapped:)];
     [_followersWrapperView addGestureRecognizer:followersTap];
@@ -84,16 +84,32 @@
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView
 {
-    _delegate = delegate;
-    
+    _user              = user;
+    _delegate          = delegate;
+
     // configure for editing if looking at the logged in user's profile
     _isLoggedInProfile = (user && (user.userId == [RYServices loggedInUser].userId));
+    _forProfileTab     = NO;
     
     // Profile picture
     if (user.avatarURL)
         [_avatarImageView setImageForURL:user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
+    
+    if (_isLoggedInProfile)
+    {
+        [_userActionButton setHidden:YES];
+        [_messageButton setHidden:YES];
+    }
+    else
+    {
+        [_userActionButton setHidden:NO];
+        [self styleFollowing:_user.isFollowing];
+        
+        [_messageButton setHidden:NO];
+        [_messageButton setTintColor:[RYStyleSheet postActionColor]];
+    }
     
     if (user.nickname.length > 0 && ![user.nickname isEqualToString:user.username])
     {
@@ -102,7 +118,7 @@
     }
     else
     {
-        [_nameField setText:user.username];
+        [_nameField setText:[NSString stringWithFormat:@"@%@",user.username]];
         [_usernameLabel setText:@""];
     }
     [_bioTextView setText:user.bio];
@@ -110,10 +126,9 @@
     [_followersCountLabel setText:[NSString stringWithFormat:@"%ld",(long)user.numFollowers]];
     [_tagListView setTags:[RYTag getTagTags:user.tags]];
     
-    [_settingsButton setHidden:YES];
     [_bioTextView setEditable:NO];
     [_nameField setEnabled:NO];
-    [_imageWrapperView setUserInteractionEnabled:NO];
+    [_avatarImageView setUserInteractionEnabled:NO];
     
     [self setBackgroundColor:[UIColor clearColor]];
 }
@@ -121,24 +136,54 @@
 // options only for logged in user in profile tab. Should be called after configureForUser: when preparing for display
 - (void) enableUserSettingOptions
 {
-    [_settingsButton setHidden:NO];
     [_bioTextView setEditable:YES];
     [_nameField setEnabled:YES];
-    [_imageWrapperView setUserInteractionEnabled:YES];
+    [_avatarImageView setUserInteractionEnabled:YES];
+    
+    [_userActionButton setHidden:NO];
+    [_userActionButton setImage:[UIImage imageNamed:@"options"] forState:UIControlStateNormal];
+    [_userActionButton setTintColor:[RYStyleSheet postActionColor]];
+    
+    [_messageButton setHidden:NO];
+    [_messageButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    
+    _forProfileTab = YES;
 }
 
+#pragma mark - Styling
+
+- (void) styleFollowing:(BOOL)following
+{
+    UIColor *followColor  = following ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    NSString *followImage = following ? @"userDelete" : @"userAdd";
+    [_userActionButton setImage:[UIImage imageNamed:followImage] forState:UIControlStateNormal];
+    [_userActionButton setTintColor:followColor];
+}
+
+#pragma mark -
 #pragma mark - Actions
 
-- (IBAction)settingsButtonHit:(id)sender
+- (IBAction)userActionButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(settingsAction:)])
-        [_delegate settingsAction:_settingsButton.frame];
+    if (_forProfileTab)
+    {
+        // tapped settings button
+        CGRect convertedFrame = [self convertRect:_userActionButton.frame fromView:_imageWrapperView];
+        if (_delegate && [_delegate respondsToSelector:@selector(settingsAction:)])
+            [_delegate settingsAction:convertedFrame];
+    }
+    else
+    {
+        // tapped follow button
+        if (_delegate && [_delegate respondsToSelector:@selector(followAction)])
+            [_delegate followAction];
+    }
 }
 
-- (IBAction)addRiffButtonHit:(id)sender
+- (IBAction)messageButtonHit:(id)sender
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(addNewRiff)])
-        [_delegate addNewRiff];
+    if (_delegate && [_delegate respondsToSelector:@selector(messageAction)])
+        [_delegate messageAction];
 }
 
 - (void) editImageTapped:(UITapGestureRecognizer *)tapGesture
@@ -149,6 +194,8 @@
 
 - (void) followersTapped:(UITapGestureRecognizer *)tapGesture
 {
+    [self styleFollowing:!_user.isFollowing];
+    
     if (_delegate && [_delegate respondsToSelector:@selector(followersAction)])
         [_delegate followersAction];
 }

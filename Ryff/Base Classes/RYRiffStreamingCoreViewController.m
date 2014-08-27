@@ -53,29 +53,20 @@
 
 #pragma mark - Follow Delegate
 
-- (void) followConfirmed:(NSInteger)userID
+- (void) follow:(BOOL)following confirmedForUser:(RYUser *)user
 {
-    for (RYNewsfeedPost *post in self.feedItems)
+    for (NSInteger postIdx = 0; postIdx < self.feedItems.count; postIdx++)
     {
-        if (post.user.userId == userID)
-            post.user.isFollowing = YES;
+        RYNewsfeedPost *post = self.feedItems[postIdx];
+        if (post.user.userId == user.userId)
+        {
+            post.user = user;
+            [self.riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
-    
-    [self.riffTableView reloadData];
 }
 
-- (void) unfollowConfirmed:(NSInteger)userID
-{
-    for (RYNewsfeedPost *post in self.feedItems)
-    {
-        if (post.user.userId == userID)
-            post.user.isFollowing = NO;
-    }
-    
-    [self.riffTableView reloadData];
-}
-
-- (void) followFailed
+- (void) followFailed:(NSString *)reason
 {
     
 }

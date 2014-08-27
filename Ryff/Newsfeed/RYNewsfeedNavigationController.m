@@ -24,7 +24,7 @@
 {
     [super pushViewController:viewController animated:animated];
     
-//    [viewController setExtendedLayoutIncludesOpaqueBars:YES];
+    [viewController setExtendedLayoutIncludesOpaqueBars:YES];
 }
 
 @end

@@ -72,6 +72,8 @@
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
+		835E482F19AE634B002A3AC2 /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482D19AE634B002A3AC2 /* options.png */; };
+		835E483019AE634B002A3AC2 /* options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482E19AE634B002A3AC2 /* options@2x.png */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
 		836F484219A04BAB00E948BE /* NSObject+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483919A04BAB00E948BE /* NSObject+block.m */; };
 		836F484319A04BAB00E948BE /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 836F483B19A04BAB00E948BE /* UIImage+Color.m */; };
@@ -342,6 +344,8 @@
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
+		835E482D19AE634B002A3AC2 /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
+		835E482E19AE634B002A3AC2 /* options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "options@2x.png"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
 		836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginTableViewCell.m; sourceTree = "<group>"; };
 		836F483819A04BAB00E948BE /* NSObject+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+block.h"; sourceTree = "<group>"; };
@@ -737,6 +741,8 @@
 		831A8890199EEEDD00C44CED /* 1.0 images */ = {
 			isa = PBXGroup;
 			children = (
+				835E482D19AE634B002A3AC2 /* options.png */,
+				835E482E19AE634B002A3AC2 /* options@2x.png */,
 				83FADE4319AC405200182155 /* create.png */,
 				83FADE4419AC405200182155 /* create@2x.png */,
 				837367EE19A8344600D9559D /* globe.png */,
@@ -1456,6 +1462,7 @@
 				83C6CA8718FAFF5200412469 /* reset.png in Resources */,
 				830186011900B1CD00093EFA /* tabBar.png in Resources */,
 				831A88AC199EEEDD00C44CED /* pause@2x.png in Resources */,
+				835E483019AE634B002A3AC2 /* options@2x.png in Resources */,
 				83ED34ED1931851600FEB018 /* AppIcon50x50@2x.png in Resources */,
 				831A88B7199EEEDD00C44CED /* star.png in Resources */,
 				83ED34F11931851600FEB018 /* AppIcon60x60@2x.png in Resources */,
@@ -1478,6 +1485,7 @@
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
 				831A88BA199EEEDD00C44CED /* stream@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
+				835E482F19AE634B002A3AC2 /* options.png in Resources */,
 				831A88C0199EEEDD00C44CED /* x@2x.png in Resources */,
 				83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */,
 				83FCD1AF18F93F5500A493F0 /* artists.png in Resources */,
