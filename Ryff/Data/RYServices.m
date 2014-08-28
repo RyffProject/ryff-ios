@@ -629,11 +629,12 @@ static RYUser* _loggedInUser;
                 if (delegate && [delegate respondsToSelector:@selector(parentsRetrieved:)])
                     [delegate parentsRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
             }
-            else
+            else if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
                 [delegate familyPostFailed:dictionary[@"error"]];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate familyPostFailed:[error localizedDescription]];
+            if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
+                [delegate familyPostFailed:[error localizedDescription]];
         }];
     });
 }
