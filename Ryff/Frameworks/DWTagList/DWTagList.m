@@ -91,6 +91,17 @@
     }
 }
 
+/**
+ *  Custom function to add a tag with a different style, for "add new tag"
+ */
+static NSString *kAddTagText = @"Add Tag";
+static UIColor *kAddTagColor;
+- (void) addAddNewTagTag
+{
+    kAddTagColor   = [UIColor redColor];
+    [self setTags:[self.textArray arrayByAddingObject:kAddTagText]];
+}
+
 - (void)setTagBackgroundColor:(UIColor *)color
 {
     lblBackgroundColor = color;
@@ -175,7 +186,12 @@
         [tagView setCornerRadius:self.cornerRadius];
         [tagView setBorderColor:self.borderColor];
         [tagView setBorderWidth:self.borderWidth];
-        [tagView setTextColor:self.textColor];
+        
+        if ([text isEqualToString:kAddTagText])
+            [tagView setTextColor:kAddTagColor];
+        else
+            [tagView setTextColor:self.textColor];
+        
         [tagView setTextShadowColor:self.textShadowColor];
         [tagView setTextShadowOffset:self.textShadowOffset];
         [tagView setTag:tag];
@@ -214,12 +230,21 @@
     DWTagView *tagView = (DWTagView *)[button superview];
     [tagView setBackgroundColor:[self getBackgroundColor]];
     
-    if ([self.tagDelegate respondsToSelector:@selector(selectedTag:tagIndex:)]) {
-        [self.tagDelegate selectedTag:tagView.label.text tagIndex:tagView.tag];
+    if ([tagView.label.text isEqualToString:kAddTagText])
+    {
+        // Add new tag selected
+        if (self.tagDelegate && [self.tagDelegate respondsToSelector:@selector(selectedAddTag)])
+            [self.tagDelegate selectedAddTag];
     }
-
-    if ([self.tagDelegate respondsToSelector:@selector(selectedTag:)]) {
-        [self.tagDelegate selectedTag:tagView.label.text];
+    else
+    {
+        if ([self.tagDelegate respondsToSelector:@selector(selectedTag:tagIndex:)]) {
+            [self.tagDelegate selectedTag:tagView.label.text tagIndex:tagView.tag];
+        }
+        
+        if ([self.tagDelegate respondsToSelector:@selector(selectedTag:)]) {
+            [self.tagDelegate selectedTag:tagView.label.text];
+        }
     }
 
     if (self.showTagMenu) {

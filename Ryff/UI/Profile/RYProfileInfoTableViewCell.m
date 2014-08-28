@@ -22,7 +22,7 @@
 // Categories
 #import "UIViewController+Extras.h"
 
-@interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate>
+@interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -147,6 +147,8 @@
     [_messageButton setHidden:NO];
     [_messageButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
     
+    [_tagListView addAddNewTagTag];
+    
     _forProfileTab = YES;
 }
 
@@ -234,6 +236,28 @@
 {
     if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
         [_delegate tagSelected:tagIndex];
+}
+
+- (void) selectedAddTag
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"New Tag" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Submit",nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+#pragma mark -
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *tagText =  [alertView textFieldAtIndex: 0].text;
+    if (buttonIndex == 1 && tagText.length > 0)
+    {
+        RYTag *newTag = [[RYTag alloc] initWithTag:tagText numUsers:0 numPosts:0];
+        RYUser *userCopy = [_user copy];
+        userCopy.tags = [userCopy.tags arrayByAddingObject:newTag];
+        [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
+    }
 }
 
 @end

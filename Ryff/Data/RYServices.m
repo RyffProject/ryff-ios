@@ -15,6 +15,7 @@
 #import "RYUser.h"
 #import "RYNewsfeedPost.h"
 #import "RYRiff.h"
+#import "RYTag.h"
 
 // Data Systems
 #import "SSKeychain.h"
@@ -200,7 +201,7 @@ static RYUser* _loggedInUser;
         if (user.email && ![user.email isEqualToString:oldUser.email])
             [params setObject:user.email forKey:@"email"];
         if (user.tags && ![user.tags isEqualToArray:oldUser.tags])
-            [params setObject:user.tags forKey:@"tags"];
+            [params setObject:[RYTag getTagTags:user.tags] forKey:@"tags"];
         
         if (params.count > 0)
         {

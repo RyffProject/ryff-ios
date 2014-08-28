@@ -40,6 +40,10 @@
 - (void)setTagBackgroundColor:(UIColor *)color;
 - (void)setTagHighlightColor:(UIColor *)color;
 - (void)setTags:(NSArray *)array;
+
+// custom function to add new tag option
+- (void) addAddNewTagTag;
+
 - (void)display;
 - (CGSize)fittedSize;
 
@@ -73,6 +77,7 @@
 
 - (void)selectedTag:(NSString *)tagName tagIndex:(NSInteger)tagIndex;
 - (void)selectedTag:(NSString *)tagName;
+- (void)selectedAddTag;
 - (void)tagListTagsChanged:(DWTagList *)tagList;
 
 @end
