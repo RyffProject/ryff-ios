@@ -10,8 +10,11 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
-#import "UIViewController+Extras.h"
 #import "RYLoginTableViewCell.h"
+#import "PXAlertView.h"
+
+// Categories
+#import "UIViewController+Extras.h"
 
 // Categories
 #import "UIView+Styling.h"
@@ -116,8 +119,7 @@
     }
     else
     {
-        UIAlertView *emptyAlert = [[UIAlertView alloc] initWithTitle:@"Log In Failed" message:@"Check credentials" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-        [emptyAlert show];
+        PXAlertView *emptyAlert = [PXAlertView showAlertWithTitle:@"Log In Failed" message:@"Check credentials"];
     }
 }
 

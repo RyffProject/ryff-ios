@@ -70,6 +70,8 @@
 		8322309419AFFCC200C60033 /* sliderFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309019AFFCC200C60033 /* sliderFull@2x.png */; };
 		8322309519AFFCC200C60033 /* sliderSeek.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309119AFFCC200C60033 /* sliderSeek.png */; };
 		8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309219AFFCC200C60033 /* sliderSeek@2x.png */; };
+		8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309919B00D0200C60033 /* PXAlertView+Customization.m */; };
+		8322309D19B00D0200C60033 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309B19B00D0200C60033 /* PXAlertView.m */; };
 		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
 		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
@@ -341,6 +343,10 @@
 		8322309019AFFCC200C60033 /* sliderFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderFull@2x.png"; sourceTree = "<group>"; };
 		8322309119AFFCC200C60033 /* sliderSeek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderSeek.png; sourceTree = "<group>"; };
 		8322309219AFFCC200C60033 /* sliderSeek@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderSeek@2x.png"; sourceTree = "<group>"; };
+		8322309819B00D0200C60033 /* PXAlertView+Customization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PXAlertView+Customization.h"; sourceTree = "<group>"; };
+		8322309919B00D0200C60033 /* PXAlertView+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXAlertView+Customization.m"; sourceTree = "<group>"; };
+		8322309A19B00D0200C60033 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
+		8322309B19B00D0200C60033 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
 		833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffDetailsViewController.h; path = ../RYRiffDetailsViewController.h; sourceTree = "<group>"; };
 		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
 		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
@@ -795,9 +801,21 @@
 			path = "1.0 images";
 			sourceTree = "<group>";
 		};
+		8322309719B00D0200C60033 /* PXAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				8322309819B00D0200C60033 /* PXAlertView+Customization.h */,
+				8322309919B00D0200C60033 /* PXAlertView+Customization.m */,
+				8322309A19B00D0200C60033 /* PXAlertView.h */,
+				8322309B19B00D0200C60033 /* PXAlertView.m */,
+			);
+			path = PXAlertView;
+			sourceTree = "<group>";
+		};
 		833E1D511975DFA90002A2BE /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				8322309719B00D0200C60033 /* PXAlertView */,
 				836F483719A04BAB00E948BE /* Categories */,
 				83CA118B1995CD23002610E8 /* FLEX */,
 				83EB8BA319959F5C0007837D /* DWTagList */,
@@ -1594,6 +1612,7 @@
 				83CA12241995CD23002610E8 /* FLEXResources.m in Sources */,
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,
 				83011B8719A7FFA80017E7C5 /* MGDeallocAction.m in Sources */,
+				8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */,
 				83CA120E1995CD23002610E8 /* FLEXWindow.m in Sources */,
 				836F484219A04BAB00E948BE /* NSObject+block.m in Sources */,
 				837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */,
@@ -1605,6 +1624,7 @@
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
 				83011B8919A7FFA80017E7C5 /* MGWeakHandler.m in Sources */,
+				8322309D19B00D0200C60033 /* PXAlertView.m in Sources */,
 				83CA121A1995CD23002610E8 /* FLEXDescriptionTableViewCell.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
 				8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */,
