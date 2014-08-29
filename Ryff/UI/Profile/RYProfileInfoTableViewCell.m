@@ -22,6 +22,9 @@
 // Categories
 #import "UIViewController+Extras.h"
 
+// Custom UI
+#import "BlockAlertView.h"
+
 @interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
@@ -108,7 +111,7 @@
         [self styleFollowing:_user.isFollowing];
         
         [_messageButton setHidden:NO];
-        [_messageButton setTintColor:[RYStyleSheet postActionColor]];
+        [_messageButton setTintColor:[RYStyleSheet availableActionColor]];
     }
     
     if (user.nickname.length > 0 && ![user.nickname isEqualToString:user.username])
@@ -142,10 +145,10 @@
     
     [_userActionButton setHidden:NO];
     [_userActionButton setImage:[UIImage imageNamed:@"options"] forState:UIControlStateNormal];
-    [_userActionButton setTintColor:[RYStyleSheet postActionColor]];
+    [_userActionButton setTintColor:[RYStyleSheet availableActionColor]];
     
     [_messageButton setHidden:NO];
-    [_messageButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    [_messageButton setTintColor:[RYStyleSheet postActionColor]];
     
     [_tagListView addAddNewTagTag];
     
@@ -156,7 +159,7 @@
 
 - (void) styleFollowing:(BOOL)following
 {
-    UIColor *followColor  = following ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    UIColor *followColor  = following ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     NSString *followImage = following ? @"userDelete" : @"userAdd";
     [_userActionButton setImage:[UIImage imageNamed:followImage] forState:UIControlStateNormal];
     [_userActionButton setTintColor:followColor];
@@ -234,7 +237,23 @@
 
 - (void) selectedTag:(NSString *)tagName tagIndex:(NSInteger)tagIndex
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
+    if (_forProfileTab)
+    {
+        BlockAlertView *removeTagAlert = [[BlockAlertView alloc] initWithTitle:@"Remove Tag" message:[NSString stringWithFormat:@"Remove %@ from profile?",tagName] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
+        [removeTagAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex != alertView.cancelButtonIndex)
+            {
+                // remove tag
+                RYUser *userCopy = [_user copy];
+                NSMutableArray *mutTags = [userCopy.tags mutableCopy];
+                [mutTags removeObjectAtIndex:tagIndex];
+                userCopy.tags = mutTags;
+                [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
+            }
+        }];
+        [removeTagAlert show];
+    }
+    else if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
         [_delegate tagSelected:tagIndex];
 }
 

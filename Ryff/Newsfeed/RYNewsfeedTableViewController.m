@@ -46,8 +46,8 @@
     _searchType = NEW;
     
     _refreshControl = [[ODRefreshControl alloc] initInScrollView:_tableView];
-    _refreshControl.tintColor = [RYStyleSheet postActionHighlightedColor];
-    _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionHighlightedColor];
+    _refreshControl.tintColor = [RYStyleSheet postActionColor];
+    _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
     [self addNewPostButtonToNavBar];

@@ -18,6 +18,9 @@
 // Custom UI
 #import "RYAudioDeckTableViewCell.h"
 
+// Categories
+#import "UIImage+Color.h"
+
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 #import "RYRiffDetailsViewController.h"
@@ -56,12 +59,7 @@
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
     [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
     
-    // iOS 7 bug, must change thumb image to change thumbTintColor (image won't show if color set after)
-    [_volumeSlider setThumbImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [_volumeSlider setThumbTintColor:[RYStyleSheet audioActionColor]];
-    
-    [_playbackSlider setThumbImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [_playbackSlider setThumbTintColor:[RYStyleSheet audioActionColor]];
+    [_volumeSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     
     // long press to move cells
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
@@ -84,8 +82,29 @@
     else
         [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     
+    if ([[RYAudioDeckManager sharedInstance] currentlyPlayingPost])
+    {
+        // enable audio buttons
+        [_playButton setEnabled:YES];
+        [_repostButton setEnabled:YES];
+        [_nextButton setEnabled:YES];
+        [_playbackSlider setUserInteractionEnabled:YES];
+        [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderSeek"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
+    }
+    else
+    {
+        // disable audio buttons
+        [_playButton setEnabled:NO];
+        [_repostButton setEnabled:NO];
+        [_nextButton setEnabled:NO];
+        [_playbackSlider setUserInteractionEnabled:NO];
+        [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet availableActionColor]] forState:UIControlStateNormal];
+    }
+    
     [_volumeSlider setValue:[[RYAudioDeckManager sharedInstance] currentVolume]];
-    [_playbackSlider setValue:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
+    
+    if (!_progressSliderTouchActive)
+        [_playbackSlider setValue:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
     
     [_nowPlayingLabel setText:[[RYAudioDeckManager sharedInstance] currentlyPlayingPost].riff.title];
 }
@@ -119,10 +138,18 @@
 {
     [[RYAudioDeckManager sharedInstance] setVolume:_volumeSlider.value];
 }
-
-- (IBAction)playbackSliderChanged:(id)sender
+- (IBAction)playbackSliderTouchStarted:(id)sender
 {
+    _progressSliderTouchActive = YES;
+}
+- (IBAction)playbackSliderTouchUpInside:(id)sender
+{
+    _progressSliderTouchActive = NO;
     [[RYAudioDeckManager sharedInstance] setPlaybackProgress:_playbackSlider.value];
+}
+- (IBAction)playbackSliderTouchUpOutside:(id)sender
+{
+    _progressSliderTouchActive = NO;
 }
 
 #pragma mark -
@@ -140,7 +167,8 @@
 
 - (void) post:(RYNewsfeedPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress
 {
-    [_playbackSlider setValue:progress animated:YES];
+    if (!_progressSliderTouchActive)
+        [_playbackSlider setValue:progress animated:YES];
 }
 
 #pragma mark -

@@ -87,10 +87,10 @@
         [_postImageView setHidden:YES];
     }
     
-    UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_starButton setTintColor:starredColor];
     
-    UIColor *upvotedColor  = post.isUpvoted ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    UIColor *upvotedColor  = post.isUpvoted ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_upvoteCountLabel setTextColor:upvotedColor];
     [_upvoteImageView setImage:[_upvoteImageView.image colorImage:upvotedColor]];
     
@@ -129,7 +129,7 @@
     
     [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
     
-    [_repostButton setTintColor:[RYStyleSheet postActionColor]];
+    [_repostButton setTintColor:[RYStyleSheet availableActionColor]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
     
@@ -167,12 +167,12 @@
     if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
     {
         [_playControlView setControlTintColor:[RYStyleSheet audioActionColor]];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
     }
     else
     {
-        [_playControlView setControlTintColor:[RYStyleSheet postActionColor]];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+        [_playControlView setControlTintColor:[RYStyleSheet availableActionColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet availableActionColor]];
     }
 }
 
@@ -210,13 +210,13 @@
     {
         // playlist contains already
         [[RYAudioDeckManager sharedInstance] removePostFromPlaylist:_post];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet availableActionColor]];
     }
     else
     {
         // add to playlist
         [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
     }
 }
 
@@ -231,7 +231,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(starAction:)])
         [_delegate starAction:_riffIndex];
     
-    [_starButton setTintColor:[RYStyleSheet postActionHighlightedColor]];
+    [_starButton setTintColor:[RYStyleSheet postActionColor]];
 }
 
 #pragma mark - Gestures
@@ -244,7 +244,7 @@
 
 - (void)upvoteHit:(UITapGestureRecognizer *)tapGesture
 {
-    UIColor *upvotedColor  = !_post.isUpvoted ? [RYStyleSheet postActionHighlightedColor] : [RYStyleSheet postActionColor];
+    UIColor *upvotedColor  = !_post.isUpvoted ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_upvoteImageView setImage:[_upvoteImageView.image colorImage:upvotedColor]];
     
     if (_delegate && [_delegate respondsToSelector:@selector(upvoteAction:)])

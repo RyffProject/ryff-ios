@@ -66,6 +66,10 @@
 		831B96081964DEC6003A8616 /* RYDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B96071964DEC6003A8616 /* RYDataManager.m */; };
 		831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */; };
 		831E5FFA19A03269007F3C31 /* RYNewsfeedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */; };
+		8322309319AFFCC200C60033 /* sliderFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322308F19AFFCC200C60033 /* sliderFull.png */; };
+		8322309419AFFCC200C60033 /* sliderFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309019AFFCC200C60033 /* sliderFull@2x.png */; };
+		8322309519AFFCC200C60033 /* sliderSeek.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309119AFFCC200C60033 /* sliderSeek.png */; };
+		8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309219AFFCC200C60033 /* sliderSeek@2x.png */; };
 		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
 		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
@@ -333,6 +337,10 @@
 		831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTrackDownloadTableViewCell.m; sourceTree = "<group>"; };
 		831E5FF819A03269007F3C31 /* RYNewsfeedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedNavigationController.h; sourceTree = "<group>"; };
 		831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedNavigationController.m; sourceTree = "<group>"; };
+		8322308F19AFFCC200C60033 /* sliderFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderFull.png; sourceTree = "<group>"; };
+		8322309019AFFCC200C60033 /* sliderFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderFull@2x.png"; sourceTree = "<group>"; };
+		8322309119AFFCC200C60033 /* sliderSeek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderSeek.png; sourceTree = "<group>"; };
+		8322309219AFFCC200C60033 /* sliderSeek@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderSeek@2x.png"; sourceTree = "<group>"; };
 		833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffDetailsViewController.h; path = ../RYRiffDetailsViewController.h; sourceTree = "<group>"; };
 		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
 		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
@@ -1344,6 +1352,10 @@
 		83FCD1A918F93E6C00A493F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8322308F19AFFCC200C60033 /* sliderFull.png */,
+				8322309019AFFCC200C60033 /* sliderFull@2x.png */,
+				8322309119AFFCC200C60033 /* sliderSeek.png */,
+				8322309219AFFCC200C60033 /* sliderSeek@2x.png */,
 				831A8890199EEEDD00C44CED /* 1.0 images */,
 				83C6A5F01960EC5200BB3D1A /* plus.png */,
 				83C6A5F11960EC5200BB3D1A /* plus@2x.png */,
@@ -1449,14 +1461,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8322309419AFFCC200C60033 /* sliderFull@2x.png in Resources */,
 				831A88A9199EEEDD00C44CED /* next.png in Resources */,
 				83ED34E91931851600FEB018 /* AppIcon29x29@2x.png in Resources */,
 				831A88AE199EEEDD00C44CED /* play@2x.png in Resources */,
 				831A88BD199EEEDD00C44CED /* upvote.png in Resources */,
+				8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */,
 				831A88B3199EEEDD00C44CED /* remix.png in Resources */,
 				834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */,
 				830186021900B1CD00093EFA /* tabBar@2x.png in Resources */,
 				8373680519A8344600D9559D /* userAdd@2x.png in Resources */,
+				8322309519AFFCC200C60033 /* sliderSeek.png in Resources */,
 				8373680319A8344600D9559D /* notification@2x.png in Resources */,
 				830BBCE018FA401700A9C53F /* friend@2x.png in Resources */,
 				83C6CA8718FAFF5200412469 /* reset.png in Resources */,
@@ -1485,6 +1500,7 @@
 				83FCD15718F907C400A493F0 /* Images.xcassets in Resources */,
 				831A88BA199EEEDD00C44CED /* stream@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
+				8322309319AFFCC200C60033 /* sliderFull.png in Resources */,
 				835E482F19AE634B002A3AC2 /* options.png in Resources */,
 				831A88C0199EEEDD00C44CED /* x@2x.png in Resources */,
 				83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */,

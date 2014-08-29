@@ -23,17 +23,12 @@
     return [UIColor colorWithHexString:@"fe9900"];
 }
 
-+ (UIColor *)audioActionHighlightedColor
-{
-    return [UIColor colorWithHexString:@"fed100"];
-}
-
-+ (UIColor *)postActionColor
++ (UIColor *)availableActionColor
 {
     return [UIColor colorWithHexString:@"b8b8b8"];
 }
 
-+ (UIColor *)postActionHighlightedColor
++ (UIColor *)postActionColor
 {
     return [UIColor colorWithHexString:@"00b6da"];
 }

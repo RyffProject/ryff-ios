@@ -23,7 +23,7 @@
     
     [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
-    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet postActionHighlightedColor]];
+    [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet postActionColor]];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     

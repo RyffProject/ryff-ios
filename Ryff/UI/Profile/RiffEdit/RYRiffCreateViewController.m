@@ -156,7 +156,7 @@
         
         [audioSession setActive:YES error:nil];
         if ([_recorder record])
-            [(UIButton*)sender setTintColor:[RYStyleSheet audioActionHighlightedColor]];
+            [(UIButton*)sender setTintColor:[RYStyleSheet availableActionColor]];
     }
     else
     {

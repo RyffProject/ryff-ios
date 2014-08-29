@@ -13,9 +13,8 @@
 @interface RYStyleSheet : NSObject
 
 + (UIColor *)audioActionColor;
-+ (UIColor *)audioActionHighlightedColor;
++ (UIColor *)availableActionColor;
 + (UIColor *)postActionColor;
-+ (UIColor *)postActionHighlightedColor;
 + (UIColor *)tabBarColor;
 + (UIColor *)audioBackgroundColor;
 + (UIColor *)lightBackgroundColor;
