@@ -119,7 +119,7 @@
     }
     else
     {
-        PXAlertView *emptyAlert = [PXAlertView showAlertWithTitle:@"Log In Failed" message:@"Check credentials"];
+        [PXAlertView showAlertWithTitle:@"Log In Failed" message:@"Check credentials"];
     }
 }
 
@@ -143,8 +143,7 @@
 - (void) updateFailed:(NSString*)reason
 {
     [self hideHUD];
-    UIAlertView *postWarning = [[UIAlertView alloc] initWithTitle:@"Post Error" message:[NSString stringWithFormat:@"Error: %@", reason] delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
-    [postWarning show];
+    [PXAlertView showAlertWithTitle:@"Log In Error" message:[NSString stringWithFormat:@"Something went wrong: %@", reason]];
 }
 
 - (void) updateSucceeded:(RYUser*)user

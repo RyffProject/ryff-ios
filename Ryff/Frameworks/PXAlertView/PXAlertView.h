@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^PXAlertViewCompletionBlock)(BOOL cancelled, NSInteger buttonIndex);
+#define kCancelButtonIndex 0
+
+typedef void(^PXAlertViewCompletionBlock)(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue);
 
 @interface PXAlertView : UIViewController
 
@@ -59,6 +61,16 @@ typedef void(^PXAlertViewCompletionBlock)(BOOL cancelled, NSInteger buttonIndex)
                        otherTitles:(NSArray *)otherTitles
                        contentView:(UIView *)view
                         completion:(PXAlertViewCompletionBlock)completion;
+
+/**
+ * Custom Initializer with text input field
+ */
++ (instancetype)showInputAlertWithTitle:(NSString *)title
+                                message:(NSString *)message
+                            placeholder:(NSString *)placeholder
+                            cancelTitle:(NSString *)cancelTitle
+                             otherTitle:(NSString*)otherTitle
+                             completion:(PXAlertViewCompletionBlock)completion;
 
 /**
  * Adds a button to the receiver with the given title.

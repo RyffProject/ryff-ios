@@ -10,7 +10,7 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
-#import "BlockAlertView.h"
+#import "PXAlertView.h"
 #import "RYSocialTextView.h"
 
 // Associated View Controllers
@@ -169,16 +169,14 @@
 
 - (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
 {
-    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [upvoteFailedAlert show];
+    [PXAlertView showAlertWithTitle:@"Upvote failed" message:reason];
     
     [self reloadPost:oldPost];
 }
 
 - (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
 {
-    UIAlertView *upvoteFailedAlert = [[UIAlertView alloc] initWithTitle:@"Upvote failed" message:reason delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [upvoteFailedAlert show];
+    [PXAlertView showAlertWithTitle:@"Star post failed" message:reason];
     
     [self reloadPost:oldPost];
 }

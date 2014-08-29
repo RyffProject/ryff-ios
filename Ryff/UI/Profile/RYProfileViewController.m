@@ -16,8 +16,8 @@
 
 // Custom UI
 #import "RYStyleSheet.h"
-#import "BlockAlertView.h"
 #import "RYProfileInfoTableViewCell.h"
+#import "PXAlertView.h"
 
 // Categories
 #import "UIImage+Thumbnail.h"
@@ -35,7 +35,7 @@
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
-@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioPlayerDelegate>
+@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
@@ -357,8 +357,7 @@
         return;
     }
     
-    BlockAlertView *photoChoice = [[BlockAlertView alloc] initWithTitle:@"Profile Picture" message:@"Select a new profile picture." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Take a Photo", @"From Library", nil];
-    [photoChoice setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
+    [PXAlertView showAlertWithTitle:@"Profile Picture" message:@"Select a new profile picture." cancelTitle:@"Cancel" otherTitles:@[@"Take a Photo", @"From Library"] completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue) {
         if (buttonIndex == 1)
         {
             // take photo
@@ -370,7 +369,6 @@
             [self pickPhoto];
         }
     }];
-    [photoChoice show];
 }
 
 -(UIImagePickerController *) imagePicker
@@ -418,8 +416,7 @@
 
 - (void) updateFailed:(NSString *)reason
 {
-    UIAlertView *updateFailedAlert = [[UIAlertView alloc] initWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [updateFailedAlert show];
+    [PXAlertView showAlertWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason]];
 }
 
 @end

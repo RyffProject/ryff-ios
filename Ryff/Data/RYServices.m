@@ -227,7 +227,7 @@ static RYUser* _loggedInUser;
 
 - (void) deletePost:(RYNewsfeedPost*)post
 {
-    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Post delete failed" message:[NSString stringWithFormat:@"Something went wrong and post was not deleted: %@",post.riff.title] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+//    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Post delete failed" message:[NSString stringWithFormat:@"Something went wrong and post was not deleted: %@",post.riff.title] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -237,13 +237,13 @@ static RYUser* _loggedInUser;
         NSDictionary *params = @{@"id" : @(post.postId)};
         
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *dictionary = responseObject;
-            
-            if (!dictionary[@"success"])
-                [failureAlert show];
+//            NSDictionary *dictionary = responseObject;
+//            
+//            if (!dictionary[@"success"])
+//                [failureAlert show];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [failureAlert show];
+//            [failureAlert show];
         }];
     });
 }
@@ -629,11 +629,12 @@ static RYUser* _loggedInUser;
                 if (delegate && [delegate respondsToSelector:@selector(parentsRetrieved:)])
                     [delegate parentsRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
             }
-            else
+            else if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
                 [delegate familyPostFailed:dictionary[@"error"]];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate familyPostFailed:[error localizedDescription]];
+            if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
+                [delegate familyPostFailed:[error localizedDescription]];
         }];
     });
 }

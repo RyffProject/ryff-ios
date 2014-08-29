@@ -23,9 +23,9 @@
 #import "UIViewController+Extras.h"
 
 // Custom UI
-#import "BlockAlertView.h"
+#import "PXAlertView.h"
 
-@interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface RYProfileInfoTableViewCell () <DWTagListDelegate, UIGestureRecognizerDelegate, UITextViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -239,9 +239,8 @@
 {
     if (_forProfileTab)
     {
-        BlockAlertView *removeTagAlert = [[BlockAlertView alloc] initWithTitle:@"Remove Tag" message:[NSString stringWithFormat:@"Remove %@ from profile?",tagName] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Remove", nil];
-        [removeTagAlert setDidDismissBlock:^(BlockAlertView *alertView, NSInteger buttonIndex) {
-            if (buttonIndex != alertView.cancelButtonIndex)
+        [PXAlertView showAlertWithTitle:@"Remove Tag" message:[NSString stringWithFormat:@"Remove %@ from profile?",tagName] cancelTitle:@"Cancel" otherTitle:@"Remove" completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue) {
+            if (buttonIndex != kCancelButtonIndex)
             {
                 // remove tag
                 RYUser *userCopy = [_user copy];
@@ -251,7 +250,6 @@
                 [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
             }
         }];
-        [removeTagAlert show];
     }
     else if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
         [_delegate tagSelected:tagIndex];
@@ -259,24 +257,16 @@
 
 - (void) selectedAddTag
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"New Tag" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Submit",nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
-}
-
-#pragma mark -
-#pragma mark - AlertView Delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *tagText =  [alertView textFieldAtIndex: 0].text;
-    if (buttonIndex == 1 && tagText.length > 0)
-    {
-        RYTag *newTag = [[RYTag alloc] initWithTag:tagText numUsers:0 numPosts:0];
-        RYUser *userCopy = [_user copy];
-        userCopy.tags = [userCopy.tags arrayByAddingObject:newTag];
-        [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
-    }
+    [PXAlertView showInputAlertWithTitle:@"Add Tag" message:nil placeholder:@"New Tag" cancelTitle:@"Cancel" otherTitle:@"Add" completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue)
+     {
+         if (buttonIndex != kCancelButtonIndex && inputValue.length > 0)
+         {
+             RYTag *newTag = [[RYTag alloc] initWithTag:[inputValue lowercaseString] numUsers:0 numPosts:0];
+             RYUser *userCopy = [_user copy];
+             userCopy.tags = [userCopy.tags arrayByAddingObject:newTag];
+             [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
+         }
+    }];
 }
 
 @end

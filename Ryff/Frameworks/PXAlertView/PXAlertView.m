@@ -8,6 +8,8 @@
 
 #import "PXAlertView.h"
 
+#import "RYStyleSheet.h"
+
 @interface PXAlertViewStack : NSObject
 
 @property (nonatomic) NSMutableArray *alertViews;
@@ -40,7 +42,9 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 @property (nonatomic) CGFloat buttonsY;
 @property (nonatomic) CALayer *verticalLine;
 @property (nonatomic) UITapGestureRecognizer *tap;
-@property (nonatomic, copy) void (^completion)(BOOL cancelled, NSInteger buttonIndex);
+@property (nonatomic, copy) void (^completion)(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue);
+
+@property (nonatomic, assign) BOOL handlesInput;
 
 @end
 
@@ -161,7 +165,7 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
         if (cancelTitle) {
             [self addButtonWithTitle:cancelTitle];
         } else {
-            [self addButtonWithTitle:NSLocalizedString(@"Ok", nil)];
+//            [self addButtonWithTitle:NSLocalizedString(@"Ok", nil)];
         }
         
         if (otherTitles && [otherTitles count] > 0) {
@@ -282,7 +286,10 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 
 - (void)setBackgroundColorForButton:(id)sender
 {
-    [sender setBackgroundColor:[UIColor colorWithRed:94/255.0 green:196/255.0 blue:221/255.0 alpha:1.0]];
+    if (sender == self.cancelButton)
+        [sender setBackgroundColor:[RYStyleSheet availableActionColor]];
+    else
+        [sender setBackgroundColor:[RYStyleSheet audioActionColor]];
 }
 
 - (void)clearBackgroundColorForButton:(id)sender
@@ -328,8 +335,12 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 - (void)dismiss:(id)sender animated:(BOOL)animated
 {
     self.visible = NO;
+    
+    if (_handlesInput)
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     if ([[[PXAlertViewStack sharedInstance] alertViews] count] == 1) {
+        
         if (animated) {
             [self dismissAlertAnimation];
         }
@@ -367,7 +378,8 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
                 buttonIndex = index;
             }
         }
-        self.completion(cancelled, buttonIndex);
+        NSString *inputValue = _handlesInput ? ((UITextField*)self.contentView).text : nil;
+        self.completion(cancelled, buttonIndex, inputValue);
     }
 }
 
@@ -589,6 +601,79 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 - (void)setTapToDismissEnabled:(BOOL)enabled
 {
     self.tap.enabled = enabled;
+}
+
+#pragma mark -
+#pragma mark - Custom Initializers
+
++ (instancetype)showInputAlertWithTitle:(NSString *)title
+                           message:(NSString *)message
+                       placeholder:(NSString *)placeholder
+                       cancelTitle:(NSString *)cancelTitle
+                        otherTitle:(NSString*)otherTitle
+                        completion:(PXAlertViewCompletionBlock)completion
+{
+    UITextField *newTagField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 252, 30)];
+    newTagField.textColor = [UIColor whiteColor];
+    newTagField.tintColor = [UIColor whiteColor];
+    newTagField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"New Tag" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    newTagField.textAlignment = NSTextAlignmentCenter;
+    
+    PXAlertView *alertView = [[self alloc] initWithTitle:title
+                                                 message:message
+                                             cancelTitle:cancelTitle
+                                              otherTitle:otherTitle
+                                             contentView:newTagField
+                                              completion:completion];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:alertView selector:@selector(onKeyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:alertView selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    alertView.handlesInput = YES;
+    [alertView show];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [newTagField becomeFirstResponder];
+    });
+    
+    return alertView;
+}
+
+#pragma mark -
+#pragma mark - Keyboard Notifications
+
+/*
+ Keyboard will appear, should center alertView higher up
+ */
+-(void)onKeyboardAppear:(NSNotification *)notification
+{
+    // position of keyboard before animation
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // keyboard to show at bottom of screen, adjust accordingly
+    CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
+        
+        CGPoint correctedCenter = [self centerWithFrame:[self frameForOrientation:self.interfaceOrientation]];
+        correctedCenter.y      -= MIN(keyboardRect.size.width, keyboardRect.size.height)/2;
+        self.alertView.center   = correctedCenter;
+        
+    } completion:nil];
+}
+
+/*
+ Keyboard will appear, should center alertView at vc center
+ */
+-(void)onKeyboardHide:(NSNotification *)notification
+{
+    // keyboard to show at bottom of screen, adjust accordingly
+    CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
+        CGPoint correctedCenter = [self centerWithFrame:[self frameForOrientation:self.interfaceOrientation]];
+        self.alertView.center   = correctedCenter;
+    } completion:nil];
 }
 
 @end
