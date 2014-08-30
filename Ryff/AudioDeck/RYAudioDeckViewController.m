@@ -77,19 +77,25 @@
 
 - (void) styleFromAudioDeck
 {
-    if ([[RYAudioDeckManager sharedInstance] isPlaying])
+    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+    
+    if ([audioManager isPlaying])
         [_playButton setImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
     else
         [_playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     
-    if ([[RYAudioDeckManager sharedInstance] currentlyPlayingPost])
+    if ([audioManager currentlyPlayingPost] || [audioManager riffPlaylist].count > 0)
     {
         // enable audio buttons
         [_playButton setEnabled:YES];
         [_repostButton setEnabled:YES];
         [_nextButton setEnabled:YES];
         [_playbackSlider setUserInteractionEnabled:YES];
-        [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderSeek"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
+        
+        if ([audioManager isPlaying])
+            [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderSeek"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
+        else
+            [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     }
     else
     {
@@ -101,12 +107,12 @@
         [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet availableActionColor]] forState:UIControlStateNormal];
     }
     
-    [_volumeSlider setValue:[[RYAudioDeckManager sharedInstance] currentVolume]];
+    [_volumeSlider setValue:[audioManager currentVolume]];
     
     if (!_progressSliderTouchActive)
-        [_playbackSlider setValue:[[RYAudioDeckManager sharedInstance] currentPlaybackProgress]];
+        [_playbackSlider setValue:[audioManager currentPlaybackProgress]];
     
-    [_nowPlayingLabel setText:[[RYAudioDeckManager sharedInstance] currentlyPlayingPost].riff.title];
+    [_nowPlayingLabel setText:[audioManager currentlyPlayingPost].riff.title];
 }
 
 #pragma mark -
