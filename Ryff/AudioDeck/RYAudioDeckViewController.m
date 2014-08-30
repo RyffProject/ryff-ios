@@ -306,7 +306,8 @@ static NSIndexPath  *movingIndexPath; // current moving index path
 - (void)longPressGesture:(UILongPressGestureRecognizer *)longPress
 {
     CGPoint location = [longPress locationInView:self.tableView];
-    movingIndexPath = [self.tableView indexPathForRowAtPoint:location];
+    movingIndexPath  = [self.tableView indexPathForRowAtPoint:location];
+    location         = [self.view convertPoint:location fromView:self.tableView];
     
     switch (longPress.state)
     {
@@ -322,10 +323,10 @@ static NSIndexPath  *movingIndexPath; // current moving index path
                 snapshot = [self customSnapshotFromView:cell];
                 
                 // Add the snapshot as subview, centered at cell's center...
-                __block CGPoint center = cell.center;
+                __block CGPoint center = [self.view convertPoint:cell.center fromView:self.tableView];
                 snapshot.center = center;
                 snapshot.alpha = 0.0;
-                [self.tableView addSubview:snapshot];
+                [self.view addSubview:snapshot];
                 [UIView animateWithDuration:0.25 animations:^{
                     
                     // Offset for gesture location.
@@ -365,7 +366,7 @@ static NSIndexPath  *movingIndexPath; // current moving index path
             cell.alpha = 0.0;
             
             [UIView animateWithDuration:0.25 animations:^{
-                snapshot.center = cell.center;
+                snapshot.center = [self.view convertPoint:cell.center fromView:self.tableView];
                 snapshot.transform = CGAffineTransformIdentity;
                 snapshot.alpha = 0.0;
                 cell.alpha = 1.0;
