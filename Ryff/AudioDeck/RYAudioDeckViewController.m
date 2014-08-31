@@ -8,6 +8,8 @@
 
 #import "RYAudioDeckViewController.h"
 
+#import <MediaPlayer/MediaPlayer.h>
+
 // Data Managers
 #import "RYAudioDeckManager.h"
 #import "RYStyleSheet.h"
@@ -20,6 +22,7 @@
 
 // Categories
 #import "UIImage+Color.h"
+#import "UIImage+Thumbnail.h"
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
@@ -59,11 +62,18 @@
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
     [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
     
-    [_volumeSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
-    
     // long press to move cells
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
     [self.tableView addGestureRecognizer:longPress];
+    
+    // prevent volume hud
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: _volumeSlider.frame];
+    [volumeView setVolumeThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
+    [volumeView setTintColor:[RYStyleSheet audioActionColor]];
+    [_controlWrapperView addSubview: volumeView];
+    
+    [_volumeSlider removeFromSuperview];
+    _volumeSlider = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated

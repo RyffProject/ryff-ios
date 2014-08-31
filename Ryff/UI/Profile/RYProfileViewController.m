@@ -399,7 +399,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     CGFloat avatarSize = 400.f;
-    UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] createThumbnailToFillSize:CGSizeMake(avatarSize, avatarSize)];
+    UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] thumbnailOfSize:CGSizeMake(avatarSize, avatarSize)];
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];

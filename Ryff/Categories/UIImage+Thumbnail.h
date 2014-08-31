@@ -10,6 +10,6 @@
 
 @interface UIImage (Thumbnail)
 
--(UIImage *) createThumbnailToFillSize:(CGSize)size;
+-(UIImage *) thumbnailOfSize:(CGSize)size;
 
 @end

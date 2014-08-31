@@ -10,7 +10,7 @@
 
 @implementation UIImage (Thumbnail)
 
--(UIImage *) createThumbnailToFillSize:(CGSize)size
+-(UIImage *) thumbnailOfSize:(CGSize)size
 {
     CGSize mainImageSize = self.size;
     
