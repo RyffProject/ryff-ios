@@ -21,8 +21,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "SGImageCache.h"
 
-#define kAudioDeckVolumeKey @"PreferredAudioDeckVolume"
-
 @interface RYAudioDeckManager () <AVAudioPlayerDelegate, TrackDownloadDelegate>
 
 // both data arrays populated with RYNewsfeedPost objects
@@ -31,7 +29,6 @@
 @property (nonatomic, strong) RYNewsfeedPost *currentlyPlayingPost;
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic, assign) CGFloat globalVolume;
 
 @property (nonatomic, strong) UIImage *nowPlayingArtwork;
 
@@ -49,12 +46,6 @@ static RYAudioDeckManager *_sharedInstance;
         _sharedInstance = [RYAudioDeckManager allocWithZone:NULL];
         _sharedInstance.downloadQueue = [[NSMutableArray alloc] init];
         _sharedInstance.riffPlaylist  = [[NSMutableArray alloc] init];
-        
-        NSNumber *preferredVolume = [[NSUserDefaults standardUserDefaults] objectForKey:kAudioDeckVolumeKey];
-        if (preferredVolume)
-            _sharedInstance.globalVolume = preferredVolume.floatValue;
-        else
-            _sharedInstance.globalVolume = 1.0f;
         
         _sharedInstance.updatePlaybackTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:_sharedInstance selector:@selector(updatePlaybackProgress:) userInfo:nil repeats:YES];
         
@@ -111,13 +102,6 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (void) setVolume:(CGFloat)volume
-{
-    _globalVolume = volume;
-    if (_audioPlayer)
-        [_audioPlayer setVolume:_globalVolume];
-}
-
 - (void) skipTrack
 {
     [self playNextTrack];
@@ -128,11 +112,6 @@ static RYAudioDeckManager *_sharedInstance;
 - (CGFloat) currentPlaybackProgress
 {
     return _audioPlayer ? (_audioPlayer.currentTime/_audioPlayer.duration) : 0;
-}
-
-- (CGFloat) currentVolume
-{
-    return _globalVolume;
 }
 
 - (BOOL) isPlaying
@@ -158,7 +137,6 @@ static RYAudioDeckManager *_sharedInstance;
         // confirmed that media file exists
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:localURL error:NULL];
         _audioPlayer.delegate = self;
-        _audioPlayer.volume = _globalVolume;
         [_audioPlayer play];
         _currentlyPlayingPost = post;
         

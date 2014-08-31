@@ -129,8 +129,6 @@
     [_followersCountLabel setText:[NSString stringWithFormat:@"%ld",(long)user.numFollowers]];
     [_tagListView setTags:[RYTag getTagTags:user.tags]];
     
-    [_bioTextView setEditable:NO];
-    [_nameField setEnabled:NO];
     [_avatarImageView setUserInteractionEnabled:NO];
     
     [self setBackgroundColor:[UIColor clearColor]];
@@ -151,6 +149,9 @@
     [_messageButton setTintColor:[RYStyleSheet postActionColor]];
     
     [_tagListView addAddNewTagTag];
+    
+    [_usernameLabel setEnabled:YES];
+    [_bioTextView setEditable:YES];
     
     _forProfileTab = YES;
 }

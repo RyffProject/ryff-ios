@@ -615,8 +615,10 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 {
     UITextField *newTagField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 252, 30)];
     newTagField.textColor = [UIColor whiteColor];
+    newTagField.font      = [UIFont fontWithName:kRegularFont size:18.0f];
     newTagField.tintColor = [UIColor whiteColor];
     newTagField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"New Tag" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    newTagField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     newTagField.textAlignment = NSTextAlignmentCenter;
     
     PXAlertView *alertView = [[self alloc] initWithTitle:title

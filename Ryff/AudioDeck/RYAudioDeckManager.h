@@ -31,12 +31,10 @@
 // Media Control
 - (void) playTrack:(BOOL)playTrack;
 - (void) setPlaybackProgress:(CGFloat)progress;
-- (void) setVolume:(CGFloat)volume;
 - (void) skipTrack;
 
 // Media
 - (CGFloat) currentPlaybackProgress;
-- (CGFloat) currentVolume;
 - (BOOL) isPlaying;
 
 // Data Control

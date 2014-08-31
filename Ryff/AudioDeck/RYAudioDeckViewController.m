@@ -117,8 +117,6 @@
         [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet availableActionColor]] forState:UIControlStateNormal];
     }
     
-    [_volumeSlider setValue:[audioManager currentVolume]];
-    
     if (!_progressSliderTouchActive)
         [_playbackSlider setValue:[audioManager currentPlaybackProgress]];
     
@@ -150,19 +148,17 @@
     [[RYAudioDeckManager sharedInstance] skipTrack];
 }
 
-- (IBAction)volumeSliderChanged:(id)sender
-{
-    [[RYAudioDeckManager sharedInstance] setVolume:_volumeSlider.value];
-}
 - (IBAction)playbackSliderTouchStarted:(id)sender
 {
     _progressSliderTouchActive = YES;
 }
+
 - (IBAction)playbackSliderTouchUpInside:(id)sender
 {
     _progressSliderTouchActive = NO;
     [[RYAudioDeckManager sharedInstance] setPlaybackProgress:_playbackSlider.value];
 }
+
 - (IBAction)playbackSliderTouchUpOutside:(id)sender
 {
     _progressSliderTouchActive = NO;
