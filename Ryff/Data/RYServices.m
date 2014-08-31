@@ -201,7 +201,14 @@ static RYUser* _loggedInUser;
         if (user.email && ![user.email isEqualToString:oldUser.email])
             [params setObject:user.email forKey:@"email"];
         if (user.tags && ![user.tags isEqualToArray:oldUser.tags])
-            [params setObject:[RYTag getTagTags:user.tags] forKey:@"tags"];
+        {
+            // can't send empty array via POST, send empty string
+            NSArray *tags = [RYTag getTagTags:user.tags];
+            if (tags.count > 0)
+                [params setObject:[RYTag getTagTags:user.tags] forKey:@"tags"];
+            else
+                [params setObject:@"" forKey:@"tags"];
+        }
         
         if (params.count > 0)
         {
@@ -635,6 +642,31 @@ static RYUser* _loggedInUser;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
                 [delegate familyPostFailed:[error localizedDescription]];
+        }];
+    });
+}
+
+#pragma mark -
+#pragma mark - Notifications
+
+- (void) updatePushToken:(NSString *)pushToken
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        NSUUID *identifier = [[UIDevice currentDevice] identifierForVendor];
+        NSDictionary *params = @{@"token": pushToken, @"uuid": [identifier UUIDString]};
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kAddPushTokenAction];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *responseDict = responseObject;
+            if (responseDict[@"success"]) {
+                NSLog(@"Add push token: %@", responseDict[@"success"]);
+            } else if (responseDict[@"error"]) {
+                NSLog(@"Add push token failed: %@", responseDict[@"error"]);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Add push token failed: %@",[error localizedDescription]);
         }];
     });
 }

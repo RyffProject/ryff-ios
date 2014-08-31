@@ -33,6 +33,8 @@
     // Clear caches
     [[RYDataManager sharedInstance] clearCache];
     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     return YES;
 }
 							
@@ -101,6 +103,22 @@
     // clear caches
     [[RYDataManager sharedInstance] clearCache];
     [SGImageCache flushImagesOlderThan:1.0f];
+}
+
+#pragma mark -
+#pragma mark - Push Notifications
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    NSString *rawToken = [[NSString stringWithFormat:@"%@",deviceToken] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+	NSString *token    = [rawToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [[RYServices sharedInstance] updatePushToken:token];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
 }
 
 @end
