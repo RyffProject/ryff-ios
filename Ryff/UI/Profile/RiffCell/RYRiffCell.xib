@@ -17,10 +17,6 @@
                         <rect key="frame" x="59" y="4" width="797" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ayo-Aa-Lbo">
-                                <rect key="frame" x="150" y="33" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1rb-I2-FWV">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -102,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upvote.png" id="uVs-7N-KVK">
-                                <rect key="frame" x="0.0" y="0.0" width="25" height="50"/>
+                                <rect key="frame" x="8" y="0.0" width="25" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rNE-nx-Cdq">
@@ -121,7 +117,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="actionWrapperView" destination="tDx-1U-Pms" id="Fr4-aG-jOE"/>
-                <outlet property="avatarImageView" destination="Ayo-Aa-Lbo" id="ueE-w1-sxY"/>
                 <outlet property="durationLabel" destination="IaF-hX-SsX" id="AKN-Fq-26u"/>
                 <outlet property="playControlView" destination="exn-K0-h4z" id="cQk-OF-NqX"/>
                 <outlet property="playlistAddButton" destination="Yxn-GF-2KK" id="nTF-Pn-okd"/>

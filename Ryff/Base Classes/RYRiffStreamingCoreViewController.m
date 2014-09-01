@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellNoImage" bundle:NULL] forCellReuseIdentifier:kRiffCellNoImageReuseID];
     
     _riffSection = 0;
     _openRiffDetailsSection = -1;
@@ -169,16 +170,18 @@
 
 - (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
 {
-    [PXAlertView showAlertWithTitle:@"Upvote failed" message:reason];
+//    [PXAlertView showAlertWithTitle:@"Upvote failed" message:reason];
     
-    [self reloadPost:oldPost];
+    NSInteger row = [_feedItems indexOfObject:oldPost];
+    [self.riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
 {
-    [PXAlertView showAlertWithTitle:@"Star post failed" message:reason];
+//    [PXAlertView showAlertWithTitle:@"Star post failed" message:reason];
     
-    [self reloadPost:oldPost];
+    NSInteger row = [_feedItems indexOfObject:oldPost];
+    [self.riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - Internal Helpers
@@ -214,7 +217,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:kRiffCellReuseID];
+    UITableViewCell *cell;
+    if (indexPath.row < _feedItems.count)
+    {
+        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        if (post.imageURL)
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffCellReuseID];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffCellNoImageReuseID];
+    }
+    return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -224,11 +236,17 @@
     if (indexPath.row < _feedItems.count)
     {
         // profile post -> calculate size with attributed text for post description
-        RYNewsfeedPost *post = _feedItems[indexPath.row];
-        CGFloat widthMinusText = kRiffCellWidthMinusText;
-        CGSize boundingSize = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
-        NSAttributedString *postString = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
-        UITextView *sizingTextView = [[UITextView alloc] init];
+        RYNewsfeedPost *post              = _feedItems[indexPath.row];
+        CGFloat widthMinusText;
+        if (post.imageURL)
+            widthMinusText                = kRiffCellWidthMinusText;
+        else
+            widthMinusText                = kRiffCellWidthMinusTextNoImage;
+        
+        CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
+        NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+        UITextView *sizingTextView        = [[UITextView alloc] init];
+        sizingTextView.textContainerInset = UIEdgeInsetsZero;
         [sizingTextView setAttributedText:postString];
         height = [sizingTextView sizeThatFits:boundingSize].height;
         

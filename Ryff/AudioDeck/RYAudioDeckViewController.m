@@ -60,7 +60,6 @@
     [_nextButton setTintColor:[RYStyleSheet audioActionColor]];
     [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
-    [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
     
     // long press to move cells
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
@@ -103,6 +102,7 @@
         [_nextButton setEnabled:YES];
         [_playbackSlider setUserInteractionEnabled:YES];
         
+        [_playbackSlider setTintColor:[RYStyleSheet audioActionColor]];
         if ([audioManager isPlaying])
             [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderSeek"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
         else
@@ -114,8 +114,10 @@
         [_playButton setEnabled:NO];
         [_repostButton setEnabled:NO];
         [_nextButton setEnabled:NO];
+        [_playbackSlider setValue:0.0f];
         [_playbackSlider setUserInteractionEnabled:NO];
-        [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet availableActionColor]] forState:UIControlStateNormal];
+        [_playbackSlider setTintColor:[RYStyleSheet availableActionColor]];
+        [_playbackSlider setThumbImage:[[UIImage imageNamed:@"sliderSmall"] colorImage:[RYStyleSheet availableActionColor]] forState:UIControlStateNormal];
     }
     
     if (!_progressSliderTouchActive)

@@ -78,7 +78,7 @@
     if (post.riff)
         [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
     
-    if (post.imageURL && post.imageURL.absoluteString.length > 0)
+    if (post.imageURL)
     {
         [_avatarImageView setHidden:YES];
         [_postImageView setHidden:NO];
@@ -114,6 +114,7 @@
     [_userLabel setFont:[UIFont fontWithName:kBoldFont size:20.0f]];
     [_userLabel setTextColor:[UIColor whiteColor]];
     [_socialTextView setColorForContentText:[UIColor whiteColor]];
+    [_socialTextView setTextContainerInset:UIEdgeInsetsZero];
     
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
@@ -160,28 +161,41 @@
 
 - (void) styleFromAudioDeck
 {
-    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId && [[RYAudioDeckManager sharedInstance] isPlaying])
+    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+    if (_post.postId == [audioManager currentlyPlayingPost].postId)
     {
         // currently playing
-        [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
-    }
-    else
-        [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
-    
-    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
-        [_playControlView setCenterImage:nil];
-    else
+        _playControlView.hidden             = NO;
+        _playControlView.controlTintColor   = [UIColor whiteColor];
+        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         [_playControlView setProgress:0.0f animated:NO];
-    
-    if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
+        if ([audioManager isPlaying])
+            [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
+        else
+            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
+    }
+    else if ([audioManager playlistContainsPost:_post.postId])
     {
-        [_playControlView setControlTintColor:[RYStyleSheet audioActionColor]];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+        // in playlist or downloading
+        _playControlView.hidden = NO;
+        _playControlView.controlTintColor = [UIColor whiteColor];
+        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
+        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+        {
+            // downloading
+            [_playControlView setCenterImage:nil];
+        }
+        else
+        {
+            // in playlist
+            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
+            [_playControlView setProgress:0.0f animated:NO];
+        }
     }
     else
     {
-        [_playControlView setControlTintColor:[RYStyleSheet availableActionColor]];
-        [_playlistAddButton setTintColor:[RYStyleSheet availableActionColor]];
+        _playControlView.hidden = YES;
+        _playlistAddButton.tintColor = [RYStyleSheet availableActionColor];
     }
 }
 

@@ -33,8 +33,6 @@
     // Clear caches
     [[RYDataManager sharedInstance] clearCache];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    
     return YES;
 }
 							

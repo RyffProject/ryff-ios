@@ -45,7 +45,7 @@
 
 + (UIColor *)lightBackgroundColor
 {
-    return [UIColor colorWithHexString:@"b9e5ee"];
+    return [UIColor colorWithHexString:@"cee5ea"];
 }
 
 #pragma mark -

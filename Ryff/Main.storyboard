@@ -124,11 +124,11 @@
             <objects>
                 <viewController storyboardIdentifier="newsfeedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yqq-Ja-uip" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wPJ-wf-woh">
-                        <rect key="frame" x="0.0" y="44" width="398" height="980"/>
+                        <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iLd-fg-1Ex">
-                                <rect key="frame" x="0.0" y="0.0" width="398" height="980"/>
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -139,7 +139,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Newsfeed" id="OYs-aH-x7g"/>
                     <connections>
                         <outlet property="tableView" destination="iLd-fg-1Ex" id="rDY-ax-71G"/>
@@ -154,12 +153,12 @@
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileInfoCell" rowHeight="500" id="4Xb-L8-djH" customClass="RYProfileInfoTableViewCell">
-                                <rect key="frame" x="0.0" y="55" width="768" height="500"/>
+                                <rect key="frame" x="0.0" y="119" width="768" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xb-L8-djH" id="OPY-3D-kbQ">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="499"/>
@@ -291,7 +290,6 @@
                             <outlet property="delegate" destination="fpf-wb-Diq" id="TOF-03-N28"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Me" id="snj-hL-Q8K"/>
                     <connections>
                         <outlet property="tableView" destination="fmo-fI-EJz" id="GIR-5b-N6h"/>
@@ -306,12 +304,12 @@
             <objects>
                 <tableViewController storyboardIdentifier="riffDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YPv-4z-4S8" customClass="RYRiffDetailsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9HB-gx-wae">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riffDetails" rowHeight="60" id="hq4-2B-ZOS" customClass="RYRiffDetailsTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="768" height="60"/>
+                                <rect key="frame" x="0.0" y="86" width="768" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hq4-2B-ZOS" id="va1-8g-a0f">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="59"/>
@@ -348,7 +346,6 @@
                             <outlet property="delegate" destination="YPv-4z-4S8" id="5TT-jj-5e5"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Riff Details" id="d9A-sz-fNA"/>
                     <connections>
                         <outlet property="tableView" destination="9HB-gx-wae" id="hHG-rL-1jM"/>
@@ -614,7 +611,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="KJU-5B-1ZL"/>
                     <connections>
                         <outlet property="tableView" destination="Dhj-Gm-nVw" id="hj7-n7-7pW"/>
@@ -814,7 +810,6 @@
         <scene sceneID="oH6-1U-yxB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Bw-DF-4Sx" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJn-8v-QMo">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -870,7 +865,6 @@
         <scene sceneID="M7a-Md-3zP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="IcL-Wj-OB1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PDS-1E-JD9">
@@ -894,7 +888,6 @@
         <scene sceneID="1rv-Yb-x91">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1aC-uB-qxi" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Me" image="userIcon.png" id="ijD-mq-LaO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VKf-uC-1ga">

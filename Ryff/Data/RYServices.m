@@ -105,6 +105,10 @@ static RYUser* _loggedInUser;
             {
                 [self setLoggedInUser:dictionary[@"user"] username:username password:password];
                 [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+                
+                // register for push notifications
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
             }
             else

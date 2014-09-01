@@ -23,6 +23,7 @@
 #import "RYUser.h"
 
 #define kRiffCellReuseID @"RiffCell"
+#define kRiffCellNoImageReuseID @"RiffCellNoImage"
 
 @interface RYRiffStreamingCoreViewController : RYCoreViewController <ActionDelegate, RiffCellDelegate, UITableViewDataSource, UITableViewDelegate>
 
