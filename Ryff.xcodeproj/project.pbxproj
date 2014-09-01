@@ -22,6 +22,8 @@
 		830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185FD1900AEB300093EFA /* UIColor+Hex.m */; };
 		830186011900B1CD00093EFA /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185FF1900B1CD00093EFA /* tabBar.png */; };
 		830186021900B1CD00093EFA /* tabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 830186001900B1CD00093EFA /* tabBar@2x.png */; };
+		83082FDD19B4F303000AFACB /* airplayIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FDB19B4F303000AFACB /* airplayIcon.png */; };
+		83082FDE19B4F303000AFACB /* airplayIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FDC19B4F303000AFACB /* airplayIcon@2x.png */; };
 		830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCAD18F9F54900A9C53F /* SSKeychain.strings */; };
 		830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB018F9F54900A9C53F /* SSKeychain.m */; };
 		830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */; };
@@ -280,6 +282,8 @@
 		830185FD1900AEB300093EFA /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		830185FF1900B1CD00093EFA /* tabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar.png; sourceTree = "<group>"; };
 		830186001900B1CD00093EFA /* tabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar@2x.png"; sourceTree = "<group>"; };
+		83082FDB19B4F303000AFACB /* airplayIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplayIcon.png; sourceTree = "<group>"; };
+		83082FDC19B4F303000AFACB /* airplayIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airplayIcon@2x.png"; sourceTree = "<group>"; };
 		830BBCAE18F9F54900A9C53F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSKeychain.strings; sourceTree = "<group>"; };
 		830BBCAF18F9F54900A9C53F /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		830BBCB018F9F54900A9C53F /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
@@ -1306,10 +1310,10 @@
 				83FCD17718F90BE700A493F0 /* RiffCell */,
 				833FC1AF1989E467002491C8 /* RiffDetails */,
 				837C98D519A82403002A9B34 /* UserList */,
-				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
-				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
 				83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */,
+				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
+				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
 				831E5FF819A03269007F3C31 /* RYNewsfeedNavigationController.h */,
 				831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */,
 			);
@@ -1351,6 +1355,8 @@
 		83FCD1A918F93E6C00A493F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				83082FDB19B4F303000AFACB /* airplayIcon.png */,
+				83082FDC19B4F303000AFACB /* airplayIcon@2x.png */,
 				8322308F19AFFCC200C60033 /* sliderFull.png */,
 				8322309019AFFCC200C60033 /* sliderFull@2x.png */,
 				8322309119AFFCC200C60033 /* sliderSeek.png */,
@@ -1514,6 +1520,7 @@
 				831A88B2199EEEDD00C44CED /* plus@2x.png in Resources */,
 				837367FF19A8344600D9559D /* location@2x.png in Resources */,
 				831A88B8199EEEDD00C44CED /* star@2x.png in Resources */,
+				83082FDD19B4F303000AFACB /* airplayIcon.png in Resources */,
 				83FCD1AB18F93E6C00A493F0 /* user.png in Resources */,
 				83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */,
 				8373680719A8344600D9559D /* userDelete@2x.png in Resources */,
@@ -1533,6 +1540,7 @@
 				8373680019A8344600D9559D /* message.png in Resources */,
 				83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */,
 				8373680619A8344600D9559D /* userDelete.png in Resources */,
+				83082FDE19B4F303000AFACB /* airplayIcon@2x.png in Resources */,
 				83ED34E81931851600FEB018 /* AppIcon29x29.png in Resources */,
 				83ED34F01931851600FEB018 /* AppIcon60x60.png in Resources */,
 				83ED34EA1931851600FEB018 /* AppIcon40x40.png in Resources */,

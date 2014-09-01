@@ -70,6 +70,7 @@
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: _volumeSlider.frame];
     [volumeView setVolumeThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     [volumeView setTintColor:[RYStyleSheet audioActionColor]];
+    [volumeView setRouteButtonImage:[[UIImage imageNamed:@"airplayIcon"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     [_controlWrapperView addSubview: volumeView];
     
     [_volumeSlider removeFromSuperview];

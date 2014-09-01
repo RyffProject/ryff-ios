@@ -661,7 +661,7 @@ static RYUser* _loggedInUser;
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *responseDict = responseObject;
             if (responseDict[@"success"]) {
-                NSLog(@"Add push token: %@", responseDict[@"success"]);
+//                NSLog(@"Add push token: %@", responseDict[@"success"]);
             } else if (responseDict[@"error"]) {
                 NSLog(@"Add push token failed: %@", responseDict[@"error"]);
             }
