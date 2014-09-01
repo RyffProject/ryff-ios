@@ -45,12 +45,7 @@
 
 + (UIColor *)lightBackgroundColor
 {
-    return [UIColor colorWithHexString:@"e9e9e9"];
-}
-
-+ (UIColor *)selectedCellColor
-{
-    return [UIColor colorWithHexString:@"d9d9d9"];
+    return [UIColor colorWithHexString:@"b9e5ee"];
 }
 
 #pragma mark -
@@ -91,40 +86,6 @@
 
 #pragma mark -
 #pragma mark - Extras
-
-// Username: post content
-+ (NSAttributedString *)createNewsfeedAttributedTextWithPost:(RYNewsfeedPost *)post
-{
-    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
-    NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
-    const NSRange range = NSMakeRange(0,post.user.username.length);
-    
-    // Create the attributed string (text + attributes)
-    NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.user.username,post.content];
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
-                                                                                       attributes:subAttrs];
-    [attributedText setAttributes:attrs range:range];
-    return attributedText;
-}
-
-// post title: post content
-+ (NSAttributedString *)createProfileAttributedTextWithPost:(RYNewsfeedPost *)post
-{
-    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [UIFont fontWithName:kBoldFont size:18.0f], NSFontAttributeName, nil];
-    NSDictionary *subAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [UIFont fontWithName:kRegularFont size:18.0f], NSFontAttributeName, nil];
-    const NSRange range = NSMakeRange(0,post.riff.title.length);
-    
-    // Create the attributed string (text + attributes)
-    NSString *fullText = [NSString stringWithFormat:@"%@\n%@",post.riff.title,post.content];
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:fullText
-                                                                                       attributes:subAttrs];
-    [attributedText setAttributes:attrs range:range];
-    return attributedText;
-}
 
 + (NSString *)convertSecondsToDisplayTime:(CGFloat)totalSeconds
 {

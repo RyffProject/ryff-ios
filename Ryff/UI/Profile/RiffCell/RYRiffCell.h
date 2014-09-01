@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define kRiffCellWidthMinusText isIpad ? 289.0f : 85.0f
-#define kRiffCellHeightMinusText 130.0f
-#define kRiffCellMinimumHeight 130.0f
+#define kRiffCellWidthMinusText isIpad ? 333.0f : 85.0f
+#define kRiffCellHeightMinusText 140.0f
+#define kRiffCellMinimumHeight 207.0f
 
 @protocol RiffCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;
@@ -31,6 +31,6 @@
 
 @property (weak, nonatomic) IBOutlet RYSocialTextView *socialTextView;
 
-- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
+- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
 
 @end

@@ -17,6 +17,8 @@
 
 @property (nonatomic, weak) id<SocialTextViewDelegate> socialDelegate;
 
+@property (nonatomic, strong) UIColor *colorForContentText;
+
 - (void) loadContent:(NSString *)content;
 - (void) loadAttributedContent:(NSAttributedString *)attributedContent;
 

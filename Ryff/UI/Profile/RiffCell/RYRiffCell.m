@@ -32,6 +32,7 @@
 
 // Main
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
+@property (weak, nonatomic) IBOutlet UILabel *postLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
@@ -61,29 +62,32 @@
 
 @implementation RYRiffCell
 
-- (void) configureForPost:(RYNewsfeedPost *)post attributedText:(NSAttributedString *)attributedText riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
+- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
 {
     _riffIndex = riffIndex;
     _delegate  = delegate;
     _post      = post;
     
+    [_postLabel setText:post.riff.title];
+    
     NSString *usernameText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_userLabel setText:usernameText];
-    [_socialTextView loadAttributedContent:attributedText];
-    CGSize textViewSize = [_socialTextView sizeThatFits:CGSizeMake(self.frame.size.width-kRiffCellWidthMinusText, CGFLOAT_MAX)];
-    [_socialTextView setFrame:CGRectMake(_socialTextView.frame.origin.x, _socialTextView.frame.origin.y, _socialTextView.frame.size.width, textViewSize.height)];
-    [_avatarImageView setImageForURL:post.user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+    
+    [_socialTextView loadAttributedContent:[[NSAttributedString alloc] initWithString:post.content]];
     
     if (post.riff)
         [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
     
-    if (post.imageURL)
+    if (post.imageURL && post.imageURL.absoluteString.length > 0)
     {
+        [_avatarImageView setHidden:YES];
         [_postImageView setHidden:NO];
         [_postImageView setImageForURL:post.imageURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
     }
     else
     {
+        [_avatarImageView setHidden:NO];
+        [_avatarImageView setImageForURL:post.user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
         [_postImageView setHidden:YES];
     }
     
@@ -105,12 +109,13 @@
 
 - (void) awakeFromNib
 {
-    [_userLabel setFont:[UIFont fontWithName:kRegularFont size:24.0f]];
+    [_postLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
+    [_postLabel setTextColor:[UIColor whiteColor]];
+    [_userLabel setFont:[UIFont fontWithName:kBoldFont size:20.0f]];
+    [_userLabel setTextColor:[UIColor whiteColor]];
+    [_socialTextView setColorForContentText:[UIColor whiteColor]];
     
     [RYStyleSheet styleProfileImageView:_avatarImageView];
-    
-    [_postImageView.layer setCornerRadius:10.0f];
-    [_postImageView setClipsToBounds:YES];
     
     UITapGestureRecognizer *playControlTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playerControlHit:)];
     [_playControlView addGestureRecognizer:playControlTap];
@@ -121,11 +126,15 @@
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
     [_avatarImageView addGestureRecognizer:avatarTap];
     
+    UITapGestureRecognizer *usernameTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(usernameHit:)];
+    [_userLabel addGestureRecognizer:usernameTap];
+    
     UITapGestureRecognizer *upvoteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(upvoteHit:)];
     [_upvoteWrapperView addGestureRecognizer:upvoteTap];
     
     [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
+    [_durationLabel setTextColor:[UIColor whiteColor]];
     
     [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
     
@@ -141,11 +150,11 @@
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     if (highlighted)
     {
-        [_wrapperView setBackgroundColor:[RYStyleSheet selectedCellColor]];
+        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.35 alpha:0.8f]];
     }
     else
     {
-        [_wrapperView setBackgroundColor:[UIColor whiteColor]];
+        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.25 alpha:0.8f]];
     }
 }
 
@@ -237,6 +246,12 @@
 #pragma mark - Gestures
 
 - (void) avatarHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(avatarAction:)])
+        [_delegate avatarAction:_riffIndex];
+}
+
+- (void) usernameHit:(UITapGestureRecognizer *)tapGesture
 {
     if (_delegate && [_delegate respondsToSelector:@selector(avatarAction:)])
         [_delegate avatarAction:_riffIndex];

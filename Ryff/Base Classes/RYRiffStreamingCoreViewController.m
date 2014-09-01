@@ -226,7 +226,12 @@
         // profile post -> calculate size with attributed text for post description
         RYNewsfeedPost *post = _feedItems[indexPath.row];
         CGFloat widthMinusText = kRiffCellWidthMinusText;
-        height = [[RYStyleSheet createProfileAttributedTextWithPost:post] boundingRectWithSize:CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
+        CGSize boundingSize = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
+        NSAttributedString *postString = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+        UITextView *sizingTextView = [[UITextView alloc] init];
+        [sizingTextView setAttributedText:postString];
+        height = [sizingTextView sizeThatFits:boundingSize].height;
+        
         height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
     }
     
@@ -239,7 +244,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RYNewsfeedPost *post = _feedItems[indexPath.row];
-    [((RYRiffCell*)cell) configureForPost:post attributedText:[RYStyleSheet createProfileAttributedTextWithPost:post] riffIndex:indexPath.row delegate:self];
+    [((RYRiffCell*)cell) configureForPost:post riffIndex:indexPath.row delegate:self];
     [((RYRiffCell *)cell).socialTextView setUserInteractionEnabled:NO];
 }
 

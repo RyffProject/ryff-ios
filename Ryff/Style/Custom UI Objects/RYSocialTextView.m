@@ -54,7 +54,8 @@
         return nil;
     
     // First reset attributes for the whole textview
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, attString.string.length)];
+    UIColor *textColor = _colorForContentText ? _colorForContentText : [UIColor blackColor];
+    [attString addAttribute:NSForegroundColorAttributeName value:textColor range:NSMakeRange(0, attString.string.length)];
     [attString addAttribute:NSFontAttributeName value:kContentFont range:NSMakeRange(0, attString.string.length)];
     
     // @username
