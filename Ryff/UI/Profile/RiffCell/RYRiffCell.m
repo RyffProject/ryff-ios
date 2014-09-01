@@ -124,8 +124,16 @@
     
     [_playControlView configureWithFrame:_playControlView.bounds centerImageInset:@(_playControlView.frame.size.width/4)];
     
-    UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
-    [_avatarImageView addGestureRecognizer:avatarTap];
+    if (_avatarImageView)
+    {
+        UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(avatarHit:)];
+        [_avatarImageView addGestureRecognizer:avatarTap];
+    }
+    if (_postImageView)
+    {
+        UITapGestureRecognizer *postImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(postImageHit:)];
+        [_postImageView addGestureRecognizer:postImageTap];
+    }
     
     UITapGestureRecognizer *usernameTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(usernameHit:)];
     [_userLabel addGestureRecognizer:usernameTap];
@@ -169,7 +177,9 @@
         _playControlView.controlTintColor   = [UIColor whiteColor];
         _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         [_playControlView setProgress:0.0f animated:NO];
-        if ([audioManager isPlaying])
+        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+            [_playControlView setCenterImage:nil];
+        else if ([audioManager isPlaying])
             [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
         else
             [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
@@ -281,6 +291,12 @@
 }
 
 - (void) playerControlHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(playerControlAction:)])
+        [_delegate playerControlAction:_riffIndex];
+}
+
+- (void) postImageHit:(UITapGestureRecognizer *)tapGesture
 {
     if (_delegate && [_delegate respondsToSelector:@selector(playerControlAction:)])
         [_delegate playerControlAction:_riffIndex];

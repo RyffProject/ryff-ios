@@ -214,6 +214,8 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == self.riffSection)
+        return [super tableView:tableView heightForHeaderInSection:section];
     return 50.0f;
 }
 

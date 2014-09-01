@@ -59,8 +59,6 @@
     
     [self fetchContent];
     
-    _tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }
 
@@ -115,12 +113,5 @@
 {
     [self fetchContent];
 }
-
-#pragma mark -
-#pragma mark - TableView Overrides
-
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 0.01f; }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { return [[UIView alloc] initWithFrame:CGRectZero]; }
 
 @end

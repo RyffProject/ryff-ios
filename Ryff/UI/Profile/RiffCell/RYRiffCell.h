@@ -10,8 +10,8 @@
 
 #define kRiffCellWidthMinusText isIpad ? 333.0f : 85.0f
 #define kRiffCellWidthMinusTextNoImage isIpad ? 195.0f : 85.0f
-#define kRiffCellHeightMinusText 140.0f
-#define kRiffCellMinimumHeight 207.0f
+#define kRiffCellHeightMinusText 146.0f
+#define kRiffCellMinimumHeight 213.0f
 
 @protocol RiffCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;

@@ -124,11 +124,11 @@
             <objects>
                 <viewController storyboardIdentifier="newsfeedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yqq-Ja-uip" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wPJ-wf-woh">
-                        <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
+                        <rect key="frame" x="0.0" y="44" width="398" height="980"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iLd-fg-1Ex">
-                                <rect key="frame" x="0.0" y="0.0" width="398" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="398" height="980"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -139,6 +139,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Newsfeed" id="OYs-aH-x7g"/>
                     <connections>
                         <outlet property="tableView" destination="iLd-fg-1Ex" id="rDY-ax-71G"/>
@@ -153,12 +154,12 @@
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fmo-fI-EJz">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileInfoCell" rowHeight="500" id="4Xb-L8-djH" customClass="RYProfileInfoTableViewCell">
-                                <rect key="frame" x="0.0" y="119" width="768" height="500"/>
+                                <rect key="frame" x="0.0" y="55" width="768" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Xb-L8-djH" id="OPY-3D-kbQ">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="499"/>
@@ -290,6 +291,7 @@
                             <outlet property="delegate" destination="fpf-wb-Diq" id="TOF-03-N28"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Me" id="snj-hL-Q8K"/>
                     <connections>
                         <outlet property="tableView" destination="fmo-fI-EJz" id="GIR-5b-N6h"/>
@@ -304,12 +306,12 @@
             <objects>
                 <tableViewController storyboardIdentifier="riffDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YPv-4z-4S8" customClass="RYRiffDetailsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9HB-gx-wae">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riffDetails" rowHeight="60" id="hq4-2B-ZOS" customClass="RYRiffDetailsTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="768" height="60"/>
+                                <rect key="frame" x="0.0" y="22" width="768" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hq4-2B-ZOS" id="va1-8g-a0f">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="59"/>
@@ -346,6 +348,7 @@
                             <outlet property="delegate" destination="YPv-4z-4S8" id="5TT-jj-5e5"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Riff Details" id="d9A-sz-fNA"/>
                     <connections>
                         <outlet property="tableView" destination="9HB-gx-wae" id="hHG-rL-1jM"/>
@@ -611,6 +614,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="KJU-5B-1ZL"/>
                     <connections>
                         <outlet property="tableView" destination="Dhj-Gm-nVw" id="hj7-n7-7pW"/>
@@ -656,21 +660,21 @@
             <objects>
                 <viewController storyboardIdentifier="audioDeck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xfH-zl-6Gm" customClass="RYAudioDeckViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bf3-HX-llO">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wV3-0q-bCb">
-                                <rect key="frame" x="30" y="266" width="708" height="758"/>
+                                <rect key="frame" x="30" y="266" width="310" height="758"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="audioDeckCell" rowHeight="50" id="Ctx-59-yBM" customClass="RYAudioDeckTableViewCell">
-                                        <rect key="frame" x="0.0" y="55" width="708" height="50"/>
+                                        <rect key="frame" x="0.0" y="55" width="310" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ctx-59-yBM" id="cEh-VO-Pky">
-                                            <rect key="frame" x="0.0" y="0.0" width="708" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="310" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="TNp-3C-E0o">
@@ -693,21 +697,21 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abattoir" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jPQ-3l-Y9G">
-                                                    <rect key="frame" x="43" y="0.0" width="224" height="49"/>
+                                                    <rect key="frame" x="43" y="0.0" width="90" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lay It Down" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eLc-ss-WMc">
-                                                    <rect key="frame" x="341" y="0.0" width="220" height="49"/>
+                                                    <rect key="frame" x="149.5" y="0.0" width="96.5" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:38" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZfN-iD-REV">
-                                                    <rect key="frame" x="586" y="0.0" width="114" height="49"/>
+                                                    <rect key="frame" x="253" y="0.0" width="49" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -732,7 +736,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="S9D-5B-EtV">
-                                <rect key="frame" x="244" y="58" width="275" height="150"/>
+                                <rect key="frame" x="47" y="58" width="275" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZiA-a2-RoD">
@@ -777,7 +781,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gOu-Kh-rON">
-                                <rect key="frame" x="30" y="216" width="708" height="31"/>
+                                <rect key="frame" x="30" y="216" width="310" height="31"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="playbackSliderTouchEnded:" destination="xfH-zl-6Gm" eventType="editingDidEndOnExit" id="ACM-jR-w09"/>
@@ -790,6 +794,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="AudioDeck" image="playing.png" id="5Ya-9F-QGh"/>
                     <connections>
                         <outlet property="controlWrapperView" destination="S9D-5B-EtV" id="oji-9P-3wa"/>
@@ -810,6 +815,7 @@
         <scene sceneID="oH6-1U-yxB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Bw-DF-4Sx" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJn-8v-QMo">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -865,6 +871,7 @@
         <scene sceneID="M7a-Md-3zP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="IcL-Wj-OB1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PDS-1E-JD9">
@@ -927,6 +934,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Bnq-i6-buY"/>
+        <segue reference="pCS-sR-09U"/>
     </inferredMetricsTieBreakers>
 </document>

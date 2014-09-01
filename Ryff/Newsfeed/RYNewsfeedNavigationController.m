@@ -17,7 +17,10 @@
 - (void) viewDidLoad
 {
     for (UIViewController *viewController in self.viewControllers)
+    {
         [viewController setExtendedLayoutIncludesOpaqueBars:YES];
+        [viewController setAutomaticallyAdjustsScrollViewInsets:NO];
+    }
 }
 
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated
