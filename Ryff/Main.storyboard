@@ -322,14 +322,14 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KEd-Gp-biS">
-                                            <rect key="frame" x="68" y="0.0" width="470" height="59"/>
+                                            <rect key="frame" x="68" y="0.0" width="470" height="60"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n9T-GR-VeU">
-                                            <rect key="frame" x="546" y="0.0" width="202" height="59"/>
+                                            <rect key="frame" x="548" y="0.0" width="202" height="59"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -356,7 +356,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlP-sl-zo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4390" y="-1487"/>
+            <point key="canvasLocation" x="6406" y="-1463"/>
         </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
@@ -828,7 +828,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fo0-Oq-NIJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3500" y="-1487"/>
+            <point key="canvasLocation" x="5516" y="-1463"/>
         </scene>
         <!--Newsfeed Container View Controller - Newsfeed-->
         <scene sceneID="ALe-Fa-Oq6">
@@ -909,6 +909,119 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZC-ZJ-80e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1273" y="-164"/>
+        </scene>
+        <!--Tag Feed View Controller - TagFeed-->
+        <scene sceneID="cOn-8Y-lkS">
+            <objects>
+                <viewController storyboardIdentifier="tagFeedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gC5-a4-eUX" customClass="RYTagFeedViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TER-Rh-HIm">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="O53-l1-VuO">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeCell" id="VNC-tS-Ubz" customClass="RYSearchTypeTableViewCell">
+                                        <rect key="frame" x="0.0" y="55" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VNC-tS-Ubz" id="7YT-PA-7P9">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="6Ix-HR-LtU">
+                                                    <rect key="frame" x="234" y="0.0" width="300" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="77H-Xs-4Ge">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                            <state key="normal" title="Trending">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="typeTrendingButtonHit:" destination="VNC-tS-Ubz" eventType="touchUpInside" id="zMW-dq-opJ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j0l-nk-IQ6">
+                                                            <rect key="frame" x="100" y="0.0" width="100" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                            <state key="normal" title="New">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="typeNewButtonHit:" destination="VNC-tS-Ubz" eventType="touchUpInside" id="rFu-RC-Ehu"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sz3-o7-Op0">
+                                                            <rect key="frame" x="200" y="0.0" width="100" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                                                            <state key="normal" title="Top">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="typeTopButtonHit:" destination="VNC-tS-Ubz" eventType="touchUpInside" id="fy2-wl-obF"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="typeNewButton" destination="j0l-nk-IQ6" id="F92-aO-Cog"/>
+                                            <outlet property="typeTopButton" destination="Sz3-o7-Op0" id="mV9-pA-RJk"/>
+                                            <outlet property="typeTrendingButton" destination="77H-Xs-4Ge" id="5tR-UO-Rj4"/>
+                                            <outlet property="wrapperView" destination="6Ix-HR-LtU" id="A5O-61-AgW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gC5-a4-eUX" id="e82-G5-oJ4"/>
+                                    <outlet property="delegate" destination="gC5-a4-eUX" id="45c-ON-krB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="TagFeed" id="2nC-Mf-Jgg"/>
+                    <connections>
+                        <outlet property="tableView" destination="O53-l1-VuO" id="qXv-fZ-KLV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n91-nm-W56" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4468" y="-1463"/>
+        </scene>
+        <!--Newsfeed Navigation Controller - Newsfeed-->
+        <scene sceneID="cIq-md-XOE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F2g-c5-NHf" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" title="Newsfeed" image="stream.png" id="r5Y-dC-tUd"/>
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Je-na-1bH">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ovQ-lC-zIU">
+                        <rect key="frame" x="0.0" y="980" width="398" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="gC5-a4-eUX" kind="relationship" relationship="rootViewController" id="HIw-Yi-s7A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D0R-HQ-gFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3558" y="-1471"/>
         </scene>
     </scenes>
     <resources>

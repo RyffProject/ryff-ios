@@ -18,7 +18,7 @@
 // Associated View Controllers
 #import "RYProfileViewController.h"
 #import "RYRiffCreateViewController.h"
-#import "RYNewsfeedTableViewController.h"
+#import "RYTagFeedViewController.h"
 
 // Categories
 #import "UIViewController+Extras.h"
@@ -136,9 +136,9 @@
 - (void) presentNewsfeedForTag:(NSString *)tag
 {
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYNewsfeedTableViewController *newsfeedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"newsfeedVC"];
-    [newsfeedVC configureWithTags:@[tag]];
-    [self.navigationController pushViewController:newsfeedVC animated:YES];
+    RYTagFeedViewController *tagFeedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"tagFeedVC"];
+    [tagFeedVC configureWithTags:@[tag]];
+    [self.navigationController pushViewController:tagFeedVC animated:YES];
 }
 
 #pragma mark -

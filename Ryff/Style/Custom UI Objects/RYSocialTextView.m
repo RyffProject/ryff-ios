@@ -8,9 +8,13 @@
 
 #import "RYSocialTextView.h"
 
+// Data Managers
+#import "RYStyleSheet.h"
+
 // Categories
 #import "UIColor+Hex.h"
 
+#define kTagAttributes @{NSForegroundColorAttributeName: [RYStyleSheet postActionColor]}
 #define kContentFont [UIFont fontWithName:kRegularFont size:18.0f]
 
 @interface RYSocialTextView () <UITextViewDelegate>
@@ -24,6 +28,8 @@
     [super awakeFromNib];
     
     self.delegate = self;
+    
+    self.linkTextAttributes = kTagAttributes;
 }
 
 #pragma mark -
@@ -60,12 +66,12 @@
     
     // @username
     NSString *userPattern = @"(@)";
-    NSDictionary *userAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"63c8e0"], NSFontAttributeName: [UIFont fontWithName:kBoldFont size:kContentFont.pointSize]};
+    NSDictionary *userAttributes = kTagAttributes;
     [self applyAttributes:userAttributes toWordsStartingWith:userPattern onAttString:attString linkScheme:@"user"];
     
     // #tag
     NSString *tagPattern = @"(#)";
-    NSDictionary *tagAttributes = @{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"63c8e0"]};
+    NSDictionary *tagAttributes = kTagAttributes;
     [self applyAttributes:tagAttributes toWordsStartingWith:tagPattern onAttString:attString linkScheme:@"tag"];
     
     return attString;
@@ -123,7 +129,8 @@
     if ([text isEqualToString:@"@"])
     {
         // provide @username placeholder
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"@username" attributes:@{NSForegroundColorAttributeName : [UIColor blueColor], NSFontAttributeName : [UIFont fontWithName:kBoldFont size:kContentFont.pointSize]}];
+        NSDictionary *userAttributes = kTagAttributes;
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"@username" attributes:userAttributes];
         [self.textStorage replaceCharactersInRange:range withAttributedString:attString];
         [self setSelectedRange:NSMakeRange(range.location+1, attString.length-1)];
         
@@ -132,7 +139,8 @@
     else if ([text isEqualToString:@"#"])
     {
         // provide @username placeholder
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"#tag" attributes:@{NSForegroundColorAttributeName : [UIColor blueColor], NSFontAttributeName : [UIFont fontWithName:kBoldFont size:kContentFont.pointSize]}];
+        NSDictionary *tagAttributes = kTagAttributes;
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"#tag" attributes:tagAttributes];
         [self.textStorage replaceCharactersInRange:range withAttributedString:attString];
         [self setSelectedRange:NSMakeRange(range.location+1, attString.length-1)];
         

@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "RYRiffStreamingCoreViewController.h"
 
-@interface RYNewsfeedTableViewController : RYRiffStreamingCoreViewController
+@class ODRefreshControl;
+
+@interface RYNewsfeedTableViewController : RYRiffStreamingCoreViewController <PostDelegate>
+
+@property (nonatomic, strong) ODRefreshControl *refreshControl;
+
+// Data
+@property (nonatomic, assign) SearchType searchType;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-- (void) configureWithTags:(NSArray *)tags;
 
 @end

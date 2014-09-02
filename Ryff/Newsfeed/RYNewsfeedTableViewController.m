@@ -19,15 +19,7 @@
 // Associated ViewControllers
 #import "RYAudioDeckViewController.h"
 
-@interface RYNewsfeedTableViewController () <PostDelegate>
-
-@property (nonatomic, strong) ODRefreshControl *refreshControl;
-
-// Data
-@property (nonatomic, assign) SearchType searchType;
-
-// array of strings
-@property (nonatomic, strong) NSArray *configurationTags;
+@interface RYNewsfeedTableViewController ()
 
 // iPad
 @property (nonatomic, strong) RYAudioDeckViewController *audioDeckVC;
@@ -44,11 +36,19 @@
     // set up test data
     self.feedItems = @[];
     _searchType = NEW;
+    [self fetchContent];
     
     _refreshControl = [[ODRefreshControl alloc] initInScrollView:_tableView];
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
     _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
+    
+    if (self.navigationController)
+    {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTop:)];
+        tapGesture.numberOfTapsRequired    = 2;
+        [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
+    }
     
     [self addNewPostButtonToNavBar];
 }
@@ -57,7 +57,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self fetchContent];
+    _tableView.contentInset = UIEdgeInsetsZero;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }
@@ -69,25 +69,22 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void) scrollToTop:(UIGestureRecognizer *)tapGesture
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 #pragma mark -
 #pragma mark - Configuration
 
-- (void) configureWithTags:(NSArray *)tags
-{
-    _configurationTags = tags;
-}
-
 - (void) fetchContent
 {
-    if (_configurationTags)
-        [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:_searchType page:nil delegate:self];
-    else
-    {
-        
-        [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
-//        [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
-    }
+    [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
+//    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
+    
     [_refreshControl beginRefreshing];
+    
+    [self.tableView setContentOffset:CGPointMake(0, -40)];
 }
 
 - (void) refreshContent:(ODRefreshControl *)refreshControl
@@ -112,6 +109,21 @@
 - (void) userLoggedIn:(NSNotification *)notification
 {
     [self fetchContent];
+}
+
+#pragma mark -
+#pragma mark - Overrides
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == self.riffSection)
+        return 40.0f;
+    else
+        return 0.01f;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 @end

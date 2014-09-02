@@ -118,7 +118,8 @@
         else
             [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
     }
-    else if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    
+    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
     {
         // currently downloading
         [self styleDownloading:YES];

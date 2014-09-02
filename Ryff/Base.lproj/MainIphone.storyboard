@@ -896,10 +896,10 @@
         <image name="next.png" width="75" height="56"/>
         <image name="pause.png" width="50" height="50"/>
         <image name="play.png" width="50" height="57"/>
-        <image name="playing.png" width="50" height="50"/>
+        <image name="playing.png" width="35" height="35"/>
         <image name="plus.png" width="50" height="50"/>
         <image name="record.png" width="45" height="45"/>
-        <image name="remix.png" width="80" height="70"/>
+        <image name="remix.png" width="45" height="40"/>
         <image name="reset.png" width="30" height="30"/>
         <image name="stream.png" width="50" height="27"/>
         <image name="upvote.png" width="38" height="50"/>

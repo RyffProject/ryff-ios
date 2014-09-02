@@ -31,7 +31,7 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
-#import "RYNewsfeedTableViewController.h"
+#import "RYTagFeedViewController.h"
 #import "RYUserListViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
@@ -179,7 +179,7 @@
         RYTag *tag = _user.tags[tagSelected];
         
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYNewsfeedTableViewController *feedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"newsfeedVC"];
+        RYTagFeedViewController *feedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"tagFeedVC"];
         [feedVC configureWithTags:@[tag.tag]];
         if (self.navigationController)
             [self.navigationController pushViewController:feedVC animated:YES];
