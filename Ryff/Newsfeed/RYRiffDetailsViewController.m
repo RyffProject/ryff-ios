@@ -52,6 +52,9 @@
         self.riffSection = 0;
     else
         self.riffSection = -1;
+    
+    if (_shouldPreventNavigation)
+        _tableView.allowsSelection = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -102,6 +105,9 @@
 
 - (void) riffAvatarTapAction:(NSInteger)postIdx
 {
+    if (_shouldPreventNavigation)
+        return;
+    
     NSArray *postArray = (_familyType == CHILDREN) ? _childrenPosts : _parentPosts;
     if (postIdx < postArray.count)
     {
@@ -151,6 +157,15 @@
         self.feedItems = parentPosts;
     
     [_tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark - Overrides
+
+- (void) avatarAction:(NSInteger)riffIndex
+{
+    if (!_shouldPreventNavigation)
+        [super avatarAction:riffIndex];
 }
 
 #pragma mark -

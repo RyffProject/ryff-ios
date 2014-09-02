@@ -97,8 +97,7 @@ static RYAudioDeckManager *_sharedInstance;
     {
         CGFloat playbackTime = progress*_audioPlayer.duration;
         [_audioPlayer setCurrentTime:playbackTime];
-        if (_delegate && [_delegate respondsToSelector:@selector(post:playbackTimeChanged:progress:)])
-            [_delegate post:_currentlyPlayingPost playbackTimeChanged:playbackTime progress:progress];
+        [self notifyPlaybackTimeChanged];
     }
 }
 
@@ -219,12 +218,7 @@ static RYAudioDeckManager *_sharedInstance;
 {
     if (_audioPlayer && _audioPlayer.isPlaying)
     {
-        if (_delegate && [_delegate respondsToSelector:@selector(post:playbackTimeChanged:progress:)])
-        {
-            CGFloat progress = _audioPlayer.currentTime / _audioPlayer.duration;
-            [_delegate post:_currentlyPlayingPost playbackTimeChanged:_audioPlayer.currentTime progress:progress];
-            [self updateNowPlaying];
-        }
+        [self notifyPlaybackTimeChanged];
     }
 }
 
@@ -314,6 +308,7 @@ static RYAudioDeckManager *_sharedInstance;
         {
             [_downloadQueue removeObject:exitingPost];
             
+            [[RYDataManager sharedInstance] cancelDownloadOperationWithURL:post.riff.URL];
             [self notifyPlaylistChanged];
             
             return;
@@ -462,6 +457,18 @@ static RYAudioDeckManager *_sharedInstance;
 }
 
 #pragma mark - Internal
+
+- (void) notifyPlaybackTimeChanged
+{
+    CGFloat progress = _audioPlayer.currentTime / _audioPlayer.duration;
+    [self updateNowPlaying];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(post:playbackTimeChanged:progress:)])
+        [_delegate post:_currentlyPlayingPost playbackTimeChanged:_audioPlayer.currentTime progress:progress];
+    
+    NSDictionary *postDict = @{@"playbackProgress":@(progress)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPlaybackChangedNotification object:postDict];
+}
 
 - (void) notifyPlaylistChanged
 {

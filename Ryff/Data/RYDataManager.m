@@ -20,6 +20,13 @@
 
 #define kRiffDirectory @"http://ryff.me/riffs/"
 
+@interface RYDataManager ()
+
+// NSDictionaries of format @{@"operation": [AFHTTPRequestOperation], @"url": [localURL]}
+@property (nonatomic, strong) NSMutableArray *downloadOperations;
+
+@end
+
 @implementation RYDataManager
 
 static RYDataManager *_sharedInstance;
@@ -28,6 +35,7 @@ static RYDataManager *_sharedInstance;
     if (_sharedInstance == NULL)
     {
         _sharedInstance = [RYDataManager allocWithZone:NULL];
+        _sharedInstance.downloadOperations = [[NSMutableArray alloc] init];
     }
     return _sharedInstance;
 }
@@ -110,15 +118,36 @@ static RYDataManager *_sharedInstance;
         }
     }];
     
+    NSDictionary *operationDict = @{@"operation": operation, @"url": localURL};
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [_downloadOperations removeObject:operationDict];
+        
         if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
             [delegate track:riffURL FinishedDownloading:localURL];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [_downloadOperations removeObject:operationDict];
         if (delegate && [delegate respondsToSelector:@selector(track:DownloadFailed:)])
             [delegate track:riffURL DownloadFailed:[error localizedDescription]];
     }];
+    [_downloadOperations addObject:operationDict];
     [operation start];
+}
+
+- (void) cancelDownloadOperationWithURL:(NSURL *)url
+{
+    for (NSDictionary *operationDict in _downloadOperations)
+    {
+        AFHTTPRequestOperation *operation = operationDict[@"operation"];
+        if (operation.request.URL == url)
+        {
+            [operation cancel];
+            [_downloadOperations removeObject:operation];
+            NSURL *localURL = operationDict[@"url"];
+            [[NSFileManager defaultManager] removeItemAtPath:localURL.path error:NULL];
+            break;
+        }
+    }
 }
 
 #pragma mark -
@@ -142,14 +171,18 @@ static RYDataManager *_sharedInstance;
         
         operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
         
+        NSDictionary *operationDict = @{@"operation": operation, @"url": [NSURL URLWithString:filePath]};
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [_downloadOperations removeObject:operationDict];
             if (completion)
                 completion(true, filePath);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [_downloadOperations removeObject:operationDict];
             if (completion)
                 completion(false, nil);
         }];
+        [_downloadOperations addObject:operationDict];
         [operation start];
     }
 }
@@ -170,6 +203,13 @@ static RYDataManager *_sharedInstance;
                 NSLog(@"clearCache failed: %@",[error localizedDescription]);
         }
     }
+    
+    for (NSDictionary *operationDict in _downloadOperations)
+    {
+        AFHTTPRequestOperation *operation = operationDict[@"operation"];
+        [operation cancel];
+    }
+    [_downloadOperations removeAllObjects];
 }
 
 @end

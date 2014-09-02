@@ -67,7 +67,7 @@
     
     // prevent volume hud
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: _volumeSlider.frame];
-    [volumeView setVolumeThumbImage:[[UIImage imageNamed:@"sliderFull"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
+    [volumeView setVolumeThumbImage:[[UIImage imageNamed:@"sliderSmall"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     [volumeView setTintColor:[RYStyleSheet audioActionColor]];
     [volumeView setRouteButtonImage:[[UIImage imageNamed:@"airplayIcon"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     [_controlWrapperView addSubview: volumeView];
@@ -270,6 +270,7 @@
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
     [riffDetails configureForPost:post familyType:CHILDREN];
+    riffDetails.shouldPreventNavigation = YES;
     [riffDetails addBackButton];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:riffDetails];

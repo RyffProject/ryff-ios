@@ -159,11 +159,15 @@
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     if (highlighted)
     {
-        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.35 alpha:0.8f]];
+        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.45 alpha:0.8f]];
+        [_postImageView setAlpha:0.7f];
+        [_avatarImageView setAlpha:0.7f];
     }
     else
     {
         [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.25 alpha:0.8f]];
+        [_postImageView setAlpha:1.0f];
+        [_avatarImageView setAlpha:1.0f];
     }
 }
 
@@ -174,7 +178,7 @@
     {
         // currently playing
         _playControlView.hidden             = NO;
-        _playControlView.controlTintColor   = [UIColor whiteColor];
+        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
         _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         [_playControlView setProgress:0.0f animated:NO];
         if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
@@ -187,8 +191,8 @@
     else if ([audioManager playlistContainsPost:_post.postId])
     {
         // in playlist or downloading
-        _playControlView.hidden = NO;
-        _playControlView.controlTintColor = [UIColor whiteColor];
+        _playControlView.hidden             = NO;
+        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
         _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
         {

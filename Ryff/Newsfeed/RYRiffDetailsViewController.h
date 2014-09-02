@@ -14,4 +14,6 @@
 - (void) configureForPost:(RYNewsfeedPost *)post familyType:(FamilyType)familyType;
 - (void) addBackButton;
 
+@property (nonatomic, assign) BOOL shouldPreventNavigation;
+
 @end

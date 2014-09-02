@@ -60,6 +60,8 @@
     UITapGestureRecognizer *playControlGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playControlHit:)];
     [_statusWrapperView addGestureRecognizer:playControlGesture];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaybackChanged:) name:kPlaybackChangedNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
@@ -109,6 +111,7 @@
         // currently playing
         [self hidePlaylistIndex:YES];
         [self styleDownloading:NO];
+        [self styleFromPlaybackProgress];
         
         if ([[RYAudioDeckManager sharedInstance] isPlaying])
             [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
@@ -129,6 +132,17 @@
         [_playControl setCenterImage:nil];
         [self styleDownloading:NO];
     }
+}
+
+- (void) styleFromPlaybackProgress
+{
+    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    {
+        CGFloat percentRemaining  = (1.0f - [[RYAudioDeckManager sharedInstance] currentPlaybackProgress]);
+        CGFloat playbackRemaining = percentRemaining*_post.riff.duration;
+        [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:playbackRemaining]];
+    }
+    
 }
 
 - (void) hidePlaylistIndex:(BOOL)hidePlaylistIndex
@@ -165,6 +179,11 @@
 
 #pragma mark -
 #pragma mark - Notifications
+
+- (void) audioDeckPlaybackChanged:(NSNotification *)notification
+{
+    [self styleFromPlaybackProgress];
+}
 
 - (void) updateDownloadProgress:(NSNotification *)notification
 {

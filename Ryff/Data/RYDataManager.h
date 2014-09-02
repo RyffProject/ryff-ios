@@ -28,6 +28,7 @@
 - (void) fetchTempRiff:(RYRiff *)riff forDelegate:(id<TrackDownloadDelegate>)delegate;
 - (void) saveRiffAt:(NSURL*)riffURL toLocalURL:(NSURL *)localURL forDelegate:(id<TrackDownloadDelegate>)delegate;
 - (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion;
+- (void) cancelDownloadOperationWithURL:(NSURL *)url;
 - (void) clearCache;
 
 @end

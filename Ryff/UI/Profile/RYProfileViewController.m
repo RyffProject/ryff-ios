@@ -23,6 +23,7 @@
 #import "UIImage+Thumbnail.h"
 #import "UIViewController+Extras.h"
 #import "UIImage+Color.h"
+#import "UIColor+Hex.h"
 
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
@@ -59,13 +60,13 @@
     [super viewDidLoad];
     
     self.riffSection = 1;
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self.tableView setBackgroundColor:[UIColor colorWithHexString:@"e9e9e9"]];
     [self configureForUser:_user];
 }
 

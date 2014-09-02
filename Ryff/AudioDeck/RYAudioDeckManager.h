@@ -10,6 +10,7 @@
 
 #define kTrackChangedNotification @"AudioDeckTrackChanged"
 #define kPlaylistChangedNotification @"AudioDeckPlaylistChanged"
+#define kPlaybackChangedNotification @"AudioDeckPlaybackChanged"
 #define kDownloadProgressNotification @"AudioDeckDownloadProgressChanged"
 
 @class RYNewsfeedPost;
