@@ -38,17 +38,19 @@
     _searchType = NEW;
     [self fetchContent];
     
+    [self.tableView setScrollsToTop:YES];
+    
     _refreshControl = [[ODRefreshControl alloc] initInScrollView:_tableView];
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
     _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
-    if (self.navigationController)
-    {
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTop:)];
-        tapGesture.numberOfTapsRequired    = 2;
-        [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
-    }
+//    if (self.navigationController)
+//    {
+//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTop:)];
+//        tapGesture.numberOfTapsRequired    = 2;
+//        [self.navigationController.navigationBar addGestureRecognizer:tapGesture];
+//    }
     
     [self addNewPostButtonToNavBar];
 }
