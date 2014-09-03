@@ -8,6 +8,9 @@
 
 #import "RYTagFeedViewController.h"
 
+// Data Objects
+#import "RYTag.h"
+
 // Custom UI
 #import "ODRefreshControl.h"
 #import "RYSearchTypeTableViewCell.h"
@@ -44,19 +47,70 @@
     self.tableView.contentInset = UIEdgeInsetsZero;
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
+}
+
 #pragma mark - Configuration
 
 - (void) configureWithTags:(NSArray *)tags
 {
     _configurationTags = tags;
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    NSMutableString *tagString = [[NSMutableString alloc] initWithString:@""];
+    for (NSInteger tagIdx = 0; tagIdx < _configurationTags.count; tagIdx++)
+    {
+        NSString *tag = _configurationTags[tagIdx];
+        [tagString appendString:tag];
+        if (tagIdx < _configurationTags.count - 1)
+            [tagString appendString:@", "];
+    }
+    
+    NSString *searchTypeString;
+    switch (self.searchType) {
+        case TRENDING:
+            searchTypeString = @"Trending";
+            break;
+        case NEW:
+            searchTypeString = @"New";
+            break;
+        case TOP:
+            searchTypeString = @"Top";
+            break;
+    }
+    
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:tagString attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+    NSAttributedString *attSearchString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@",searchTypeString] attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:14.0f]}];
+    [attString appendAttributedString:attSearchString];
+    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, attString.string.length)];
+    
+    titleLabel.attributedText = attString;
+    titleLabel.numberOfLines = 0;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
+    CGFloat adjustment = (self.navigationController.navigationBar.frame.size.height - titleLabel.frame.size.height)/2.0f;
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:-adjustment forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void) fetchContent
 {
     [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil delegate:self];
     [self.refreshControl beginRefreshing];
-    
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
+}
+
+#pragma mark -
+#pragma mark - Post Delegate
+
+- (void) postSucceeded:(NSArray *)posts
+{
+    [super postSucceeded:posts];
+    [self configureWithTags:_configurationTags];
 }
 
 #pragma mark -

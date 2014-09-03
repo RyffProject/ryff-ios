@@ -38,7 +38,7 @@
 {
     [_topLabel setText:@"configured!"];
     
-    double timeSince = [[NSDate date] timeIntervalSinceDate:notification.dateUpdated];
+    CGFloat timeSince = [notification.dateUpdated timeIntervalSinceNow];
     [_bottomLabel setText:[RYStyleSheet displayTimeWithSeconds:timeSince]];
 }
 

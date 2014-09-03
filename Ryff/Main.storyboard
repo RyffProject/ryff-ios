@@ -732,7 +732,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="TNp-3C-E0o">
-                                                    <rect key="frame" x="0.0" y="7" width="35" height="35"/>
+                                                    <rect key="frame" x="2" y="7" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" id="sg2-iN-aIA" customClass="RYPlayControl">

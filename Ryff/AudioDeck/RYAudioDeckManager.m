@@ -277,7 +277,7 @@ static RYAudioDeckManager *_sharedInstance;
         [_riffPlaylist removeObjectAtIndex:playlistIdx];
         [_riffPlaylist insertObject:post atIndex:newPlaylistIdx];
         
-        if (post.postId == _currentlyPlayingPost.postId)
+        if (post.postId == _currentlyPlayingPost.postId || newPlaylistIdx == 0)
             [self stopPost];
         
         [self notifyPlaylistChanged];

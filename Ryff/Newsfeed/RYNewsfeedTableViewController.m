@@ -37,6 +37,7 @@
     self.feedItems = @[];
     _searchType = NEW;
     [self fetchContent];
+    [self.tableView setContentOffset:CGPointMake(0, -40)];
     
     [self.tableView setScrollsToTop:YES];
     
@@ -78,8 +79,6 @@
 //    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     
     [_refreshControl beginRefreshing];
-    
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
 }
 
 - (void) refreshContent:(ODRefreshControl *)refreshControl
@@ -96,6 +95,11 @@
     
     [_refreshControl endRefreshing];
     [self.tableView reloadData];
+}
+
+- (void) postFailed:(NSString *)reason
+{
+    [_refreshControl endRefreshing];
 }
 
 #pragma mark -

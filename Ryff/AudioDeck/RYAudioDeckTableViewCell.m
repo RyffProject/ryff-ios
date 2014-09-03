@@ -106,7 +106,13 @@
 
 - (void) styleFromAudioDeck
 {
-    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    {
+        // currently downloading
+        [self styleDownloading:YES];
+        [_playControl setCenterImage:nil];
+    }
+    else if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
     {
         // currently playing
         [self hidePlaylistIndex:YES];
@@ -117,13 +123,6 @@
             [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
         else
             [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
-    }
-    
-    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
-    {
-        // currently downloading
-        [self styleDownloading:YES];
-        [_playControl setCenterImage:nil];
     }
     else if (_trackIdx > 0)
     {
