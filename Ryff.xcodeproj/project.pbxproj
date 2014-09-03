@@ -79,6 +79,8 @@
 		8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309219AFFCC200C60033 /* sliderSeek@2x.png */; };
 		8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309919B00D0200C60033 /* PXAlertView+Customization.m */; };
 		8322309D19B00D0200C60033 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309B19B00D0200C60033 /* PXAlertView.m */; };
+		83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */; };
+		83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD319B6A7FF00136FCB /* RYNotificationsTableViewCell.m */; };
 		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
 		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
@@ -361,6 +363,10 @@
 		8322309919B00D0200C60033 /* PXAlertView+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXAlertView+Customization.m"; sourceTree = "<group>"; };
 		8322309A19B00D0200C60033 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
 		8322309B19B00D0200C60033 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
+		83360CCF19B6A7EB00136FCB /* RYNotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNotificationsTableViewController.h; sourceTree = "<group>"; };
+		83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNotificationsTableViewController.m; sourceTree = "<group>"; };
+		83360CD219B6A7FF00136FCB /* RYNotificationsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNotificationsTableViewCell.h; sourceTree = "<group>"; };
+		83360CD319B6A7FF00136FCB /* RYNotificationsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNotificationsTableViewCell.m; sourceTree = "<group>"; };
 		833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffDetailsViewController.h; path = ../RYRiffDetailsViewController.h; sourceTree = "<group>"; };
 		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
 		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
@@ -831,6 +837,17 @@
 				8322309B19B00D0200C60033 /* PXAlertView.m */,
 			);
 			path = PXAlertView;
+			sourceTree = "<group>";
+		};
+		83360CCE19B6A7C800136FCB /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				83360CCF19B6A7EB00136FCB /* RYNotificationsTableViewController.h */,
+				83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */,
+				83360CD219B6A7FF00136FCB /* RYNotificationsTableViewCell.h */,
+				83360CD319B6A7FF00136FCB /* RYNotificationsTableViewCell.m */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		833E1D511975DFA90002A2BE /* Extras */ = {
@@ -1307,6 +1324,7 @@
 		83FCD17318F909CB00A493F0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				83360CCE19B6A7C800136FCB /* Notifications */,
 				83FCD17418F909DB00A493F0 /* RYProfileViewController.h */,
 				83FCD17518F909DB00A493F0 /* RYProfileViewController.m */,
 				837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */,
@@ -1644,6 +1662,7 @@
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
 				83011B8919A7FFA80017E7C5 /* MGWeakHandler.m in Sources */,
+				83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */,
 				8322309D19B00D0200C60033 /* PXAlertView.m in Sources */,
 				83CA121A1995CD23002610E8 /* FLEXDescriptionTableViewCell.m in Sources */,
 				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
@@ -1671,6 +1690,7 @@
 				83CA12051995CD23002610E8 /* FLEXFieldEditorView.m in Sources */,
 				83CA120C1995CD23002610E8 /* FLEXManager.m in Sources */,
 				83CA11FA1995CD23002610E8 /* FLEXArgumentInputFontView.m in Sources */,
+				83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */,
 				83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */,
 				83CA121F1995CD23002610E8 /* FLEXObjectExplorerViewController.m in Sources */,
 				83011B7719A7FF420017E7C5 /* UIImageView+SGImageCache.m in Sources */,

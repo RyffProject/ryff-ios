@@ -358,6 +358,60 @@
             </objects>
             <point key="canvasLocation" x="6406" y="-1463"/>
         </scene>
+        <!--Notifications Table View Controller-->
+        <scene sceneID="pff-LW-l2e">
+            <objects>
+                <tableViewController storyboardIdentifier="notificationsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TMa-aI-Qyi" customClass="RYNotificationsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i3f-yD-x0d">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="450"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" rowHeight="50" id="PEU-NH-BwO" customClass="RYNotificationsTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="350" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEU-NH-BwO" id="sUL-o0-jK6">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gGX-zt-pn3">
+                                            <rect key="frame" x="10" y="5" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ry6-ix-lNb">
+                                            <rect key="frame" x="58" y="5" width="272" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 minutes ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Sf-Fj-3eB">
+                                            <rect key="frame" x="58" y="26" width="272" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="gGX-zt-pn3" id="Tar-82-Ppo"/>
+                                    <outlet property="bottomLabel" destination="0Sf-Fj-3eB" id="ZMe-e6-5Xp"/>
+                                    <outlet property="topLabel" destination="Ry6-ix-lNb" id="aWF-P1-ffG"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TMa-aI-Qyi" id="0CS-1W-FdX"/>
+                            <outlet property="delegate" destination="TMa-aI-Qyi" id="Amx-8C-UOF"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="350" height="450"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Hb-IT-HQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3365" y="-164"/>
+        </scene>
         <!--Riff Create View Controller - Create Riff-->
         <scene sceneID="OeC-Me-qwo">
             <objects>
@@ -556,7 +610,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZF-bj-J8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="-164"/>
+            <point key="canvasLocation" x="4468" y="-164"/>
         </scene>
         <!--User List View Controller-->
         <scene sceneID="nVf-3V-EEc">
@@ -704,7 +758,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lay It Down" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eLc-ss-WMc">
-                                                    <rect key="frame" x="149.5" y="0.0" width="96.5" height="49"/>
+                                                    <rect key="frame" x="149" y="0.0" width="97" height="49"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

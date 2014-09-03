@@ -33,13 +33,15 @@
 #import "RYLoginViewController.h"
 #import "RYTagFeedViewController.h"
 #import "RYUserListViewController.h"
+#import "RYNotificationsTableViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
-@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
+@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, NotificationSelectionDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
+@property (nonatomic, strong) UIPopoverController *notificationsPopover;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -68,6 +70,14 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithHexString:@"e9e9e9"]];
     [self configureForUser:_user];
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (_notificationsPopover && [_notificationsPopover isPopoverVisible])
+    {
+        [_notificationsPopover presentPopoverFromBarButtonItem:_notificationsBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 #pragma mark -
@@ -150,7 +160,17 @@
 
 - (void) notificationsTapped:(id)sender
 {
-    NSLog(@"show notifications");
+    RYNotificationsTableViewController *notificationsVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"notificationsVC"];
+    [notificationsVC configureWithDelegate:self];
+    if (isIpad)
+    {
+        _notificationsPopover = [[UIPopoverController alloc] initWithContentViewController:notificationsVC];
+        [_notificationsPopover presentPopoverFromBarButtonItem:_notificationsBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+    else
+    {
+        [self.navigationController pushViewController:notificationsVC animated:YES];
+    }
 }
 
 #pragma mark - ProfileInfoCell Delegate
@@ -217,6 +237,14 @@
 {
     UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
     [self presentViewController:navCon animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark - Notifications Delegate
+
+- (void) notificationSelected
+{
+#warning implement notification selection
 }
 
 #pragma mark -
