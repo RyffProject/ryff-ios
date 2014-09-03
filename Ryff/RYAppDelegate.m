@@ -33,6 +33,10 @@
     // Clear caches
     [[RYDataManager sharedInstance] clearCache];
     
+    // light content 
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     return YES;
 }
 							
