@@ -11,6 +11,9 @@
 // Data Managers
 #import "RYStyleSheet.h"
 
+// Data Objects
+#import "RYNotification.h"
+
 @interface RYNotificationsTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -29,6 +32,11 @@
     [_topLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bottomLabel setFont:[UIFont fontWithName:kLightFont size:16.0f]];
     [_bottomLabel setTextColor:[RYStyleSheet availableActionColor]];
+}
+
+- (void) configureWithNotification:(RYNotification *)notification
+{
+    [_topLabel setText:@"configured!"];
 }
 
 @end

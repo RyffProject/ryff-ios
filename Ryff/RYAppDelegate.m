@@ -12,6 +12,7 @@
 #import "RYServices.h"
 #import "RYDataManager.h"
 #import "RYAudioDeckManager.h"
+#import "RYNotificationsManager.h"
 
 // Frameworks
 #import "SSKeychain.h"
@@ -115,7 +116,7 @@
     NSString *rawToken = [[NSString stringWithFormat:@"%@",deviceToken] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
 	NSString *token    = [rawToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    [[RYServices sharedInstance] updatePushToken:token];
+    [[RYNotificationsManager sharedInstance] updatePushToken:token];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

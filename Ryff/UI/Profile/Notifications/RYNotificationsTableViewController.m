@@ -10,6 +10,10 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
+#import "RYNotificationsManager.h"
+
+// Data Objects
+#import "RYNotification.h"
 
 // Custom UI
 #import "RYNotificationsTableViewCell.h"
@@ -17,7 +21,7 @@
 
 #define kNotificationCellReuseID @"notificationCell"
 
-@interface RYNotificationsTableViewController ()
+@interface RYNotificationsTableViewController () <NotificationsDelegate>
 
 @property (nonatomic, strong) ODRefreshControl *refControl;
 
@@ -52,12 +56,9 @@
 - (void) fetchContent
 {
     [_refControl beginRefreshing];
-    
     [self.tableView setContentOffset:CGPointMake(0, -40)];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_refControl endRefreshing];
-    });
+    [[RYNotificationsManager sharedInstance] fetchNotificationsForDelegate:self page:nil];
 }
 
 #pragma mark - Actions
@@ -65,6 +66,21 @@
 - (void) refreshContent:(ODRefreshControl *)refreshControl
 {
     [self fetchContent];
+}
+
+#pragma mark -
+#pragma mark - Notifications Delegate
+
+- (void) notificationsRetrieved:(NSArray *)notifications
+{
+    _notifications = notifications;
+    [self.tableView reloadData];
+    [_refControl endRefreshing];
+}
+
+- (void) failedNotificationsRetrieval:(NSString *)reason
+{
+    [_refControl endRefreshing];
 }
 
 #pragma mark -
@@ -85,12 +101,21 @@
     return [tableView dequeueReusableCellWithIdentifier:kNotificationCellReuseID forIndexPath:indexPath];
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50.0f;
+}
+
 #pragma mark -
 #pragma mark - TableView Delegate
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // prepare cell
+    if (indexPath.row < _notifications.count)
+    {
+        RYNotification *notification = _notifications[indexPath.row];
+        [(RYNotificationsTableViewCell *)cell configureWithNotification:notification];
+    }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

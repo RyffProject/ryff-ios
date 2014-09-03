@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RYNotification;
+
 @interface RYNotificationsTableViewCell : UITableViewCell
+
+- (void) configureWithNotification:(RYNotification *)notification;
 
 @end
