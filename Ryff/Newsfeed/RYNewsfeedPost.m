@@ -48,7 +48,7 @@
     
     NSString *date_created = [userDict objectForKey:@"date_created"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     NSDate *date = [dateFormatter dateFromString:date_created];
     
     BOOL isUpvoted = [postDict[@"is_upvoted"] boolValue];

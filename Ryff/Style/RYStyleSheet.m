@@ -104,4 +104,33 @@
     return displayTime;
 }
 
++ (NSString *)displayTimeWithSeconds:(CGFloat)totalSeconds
+{
+    NSInteger hours = (totalSeconds / 3600);
+    totalSeconds -= (hours * 3600);
+    
+    NSInteger minutes = (totalSeconds / 60);
+    NSInteger seconds = (totalSeconds - (minutes * 60));
+    
+    NSString* displayTime;
+    if (hours > 48)
+        displayTime = [NSString stringWithFormat:@"%ld days ago",(long)(hours/24.0f)];
+    else if (hours > 24)
+        displayTime = @"1 day ago";
+    else if (hours > 1)
+        displayTime = [NSString stringWithFormat:@"%ld hours ago",(long)(hours)];
+    else if (hours > 0)
+        displayTime = @"1 hour ago";
+    else if (minutes > 1)
+        displayTime = [NSString stringWithFormat:@"%ld minutes ago",(long)(minutes)];
+    else if (minutes > 0)
+        displayTime = @"1 minute ago";
+    else if (seconds > 1)
+        displayTime = [NSString stringWithFormat:@"%ld seconds ago",(long)(seconds)];
+    else
+        displayTime = @"1 second ago";
+    
+    return displayTime;
+}
+
 @end

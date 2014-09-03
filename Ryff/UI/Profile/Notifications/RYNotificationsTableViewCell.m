@@ -37,6 +37,9 @@
 - (void) configureWithNotification:(RYNotification *)notification
 {
     [_topLabel setText:@"configured!"];
+    
+    double timeSince = [[NSDate date] timeIntervalSinceDate:notification.dateUpdated];
+    [_bottomLabel setText:[RYStyleSheet displayTimeWithSeconds:timeSince]];
 }
 
 @end

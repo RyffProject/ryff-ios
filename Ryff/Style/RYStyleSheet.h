@@ -23,5 +23,6 @@
 + (void) styleProfileImageView:(UIView *)view;
 
 + (NSString *)convertSecondsToDisplayTime:(CGFloat)totalSeconds;
++ (NSString *)displayTimeWithSeconds:(CGFloat)totalSeconds;
 
 @end

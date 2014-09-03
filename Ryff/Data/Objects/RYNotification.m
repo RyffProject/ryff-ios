@@ -33,7 +33,7 @@
     NSString *created = notifDict[@"date_created"];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-DD HH:MM:SS"];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     NSDate *dateCreated = [dateFormatter dateFromString:created];
     
     NotificationType type = UNRECOGNIZED_NOTIF;
