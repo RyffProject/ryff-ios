@@ -650,29 +650,4 @@ static RYUser* _loggedInUser;
     });
 }
 
-#pragma mark -
-#pragma mark - Notifications
-
-- (void) updatePushToken:(NSString *)pushToken
-{
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        
-        NSUUID *identifier = [[UIDevice currentDevice] identifierForVendor];
-        NSDictionary *params = @{@"token": pushToken, @"uuid": [identifier UUIDString]};
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kAddPushTokenAction];
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *responseDict = responseObject;
-            if (responseDict[@"success"]) {
-//                NSLog(@"Add push token: %@", responseDict[@"success"]);
-            } else if (responseDict[@"error"]) {
-                NSLog(@"Add push token failed: %@", responseDict[@"error"]);
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Add push token failed: %@",[error localizedDescription]);
-        }];
-    });
-}
-
 @end

@@ -48,9 +48,6 @@
 #define kStarPostAction         @"add-star.php"
 #define kUnstarPostAction       @"delete-star.php"
 
-// Notifications
-#define kAddPushTokenAction     @"add-apns-token.php"
-
 @class RYNewsfeedPost;
 @class RYUser;
 
@@ -147,8 +144,5 @@ typedef enum : NSUInteger {
 - (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
-
-// Notifications
-- (void) updatePushToken:(NSString *)pushToken;
 
 @end
