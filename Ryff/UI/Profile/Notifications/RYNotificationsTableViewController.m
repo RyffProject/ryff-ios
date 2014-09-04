@@ -121,6 +121,13 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row < _notifications.count)
+    {
+        RYNotification *notification = _notifications[indexPath.row];
+        if (_delegate && [_delegate respondsToSelector:@selector(notificationSelected:)])
+            [_delegate notificationSelected:notification];
+    }
 }
 
 @end

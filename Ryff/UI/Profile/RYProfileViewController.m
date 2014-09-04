@@ -13,6 +13,7 @@
 
 // Data Objects
 #import "RYTag.h"
+#import "RYNotification.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -34,6 +35,7 @@
 #import "RYTagFeedViewController.h"
 #import "RYUserListViewController.h"
 #import "RYNotificationsTableViewController.h"
+#import "RYRiffDetailsViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 
@@ -242,9 +244,53 @@
 #pragma mark -
 #pragma mark - Notifications Delegate
 
-- (void) notificationSelected
+- (void) notificationSelected:(RYNotification *)notification
 {
-#warning implement notification selection
+    [_notificationsPopover dismissPopoverAnimated:NO];
+    
+    UIViewController *vcToPush;
+    
+    switch (notification.type) {
+        case FOLLOW_NOTIF:
+        {
+            if (notification.users.count > 0)
+            {
+                RYUser *user = notification.users.lastObject;
+                RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
+                [profileVC configureForUser:user];
+                vcToPush = profileVC;
+            }
+            break;
+        }
+        case UPVOTE_NOTIF:
+        case REMIX_NOTIF:
+        {
+            if (notification.post)
+            {
+                RYNewsfeedPost *post = notification.post;
+                RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
+                [riffDetails configureForPost:post familyType:CHILDREN];
+                vcToPush = riffDetails;
+            }
+            break;
+        }
+        case MENTION_NOTIF:
+        {
+            if (notification.posts.count > 0)
+            {
+                RYNewsfeedPost *post = notification.posts.lastObject;
+                RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
+                [riffDetails configureForPost:post familyType:CHILDREN];
+                vcToPush = riffDetails;
+            }
+            break;
+        }
+        case UNRECOGNIZED_NOTIF:
+            break;
+    }
+    
+    if (vcToPush)
+        [self.navigationController pushViewController:vcToPush animated:YES];
 }
 
 #pragma mark -

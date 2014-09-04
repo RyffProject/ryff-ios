@@ -1372,10 +1372,10 @@
 				837C98D519A82403002A9B34 /* UserList */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
 				83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */,
-				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
-				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
 				831E5FF819A03269007F3C31 /* RYNewsfeedNavigationController.h */,
 				831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */,
+				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
+				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
 			);
 			path = Newsfeed;
 			sourceTree = "<group>";

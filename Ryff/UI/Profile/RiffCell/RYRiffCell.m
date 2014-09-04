@@ -70,8 +70,7 @@
     
     [_postLabel setText:post.riff.title];
     
-    NSString *usernameText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
-    [_userLabel setText:usernameText];
+    [_userLabel setText:post.user.username];
     
     [_socialTextView loadAttributedContent:[[NSAttributedString alloc] initWithString:post.content]];
     

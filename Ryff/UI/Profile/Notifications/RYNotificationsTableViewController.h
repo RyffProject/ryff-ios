@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RYNotification;
+
 @protocol NotificationSelectionDelegate <NSObject>
-- (void) notificationSelected;
+- (void) notificationSelected:(RYNotification *)notification;
 @end
 
 @interface RYNotificationsTableViewController : UITableViewController

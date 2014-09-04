@@ -8,6 +8,9 @@
 
 #import "RYNewsfeedContainerViewController.h"
 
+// Data Managers
+#import "RYStyleSheet.h"
+
 @interface RYNewsfeedContainerViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *newsfeedContainerView;
@@ -20,6 +23,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
+    [statusBarView setAutoresizesSubviews:UIViewAutoresizingFlexibleWidth];
+    [statusBarView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+    [self.view insertSubview:statusBarView aboveSubview:_newsfeedContainerView];
     
     [_newsfeedContainerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
     [_audioDeckContainerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
@@ -61,11 +69,6 @@
         [_newsfeedContainerView setFrame:newsfeedFrame];
         
     } completion:nil];
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 @end
