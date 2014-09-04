@@ -34,6 +34,7 @@
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"America/New_York"]];
     NSDate *dateCreated = [dateFormatter dateFromString:created];
     
     NotificationType type = UNRECOGNIZED_NOTIF;
