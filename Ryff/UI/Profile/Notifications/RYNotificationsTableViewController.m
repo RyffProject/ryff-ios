@@ -44,6 +44,7 @@
     
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 20)];
     [self.tableView setSeparatorColor:[RYStyleSheet availableActionColor]];
+    [self.tableView setContentOffset:CGPointMake(0, -40)];
     
     [self fetchContent];
 }
@@ -56,7 +57,6 @@
 - (void) fetchContent
 {
     [_refControl beginRefreshing];
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
     
     [[RYNotificationsManager sharedInstance] fetchNotificationsForDelegate:self page:nil];
 }
