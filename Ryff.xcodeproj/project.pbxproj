@@ -79,6 +79,7 @@
 		8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309219AFFCC200C60033 /* sliderSeek@2x.png */; };
 		8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309919B00D0200C60033 /* PXAlertView+Customization.m */; };
 		8322309D19B00D0200C60033 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309B19B00D0200C60033 /* PXAlertView.m */; };
+		832658A519BA416C0047D93B /* RYRiffCellAvatar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */; };
 		83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */; };
 		83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD319B6A7FF00136FCB /* RYNotificationsTableViewCell.m */; };
 		83360CDA19B6B76500136FCB /* RYNotificationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD919B6B76500136FCB /* RYNotificationsManager.m */; };
@@ -365,6 +366,7 @@
 		8322309919B00D0200C60033 /* PXAlertView+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXAlertView+Customization.m"; sourceTree = "<group>"; };
 		8322309A19B00D0200C60033 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
 		8322309B19B00D0200C60033 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
+		832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellAvatar.xib; sourceTree = "<group>"; };
 		83360CCF19B6A7EB00136FCB /* RYNotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNotificationsTableViewController.h; sourceTree = "<group>"; };
 		83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNotificationsTableViewController.m; sourceTree = "<group>"; };
 		83360CD219B6A7FF00136FCB /* RYNotificationsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNotificationsTableViewCell.h; sourceTree = "<group>"; };
@@ -1355,6 +1357,7 @@
 			isa = PBXGroup;
 			children = (
 				834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */,
+				832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */,
 				83082FE319B525BA000AFACB /* RYRiffCellNoImage.xib */,
 				834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */,
 				834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */,
@@ -1571,6 +1574,7 @@
 				831A88BA199EEEDD00C44CED /* stream@2x.png in Resources */,
 				83FCD14618F907C400A493F0 /* InfoPlist.strings in Resources */,
 				8322309319AFFCC200C60033 /* sliderFull.png in Resources */,
+				832658A519BA416C0047D93B /* RYRiffCellAvatar.xib in Resources */,
 				835E482F19AE634B002A3AC2 /* options.png in Resources */,
 				831A88C0199EEEDD00C44CED /* x@2x.png in Resources */,
 				83FA50B71931524E00F1F3A7 /* Lato-Bol.ttf in Resources */,

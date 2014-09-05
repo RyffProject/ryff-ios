@@ -224,7 +224,7 @@
         if (post.imageURL)
             widthMinusText                = kRiffCellWidthMinusText;
         else
-            widthMinusText                = kRiffCellWidthMinusTextNoImage;
+            widthMinusText                = kRiffCellWidthMinusTextAvatar;
         
         CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
         NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
@@ -268,6 +268,7 @@
         RYRiffCell *riffCell = (RYRiffCell*)cell;
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         [riffCell.socialTextView setUserInteractionEnabled:YES];
+        [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
         [riffCell.socialTextView setSocialDelegate:self];
     }
     else if (indexPath.section == parentInfoSection)

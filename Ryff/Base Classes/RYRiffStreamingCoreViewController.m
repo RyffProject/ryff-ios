@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
+    [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellAvatar" bundle:NULL] forCellReuseIdentifier:KRiffCellAvatar];
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellNoImage" bundle:NULL] forCellReuseIdentifier:kRiffCellNoImageReuseID];
     
     _riffSection = 0;
@@ -233,7 +234,7 @@
         if (post.imageURL)
             cell = [tableView dequeueReusableCellWithIdentifier:kRiffCellReuseID];
         else
-            cell = [tableView dequeueReusableCellWithIdentifier:kRiffCellNoImageReuseID];
+            cell = [tableView dequeueReusableCellWithIdentifier:KRiffCellAvatar];
     }
     return cell;
 }

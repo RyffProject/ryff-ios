@@ -112,8 +112,12 @@
     [_postLabel setTextColor:[UIColor whiteColor]];
     [_userLabel setFont:[UIFont fontWithName:kBoldFont size:20.0f]];
     [_userLabel setTextColor:[UIColor whiteColor]];
-    [_socialTextView setColorForContentText:[UIColor whiteColor]];
-    [_socialTextView setTextContainerInset:UIEdgeInsetsZero];
+    
+    _socialTextView.colorForContentText = [UIColor whiteColor];
+    _socialTextView.textContainerInset = UIEdgeInsetsZero;
+    _socialTextView.scrollEnabled = NO;
+    _socialTextView.textContainer.maximumNumberOfLines = 0;
+    _socialTextView.textContainer.lineBreakMode = NSLineBreakByTruncatingTail;
     
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
