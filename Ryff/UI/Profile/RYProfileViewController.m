@@ -38,6 +38,7 @@
 #import "RYRiffDetailsViewController.h"
 
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
+#define kLoggedOutCellReuseID @"loggedOutCell"
 
 @interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, NotificationSelectionDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
 
@@ -162,17 +163,22 @@
 
 - (void) notificationsTapped:(id)sender
 {
-    RYNotificationsTableViewController *notificationsVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"notificationsVC"];
-    [notificationsVC configureWithDelegate:self];
-    if (isIpad)
+    if (_user)
     {
-        _notificationsPopover = [[UIPopoverController alloc] initWithContentViewController:notificationsVC];
-        [_notificationsPopover presentPopoverFromBarButtonItem:_notificationsBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        RYNotificationsTableViewController *notificationsVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"notificationsVC"];
+        [notificationsVC configureWithDelegate:self];
+        if (isIpad)
+        {
+            _notificationsPopover = [[UIPopoverController alloc] initWithContentViewController:notificationsVC];
+            [_notificationsPopover presentPopoverFromBarButtonItem:_notificationsBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
+        else
+        {
+            [self.navigationController pushViewController:notificationsVC animated:YES];
+        }
     }
     else
-    {
-        [self.navigationController pushViewController:notificationsVC animated:YES];
-    }
+        [self presentLogIn];
 }
 
 #pragma mark - ProfileInfoCell Delegate
@@ -238,6 +244,7 @@
 - (void) presentLogIn
 {
     UIViewController *navCon  = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"LoginVC"];
+    [navCon setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:navCon animated:YES completion:nil];
 }
 
@@ -363,7 +370,10 @@
     UITableViewCell *cell;
     if (indexPath.section == 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
+        if (_user)
+            cell = [tableView dequeueReusableCellWithIdentifier:kProfileInfoCellReuseID forIndexPath:indexPath];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:kLoggedOutCellReuseID forIndexPath:indexPath];
     }
     else if (indexPath.section == 1)
         cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
@@ -378,15 +388,20 @@
     
     if (indexPath.section == 0)
     {
-        // profile info -> calculate size with user bio
-        CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
-        
-        UITextView *sizingView = [[UITextView alloc] init];
-        [sizingView setFont:kProfileInfoCellFont];
-        [sizingView setText:_user.bio];
-        CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
-        height = resultSize.height + kProfileInfoCellHeightMinusText;
-        height = MAX(height, kProfileInfoCellMinimumHeight);
+        if (_user)
+        {
+            // profile info -> calculate size with user bio
+            CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
+            
+            UITextView *sizingView = [[UITextView alloc] init];
+            [sizingView setFont:kProfileInfoCellFont];
+            [sizingView setText:_user.bio];
+            CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
+            height = resultSize.height + kProfileInfoCellHeightMinusText;
+            height = MAX(height, kProfileInfoCellMinimumHeight);
+        }
+        else
+            height = 200.0f;
     }
     else if (indexPath.section == 1)
     {
@@ -402,10 +417,15 @@
     if (indexPath.section == 0)
     {
         // profile info
-        [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:self.tableView];
-        
-        if (_profileTab)
-            [((RYProfileInfoTableViewCell*)cell) enableUserSettingOptions];
+        if (_user)
+        {
+            [((RYProfileInfoTableViewCell*)cell) configureForUser:_user delegate:self parentTableView:self.tableView];
+            
+            if (_profileTab)
+                [((RYProfileInfoTableViewCell*)cell) enableUserSettingOptions];
+        }
+        else
+            [cell setBackgroundColor:nil];
     }
     else if (indexPath.section == 1)
     {
@@ -416,7 +436,12 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0)
+    {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        if (!_user)
+            [self presentLogIn];
+    }
     if (indexPath.section == 1)
         [super tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
 }

@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *wrapperView;
 @property (weak, nonatomic) IBOutlet UIButton *userTypeButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 // Data
 @property (nonatomic, assign) BOOL newUser;
@@ -56,11 +57,14 @@
     
     _newUser = NO;
     
-    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet postActionColor]];
     
     [_userTypeButton.titleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_userTypeButton setTintColor:[UIColor whiteColor]];
     [_userTypeButton setTitle:@"New User" forState:UIControlStateNormal];
+    
+    [_cancelButton setTintColor:[UIColor whiteColor]];
+    [_cancelButton.titleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     
     UITapGestureRecognizer *backgroundTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTap:)];
     [_tapView addGestureRecognizer:backgroundTapGesture];
@@ -136,6 +140,10 @@
     [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kLoginRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (IBAction)cancelButtonHit:(id)sender
+{
+    [self dismissViewController];
+}
 
 #pragma mark -
 #pragma mark - UpdateUserDelegate

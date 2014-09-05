@@ -17,11 +17,11 @@
 
 @implementation RYCoreViewController
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
-    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet lightBackgroundColor]];
     
     [self.navigationController.navigationBar setBarTintColor:[RYStyleSheet postActionColor]];
     [self.navigationController.navigationBar setTranslucent:NO];

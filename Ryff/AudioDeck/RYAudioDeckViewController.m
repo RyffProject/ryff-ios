@@ -55,6 +55,8 @@
 {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+    
     [_playButton setTintColor:[RYStyleSheet audioActionColor]];
     [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
     [_nextButton setTintColor:[RYStyleSheet audioActionColor]];

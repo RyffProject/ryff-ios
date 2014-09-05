@@ -16,6 +16,18 @@
                             <view contentMode="scaleToFill" id="ZcM-oY-5ae">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="25a-DE-7gI">
+                                        <rect key="frame" x="40" y="40" width="92" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonHit:" destination="YdO-9g-msK" eventType="touchUpInside" id="8Rk-t3-YDp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="xbU-ob-ff0">
@@ -44,11 +56,6 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                         </textField>
-                                                        <view tag="8" contentMode="scaleToFill" id="WtI-Tl-gbb">
-                                                            <rect key="frame" x="20" y="74" width="260" height="1"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
@@ -102,6 +109,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Log In" id="Ye3-Jb-sqH"/>
                     <connections>
+                        <outlet property="cancelButton" destination="25a-DE-7gI" id="NJ7-TJ-3Zt"/>
                         <outlet property="tableView" destination="qpk-qa-jtU" id="mte-pA-i3n"/>
                         <outlet property="tapView" destination="ZcM-oY-5ae" id="e4N-9M-iwb"/>
                         <outlet property="userTypeButton" destination="DeN-NG-8ae" id="ITl-gm-Bhs"/>
@@ -284,6 +292,24 @@
                                     <outlet property="userActionButton" destination="QnL-Aw-Uz4" id="6lO-Jp-fBg"/>
                                     <outlet property="usernameLabel" destination="eLr-uR-bNl" id="MDl-Qe-t6F"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loggedOutCell" rowHeight="200" id="xZ7-fg-QA1" customClass="RYProfileInfoTableViewCell">
+                                <rect key="frame" x="0.0" y="555" width="768" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xZ7-fg-QA1" id="oQz-v3-B2v">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="199"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey there! Tap here to log in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g5H-Bd-dGy">
+                                            <rect key="frame" x="0.0" y="89" width="768" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
