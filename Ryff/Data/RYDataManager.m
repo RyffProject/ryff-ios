@@ -20,10 +20,30 @@
 
 #define kRiffDirectory @"http://ryff.me/riffs/"
 
+@implementation DownloadOperation
+
+- (id) initWithOperation:(AFHTTPRequestOperation *)operation localURL:(NSURL *)localURL
+{
+    if (self = [super init])
+    {
+        _operation = operation;
+        _localURL  = localURL;
+    }
+    return self;
+}
+
++ (DownloadOperation *)downloadOperation:(AFHTTPRequestOperation *)operation localURL:(NSURL *)localURL
+{
+    return [[DownloadOperation alloc] initWithOperation:operation localURL:localURL];
+}
+
+@end
+
 @interface RYDataManager ()
 
 // NSDictionaries of format @{@"operation": [AFHTTPRequestOperation], @"url": [localURL]}
-@property (nonatomic, strong) NSMutableArray *downloadOperations;
+@property (nonatomic, strong) NSMutableArray *downloadQueue;
+@property (nonatomic, strong) DownloadOperation *currentDownload;
 
 @end
 
@@ -35,7 +55,7 @@ static RYDataManager *_sharedInstance;
     if (_sharedInstance == NULL)
     {
         _sharedInstance = [RYDataManager allocWithZone:NULL];
-        _sharedInstance.downloadOperations = [[NSMutableArray alloc] init];
+        _sharedInstance.downloadQueue = [[NSMutableArray alloc] init];
     }
     return _sharedInstance;
 }
@@ -118,74 +138,63 @@ static RYDataManager *_sharedInstance;
         }
     }];
     
-    NSDictionary *operationDict = @{@"operation": operation, @"url": localURL};
+    DownloadOperation *downloadOperation = [DownloadOperation downloadOperation:operation localURL:localURL];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [_downloadOperations removeObject:operationDict];
+        [_downloadQueue removeObject:operation];
         
         if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
             [delegate track:riffURL FinishedDownloading:localURL];
         
+        [_downloadQueue removeObject:downloadOperation];
+        _currentDownload = nil;
+        [self startNextDownload];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_downloadOperations removeObject:operationDict];
+        [_downloadQueue removeObject:downloadOperation];
         if (delegate && [delegate respondsToSelector:@selector(track:DownloadFailed:)])
             [delegate track:riffURL DownloadFailed:[error localizedDescription]];
+        
+        [_downloadQueue removeObject:downloadOperation];
+        _currentDownload = nil;
+        [self startNextDownload];
     }];
-    [_downloadOperations addObject:operationDict];
-    [operation start];
+    [_downloadQueue addObject:downloadOperation];
+    [self startNextDownload];
 }
 
 - (void) cancelDownloadOperationWithURL:(NSURL *)url
 {
-    for (NSDictionary *operationDict in _downloadOperations)
+    for (DownloadOperation *download in _downloadQueue)
     {
-        AFHTTPRequestOperation *operation = operationDict[@"operation"];
-        if (operation.request.URL == url)
+        if (download.operation.request.URL == url)
         {
-            [operation cancel];
-            [_downloadOperations removeObject:operation];
-            NSURL *localURL = operationDict[@"url"];
+            [download.operation cancel];
+            [_downloadQueue removeObject:download];
+            if (_currentDownload == download)
+                _currentDownload = nil;
+            
+            NSURL *localURL = download.localURL;
             [[NSFileManager defaultManager] removeItemAtPath:localURL.path error:NULL];
+            
+            [self startNextDownload];
             break;
         }
     }
 }
 
-#pragma mark -
-#pragma mark - Riff Caching
+#pragma mark - Internal
 
-- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion
+- (void) startNextDownload
 {
-    NSString *tempPath = NSTemporaryDirectory();
-    NSString *filePath = [tempPath stringByAppendingPathComponent:fileName];
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    if (!_currentDownload && _downloadQueue.count > 0)
     {
-        if (completion)
-            completion(true, filePath);
-    }
-    else
-    {
-        // start file downloading
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[kRiffDirectory stringByAppendingPathComponent:fileName]]];
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        
-        operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
-        
-        NSDictionary *operationDict = @{@"operation": operation, @"url": [NSURL URLWithString:filePath]};
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [_downloadOperations removeObject:operationDict];
-            if (completion)
-                completion(true, filePath);
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [_downloadOperations removeObject:operationDict];
-            if (completion)
-                completion(false, nil);
-        }];
-        [_downloadOperations addObject:operationDict];
-        [operation start];
+        DownloadOperation *next = _downloadQueue[0];
+        [next.operation start];
     }
 }
+
+#pragma mark -
+#pragma mark - Riff Caching
 
 /**
  *  Clear cache, saving files which are currently in the AudioDeck playlist
@@ -204,12 +213,11 @@ static RYDataManager *_sharedInstance;
         }
     }
     
-    for (NSDictionary *operationDict in _downloadOperations)
+    for (DownloadOperation *download in _downloadQueue)
     {
-        AFHTTPRequestOperation *operation = operationDict[@"operation"];
-        [operation cancel];
+        [download.operation cancel];
     }
-    [_downloadOperations removeAllObjects];
+    [_downloadQueue removeAllObjects];
 }
 
 @end

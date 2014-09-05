@@ -120,7 +120,6 @@
 {
     self.searchType = searchType;
     
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
     [self fetchContent];
 }
 

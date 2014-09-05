@@ -63,12 +63,18 @@
     [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
     
+    [_controlWrapperView setBackgroundColor:[[RYStyleSheet audioBackgroundColor] colorWithAlphaComponent:0.85f]];
+    [_controlWrapperView setClipsToBounds:YES];
+    [_controlWrapperView.layer setCornerRadius:10.0f];
+    
+    
     // long press to move cells
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGesture:)];
     [self.tableView addGestureRecognizer:longPress];
     
     // prevent volume hud
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: _volumeSlider.frame];
+    volumeView.autoresizingMask = _volumeSlider.autoresizingMask;
     [volumeView setVolumeThumbImage:[[UIImage imageNamed:@"sliderSmall"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
     [volumeView setTintColor:[RYStyleSheet audioActionColor]];
     [volumeView setRouteButtonImage:[[UIImage imageNamed:@"airplayIcon"] colorImage:[RYStyleSheet audioActionColor]] forState:UIControlStateNormal];
@@ -327,6 +333,8 @@ static NSIndexPath  *movingIndexPath; // current moving index path
     movingIndexPath  = [self.tableView indexPathForRowAtPoint:location];
     location         = [self.view convertPoint:location fromView:self.tableView];
     
+    NSInteger playlistCount = [[RYAudioDeckManager sharedInstance] riffPlaylist].count;
+    
     switch (longPress.state)
     {
         case UIGestureRecognizerStateBegan:
@@ -335,28 +343,32 @@ static NSIndexPath  *movingIndexPath; // current moving index path
             {
                 sourceIndexPath = movingIndexPath;
                 
-                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:movingIndexPath];
-                
-                // Take a snapshot of the selected row using helper method.
-                snapshot = [self customSnapshotFromView:cell];
-                
-                // Add the snapshot as subview, centered at cell's center...
-                __block CGPoint center = [self.view convertPoint:cell.center fromView:self.tableView];
-                snapshot.center = center;
-                snapshot.alpha = 0.0;
-                [self.view addSubview:snapshot];
-                [UIView animateWithDuration:0.25 animations:^{
+                if (sourceIndexPath.row < playlistCount)
+                {
+                    // playlist cell, allow moving in playlist
+                    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:movingIndexPath];
                     
-                    // Offset for gesture location.
-                    center.y = location.y;
+                    // Take a snapshot of the selected row using helper method.
+                    snapshot = [self customSnapshotFromView:cell];
+                    
+                    // Add the snapshot as subview, centered at cell's center...
+                    __block CGPoint center = [self.view convertPoint:cell.center fromView:self.tableView];
                     snapshot.center = center;
-                    snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
-                    snapshot.alpha = 0.98;
-                    cell.alpha = 0.0;
-                    
-                } completion:^(BOOL finished) {
-                    cell.hidden = YES;
-                }];
+                    snapshot.alpha = 0.0;
+                    [self.view insertSubview:snapshot aboveSubview:_tableView];
+                    [UIView animateWithDuration:0.25 animations:^{
+                        
+                        // Offset for gesture location.
+                        center.y = location.y;
+                        snapshot.center = center;
+                        snapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
+                        snapshot.alpha = 0.98;
+                        cell.alpha = 0.0;
+                        
+                    } completion:^(BOOL finished) {
+                        cell.hidden = YES;
+                    }];
+                }
             }
             break;
         }
@@ -366,9 +378,9 @@ static NSIndexPath  *movingIndexPath; // current moving index path
             center.y = location.y;
             snapshot.center = center;
             
-            // Is destination valid and is it different from source?
-            if (movingIndexPath && ![movingIndexPath isEqual:sourceIndexPath])
+            if (movingIndexPath && ![movingIndexPath isEqual:sourceIndexPath] && movingIndexPath.row < playlistCount)
             {
+                // destination valid, different from source, and in playlist
                 [[RYAudioDeckManager sharedInstance] movePostFromPlaylistIndex:sourceIndexPath.row toIndex:movingIndexPath.row];
                 
                 [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:movingIndexPath];

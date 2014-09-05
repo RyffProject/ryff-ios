@@ -89,8 +89,6 @@
         [self setTitle:[NSString stringWithFormat:@"Sampled in %@",post.riff.title]];
     
     self.feedItems = @[post];
-    
-    [[RYDataManager sharedInstance] getRiffFile:post.riff.fileName completion:nil];
 }
 
 #pragma mark - Actions

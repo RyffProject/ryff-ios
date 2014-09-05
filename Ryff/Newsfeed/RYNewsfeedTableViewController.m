@@ -37,7 +37,6 @@
     self.feedItems = @[];
     _searchType = NEW;
     [self fetchContent];
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
     
     [self.tableView setScrollsToTop:YES];
     
@@ -76,6 +75,8 @@
 - (void) fetchContent
 {
     [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
+    [self.tableView setContentOffset:CGPointMake(0, -40)];
+    
 //    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     
     [_refreshControl beginRefreshing];
@@ -113,8 +114,15 @@
 #pragma mark -
 #pragma mark - Overrides
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == self.riffSection)
+        return 40.0f;
+    else
+        return 0.01f;
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     if (section == self.riffSection)
         return 40.0f;
     else

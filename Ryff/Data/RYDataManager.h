@@ -9,12 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @class RYRiff;
+@class AFHTTPRequestOperation;
 
 @protocol TrackDownloadDelegate <NSObject>
 - (void) track:(NSURL*)trackURL DownloadProgressed:(CGFloat)progress;
 - (void) track:(NSURL*)trackURL FinishedDownloading:(NSURL*)localURL;
 @optional
 - (void) track:(NSURL*)trackURL DownloadFailed:(NSString*)reason;
+@end
+
+@interface DownloadOperation : NSObject
+@property (nonatomic, strong) AFHTTPRequestOperation *operation;
+@property (nonatomic, strong) NSURL *localURL;
+- (id) initWithOperation:(AFHTTPRequestOperation *)operation localURL:(NSURL *)localURL;
++ (DownloadOperation *)downloadOperation:(AFHTTPRequestOperation *)operation localURL:(NSURL *)localURL;
 @end
 
 @interface RYDataManager : NSObject
@@ -27,7 +35,6 @@
 
 - (void) fetchTempRiff:(RYRiff *)riff forDelegate:(id<TrackDownloadDelegate>)delegate;
 - (void) saveRiffAt:(NSURL*)riffURL toLocalURL:(NSURL *)localURL forDelegate:(id<TrackDownloadDelegate>)delegate;
-- (void) getRiffFile:(NSString *)fileName completion:(void(^)(BOOL success, NSString *localPath))completion;
 - (void) cancelDownloadOperationWithURL:(NSURL *)url;
 - (void) clearCache;
 
