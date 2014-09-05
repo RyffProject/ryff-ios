@@ -240,29 +240,7 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
-    
-    if (indexPath.row < _feedItems.count)
-    {
-        // profile post -> calculate size with attributed text for post description
-        RYNewsfeedPost *post              = _feedItems[indexPath.row];
-        CGFloat widthMinusText;
-        if (post.imageURL)
-            widthMinusText                = kRiffCellWidthMinusText;
-        else
-            widthMinusText                = kRiffCellWidthMinusTextNoImage;
-        
-        CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
-        NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
-        UITextView *sizingTextView        = [[UITextView alloc] init];
-        sizingTextView.textContainerInset = UIEdgeInsetsZero;
-        [sizingTextView setAttributedText:postString];
-        height = [sizingTextView sizeThatFits:boundingSize].height;
-        
-        height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
-    }
-    
-    return height;
+    return kRiffCellMinimumHeight;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 20.0f; }

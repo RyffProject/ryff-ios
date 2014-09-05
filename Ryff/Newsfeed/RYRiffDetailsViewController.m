@@ -217,7 +217,24 @@
     CGFloat height = 0;
     
     if (indexPath.section == self.riffSection || _familyType == PARENTS)
-        height = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    {
+        // riff details -> calculate size with attributed text for post description
+        RYNewsfeedPost *post              = self.feedItems[indexPath.row];
+        CGFloat widthMinusText;
+        if (post.imageURL)
+            widthMinusText                = kRiffCellWidthMinusText;
+        else
+            widthMinusText                = kRiffCellWidthMinusTextNoImage;
+        
+        CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
+        NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+        UITextView *sizingTextView        = [[UITextView alloc] init];
+        sizingTextView.textContainerInset = UIEdgeInsetsZero;
+        [sizingTextView setAttributedText:postString];
+        height = [sizingTextView sizeThatFits:boundingSize].height;
+        
+        height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
+    }
     else
     {
         // riff details cell
