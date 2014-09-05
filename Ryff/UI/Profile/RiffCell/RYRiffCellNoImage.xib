@@ -50,7 +50,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8za-93-uZ5">
-                                        <rect key="frame" x="75.5" y="3" width="50" height="44"/>
+                                        <rect key="frame" x="75" y="3" width="50" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
                                         <state key="normal" image="remix.png"/>
@@ -93,7 +93,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" id="eVA-fE-Lu6">
-                        <rect key="frame" x="814.5" y="12" width="100" height="50"/>
+                        <rect key="frame" x="814" y="12" width="100" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upvote.png" id="qgK-uh-H0e">
