@@ -77,4 +77,23 @@
     return posts;
 }
 
+#pragma mark - Internal
+
+- (BOOL) isEqual:(id)object
+{
+    BOOL equal = NO;
+    if ([object isKindOfClass:[RYNewsfeedPost class]])
+    {
+        RYNewsfeedPost *other = (RYNewsfeedPost *)object;
+        if (other.postId == self.postId)
+            equal = YES;
+    }
+    return equal;
+}
+
+- (NSUInteger)hash
+{
+    return _postId;
+}
+
 @end

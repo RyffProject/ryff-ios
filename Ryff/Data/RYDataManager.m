@@ -162,6 +162,13 @@ static RYDataManager *_sharedInstance;
     [self startNextDownload];
 }
 
+- (void) deleteLocalRiff:(RYRiff *)riff
+{
+    NSURL *localURL = [RYDataManager urlForTempRiff:riff.fileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:localURL.path])
+        [[NSFileManager defaultManager] removeItemAtPath:localURL.path error:NULL];
+}
+
 - (void) cancelDownloadOperationWithURL:(NSURL *)url
 {
     for (DownloadOperation *download in _downloadQueue)

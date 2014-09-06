@@ -21,9 +21,12 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "SGImageCache.h"
 
+#define kRecentlyPlayedSize 5
+
 @interface RYAudioDeckManager () <AVAudioPlayerDelegate, TrackDownloadDelegate>
 
-// both data arrays populated with RYNewsfeedPost objects
+// data arrays populated with RYNewsfeedPost objects
+@property (nonatomic, strong) NSMutableArray *recentlyPlayed;
 @property (nonatomic, strong) NSMutableArray *riffPlaylist;
 @property (nonatomic, strong) NSMutableArray *downloadQueue;
 @property (nonatomic, strong) RYNewsfeedPost *currentlyPlayingPost;
@@ -44,6 +47,7 @@ static RYAudioDeckManager *_sharedInstance;
     if (_sharedInstance == NULL)
     {
         _sharedInstance = [RYAudioDeckManager allocWithZone:NULL];
+        _sharedInstance.recentlyPlayed = [[NSMutableArray alloc] init];
         _sharedInstance.downloadQueue = [[NSMutableArray alloc] init];
         _sharedInstance.riffPlaylist  = [[NSMutableArray alloc] init];
         
@@ -164,6 +168,8 @@ static RYAudioDeckManager *_sharedInstance;
     
     if (_currentlyPlayingPost)
     {
+        [_recentlyPlayed addObject:_currentlyPlayingPost];
+        
         _currentlyPlayingPost = nil;
         
         [self notifyTrackChanged];
@@ -295,6 +301,7 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.postId == exitingPost.postId)
         {
             [_riffPlaylist removeObject:exitingPost];
+            [[RYDataManager sharedInstance] deleteLocalRiff:exitingPost.riff];
             
             [self notifyPlaylistChanged];
             
@@ -380,6 +387,27 @@ static RYAudioDeckManager *_sharedInstance;
     return fileInPlaylist;
 }
 
+#pragma mark - Recently Played
+
+- (void) addPostToRecentlyPlayed:(RYNewsfeedPost *)post
+{
+    if (_recentlyPlayed.count >= kRecentlyPlayedSize)
+    {
+        RYNewsfeedPost *oldestPost = _recentlyPlayed[0];
+        [self removePostFromPlaylist:oldestPost];
+    }
+    [_recentlyPlayed addObject:post];
+}
+
+- (void) removePostFromRecentlyPlayed:(RYNewsfeedPost *)post
+{
+    if ([_recentlyPlayed containsObject:post])
+        [_recentlyPlayed removeObject:post];
+    
+    [[RYDataManager sharedInstance] deleteLocalRiff:post.riff];
+}
+
+#pragma mark -
 #pragma mark - Data
 
 - (RYNewsfeedPost *)currentlyPlayingPost
