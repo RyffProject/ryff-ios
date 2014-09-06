@@ -29,10 +29,9 @@
 #define kPostImageCellReuseID @"postImageCell"
 #define kRiffDetailsCellReuseID @"riffDetails"
 
-#define kParentPostsInfoSection (_parentPosts.count > 0) ? 1 : -1
 #define kPostImageRow (_post.imageURL && indexPath.row == 0)
 
-@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate>
+@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate, PostImageCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -86,6 +85,24 @@
 - (IBAction)backButtonHit:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark - PostImageCell Delegate
+
+- (void) postImageTapped
+{
+    // same as if user tapped play control to start playback or download
+    [self playerControlAction:0];
+}
+
+- (void) parentsTapped
+{
+    // present list of parent riffs
+    RYRiffStreamViewController *riffStream = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffStream"];
+    [riffStream configureWithPosts:_parentPosts];
+    riffStream.title = @"Sampled Riffs";
+    [self.navigationController pushViewController:riffStream animated:YES];
 }
 
 #pragma mark -
@@ -174,11 +191,6 @@
         if (_post.imageURL)
             numRows++; // row for image
     }
-    else if (section == kParentPostsInfoSection)
-    {
-        // provide one cell for description of parents
-        numRows = 1;
-    }
     else
     {
         numRows = _childrenPosts.count;
@@ -240,8 +252,6 @@
     CGFloat height = 15.0f;
     if (section == self.riffSection)
         height = [super tableView:tableView heightForHeaderInSection:section];
-    else if (section == kParentPostsInfoSection)
-        height = 0.01f;
     return height;
 }
 
@@ -250,14 +260,11 @@
 
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger parentInfoSection = kParentPostsInfoSection;
-    
     if (indexPath.section == self.riffSection)
     {
         if (kPostImageRow)
         {
-            [((RYPostImageTableViewCell *)cell).centerImageView setImageForURL:_post.imageURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
-            [cell setBackgroundColor:[UIColor clearColor]];
+            [(RYPostImageTableViewCell *)cell configureWithImageURL:_post.imageURL.absoluteString numParents:_parentPosts.count delegate:self];
         }
         else
         {
@@ -268,15 +275,6 @@
             [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
             [riffCell.socialTextView setSocialDelegate:self];
         }
-    }
-    else if (indexPath.section == parentInfoSection)
-    {
-        NSMutableAttributedString *username = [[NSMutableAttributedString alloc] initWithString:_post.user.username attributes:@{NSFontAttributeName: [UIFont fontWithName:kBoldFont size:18.0f]}];
-        NSAttributedString *action   = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" sampled %lu riffs", (unsigned long)_parentPosts.count] attributes:@{NSFontAttributeName : [UIFont fontWithName:kRegularFont size:18.0f]}];
-        [username appendAttributedString:action];
-        
-        RYRiffDetailsTableViewCell *detailsCell = (RYRiffDetailsTableViewCell *)cell;
-        [detailsCell configureWithAttributedString:username imageURL:_post.user.avatarURL];
     }
     else
     {
@@ -299,15 +297,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSInteger parentInfoSection = kParentPostsInfoSection;
-    if (indexPath.section == parentInfoSection)
-    {
-        RYRiffStreamViewController *riffStream = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffStream"];
-        [riffStream configureWithPosts:_parentPosts];
-        riffStream.title = [NSString stringWithFormat:@"Posts Sampled in %@",_post.riff.title];
-        [self.navigationController pushViewController:riffStream animated:YES];
-    }
-    else if (indexPath.section != self.riffSection)
+    if (indexPath.section != self.riffSection)
     {
         // push new riff details vc
         RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;

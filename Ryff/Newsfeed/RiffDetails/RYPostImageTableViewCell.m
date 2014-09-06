@@ -8,20 +8,70 @@
 
 #import "RYPostImageTableViewCell.h"
 
+// Data Managers
+#import "RYStyleSheet.h"
+
 // Categories
 #import "UIImageView+SGImageCache.h"
+#import "UIImage+Color.h"
 
 @interface RYPostImageTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *centerImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *parentsWrapperView;
+@property (weak, nonatomic) IBOutlet UIImageView *parentsImageView;
+@property (weak, nonatomic) IBOutlet UILabel *parentsCountLabel;
+
 @end
 
 @implementation RYPostImageTableViewCell
 
-- (void) configureWithImageURL:(NSString *)urlString delegate:(id<PostImageCellDelegate>)delegate
+- (void) awakeFromNib
+{
+    [super awakeFromNib];
+    
+    _parentsCountLabel.font = [UIFont fontWithName:kRegularFont size:18.0f];
+    _parentsCountLabel.textColor = [RYStyleSheet availableActionColor];
+    
+    UITapGestureRecognizer *parentsWrapperTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(parentsWrapperViewHit:)];
+    [_parentsWrapperView addGestureRecognizer:parentsWrapperTap];
+    
+    UITapGestureRecognizer *centerImageViewTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerImageHit:)];
+    [_centerImageView addGestureRecognizer:centerImageViewTap];
+}
+
+- (void) configureWithImageURL:(NSString *)urlString numParents:(NSInteger)numParents delegate:(id<PostImageCellDelegate>)delegate
 {
     _delegate = delegate;
+    
+    [_centerImageView setImageForURL:urlString placeholder:[UIImage imageNamed:@"user"]];
+    
+    if (numParents > 0)
+    {
+        _parentsWrapperView.hidden = NO;
+        [_parentsImageView setImage:[[UIImage imageNamed:@"remix"] colorImage:[RYStyleSheet availableActionColor]]];
+        [_parentsCountLabel setText:[NSString stringWithFormat:@"%ld",(long)numParents]];
+    }
+    else
+        _parentsWrapperView.hidden = YES;
+    
+    [self setBackgroundColor:[UIColor clearColor]];
+}
+
+#pragma mark -
+#pragma mark - Actions
+
+- (void) parentsWrapperViewHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(parentsTapped)])
+        [_delegate parentsTapped];
+}
+
+- (void) centerImageHit:(UITapGestureRecognizer *)tapGesture
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(postImageTapped)])
+        [_delegate postImageTapped];
 }
 
 @end
