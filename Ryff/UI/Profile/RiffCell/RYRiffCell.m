@@ -77,7 +77,7 @@
     if (post.riff)
         [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
     
-    if (post.imageURL)
+    if (post.imageURL && _postImageView)
     {
         [_avatarImageView setHidden:YES];
         [_postImageView setHidden:NO];

@@ -26,7 +26,6 @@
 		83082FDE19B4F303000AFACB /* airplayIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FDC19B4F303000AFACB /* airplayIcon@2x.png */; };
 		83082FE119B52256000AFACB /* sliderSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FDF19B52256000AFACB /* sliderSmall.png */; };
 		83082FE219B52256000AFACB /* sliderSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FE019B52256000AFACB /* sliderSmall@2x.png */; };
-		83082FE419B525BA000AFACB /* RYRiffCellNoImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83082FE319B525BA000AFACB /* RYRiffCellNoImage.xib */; };
 		83082FE819B55DF4000AFACB /* RYTagFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83082FE719B55DF4000AFACB /* RYTagFeedViewController.m */; };
 		83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83082FEA19B5652D000AFACB /* RYSearchTypeTableViewCell.m */; };
 		830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCAD18F9F54900A9C53F /* SSKeychain.strings */; };
@@ -118,6 +117,8 @@
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
+		83C354B319BBAD41000A5BD4 /* RYRiffStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */; };
+		83C354B619BBB480000A5BD4 /* RYPostImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */; };
 		83C6A5EE1960EB9600BB3D1A /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5EC1960EB9600BB3D1A /* record.png */; };
 		83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5ED1960EB9600BB3D1A /* record@2x.png */; };
 		83C6A5F21960EC5200BB3D1A /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F01960EC5200BB3D1A /* plus.png */; };
@@ -296,7 +297,6 @@
 		83082FDC19B4F303000AFACB /* airplayIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airplayIcon@2x.png"; sourceTree = "<group>"; };
 		83082FDF19B52256000AFACB /* sliderSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderSmall.png; sourceTree = "<group>"; };
 		83082FE019B52256000AFACB /* sliderSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderSmall@2x.png"; sourceTree = "<group>"; };
-		83082FE319B525BA000AFACB /* RYRiffCellNoImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellNoImage.xib; sourceTree = "<group>"; };
 		83082FE619B55DF4000AFACB /* RYTagFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagFeedViewController.h; sourceTree = "<group>"; };
 		83082FE719B55DF4000AFACB /* RYTagFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagFeedViewController.m; sourceTree = "<group>"; };
 		83082FE919B5652D000AFACB /* RYSearchTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSearchTypeTableViewCell.h; sourceTree = "<group>"; };
@@ -425,6 +425,10 @@
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedContainerViewController.h; sourceTree = "<group>"; };
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
+		83C354B119BBAD41000A5BD4 /* RYRiffStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamViewController.h; sourceTree = "<group>"; };
+		83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamViewController.m; sourceTree = "<group>"; };
+		83C354B419BBB480000A5BD4 /* RYPostImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPostImageTableViewCell.h; sourceTree = "<group>"; };
+		83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostImageTableViewCell.m; sourceTree = "<group>"; };
 		83C6A5EC1960EB9600BB3D1A /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
 		83C6A5ED1960EB9600BB3D1A /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
 		83C6A5F01960EC5200BB3D1A /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 			children = (
 				833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */,
 				833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */,
+				83C354B419BBB480000A5BD4 /* RYPostImageTableViewCell.h */,
+				83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */,
 				833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */,
 				833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */,
 			);
@@ -935,6 +941,15 @@
 				837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */,
 			);
 			path = UserList;
+			sourceTree = "<group>";
+		};
+		83C354B019BBAD28000A5BD4 /* RiffStream */ = {
+			isa = PBXGroup;
+			children = (
+				83C354B119BBAD41000A5BD4 /* RYRiffStreamViewController.h */,
+				83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */,
+			);
+			path = RiffStream;
 			sourceTree = "<group>";
 		};
 		83C6CA7618FAECD200412469 /* RiffEdit */ = {
@@ -1358,7 +1373,6 @@
 			children = (
 				834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */,
 				832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */,
-				83082FE319B525BA000AFACB /* RYRiffCellNoImage.xib */,
 				834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */,
 				834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */,
 			);
@@ -1373,6 +1387,7 @@
 				83FCD17718F90BE700A493F0 /* RiffCell */,
 				833FC1AF1989E467002491C8 /* RiffDetails */,
 				837C98D519A82403002A9B34 /* UserList */,
+				83C354B019BBAD28000A5BD4 /* RiffStream */,
 				83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */,
 				83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */,
 				831E5FF819A03269007F3C31 /* RYNewsfeedNavigationController.h */,
@@ -1549,7 +1564,6 @@
 				830186011900B1CD00093EFA /* tabBar.png in Resources */,
 				831A88AC199EEEDD00C44CED /* pause@2x.png in Resources */,
 				835E483019AE634B002A3AC2 /* options@2x.png in Resources */,
-				83082FE419B525BA000AFACB /* RYRiffCellNoImage.xib in Resources */,
 				83ED34ED1931851600FEB018 /* AppIcon50x50@2x.png in Resources */,
 				831A88B7199EEEDD00C44CED /* star.png in Resources */,
 				83ED34F11931851600FEB018 /* AppIcon60x60@2x.png in Resources */,
@@ -1660,6 +1674,7 @@
 				83CA12251995CD23002610E8 /* FLEXRuntimeUtility.m in Sources */,
 				83011B8619A7FFA80017E7C5 /* MGBlockWrapper.m in Sources */,
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				83C354B319BBAD41000A5BD4 /* RYRiffStreamViewController.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
 				83FADE4A19AC52B300182155 /* ODRefreshControl.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
@@ -1712,6 +1727,7 @@
 				83CA12201995CD23002610E8 /* FLEXSetExplorerViewController.m in Sources */,
 				83CA12051995CD23002610E8 /* FLEXFieldEditorView.m in Sources */,
 				83CA120C1995CD23002610E8 /* FLEXManager.m in Sources */,
+				83C354B619BBB480000A5BD4 /* RYPostImageTableViewCell.m in Sources */,
 				83CA11FA1995CD23002610E8 /* FLEXArgumentInputFontView.m in Sources */,
 				83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */,
 				83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */,

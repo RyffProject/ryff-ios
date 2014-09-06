@@ -12,6 +12,7 @@
 #import "RYDataManager.h"
 
 // Custom UI
+#import "RYPostImageTableViewCell.h"
 #import "RYRiffDetailsTableViewCell.h"
 #import "RYSocialTextView.h"
 
@@ -19,13 +20,17 @@
 #import "RYProfileViewController.h"
 #import "RYRiffCreateViewController.h"
 #import "RYTagFeedViewController.h"
+#import "RYRiffStreamViewController.h"
 
 // Categories
 #import "UIViewController+Extras.h"
+#import "UIImageView+SGImageCache.h"
 
+#define kPostImageCellReuseID @"postImageCell"
 #define kRiffDetailsCellReuseID @"riffDetails"
 
 #define kParentPostsInfoSection (_parentPosts.count > 0) ? 1 : -1
+#define kPostImageRow (_post.imageURL && indexPath.row == 0)
 
 @interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate>
 
@@ -48,17 +53,10 @@
     [super viewDidLoad];
     
     self.riffSection = 0;
+    [[RYServices sharedInstance] getFamilyForPost:_post.postId delegate:self];
     
     if (_shouldPreventNavigation)
         _tableView.allowsSelection = NO;
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [[RYServices sharedInstance] getFamilyForPost:_post.postId delegate:self];
-    [self.tableView reloadData];
 }
 
 - (void) addBackButton
@@ -171,7 +169,11 @@
 {
     NSInteger numRows;
     if (section == self.riffSection)
+    {
         numRows = [super tableView:tableView numberOfRowsInSection:0];
+        if (_post.imageURL)
+            numRows++; // row for image
+    }
     else if (section == kParentPostsInfoSection)
     {
         // provide one cell for description of parents
@@ -188,9 +190,14 @@
 {
     UITableViewCell *cell;
     if (indexPath.section == self.riffSection)
-        cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
+    {
+        if (kPostImageRow)
+            cell = [tableView dequeueReusableCellWithIdentifier:kPostImageCellReuseID];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:KRiffCellAvatarReuseID];
+    }
     else
-        cell = [_tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
+        cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
     return cell;
 }
 
@@ -200,22 +207,24 @@
     
     if (indexPath.section == self.riffSection)
     {
-        // riff details -> calculate size with attributed text for post description
-        RYNewsfeedPost *post              = self.feedItems[indexPath.row];
-        CGFloat widthMinusText;
-        if (post.imageURL)
-            widthMinusText                = kRiffCellWidthMinusText;
+        if (kPostImageRow)
+            height = 230.0f;
         else
-            widthMinusText                = kRiffCellWidthMinusTextAvatar;
-        
-        CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
-        NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
-        UITextView *sizingTextView        = [[UITextView alloc] init];
-        sizingTextView.textContainerInset = UIEdgeInsetsZero;
-        [sizingTextView setAttributedText:postString];
-        height = [sizingTextView sizeThatFits:boundingSize].height;
-        
-        height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
+        {
+            // riff details -> calculate size with attributed text for post description
+            NSInteger postIdx                 = _post.imageURL ? (indexPath.row-1) : indexPath.row;
+            RYNewsfeedPost *post              = self.feedItems[postIdx];
+            CGFloat widthMinusText            = kRiffCellWidthMinusTextAvatar;
+            
+            CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
+            NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+            UITextView *sizingTextView        = [[UITextView alloc] init];
+            sizingTextView.textContainerInset = UIEdgeInsetsZero;
+            [sizingTextView setAttributedText:postString];
+            height = [sizingTextView sizeThatFits:boundingSize].height;
+            
+            height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
+        }
     }
     else
     {
@@ -228,9 +237,12 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    CGFloat height = 15.0f;
     if (section == self.riffSection)
-        return [super tableView:tableView heightForHeaderInSection:section];
-    return 50.0f;
+        height = [super tableView:tableView heightForHeaderInSection:section];
+    else if (section == kParentPostsInfoSection)
+        height = 0.01f;
+    return height;
 }
 
 #pragma mark -
@@ -242,11 +254,20 @@
     
     if (indexPath.section == self.riffSection)
     {
-        RYRiffCell *riffCell = (RYRiffCell*)cell;
-        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
-        [riffCell.socialTextView setUserInteractionEnabled:YES];
-        [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
-        [riffCell.socialTextView setSocialDelegate:self];
+        if (kPostImageRow)
+        {
+            [((RYPostImageTableViewCell *)cell).centerImageView setImageForURL:_post.imageURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+            [cell setBackgroundColor:[UIColor clearColor]];
+        }
+        else
+        {
+            RYRiffCell *riffCell = (RYRiffCell*)cell;
+            NSInteger postIdx    = _post.imageURL ? (indexPath.row-1) : indexPath.row;
+            [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:postIdx inSection:0]];
+            [riffCell.socialTextView setUserInteractionEnabled:YES];
+            [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
+            [riffCell.socialTextView setSocialDelegate:self];
+        }
     }
     else if (indexPath.section == parentInfoSection)
     {
@@ -281,10 +302,10 @@
     NSInteger parentInfoSection = kParentPostsInfoSection;
     if (indexPath.section == parentInfoSection)
     {
-        RYRiffStreamingCoreViewController *riffStreamingVC = [[RYRiffStreamingCoreViewController alloc] init];
-        riffStreamingVC.feedItems = _parentPosts;
-        riffStreamingVC.title = [NSString stringWithFormat:@"Posts Sampled in %@",_post.riff.title];
-        [self.navigationController pushViewController:riffStreamingVC animated:YES];
+        RYRiffStreamViewController *riffStream = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffStream"];
+        [riffStream configureWithPosts:_parentPosts];
+        riffStream.title = [NSString stringWithFormat:@"Posts Sampled in %@",_post.riff.title];
+        [self.navigationController pushViewController:riffStream animated:YES];
     }
     else if (indexPath.section != self.riffSection)
     {
