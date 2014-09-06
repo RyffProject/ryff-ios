@@ -277,7 +277,7 @@
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post familyType:CHILDREN];
+    [riffDetails configureForPost:post];
     riffDetails.shouldPreventNavigation = YES;
     [riffDetails addBackButton];
     

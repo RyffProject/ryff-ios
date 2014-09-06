@@ -276,7 +276,7 @@
             {
                 RYNewsfeedPost *post = notification.post;
                 RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-                [riffDetails configureForPost:post familyType:CHILDREN];
+                [riffDetails configureForPost:post];
                 vcToPush = riffDetails;
             }
             break;
@@ -287,7 +287,7 @@
             {
                 RYNewsfeedPost *post = notification.posts.lastObject;
                 RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-                [riffDetails configureForPost:post familyType:CHILDREN];
+                [riffDetails configureForPost:post];
                 vcToPush = riffDetails;
             }
             break;

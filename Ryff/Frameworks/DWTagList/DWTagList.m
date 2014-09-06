@@ -8,6 +8,9 @@
 #import "DWTagList.h"
 #import <QuartzCore/QuartzCore.h>
 
+// Custom UI
+#import "RYStyleSheet.h"
+
 #define CORNER_RADIUS 10.0f
 #define LABEL_MARGIN_DEFAULT 5.0f
 #define BOTTOM_MARGIN_DEFAULT 5.0f
@@ -98,7 +101,7 @@ static NSString *kAddTagText = @"Add Tag";
 static UIColor *kAddTagColor;
 - (void) addAddNewTagTag
 {
-    kAddTagColor   = [UIColor redColor];
+    kAddTagColor   = [RYStyleSheet availableActionColor];
     [self setTags:[self.textArray arrayByAddingObject:kAddTagText]];
 }
 
@@ -367,12 +370,15 @@ static UIColor *kAddTagColor;
     BOOL isTextAttributedString = [text isKindOfClass:[NSAttributedString class]];
 
     if (isTextAttributedString) {
+        text = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"#%@",((NSAttributedString*)text).string]];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:text];
         [attributedString addAttributes:@{NSFontAttributeName: font} range:NSMakeRange(0, ((NSAttributedString *)text).string.length)];
 
         textSize = [attributedString boundingRectWithSize:CGSizeMake(maxWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         _label.attributedText = [attributedString copy];
     } else {
+        if (![text isEqualToString:kAddTagText])
+            text = [NSString stringWithFormat:@"#%@",text];
         textSize = [text sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
         _label.text = text;
     }

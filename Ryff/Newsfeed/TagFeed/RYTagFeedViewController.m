@@ -100,6 +100,9 @@
 
 - (void) fetchContent
 {
+    if (!self.scrollViewActive)
+        [self.tableView setContentOffset:CGPointMake(0, -40)];
+    
     [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil delegate:self];
     [self.refreshControl beginRefreshing];
 }

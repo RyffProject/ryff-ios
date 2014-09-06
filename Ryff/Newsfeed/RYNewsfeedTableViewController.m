@@ -23,7 +23,6 @@
 
 // iPad
 @property (nonatomic, strong) RYAudioDeckViewController *audioDeckVC;
-
 @end
 
 @implementation RYNewsfeedTableViewController
@@ -75,7 +74,9 @@
 - (void) fetchContent
 {
     [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
+    
+    if (!_scrollViewActive)
+        [self.tableView setContentOffset:CGPointMake(0, -40)];
     
 //    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     
@@ -128,9 +129,17 @@
     else
         return 0.01f;
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+
+#pragma mark - ScrollView Delegate
+
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    return [[UIView alloc] initWithFrame:CGRectZero];
+    _scrollViewActive = YES;
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    _scrollViewActive = NO;
 }
 
 @end

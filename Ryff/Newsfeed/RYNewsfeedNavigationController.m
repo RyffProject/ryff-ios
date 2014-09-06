@@ -27,6 +27,8 @@
 {
     [super pushViewController:viewController animated:animated];
     
+    [viewController setEdgesForExtendedLayout:UIRectEdgeBottom];
+    [viewController setAutomaticallyAdjustsScrollViewInsets:NO];
     [viewController setExtendedLayoutIncludesOpaqueBars:YES];
 }
 

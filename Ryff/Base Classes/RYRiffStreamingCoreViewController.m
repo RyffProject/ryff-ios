@@ -247,6 +247,16 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 20.0f; }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 20.0f; }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
 #pragma mark -
 #pragma mark - TableView Delegate
 
@@ -264,7 +274,7 @@
     RYNewsfeedPost *post = _feedItems[indexPath.row];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post familyType:CHILDREN];
+    [riffDetails configureForPost:post];
     [self.navigationController pushViewController:riffDetails animated:YES];
 }
 

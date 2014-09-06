@@ -83,6 +83,11 @@
     
     [_tagListView setAutomaticResize:YES];
     [_tagListView setTagDelegate:self];
+    [_tagListView setBorderWidth:0.0f];
+    [_tagListView setTagBackgroundColor:[UIColor clearColor]];
+    [_tagListView setTextShadowColor:[UIColor clearColor]];
+    [_tagListView setFont:[UIFont fontWithName:kRegularFont size:16.0f]];
+    [_tagListView setTextColor:[RYStyleSheet postActionColor]];
 }
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView

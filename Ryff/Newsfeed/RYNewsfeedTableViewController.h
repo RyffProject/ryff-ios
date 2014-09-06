@@ -15,9 +15,10 @@
 
 @property (nonatomic, strong) ODRefreshControl *refreshControl;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 // Data
 @property (nonatomic, assign) SearchType searchType;
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) BOOL scrollViewActive;
 
 @end

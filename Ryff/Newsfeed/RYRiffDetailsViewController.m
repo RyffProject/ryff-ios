@@ -25,7 +25,7 @@
 
 #define kRiffDetailsCellReuseID @"riffDetails"
 
-#define kParentPostsInfoSection (_parentPosts.count > 0 && _familyType == CHILDREN) ? 1 : -1
+#define kParentPostsInfoSection (_parentPosts.count > 0) ? 1 : -1
 
 @interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate>
 
@@ -33,7 +33,6 @@
 
 // Data
 @property (nonatomic, strong) RYNewsfeedPost *post;
-@property (nonatomic, assign) FamilyType familyType;
 
 // populated with Post objects
 @property (nonatomic, strong) NSArray *childrenPosts;
@@ -48,10 +47,7 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    if (_familyType == CHILDREN)
-        self.riffSection = 0;
-    else
-        self.riffSection = -1;
+    self.riffSection = 0;
     
     if (_shouldPreventNavigation)
         _tableView.allowsSelection = NO;
@@ -78,15 +74,11 @@
 
 #pragma mark - Configuring
 
-- (void) configureForPost:(RYNewsfeedPost *)post familyType:(FamilyType)familyType
+- (void) configureForPost:(RYNewsfeedPost *)post
 {
     _post = post;
-    _familyType = familyType;
     
-    if (_familyType == CHILDREN)
-        [self setTitle:post.riff.title];
-    else
-        [self setTitle:[NSString stringWithFormat:@"Sampled in %@",post.riff.title]];
+    [self setTitle:post.riff.title];
     
     self.feedItems = @[post];
 }
@@ -106,10 +98,9 @@
     if (_shouldPreventNavigation)
         return;
     
-    NSArray *postArray = (_familyType == CHILDREN) ? _childrenPosts : _parentPosts;
-    if (postIdx < postArray.count)
+    if (postIdx < _childrenPosts.count)
     {
-        RYNewsfeedPost *selectedPost = postArray[postIdx];
+        RYNewsfeedPost *selectedPost = _childrenPosts[postIdx];
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
         RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
         [profileVC configureForUser:selectedPost.user];
@@ -151,9 +142,6 @@
 - (void) parentsRetrieved:(NSArray *)parentPosts
 {
     _parentPosts = parentPosts;
-    if (_familyType == PARENTS)
-        self.feedItems = parentPosts;
-    
     [_tableView reloadData];
 }
 
@@ -172,13 +160,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger sectionCount = 1;
-    if (_familyType == CHILDREN)
-    {
-        if (_childrenPosts.count > 0)
-            sectionCount++;
-        if (_parentPosts.count > 0)
-            sectionCount++;
-    }
+    if (_childrenPosts.count > 0)
+        sectionCount++;
+    if (_parentPosts.count > 0)
+        sectionCount++;
     return sectionCount;
 }
 
@@ -187,15 +172,14 @@
     NSInteger numRows;
     if (section == self.riffSection)
         numRows = [super tableView:tableView numberOfRowsInSection:0];
-    else if (_familyType == CHILDREN && section == 1)
+    else if (section == kParentPostsInfoSection)
     {
-        // provide one cell for description
+        // provide one cell for description of parents
         numRows = 1;
     }
     else
     {
-        NSArray *postArray = (_familyType == CHILDREN) ? _childrenPosts : _parentPosts;
-        numRows = postArray.count;
+        numRows = _childrenPosts.count;
     }
     return numRows;
 }
@@ -203,7 +187,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.section == self.riffSection || _familyType == PARENTS)
+    if (indexPath.section == self.riffSection)
         cell = [super tableView:tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:self.riffSection]];
     else
         cell = [_tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
@@ -214,7 +198,7 @@
 {
     CGFloat height = 0;
     
-    if (indexPath.section == self.riffSection || _familyType == PARENTS)
+    if (indexPath.section == self.riffSection)
     {
         // riff details -> calculate size with attributed text for post description
         RYNewsfeedPost *post              = self.feedItems[indexPath.row];
@@ -249,11 +233,6 @@
     return 50.0f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [[UIView alloc] initWithFrame:CGRectZero];
-}
-
 #pragma mark -
 #pragma mark - TableView Delegate
 
@@ -261,7 +240,7 @@
 {
     NSInteger parentInfoSection = kParentPostsInfoSection;
     
-    if (indexPath.section == self.riffSection || _familyType == PARENTS)
+    if (indexPath.section == self.riffSection)
     {
         RYRiffCell *riffCell = (RYRiffCell*)cell;
         [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
@@ -280,14 +259,10 @@
     }
     else
     {
-        NSString *actionString = (_familyType == CHILDREN) ? @"sampled on" : @"sampled";
-        NSArray *postArray = (_familyType == CHILDREN) ? _childrenPosts : _parentPosts;
-        RYNewsfeedPost *post = indexPath.row < postArray.count ? postArray[indexPath.row] : nil;
+        NSString *actionString = @"sampled on";
+        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
         RYRiffDetailsTableViewCell *detailsCell = (RYRiffDetailsTableViewCell *)cell;
-        if (_familyType == CHILDREN)
-            [detailsCell configureWithPost:post postIdx:indexPath.row actionString:actionString delegate:self];
-        else
-            [detailsCell configureWithSampledPost:post user:_post.user postIdx:indexPath.row actionString:actionString delegate:self];
+        [detailsCell configureWithPost:post postIdx:indexPath.row actionString:actionString delegate:self];
     }
 }
 
@@ -304,25 +279,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSInteger parentInfoSection = kParentPostsInfoSection;
-    if (_familyType == PARENTS)
+    if (indexPath.section == parentInfoSection)
     {
-        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    }
-    else if (indexPath.section == parentInfoSection)
-    {
-        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-        [riffDetails configureForPost:_post familyType:PARENTS];
-        [self.navigationController pushViewController:riffDetails animated:YES];
+        RYRiffStreamingCoreViewController *riffStreamingVC = [[RYRiffStreamingCoreViewController alloc] init];
+        riffStreamingVC.feedItems = _parentPosts;
+        riffStreamingVC.title = [NSString stringWithFormat:@"Posts Sampled in %@",_post.riff.title];
+        [self.navigationController pushViewController:riffStreamingVC animated:YES];
     }
     else if (indexPath.section != self.riffSection)
     {
         // push new riff details vc
-        NSArray *postArray = (_familyType == CHILDREN) ? _childrenPosts : _parentPosts;
-        RYNewsfeedPost *post = indexPath.row < postArray.count ? postArray[indexPath.row] : nil;
+        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
         RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-        [riffDetails configureForPost:post familyType:CHILDREN];
+        [riffDetails configureForPost:post];
         [self.navigationController pushViewController:riffDetails animated:YES];
     }
 }
