@@ -45,6 +45,14 @@
     [self configureLayout:toInterfaceOrientation duration:duration];
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"newsfeedEmbed"])
+    {
+        _newsfeedNav = segue.destinationViewController;
+    }
+}
+
 #pragma mark -
 #pragma mark - Layout
 

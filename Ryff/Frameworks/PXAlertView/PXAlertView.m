@@ -255,6 +255,11 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
     return statusBarOffset;
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)setupGestures
 {
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss:)];

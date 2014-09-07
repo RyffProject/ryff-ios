@@ -998,7 +998,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="ZG3-zP-onj" kind="embed" id="WaL-ib-GFa"/>
+                                    <segue destination="ZG3-zP-onj" kind="embed" identifier="newsfeedEmbed" id="WaL-ib-GFa"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" id="kjP-j4-ojW">
@@ -1192,7 +1192,7 @@
         <image name="plus.png" width="50" height="50"/>
         <image name="record.png" width="45" height="45"/>
         <image name="remix.png" width="45" height="40"/>
-        <image name="stream.png" width="50" height="27"/>
+        <image name="stream.png" width="35" height="35"/>
         <image name="userAdd.png" width="35" height="35"/>
         <image name="userIcon.png" width="35" height="35"/>
     </resources>

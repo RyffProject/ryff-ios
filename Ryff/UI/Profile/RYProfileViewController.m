@@ -542,11 +542,14 @@
         if ([topCell isKindOfClass:[RYProfileInfoTableViewCell class]])
         {
             RYProfileInfoTableViewCell *profileCell = (RYProfileInfoTableViewCell *)topCell;
-            CGRect cellFrame = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
-            cellFrame.origin.y -= _tableView.contentOffset.y;
-            CGPoint bioTextOrigin = CGPointMake(cellFrame.origin.x+profileCell.bioTextView.frame.origin.x, cellFrame.origin.y+profileCell.bioTextView.frame.origin.y);
-            CGPoint offsetChange = CGPointMake(0, (profileCell.bioTextView.frame.size.height/2+bioTextOrigin.y)-viewCenter.y);
-            _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+            if (profileCell.bioTextView.isFirstResponder)
+            {
+                CGRect cellFrame = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
+                cellFrame.origin.y -= _tableView.contentOffset.y;
+                CGPoint bioTextOrigin = CGPointMake(cellFrame.origin.x+profileCell.bioTextView.frame.origin.x, cellFrame.origin.y+profileCell.bioTextView.frame.origin.y);
+                CGPoint offsetChange = CGPointMake(0, (profileCell.bioTextView.frame.size.height/2+bioTextOrigin.y)-viewCenter.y);
+                _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+            }
         }
         
     } completion:nil];
@@ -567,8 +570,13 @@
         UITableViewCell *topCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         if ([topCell isKindOfClass:[RYProfileInfoTableViewCell class]])
         {
-            CGPoint offsetChange = CGPointMake(0, -keyboardRect.size.height/2);
-            _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+            RYProfileInfoTableViewCell *profileCell = (RYProfileInfoTableViewCell *)topCell;
+            if (profileCell.bioTextView.isFirstResponder)
+            {
+                CGPoint offsetChange = CGPointMake(0, -keyboardRect.size.height/2);
+                CGPoint offset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+                _tableView.contentOffset = CGPointMake(MAX(offset.x, 0), MAX(offset.y,0));
+            }
         }
     } completion:nil];
 }

@@ -12,4 +12,6 @@
 
 @interface RYNewsfeedContainerViewController : RYCoreViewController
 
+@property (nonatomic, weak) UINavigationController *newsfeedNav;
+
 @end

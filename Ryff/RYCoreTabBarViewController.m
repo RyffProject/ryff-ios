@@ -20,8 +20,9 @@
 
 // Associated View Controller
 #import "RYProfileViewController.h"
+#import "RYNewsfeedContainerViewController.h"
 
-@interface RYCoreTabBarViewController ()
+@interface RYCoreTabBarViewController () <UITabBarDelegate>
 
 @end
 
@@ -42,6 +43,22 @@
             UIViewController *potentialProfile = ((UINavigationController*)viewController).viewControllers.firstObject;
             if ([potentialProfile isKindOfClass:[RYProfileViewController class]])
                 [((RYProfileViewController *)potentialProfile) addSettingsOptions];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark - TabBar Delegate
+
+- (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    for (UIViewController *viewController in self.viewControllers)
+    {
+        if ([viewController isKindOfClass:[RYNewsfeedContainerViewController class]])
+        {
+            UINavigationController *navController = ((RYNewsfeedContainerViewController *)viewController).newsfeedNav;
+            if (navController)
+                [navController popToRootViewControllerAnimated:YES];
         }
     }
 }
