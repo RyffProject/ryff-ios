@@ -8,8 +8,8 @@
 
 #import "RYRefreshControl.h"
 
-#define kRefreshPullHeight 60.0f
-#define kRefreshControlHeight 60.0f
+#define kRefreshPullHeight 70.0f
+#define kRefreshControlHeight 70.0f
 #define kRefreshControlWidth 200.0f
 
 @interface RYRefreshControl ()
@@ -17,6 +17,7 @@
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) CAShapeLayer *circleShape;
+@property (nonatomic, strong) UILabel *hintLabel;
 
 // Data
 @property (nonatomic, assign) UIEdgeInsets originalContentInset;
@@ -44,14 +45,7 @@
         [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         [scrollView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:nil];
         
-        _activityIndicator                  = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicator.center           = CGPointMake(floor(self.frame.size.width / 2), floor(self.frame.size.height / 2));
-        _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        _activityIndicator.hidesWhenStopped = YES;
-        [_activityIndicator stopAnimating];
-        [self addSubview:_activityIndicator];
-        
-        CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-50.0f), 0.5f*(self.frame.size.height-50.0f), 50.0f, 50.0f);
+        CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-40.0f), 0, 40.0f, 40.0f);
         CGPoint circleCenter        = CGPointMake(circleFrame.size.width/2, circleFrame.size.height/2);
         CGFloat outerStrokeWidth    = 4.0f;
         _circleShape                = [CAShapeLayer layer];
@@ -62,6 +56,20 @@
         _circleShape.strokeEnd      = 0.75f;
         _circleShape.position       = circleFrame.origin;
         [self.layer addSublayer:_circleShape];
+        
+        _activityIndicator                  = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.center           = CGPointMake(_circleShape.position.x + circleFrame.size.width/2, _circleShape.position.y + circleFrame.size.height/2);
+        _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _activityIndicator.hidesWhenStopped = YES;
+        [_activityIndicator stopAnimating];
+        [self addSubview:_activityIndicator];
+        
+        _hintLabel               = [[UILabel alloc] initWithFrame:CGRectMake(0, kRefreshControlHeight-20.0f, kRefreshControlWidth, 20.0f)];
+        _hintLabel.textAlignment = NSTextAlignmentCenter;
+        _hintLabel.font          = [UIFont fontWithName:kRegularFont size:16.0f];
+        _hintLabel.textColor     = [UIColor lightGrayColor];
+        _hintLabel.text          = @"Pull to refresh";
+        [self addSubview:_hintLabel];
     }
     return self;
 }
@@ -115,12 +123,53 @@
 
 - (void) beginRefreshing
 {
-    
+    if (!_isRefreshing)
+    {
+        _ignoreEdges = YES;
+        CGPoint offset = self.scrollView.contentOffset;
+        
+        UIEdgeInsets scrollViewInsets = _originalContentInset;
+        scrollViewInsets.top += kRefreshControlHeight;
+        _scrollView.contentInset = scrollViewInsets;
+        
+        _scrollView.contentOffset = offset;
+        _ignoreEdges = NO;
+        
+        _circleShape.hidden = YES;
+        [_activityIndicator startAnimating];
+        [self animateFill:_circleShape toStrokeEnd:0.0f];
+        
+        _canRefresh = NO;
+        _isRefreshing = YES;
+    }
 }
 
 - (void) endRefreshing
 {
-    
+    if (_isRefreshing)
+    {
+        __block UIScrollView *blockScrollView = self.scrollView;
+        [UIView animateWithDuration:0.4 animations:^{
+            _ignoreEdges = YES;
+            [blockScrollView setContentInset:self.originalContentInset];
+            _ignoreEdges = NO;
+            _activityIndicator.alpha = 0.0f;
+            _activityIndicator.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+        } completion:^(BOOL finished) {
+            
+            _circleShape.hidden = NO;
+            _activityIndicator.alpha = 1.0f;
+            [_activityIndicator stopAnimating];
+            
+            _ignoreEdges = YES;
+            _ignoreEdges = NO;
+            
+            // use again to keep retain cycle
+            [blockScrollView setContentInset:_originalContentInset];
+        }];
+        
+        _isRefreshing = NO;
+    }
 }
 
 #pragma mark - Internal
@@ -190,16 +239,15 @@
                 CGFloat percentPulled = MIN(-kRefreshControlHeight-offset,kRefreshPullHeight)/kRefreshPullHeight;
                 if (percentPulled == 1.0f)
                 {
-                    _isRefreshing = YES;
-                    _circleShape.hidden = YES;
-                    [_activityIndicator startAnimating];
-                    [self animateFill:_circleShape toStrokeEnd:0.0f];
+                    // triggered refresh
+                    [self beginRefreshing];
+                    [self sendActionsForControlEvents:UIControlEventValueChanged];
                 }
                 else
                 {
+                    // approaching refresh
                     [self animateFill:_circleShape toStrokeEnd:percentPulled];
                 }
-                NSLog(@"offset: %02f",offset);
             }
         }
     }
