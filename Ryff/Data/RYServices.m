@@ -456,20 +456,7 @@ static RYUser* _loggedInUser;
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
-        NSString *action;
-        switch (searchType) {
-            case NEW:
-                action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSearchPostsNew];
-                break;
-            case TOP:
-                action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSearchPostsTop];
-                break;
-            case TRENDING:
-                action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSearchPostsTrending];
-                break;
-            default:
-                break;
-        }
+        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetNewsfeedPosts];
         
         NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:1];
         if (page)
