@@ -163,17 +163,21 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
         
         // Buttons
         if (cancelTitle) {
-            [self addButtonWithTitle:cancelTitle];
+            [self addCancelButtonWithTitle:cancelTitle];
         } else {
 //            [self addButtonWithTitle:NSLocalizedString(@"Ok", nil)];
         }
         
-        if (otherTitles && [otherTitles count] > 0) {
+        if (otherTitles && [otherTitles count] > 0)
+        {
+            otherTitles = [[otherTitles reverseObjectEnumerator] allObjects];
             for (id otherTitle in otherTitles) {
                 NSParameterAssert([otherTitle isKindOfClass:[NSString class]]);
                 [self addButtonWithTitle:(NSString *)otherTitle];
             }
         }
+        
+        [self setUpLines];
         
         self.alertView.bounds = CGRectMake(0, 0, AlertViewWidth, 150);
         
@@ -372,15 +376,22 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
     }];
 
     if (self.completion) {
+        NSInteger buttonIndex = -1;
         BOOL cancelled = NO;
         if (sender == self.cancelButton || sender == self.tap) {
             cancelled = YES;
         }
-        NSInteger buttonIndex = -1;
-        if (self.buttons) {
+        else if (self.buttons) {
             NSUInteger index = [self.buttons indexOfObject:sender];
             if (buttonIndex != NSNotFound) {
-                buttonIndex = index;
+                buttonIndex = self.buttons.count-index;
+                
+                NSUInteger cancelIndex = [self.buttons indexOfObject:self.cancelButton];
+                if (cancelIndex != NSNotFound && cancelIndex < buttonIndex)
+                {
+                    // cancel button is before in index, adjust accordingly
+                    buttonIndex--;
+                }
             }
         }
         NSString *inputValue = _handlesInput ? ((UITextField*)self.contentView).text : nil;
@@ -556,44 +567,70 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
     return alertView;
 }
 
+// add button and adjust all button frames appropriately
 - (NSInteger)addButtonWithTitle:(NSString *)title
 {
     UIButton *button = [self genericButton];
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     
-    if (!self.cancelButton) {
-        self.cancelButton = button;
-        self.cancelButton.frame = CGRectMake(0, self.buttonsY, AlertViewWidth, AlertViewButtonHeight);
-    } else if (self.buttons && [self.buttons count] > 1) {
-        UIButton *lastButton = (UIButton *)[self.buttons lastObject];
-        lastButton.titleLabel.font = [UIFont systemFontOfSize:17];
-        if ([self.buttons count] == 2) {
-            [self.verticalLine removeFromSuperlayer];
-            CALayer *lineLayer = [self lineLayer];
-            lineLayer.frame = CGRectMake(0, self.buttonsY + AlertViewButtonHeight, AlertViewWidth, AlertViewLineLayerWidth);
-            [self.alertView.layer addSublayer:lineLayer];
-            lastButton.frame = CGRectMake(0, self.buttonsY + AlertViewButtonHeight, AlertViewWidth, AlertViewButtonHeight);
-            self.cancelButton.frame = CGRectMake(0, self.buttonsY, AlertViewWidth, AlertViewButtonHeight);
-        }
-        CGFloat lastButtonYOffset = lastButton.frame.origin.y + AlertViewButtonHeight;
-        button.frame = CGRectMake(0, lastButtonYOffset, AlertViewWidth, AlertViewButtonHeight);
-        CALayer *lineLayer = [self lineLayer];
-        lineLayer.frame = CGRectMake(0, lastButtonYOffset, AlertViewWidth, AlertViewLineLayerWidth);
-        [self.alertView.layer addSublayer:lineLayer];
-    } else {
-        self.verticalLine = [self lineLayer];
-        self.verticalLine.frame = CGRectMake(AlertViewWidth/2, self.buttonsY, AlertViewLineLayerWidth, AlertViewButtonHeight);
-        [self.alertView.layer addSublayer:self.verticalLine];
+    if (!self.buttons || self.buttons.count == 0)
+    {
+        // first button added -> full width
+        button.frame = CGRectMake(0, self.buttonsY, AlertViewWidth, AlertViewButtonHeight);
+    }
+    else if (self.buttons && self.buttons.count == 1)
+    {
+        // second button added -> split width between two buttons
+        UIButton *other = self.buttons[0];
         button.frame = CGRectMake(AlertViewWidth/2, self.buttonsY, AlertViewWidth/2, AlertViewButtonHeight);
-        self.otherButton = button;
-        self.cancelButton.frame = CGRectMake(0, self.buttonsY, AlertViewWidth/2, AlertViewButtonHeight);
-        self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        other.frame = CGRectMake(0, self.buttonsY, AlertViewWidth/2, AlertViewButtonHeight);
+    }
+    else
+    {
+        // adjust all buttons to be full rows
+        button.frame = CGRectMake(0, self.buttonsY, AlertViewWidth, AlertViewButtonHeight);
+        for (NSInteger buttonIdx = 0; buttonIdx < self.buttons.count; buttonIdx++)
+        {
+            UIButton *otherBtn = self.buttons[buttonIdx];
+            otherBtn.frame = CGRectMake(0, self.buttonsY + AlertViewButtonHeight*(self.buttons.count-buttonIdx), AlertViewWidth, AlertViewButtonHeight);
+        }
     }
     
     [self.alertView addSubview:button];
     self.buttons = (self.buttons) ? [self.buttons arrayByAddingObject:button] : @[ button ];
     return [self.buttons count] - 1;
+}
+
+// add cancel button with title
+- (NSInteger)addCancelButtonWithTitle:(NSString *)title
+{
+    NSInteger cancelIdx = [self addButtonWithTitle:title];
+    self.cancelButton = self.buttons[cancelIdx];
+    self.cancelButton.titleLabel.font = [UIFont fontWithName:kRegularFont size:17.0f];
+    return [self.buttons count] - 1;
+}
+
+// add separator lines
+- (void) setUpLines
+{
+    if (self.buttons && self.buttons.count == 2)
+    {
+        // vertical divider in center
+        self.verticalLine = [self lineLayer];
+        self.verticalLine.frame = CGRectMake(AlertViewWidth/2, self.buttonsY, AlertViewLineLayerWidth, AlertViewButtonHeight);
+        [self.alertView.layer addSublayer:self.verticalLine];
+    }
+    else if (self.buttons && self.buttons.count > 2)
+    {
+        // horizontal divider lines below each but the last button
+        for (NSInteger numButtonsAbove = 1; numButtonsAbove < self.buttons.count; numButtonsAbove++)
+        {
+            CALayer *horizontal = [self lineLayer];
+            horizontal.frame = CGRectMake(0, self.buttonsY+AlertViewButtonHeight*numButtonsAbove, AlertViewWidth, AlertViewLineLayerWidth);
+            [self.alertView.layer addSublayer:horizontal];
+        }
+    }
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated

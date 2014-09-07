@@ -121,6 +121,7 @@
 		83C354B619BBB480000A5BD4 /* RYPostImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */; };
 		83C354B919BC2AB3000A5BD4 /* availableStream.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C354B719BC2AB3000A5BD4 /* availableStream.png */; };
 		83C354BA19BC2AB3000A5BD4 /* availableStream@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C354B819BC2AB3000A5BD4 /* availableStream@2x.png */; };
+		83C354C219BCE548000A5BD4 /* UIImagePickerController+Orientations.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */; };
 		83C6A5EE1960EB9600BB3D1A /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5EC1960EB9600BB3D1A /* record.png */; };
 		83C6A5EF1960EB9600BB3D1A /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5ED1960EB9600BB3D1A /* record@2x.png */; };
 		83C6A5F21960EC5200BB3D1A /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C6A5F01960EC5200BB3D1A /* plus.png */; };
@@ -433,6 +434,8 @@
 		83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostImageTableViewCell.m; sourceTree = "<group>"; };
 		83C354B719BC2AB3000A5BD4 /* availableStream.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = availableStream.png; sourceTree = "<group>"; };
 		83C354B819BC2AB3000A5BD4 /* availableStream@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "availableStream@2x.png"; sourceTree = "<group>"; };
+		83C354C019BCE548000A5BD4 /* UIImagePickerController+Orientations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Orientations.h"; sourceTree = "<group>"; };
+		83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Orientations.m"; sourceTree = "<group>"; };
 		83C6A5EC1960EB9600BB3D1A /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
 		83C6A5ED1960EB9600BB3D1A /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
 		83C6A5F01960EC5200BB3D1A /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
@@ -933,6 +936,8 @@
 				836F483F19A04BAB00E948BE /* UIView+Styling.m */,
 				836F484019A04BAB00E948BE /* UIViewController+Extras.h */,
 				836F484119A04BAB00E948BE /* UIViewController+Extras.m */,
+				83C354C019BCE548000A5BD4 /* UIImagePickerController+Orientations.h */,
+				83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */,
 			);
 			name = Categories;
 			path = Ryff/Categories;
@@ -1726,6 +1731,7 @@
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
 				83FCD14C18F907C400A493F0 /* RYAppDelegate.m in Sources */,
 				83CA121C1995CD23002610E8 /* FLEXGlobalsTableViewControllerEntry.m in Sources */,
+				83C354C219BCE548000A5BD4 /* UIImagePickerController+Orientations.m in Sources */,
 				83CA12141995CD23002610E8 /* FLEXLibrariesTableViewController.m in Sources */,
 				83CA12131995CD23002610E8 /* FLEXInstancesTableViewController.m in Sources */,
 				83CA11FE1995CD23002610E8 /* FLEXArgumentInputStringView.m in Sources */,

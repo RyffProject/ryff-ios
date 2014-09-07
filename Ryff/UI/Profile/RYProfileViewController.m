@@ -25,6 +25,7 @@
 #import "UIViewController+Extras.h"
 #import "UIImage+Color.h"
 #import "UIColor+Hex.h"
+#import "UIImagePickerController+Orientations.h"
 
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
@@ -468,15 +469,18 @@
     }
     
     [PXAlertView showAlertWithTitle:@"Profile Picture" message:@"Select a new profile picture." cancelTitle:@"Cancel" otherTitles:@[@"Take a Photo", @"From Library"] completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue) {
-        if (buttonIndex == 1)
+        if (!cancelled)
         {
-            // take photo
-            [self takePhoto];
-        }
-        else if (buttonIndex == 2)
-        {
-            // choose from library
-            [self pickPhoto];
+            if (buttonIndex == 0)
+            {
+                // take photo
+                [self takePhoto];
+            }
+            else if (buttonIndex == 1)
+            {
+                // choose from library
+                [self pickPhoto];
+            }
         }
     }];
 }
@@ -486,6 +490,7 @@
     if (_imagePicker == nil) {
         _imagePicker = [[UIImagePickerController alloc] init];
         _imagePicker.delegate = self;
+        _imagePicker.navigationBar.tintColor = [UIColor whiteColor];
     }
     return _imagePicker;
 }

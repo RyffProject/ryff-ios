@@ -246,7 +246,7 @@
     if (_forProfileTab)
     {
         [PXAlertView showAlertWithTitle:@"Remove Tag" message:[NSString stringWithFormat:@"Remove %@ from profile?",tagName] cancelTitle:@"Cancel" otherTitle:@"Remove" completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue) {
-            if (buttonIndex != kCancelButtonIndex)
+            if (!cancelled)
             {
                 // remove tag
                 RYUser *userCopy = [_user copy];
@@ -265,7 +265,7 @@
 {
     [PXAlertView showInputAlertWithTitle:@"Add Tag" message:nil placeholder:@"New Tag" cancelTitle:@"Cancel" otherTitle:@"Add" completion:^(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue)
      {
-         if (buttonIndex != kCancelButtonIndex && inputValue.length > 0)
+         if (!cancelled && inputValue.length > 0)
          {
              RYTag *newTag = [[RYTag alloc] initWithTag:[inputValue lowercaseString] numUsers:0 numPosts:0];
              RYUser *userCopy = [_user copy];

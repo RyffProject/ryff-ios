@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kCancelButtonIndex 0
-
 typedef void(^PXAlertViewCompletionBlock)(BOOL cancelled, NSInteger buttonIndex, NSString *inputValue);
 
 @interface PXAlertView : UIViewController
