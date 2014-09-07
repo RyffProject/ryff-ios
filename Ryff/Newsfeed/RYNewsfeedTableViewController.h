@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RYRiffStreamingCoreViewController.h"
 
-@class ODRefreshControl;
+// Custom UI
+#import "RYRefreshControl.h"
 
 @interface RYNewsfeedTableViewController : RYRiffStreamingCoreViewController <PostDelegate>
 
-@property (nonatomic, strong) ODRefreshControl *refreshControl;
+@property (nonatomic, strong) RYRefreshControl *refreshControl;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

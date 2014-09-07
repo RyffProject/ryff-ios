@@ -12,7 +12,6 @@
 #import "RYTag.h"
 
 // Custom UI
-#import "ODRefreshControl.h"
 #import "RYSearchTypeTableViewCell.h"
 
 #define kFeedSection 0

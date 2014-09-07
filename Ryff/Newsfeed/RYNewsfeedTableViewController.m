@@ -9,7 +9,6 @@
 #import "RYNewsfeedTableViewController.h"
 
 // UI
-#import "ODRefreshControl.h"
 #import "UIImage+Color.h"
 #import "UIViewController+Extras.h"
 
@@ -39,9 +38,8 @@
     
     [self.tableView setScrollsToTop:YES];
     
-    _refreshControl = [[ODRefreshControl alloc] initInScrollView:_tableView];
+    _refreshControl = [[RYRefreshControl alloc] initInScrollView:_tableView];
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
-    _refreshControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
     [self addNewPostButtonToNavBar];
@@ -78,7 +76,7 @@
     [_refreshControl beginRefreshing];
 }
 
-- (void) refreshContent:(ODRefreshControl *)refreshControl
+- (void) refreshContent:(RYRefreshControl *)refreshControl
 {
     [self fetchContent];
 }
