@@ -67,13 +67,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
 }
 
-- (void) prepareForReuse
-{
-    [super prepareForReuse];
-    
-    [_playControl setProgress:0.0f animated:NO];
-}
-
 #pragma mark -
 #pragma mark - Actions
 
@@ -106,31 +99,37 @@
 
 - (void) styleFromAudioDeck
 {
-    if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+    if ([audioManager idxOfDownload:_post] >= 0)
     {
         // currently downloading
         [self styleDownloading:YES];
         [_playControl setCenterImage:nil];
+        
+        if ([audioManager idxOfDownload:_post] != 0)
+            [_playControl setProgress:0.0f animated:NO];
     }
-    else if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+    else if (_post.postId == [audioManager currentlyPlayingPost].postId)
     {
         // currently playing
         [self hidePlaylistIndex:YES];
         [self styleDownloading:NO];
         [self styleFromPlaybackProgress];
         
-        if ([[RYAudioDeckManager sharedInstance] isPlaying])
+        if ([audioManager isPlaying])
             [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
         else
             [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
+        [_playControl setProgress:0.0f animated:NO];
     }
     else if (_trackIdx > 0)
     {
         // just in playlist
-        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)_trackIdx]];
         [self hidePlaylistIndex:NO];
-        [_playControl setCenterImage:nil];
         [self styleDownloading:NO];
+        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)_trackIdx]];
+        [_playControl setCenterImage:nil];
+        [_playControl setProgress:0.0f animated:NO];
     }
 }
 

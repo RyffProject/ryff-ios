@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UIView *imageWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIButton *userActionButton;
-@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet DWTagList *tagListView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -62,6 +61,7 @@
     [_nameField setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bioTextView setFont:kProfileInfoCellFont];
+    [_bioTextView setTintColor:[UIColor blackColor]];
     
     [_avatarImageView setBackgroundColor:[RYStyleSheet tabBarColor]];
     [RYStyleSheet styleProfileImageView:_avatarImageView];
@@ -166,7 +166,7 @@
 - (void) styleFollowing:(BOOL)following
 {
     UIColor *followColor  = following ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
-    NSString *followImage = following ? @"userDelete" : @"userAdd";
+    NSString *followImage = following ? @"stream" : @"availableStream";
     [_userActionButton setImage:[UIImage imageNamed:followImage] forState:UIControlStateNormal];
     [_userActionButton setTintColor:followColor];
 }

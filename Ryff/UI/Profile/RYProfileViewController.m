@@ -73,6 +73,16 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithHexString:@"e9e9e9"]];
     [self configureForUser:_user];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -503,6 +513,64 @@
     
     [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+}
+
+#pragma mark -
+#pragma mark - Keyboard Notifications
+
+/*
+ Keyboard will appear, should center alertView higher up
+ */
+-(void)onKeyboardAppear:(NSNotification *)notification
+{
+    // position of keyboard before animation
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = CGRectMake(0, 0, MAX(keyboardRect.size.width,keyboardRect.size.height), MIN(keyboardRect.size.width,keyboardRect.size.height));
+    
+    CGPoint viewCenter;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+        viewCenter = CGPointMake(0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.height/2);
+    else
+        viewCenter = CGPointMake(0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.height/2);
+    
+    // keyboard to show at bottom of screen, adjust accordingly
+    CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
+        
+        UITableViewCell *topCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if ([topCell isKindOfClass:[RYProfileInfoTableViewCell class]])
+        {
+            RYProfileInfoTableViewCell *profileCell = (RYProfileInfoTableViewCell *)topCell;
+            CGRect cellFrame = [self.tableView convertRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] toView:self.view];
+            cellFrame.origin.y -= _tableView.contentOffset.y;
+            CGPoint bioTextOrigin = CGPointMake(cellFrame.origin.x+profileCell.bioTextView.frame.origin.x, cellFrame.origin.y+profileCell.bioTextView.frame.origin.y);
+            CGPoint offsetChange = CGPointMake(0, (profileCell.bioTextView.frame.size.height/2+bioTextOrigin.y)-viewCenter.y);
+            _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+        }
+        
+    } completion:nil];
+}
+
+/*
+ Keyboard will appear, should center alertView at vc center
+ */
+-(void)onKeyboardHide:(NSNotification *)notification
+{
+    // keyboard to show at bottom of screen, adjust accordingly
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = CGRectMake(0, 0, MAX(keyboardRect.size.width,keyboardRect.size.height), MIN(keyboardRect.size.width,keyboardRect.size.height));
+    CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    NSInteger curve             = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    [UIView animateWithDuration:animationDuration delay:0.f options:curve animations:^{
+        
+        UITableViewCell *topCell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if ([topCell isKindOfClass:[RYProfileInfoTableViewCell class]])
+        {
+            CGPoint offsetChange = CGPointMake(0, -keyboardRect.size.height/2);
+            _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x+offsetChange.x, _tableView.contentOffset.y+offsetChange.y);
+        }
+    } completion:nil];
 }
 
 #pragma mark -

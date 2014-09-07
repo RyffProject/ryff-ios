@@ -263,7 +263,7 @@
     
     RYNewsfeedPost *post;
     NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
-    if (indexPath.row <= playlist.count)
+    if (indexPath.row < playlist.count)
     {
         // riff playlist
         post = [playlist objectAtIndex:indexPath.row];

@@ -28,6 +28,8 @@
 
 @interface RYProfileInfoTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
+
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView;
 - (void) enableUserSettingOptions;
 
