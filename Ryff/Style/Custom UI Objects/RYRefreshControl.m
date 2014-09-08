@@ -8,9 +8,12 @@
 
 #import "RYRefreshControl.h"
 
-#define kRefreshPullHeight 70.0f
-#define kRefreshControlHeight 70.0f
+#define kRefreshPullHeight 65.0f
+#define kRefreshControlHeight 65.0f
 #define kRefreshControlWidth 200.0f
+
+#define kRefreshTitle @"Pull to Refresh"
+#define kRefreshingTitle @"Refreshing"
 
 @interface RYRefreshControl ()
 
@@ -45,31 +48,7 @@
         [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         [scrollView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:nil];
         
-        CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-40.0f), 0, 40.0f, 40.0f);
-        CGPoint circleCenter        = CGPointMake(circleFrame.size.width/2, circleFrame.size.height/2);
-        CGFloat outerStrokeWidth    = 4.0f;
-        _circleShape                = [CAShapeLayer layer];
-        _circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(circleFrame.size.width-outerStrokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-        _circleShape.strokeColor    = _tintColor.CGColor;
-        _circleShape.fillColor      = nil;
-        _circleShape.lineWidth      = outerStrokeWidth;
-        _circleShape.strokeEnd      = 0.75f;
-        _circleShape.position       = circleFrame.origin;
-        [self.layer addSublayer:_circleShape];
-        
-        _activityIndicator                  = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        _activityIndicator.center           = CGPointMake(_circleShape.position.x + circleFrame.size.width/2, _circleShape.position.y + circleFrame.size.height/2);
-        _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        _activityIndicator.hidesWhenStopped = YES;
-        [_activityIndicator stopAnimating];
-        [self addSubview:_activityIndicator];
-        
-        _hintLabel               = [[UILabel alloc] initWithFrame:CGRectMake(0, kRefreshControlHeight-20.0f, kRefreshControlWidth, 20.0f)];
-        _hintLabel.textAlignment = NSTextAlignmentCenter;
-        _hintLabel.font          = [UIFont fontWithName:kRegularFont size:16.0f];
-        _hintLabel.textColor     = [UIColor lightGrayColor];
-        _hintLabel.text          = @"Pull to refresh";
-        [self addSubview:_hintLabel];
+        [self setupRefresh];
     }
     return self;
 }
@@ -92,12 +71,50 @@
 }
 
 #pragma mark -
+#pragma mark - Styling
+
+- (void) setupRefresh
+{
+    CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-40.0f), 0, 40.0f, 40.0f);
+    CGPoint circleCenter        = CGPointMake(circleFrame.size.width/2, circleFrame.size.height/2);
+    CGFloat outerStrokeWidth    = 4.0f;
+    _circleShape                = [CAShapeLayer layer];
+    _circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(circleFrame.size.width-outerStrokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
+    _circleShape.strokeColor    = _tintColor.CGColor;
+    _circleShape.fillColor      = nil;
+    _circleShape.lineWidth      = outerStrokeWidth;
+    _circleShape.strokeEnd      = 0.75f;
+    _circleShape.position       = circleFrame.origin;
+    [self.layer addSublayer:_circleShape];
+    
+    _activityIndicator                  = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityIndicator.center           = CGPointMake(_circleShape.position.x + circleFrame.size.width/2, _circleShape.position.y + circleFrame.size.height/2);
+    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    _activityIndicator.hidesWhenStopped = NO;
+    _activityIndicator.hidden           = YES;
+    _activityIndicator.color            = _tintColor;
+    [self addSubview:_activityIndicator];
+    
+    _hintLabel               = [[UILabel alloc] initWithFrame:CGRectMake(0, kRefreshControlHeight-20.0f, kRefreshControlWidth, 20.0f)];
+    _hintLabel.textAlignment = NSTextAlignmentCenter;
+    _hintLabel.font          = [UIFont fontWithName:kRegularFont size:16.0f];
+    _hintLabel.textColor     = [UIColor lightGrayColor];
+    _hintLabel.text          = kRefreshTitle;
+    [self addSubview:_hintLabel];
+}
+
+- (void) styleForPullProgress:(CGFloat)progress
+{
+    [self animateFill:_circleShape toStrokeEnd:progress];
+}
+
+#pragma mark -
 #pragma mark - Members
 
 - (void) setTintColor:(UIColor *)tintColor
 {
     _tintColor                      = tintColor;
-    _activityIndicator.tintColor    = tintColor;
+    _activityIndicator.color        = tintColor;
     _circleShape.strokeColor        = tintColor.CGColor;
 }
 
@@ -125,19 +142,21 @@
 {
     if (!_isRefreshing)
     {
-        _ignoreEdges = YES;
         CGPoint offset = self.scrollView.contentOffset;
+        _ignoreEdges = YES;
         
         UIEdgeInsets scrollViewInsets = _originalContentInset;
         scrollViewInsets.top += kRefreshControlHeight;
-        _scrollView.contentInset = scrollViewInsets;
+        self.scrollView.contentInset = scrollViewInsets;
         
-        _scrollView.contentOffset = offset;
         _ignoreEdges = NO;
+        [_scrollView setContentOffset:offset animated:NO];
         
         _circleShape.hidden = YES;
+        _activityIndicator.hidden = NO;
         [_activityIndicator startAnimating];
         [self animateFill:_circleShape toStrokeEnd:0.0f];
+        [_hintLabel setText:kRefreshingTitle];
         
         _canRefresh = NO;
         _isRefreshing = YES;
@@ -153,13 +172,14 @@
             _ignoreEdges = YES;
             [blockScrollView setContentInset:self.originalContentInset];
             _ignoreEdges = NO;
-            _activityIndicator.alpha = 0.0f;
             _activityIndicator.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
         } completion:^(BOOL finished) {
             
             _circleShape.hidden = NO;
-            _activityIndicator.alpha = 1.0f;
+            _activityIndicator.hidden = YES;
             [_activityIndicator stopAnimating];
+            _activityIndicator.layer.transform = CATransform3DIdentity;
+            [_hintLabel setText:kRefreshTitle];
             
             _ignoreEdges = YES;
             _ignoreEdges = NO;
@@ -217,7 +237,7 @@
             BOOL shouldDraw = YES;
             if (!_canRefresh)
             {
-                if (offset >= 0.0f)
+                if (offset >= -10.0f)
                 {
                     // We can refresh again after the control is scrolled out of view
                     _canRefresh = YES;
@@ -246,7 +266,7 @@
                 else
                 {
                     // approaching refresh
-                    [self animateFill:_circleShape toStrokeEnd:percentPulled];
+                    [self styleForPullProgress:percentPulled];
                 }
             }
         }

@@ -31,16 +31,16 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    // set up test data
-    self.feedItems = @[];
-    _searchType = NEW;
-    [self fetchContent];
-    
     [self.tableView setScrollsToTop:YES];
     
     _refreshControl = [[RYRefreshControl alloc] initInScrollView:_tableView];
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
+    
+    // set up test data
+    self.feedItems = @[];
+    _searchType = NEW;
+    [self fetchContent];
     
     [self addNewPostButtonToNavBar];
 }
@@ -68,9 +68,6 @@
 {
     [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
     
-    if (!_scrollViewActive)
-        [self.tableView setContentOffset:CGPointMake(0, -40)];
-    
 //    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
     
     [_refreshControl beginRefreshing];
@@ -88,7 +85,10 @@
 {
     [self setFeedItems:posts];
     
-    [_refreshControl endRefreshing];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [_refreshControl endRefreshing];
+    });
     [self.tableView reloadData];
 }
 
