@@ -85,6 +85,7 @@
 		83360CDD19B6B84E00136FCB /* RYNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CDC19B6B84E00136FCB /* RYNotification.m */; };
 		833FC1AE1989E406002491C8 /* RYRiffDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */; };
 		833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */; };
+		834A0B4F19BED5A700E4D7E9 /* RYRegistrationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 834A0B4E19BED5A700E4D7E9 /* RYRegistrationServices.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
@@ -383,6 +384,8 @@
 		833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffDetailsViewController.m; path = ../RYRiffDetailsViewController.m; sourceTree = "<group>"; };
 		833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffDetailsTableViewCell.h; sourceTree = "<group>"; };
 		833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffDetailsTableViewCell.m; sourceTree = "<group>"; };
+		834A0B4D19BED5A700E4D7E9 /* RYRegistrationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRegistrationServices.h; sourceTree = "<group>"; };
+		834A0B4E19BED5A700E4D7E9 /* RYRegistrationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRegistrationServices.m; sourceTree = "<group>"; };
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
 		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
@@ -648,8 +651,8 @@
 		83FCD17518F909DB00A493F0 /* RYProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileViewController.m; sourceTree = "<group>"; };
 		83FCD18D18F9144100A493F0 /* RYNewsfeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedTableViewController.h; sourceTree = "<group>"; };
 		83FCD18E18F9144100A493F0 /* RYNewsfeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedTableViewController.m; sourceTree = "<group>"; };
-		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYServices.h; sourceTree = "<group>"; };
-		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYServices.m; sourceTree = "<group>"; };
+		83FCD1A118F921EA00A493F0 /* RYServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYServices.h; path = ../RYServices.h; sourceTree = "<group>"; };
+		83FCD1A218F921EA00A493F0 /* RYServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYServices.m; path = ../RYServices.m; sourceTree = "<group>"; };
 		83FCD1A618F9393F00A493F0 /* RYStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYStyleSheet.h; sourceTree = "<group>"; };
 		83FCD1A718F9393F00A493F0 /* RYStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYStyleSheet.m; sourceTree = "<group>"; };
 		83FCD1AA18F93E6C00A493F0 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
@@ -757,7 +760,8 @@
 				830BBCB118F9F54900A9C53F /* SSKeychainQuery.h */,
 				830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */,
 			);
-			path = SSKeychain;
+			name = SSKeychain;
+			path = ../Data/SSKeychain;
 			sourceTree = "<group>";
 		};
 		830BBCB618FA055900A9C53F /* MBProgressHUD */ = {
@@ -879,6 +883,10 @@
 		83360CD719B6B75300136FCB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				83FCD1A118F921EA00A493F0 /* RYServices.h */,
+				83FCD1A218F921EA00A493F0 /* RYServices.m */,
+				834A0B4D19BED5A700E4D7E9 /* RYRegistrationServices.h */,
+				834A0B4E19BED5A700E4D7E9 /* RYRegistrationServices.m */,
 				83360CD819B6B76500136FCB /* RYNotificationsManager.h */,
 				83360CD919B6B76500136FCB /* RYNotificationsManager.m */,
 			);
@@ -899,6 +907,7 @@
 				83011B6E19A7FF420017E7C5 /* SGImageCache */,
 				83011B7819A7FFA80017E7C5 /* MGEvents */,
 				830BBCCF18FA142000A9C53F /* BlockAlert */,
+				830BBCAC18F9F54900A9C53F /* SSKeychain */,
 			);
 			name = Extras;
 			path = Frameworks;
@@ -1420,9 +1429,6 @@
 				83360CD719B6B75300136FCB /* Services */,
 				83E56B5F1953A07F00EF054C /* Objects */,
 				830BBCC518FA0A4500A9C53F /* Location */,
-				830BBCAC18F9F54900A9C53F /* SSKeychain */,
-				83FCD1A118F921EA00A493F0 /* RYServices.h */,
-				83FCD1A218F921EA00A493F0 /* RYServices.m */,
 				83E56B661953A0DA00EF054C /* RYMediaEditor.h */,
 				83E56B671953A0DA00EF054C /* RYMediaEditor.m */,
 				831B96061964DEC6003A8616 /* RYDataManager.h */,
@@ -1705,6 +1711,7 @@
 				83CA12241995CD23002610E8 /* FLEXResources.m in Sources */,
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,
 				83011B8719A7FFA80017E7C5 /* MGDeallocAction.m in Sources */,
+				834A0B4F19BED5A700E4D7E9 /* RYRegistrationServices.m in Sources */,
 				8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */,
 				83CA120E1995CD23002610E8 /* FLEXWindow.m in Sources */,
 				836F484219A04BAB00E948BE /* NSObject+block.m in Sources */,

@@ -8,21 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-// NSNotifications
-#define kLoggedInNotification   @"userLoggedIn"
-
-// NSUserDefaults keys
-#define kLoggedInUserKey        @"loggedInUser"
-#define kCoordLongitude         @"lastUpdatedLongitude"
-#define kCoordLatitude          @"lastUpdatedLatitude"
-
 // Server paths
 #define kApiRoot                @"https://ryff.me/api/"
-
-// Registration
-#define kRegistrationAction     @"create-user.php"
-#define kUpdateUserAction       @"update-user.php"
-#define kLogIn                  @"login.php"
 
 // Users
 #define kGetUser                @"get-user.php"
@@ -101,48 +88,32 @@ typedef enum : NSUInteger {
 - (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost;
 @end
 
-@protocol UpdateUserDelegate <NSObject>
-- (void) updateSucceeded:(RYUser*)user;
-@optional
-- (void) updateFailed:(NSString*)reason;
-@end
-
 @class RYUser;
 @class RYNewsfeedPost;
 
 @interface RYServices : NSObject
 
 + (RYServices *)sharedInstance;
-+ (RYUser *) loggedInUser;
-
-// Registration
-- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<UpdateUserDelegate>)delegate;
-- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate;
-- (BOOL) attemptBackgroundLogIn;
-- (void) logOut;
-
-// Edit User
-- (void) updateAvatar:(UIImage*)avatar forDelegate:(id<UpdateUserDelegate>)delegate;
-- (void) editUserInfo:(RYUser*)user forDelegate:(id<UpdateUserDelegate>)delegate;
-- (void) deletePost:(RYNewsfeedPost*)post;
 
 // Users
 - (void) getUserWithId:(NSNumber *)userID orUsername:(NSString *)username delegate:(id<UsersDelegate>)delegate;
 - (void) getFollowersForUser:(NSInteger)userID page:(NSNumber *)page delegate:(id<UsersDelegate>)delegate;
-
-// Discover
 - (void) follow:(BOOL)shouldFollow user:(NSInteger)userId forDelegate:(id<FollowDelegate>)delegate;
 
-// Posts
+// User Posts
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs image:(UIImage *)image ForDelegate:(id<RiffDelegate>)riffDelegate;
+
+- (void) deletePost:(RYNewsfeedPost*)post;
+
+// Other Posts
 - (void) getUserPostsForUser:(NSInteger)userId page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getNewsfeedPosts:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getStarredPostsForUser:(NSInteger)userID delegate:(id<PostDelegate>)delegate;
+- (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
 
 // Actions
 - (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
-- (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
 
 @end

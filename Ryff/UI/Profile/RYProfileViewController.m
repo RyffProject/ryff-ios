@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 
 // Data Objects
 #import "RYTag.h"
@@ -99,7 +100,7 @@
 
 - (void) configureForUser:(RYUser *)user
 {
-    _user = user ? user : [RYServices loggedInUser];
+    _user = user ? user : [RYRegistrationServices loggedInUser];
     
     // prep activity
     self.feedItems = nil;
@@ -166,7 +167,7 @@
 
 - (void) followAction
 {
-    if (_user.userId != [RYServices loggedInUser].userId)
+    if (_user.userId != [RYRegistrationServices loggedInUser].userId)
     {
         [[RYServices sharedInstance] follow:!_user.isFollowing user:_user.userId forDelegate:self];
     }
@@ -196,7 +197,7 @@
 
 - (void) editImageAction
 {
-    if (_user.userId == [RYServices loggedInUser].userId)
+    if (_user.userId == [RYRegistrationServices loggedInUser].userId)
         [self presentProfilePictureOptions];
 }
 
@@ -237,7 +238,7 @@
     if (buttonIndex == 0)
     {
         // sign out
-        [[RYServices sharedInstance] logOut];
+        [[RYRegistrationServices sharedInstance] logOut];
         [self configureForUser:nil];
     }
     else if (buttonIndex == 1)
@@ -355,7 +356,7 @@
 - (void) avatarAction:(NSInteger)riffIndex
 {
     RYNewsfeedPost *post = self.feedItems[riffIndex];
-    if (post.user.userId != [RYServices loggedInUser].userId)
+    if (post.user.userId != [RYRegistrationServices loggedInUser].userId)
         [super avatarAction:riffIndex];
 }
 
@@ -516,7 +517,7 @@
     CGFloat avatarSize = 400.f;
     UIImage *avatarImage = [info[UIImagePickerControllerOriginalImage] thumbnailOfSize:CGSizeMake(avatarSize, avatarSize)];
     
-    [[RYServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
+    [[RYRegistrationServices sharedInstance] updateAvatar:avatarImage forDelegate:self];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
