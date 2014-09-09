@@ -13,6 +13,7 @@
 #import "UIViewController+Extras.h"
 
 // Data Managers
+#import "RYRegistrationServices.h"
 #import "RYServices.h"
 
 // Associated ViewControllers

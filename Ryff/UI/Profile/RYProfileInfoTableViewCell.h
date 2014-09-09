@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 
 #define kProfileInfoCellWidthMinusText isIpad ? 171.0f : 258.0f
 #define kProfileInfoCellHeightMinusText 363.0f

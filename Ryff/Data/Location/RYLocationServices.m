@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 
 
 @implementation RYLocationServices

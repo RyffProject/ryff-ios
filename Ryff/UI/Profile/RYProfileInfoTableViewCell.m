@@ -96,7 +96,7 @@
     _delegate          = delegate;
 
     // configure for editing if looking at the logged in user's profile
-    _isLoggedInProfile = (user && (user.userId == [RYServices loggedInUser].userId));
+    _isLoggedInProfile = (user && (user.userId == [RYRegistrationServices loggedInUser].userId));
     _forProfileTab     = NO;
     
     // Profile picture
@@ -216,12 +216,12 @@
 
 - (void) textViewDidEndEditing:(UITextView *)textView
 {
-    if (![_bioTextView.text isEqualToString:[RYServices loggedInUser].bio])
+    if (![_bioTextView.text isEqualToString:[RYRegistrationServices loggedInUser].bio])
     {
         // bio changed
-        RYUser *newUser = [[RYServices loggedInUser] copy];
+        RYUser *newUser = [[RYRegistrationServices loggedInUser] copy];
         [newUser setBio:textView.text];
-        [[RYServices sharedInstance] editUserInfo:newUser forDelegate:_delegate];
+        [[RYRegistrationServices sharedInstance] editUserInfo:newUser forDelegate:_delegate];
     }
 }
 
@@ -229,12 +229,12 @@
 
 - (void) textFieldDidEndEditing:(UITextField *)textField
 {
-    if (![_nameField.text isEqualToString:[RYServices loggedInUser].nickname])
+    if (![_nameField.text isEqualToString:[RYRegistrationServices loggedInUser].nickname])
     {
         // bio changed
-        RYUser *newUser = [[RYServices loggedInUser] copy];
+        RYUser *newUser = [[RYRegistrationServices loggedInUser] copy];
         newUser.nickname = _nameField.text;
-        [[RYServices sharedInstance] editUserInfo:newUser forDelegate:_delegate];
+        [[RYRegistrationServices sharedInstance] editUserInfo:newUser forDelegate:_delegate];
     }
 }
 
@@ -253,7 +253,7 @@
                 NSMutableArray *mutTags = [userCopy.tags mutableCopy];
                 [mutTags removeObjectAtIndex:tagIndex];
                 userCopy.tags = mutTags;
-                [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
+                [[RYRegistrationServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
             }
         }];
     }
@@ -270,7 +270,7 @@
              RYTag *newTag = [[RYTag alloc] initWithTag:[inputValue lowercaseString] numUsers:0 numPosts:0];
              RYUser *userCopy = [_user copy];
              userCopy.tags = [userCopy.tags arrayByAddingObject:newTag];
-             [[RYServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
+             [[RYRegistrationServices sharedInstance] editUserInfo:userCopy forDelegate:_delegate];
          }
     }];
 }

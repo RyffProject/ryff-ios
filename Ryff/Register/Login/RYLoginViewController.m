@@ -21,6 +21,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 #import "SSKeychain.h"
 
 #define kFieldCellReuseID @"FieldCell"
@@ -111,13 +112,13 @@
         {
             // register
             NSDictionary *parameters = @{@"username" : _username, @"password" : _password};
-            [[RYServices sharedInstance] registerUserWithPOSTDict:parameters forDelegate:self];
+            [[RYRegistrationServices sharedInstance] registerUserWithPOSTDict:parameters forDelegate:self];
             [self showHUDWithTitle:@"Registering"];
         }
         else
         {
             // log in
-            [[RYServices sharedInstance] logInUserWithUsername:_username Password:_password forDelegate:self];
+            [[RYRegistrationServices sharedInstance] logInUserWithUsername:_username Password:_password forDelegate:self];
             [self showHUDWithTitle:@"Logging in"];
         }
     }

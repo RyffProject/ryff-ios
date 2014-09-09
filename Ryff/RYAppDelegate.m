@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 #import "RYDataManager.h"
 #import "RYAudioDeckManager.h"
 #import "RYNotificationsManager.h"
@@ -29,7 +30,7 @@
     [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
     [self.window makeKeyAndVisible];
     
-    [[RYServices sharedInstance] attemptBackgroundLogIn];
+    [[RYRegistrationServices sharedInstance] attemptBackgroundLogIn];
     
     // Clear caches
     [[RYDataManager sharedInstance] clearCache];
