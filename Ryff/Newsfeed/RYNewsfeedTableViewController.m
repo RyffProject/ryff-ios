@@ -41,6 +41,7 @@
     self.feedItems = @[];
     _searchType = NEW;
     [self fetchContent];
+    [_refreshControl beginRefreshing];
     
     [self addNewPostButtonToNavBar];
 }
@@ -48,8 +49,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    _tableView.contentInset = UIEdgeInsetsZero;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }
@@ -67,10 +66,6 @@
 - (void) fetchContent
 {
     [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
-    
-//    [[RYServices sharedInstance] getUserPostsForUser:[RYServices loggedInUser].userId page:nil delegate:self];
-    
-    [_refreshControl beginRefreshing];
 }
 
 - (void) refreshContent:(RYRefreshControl *)refreshControl
@@ -121,18 +116,6 @@
         return 40.0f;
     else
         return 0.01f;
-}
-
-#pragma mark - ScrollView Delegate
-
-- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    _scrollViewActive = YES;
-}
-
-- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    _scrollViewActive = NO;
 }
 
 @end

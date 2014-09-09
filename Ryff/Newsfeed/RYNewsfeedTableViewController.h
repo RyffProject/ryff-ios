@@ -20,6 +20,5 @@
 
 // Data
 @property (nonatomic, assign) SearchType searchType;
-@property (nonatomic, assign) BOOL scrollViewActive;
 
 @end

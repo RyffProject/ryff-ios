@@ -8,8 +8,8 @@
 
 #import "RYRefreshControl.h"
 
-#define kRefreshPullHeight 65.0f
-#define kRefreshControlHeight 65.0f
+#define kRefreshPullHeight 55.0f
+#define kRefreshControlHeight 55.0f
 #define kRefreshControlWidth 200.0f
 
 #define kRefreshTitle @"Pull to Refresh"
@@ -17,7 +17,7 @@
 
 @interface RYRefreshControl ()
 
-@property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) CAShapeLayer *circleShape;
 @property (nonatomic, strong) UILabel *hintLabel;
@@ -26,6 +26,7 @@
 @property (nonatomic, assign) UIEdgeInsets originalContentInset;
 @property (nonatomic, assign) BOOL canRefresh;
 @property (nonatomic, assign) BOOL ignoreEdges;
+@property (nonatomic, assign) BOOL dontAdjustInsets;
 
 @end
 
@@ -34,6 +35,7 @@
 #pragma mark -
 #pragma mark - Life Cycle
 
+static int scrollObservanceContext;
 - (id) initInScrollView:(UIScrollView *)scrollView
 {
     if (self = [super initWithFrame:CGRectMake(0.5*(scrollView.frame.size.width-kRefreshControlWidth), -(kRefreshControlHeight + scrollView.contentInset.top), kRefreshControlWidth, kRefreshControlHeight)])
@@ -44,9 +46,10 @@
         _tintColor = [UIColor whiteColor];
         
         self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
-        [scrollView addSubview:self];
-        [scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-        [scrollView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:nil];
+        
+        [_scrollView addSubview:self];
+        [_scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:&scrollObservanceContext];
+        [_scrollView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:&scrollObservanceContext];
         
         [self setupRefresh];
     }
@@ -55,17 +58,18 @@
 
 - (void)dealloc
 {
-    [_scrollView removeObserver:self forKeyPath:@"contentOffset"];
-    [_scrollView removeObserver:self forKeyPath:@"contentInset"];
+    [_scrollView removeObserver:self forKeyPath:@"contentOffset" context:&scrollObservanceContext];
+    [_scrollView removeObserver:self forKeyPath:@"contentInset"context:&scrollObservanceContext];
     _scrollView = nil;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     [super willMoveToSuperview:newSuperview];
-    if (!newSuperview) {
-        [_scrollView removeObserver:self forKeyPath:@"contentOffset"];
-        [_scrollView removeObserver:self forKeyPath:@"contentInset"];
+    if (!newSuperview)
+    {
+        [_scrollView removeObserver:self forKeyPath:@"contentOffset" context:&scrollObservanceContext];
+        [_scrollView removeObserver:self forKeyPath:@"contentInset" context:&scrollObservanceContext];
         _scrollView = nil;
     }
 }
@@ -75,7 +79,7 @@
 
 - (void) setupRefresh
 {
-    CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-40.0f), 0, 40.0f, 40.0f);
+    CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-25.0f), 5, 25.0f, 25.0f);
     CGPoint circleCenter        = CGPointMake(circleFrame.size.width/2, circleFrame.size.height/2);
     CGFloat outerStrokeWidth    = 4.0f;
     _circleShape                = [CAShapeLayer layer];
@@ -142,24 +146,26 @@
 {
     if (!_isRefreshing)
     {
-        CGPoint offset = self.scrollView.contentOffset;
+        _canRefresh = NO;
+        _isRefreshing = YES;
         _ignoreEdges = YES;
         
+        CGPoint offset = self.scrollView.contentOffset;
         UIEdgeInsets scrollViewInsets = _originalContentInset;
         scrollViewInsets.top += kRefreshControlHeight;
-        self.scrollView.contentInset = scrollViewInsets;
+        if (!_dontAdjustInsets)
+        {
+            [_scrollView setContentInset:scrollViewInsets];
+//            [_scrollView setContentOffset:offset animated:NO];
+        }
         
         _ignoreEdges = NO;
-        [_scrollView setContentOffset:offset animated:NO];
         
         _circleShape.hidden = YES;
         _activityIndicator.hidden = NO;
         [_activityIndicator startAnimating];
         [self animateFill:_circleShape toStrokeEnd:0.0f];
         [_hintLabel setText:kRefreshingTitle];
-        
-        _canRefresh = NO;
-        _isRefreshing = YES;
     }
 }
 
@@ -167,6 +173,8 @@
 {
     if (_isRefreshing)
     {
+        _isRefreshing = NO;
+        
         __block UIScrollView *blockScrollView = self.scrollView;
         [UIView animateWithDuration:0.4 animations:^{
             _ignoreEdges = YES;
@@ -183,12 +191,7 @@
             
             _ignoreEdges = YES;
             _ignoreEdges = NO;
-            
-            // use again to keep retain cycle
-            [blockScrollView setContentInset:_originalContentInset];
         }];
-        
-        _isRefreshing = NO;
     }
 }
 
@@ -260,8 +263,10 @@
                 if (percentPulled == 1.0f)
                 {
                     // triggered refresh
+                    _dontAdjustInsets = YES;
                     [self beginRefreshing];
                     [self sendActionsForControlEvents:UIControlEventValueChanged];
+                    _dontAdjustInsets = NO;
                 }
                 else
                 {

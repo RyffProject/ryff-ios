@@ -50,8 +50,6 @@
     
     [self.riffTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.riffTableView setBackgroundColor:[RYStyleSheet lightBackgroundColor]];
-    
-    self.riffTableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0);
 }
 
 #pragma mark - Follow Delegate
@@ -244,7 +242,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 20.0f; }
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 20.0f; }
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 40.0f; }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

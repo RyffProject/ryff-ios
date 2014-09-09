@@ -34,16 +34,11 @@
     [super viewDidLoad];
     
     self.riffSection = 1;
-    
-    CGFloat searchTypeHeight = kSearchTypeCellHeight;
-    self.tableView.contentInset = UIEdgeInsetsMake(searchTypeHeight, 0, 0, 0);
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.tableView.contentInset = UIEdgeInsetsZero;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -99,11 +94,7 @@
 
 - (void) fetchContent
 {
-    if (!self.scrollViewActive)
-        [self.tableView setContentOffset:CGPointMake(0, -40)];
-    
     [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil delegate:self];
-    [self.refreshControl beginRefreshing];
 }
 
 #pragma mark -
@@ -122,6 +113,7 @@
 {
     self.searchType = searchType;
     
+    [self.refreshControl beginRefreshing];
     [self fetchContent];
 }
 
