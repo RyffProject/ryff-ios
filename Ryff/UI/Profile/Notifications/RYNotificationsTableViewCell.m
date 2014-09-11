@@ -13,7 +13,7 @@
 
 // Data Objects
 #import "RYNotification.h"
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYUser.h"
 
@@ -51,9 +51,9 @@
     
     if (notification.posts)
     {
-        RYNewsfeedPost *lastPost = notification.posts.lastObject;
+        RYPost *lastPost = notification.posts.lastObject;
         lastUser = lastPost.user;
-        postsString = [lastPost.riff.title mutableCopy];
+        postsString = [lastPost.title mutableCopy];
         if (notification.posts.count == 2)
             [postsString appendFormat:@" and 1 other riff"];
         else if (notification.users.count > 2)
@@ -72,7 +72,7 @@
     
     if (notification.post)
     {
-        postString = notification.post.riff.title;
+        postString = notification.post.title;
     }
     
     switch (notification.type) {

@@ -12,7 +12,7 @@
 #import "RYDataManager.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYUser.h"
 
@@ -25,11 +25,11 @@
 
 @interface RYAudioDeckManager () <AVAudioPlayerDelegate, TrackDownloadDelegate>
 
-// data arrays populated with RYNewsfeedPost objects
+// data arrays populated with RYPost objects
 @property (nonatomic, strong) NSMutableArray *recentlyPlayed;
 @property (nonatomic, strong) NSMutableArray *riffPlaylist;
 @property (nonatomic, strong) NSMutableArray *downloadQueue;
-@property (nonatomic, strong) RYNewsfeedPost *currentlyPlayingPost;
+@property (nonatomic, strong) RYPost *currentlyPlayingPost;
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
@@ -132,9 +132,9 @@ static RYAudioDeckManager *_sharedInstance;
     [[NSNotificationCenter defaultCenter] postNotificationName:kTrackChangedNotification object:@{@"trackChanged":@(true)}];
 }
 
-- (void) playPost:(RYNewsfeedPost *)post
+- (void) playPost:(RYPost *)post
 {
-    NSURL *localURL = [RYDataManager urlForTempRiff:post.riff.fileName];
+    NSURL *localURL = [RYDataManager urlForTempRiff:post.riffURL];
     if ([[NSFileManager defaultManager] fileExistsAtPath:localURL.path])
     {
         // confirmed that media file exists
@@ -181,7 +181,7 @@ static RYAudioDeckManager *_sharedInstance;
 {
     if (_riffPlaylist.count > 0)
     {
-        if (((RYNewsfeedPost*)_riffPlaylist[0]).postId == _currentlyPlayingPost.postId)
+        if (((RYPost*)_riffPlaylist[0]).postId == _currentlyPlayingPost.postId)
         {
             // first track in playlist is also currently playing one -> should remove it
             [_riffPlaylist removeObjectAtIndex:0];
@@ -207,7 +207,7 @@ static RYAudioDeckManager *_sharedInstance;
     {
         NSString *artist = _currentlyPlayingPost.user.nickname.length > 0 ? _currentlyPlayingPost.user.nickname : _currentlyPlayingPost.user.username;
         NSMutableDictionary *nowPlaying = [@{MPMediaItemPropertyArtist: artist,
-                                     MPMediaItemPropertyAlbumTitle: _currentlyPlayingPost.riff.title} mutableCopy];
+                                     MPMediaItemPropertyAlbumTitle: _currentlyPlayingPost.title} mutableCopy];
         if (_audioPlayer)
         {
             [nowPlaying setObject:@(_audioPlayer.duration) forKey:MPMediaItemPropertyPlaybackDuration];
@@ -231,7 +231,7 @@ static RYAudioDeckManager *_sharedInstance;
 #pragma mark -
 #pragma mark - Data Control
 
-- (void) forcePostToTop:(RYNewsfeedPost *)post
+- (void) forcePostToTop:(RYPost *)post
 {
     [self stopPost];
     _currentlyPlayingPost = post;
@@ -254,14 +254,14 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (void) addPostToPlaylist:(RYNewsfeedPost *)post
+- (void) addPostToPlaylist:(RYPost *)post
 {
     if (!post)
         return;
     
     // make sure not already in playlist
     NSArray *processedPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
-    for (RYNewsfeedPost *exitingPost in processedPosts)
+    for (RYPost *exitingPost in processedPosts)
     {
         if (post.postId == exitingPost.postId)
             return;
@@ -272,14 +272,14 @@ static RYAudioDeckManager *_sharedInstance;
     
     [self notifyPlaylistChanged];
     
-    [[RYDataManager sharedInstance] fetchTempRiff:post.riff forDelegate:self];
+    [[RYDataManager sharedInstance] fetchTempRiff:post.riffURL forDelegate:self];
 }
 
 - (void) movePostFromPlaylistIndex:(NSInteger)playlistIdx toIndex:(NSInteger)newPlaylistIdx
 {
     if (newPlaylistIdx < _riffPlaylist.count && playlistIdx < _riffPlaylist.count)
     {
-        RYNewsfeedPost *post = _riffPlaylist[playlistIdx];
+        RYPost *post = _riffPlaylist[playlistIdx];
         [_riffPlaylist removeObjectAtIndex:playlistIdx];
         [_riffPlaylist insertObject:post atIndex:newPlaylistIdx];
         
@@ -290,18 +290,18 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (void) removePostFromPlaylist:(RYNewsfeedPost *)post
+- (void) removePostFromPlaylist:(RYPost *)post
 {
     if (post.postId == _currentlyPlayingPost.postId)
         [self playNextTrack];
     
     // remove from _riffPlaylist if there
-    for (RYNewsfeedPost *exitingPost in _riffPlaylist)
+    for (RYPost *exitingPost in _riffPlaylist)
     {
         if (post.postId == exitingPost.postId)
         {
             [_riffPlaylist removeObject:exitingPost];
-            [[RYDataManager sharedInstance] deleteLocalRiff:exitingPost.riff];
+            [[RYDataManager sharedInstance] deleteLocalRiff:exitingPost.riffURL];
             
             [self notifyPlaylistChanged];
             
@@ -309,13 +309,13 @@ static RYAudioDeckManager *_sharedInstance;
         }
     }
     // remove from _downloadQueue if there
-    for (RYNewsfeedPost *exitingPost in _downloadQueue)
+    for (RYPost *exitingPost in _downloadQueue)
     {
         if (post.postId == exitingPost.postId)
         {
             [_downloadQueue removeObject:exitingPost];
             
-            [[RYDataManager sharedInstance] cancelDownloadOperationWithURL:post.riff.URL];
+            [[RYDataManager sharedInstance] cancelDownloadOperationWithURL:post.riffURL];
             [self notifyPlaylistChanged];
             
             return;
@@ -323,10 +323,10 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (NSInteger) idxOfDownload:(RYNewsfeedPost *)post
+- (NSInteger) idxOfDownload:(RYPost *)post
 {
     NSInteger idx = -1;
-    for (RYNewsfeedPost *existingPost in _downloadQueue)
+    for (RYPost *existingPost in _downloadQueue)
     {
         if (existingPost.postId == post.postId)
         {
@@ -337,10 +337,10 @@ static RYAudioDeckManager *_sharedInstance;
     return idx;
 }
 
-- (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post
+- (NSInteger) idxInPlaylistOfPost:(RYPost *)post
 {
     NSInteger idx = -1;
-    for (RYNewsfeedPost *existingPost in _riffPlaylist)
+    for (RYPost *existingPost in _riffPlaylist)
     {
         if (existingPost.postId == post.postId)
         {
@@ -356,7 +356,7 @@ static RYAudioDeckManager *_sharedInstance;
     BOOL postInPlaylist = NO;
     
     NSArray *allPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
-    for (RYNewsfeedPost *existingPost in allPosts)
+    for (RYPost *existingPost in allPosts)
     {
         if (existingPost.postId == postID)
         {
@@ -376,9 +376,10 @@ static RYAudioDeckManager *_sharedInstance;
     BOOL fileInPlaylist = NO;
     
     NSArray *allPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
-    for (RYNewsfeedPost *existingPost in allPosts)
+    for (RYPost *existingPost in allPosts)
     {
-        if ([existingPost.riff.fileName isEqualToString:fileName])
+        NSString *riffName = [[existingPost.riffURL pathComponents] lastObject];
+        if ([riffName isEqualToString:fileName])
         {
             fileInPlaylist = YES;
             break;
@@ -389,28 +390,28 @@ static RYAudioDeckManager *_sharedInstance;
 
 #pragma mark - Recently Played
 
-- (void) addPostToRecentlyPlayed:(RYNewsfeedPost *)post
+- (void) addPostToRecentlyPlayed:(RYPost *)post
 {
     if (_recentlyPlayed.count >= kRecentlyPlayedSize)
     {
-        RYNewsfeedPost *oldestPost = _recentlyPlayed[0];
+        RYPost *oldestPost = _recentlyPlayed[0];
         [self removePostFromPlaylist:oldestPost];
     }
     [_recentlyPlayed addObject:post];
 }
 
-- (void) removePostFromRecentlyPlayed:(RYNewsfeedPost *)post
+- (void) removePostFromRecentlyPlayed:(RYPost *)post
 {
     if ([_recentlyPlayed containsObject:post])
         [_recentlyPlayed removeObject:post];
     
-    [[RYDataManager sharedInstance] deleteLocalRiff:post.riff];
+    [[RYDataManager sharedInstance] deleteLocalRiff:post.riffURL];
 }
 
 #pragma mark -
 #pragma mark - Data
 
-- (RYNewsfeedPost *)currentlyPlayingPost
+- (RYPost *)currentlyPlayingPost
 {
     return _currentlyPlayingPost;
 }
@@ -430,9 +431,9 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) track:(NSURL *)trackURL DownloadProgressed:(CGFloat)progress
 {
-    for (RYNewsfeedPost *post in _downloadQueue)
+    for (RYPost *post in _downloadQueue)
     {
-        if (post.riff.URL == trackURL)
+        if (post.riffURL == trackURL)
         {
             if (_delegate && [_delegate respondsToSelector:@selector(post:downloadProgressChanged:)])
                 [_delegate post:post downloadProgressChanged:progress];
@@ -445,13 +446,13 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) track:(NSURL *)trackURL FinishedDownloading:(NSURL *)localURL
 {
-    for (RYNewsfeedPost *post in _downloadQueue)
+    for (RYPost *post in _downloadQueue)
     {
-        if (post.riff.URL == trackURL)
+        if (post.riffURL == trackURL)
         {
             [_downloadQueue removeObject:post];
             
-            if (trackURL == _currentlyPlayingPost.riff.URL)
+            if (trackURL == _currentlyPlayingPost.riffURL)
             {
                 [self playPost:_currentlyPlayingPost];
             }
@@ -471,9 +472,9 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) track:(NSURL *)trackURL DownloadFailed:(NSString *)reason
 {
-    for (RYNewsfeedPost *post in _downloadQueue)
+    for (RYPost *post in _downloadQueue)
     {
-        if (post.riff.URL == trackURL)
+        if (post.riffURL == trackURL)
         {
             [_downloadQueue removeObject:post];
             

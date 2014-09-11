@@ -22,7 +22,7 @@
 - (void) starAction:(NSInteger)riffIndex;
 @end
 
-@class RYNewsfeedPost;
+@class RYPost;
 @class RYSocialTextView;
 
 @interface RYRiffCell : UITableViewCell
@@ -33,6 +33,6 @@
 
 @property (weak, nonatomic) IBOutlet RYSocialTextView *socialTextView;
 
-- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
+- (void) configureForPost:(RYPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate;
 
 @end

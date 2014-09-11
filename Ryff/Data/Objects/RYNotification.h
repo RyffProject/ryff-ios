@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class RYUser;
-@class RYNewsfeedPost;
+@class RYPost;
 
 typedef enum : NSUInteger {
     UNRECOGNIZED_NOTIF = 0,
@@ -30,7 +30,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSArray *users;
 @property (nonatomic, strong) NSArray *posts;
 @property (nonatomic, strong) RYUser *user;
-@property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, strong) RYPost *post;
 
 - (id) initWithId:(NSInteger)notifId type:(NotificationType)type isRead:(BOOL)isRead dateUpdated:(NSDate *)dateUpdated;
 

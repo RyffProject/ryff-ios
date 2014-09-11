@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class RYNewsfeedPost;
+@class RYPost;
 
 @interface RYAudioDeckTableViewCell : UITableViewCell
 
-- (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx;
+- (void) configureForPost:(RYPost *)post trackIdx:(NSInteger)trackIdx;
 
 @end

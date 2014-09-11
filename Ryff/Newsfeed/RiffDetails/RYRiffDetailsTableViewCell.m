@@ -12,7 +12,7 @@
 #import "RYStyleSheet.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYUser.h"
 
@@ -39,12 +39,12 @@
     [RYStyleSheet styleProfileImageView:_avatarImageView];
 }
 
-- (void) configureWithPost:(RYNewsfeedPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
+- (void) configureWithPost:(RYPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
 {
     [self configureWithSampledPost:post user:post.user postIdx:postIdx actionString:actionString delegate:delegate];
 }
 
-- (void) configureWithSampledPost:(RYNewsfeedPost *)post user:(RYUser *)user postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
+- (void) configureWithSampledPost:(RYPost *)post user:(RYUser *)user postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate
 {
     if (post)
     {
@@ -52,7 +52,7 @@
         _postIdx  = postIdx;
         
         NSMutableAttributedString *username = [[NSMutableAttributedString alloc] initWithString:user.username attributes:@{NSFontAttributeName: [UIFont fontWithName:kBoldFont size:18.0f]}];
-        NSAttributedString *action   = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ %@", actionString, post.riff.title] attributes:@{NSFontAttributeName : [UIFont fontWithName:kRegularFont size:18.0f]}];
+        NSAttributedString *action   = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ %@", actionString, post.title] attributes:@{NSFontAttributeName : [UIFont fontWithName:kRegularFont size:18.0f]}];
         
         [username appendAttributedString:action];
         [_actionLabel setAttributedText:username];

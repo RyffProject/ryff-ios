@@ -18,7 +18,7 @@
 #import "RYAudioDeckManager.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYUser.h"
 

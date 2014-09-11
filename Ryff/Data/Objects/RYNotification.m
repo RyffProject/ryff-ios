@@ -10,7 +10,7 @@
 
 // Data Objects
 #import "RYUser.h"
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 
 @implementation RYNotification
 
@@ -57,9 +57,9 @@
     if (notifDict[@"user"])
         newNotif.user  = [RYUser userFromDict:notifDict[@"user"]];
     if (notifDict[@"posts"])
-        newNotif.posts = [RYNewsfeedPost newsfeedPostsFromDictArray:notifDict[@"posts"]];
+        newNotif.posts = [RYPost postsFromDictArray:notifDict[@"posts"]];
     if (notifDict[@"post"])
-        newNotif.post  = [RYNewsfeedPost newsfeedPostWithDict:notifDict[@"post"]];
+        newNotif.post  = [RYPost postWithDict:notifDict[@"post"]];
     
     return newNotif;
 }

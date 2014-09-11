@@ -70,7 +70,7 @@ static RYDataManager *_sharedInstance;
     return outputFileURL;
 }
 
-+ (NSURL *)urlForTempRiff:(NSString *)fileName
++ (NSURL *)urlForTempRiff:(NSURL *)riffURL
 {
     NSString *documentDirPath = NSTemporaryDirectory();
     NSString *trackDir        = [documentDirPath stringByAppendingPathComponent:@"Riffs"];
@@ -78,6 +78,7 @@ static RYDataManager *_sharedInstance;
     if (![[NSFileManager defaultManager] fileExistsAtPath:trackDir isDirectory:nil])
         [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:NULL];
     
+    NSString *fileName = [[riffURL pathComponents] lastObject];
     return [NSURL URLWithString:[trackDir stringByAppendingPathComponent:fileName]];
 }
 
@@ -103,20 +104,20 @@ static RYDataManager *_sharedInstance;
     return trackPath;
 }
 
-- (void) fetchTempRiff:(RYRiff *)riff forDelegate:(id<TrackDownloadDelegate>)delegate
+- (void) fetchTempRiff:(NSURL *)riffURL forDelegate:(id<TrackDownloadDelegate>)delegate
 {
-    NSURL *localURL = [RYDataManager urlForTempRiff:riff.fileName];
+    NSURL *localURL = [RYDataManager urlForTempRiff:riffURL];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[localURL path]])
     {
         // don't need to download
         if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
-            [delegate track:riff.URL FinishedDownloading:localURL];
+            [delegate track:riffURL FinishedDownloading:localURL];
     }
     else
     {
         // start download
-        [self saveRiffAt:riff.URL toLocalURL:localURL forDelegate:delegate];
+        [self saveRiffAt:riffURL toLocalURL:localURL forDelegate:delegate];
     }
 }
 
@@ -162,9 +163,9 @@ static RYDataManager *_sharedInstance;
     [self startNextDownload];
 }
 
-- (void) deleteLocalRiff:(RYRiff *)riff
+- (void) deleteLocalRiff:(NSURL *)riffURL
 {
-    NSURL *localURL = [RYDataManager urlForTempRiff:riff.fileName];
+    NSURL *localURL = [RYDataManager urlForTempRiff:riffURL];
     if ([[NSFileManager defaultManager] fileExistsAtPath:localURL.path])
         [[NSFileManager defaultManager] removeItemAtPath:localURL.path error:NULL];
 }

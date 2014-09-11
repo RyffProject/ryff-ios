@@ -8,11 +8,6 @@
 
 #import "RYStyleSheet.h"
 
-// Data Objects
-#import "RYNewsfeedPost.h"
-#import "RYRiff.h"
-#import "RYUser.h"
-
 // Categories
 #import "UIColor+Hex.h"
 

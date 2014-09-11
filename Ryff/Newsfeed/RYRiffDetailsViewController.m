@@ -36,7 +36,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 // Data
-@property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, strong) RYPost *post;
 
 // populated with Post objects
 @property (nonatomic, strong) NSArray *childrenPosts;
@@ -71,11 +71,11 @@
 
 #pragma mark - Configuring
 
-- (void) configureForPost:(RYNewsfeedPost *)post
+- (void) configureForPost:(RYPost *)post
 {
     _post = post;
     
-    [self setTitle:post.riff.title];
+    [self setTitle:post.title];
     
     self.feedItems = @[post];
 }
@@ -115,7 +115,7 @@
     
     if (postIdx < _childrenPosts.count)
     {
-        RYNewsfeedPost *selectedPost = _childrenPosts[postIdx];
+        RYPost *selectedPost = _childrenPosts[postIdx];
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
         RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
         [profileVC configureForUser:selectedPost.user];
@@ -225,7 +225,7 @@
         {
             // riff details -> calculate size with attributed text for post description
             NSInteger postIdx                 = _post.imageURL ? (indexPath.row-1) : indexPath.row;
-            RYNewsfeedPost *post              = self.feedItems[postIdx];
+            RYPost *post                      = self.feedItems[postIdx];
             CGFloat widthMinusText            = kRiffCellWidthMinusTextAvatar;
             
             CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
@@ -279,7 +279,7 @@
     else
     {
         NSString *actionString = @"sampled on";
-        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
+        RYPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
         RYRiffDetailsTableViewCell *detailsCell = (RYRiffDetailsTableViewCell *)cell;
         [detailsCell configureWithPost:post postIdx:indexPath.row actionString:actionString delegate:self];
     }
@@ -300,7 +300,7 @@
     if (indexPath.section != self.riffSection)
     {
         // push new riff details vc
-        RYNewsfeedPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
+        RYPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
         NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
         RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
         [riffDetails configureForPost:post];

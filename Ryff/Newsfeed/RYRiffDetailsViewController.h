@@ -11,7 +11,7 @@
 
 @interface RYRiffDetailsViewController : RYRiffStreamingCoreViewController
 
-- (void) configureForPost:(RYNewsfeedPost *)post;
+- (void) configureForPost:(RYPost *)post;
 - (void) addBackButton;
 
 @property (nonatomic, assign) BOOL shouldPreventNavigation;

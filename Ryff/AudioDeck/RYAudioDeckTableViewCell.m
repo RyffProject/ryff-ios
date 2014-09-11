@@ -13,7 +13,7 @@
 #import "RYAudioDeckManager.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYUser.h"
 #import "RYRiff.h"
 
@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 
 // Data
-@property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, strong) RYPost *post;
 @property (nonatomic, assign) NSInteger trackIdx;
 
 @end
@@ -82,15 +82,15 @@
 #pragma mark -
 #pragma mark - Styling
 
-- (void) configureForPost:(RYNewsfeedPost *)post trackIdx:(NSInteger)trackIdx
+- (void) configureForPost:(RYPost *)post trackIdx:(NSInteger)trackIdx
 {
     _post = post;
     _trackIdx = trackIdx;
     
     NSString *artistText = (post.user.nickname && post.user.nickname.length > 0) ? post.user.nickname : post.user.username;
     [_artistLabel setText:artistText];
-    [_riffTitleLabel setText:post.riff.title];
-    [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
+    [_riffTitleLabel setText:post.title];
+    [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.duration]];
     
     [self styleFromAudioDeck];
     
@@ -138,7 +138,7 @@
     if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
     {
         CGFloat percentRemaining  = (1.0f - [[RYAudioDeckManager sharedInstance] currentPlaybackProgress]);
-        CGFloat playbackRemaining = percentRemaining*_post.riff.duration;
+        CGFloat playbackRemaining = percentRemaining*_post.duration;
         [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:playbackRemaining]];
     }
     

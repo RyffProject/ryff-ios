@@ -9,7 +9,7 @@
 #import "RYUser.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYTag.h"
 
 @implementation RYUser

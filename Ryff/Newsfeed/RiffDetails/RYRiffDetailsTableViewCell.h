@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class RYNewsfeedPost;
+@class RYPost;
 @class RYUser;
 
 @protocol RiffDetailsDelegate <NSObject>
@@ -17,7 +17,7 @@
 
 @interface RYRiffDetailsTableViewCell : UITableViewCell
 
-- (void) configureWithPost:(RYNewsfeedPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
+- (void) configureWithPost:(RYPost *)post postIdx:(NSInteger)postIdx actionString:(NSString *)actionString delegate:(id<RiffDetailsDelegate>)delegate;
 - (void) configureWithAttributedString:(NSAttributedString *)attString imageURL:(NSURL *)url;
 
 @property (nonatomic, weak) id<RiffDetailsDelegate> delegate;

@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class RYNewsfeedPost;
-
 @interface RYStyleSheet : NSObject
 
 + (UIColor *)audioActionColor;

@@ -14,7 +14,7 @@
 
 // Data Objects
 #import "RYUser.h"
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYTag.h"
 
@@ -40,7 +40,7 @@ static RYUser* _loggedInUser;
     return _sharedInstance;
 }
 
-- (void) deletePost:(RYNewsfeedPost*)post
+- (void) deletePost:(RYPost*)post
 {
 //    UIAlertView *failureAlert = [[UIAlertView alloc] initWithTitle:@"Post delete failed" message:[NSString stringWithFormat:@"Something went wrong and post was not deleted: %@",post.riff.title] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
     
@@ -239,7 +239,7 @@ static RYUser* _loggedInUser;
             {
                 if (delegate && [delegate respondsToSelector:@selector(postSucceeded:)])
                 {
-                    NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                    NSArray *posts = [RYPost postsFromDictArray:dictionary[@"posts"]];
                     [delegate postSucceeded:posts];
                 }
             }
@@ -270,7 +270,7 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                NSArray *posts = [RYPost postsFromDictArray:dictionary[@"posts"]];
                 [delegate postSucceeded:posts];
             }
             else if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
@@ -315,7 +315,7 @@ static RYUser* _loggedInUser;
             {
                 if (delegate && [delegate respondsToSelector:@selector(postSucceeded:)])
                 {
-                    NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                    NSArray *posts = [RYPost postsFromDictArray:dictionary[@"posts"]];
                     [delegate postSucceeded:posts];
                 }
             }
@@ -339,7 +339,7 @@ static RYUser* _loggedInUser;
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                NSArray *posts = [RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"posts"]];
+                NSArray *posts = [RYPost postsFromDictArray:dictionary[@"posts"]];
                 [delegate postSucceeded:posts];
             }
             else if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
@@ -355,7 +355,7 @@ static RYUser* _loggedInUser;
 #pragma mark -
 #pragma mark - Actions
 
-- (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate
+- (void) upvote:(BOOL)shouldUpvote post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -369,7 +369,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 if (delegate && [delegate respondsToSelector:@selector(upvoteSucceeded:)])
-                    [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary[@"post"]]];
+                    [delegate upvoteSucceeded:[RYPost postWithDict:dictionary[@"post"]]];
             }
             else
             {
@@ -384,7 +384,7 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate
+- (void) star:(BOOL)shouldStar post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -398,7 +398,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 if (delegate && [delegate respondsToSelector:@selector(upvoteSucceeded:)])
-                    [delegate upvoteSucceeded:[RYNewsfeedPost newsfeedPostWithDict:dictionary[@"post"]]];
+                    [delegate upvoteSucceeded:[RYPost postWithDict:dictionary[@"post"]]];
             }
             else
             {
@@ -427,9 +427,9 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 if (delegate && [delegate respondsToSelector:@selector(childrenRetrieved:)])
-                    [delegate childrenRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"children"]]];
+                    [delegate childrenRetrieved:[RYPost postsFromDictArray:dictionary[@"children"]]];
                 if (delegate && [delegate respondsToSelector:@selector(parentsRetrieved:)])
-                    [delegate parentsRetrieved:[RYNewsfeedPost newsfeedPostsFromDictArray:dictionary[@"parents"]]];
+                    [delegate parentsRetrieved:[RYPost postsFromDictArray:dictionary[@"parents"]]];
             }
             else if (delegate && [delegate respondsToSelector:@selector(familyPostFailed:)])
                 [delegate familyPostFailed:dictionary[@"error"]];

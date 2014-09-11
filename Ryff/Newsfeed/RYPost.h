@@ -1,5 +1,5 @@
 //
-//  RYNewsfeedPost.h
+//  RYPost.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/12/14.
@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class RYRiff;
 @class RYUser;
 
-@interface RYNewsfeedPost : NSObject
+@interface RYPost : NSObject
 
 @property (nonatomic, assign) NSInteger postId;
 @property (nonatomic, strong) RYUser *user;
-@property (nonatomic, strong) RYRiff *riff;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSURL *riffURL;
+@property (nonatomic, assign) CGFloat duration;
 @property (nonatomic, strong) NSDate *dateCreated;
 @property (nonatomic, assign) BOOL isStarred;
 @property (nonatomic, assign) BOOL isUpvoted;
@@ -26,9 +27,9 @@
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSArray *tags;
 
-- (RYNewsfeedPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content riff:(RYRiff*)riff dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;
+- (RYPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content title:(NSString *)title riffURL:(NSURL*)riffURL duration:(CGFloat)duration dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;
 
-+ (RYNewsfeedPost *)newsfeedPostWithDict:(NSDictionary*)postDict;
-+ (NSArray *)newsfeedPostsFromDictArray:(NSArray *)dictArray;
++ (RYPost *)postWithDict:(NSDictionary*)postDict;
++ (NSArray *)postsFromDictArray:(NSArray *)dictArray;
 
 @end

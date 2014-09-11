@@ -255,7 +255,7 @@
 		83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AD18F93F5500A493F0 /* artists@2x.png */; };
 		83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AE18F93F5500A493F0 /* user@2x.png */; };
 		83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */; };
-		83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */; };
+		83FCD1BB18F9413400A493F0 /* RYPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BA18F9413400A493F0 /* RYPost.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -661,8 +661,8 @@
 		83FCD1AE18F93F5500A493F0 /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
 		83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreTabBarViewController.h; sourceTree = "<group>"; };
 		83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreTabBarViewController.m; sourceTree = "<group>"; };
-		83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYNewsfeedPost.h; path = ../../Newsfeed/RYNewsfeedPost.h; sourceTree = "<group>"; };
-		83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYNewsfeedPost.m; path = ../../Newsfeed/RYNewsfeedPost.m; sourceTree = "<group>"; };
+		83FCD1B918F9413400A493F0 /* RYPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYPost.h; path = ../../Newsfeed/RYPost.h; sourceTree = "<group>"; };
+		83FCD1BA18F9413400A493F0 /* RYPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYPost.m; path = ../../Newsfeed/RYPost.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1235,8 +1235,8 @@
 				83E56B611953A0A900EF054C /* RYRiff.m */,
 				83E56B621953A0A900EF054C /* RYUser.h */,
 				83E56B631953A0A900EF054C /* RYUser.m */,
-				83FCD1B918F9413400A493F0 /* RYNewsfeedPost.h */,
-				83FCD1BA18F9413400A493F0 /* RYNewsfeedPost.m */,
+				83FCD1B918F9413400A493F0 /* RYPost.h */,
+				83FCD1BA18F9413400A493F0 /* RYPost.m */,
 				837CCD1519A3E12D00F95FCA /* RYTag.h */,
 				837CCD1619A3E12D00F95FCA /* RYTag.m */,
 				83360CDB19B6B84E00136FCB /* RYNotification.h */,
@@ -1813,7 +1813,7 @@
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
 				83CA12081995CD23002610E8 /* FLEXMethodCallingViewController.m in Sources */,
 				83CCC91D197EFCBF00FD1B4B /* UIRefreshControl+AFNetworking.m in Sources */,
-				83FCD1BB18F9413400A493F0 /* RYNewsfeedPost.m in Sources */,
+				83FCD1BB18F9413400A493F0 /* RYPost.m in Sources */,
 				83CCC916197EFCBF00FD1B4B /* AFURLSessionManager.m in Sources */,
 				83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */,
 				83CA121E1995CD23002610E8 /* FLEXObjectExplorerFactory.m in Sources */,

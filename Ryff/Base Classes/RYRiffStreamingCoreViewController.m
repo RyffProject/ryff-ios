@@ -58,7 +58,7 @@
 {
     for (NSInteger postIdx = 0; postIdx < self.feedItems.count; postIdx++)
     {
-        RYNewsfeedPost *post = self.feedItems[postIdx];
+        RYPost *post = self.feedItems[postIdx];
         if (post.user.userId == user.userId)
         {
             post.user = user;
@@ -76,7 +76,7 @@
 
 - (void) avatarAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = _feedItems[riffIndex];
+    RYPost *post = _feedItems[riffIndex];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
     [profileVC configureForUser:post.user];
@@ -89,7 +89,7 @@
 - (void) playerControlAction:(NSInteger)riffIndex
 {
     RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
-    RYNewsfeedPost *post = _feedItems[riffIndex];
+    RYPost *post = _feedItems[riffIndex];
     if (post.postId == [audioManager currentlyPlayingPost].postId)
     {
         // currently playing
@@ -113,13 +113,13 @@
  */
 - (void) upvoteAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
     [[RYServices sharedInstance] upvote:!post.isUpvoted post:post forDelegate:self];
 }
 
 - (void) starAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
+    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
     [[RYServices sharedInstance] star:!post.isStarred post:post forDelegate:self];
 }
 
@@ -128,13 +128,10 @@
  */
 - (void) repostAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = [self.feedItems objectAtIndex:riffIndex];
-    if (post.riff)
-    {
-        RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-        [riffCreateVC includeRiffs:@[post.riff]];
-        [self presentViewController:riffCreateVC animated:YES completion:nil];
-    }
+    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
+    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    [riffCreateVC includeRiffs:@[post.riffURL]];
+    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
 ///*
@@ -165,17 +162,17 @@
 #pragma mark -
 #pragma mark - Action Delegate
 
-- (void) upvoteSucceeded:(RYNewsfeedPost *)updatedPost
+- (void) upvoteSucceeded:(RYPost *)updatedPost
 {
     [self reloadPost:updatedPost];
 }
 
-- (void) starSucceeded:(RYNewsfeedPost *)updatedPost
+- (void) starSucceeded:(RYPost *)updatedPost
 {
     [self reloadPost:updatedPost];
 }
 
-- (void) upvoteFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+- (void) upvoteFailed:(NSString *)reason post:(RYPost *)oldPost
 {
 //    [PXAlertView showAlertWithTitle:@"Upvote failed" message:reason];
     
@@ -183,7 +180,7 @@
     [self.riffTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:self.riffSection]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost
+- (void) starFailed:(NSString *)reason post:(RYPost *)oldPost
 {
 //    [PXAlertView showAlertWithTitle:@"Star post failed" message:reason];
     
@@ -193,11 +190,11 @@
 
 #pragma mark - Internal Helpers
 
-- (void) reloadPost:(RYNewsfeedPost *)post
+- (void) reloadPost:(RYPost *)post
 {
     for (NSInteger postIdx = 0; postIdx < _feedItems.count; postIdx++)
     {
-        RYNewsfeedPost *oldPost = _feedItems[postIdx];
+        RYPost *oldPost = _feedItems[postIdx];
         if (oldPost.postId == post.postId)
         {
             // found the old post, replace it and update UI
@@ -227,7 +224,7 @@
     UITableViewCell *cell;
     if (indexPath.row < _feedItems.count)
     {
-        RYNewsfeedPost *post = _feedItems[indexPath.row];
+        RYPost *post = _feedItems[indexPath.row];
         if (post.imageURL)
             cell = [tableView dequeueReusableCellWithIdentifier:kRiffCellReuseID];
         else
@@ -259,7 +256,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    RYPost *post = _feedItems[indexPath.row];
     [((RYRiffCell*)cell) configureForPost:post riffIndex:indexPath.row delegate:self];
     [((RYRiffCell *)cell).socialTextView setUserInteractionEnabled:NO];
 }
@@ -268,7 +265,7 @@
 {
     [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_riffSection] animated:YES];
     
-    RYNewsfeedPost *post = _feedItems[indexPath.row];
+    RYPost *post = _feedItems[indexPath.row];
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
     [riffDetails configureForPost:post];

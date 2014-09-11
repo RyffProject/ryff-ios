@@ -35,7 +35,7 @@
 #define kStarPostAction         @"add-star.php"
 #define kUnstarPostAction       @"delete-star.php"
 
-@class RYNewsfeedPost;
+@class RYPost;
 @class RYUser;
 
 typedef enum : NSUInteger {
@@ -81,15 +81,15 @@ typedef enum : NSUInteger {
 @end
 
 @protocol ActionDelegate <NSObject>
-- (void) upvoteSucceeded:(RYNewsfeedPost*)updatedPost;
-- (void) starSucceeded:(RYNewsfeedPost *)updatedPost;
+- (void) upvoteSucceeded:(RYPost*)updatedPost;
+- (void) starSucceeded:(RYPost *)updatedPost;
 @optional
-- (void) upvoteFailed:(NSString*)reason post:(RYNewsfeedPost *)oldPost;
-- (void) starFailed:(NSString *)reason post:(RYNewsfeedPost *)oldPost;
+- (void) upvoteFailed:(NSString*)reason post:(RYPost *)oldPost;
+- (void) starFailed:(NSString *)reason post:(RYPost *)oldPost;
 @end
 
 @class RYUser;
-@class RYNewsfeedPost;
+@class RYPost;
 
 @interface RYServices : NSObject
 
@@ -103,7 +103,7 @@ typedef enum : NSUInteger {
 // User Posts
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs image:(UIImage *)image ForDelegate:(id<RiffDelegate>)riffDelegate;
 
-- (void) deletePost:(RYNewsfeedPost*)post;
+- (void) deletePost:(RYPost*)post;
 
 // Other Posts
 - (void) getUserPostsForUser:(NSInteger)userId page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
@@ -113,7 +113,7 @@ typedef enum : NSUInteger {
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
 
 // Actions
-- (void) upvote:(BOOL)shouldUpvote post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
-- (void) star:(BOOL)shouldStar post:(RYNewsfeedPost *)post forDelegate:(id<ActionDelegate>)delegate;
+- (void) upvote:(BOOL)shouldUpvote post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate;
+- (void) star:(BOOL)shouldStar post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate;
 
 @end

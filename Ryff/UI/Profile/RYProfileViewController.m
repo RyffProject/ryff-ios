@@ -286,7 +286,7 @@
         {
             if (notification.post)
             {
-                RYNewsfeedPost *post = notification.post;
+                RYPost *post = notification.post;
                 RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
                 [riffDetails configureForPost:post];
                 vcToPush = riffDetails;
@@ -297,7 +297,7 @@
         {
             if (notification.posts.count > 0)
             {
-                RYNewsfeedPost *post = notification.posts.lastObject;
+                RYPost *post = notification.posts.lastObject;
                 RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
                 [riffDetails configureForPost:post];
                 vcToPush = riffDetails;
@@ -355,7 +355,7 @@
 
 - (void) avatarAction:(NSInteger)riffIndex
 {
-    RYNewsfeedPost *post = self.feedItems[riffIndex];
+    RYPost *post = self.feedItems[riffIndex];
     if (post.user.userId != [RYRegistrationServices loggedInUser].userId)
         [super avatarAction:riffIndex];
 }

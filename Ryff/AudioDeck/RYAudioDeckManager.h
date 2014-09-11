@@ -13,14 +13,14 @@
 #define kPlaybackChangedNotification @"AudioDeckPlaybackChanged"
 #define kDownloadProgressNotification @"AudioDeckDownloadProgressChanged"
 
-@class RYNewsfeedPost;
+@class RYPost;
 
 @protocol AudioDeckDelegate <NSObject>
 @optional
 - (void) riffPlaylistUpdated;
 - (void) trackChanged;
-- (void) post:(RYNewsfeedPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress;
-- (void) post:(RYNewsfeedPost *)post downloadProgressChanged:(CGFloat)progress;
+- (void) post:(RYPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress;
+- (void) post:(RYPost *)post downloadProgressChanged:(CGFloat)progress;
 @end
 
 @interface RYAudioDeckManager : NSObject
@@ -39,17 +39,17 @@
 - (BOOL) isPlaying;
 
 // Data Control
-- (void) forcePostToTop:(RYNewsfeedPost *)post;
-- (void) addPostToPlaylist:(RYNewsfeedPost *)post;
+- (void) forcePostToTop:(RYPost *)post;
+- (void) addPostToPlaylist:(RYPost *)post;
 - (void) movePostFromPlaylistIndex:(NSInteger)playlistIdx toIndex:(NSInteger)newPlaylistIdx;
-- (void) removePostFromPlaylist:(RYNewsfeedPost *)post;
-- (NSInteger) idxOfDownload:(RYNewsfeedPost *)post;
-- (NSInteger) idxInPlaylistOfPost:(RYNewsfeedPost *)post;
+- (void) removePostFromPlaylist:(RYPost *)post;
+- (NSInteger) idxOfDownload:(RYPost *)post;
+- (NSInteger) idxInPlaylistOfPost:(RYPost *)post;
 - (BOOL) playlistContainsPost:(NSInteger)postID;
 - (BOOL) playlistContainsFile:(NSString *)fileName;
 
 // Data
-- (RYNewsfeedPost *)currentlyPlayingPost;
+- (RYPost *)currentlyPlayingPost;
 - (NSArray *)riffPlaylist;
 - (NSArray *)downloadQueue;
 

@@ -9,7 +9,7 @@
 #import "RYRiffCell.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 #import "RYRiff.h"
 #import "RYUser.h"
 
@@ -55,27 +55,26 @@
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
 
 // Data
-@property (nonatomic, strong) RYNewsfeedPost *post;
+@property (nonatomic, strong) RYPost *post;
 @property (nonatomic, strong) NSAttributedString *attributedPostString;
 
 @end
 
 @implementation RYRiffCell
 
-- (void) configureForPost:(RYNewsfeedPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
+- (void) configureForPost:(RYPost *)post riffIndex:(NSInteger)riffIndex delegate:(id<RiffCellDelegate>)delegate
 {
     _riffIndex = riffIndex;
     _delegate  = delegate;
     _post      = post;
     
-    [_postLabel setText:post.riff.title];
+    [_postLabel setText:post.title];
     
     [_userLabel setText:post.user.username];
     
     [_socialTextView loadAttributedContent:[[NSAttributedString alloc] initWithString:post.content]];
     
-    if (post.riff)
-        [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.riff.duration]];
+    [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.duration]];
     
     if (post.imageURL && _postImageView)
     {

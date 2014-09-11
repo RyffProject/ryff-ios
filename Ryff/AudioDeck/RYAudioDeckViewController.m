@@ -15,7 +15,7 @@
 #import "RYStyleSheet.h"
 
 // Data Objects
-#import "RYNewsfeedPost.h"
+#import "RYPost.h"
 
 // Custom UI
 #import "RYAudioDeckTableViewCell.h"
@@ -131,7 +131,7 @@
     if (!_progressSliderTouchActive)
         [_playbackSlider setValue:[audioManager currentPlaybackProgress]];
     
-    [_nowPlayingLabel setText:[audioManager currentlyPlayingPost].riff.title];
+    [_nowPlayingLabel setText:[audioManager currentlyPlayingPost].title];
 }
 
 #pragma mark -
@@ -145,11 +145,11 @@
 
 - (IBAction)repostButtonHit:(id)sender
 {
-    RYNewsfeedPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
+    RYPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
     if (post)
     {
         RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-        [riffCreateVC includeRiffs:@[post.riff]];
+        [riffCreateVC includeRiffs:@[post.riffURL]];
         [self presentViewController:riffCreateVC animated:YES completion:nil];
     }
 }
@@ -188,7 +188,7 @@
     [self styleFromAudioDeck];
 }
 
-- (void) post:(RYNewsfeedPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress
+- (void) post:(RYPost *)post playbackTimeChanged:(CGFloat)time progress:(CGFloat)progress
 {
     if (!_progressSliderTouchActive)
         [_playbackSlider setValue:progress animated:YES];
@@ -234,7 +234,7 @@
 {
     RYAudioDeckTableViewCell *audioCell = (RYAudioDeckTableViewCell *)cell;
     NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
-    RYNewsfeedPost *post;
+    RYPost *post;
     if (indexPath.row < playlist.count)
     {
         // riff playlist
@@ -261,7 +261,7 @@
     
     [[RYAudioDeckManager sharedInstance] playTrack:NO];
     
-    RYNewsfeedPost *post;
+    RYPost *post;
     NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
     if (indexPath.row < playlist.count)
     {
@@ -307,7 +307,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        RYNewsfeedPost *postToDelete;
+        RYPost *postToDelete;
         
         NSArray *playlist = [[RYAudioDeckManager sharedInstance] riffPlaylist];
         NSArray *downloadQueue = [[RYAudioDeckManager sharedInstance] downloadQueue];
