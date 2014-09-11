@@ -150,13 +150,14 @@ static int scrollObservanceContext;
         _isRefreshing = YES;
         _ignoreEdges = YES;
         
-        CGPoint offset = self.scrollView.contentOffset;
-        UIEdgeInsets scrollViewInsets = _originalContentInset;
-        scrollViewInsets.top += kRefreshControlHeight;
         if (!_dontAdjustInsets)
         {
+            CGPoint offset = self.scrollView.contentOffset;
+            UIEdgeInsets scrollViewInsets = _originalContentInset;
+            scrollViewInsets.top += kRefreshControlHeight;
+            offset.y -= kRefreshControlHeight;
             [_scrollView setContentInset:scrollViewInsets];
-//            [_scrollView setContentOffset:offset animated:NO];
+            [_scrollView setContentOffset:offset animated:NO];
         }
         
         _ignoreEdges = NO;
