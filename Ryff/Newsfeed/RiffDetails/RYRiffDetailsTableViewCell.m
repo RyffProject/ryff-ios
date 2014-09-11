@@ -13,7 +13,6 @@
 
 // Data Objects
 #import "RYPost.h"
-#import "RYRiff.h"
 #import "RYUser.h"
 
 // Categories

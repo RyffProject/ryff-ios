@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GT5-hx-xKb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="GT5-hx-xKb">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller - Log In-->
+        <!--Log In-->
         <scene sceneID="EKD-5p-Cwf">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YdO-9g-msK" customClass="RYLoginViewController" sceneMemberID="viewController">
@@ -127,7 +126,7 @@
             </objects>
             <point key="canvasLocation" x="-1154" y="-84"/>
         </scene>
-        <!--Newsfeed Table View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="38f-DM-crI">
             <objects>
                 <viewController storyboardIdentifier="newsfeedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yqq-Ja-uip" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
@@ -157,7 +156,7 @@
             </objects>
             <point key="canvasLocation" x="2936" y="-1487"/>
         </scene>
-        <!--Profile View Controller - Me-->
+        <!--Me-->
         <scene sceneID="09g-f5-Xph">
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fpf-wb-Diq" customClass="RYProfileViewController" sceneMemberID="viewController">
@@ -327,7 +326,7 @@
             </objects>
             <point key="canvasLocation" x="2247" y="-164"/>
         </scene>
-        <!--Riff Details View Controller - Riff Details-->
+        <!--Riff Details-->
         <scene sceneID="rot-Eb-TkR">
             <objects>
                 <tableViewController storyboardIdentifier="riffDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YPv-4z-4S8" customClass="RYRiffDetailsViewController" sceneMemberID="viewController">
@@ -485,7 +484,7 @@
             </objects>
             <point key="canvasLocation" x="3365" y="-164"/>
         </scene>
-        <!--Riff Create View Controller - Create Riff-->
+        <!--Create Riff-->
         <scene sceneID="OeC-Me-qwo">
             <objects>
                 <viewController storyboardIdentifier="RiffCreateVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o3c-8f-o5U" customClass="RYRiffCreateViewController" sceneMemberID="viewController">
@@ -800,7 +799,7 @@
             </objects>
             <point key="canvasLocation" x="128" y="-70"/>
         </scene>
-        <!--Page View Controller - Discover-->
+        <!--Discover-->
         <scene sceneID="56Q-O6-kPQ">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="B11-cl-E0p" sceneMemberID="viewController">
@@ -810,7 +809,7 @@
             </objects>
             <point key="canvasLocation" x="1151" y="1040"/>
         </scene>
-        <!--Audio Deck View Controller - AudioDeck-->
+        <!--AudioDeck-->
         <scene sceneID="3jB-7M-2Yb">
             <objects>
                 <viewController storyboardIdentifier="audioDeck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xfH-zl-6Gm" customClass="RYAudioDeckViewController" sceneMemberID="viewController">
@@ -985,7 +984,7 @@
             </objects>
             <point key="canvasLocation" x="5516" y="-1463"/>
         </scene>
-        <!--Newsfeed Container View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="ALe-Fa-Oq6">
             <objects>
                 <viewController storyboardIdentifier="newsfeedContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FDM-f1-Nbn" customClass="RYNewsfeedContainerViewController" sceneMemberID="viewController">
@@ -1022,7 +1021,7 @@
             </objects>
             <point key="canvasLocation" x="1348" y="-1415"/>
         </scene>
-        <!--Newsfeed Navigation Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="M7a-Md-3zP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZG3-zP-onj" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
@@ -1046,7 +1045,7 @@
             </objects>
             <point key="canvasLocation" x="2374" y="-1487"/>
         </scene>
-        <!--Navigation Controller - Me-->
+        <!--Me-->
         <scene sceneID="1rv-Yb-x91">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1aC-uB-qxi" sceneMemberID="viewController">
@@ -1065,7 +1064,7 @@
             </objects>
             <point key="canvasLocation" x="1273" y="-164"/>
         </scene>
-        <!--Tag Feed View Controller - TagFeed-->
+        <!--TagFeed-->
         <scene sceneID="cOn-8Y-lkS">
             <objects>
                 <viewController storyboardIdentifier="tagFeedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gC5-a4-eUX" customClass="RYTagFeedViewController" sceneMemberID="viewController">
@@ -1152,7 +1151,7 @@
             </objects>
             <point key="canvasLocation" x="4468" y="-1463"/>
         </scene>
-        <!--Newsfeed Navigation Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="cIq-md-XOE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F2g-c5-NHf" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">

@@ -15,7 +15,6 @@
 // Data Objects
 #import "RYPost.h"
 #import "RYUser.h"
-#import "RYRiff.h"
 
 // Custom UI
 #import "RYPlayControl.h"

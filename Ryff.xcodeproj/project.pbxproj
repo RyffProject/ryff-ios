@@ -205,7 +205,6 @@
 		83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC90D197EFCBF00FD1B4B /* UIWebView+AFNetworking.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
 		83DC3B7819BD0EC00036AD2A /* RYRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC3B7719BD0EC00036AD2A /* RYRefreshControl.m */; };
-		83E56B641953A0A900EF054C /* RYRiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B611953A0A900EF054C /* RYRiff.m */; };
 		83E56B651953A0A900EF054C /* RYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B631953A0A900EF054C /* RYUser.m */; };
 		83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B671953A0DA00EF054C /* RYMediaEditor.m */; };
 		83EB8BA619959F5C0007837D /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB8BA519959F5C0007837D /* DWTagList.m */; };
@@ -597,8 +596,6 @@
 		83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamingCoreViewController.m; sourceTree = "<group>"; };
 		83DC3B7619BD0EC00036AD2A /* RYRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRefreshControl.h; sourceTree = "<group>"; };
 		83DC3B7719BD0EC00036AD2A /* RYRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRefreshControl.m; sourceTree = "<group>"; };
-		83E56B601953A0A900EF054C /* RYRiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiff.h; sourceTree = "<group>"; };
-		83E56B611953A0A900EF054C /* RYRiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiff.m; sourceTree = "<group>"; };
 		83E56B621953A0A900EF054C /* RYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUser.h; sourceTree = "<group>"; };
 		83E56B631953A0A900EF054C /* RYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUser.m; sourceTree = "<group>"; };
 		83E56B661953A0DA00EF054C /* RYMediaEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMediaEditor.h; sourceTree = "<group>"; };
@@ -1231,8 +1228,6 @@
 		83E56B5F1953A07F00EF054C /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				83E56B601953A0A900EF054C /* RYRiff.h */,
-				83E56B611953A0A900EF054C /* RYRiff.m */,
 				83E56B621953A0A900EF054C /* RYUser.h */,
 				83E56B631953A0A900EF054C /* RYUser.m */,
 				83FCD1B918F9413400A493F0 /* RYPost.h */,
@@ -1792,7 +1787,6 @@
 				83011B8B19A7FFA80017E7C5 /* UIControl+MGEvents.m in Sources */,
 				83CA12221995CD23002610E8 /* FLEXViewExplorerViewController.m in Sources */,
 				83360CDD19B6B84E00136FCB /* RYNotification.m in Sources */,
-				83E56B641953A0A900EF054C /* RYRiff.m in Sources */,
 				83CA12211995CD23002610E8 /* FLEXViewControllerExplorerViewController.m in Sources */,
 				8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */,
 				831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */,

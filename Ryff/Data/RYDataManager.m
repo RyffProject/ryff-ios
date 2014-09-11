@@ -12,9 +12,6 @@
 #import "RYMediaEditor.h"
 #import "RYAudioDeckManager.h"
 
-// Data Objects
-#import "RYRiff.h"
-
 // Frameworks
 #import "AFHTTPRequestOperation.h"
 

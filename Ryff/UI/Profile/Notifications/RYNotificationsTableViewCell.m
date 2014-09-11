@@ -14,7 +14,6 @@
 // Data Objects
 #import "RYNotification.h"
 #import "RYPost.h"
-#import "RYRiff.h"
 #import "RYUser.h"
 
 // Frameworks

@@ -15,7 +15,7 @@
 #import "RYAudioDeckManager.h"
 
 // Data Objects
-#import "RYRiff.h"
+#import "RYPost.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -48,7 +48,7 @@
 // Data
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSMutableArray *audioPlayers;
-@property (nonatomic, strong) NSMutableArray *downloadingRiffs;
+@property (nonatomic, strong) NSMutableArray *downloadingPosts;
 
 @property (nonatomic, assign) BOOL playingAll;
 @property (nonatomic, assign) BOOL safeToUpdateTable;
@@ -62,16 +62,16 @@
 /*
  Start this view controller with these tracks already populating _audioPlayers. This is used when reposting riffs.
  PARAMETERS:
- -arrayOfRiffs: array of riffs to include
+ -arrayOfPosts: array of posts to include
  */
-- (void) includeRiffs:(NSArray*)arrayOfRiffs
+- (void) includePosts:(NSArray*)arrayOfPosts
 {
-    _downloadingRiffs = _downloadingRiffs ? _downloadingRiffs : [[NSMutableArray alloc] initWithCapacity:arrayOfRiffs.count];
-    for (RYRiff *riff in arrayOfRiffs)
+    _downloadingPosts = _downloadingPosts ? _downloadingPosts : [[NSMutableArray alloc] initWithCapacity:arrayOfPosts.count];
+    for (RYPost *post in arrayOfPosts)
     {
         // have to download track
-        [_downloadingRiffs addObject:riff];
-        [[RYDataManager sharedInstance] saveRiffAt:riff.URL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
+        [_downloadingPosts addObject:post];
+        [[RYDataManager sharedInstance] saveRiffAt:post.riffURL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
     }
     [_tableView reloadData];
 }
@@ -372,7 +372,7 @@
     _safeToUpdateTable = NO;
     [_tableView beginUpdates];
     
-    [_downloadingRiffs removeObjectAtIndex:trackIdx];
+    [_downloadingPosts removeObjectAtIndex:trackIdx];
     [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:trackIdx inSection:kDownloadSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [_tableView endUpdates];
@@ -391,7 +391,7 @@
         _safeToUpdateTable = NO;
         [_tableView beginUpdates];
         
-        [_downloadingRiffs removeObjectAtIndex:trackIdx];
+        [_downloadingPosts removeObjectAtIndex:trackIdx];
         [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:trackIdx inSection:kDownloadSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
 
         [_tableView endUpdates];
@@ -465,10 +465,10 @@
 - (NSInteger)indexForDownloadingURL:(NSURL*)downloadingURL
 {
     NSInteger index = -1;
-    for (NSInteger trackIdx = 0; trackIdx < _downloadingRiffs.count; trackIdx++)
+    for (NSInteger trackIdx = 0; trackIdx < _downloadingPosts.count; trackIdx++)
     {
-        RYRiff *riff = _downloadingRiffs[trackIdx];
-        if ([riff.URL isEqual:downloadingURL])
+        RYPost *post = _downloadingPosts[trackIdx];
+        if ([post.riffURL isEqual:downloadingURL])
         {
             // found the right index
             index = trackIdx;
@@ -502,14 +502,14 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _downloadingRiffs ? 1 : 2;
+    return _downloadingPosts ? 1 : 2;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger numRows;
     if (section == kDownloadSection)
-        numRows = _downloadingRiffs.count;
+        numRows = _downloadingPosts.count;
     else
         numRows = _audioPlayers.count;
     return numRows;
@@ -535,8 +535,8 @@
     if (indexPath.section == kDownloadSection)
     {
         // downloading row
-        RYRiff *relevantRiff = _downloadingRiffs[indexPath.row];
-        [((RYTrackDownloadTableViewCell*)cell).descriptionLabel setText:relevantRiff.title];
+        RYPost *post = _downloadingPosts[indexPath.row];
+        [((RYTrackDownloadTableViewCell*)cell).descriptionLabel setText:post.title];
     }
     else
     {
