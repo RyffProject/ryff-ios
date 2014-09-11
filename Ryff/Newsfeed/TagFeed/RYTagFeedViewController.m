@@ -22,6 +22,8 @@
 // array of strings
 @property (nonatomic, strong) NSArray *configurationTags;
 
+@property (nonatomic, assign) BOOL didAppear;
+
 @end
 
 @implementation RYTagFeedViewController
@@ -32,20 +34,16 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    [self styleWithTags];
     
     self.riffSection = 1;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
+    [super viewDidAppear:animated];
     
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
+    _didAppear = YES;
 }
 
 #pragma mark - Configuration
@@ -54,6 +52,13 @@
 {
     _configurationTags = tags;
     
+    if (_didAppear)
+        [self styleWithTags];
+}
+
+- (void) styleWithTags
+{
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     UILabel *titleLabel = [[UILabel alloc] init];
     NSMutableString *tagString = [[NSMutableString alloc] initWithString:@""];
     for (NSInteger tagIdx = 0; tagIdx < _configurationTags.count; tagIdx++)
@@ -87,9 +92,19 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleLabel sizeToFit];
     
-    self.navigationItem.titleView = titleLabel;
-    CGFloat adjustment = (self.navigationController.navigationBar.frame.size.height - titleLabel.frame.size.height)/2.0f;
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:-adjustment forBarMetrics:UIBarMetricsDefault];
+    if (tagString.length > 20)
+    {
+        NSArray *tags = [tagString componentsSeparatedByString:@","];
+        if (tags.count > 2)
+            tagString = [[NSString stringWithFormat:@"%@%@ and %lu more",tags[0],tags[1],(tags.count-2)] mutableCopy];
+    }
+    self.title = tagString;
+    
+    [titleView addSubview:titleLabel];
+    
+    CGFloat adjustment = (self.navigationController.navigationBar.frame.size.height - titleView.frame.size.height)/2.0f;
+    titleLabel.center = CGPointMake(titleView.frame.size.width/2, titleView.frame.size.height/2-adjustment);
+    self.navigationItem.titleView = titleView;
 }
 
 - (void) fetchContent

@@ -58,7 +58,7 @@
 {
     [super awakeFromNib];
     
-    [_nameField setFont:[UIFont fontWithName:kRegularFont size:36.0f]];
+    [_nameField setFont:[UIFont fontWithName:kRegularFont size:28.0f]];
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bioTextView setFont:kProfileInfoCellFont];
     [_bioTextView setTintColor:[UIColor blackColor]];

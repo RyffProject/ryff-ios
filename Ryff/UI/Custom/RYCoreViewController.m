@@ -31,6 +31,12 @@
                                             NSFontAttributeName: [UIFont fontWithName:kRegularFont size:24.0f]};
     
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleAttributes];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
 }
 
