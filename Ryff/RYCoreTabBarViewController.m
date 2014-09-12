@@ -22,7 +22,7 @@
 #import "RYProfileViewController.h"
 #import "RYNewsfeedContainerViewController.h"
 
-@interface RYCoreTabBarViewController () <UITabBarDelegate>
+@interface RYCoreTabBarViewController ()
 
 @end
 
@@ -52,14 +52,11 @@
 
 - (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    for (UIViewController *viewController in self.viewControllers)
+    if ([self.selectedViewController isKindOfClass:[RYNewsfeedContainerViewController class]] && [item.title isEqualToString:@"Newsfeed"])
     {
-        if ([viewController isKindOfClass:[RYNewsfeedContainerViewController class]])
-        {
-            UINavigationController *navController = ((RYNewsfeedContainerViewController *)viewController).newsfeedNav;
-            if (navController)
-                [navController popToRootViewControllerAnimated:YES];
-        }
+        UINavigationController *navController = ((RYNewsfeedContainerViewController *)self.selectedViewController).newsfeedNav;
+        if (navController)
+            [navController popToRootViewControllerAnimated:YES];
     }
 }
 

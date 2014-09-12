@@ -87,7 +87,9 @@
 
 - (void) postFailed:(NSString *)reason
 {
+    self.feedItems = nil;
     [_refreshControl endRefreshing];
+    [self.riffTableView reloadData];
 }
 
 #pragma mark -

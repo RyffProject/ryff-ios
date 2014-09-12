@@ -121,6 +121,11 @@
     [self configureWithTags:_configurationTags];
 }
 
+- (void) postFailed:(NSString *)reason
+{
+    [self.refreshControl endRefreshing];
+}
+
 #pragma mark -
 #pragma mark - SearchTypeCell Delegate
 
