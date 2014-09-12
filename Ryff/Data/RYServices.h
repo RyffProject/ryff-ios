@@ -14,7 +14,7 @@
 // Users
 #define kGetUser                @"get-user.php"
 #define kGetNearby              @"get-users-nearby.php"
-#define kGetFollowersAction     @"get-following.php"
+#define kGetFollowersAction     @"get-followers.php"
 
 // Posts
 #define kGetPosts               @"get-posts.php"

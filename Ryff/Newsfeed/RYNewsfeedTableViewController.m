@@ -41,8 +41,6 @@
     // set up test data
     self.feedItems = @[];
     _searchType = NEW;
-    [self fetchContent];
-    [_refreshControl beginRefreshing];
     
     [self addNewPostButtonToNavBar];
 }
@@ -50,6 +48,12 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ((!self.feedItems || self.feedItems.count == 0) && [RYRegistrationServices loggedInUser])
+    {
+        [_refreshControl beginRefreshing];
+        [self fetchContent];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
 }

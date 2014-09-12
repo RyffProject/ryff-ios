@@ -21,6 +21,7 @@
 
 // Categories
 #import "UIViewController+Extras.h"
+#import "UIImage+Color.h"
 
 // Custom UI
 #import "PXAlertView.h"
@@ -37,11 +38,11 @@
 
 @property (weak, nonatomic) IBOutlet UIView *karmaWrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *karmaCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *karmaDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *karmaImageView;
 
 @property (weak, nonatomic) IBOutlet UIView *followersWrapperView;
 @property (weak, nonatomic) IBOutlet UILabel *followersCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followersDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *followersImageView;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -67,10 +68,12 @@
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
     [_followersCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
-    [_followersDescriptionLabel setFont:[UIFont fontWithName:kLightFont size:18.0f]];
+    [_followersCountLabel setTextColor:[RYStyleSheet tabBarColor]];
+    [_followersImageView setImage:[[UIImage imageNamed:@"stream"] colorImage:[RYStyleSheet tabBarColor]]];
     
     [_karmaCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
-    [_karmaDescriptionLabel setFont:[UIFont fontWithName:kLightFont size:18.0f]];
+    [_karmaCountLabel setTextColor:[RYStyleSheet tabBarColor]];
+    [_karmaImageView setImage:[[UIImage imageNamed:@"upvote"] colorImage:[RYStyleSheet tabBarColor]]];
     
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
     [_avatarImageView addGestureRecognizer:avatarTap];

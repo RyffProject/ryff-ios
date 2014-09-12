@@ -137,8 +137,9 @@ static RYUser* _loggedInUser;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kLoggedInUserKey];
     _loggedInUser = nil;
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *each in cookieStorage.cookies) {
-        [cookieStorage deleteCookie:each];
+    while (cookieStorage.cookies.count > 0)
+    {
+        [cookieStorage deleteCookie:[cookieStorage.cookies firstObject]];
     }
 }
 
