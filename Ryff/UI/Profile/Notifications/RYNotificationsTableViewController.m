@@ -42,8 +42,8 @@
     _refControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
-    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 20)];
-    [self.tableView setSeparatorColor:[RYStyleSheet availableActionColor]];
+    self.tableView.backgroundColor = [RYStyleSheet audioBackgroundColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self fetchContent];
 }

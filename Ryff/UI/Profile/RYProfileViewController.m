@@ -403,14 +403,19 @@
         if (_user)
         {
             // profile info -> calculate size with user bio
-            CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
-            
-            UITextView *sizingView = [[UITextView alloc] init];
-            [sizingView setFont:kProfileInfoCellFont];
-            [sizingView setText:_user.bio];
-            CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
-            height = resultSize.height + kProfileInfoCellHeightMinusText;
-            height = MAX(height, kProfileInfoCellMinimumHeight);
+            if (_user.bio.length > 0 || _profileTab)
+            {
+                CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
+                
+                UITextView *sizingView = [[UITextView alloc] init];
+                [sizingView setFont:kProfileInfoCellFont];
+                [sizingView setText:_user.bio];
+                CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
+                height = resultSize.height + kProfileInfoCellHeightMinusText;
+                height = MAX(height, kProfileInfoCellMinimumHeight);
+            }
+            else
+                height = kProfileInfoCellMinimumHeight;
         }
         else
             height = 200.0f;

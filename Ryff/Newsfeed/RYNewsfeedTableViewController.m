@@ -32,7 +32,7 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
-    [self.tableView setScrollsToTop:YES];
+    _tableView.scrollsToTop = YES;
     
     _refreshControl = [[RYRefreshControl alloc] initInScrollView:_tableView];
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
