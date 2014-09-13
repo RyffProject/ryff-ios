@@ -274,11 +274,16 @@
 {
     // position of keyboard before animation
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = MIN(keyboardRect.size.width, keyboardRect.size.height);
     CGPoint viewCenter;
+    
+    CGFloat bigSide = MAX(self.view.bounds.size.width,self.view.bounds.size.height);
+    CGFloat smallSide = MIN(self.view.bounds.size.width,self.view.bounds.size.height);
+    
     if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-        viewCenter = CGPointMake(0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.height/2);
+        viewCenter = CGPointMake(0.5*smallSide, 0.5*bigSide-keyboardHeight/2);
     else
-        viewCenter = CGPointMake(0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height)-keyboardRect.size.width/2);
+        viewCenter = CGPointMake(0.5*bigSide, 0.5*smallSide-keyboardHeight/2);
     
     // keyboard to show at bottom of screen, adjust accordingly
     CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
@@ -297,10 +302,14 @@
 -(void)onKeyboardHide:(NSNotification *)notification
 {
     CGPoint viewCenter;
+    
+    CGFloat bigSide = MAX(self.view.bounds.size.width,self.view.bounds.size.height);
+    CGFloat smallSide = MIN(self.view.bounds.size.width,self.view.bounds.size.height);
+    
     if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-        viewCenter = CGPointMake(0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height));
+        viewCenter = CGPointMake(0.5*smallSide, 0.5*bigSide);
     else
-        viewCenter = CGPointMake(0.5*MAX(self.view.bounds.size.width,self.view.bounds.size.height), 0.5*MIN(self.view.bounds.size.width,self.view.bounds.size.height));
+        viewCenter = CGPointMake(0.5*bigSide, 0.5*smallSide);
     
     // keyboard to show at bottom of screen, adjust accordingly
     CGFloat animationDuration   = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
