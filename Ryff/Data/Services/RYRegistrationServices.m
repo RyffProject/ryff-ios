@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYNotificationsManager.h"
 
 // Data Objects
 #import "RYUser.h"
@@ -95,11 +96,9 @@ static RYUser* _loggedInUser;
             
             if (dictionary[@"success"])
             {
+                [[RYNotificationsManager sharedInstance] registerForPushNotifications];
                 [self setLoggedInUser:dictionary[@"user"] username:username password:password];
                 [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
-                
-                // register for push notifications
-                [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
             }

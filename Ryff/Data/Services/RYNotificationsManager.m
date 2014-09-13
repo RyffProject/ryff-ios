@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYServices.h"
+#import "RYRegistrationServices.h"
 
 // Data Objects
 #import "RYNotification.h"
@@ -27,6 +28,37 @@ static RYNotificationsManager *_sharedInstance;
         _sharedInstance = [RYNotificationsManager allocWithZone:NULL];
     }
     return _sharedInstance;
+}
+
+#pragma mark -
+#pragma mark - Registration
+
+- (void) registerForPushNotifications
+{
+    // Push Notifications
+    // keep ifdefs to allow building on xCode 5
+    if ([RYRegistrationServices loggedInUser])
+    {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
+        {
+            UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+            if (currentSettings.types != (UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound))
+            {
+                UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound) categories:nil];
+                [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+            }
+        }
+        else
+        {
+            if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound))
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+        }
+#else
+        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound))
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+#endif
+    }
 }
 
 #pragma mark -

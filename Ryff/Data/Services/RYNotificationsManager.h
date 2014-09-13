@@ -22,6 +22,9 @@
 
 + (instancetype)sharedInstance;
 
+// Registration
+- (void) registerForPushNotifications;
+
 // Notifications
 - (void) fetchNotificationsForDelegate:(id<NotificationsDelegate>)delegate page:(NSNumber *)page;
 

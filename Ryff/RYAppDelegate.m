@@ -61,7 +61,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -120,9 +120,19 @@
     [[RYNotificationsManager sharedInstance] updatePushToken:token];
 }
 
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-	NSLog(@"Failed to get token, error: %@", error);
+    
 }
+
+// allow us to use xCode 5 still
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+
+- (void) application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
+}
+
+#endif
 
 @end
