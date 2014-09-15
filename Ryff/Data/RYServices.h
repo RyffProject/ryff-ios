@@ -102,12 +102,11 @@ typedef enum : NSUInteger {
 
 // User Posts
 - (void) postRiffWithContent:(NSString*)content title:(NSString *)title duration:(NSNumber *)duration parentIDs:(NSArray *)parentIDs image:(UIImage *)image ForDelegate:(id<RiffDelegate>)riffDelegate;
-
 - (void) deletePost:(RYPost*)post;
 
 // Other Posts
 - (void) getUserPostsForUser:(NSInteger)userId page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
-- (void) getNewsfeedPosts:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
+- (void) getNewsfeedPostsWithPage:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getStarredPostsForUser:(NSInteger)userID delegate:(id<PostDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
@@ -115,5 +114,8 @@ typedef enum : NSUInteger {
 // Actions
 - (void) upvote:(BOOL)shouldUpvote post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate;
 - (void) star:(BOOL)shouldStar post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate;
+
+// Helper
+- (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action forDelegate:(id<PostDelegate>)delegate;
 
 @end

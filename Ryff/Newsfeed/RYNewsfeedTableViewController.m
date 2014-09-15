@@ -70,7 +70,7 @@
 
 - (void) fetchContent
 {
-    [[RYServices sharedInstance] getNewsfeedPosts:NEW page:0 delegate:self];
+    [[RYServices sharedInstance] getNewsfeedPostsWithPage:0 delegate:self];
 }
 
 - (void) refreshContent:(RYRefreshControl *)refreshControl

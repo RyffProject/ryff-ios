@@ -55,65 +55,6 @@ static RYUser* _loggedInUser;
         [SSKeychain setPassword:password forService:@"ryff" account:username];
 }
 
-#pragma mark -
-#pragma mark - Registration
-
-- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<UpdateUserDelegate>)delegate
-{
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kRegistrationAction];
-        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *dictionary = responseObject;
-            
-            if (dictionary[@"success"])
-            {
-                [self setLoggedInUser:dictionary[@"user"] username:params[@"username"] password:params[@"password"]];
-                [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
-            }
-            else
-                [delegate updateFailed:responseObject];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate updateFailed:[error localizedDescription]];
-        }];
-    });
-}
-
-- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate
-{
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kLogIn];
-        
-        NSDictionary *params = @{@"auth_username":username,@"auth_password":password};
-        
-        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSDictionary *dictionary = responseObject;
-            
-            if (dictionary[@"success"])
-            {
-                [[RYNotificationsManager sharedInstance] registerForPushNotifications];
-                [self setLoggedInUser:dictionary[@"user"] username:username password:password];
-                [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
-            }
-            else
-                [delegate updateFailed:responseObject];
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [delegate updateFailed:[error localizedDescription]];
-        }];
-    });
-}
-
-/*
- Try logging in with saved information, if available
- */
 - (BOOL) attemptBackgroundLogIn
 {
     BOOL success = NO;
@@ -140,6 +81,48 @@ static RYUser* _loggedInUser;
     {
         [cookieStorage deleteCookie:[cookieStorage.cookies firstObject]];
     }
+}
+
+#pragma mark -
+#pragma mark - Registration
+
+- (void) updateUserWithParams:(NSDictionary *)params toAction:(NSString *)action forDelegate:(id<UpdateUserDelegate>)delegate
+{
+    dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dictionary = responseObject;
+            
+            if (dictionary[@"success"])
+            {
+                [self setLoggedInUser:dictionary[@"user"] username:params[@"username"] password:params[@"password"]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
+                
+                if (delegate && [delegate respondsToSelector:@selector(updateSucceeded:)])
+                    [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
+            }
+            else if (delegate && [delegate respondsToSelector:@selector(updateFailed:)])
+                [delegate updateFailed:responseObject];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (delegate && [delegate respondsToSelector:@selector(updateFailed:)])
+                [delegate updateFailed:[error localizedDescription]];
+        }];
+    });
+}
+
+- (void) registerUserWithPOSTDict:(NSDictionary*)params forDelegate:(id<UpdateUserDelegate>)delegate
+{
+    NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kRegistrationAction];
+    [self updateUserWithParams:params toAction:action forDelegate:delegate];
+}
+
+- (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate
+{
+    NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kLogIn];
+    NSDictionary *params = @{@"auth_username":username,@"auth_password":password};
+    [self updateUserWithParams:params toAction:action forDelegate:delegate];
 }
 
 #pragma mark -
@@ -182,50 +165,28 @@ static RYUser* _loggedInUser;
 
 - (void) editUserInfo:(RYUser*)user forDelegate:(id<UpdateUserDelegate>)delegate
 {
-    dispatch_async(dispatch_get_global_queue(2, 0), ^{
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpdateUserAction];
-        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
-        
-        RYUser *oldUser = [RYRegistrationServices loggedInUser];
-        if (user.username && ![user.username isEqualToString:oldUser.username])
-            [params setObject:user.username forKey:@"username"];
-        if (user.nickname && ![user.nickname isEqualToString:oldUser.nickname])
-            [params setObject:user.nickname forKey:@"name"];
-        if (user.bio && ![user.bio isEqualToString:oldUser.bio])
-            [params setObject:user.bio forKey:@"bio"];
-        if (user.email && ![user.email isEqualToString:oldUser.email])
-            [params setObject:user.email forKey:@"email"];
-        if (user.tags && ![user.tags isEqualToArray:oldUser.tags])
-        {
-            // can't send empty array via POST, send empty string
-            NSArray *tags = [RYTag getTagTags:user.tags];
-            if (tags.count > 0)
-                [params setObject:[RYTag getTagTags:user.tags] forKey:@"tags"];
-            else
-                [params setObject:@"" forKey:@"tags"];
-        }
-        
-        if (params.count > 0)
-        {
-            [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSDictionary *dictionary = responseObject;
-                
-                if (dictionary[@"success"])
-                {
-                    [self setLoggedInUser:dictionary[@"user"] username:user.username password:nil];
-                    if (delegate && [delegate respondsToSelector:@selector(updateSucceeded:)])
-                        [delegate updateSucceeded:[RYUser userFromDict:dictionary[@"user"]]];
-                }
-                else if (delegate && [delegate respondsToSelector:@selector(updateFailed:)])
-                    [delegate updateFailed:responseObject];
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                if (delegate && [delegate respondsToSelector:@selector(updateFailed:)])
-                    [delegate updateFailed:[error localizedDescription]];
-            }];
-        }
-    });
+    NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kUpdateUserAction];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:3];
+    
+    RYUser *oldUser = [RYRegistrationServices loggedInUser];
+    if (user.username && ![user.username isEqualToString:oldUser.username])
+        [params setObject:user.username forKey:@"username"];
+    if (user.nickname && ![user.nickname isEqualToString:oldUser.nickname])
+        [params setObject:user.nickname forKey:@"name"];
+    if (user.bio && ![user.bio isEqualToString:oldUser.bio])
+        [params setObject:user.bio forKey:@"bio"];
+    if (user.email && ![user.email isEqualToString:oldUser.email])
+        [params setObject:user.email forKey:@"email"];
+    if (user.tags && ![user.tags isEqualToArray:oldUser.tags])
+    {
+        // can't send empty array via POST, send empty string
+        NSArray *tags = [RYTag getTagTags:user.tags];
+        if (tags.count > 0)
+            [params setObject:[RYTag getTagTags:user.tags] forKey:@"tags"];
+        else
+            [params setObject:@"" forKey:@"tags"];
+    }
+    [self updateUserWithParams:params toAction:action forDelegate:delegate];
 }
 
 @end
