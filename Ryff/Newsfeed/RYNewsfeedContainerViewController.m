@@ -47,7 +47,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"newsfeedEmbed"])
+    if ([segue.identifier isEqualToString:@"newsfeedEmbed"] || [segue.identifier isEqualToString:@"tagsEmbed"])
     {
         _newsfeedNav = segue.destinationViewController;
     }
