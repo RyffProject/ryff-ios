@@ -25,10 +25,10 @@
 #define kSearchUsersTrending        @"search-users-trending.php"
 #define kSearchUsersNearbyAction    @"search-users-nearby.php"
 
-@protocol TagsDelegate <NSObject>
-- (void) retrievedTags:(NSArray *)tags;
+@protocol TagDelegate <NSObject>
+- (void) tagsRetrieved:(NSArray *)tags;
 @optional
-- (void) retrievTagsFailed:(NSString *)reason;
+- (void) tagsFailedToRetrieve:(NSString *)reason;
 @end
 
 @interface RYDiscoverServices : NSObject
@@ -36,9 +36,9 @@
 + (RYDiscoverServices *)sharedInstance;
 
 // Search Tags
-- (void) searchTagsFor:(NSString *)query delegate:(id<TagsDelegate>)delegate;
-- (void) getTrendingTagsForDelegate:(id<TagsDelegate>)delegate;
-- (void) getSuggestedTagsForDelegate:(id<TagsDelegate>)delegate;
+- (void) searchTagsFor:(NSString *)query delegate:(id<TagDelegate>)delegate;
+- (void) getTrendingTagsForDelegate:(id<TagDelegate>)delegate;
+- (void) getSuggestedTagsForDelegate:(id<TagDelegate>)delegate;
 
 // Search Posts
 - (void) searchForPostsWithTags:(NSArray *)tags searchType:(SearchType)searchType delegate:(id<PostDelegate>)delegate;

@@ -8,6 +8,9 @@
 
 #import "RYTagListViewController.h"
 
+// Data Managers
+#import "RYDiscoverServices.h"
+
 // Custom UI
 #import "RYTagListCollectionTableViewCell.h"
 
@@ -15,7 +18,7 @@
 
 @interface RYTagListViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *tagGroups;
+@property (nonatomic, strong) NSArray *tagLists;
 
 @end
 

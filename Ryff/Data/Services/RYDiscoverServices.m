@@ -29,7 +29,7 @@ static RYDiscoverServices* _sharedInstance;
 #pragma mark -
 #pragma mark - Search Tags
 
-- (void) tagSearchWithParams:(NSDictionary *)dictionary toAction:(NSString *)action forDelegate:(id<TagsDelegate>)delegate
+- (void) tagSearchWithParams:(NSDictionary *)dictionary toAction:(NSString *)action forDelegate:(id<TagDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
@@ -39,36 +39,36 @@ static RYDiscoverServices* _sharedInstance;
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(retrievedTags:)])
-                    [delegate retrievedTags:[RYTag tagsFromDictArray:dictionary[@"tags"]]];
+                if (delegate && [delegate respondsToSelector:@selector(tagsRetrieved:)])
+                    [delegate tagsRetrieved:[RYTag tagsFromDictArray:dictionary[@"tags"]]];
             }
             else
             {
-                if (delegate && [delegate respondsToSelector:@selector(retrievTagsFailed:)])
-                    [delegate retrievTagsFailed:dictionary[@"error"]];
+                if (delegate && [delegate respondsToSelector:@selector(tagsFailedToRetrieve:)])
+                    [delegate tagsFailedToRetrieve:dictionary[@"error"]];
             }
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (delegate && [delegate respondsToSelector:@selector(retrievTagsFailed:)])
-                [delegate retrievTagsFailed:[error localizedDescription]];
+            if (delegate && [delegate respondsToSelector:@selector(tagsFailedToRetrieve:)])
+                [delegate tagsFailedToRetrieve:[error localizedDescription]];
         }];
     });
 }
 
-- (void) searchTagsFor:(NSString *)query delegate:(id<TagsDelegate>)delegate
+- (void) searchTagsFor:(NSString *)query delegate:(id<TagDelegate>)delegate
 {
     NSDictionary *params = @{@"query":query};
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSearchTags];
     [self tagSearchWithParams:params toAction:action forDelegate:delegate];
 }
 
-- (void) getTrendingTagsForDelegate:(id<TagsDelegate>)delegate
+- (void) getTrendingTagsForDelegate:(id<TagDelegate>)delegate
 {
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kTrendingTagsAction];
     [self tagSearchWithParams:nil toAction:action forDelegate:delegate];
 }
 
-- (void) getSuggestedTagsForDelegate:(id<TagsDelegate>)delegate
+- (void) getSuggestedTagsForDelegate:(id<TagDelegate>)delegate
 {
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSuggestedTagsAction];
     [self tagSearchWithParams:nil toAction:action forDelegate:delegate];
