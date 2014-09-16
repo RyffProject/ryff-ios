@@ -208,6 +208,7 @@
 		83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CCC90D197EFCBF00FD1B4B /* UIWebView+AFNetworking.m */; };
 		83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */; };
 		83DC3B7819BD0EC00036AD2A /* RYRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC3B7719BD0EC00036AD2A /* RYRefreshControl.m */; };
+		83E3017219C7BAEE0085F17F /* RYTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E3017119C7BAEE0085F17F /* RYTagCollectionViewCell.m */; };
 		83E56B651953A0A900EF054C /* RYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B631953A0A900EF054C /* RYUser.m */; };
 		83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E56B671953A0DA00EF054C /* RYMediaEditor.m */; };
 		83EB8BA619959F5C0007837D /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 83EB8BA519959F5C0007837D /* DWTagList.m */; };
@@ -605,6 +606,8 @@
 		83DBCA7A18F99E3F00262496 /* RYRiffStreamingCoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamingCoreViewController.m; sourceTree = "<group>"; };
 		83DC3B7619BD0EC00036AD2A /* RYRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRefreshControl.h; sourceTree = "<group>"; };
 		83DC3B7719BD0EC00036AD2A /* RYRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRefreshControl.m; sourceTree = "<group>"; };
+		83E3017019C7BAEE0085F17F /* RYTagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagCollectionViewCell.h; sourceTree = "<group>"; };
+		83E3017119C7BAEE0085F17F /* RYTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagCollectionViewCell.m; sourceTree = "<group>"; };
 		83E56B621953A0A900EF054C /* RYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUser.h; sourceTree = "<group>"; };
 		83E56B631953A0A900EF054C /* RYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUser.m; sourceTree = "<group>"; };
 		83E56B661953A0DA00EF054C /* RYMediaEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYMediaEditor.h; sourceTree = "<group>"; };
@@ -882,6 +885,8 @@
 				83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */,
 				83302D9019C7A830008C5A54 /* RYTagListCollectionTableViewCell.h */,
 				83302D9119C7A830008C5A54 /* RYTagListCollectionTableViewCell.m */,
+				83E3017019C7BAEE0085F17F /* RYTagCollectionViewCell.h */,
+				83E3017119C7BAEE0085F17F /* RYTagCollectionViewCell.m */,
 			);
 			name = Discover;
 			path = TagList;
@@ -1758,6 +1763,7 @@
 				836F484319A04BAB00E948BE /* UIImage+Color.m in Sources */,
 				83011B7519A7FF420017E7C5 /* SGImageCache.m in Sources */,
 				83360CDA19B6B76500136FCB /* RYNotificationsManager.m in Sources */,
+				83E3017219C7BAEE0085F17F /* RYTagCollectionViewCell.m in Sources */,
 				836F484619A04BAB00E948BE /* UIViewController+Extras.m in Sources */,
 				83082FE819B55DF4000AFACB /* RYTagFeedViewController.m in Sources */,
 				83FCD17618F909DB00A493F0 /* RYProfileViewController.m in Sources */,
