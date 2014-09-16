@@ -12,21 +12,26 @@
 #import "RYDiscoverServices.h"
 
 @protocol TagListDelegate <NSObject>
-
-- (void) retrievedTags;
-
+- (void) tagsUpdated;
 @end
 
 typedef enum : NSUInteger {
-    TRENDING_LIST = 1,
+    SEARCH = 0,
+    TRENDING_LIST,
     SUGGESTED_LIST
 } TagListType;
 
 @interface RYTagList : NSObject <TagDelegate>
 
-- (void) retrieveTrendingTags;
-- (void) retrieveSuggestedTags;
+@property (nonatomic, weak) id<TagListDelegate> delegate;
 
+- (id) initWithTagListType:(TagListType)tagListType;
+
+- (NSArray *)list;
+
+- (void) fetchData;
 - (BOOL) isFetching;
+- (TagListType)listType;
+- (NSString *)listTitle;
 
 @end

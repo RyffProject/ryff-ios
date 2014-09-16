@@ -49,7 +49,7 @@
 {
     [super viewWillAppear:animated];
     
-    if ((!self.feedItems || self.feedItems.count == 0) && [RYRegistrationServices loggedInUser])
+    if (!self.feedItems || self.feedItems.count == 0)
     {
         [_refreshControl beginRefreshing];
         [self fetchContent];

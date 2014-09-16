@@ -34,13 +34,23 @@
     _currentTag = tag;
     
     // set image
-    if (tag.trendingPost)
+    if (tag.trendingPost && tag.trendingPost.imageURL)
+    {
+        _tagLabel.layer.shadowOpacity = 0.7f;
+        _darkenView.alpha = 0.45f;
         [_imageView setImageForURL:tag.trendingPost.imageURL.absoluteString placeholder:nil];
+    }
     else
-        [tag retrieveTrendingPost];
+    {
+        _tagLabel.layer.shadowOpacity = 0.0f;
+        _darkenView.alpha = 0.6f;
+        [tag retrieveTrendingPostWithImage];
+    }
     
     _tagLabel.text = tag.tag;
     _descriptionLabel.text = [NSString stringWithFormat:@"%ld Posts",(long)tag.numPosts];
+    
+    self.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark -
@@ -51,8 +61,21 @@
     [super awakeFromNib];
     
     _tagLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
+    _tagLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    _tagLabel.layer.shadowOffset = CGSizeMake(-1, 1);
+    _tagLabel.layer.shadowRadius = 2.0f;
+    
+    self.layer.cornerRadius = 35.0f;
+    self.clipsToBounds = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagUpdated:) name:kRetrievedTrendingPostNotification object:nil];
+}
+
+- (void) prepareForReuse
+{
+    [super prepareForReuse];
+    
+    _imageView.image = nil;
 }
 
 #pragma mark - Notifications

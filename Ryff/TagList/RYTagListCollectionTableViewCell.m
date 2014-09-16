@@ -11,22 +11,56 @@
 // Custom UI
 #import "RYTagCollectionViewCell.h"
 
+// Data Managers
+#import "RYStyleSheet.h"
+
+// Data Objects
+#import "RYTagList.h"
+
 #define kTagCellReuseID @"tagCell"
 
-@interface RYTagListCollectionTableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface RYTagListCollectionTableViewCell () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) NSArray *tagList;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+// Data
+@property (nonatomic, strong) RYTagList *tagList;
 
 @end
 
 @implementation RYTagListCollectionTableViewCell
 
+- (void) configureWithTagList:(RYTagList *)tagList delegate:(id<TagListCollectionDelegate>)delegate
+{
+    _delegate         = delegate;
+    _tagList          = tagList;
+    _tagList.delegate = self;
+    _titleLabel.text  = tagList.listTitle;
+    
+    self.backgroundColor = [UIColor clearColor];
+}
+
 #pragma mark -
 #pragma mark - LifeCycle
 
-- (void) configureWithTags:(NSArray *)tagList
+- (void) awakeFromNib
 {
-    _tagList = tagList;
+    [super awakeFromNib];
+    
+    _collectionView.contentInset = UIEdgeInsetsMake(0, 17.5, 0, 17.5);
+    _collectionView.backgroundColor = [UIColor clearColor];
+    
+    _titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
+    _titleLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
+}
+
+#pragma mark -
+#pragma mark - TagList Delegate
+
+- (void) tagsUpdated
+{
+    [_collectionView reloadData];
 }
 
 #pragma mark -
@@ -34,12 +68,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _tagList.count;
+    return _tagList.list.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    RYTag *tag = _tagList[indexPath.row];
+    RYTag *tag = _tagList.list[indexPath.row];
     RYTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
     [cell configureWithTag:tag];
     return cell;
@@ -54,7 +88,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    RYTag *selectedTag = _tagList.list[indexPath.row];
+    if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
+        [_delegate tagSelected:selectedTag];
 }
 
 #pragma mark -

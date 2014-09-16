@@ -21,22 +21,32 @@
 
 @implementation RYTagList
 
-- (void) retrieveTrendingTags
+- (id) initWithTagListType:(TagListType)tagListType
 {
-    if (!_fetching)
+    if (self = [super init])
     {
-        _searchType = TRENDING_LIST;
-        [[RYDiscoverServices sharedInstance] getTrendingTagsForDelegate:self];
-        _fetching = YES;
+        _searchType = tagListType;
     }
+    return self;
 }
 
-- (void) retrieveSuggestedTags
+- (NSArray *)list
+{
+    return _tagList;
+}
+
+- (void) fetchData
 {
     if (!_fetching)
     {
-        _searchType = SUGGESTED_LIST;
-        [[RYDiscoverServices sharedInstance] getSuggestedTagsForDelegate:self];
+        if (_searchType == TRENDING_LIST)
+            [[RYDiscoverServices sharedInstance] getTrendingTagsForDelegate:self];
+        else if (_searchType == SUGGESTED_LIST)
+            [[RYDiscoverServices sharedInstance] getSuggestedTagsForDelegate:self];
+        else
+        {
+            // search tags
+        }
         _fetching = YES;
     }
 }
@@ -46,6 +56,21 @@
     return _fetching;
 }
 
+- (TagListType)listType
+{
+    return _searchType;
+}
+
+- (NSString *)listTitle
+{
+    NSString *listTitle;
+    if (_searchType == TRENDING_LIST)
+        listTitle = @"Trending Tags";
+    else if (_searchType == SUGGESTED_LIST)
+        listTitle = @"Suggested Tags";
+    return listTitle;
+}
+
 #pragma mark -
 #pragma mark - Tag Delegate
 
@@ -53,6 +78,9 @@
 {
     _tagList = tags;
     _fetching = NO;
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(tagsUpdated)])
+        [_delegate tagsUpdated];
 }
 
 @end

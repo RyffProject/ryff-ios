@@ -23,7 +23,7 @@
 
 - (RYTag *)initWithTag:(NSString *)tag numUsers:(NSInteger)numUsers numPosts:(NSInteger)numPosts;
 
-- (void) retrieveTrendingPost;
+- (void) retrieveTrendingPostWithImage;
 
 + (RYTag *)tagFromDict:(NSDictionary *)tagDict;
 + (NSArray *)tagsFromDictArray:(NSArray *)tagDictArray;

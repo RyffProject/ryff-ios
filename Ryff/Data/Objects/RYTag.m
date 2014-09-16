@@ -11,6 +11,9 @@
 // Data Managers
 #import "RYServices.h"
 
+// Data Objects
+#import "RYPost.h"
+
 @interface RYTag () <PostDelegate>
 
 @end
@@ -59,17 +62,27 @@
 #pragma mark -
 #pragma mark - Utilities
 
-- (void) getTrendingPost
+- (void) retrieveTrendingPostWithImage
 {
     if (!_trendingPost)
-        [[RYServices sharedInstance] getPostsForTags:@[_tag] searchType:TRENDING page:nil limit:@1 delegate:self];
+        [[RYServices sharedInstance] getPostsForTags:@[_tag] searchType:TRENDING page:nil limit:@5 delegate:self];
 }
 
 #pragma mark - PostDelegate
 
 - (void) postSucceeded:(NSArray *)posts
 {
-    _trendingPost = posts.firstObject;
+    // try to get post with an image
+    for (RYPost *post in posts)
+    {
+        if (post.imageURL)
+        {
+            _trendingPost = post;
+            break;
+        }
+    }
+    if (!_trendingPost)
+        _trendingPost = posts.firstObject;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRetrievedTrendingPostNotification object:nil userInfo:@{@"tag": _tag}];
 }

@@ -34,6 +34,8 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.searchType = TRENDING;
     [self styleWithTags];
     
     self.riffSection = 1;
