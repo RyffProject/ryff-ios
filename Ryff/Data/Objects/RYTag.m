@@ -8,6 +8,13 @@
 
 #import "RYTag.h"
 
+// Data Managers
+#import "RYServices.h"
+
+@interface RYTag () <PostDelegate>
+
+@end
+
 @implementation RYTag
 
 - (RYTag *)initWithTag:(NSString *)tag numUsers:(NSInteger)numUsers numPosts:(NSInteger)numPosts
@@ -47,6 +54,24 @@
         [tagTagArray addObject:tag.tag];
     }
     return tagTagArray;
+}
+
+#pragma mark -
+#pragma mark - Utilities
+
+- (void) getTrendingPost
+{
+    if (!_trendingPost)
+        [[RYServices sharedInstance] getPostsForTags:@[_tag] searchType:TRENDING page:nil limit:@1 delegate:self];
+}
+
+#pragma mark - PostDelegate
+
+- (void) postSucceeded:(NSArray *)posts
+{
+    _trendingPost = posts.firstObject;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRetrievedTrendingPostNotification object:nil userInfo:@{@"tag": _tag}];
 }
 
 @end

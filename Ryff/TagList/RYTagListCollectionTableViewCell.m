@@ -8,6 +8,9 @@
 
 #import "RYTagListCollectionTableViewCell.h"
 
+// Custom UI
+#import "RYTagCollectionViewCell.h"
+
 #define kTagCellReuseID @"tagCell"
 
 @interface RYTagListCollectionTableViewCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -23,7 +26,7 @@
 
 - (void) configureWithTags:(NSArray *)tagList
 {
-    
+    _tagList = tagList;
 }
 
 #pragma mark -
@@ -31,12 +34,14 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
+    return _tagList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
+    RYTag *tag = _tagList[indexPath.row];
+    RYTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
+    [cell configureWithTag:tag];
     return cell;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -57,7 +62,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(100, 100);
+    return CGSizeMake(150, 150);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

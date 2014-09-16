@@ -107,7 +107,7 @@ typedef enum : NSUInteger {
 // Other Posts
 - (void) getUserPostsForUser:(NSInteger)userId page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 - (void) getNewsfeedPostsWithPage:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
-- (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
+- (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page limit:(NSNumber *)limit delegate:(id<PostDelegate>)delegate;
 - (void) getStarredPostsForUser:(NSInteger)userID delegate:(id<PostDelegate>)delegate;
 - (void) getFamilyForPost:(NSInteger)postID delegate:(id<FamilyPostDelegate>)delegate;
 

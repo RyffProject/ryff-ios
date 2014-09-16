@@ -8,13 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+#define kRetrievedTrendingPostNotification @"RetrievedTrendingPost"
+
+@class RYPost;
+
 @interface RYTag : NSObject
 
 @property (nonatomic, strong) NSString *tag;
 @property (nonatomic, assign) NSInteger numUsers;
 @property (nonatomic, assign) NSInteger numPosts;
 
+// optional
+@property (nonatomic, strong) RYPost *trendingPost;
+
 - (RYTag *)initWithTag:(NSString *)tag numUsers:(NSInteger)numUsers numPosts:(NSInteger)numPosts;
+
+- (void) retrieveTrendingPost;
+
 + (RYTag *)tagFromDict:(NSDictionary *)tagDict;
 + (NSArray *)tagsFromDictArray:(NSArray *)tagDictArray;
 

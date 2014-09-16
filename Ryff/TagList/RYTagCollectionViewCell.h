@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RYTag;
+
 @interface RYTagCollectionViewCell : UICollectionViewCell
+
+- (void) configureWithTag:(RYTag *)tag;
 
 @end

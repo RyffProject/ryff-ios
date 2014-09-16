@@ -265,7 +265,7 @@ static RYUser* _loggedInUser;
     [self getPostsWithParams:params toAction:action forDelegate:delegate];
 }
 
-- (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate
+- (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page limit:(NSNumber *)limit delegate:(id<PostDelegate>)delegate
 {
     NSString *action;
     switch (searchType) {
@@ -287,6 +287,8 @@ static RYUser* _loggedInUser;
         [params setObject:tags forKey:@"tags"];
     if (page)
         [params setObject:page forKey:@"page"];
+    if (limit)
+        [params setObject:limit forKey:@"limit"];
     
     [self getPostsWithParams:params toAction:action forDelegate:delegate];
 }

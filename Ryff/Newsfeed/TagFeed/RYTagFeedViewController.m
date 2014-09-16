@@ -109,7 +109,7 @@
 
 - (void) fetchContent
 {
-    [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil delegate:self];
+    [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil limit:nil delegate:self];
 }
 
 #pragma mark -
