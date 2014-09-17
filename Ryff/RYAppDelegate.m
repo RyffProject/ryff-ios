@@ -32,9 +32,6 @@
     
     [[RYRegistrationServices sharedInstance] attemptBackgroundLogIn];
     
-    // Clear caches
-    [[RYDataManager sharedInstance] clearCache];
-    
     // light content 
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -61,7 +58,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
+    // Clear caches
+    [[RYDataManager sharedInstance] clearCache];
+    [SGImageCache flushImagesOlderThan:1.0f];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
