@@ -17,13 +17,13 @@
 
 // Custom UI
 #import "RYNotificationsTableViewCell.h"
-#import "ODRefreshControl.h"
+#import "RYRefreshControl.h"
 
 #define kNotificationCellReuseID @"notificationCell"
 
 @interface RYNotificationsTableViewController () <NotificationsDelegate>
 
-@property (nonatomic, strong) ODRefreshControl *refControl;
+@property (nonatomic, strong) RYRefreshControl *refControl;
 
 // Data
 @property (nonatomic, strong) NSArray *notifications;
@@ -37,14 +37,15 @@
 {
     [super viewDidLoad];
     
-    _refControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+    _refControl = [[RYRefreshControl alloc] initInScrollView:self.tableView];
     _refControl.tintColor = [RYStyleSheet postActionColor];
-    _refControl.activityIndicatorViewColor = [RYStyleSheet postActionColor];
     [_refControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
-    self.tableView.backgroundColor = [RYStyleSheet audioBackgroundColor];
+    self.tableView.backgroundColor = [RYStyleSheet lightBackgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsZero;
     
+    [_refControl beginRefreshing];
     [self fetchContent];
 }
 
@@ -55,15 +56,12 @@
 
 - (void) fetchContent
 {
-    [_refControl beginRefreshing];
-    [self.tableView setContentOffset:CGPointMake(0, -40)];
-    
     [[RYNotificationsManager sharedInstance] fetchNotificationsForDelegate:self page:nil];
 }
 
 #pragma mark - Actions
 
-- (void) refreshContent:(ODRefreshControl *)refreshControl
+- (void) refreshContent:(RYRefreshControl *)refreshControl
 {
     [self fetchContent];
 }
@@ -74,8 +72,8 @@
 - (void) notificationsRetrieved:(NSArray *)notifications
 {
     _notifications = notifications;
-    [self.tableView reloadData];
     [_refControl endRefreshing];
+    [self.tableView reloadData];
 }
 
 - (void) failedNotificationsRetrieval:(NSString *)reason
@@ -104,9 +102,9 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RYNotification *notification = _notifications[indexPath.row];
-    NSString *notificationString = [RYNotificationsManager notificationString:notification];
+    NSAttributedString *notificationString = [RYNotificationsManager notificationString:notification];
     CGFloat labelWidth = self.view.frame.size.width-kNotificationsCellWidthMinusText;
-    CGRect allowedFrame = [notificationString boundingRectWithSize:CGSizeMake(labelWidth, 20000) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: kNotificationsCellFont} context:NULL];
+    CGRect allowedFrame = [notificationString boundingRectWithSize:CGSizeMake(labelWidth, 20000) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:NULL];
     return allowedFrame.size.height + kNotificationsCellHeightMinusText;
 }
 

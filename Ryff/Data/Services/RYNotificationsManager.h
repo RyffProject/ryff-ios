@@ -33,6 +33,6 @@
 - (void) updatePushToken:(NSString *)pushToken;
 
 // Helpers
-+ (NSString *)notificationString:(RYNotification *)notification;
++ (NSAttributedString *)notificationString:(RYNotification *)notification;
 
 @end

@@ -182,6 +182,7 @@
         if (isIpad)
         {
             _notificationsPopover = [[UIPopoverController alloc] initWithContentViewController:notificationsVC];
+            _notificationsPopover.backgroundColor = [RYStyleSheet lightBackgroundColor];
             [_notificationsPopover presentPopoverFromBarButtonItem:_notificationsBarButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
         else

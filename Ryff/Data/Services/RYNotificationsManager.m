@@ -11,6 +11,7 @@
 // Data Managers
 #import "RYServices.h"
 #import "RYRegistrationServices.h"
+#import "RYStyleSheet.h"
 
 // Data Objects
 #import "RYNotification.h"
@@ -121,22 +122,29 @@ static RYNotificationsManager *_sharedInstance;
 #pragma mark -
 #pragma mark - Helpers
 
-+ (NSString *)notificationString:(RYNotification *)notification
+/**
+ *  Helper method to build an attributed string for the description of this notification. Will be used when displaying table of notifications to the user.
+ *
+ *  @param notification the notification to use
+ *
+ *  @return styled attributed string
+ */
++ (NSAttributedString *)notificationString:(RYNotification *)notification
 {
-    NSString *notificationString;
+    NSMutableAttributedString *notificationString;
     
     NSMutableString *usersString;
-    NSMutableString *postsString;
+    NSString *postsString;
     NSString *postString;
     
     if (notification.posts)
     {
         RYPost *lastPost = notification.posts.lastObject;
-        postsString = [lastPost.title mutableCopy];
+        postString = [lastPost.title mutableCopy];
         if (notification.posts.count == 2)
-            [postsString appendFormat:@" and 1 other riff"];
+            postsString = @" and 1 other riff";
         else if (notification.users.count > 2)
-            [postsString appendString:[NSString stringWithFormat:@" and %ld other riffs",(notification.posts.count-1)]];
+            postsString = [NSString stringWithFormat:@" and %ld other riffs",(notification.posts.count-1)];
     }
     
     if (notification.users)
@@ -154,22 +162,30 @@ static RYNotificationsManager *_sharedInstance;
         postString = notification.post.title;
     }
     
+    NSDictionary *notificationTextAttributes = @{NSForegroundColorAttributeName: [UIColor darkTextColor]};
+    NSDictionary *highlightedNotificationAttributes = @{NSForegroundColorAttributeName: [RYStyleSheet postActionColor]};
     switch (notification.type) {
         case FOLLOW_NOTIF:
-            notificationString = [NSString stringWithFormat:@"%@ followed you.",usersString];
+            notificationString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ followed you.",usersString] attributes:notificationTextAttributes];
             break;
         case UPVOTE_NOTIF:
-            notificationString = [NSString stringWithFormat:@"%@ upvoted %@",usersString,postString];
+            notificationString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ upvoted ",usersString] attributes:notificationTextAttributes];
+            [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postString attributes:highlightedNotificationAttributes]];
             break;
         case REMIX_NOTIF:
-            notificationString = [NSString stringWithFormat:@"%@ remixed %@",usersString,postString];
+            notificationString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ remixed ",usersString] attributes:notificationTextAttributes];
+            [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postString attributes:highlightedNotificationAttributes]];
             break;
         case MENTION_NOTIF:
-            notificationString = [NSString stringWithFormat:@"You were mentioned in %@",postsString];
+            notificationString = [[NSMutableAttributedString alloc] initWithString:@"You were mentioned in " attributes:notificationTextAttributes];
+            [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postString attributes:highlightedNotificationAttributes]];
+            [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postsString attributes:notificationTextAttributes]];
             break;
         case UNRECOGNIZED_NOTIF:
             break;
     }
+    
+    [notificationString addAttribute:NSFontAttributeName value:[UIFont fontWithName:kRegularFont size:18.0f] range:NSMakeRange(0, notificationString.string.length)];
     return notificationString;
 }
 

@@ -36,17 +36,15 @@
     [super awakeFromNib];
     
     [RYStyleSheet styleProfileImageView:_avatarImageView];
-    [_topLabel setFont:kNotificationsCellFont];
     [_bottomLabel setFont:[UIFont fontWithName:kLightFont size:16.0f]];
-    [_bottomLabel setTextColor:[RYStyleSheet availableActionColor]];
+    [_bottomLabel setTextColor:[UIColor darkTextColor]];
     
-    _backView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.3f];
+    _backView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.35f];
 }
 
 - (void) configureWithNotification:(RYNotification *)notification
 {
-    
-    [_topLabel setText:[RYNotificationsManager notificationString:notification]];
+    _topLabel.attributedText = [RYNotificationsManager notificationString:notification];
     
     // avatar image
     RYUser *lastUser;
