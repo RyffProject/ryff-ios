@@ -19,7 +19,7 @@
 // Frameworks
 #import "SSKeychain.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "SGImageCache.h"
+#import "SDWebImageManager.h"
 
 @implementation RYRegistrationServices
 
@@ -151,7 +151,7 @@ static RYUser* _loggedInUser;
             if (dictionary[@"success"])
             {
                 RYUser *updatedUser = [RYUser userFromDict:dictionary[@"user"]];
-                [SGImageCache removeImageForURL:[RYRegistrationServices loggedInUser].avatarURL.absoluteString];
+                [[SDWebImageManager sharedManager] saveImageToCache:avatar forURL:[RYRegistrationServices loggedInUser].avatarURL];
                 [delegate updateSucceeded:updatedUser];
             }
             else

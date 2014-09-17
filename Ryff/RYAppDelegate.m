@@ -17,7 +17,6 @@
 
 // Frameworks
 #import "SSKeychain.h"
-#import "SGImageCache.h"
 
 @implementation RYAppDelegate
 
@@ -60,7 +59,6 @@
 {
     // Clear caches
     [[RYDataManager sharedInstance] clearCache];
-    [SGImageCache flushImagesOlderThan:1.0f];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -105,7 +103,6 @@
 {
     // clear caches
     [[RYDataManager sharedInstance] clearCache];
-    [SGImageCache flushImagesOlderThan:1.0f];
 }
 
 #pragma mark -

@@ -17,6 +17,6 @@
 
 @property (nonatomic, weak) id<PostImageCellDelegate>delegate;
 
-- (void) configureWithImageURL:(NSString *)urlString numParents:(NSInteger)numParents delegate:(id<PostImageCellDelegate>)delegate;
+- (void) configureWithImageURL:(NSURL *)imageURL numParents:(NSInteger)numParents delegate:(id<PostImageCellDelegate>)delegate;
 
 @end

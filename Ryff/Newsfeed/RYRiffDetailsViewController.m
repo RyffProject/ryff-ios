@@ -24,7 +24,7 @@
 
 // Categories
 #import "UIViewController+Extras.h"
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 
 #define kPostImageCellReuseID @"postImageCell"
 #define kRiffDetailsCellReuseID @"riffDetails"
@@ -264,7 +264,7 @@
     {
         if (kPostImageRow)
         {
-            [(RYPostImageTableViewCell *)cell configureWithImageURL:_post.imageURL.absoluteString numParents:_parentPosts.count delegate:self];
+            [(RYPostImageTableViewCell *)cell configureWithImageURL:_post.imageURL numParents:_parentPosts.count delegate:self];
         }
         else
         {

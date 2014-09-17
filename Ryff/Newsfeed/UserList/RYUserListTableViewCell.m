@@ -15,7 +15,7 @@
 #import "RYUser.h"
 
 // Frameworks
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface RYUserListTableViewCell ()
 
@@ -39,7 +39,7 @@
 - (void) configureForUser:(RYUser *)user
 {
     if (user.avatarURL.absoluteString.length > 0)
-        [_avatarImageView setImageForURL:user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     else
         [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
     

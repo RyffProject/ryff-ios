@@ -12,7 +12,7 @@
 #import "RYStyleSheet.h"
 
 // Categories
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 #import "UIImage+Color.h"
 
 @interface RYPostImageTableViewCell ()
@@ -41,11 +41,11 @@
     [_centerImageView addGestureRecognizer:centerImageViewTap];
 }
 
-- (void) configureWithImageURL:(NSString *)urlString numParents:(NSInteger)numParents delegate:(id<PostImageCellDelegate>)delegate
+- (void) configureWithImageURL:(NSURL *)imageURL numParents:(NSInteger)numParents delegate:(id<PostImageCellDelegate>)delegate
 {
     _delegate = delegate;
     
-    [_centerImageView setImageForURL:urlString placeholder:[UIImage imageNamed:@"user"]];
+    [_centerImageView sd_setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"user"]];
     
     if (numParents > 0)
     {

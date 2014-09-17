@@ -18,7 +18,7 @@
 #import "RYUser.h"
 
 // Frameworks
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface RYNotificationsTableViewCell ()
 
@@ -59,7 +59,7 @@
     }
     
     if (lastUser)
-        [_avatarImageView setImageForURL:lastUser.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView sd_setImageWithURL:lastUser.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     
     // time since
     NSTimeInterval timeSince = [[NSDate date] timeIntervalSinceDate:notification.dateUpdated];

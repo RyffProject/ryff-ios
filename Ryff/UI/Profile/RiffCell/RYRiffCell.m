@@ -25,7 +25,7 @@
 #import "UIImage+Color.h"
 
 // Frameworks
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface RYRiffCell () <UIGestureRecognizerDelegate>
 
@@ -79,12 +79,12 @@
     {
         [_avatarImageView setHidden:YES];
         [_postImageView setHidden:NO];
-        [_postImageView setImageForURL:post.imageURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+        [_postImageView sd_setImageWithURL:post.imageURL placeholderImage:[UIImage imageNamed:@"user"]];
     }
     else
     {
         [_avatarImageView setHidden:NO];
-        [_avatarImageView setImageForURL:post.user.avatarURL.absoluteString placeholder:[UIImage imageNamed:@"user"]];
+        [_avatarImageView sd_setImageWithURL:post.user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
         [_postImageView setHidden:YES];
     }
     

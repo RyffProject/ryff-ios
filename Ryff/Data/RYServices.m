@@ -23,7 +23,6 @@
 // Server
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
-#import "SGImageCache.h"
 
 @implementation RYServices
 

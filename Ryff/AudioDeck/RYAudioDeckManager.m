@@ -18,7 +18,7 @@
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "SGImageCache.h"
+#import "SDWebImageManager.h"
 
 #define kRecentlyPlayedSize 5
 
@@ -144,9 +144,10 @@ static RYAudioDeckManager *_sharedInstance;
         
         if (post.imageURL || post.user.avatarURL.absoluteString.length > 0)
         {
-            NSString *urlString = post.imageURL ? post.imageURL.absoluteString : post.user.avatarURL.absoluteString;
+            NSURL *imageURL = post.imageURL ? post.imageURL : post.user.avatarURL;
             __block RYAudioDeckManager *blockSelf = self;
-            [SGImageCache getImageForURL:urlString thenDo:^(UIImage *image) {
+            
+            [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                 blockSelf.nowPlayingArtwork = image;
             }];
         }

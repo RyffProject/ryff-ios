@@ -13,7 +13,7 @@
 #import "RYPost.h"
 
 // Categories
-#import "UIImageView+SGImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface RYTagCollectionViewCell ()
 
@@ -38,7 +38,7 @@
     {
         _tagLabel.layer.shadowOpacity = 0.7f;
         _darkenView.alpha = 0.45f;
-        [_imageView setImageForURL:tag.trendingPost.imageURL.absoluteString placeholder:nil];
+        [_imageView sd_setImageWithURL:tag.trendingPost.imageURL];
     }
     else
     {
