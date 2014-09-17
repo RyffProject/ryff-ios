@@ -235,7 +235,6 @@
 		83FA50B81931524E00F1F3A7 /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */; };
 		83FADE4519AC405200182155 /* create.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FADE4319AC405200182155 /* create.png */; };
 		83FADE4619AC405200182155 /* create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FADE4419AC405200182155 /* create@2x.png */; };
-		83FADE4A19AC52B300182155 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FADE4919AC52B300182155 /* ODRefreshControl.m */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
@@ -639,8 +638,6 @@
 		83FA50B61931524E00F1F3A7 /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
 		83FADE4319AC405200182155 /* create.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create.png; sourceTree = "<group>"; };
 		83FADE4419AC405200182155 /* create@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create@2x.png"; sourceTree = "<group>"; };
-		83FADE4819AC52B300182155 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
-		83FADE4919AC52B300182155 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		83FADE4B19AC54DA00182155 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -931,7 +928,6 @@
 				836F483719A04BAB00E948BE /* Categories */,
 				83CA118B1995CD23002610E8 /* FLEX */,
 				83EB8BA319959F5C0007837D /* DWTagList */,
-				83FADE4719AC52B200182155 /* ODRefreshControl */,
 				83CCC8E8197EFCBF00FD1B4B /* AFNetworking */,
 				83CCC8FC197EFCBF00FD1B4B /* UIKit+AFNetworking */,
 				83011B6E19A7FF420017E7C5 /* SGImageCache */,
@@ -1311,15 +1307,6 @@
 				83ED34E71931851600FEB018 /* iTunesArtwork@2x.png */,
 			);
 			path = "App Icon [Squared]";
-			sourceTree = "<group>";
-		};
-		83FADE4719AC52B200182155 /* ODRefreshControl */ = {
-			isa = PBXGroup;
-			children = (
-				83FADE4819AC52B300182155 /* ODRefreshControl.h */,
-				83FADE4919AC52B300182155 /* ODRefreshControl.m */,
-			);
-			path = ODRefreshControl;
 			sourceTree = "<group>";
 		};
 		83FCD12F18F907C400A493F0 = {
@@ -1730,7 +1717,6 @@
 				83C354B319BBAD41000A5BD4 /* RYRiffStreamViewController.m in Sources */,
 				83C8940B19C809E100127F68 /* RYTagList.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
-				83FADE4A19AC52B300182155 /* ODRefreshControl.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83CCC90F197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m in Sources */,
