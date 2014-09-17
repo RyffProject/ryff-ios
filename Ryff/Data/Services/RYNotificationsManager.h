@@ -12,6 +12,8 @@
 #define kGetNotifications       @"get-notifications.php"
 #define kGetOneNotification     @"get-notification.php"
 
+@class RYNotification;
+
 @protocol NotificationsDelegate <NSObject>
 - (void) notificationsRetrieved:(NSArray *)notifications;
 @optional
@@ -29,5 +31,8 @@
 - (void) fetchNotificationsForDelegate:(id<NotificationsDelegate>)delegate page:(NSNumber *)page;
 
 - (void) updatePushToken:(NSString *)pushToken;
+
+// Helpers
++ (NSString *)notificationString:(RYNotification *)notification;
 
 @end

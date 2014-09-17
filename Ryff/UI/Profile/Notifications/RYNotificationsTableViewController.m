@@ -103,7 +103,11 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50.0f;
+    RYNotification *notification = _notifications[indexPath.row];
+    NSString *notificationString = [RYNotificationsManager notificationString:notification];
+    CGFloat labelWidth = self.view.frame.size.width-kNotificationsCellWidthMinusText;
+    CGRect allowedFrame = [notificationString boundingRectWithSize:CGSizeMake(labelWidth, 20000) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: kNotificationsCellFont} context:NULL];
+    return allowedFrame.size.height + kNotificationsCellHeightMinusText;
 }
 
 #pragma mark -
