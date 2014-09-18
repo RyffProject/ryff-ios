@@ -76,17 +76,9 @@
     [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.duration]];
     
     if (post.imageURL && _postImageView)
-    {
-        [_avatarImageView setHidden:YES];
-        [_postImageView setHidden:NO];
         [_postImageView sd_setImageWithURL:post.imageURL placeholderImage:[UIImage imageNamed:@"user"]];
-    }
-    else
-    {
-        [_avatarImageView setHidden:NO];
+    if (post.user.avatarURL && _avatarImageView)
         [_avatarImageView sd_setImageWithURL:post.user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
-        [_postImageView setHidden:YES];
-    }
     
     UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_starButton setTintColor:starredColor];

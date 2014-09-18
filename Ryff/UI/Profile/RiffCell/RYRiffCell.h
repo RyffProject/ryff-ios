@@ -14,6 +14,9 @@
 #define kRiffCellHeightMinusText 168.0f
 #define kRiffCellMinimumHeight 259.0f
 
+// Details
+#define kRiffDetailsHeightMinusText 479.0f
+
 @protocol RiffCellDelegate <NSObject>
 - (void) playerControlAction:(NSInteger)riffIndex;
 - (void) avatarAction:(NSInteger)riffIndex;

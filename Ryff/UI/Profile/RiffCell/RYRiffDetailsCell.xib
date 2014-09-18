@@ -6,24 +6,19 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RiffCell" rowHeight="259" id="uch-i2-GQU" customClass="RYRiffCell">
-            <rect key="frame" x="0.0" y="0.0" width="922" height="260"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RiffDetailsCell" rowHeight="570" id="dfp-NJ-3tz" customClass="RYRiffCell">
+            <rect key="frame" x="0.0" y="0.0" width="922" height="570"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uch-i2-GQU" id="4lL-io-bnx">
-                <rect key="frame" x="0.0" y="0.0" width="922" height="259"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfp-NJ-3tz" id="x2M-8s-COd">
+                <rect key="frame" x="0.0" y="0.0" width="922" height="569"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="lsh-uq-4dC">
-                        <rect key="frame" x="86" y="0.0" width="750" height="200"/>
+                    <view contentMode="scaleToFill" id="J5g-7q-ZdH">
+                        <rect key="frame" x="86" y="0.0" width="750" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1rb-I2-FWV">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" editable="NO" id="JVI-YC-dTz" customClass="RYSocialTextView">
-                                <rect key="frame" x="208" y="81" width="532" height="91"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" editable="NO" id="ikI-dv-gTR" customClass="RYSocialTextView">
+                                <rect key="frame" x="73" y="389" width="667" height="91"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -31,43 +26,51 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IaF-hX-SsX">
-                                <rect key="frame" x="637" y="170" width="103" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4fg-0k-s1J">
+                                <rect key="frame" x="637" y="480" width="103" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9II-YH-0HS">
-                                <rect key="frame" x="208" y="43" width="532" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SaT-XG-fv9">
+                                <rect key="frame" x="73" y="43" width="667" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CQ0-Uh-gDd">
-                                <rect key="frame" x="208" y="15" width="532" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BHu-3l-8UV">
+                                <rect key="frame" x="73" y="15" width="667" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="sNM-1M-Jqg">
+                                <rect key="frame" x="15" y="33" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nOI-gH-xRh">
+                                <rect key="frame" x="73" y="81" width="604" height="300"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" id="exn-K0-h4z" customClass="RYPlayControl">
+                    <view contentMode="scaleToFill" id="7mD-3e-gDO" customClass="RYPlayControl">
                         <rect key="frame" x="23" y="10" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" id="5Ga-qf-K1z">
+                    <view contentMode="scaleToFill" id="97D-Gb-175">
                         <rect key="frame" x="850" y="5" width="72" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upvote.png" id="kns-XD-3ks">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upvote.png" id="HIQ-DW-j8P">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d2n-cZ-K6c">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eob-nA-iQd">
                                 <rect key="frame" x="33" y="0.0" width="39" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -77,35 +80,35 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" id="tDx-1U-Pms">
-                        <rect key="frame" x="86" y="198" width="200" height="50"/>
+                    <view contentMode="scaleToFill" id="Ro3-Xu-iSG">
+                        <rect key="frame" x="86" y="508" width="200" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Yxn-GF-2KK">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WCR-V1-DiD">
                                 <rect key="frame" x="10" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="plus.png"/>
                                 <connections>
-                                    <action selector="playlistAddHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="44e-bs-o7Q"/>
+                                    <action selector="playlistAddHit:" destination="dfp-NJ-3tz" eventType="touchUpInside" id="eh2-V3-ZbI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TbB-jV-mwf">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j8g-Kn-JEi">
                                 <rect key="frame" x="75" y="3" width="50" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="10"/>
                                 <state key="normal" image="remix.png"/>
                                 <connections>
-                                    <action selector="repostHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="euX-Q6-UNN"/>
+                                    <action selector="repostHit:" destination="dfp-NJ-3tz" eventType="touchUpInside" id="UXg-Y5-3A9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pyG-px-9wX">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qxZ-ZJ-Tfa">
                                 <rect key="frame" x="140" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="star.png"/>
                                 <connections>
-                                    <action selector="starHit:" destination="uch-i2-GQU" eventType="touchUpInside" id="wAz-LN-1Qy"/>
+                                    <action selector="starHit:" destination="dfp-NJ-3tz" eventType="touchUpInside" id="zNY-MC-ciw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,20 +119,21 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="actionWrapperView" destination="tDx-1U-Pms" id="Fr4-aG-jOE"/>
-                <outlet property="durationLabel" destination="IaF-hX-SsX" id="AKN-Fq-26u"/>
-                <outlet property="playControlView" destination="exn-K0-h4z" id="cQk-OF-NqX"/>
-                <outlet property="playlistAddButton" destination="Yxn-GF-2KK" id="nTF-Pn-okd"/>
-                <outlet property="postImageView" destination="1rb-I2-FWV" id="qYj-xi-sag"/>
-                <outlet property="postLabel" destination="CQ0-Uh-gDd" id="vmF-Jr-DID"/>
-                <outlet property="repostButton" destination="TbB-jV-mwf" id="WyU-g8-fLF"/>
-                <outlet property="socialTextView" destination="JVI-YC-dTz" id="s3a-uu-mAt"/>
-                <outlet property="starButton" destination="pyG-px-9wX" id="ONZ-EI-A60"/>
-                <outlet property="upvoteCountLabel" destination="d2n-cZ-K6c" id="k92-Ve-EZF"/>
-                <outlet property="upvoteImageView" destination="kns-XD-3ks" id="inl-Vz-wo3"/>
-                <outlet property="upvoteWrapperView" destination="5Ga-qf-K1z" id="ceO-Xf-gZ2"/>
-                <outlet property="userLabel" destination="9II-YH-0HS" id="sMH-k7-a0U"/>
-                <outlet property="wrapperView" destination="lsh-uq-4dC" id="RzI-CR-Doa"/>
+                <outlet property="actionWrapperView" destination="Ro3-Xu-iSG" id="AP0-t5-mcx"/>
+                <outlet property="avatarImageView" destination="sNM-1M-Jqg" id="pFS-Fc-fBF"/>
+                <outlet property="durationLabel" destination="4fg-0k-s1J" id="pZK-EC-Eca"/>
+                <outlet property="playControlView" destination="7mD-3e-gDO" id="Iri-cl-Wfc"/>
+                <outlet property="playlistAddButton" destination="WCR-V1-DiD" id="TCk-h8-4f0"/>
+                <outlet property="postImageView" destination="nOI-gH-xRh" id="fAG-nq-MPz"/>
+                <outlet property="postLabel" destination="BHu-3l-8UV" id="cB1-BI-Z5N"/>
+                <outlet property="repostButton" destination="j8g-Kn-JEi" id="vqC-Kn-qDS"/>
+                <outlet property="socialTextView" destination="ikI-dv-gTR" id="RBP-9k-TxP"/>
+                <outlet property="starButton" destination="qxZ-ZJ-Tfa" id="OHf-3q-WnP"/>
+                <outlet property="upvoteCountLabel" destination="eob-nA-iQd" id="LFn-Eh-XmM"/>
+                <outlet property="upvoteImageView" destination="HIQ-DW-j8P" id="b4b-HP-KyP"/>
+                <outlet property="upvoteWrapperView" destination="97D-Gb-175" id="byu-GO-RzL"/>
+                <outlet property="userLabel" destination="SaT-XG-fv9" id="8hT-PT-qK9"/>
+                <outlet property="wrapperView" destination="J5g-7q-ZdH" id="hIW-MG-VjB"/>
             </connections>
         </tableViewCell>
     </objects>

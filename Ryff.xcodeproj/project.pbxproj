@@ -17,6 +17,7 @@
 		83082FE219B52256000AFACB /* sliderSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83082FE019B52256000AFACB /* sliderSmall@2x.png */; };
 		83082FE819B55DF4000AFACB /* RYTagFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83082FE719B55DF4000AFACB /* RYTagFeedViewController.m */; };
 		83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83082FEA19B5652D000AFACB /* RYSearchTypeTableViewCell.m */; };
+		8309553819CA5EAC000A41B3 /* RYRiffDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8309553719CA5EAC000A41B3 /* RYRiffDetailsCell.xib */; };
 		830BBCB318F9F54900A9C53F /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 830BBCAD18F9F54900A9C53F /* SSKeychain.strings */; };
 		830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB018F9F54900A9C53F /* SSKeychain.m */; };
 		830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 830BBCB218F9F54900A9C53F /* SSKeychainQuery.m */; };
@@ -127,7 +128,6 @@
 		83BF316719C9FFC200F5BE48 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF315619C9FFC200F5BE48 /* UIImageView+WebCache.m */; };
 		83BF316819C9FFC200F5BE48 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF315819C9FFC200F5BE48 /* UIView+WebCacheOperation.m */; };
 		83C354B319BBAD41000A5BD4 /* RYRiffStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */; };
-		83C354B619BBB480000A5BD4 /* RYPostImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */; };
 		83C354B919BC2AB3000A5BD4 /* availableStream.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C354B719BC2AB3000A5BD4 /* availableStream.png */; };
 		83C354BA19BC2AB3000A5BD4 /* availableStream@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C354B819BC2AB3000A5BD4 /* availableStream@2x.png */; };
 		83C354C219BCE548000A5BD4 /* UIImagePickerController+Orientations.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */; };
@@ -291,6 +291,7 @@
 		83082FE719B55DF4000AFACB /* RYTagFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagFeedViewController.m; sourceTree = "<group>"; };
 		83082FE919B5652D000AFACB /* RYSearchTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYSearchTypeTableViewCell.h; sourceTree = "<group>"; };
 		83082FEA19B5652D000AFACB /* RYSearchTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYSearchTypeTableViewCell.m; sourceTree = "<group>"; };
+		8309553719CA5EAC000A41B3 /* RYRiffDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffDetailsCell.xib; sourceTree = "<group>"; };
 		830BBCAE18F9F54900A9C53F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSKeychain.strings; sourceTree = "<group>"; };
 		830BBCAF18F9F54900A9C53F /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		830BBCB018F9F54900A9C53F /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
@@ -458,8 +459,6 @@
 		83BF315819C9FFC200F5BE48 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		83C354B119BBAD41000A5BD4 /* RYRiffStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamViewController.h; sourceTree = "<group>"; };
 		83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamViewController.m; sourceTree = "<group>"; };
-		83C354B419BBB480000A5BD4 /* RYPostImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPostImageTableViewCell.h; sourceTree = "<group>"; };
-		83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostImageTableViewCell.m; sourceTree = "<group>"; };
 		83C354B719BC2AB3000A5BD4 /* availableStream.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = availableStream.png; sourceTree = "<group>"; };
 		83C354B819BC2AB3000A5BD4 /* availableStream@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "availableStream@2x.png"; sourceTree = "<group>"; };
 		83C354C019BCE548000A5BD4 /* UIImagePickerController+Orientations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Orientations.h"; sourceTree = "<group>"; };
@@ -921,8 +920,6 @@
 			children = (
 				833FC1AC1989E406002491C8 /* RYRiffDetailsViewController.h */,
 				833FC1AD1989E406002491C8 /* RYRiffDetailsViewController.m */,
-				83C354B419BBB480000A5BD4 /* RYPostImageTableViewCell.h */,
-				83C354B519BBB480000A5BD4 /* RYPostImageTableViewCell.m */,
 				833FC1B01989E4B0002491C8 /* RYRiffDetailsTableViewCell.h */,
 				833FC1B11989E4B0002491C8 /* RYRiffDetailsTableViewCell.m */,
 			);
@@ -1431,6 +1428,7 @@
 			children = (
 				834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */,
 				832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */,
+				8309553719CA5EAC000A41B3 /* RYRiffDetailsCell.xib */,
 				834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */,
 				834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */,
 			);
@@ -1696,6 +1694,7 @@
 				8373680219A8344600D9559D /* notification.png in Resources */,
 				837367FE19A8344600D9559D /* location.png in Resources */,
 				83ED34EE1931851600FEB018 /* AppIcon57x57.png in Resources */,
+				8309553819CA5EAC000A41B3 /* RYRiffDetailsCell.xib in Resources */,
 				83ED34F41931851600FEB018 /* AppIcon76x76.png in Resources */,
 				83ED34F31931851600FEB018 /* AppIcon72x72@2x.png in Resources */,
 				8397133F1936DD1100913996 /* Main.storyboard in Resources */,
@@ -1791,7 +1790,6 @@
 				83CA12201995CD23002610E8 /* FLEXSetExplorerViewController.m in Sources */,
 				83CA12051995CD23002610E8 /* FLEXFieldEditorView.m in Sources */,
 				83CA120C1995CD23002610E8 /* FLEXManager.m in Sources */,
-				83C354B619BBB480000A5BD4 /* RYPostImageTableViewCell.m in Sources */,
 				83CA11FA1995CD23002610E8 /* FLEXArgumentInputFontView.m in Sources */,
 				83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */,
 				83E56B681953A0DA00EF054C /* RYMediaEditor.m in Sources */,

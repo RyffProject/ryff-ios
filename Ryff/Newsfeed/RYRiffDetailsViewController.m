@@ -12,7 +12,6 @@
 #import "RYDataManager.h"
 
 // Custom UI
-#import "RYPostImageTableViewCell.h"
 #import "RYRiffDetailsTableViewCell.h"
 #import "RYSocialTextView.h"
 
@@ -27,11 +26,12 @@
 #import "UIImageView+WebCache.h"
 
 #define kPostImageCellReuseID @"postImageCell"
-#define kRiffDetailsCellReuseID @"riffDetails"
+#define kRiffDetailsCellReuseID @"RiffDetailsCell"
+#define kRInfoInfoCellReuseID @"riffDetails"
 
 #define kPostImageRow (_post.imageURL && indexPath.row == 0)
 
-@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate, PostImageCellDelegate>
+@interface RYRiffDetailsViewController () <FamilyPostDelegate, RiffDetailsDelegate, SocialTextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -50,6 +50,8 @@
 {
     self.riffTableView = _tableView;
     [super viewDidLoad];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"RYRiffDetailsCell" bundle:NULL] forCellReuseIdentifier:kRiffDetailsCellReuseID];
     
     self.riffSection = 0;
     [[RYServices sharedInstance] getFamilyForPost:_post.postId delegate:self];
@@ -186,15 +188,9 @@
 {
     NSInteger numRows;
     if (section == self.riffSection)
-    {
         numRows = [super tableView:tableView numberOfRowsInSection:0];
-        if (_post.imageURL)
-            numRows++; // row for image
-    }
     else
-    {
         numRows = _childrenPosts.count;
-    }
     return numRows;
 }
 
@@ -203,13 +199,13 @@
     UITableViewCell *cell;
     if (indexPath.section == self.riffSection)
     {
-        if (kPostImageRow)
-            cell = [tableView dequeueReusableCellWithIdentifier:kPostImageCellReuseID];
+        if (_post.imageURL)
+            cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
         else
-            cell = [tableView dequeueReusableCellWithIdentifier:KRiffCellAvatarReuseID];
+            cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     else
-        cell = [tableView dequeueReusableCellWithIdentifier:kRiffDetailsCellReuseID];
+        cell = [tableView dequeueReusableCellWithIdentifier:kRInfoInfoCellReuseID];
     return cell;
 }
 
@@ -219,24 +215,19 @@
     
     if (indexPath.section == self.riffSection)
     {
-        if (kPostImageRow)
-            height = 230.0f;
-        else
-        {
-            // riff details -> calculate size with attributed text for post description
-            NSInteger postIdx                 = _post.imageURL ? (indexPath.row-1) : indexPath.row;
-            RYPost *post                      = self.feedItems[postIdx];
-            CGFloat widthMinusText            = kRiffCellWidthMinusTextAvatar;
-            
-            CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
-            NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
-            UITextView *sizingTextView        = [[UITextView alloc] init];
-            sizingTextView.textContainerInset = UIEdgeInsetsZero;
-            [sizingTextView setAttributedText:postString];
-            height = [sizingTextView sizeThatFits:boundingSize].height;
-            
-            height = MAX(height+kRiffCellHeightMinusText, kRiffCellMinimumHeight);
-        }
+        // riff details -> calculate size with attributed text for post description
+        RYPost *post                      = self.feedItems[indexPath.row];
+        CGFloat widthMinusText            = kRiffCellWidthMinusTextAvatar;
+        
+        CGSize boundingSize               = CGSizeMake(self.riffTableView.frame.size.width-widthMinusText, 20000);
+        NSAttributedString *postString    = [[NSAttributedString alloc] initWithString:post.content attributes:@{NSFontAttributeName: [UIFont fontWithName:kRegularFont size:18.0f]}];
+        UITextView *sizingTextView        = [[UITextView alloc] init];
+        sizingTextView.textContainerInset = UIEdgeInsetsZero;
+        [sizingTextView setAttributedText:postString];
+        height = [sizingTextView sizeThatFits:boundingSize].height;
+        
+        CGFloat heightMinusText = post.imageURL ? kRiffDetailsHeightMinusText : kRiffCellHeightMinusText;
+        height = height + heightMinusText;
     }
     else
     {
@@ -262,19 +253,11 @@
 {
     if (indexPath.section == self.riffSection)
     {
-        if (kPostImageRow)
-        {
-            [(RYPostImageTableViewCell *)cell configureWithImageURL:_post.imageURL numParents:_parentPosts.count delegate:self];
-        }
-        else
-        {
-            RYRiffCell *riffCell = (RYRiffCell*)cell;
-            NSInteger postIdx    = _post.imageURL ? (indexPath.row-1) : indexPath.row;
-            [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:postIdx inSection:0]];
-            [riffCell.socialTextView setUserInteractionEnabled:YES];
-            [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
-            [riffCell.socialTextView setSocialDelegate:self];
-        }
+        RYRiffCell *riffCell = (RYRiffCell*)cell;
+        [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        [riffCell.socialTextView setUserInteractionEnabled:YES];
+        [riffCell.socialTextView.textContainer setLineBreakMode:NSLineBreakByWordWrapping];
+        [riffCell.socialTextView setSocialDelegate:self];
     }
     else
     {
