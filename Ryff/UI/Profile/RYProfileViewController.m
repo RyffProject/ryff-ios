@@ -20,6 +20,7 @@
 #import "RYStyleSheet.h"
 #import "RYProfileInfoTableViewCell.h"
 #import "PXAlertView.h"
+#import "RYRefreshControl.h"
 
 // Categories
 #import "UIImage+Thumbnail.h"
@@ -47,6 +48,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
 @property (nonatomic, strong) UIPopoverController *notificationsPopover;
+@property (nonatomic, strong) RYRefreshControl *refreshControl;
 
 // Data
 @property (nonatomic, strong) RYUser *user;
@@ -66,6 +68,10 @@
     self.riffTableView = _tableView;
     [super viewDidLoad];
     
+    _refreshControl = [[RYRefreshControl alloc] initInScrollView:_tableView];
+    _refreshControl.tintColor = [RYStyleSheet postActionColor];
+    [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
+    
     self.riffSection = 1;
 }
 
@@ -75,6 +81,11 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithHexString:@"e9e9e9"]];
     [self configureForUser:_user];
+    if (_user)
+    {
+        [[RYServices sharedInstance] getUserWithId:@(_user.userId) orUsername:nil delegate:self];
+        [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
+    }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onKeyboardHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -98,22 +109,23 @@
 #pragma mark -
 #pragma mark - Configuration
 
+- (void) refreshContent:(RYRefreshControl *)refreshControl
+{
+    if (_user)
+    {
+        [[RYServices sharedInstance] getUserWithId:@(_user.userId) orUsername:nil delegate:self];
+        [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
+    }
+}
+
 - (void) configureForUser:(RYUser *)user
 {
     _user = user ? user : [RYRegistrationServices loggedInUser];
     
-    // prep activity
-    self.feedItems = nil;
-    
     if (_user)
-    {
-        [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
         [self setTitle:_user.username];
-    }
     else
-    {
         [self setTitle:@"Me"];
-    }
     
     [self.tableView reloadData];
 }
@@ -332,6 +344,7 @@
 // fetched user with username (from call sent by configureWithUsername:)
 - (void) retrievedUsers:(NSArray *)users
 {
+    [_refreshControl endRefreshing];
     RYUser *user = [users firstObject];
     [self configureForUser:user];
 }
@@ -349,6 +362,20 @@
 {
     NSLog(@"follow user failed: %@",reason);
     [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+#pragma mark -
+#pragma mark - UserUpdateDelegate
+
+- (void) updateSucceeded:(RYUser*)user
+{
+    [self configureForUser:user];
+    [self showCheckHUDWithTitle:@"Updated Profile" forDuration:1.0f];
+}
+
+- (void) updateFailed:(NSString *)reason
+{
+    [PXAlertView showAlertWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason]];
 }
 
 #pragma mark -
@@ -594,20 +621,6 @@
             }
         }
     } completion:nil];
-}
-
-#pragma mark -
-#pragma mark - UserUpdateDelegate
-
-- (void) updateSucceeded:(RYUser*)user
-{
-    [self configureForUser:user];
-    [self showCheckHUDWithTitle:@"Updated Profile" forDuration:1.0f];
-}
-
-- (void) updateFailed:(NSString *)reason
-{
-    [PXAlertView showAlertWithTitle:@"Update Failed" message:[NSString stringWithFormat:@"Could not update user properties: %@",reason]];
 }
 
 @end

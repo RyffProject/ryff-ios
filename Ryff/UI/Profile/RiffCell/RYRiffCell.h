@@ -11,7 +11,7 @@
 #define kRiffCellWidthMinusText isIpad ? 390.0f : 85.0f
 #define kRiffCellWidthMinusTextAvatar isIpad ? 255.0f : 85.0f
 #define kRiffCellWidthMinusTextNoImage isIpad ? 192.0f : 85.0f
-#define kRiffCellHeightMinusText 168.0f
+#define kRiffCellHeightMinusText 170.0f
 #define kRiffCellMinimumHeight 259.0f
 
 // Details
