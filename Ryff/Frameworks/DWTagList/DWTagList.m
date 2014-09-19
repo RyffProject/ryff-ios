@@ -105,6 +105,16 @@ static UIColor *kAddTagColor;
     [self setTags:[self.textArray arrayByAddingObject:kAddTagText]];
 }
 
+- (void) styleForRyff
+{
+    [self setAutomaticResize:YES];
+    [self setBorderWidth:0.0f];
+    [self setTagBackgroundColor:[UIColor clearColor]];
+    [self setTextShadowColor:[UIColor clearColor]];
+    [self setFont:[UIFont fontWithName:kRegularFont size:16.0f]];
+    [self setTextColor:[RYStyleSheet postActionColor]];
+}
+
 - (void)setTagBackgroundColor:(UIColor *)color
 {
     lblBackgroundColor = color;

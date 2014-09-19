@@ -47,6 +47,8 @@
 - (void)display;
 - (CGSize)fittedSize;
 
+- (void) styleForRyff;
+
 @end
 
 @interface DWTagView : UIView
