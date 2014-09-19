@@ -70,7 +70,7 @@
 		8322309D19B00D0200C60033 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309B19B00D0200C60033 /* PXAlertView.m */; };
 		832658A519BA416C0047D93B /* RYRiffCellAvatar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */; };
 		83302D8F19C7A20B008C5A54 /* RYTagListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */; };
-		83302D9219C7A830008C5A54 /* RYTagListCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D9119C7A830008C5A54 /* RYTagListCollectionTableViewCell.m */; };
+		83302D9219C7A830008C5A54 /* RYTagListCollectionContainerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D9119C7A830008C5A54 /* RYTagListCollectionContainerCell.m */; };
 		83302D9519C7A972008C5A54 /* RYDiscoverServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D9419C7A972008C5A54 /* RYDiscoverServices.m */; };
 		83360CD119B6A7EB00136FCB /* RYNotificationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD019B6A7EB00136FCB /* RYNotificationsTableViewController.m */; };
 		83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83360CD319B6A7FF00136FCB /* RYNotificationsTableViewCell.m */; };
@@ -362,8 +362,8 @@
 		832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellAvatar.xib; sourceTree = "<group>"; };
 		83302D8D19C7A20B008C5A54 /* RYTagListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagListViewController.h; sourceTree = "<group>"; };
 		83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListViewController.m; sourceTree = "<group>"; };
-		83302D9019C7A830008C5A54 /* RYTagListCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagListCollectionTableViewCell.h; sourceTree = "<group>"; };
-		83302D9119C7A830008C5A54 /* RYTagListCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListCollectionTableViewCell.m; sourceTree = "<group>"; };
+		83302D9019C7A830008C5A54 /* RYTagListCollectionContainerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagListCollectionContainerCell.h; sourceTree = "<group>"; };
+		83302D9119C7A830008C5A54 /* RYTagListCollectionContainerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListCollectionContainerCell.m; sourceTree = "<group>"; };
 		83302D9319C7A972008C5A54 /* RYDiscoverServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYDiscoverServices.h; sourceTree = "<group>"; };
 		83302D9419C7A972008C5A54 /* RYDiscoverServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYDiscoverServices.m; sourceTree = "<group>"; };
 		83360CCF19B6A7EB00136FCB /* RYNotificationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNotificationsTableViewController.h; sourceTree = "<group>"; };
@@ -868,8 +868,8 @@
 				83C8940A19C809E100127F68 /* RYTagList.m */,
 				83302D8D19C7A20B008C5A54 /* RYTagListViewController.h */,
 				83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */,
-				83302D9019C7A830008C5A54 /* RYTagListCollectionTableViewCell.h */,
-				83302D9119C7A830008C5A54 /* RYTagListCollectionTableViewCell.m */,
+				83302D9019C7A830008C5A54 /* RYTagListCollectionContainerCell.h */,
+				83302D9119C7A830008C5A54 /* RYTagListCollectionContainerCell.m */,
 				83E3017019C7BAEE0085F17F /* RYTagCollectionViewCell.h */,
 				83E3017119C7BAEE0085F17F /* RYTagCollectionViewCell.m */,
 			);
@@ -1836,7 +1836,7 @@
 				83360CDD19B6B84E00136FCB /* RYNotification.m in Sources */,
 				83CA12211995CD23002610E8 /* FLEXViewControllerExplorerViewController.m in Sources */,
 				8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */,
-				83302D9219C7A830008C5A54 /* RYTagListCollectionTableViewCell.m in Sources */,
+				83302D9219C7A830008C5A54 /* RYTagListCollectionContainerCell.m in Sources */,
 				831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */,
 				83CA12281995CD23002610E8 /* FLEXHierarchyTableViewController.m in Sources */,
 				83EB8BA619959F5C0007837D /* DWTagList.m in Sources */,

@@ -16,16 +16,16 @@
 #import "RYTagList.h"
 
 // Custom UI
-#import "RYTagListCollectionTableViewCell.h"
+#import "RYTagListCollectionContainerCell.h"
 
 // Associated View Controllers
 #import "RYTagFeedViewController.h"
 
-#define kTagListTableCellReuseID @"tagListCell"
+#define kTagListContainerCellReuseID @"tagListContainerCell"
 
-@interface RYTagListViewController () <TagListCollectionDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface RYTagListViewController () <TagListCollectionContainerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 // Data
 @property (nonatomic, strong) NSArray *tagLists;
@@ -46,16 +46,13 @@
     
     _tagLists = @[trending, suggested];
     
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = [UIColor clearColor];
-    
     self.view.backgroundColor = [RYStyleSheet profileBackgroundColor];
     
     self.title = @"Discover";
 }
 
 #pragma mark -
-#pragma mark - TagList Collection Delegate
+#pragma mark - TagListCollectionContainer Delegate
 
 - (void) tagSelected:(RYTag *)tag
 {
@@ -66,45 +63,46 @@
 }
 
 #pragma mark -
-#pragma mark - TableView Data Source
+#pragma mark - CollectionView Data Source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _tagLists.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kTagListTableCellReuseID];
+    RYTagList *tagList = _tagLists[indexPath.row];
+    RYTagListCollectionContainerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagListContainerCellReuseID forIndexPath:indexPath];
+    [cell configureWithTagList:tagList delegate:self];
     return cell;
 }
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
 #pragma mark -
-#pragma mark - TableView Delegate
+#pragma mark - CollectionView Flow Delegate
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section { return 0.01f; }
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section { return 0.01f; }
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 235.0f;
+    return CGSizeMake(self.view.frame.size.width, 235);
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    RYTagList *list = _tagLists[indexPath.row];
-    RYTagListCollectionTableViewCell *tagListCell = (RYTagListCollectionTableViewCell *)cell;
-    [tagListCell configureWithTagList:list delegate:self];
+    return UIEdgeInsetsZero;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return 20.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 20.0f;
 }
 
 @end

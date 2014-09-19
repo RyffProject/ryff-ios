@@ -1,12 +1,12 @@
 //
-//  RYTagListCollectionTableViewCell.m
+//  RYTagListCollectionContainerCell.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 9/15/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYTagListCollectionTableViewCell.h"
+#import "RYTagListCollectionContainerCell.h"
 
 // Custom UI
 #import "RYTagCollectionViewCell.h"
@@ -19,7 +19,7 @@
 
 #define kTagCellReuseID @"tagCell"
 
-@interface RYTagListCollectionTableViewCell () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface RYTagListCollectionContainerCell () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -29,9 +29,9 @@
 
 @end
 
-@implementation RYTagListCollectionTableViewCell
+@implementation RYTagListCollectionContainerCell
 
-- (void) configureWithTagList:(RYTagList *)tagList delegate:(id<TagListCollectionDelegate>)delegate
+- (void) configureWithTagList:(RYTagList *)tagList delegate:(id<TagListCollectionContainerDelegate>)delegate
 {
     _delegate         = delegate;
     _tagList          = tagList;
@@ -53,8 +53,6 @@
     
     _titleLabel.textColor = [RYStyleSheet darkTextColor];
     _titleLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
-    
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 #pragma mark -
