@@ -53,6 +53,8 @@
     
     _titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
     _titleLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 #pragma mark -

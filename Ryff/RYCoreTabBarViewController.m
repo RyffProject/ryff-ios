@@ -52,7 +52,7 @@
 
 - (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
-    if ([self.selectedViewController isKindOfClass:[RYNewsfeedContainerViewController class]] && ([item.title isEqualToString:@"Newsfeed"] || [item.title isEqualToString:@"Discover"]))
+    if ([self.selectedViewController isKindOfClass:[RYNewsfeedContainerViewController class]] && [self.selectedViewController.tabBarItem isEqual:item])
     {
         UINavigationController *navController = ((RYNewsfeedContainerViewController *)self.selectedViewController).newsfeedNav;
         if (navController)

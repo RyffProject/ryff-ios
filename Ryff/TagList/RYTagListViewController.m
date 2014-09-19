@@ -49,7 +49,7 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor clearColor];
     
-    self.view.backgroundColor = [RYStyleSheet lightBackgroundColor];
+    self.view.backgroundColor = [RYStyleSheet profileBackgroundColor];
     
     self.title = @"Discover";
 }
