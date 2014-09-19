@@ -43,6 +43,16 @@
     return [UIColor colorWithHexString:@"cee5ea"];
 }
 
++ (UIColor *)profileBackgroundColor
+{
+    return [UIColor colorWithHexString:@"f2f3ed"];
+}
+
++ (UIColor *)darkTextColor
+{
+    return [UIColor colorWithHexString:@"5c5c5c"];
+}
+
 #pragma mark -
 #pragma mark - Image Utilities
 

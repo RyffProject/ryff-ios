@@ -16,6 +16,8 @@
 + (UIColor *)tabBarColor;
 + (UIColor *)audioBackgroundColor;
 + (UIColor *)lightBackgroundColor;
++ (UIColor *)profileBackgroundColor;
++ (UIColor *)darkTextColor;
 
 + (UIImage *) image:(UIImage*)imageToRotate RotatedByRadians:(CGFloat)radians;
 + (void) styleProfileImageView:(UIView *)view;

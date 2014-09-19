@@ -170,9 +170,11 @@
     if (_post.postId == [audioManager currentlyPlayingPost].postId)
     {
         // currently playing
+        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
+        
         _playControlView.hidden             = NO;
         _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
-        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         [_playControlView setProgress:0.0f animated:NO];
         if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
             [_playControlView setCenterImage:nil];
@@ -184,9 +186,11 @@
     else if ([audioManager playlistContainsPost:_post.postId])
     {
         // in playlist or downloading
+        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
+        
         _playControlView.hidden             = NO;
         _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
-        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
         if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
         {
             // downloading
@@ -201,8 +205,10 @@
     }
     else
     {
-        _playControlView.hidden = YES;
+        [_playlistAddButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
         _playlistAddButton.tintColor = [RYStyleSheet availableActionColor];
+        
+        _playControlView.hidden = YES;
     }
 }
 

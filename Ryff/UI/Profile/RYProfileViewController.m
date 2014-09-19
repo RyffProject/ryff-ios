@@ -79,7 +79,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.tableView setBackgroundColor:[UIColor colorWithHexString:@"e9e9e9"]];
+    [self.tableView setBackgroundColor:[RYStyleSheet profileBackgroundColor]];
     [self configureForUser:_user];
     if (_user)
     {

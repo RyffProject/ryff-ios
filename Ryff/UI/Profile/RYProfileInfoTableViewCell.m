@@ -62,18 +62,21 @@
     [_nameField setFont:[UIFont fontWithName:kRegularFont size:28.0f]];
     [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_bioTextView setFont:kProfileInfoCellFont];
-    [_bioTextView setTintColor:[UIColor blackColor]];
+    _nameField.textColor = [RYStyleSheet darkTextColor];
+    _usernameLabel.textColor = [RYStyleSheet darkTextColor];
+    _bioTextView.textColor = [RYStyleSheet darkTextColor];
+    [_bioTextView setTintColor:[RYStyleSheet darkTextColor]];
     
     [_avatarImageView setBackgroundColor:[RYStyleSheet tabBarColor]];
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
     [_followersCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
-    [_followersCountLabel setTextColor:[RYStyleSheet tabBarColor]];
-    [_followersImageView setImage:[[UIImage imageNamed:@"stream"] colorImage:[RYStyleSheet tabBarColor]]];
+    [_followersCountLabel setTextColor:[RYStyleSheet darkTextColor]];
+    [_followersImageView setImage:[[UIImage imageNamed:@"stream"] colorImage:[RYStyleSheet darkTextColor]]];
     
     [_karmaCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
-    [_karmaCountLabel setTextColor:[RYStyleSheet tabBarColor]];
-    [_karmaImageView setImage:[[UIImage imageNamed:@"upvote"] colorImage:[RYStyleSheet tabBarColor]]];
+    [_karmaCountLabel setTextColor:[RYStyleSheet darkTextColor]];
+    [_karmaImageView setImage:[[UIImage imageNamed:@"upvote"] colorImage:[RYStyleSheet darkTextColor]]];
     
     UITapGestureRecognizer *avatarTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImageTapped:)];
     [_avatarImageView addGestureRecognizer:avatarTap];

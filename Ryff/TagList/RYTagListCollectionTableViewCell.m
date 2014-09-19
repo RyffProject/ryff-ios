@@ -51,7 +51,7 @@
     _collectionView.contentInset = UIEdgeInsetsMake(0, 17.5, 0, 17.5);
     _collectionView.backgroundColor = [UIColor clearColor];
     
-    _titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
+    _titleLabel.textColor = [RYStyleSheet darkTextColor];
     _titleLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;

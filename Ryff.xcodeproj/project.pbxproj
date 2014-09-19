@@ -109,6 +109,8 @@
 		837C98DB19A82439002A9B34 /* RYUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
+		8384965F19CBD62D0033EF92 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965D19CBD62D0033EF92 /* check.png */; };
+		8384966019CBD62D0033EF92 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965E19CBD62D0033EF92 /* check@2x.png */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
 		83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */; };
@@ -421,6 +423,8 @@
 		837CCD1619A3E12D00F95FCA /* RYTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTag.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
 		837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
+		8384965D19CBD62D0033EF92 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		8384965E19CBD62D0033EF92 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedContainerViewController.h; sourceTree = "<group>"; };
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
@@ -796,6 +800,8 @@
 		831A8890199EEEDD00C44CED /* 1.0 images */ = {
 			isa = PBXGroup;
 			children = (
+				8384965D19CBD62D0033EF92 /* check.png */,
+				8384965E19CBD62D0033EF92 /* check@2x.png */,
 				83C354B719BC2AB3000A5BD4 /* availableStream.png */,
 				83C354B819BC2AB3000A5BD4 /* availableStream@2x.png */,
 				835E482D19AE634B002A3AC2 /* options.png */,
@@ -1606,6 +1612,7 @@
 				831A88AE199EEEDD00C44CED /* play@2x.png in Resources */,
 				831A88BD199EEEDD00C44CED /* upvote.png in Resources */,
 				8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */,
+				8384965F19CBD62D0033EF92 /* check.png in Resources */,
 				831A88B3199EEEDD00C44CED /* remix.png in Resources */,
 				834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */,
 				830186021900B1CD00093EFA /* tabBar@2x.png in Resources */,
@@ -1622,6 +1629,7 @@
 				83ED34F11931851600FEB018 /* AppIcon60x60@2x.png in Resources */,
 				831A88AF199EEEDD00C44CED /* playing.png in Resources */,
 				83C6A5EE1960EB9600BB3D1A /* record.png in Resources */,
+				8384966019CBD62D0033EF92 /* check@2x.png in Resources */,
 				83C6A5F21960EC5200BB3D1A /* plus.png in Resources */,
 				837367FC19A8344600D9559D /* globe.png in Resources */,
 				8373680919A8344600D9559D /* userIcon@2x.png in Resources */,
