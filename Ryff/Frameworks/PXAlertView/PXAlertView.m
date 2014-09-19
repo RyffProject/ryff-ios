@@ -196,13 +196,14 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 
 - (CGRect)frameForOrientation:(UIInterfaceOrientation)orientation
 {
+    CGRect bounds = [UIScreen mainScreen].bounds;
+    CGFloat smallSide = MIN(bounds.size.width, bounds.size.height);
+    CGFloat bigSide = MAX(bounds.size.width, bounds.size.height);
     CGRect frame;
-    if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
-        CGRect bounds = [UIScreen mainScreen].bounds;
-        frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.height, bounds.size.width);
-    } else {
-        frame = [UIScreen mainScreen].bounds;
-    }
+    if (UIInterfaceOrientationIsLandscape(orientation))
+        frame = CGRectMake(0, 0, bigSide, smallSide);
+    else
+        frame = CGRectMake(0, 0, smallSide, bigSide);
     return frame;
 }
 
@@ -453,14 +454,9 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
     return UIInterfaceOrientationMaskAll;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    return YES;
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
-{
-    CGRect frame = [self frameForOrientation:interfaceOrientation];
+    CGRect frame = [self frameForOrientation:toInterfaceOrientation];
     self.backgroundView.frame = frame;
     self.alertView.center = [self centerWithFrame:frame];
 }
@@ -572,7 +568,7 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 {
     UIButton *button = [self genericButton];
     [button setTitle:title forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    button.titleLabel.font = [UIFont fontWithName:kRegularFont size:17.0f];
     
     if (!self.buttons || self.buttons.count == 0)
     {
@@ -607,7 +603,7 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 {
     NSInteger cancelIdx = [self addButtonWithTitle:title];
     self.cancelButton = self.buttons[cancelIdx];
-    self.cancelButton.titleLabel.font = [UIFont fontWithName:kRegularFont size:17.0f];
+    self.cancelButton.titleLabel.font = [UIFont fontWithName:kBoldFont size:17.0f];
     return [self.buttons count] - 1;
 }
 
