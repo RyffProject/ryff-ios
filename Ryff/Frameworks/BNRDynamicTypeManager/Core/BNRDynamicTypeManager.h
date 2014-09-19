@@ -15,6 +15,11 @@
  size.
  */
 
+typedef enum : NSUInteger {
+    FONT_REGULAR = 0,
+    FONT_BOLD,
+} FontStyle;
+
 @interface BNRDynamicTypeManager : NSObject
 
 ///--------------------
@@ -54,7 +59,7 @@
  @param label The UILabel to watch.
  @param style The text style to use. See "Text Styles" in `UIFontDescriptor Class Reference` for recognized values.
  */
-- (void)watchLabel:(UILabel *)label textStyle:(NSString *)style;
+- (void)watchLabel:(UILabel *)label textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle;
 
 /**
  Start watching a UIButton. We will set its font to `[UIFont preferredFontForTextStyle:style]`
@@ -65,7 +70,7 @@
  @param button The UIButton to watch.
  @param style The text style to use. See "Text Styles" in `UIFontDescriptor Class Reference` for recognized values.
  */
-- (void)watchButton:(UIButton *)button textStyle:(NSString *)style;
+- (void)watchButton:(UIButton *)button textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle;
 
 /**
  Start watching a UITextField. We will set its font to `[UIFont preferredFontForTextStyle:style]`
@@ -76,7 +81,7 @@
  @param textField The UITextField to watch.
  @param style The text style to use. See "Text Styles" in `UIFontDescriptor Class Reference` for recognized values.
  */
-- (void)watchTextField:(UITextField *)textField textStyle:(NSString *)style;
+- (void)watchTextField:(UITextField *)textField textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle;
 
 /**
  Start watching a UITextView. We will set its font to `[UIFont preferredFontForTextStyle:style]`
@@ -87,7 +92,7 @@
  @param textView The UITextView to watch.
  @param style The text style to use. See "Text Styles" in `UIFontDescriptor Class Reference` for recognized values.
  */
-- (void)watchTextView:(UITextView *)textView textStyle:(NSString *)style;
+- (void)watchTextView:(UITextView *)textView textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle;
 
 /**
  Starts watching an element that has a `UIFont` that can be set and
@@ -103,6 +108,6 @@
  @param style The text style to use for the element. See "Text Styles"
               in `UIFontDescriptor Class Reference` for recognized values.
  */
-- (void)watchElement:(id)element fontKeypath:(NSString *)fontKeypath textStyle:(NSString *)style;
+- (void)watchElement:(id)element fontKeypath:(NSString *)fontKeypath textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle;
 
 @end

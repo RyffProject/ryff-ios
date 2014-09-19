@@ -8,6 +8,9 @@
 
 #import "BNRDynamicTypeManager.h"
 
+// Custom UI
+#import "RYStyleSheet.h"
+
 static NSString * const BNRDynamicTypeManagerFontKeypathUILabel     = @"font";
 static NSString * const BNRDynamicTypeManagerFontKeypathUIButton    = @"titleLabel.font";
 static NSString * const BNRDynamicTypeManagerFontKeypathUITextField = @"font";
@@ -21,8 +24,9 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
 
 @property (nonatomic, copy) NSString *keypath;
 @property (nonatomic, copy) NSString *textStyle;
+@property (nonatomic, assign) FontStyle fontStyle;
 
-- (instancetype)initWithKeypath:(NSString *)keypath textStyle:(NSString *)textStyle;
+- (instancetype)initWithKeypath:(NSString *)keypath textStyle:(NSString *)textStyle fontStyle:(FontStyle)fontStyle;
 
 @end
 
@@ -64,7 +68,7 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
     });
 
     for (NSString *style in textStyles) {
-        if ([font isEqual:[UIFont preferredFontForTextStyle:style]]) {
+        if ([font isEqual:[RYStyleSheet customFontForTextStyle:style]]) {
             return style;
         }
     }
@@ -94,35 +98,39 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
 
 #pragma mark - Public API
 
-- (void)watchLabel:(UILabel *)label textStyle:(NSString *)style
+- (void)watchLabel:(UILabel *)label textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle
 {
-    [self watchElement:label fontKeypath:BNRDynamicTypeManagerFontKeypathUILabel textStyle:style];
+    [self watchElement:label fontKeypath:BNRDynamicTypeManagerFontKeypathUILabel textStyle:style fontStyle:fontStyle];
 }
 
-- (void)watchButton:(UIButton *)button textStyle:(NSString *)style
+- (void)watchButton:(UIButton *)button textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle
 {
-    [self watchElement:button fontKeypath:BNRDynamicTypeManagerFontKeypathUIButton textStyle:style];
+    [self watchElement:button fontKeypath:BNRDynamicTypeManagerFontKeypathUIButton textStyle:style fontStyle:fontStyle];
 }
 
-- (void)watchTextField:(UITextField *)textField textStyle:(NSString *)style
+- (void)watchTextField:(UITextField *)textField textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle
 {
-    [self watchElement:textField fontKeypath:BNRDynamicTypeManagerFontKeypathUITextField textStyle:style];
+    [self watchElement:textField fontKeypath:BNRDynamicTypeManagerFontKeypathUITextField textStyle:style fontStyle:fontStyle];
 }
 
-- (void)watchTextView:(UITextView *)textView textStyle:(NSString *)style
+- (void)watchTextView:(UITextView *)textView textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle
 {
-    [self watchElement:textView fontKeypath:BNRDynamicTypeManagerFontKeypathUITextView textStyle:style];
+    [self watchElement:textView fontKeypath:BNRDynamicTypeManagerFontKeypathUITextView textStyle:style fontStyle:fontStyle];
 }
 
-- (void)watchElement:(id)element fontKeypath:(NSString *)fontKeypath textStyle:(NSString *)style
+- (void)watchElement:(id)element fontKeypath:(NSString *)fontKeypath textStyle:(NSString *)style fontStyle:(FontStyle)fontStyle
 {
     if (!style) {
         style = [BNRDynamicTypeManager textStyleMatchingFont:[element valueForKeyPath:fontKeypath]];
     }
     if (fontKeypath && style) {
-        [element setValue:[UIFont preferredFontForTextStyle:style] forKeyPath:fontKeypath];
+        
+        if (fontStyle == FONT_REGULAR)
+            [element setValue:[RYStyleSheet customFontForTextStyle:style] forKeyPath:fontKeypath];
+        else if (fontStyle == FONT_BOLD)
+            [element setValue:[RYStyleSheet boldCustomFontForTextStyle:style] forKey:fontKeypath];
 
-        BNRDynamicTypeTuple *tuple = [[BNRDynamicTypeTuple alloc] initWithKeypath:fontKeypath textStyle:style];
+        BNRDynamicTypeTuple *tuple = [[BNRDynamicTypeTuple alloc] initWithKeypath:fontKeypath textStyle:style fontStyle:fontStyle];
         [self.elementToTupleTable setObject:tuple
                                      forKey:element];
     }
@@ -136,7 +144,10 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
 
     for (id element in elementToTupleTable) {
         BNRDynamicTypeTuple *tuple = [elementToTupleTable objectForKey:element];
-        [element setValue:[UIFont preferredFontForTextStyle:tuple.textStyle] forKeyPath:tuple.keypath];
+        if (tuple.fontStyle == FONT_REGULAR)
+            [element setValue:[RYStyleSheet customFontForTextStyle:tuple.textStyle] forKeyPath:tuple.keypath];
+        else if (tuple.fontStyle == FONT_BOLD)
+            [element setValue:[RYStyleSheet boldCustomFontForTextStyle:tuple.textStyle] forKey:tuple.keypath];
     }
 }
 
@@ -146,12 +157,13 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
 
 @implementation BNRDynamicTypeTuple
 
-- (instancetype)initWithKeypath:(NSString *)keypath textStyle:(NSString *)textStyle
+- (instancetype)initWithKeypath:(NSString *)keypath textStyle:(NSString *)textStyle fontStyle:(FontStyle)fontStyle
 {
     self = [super init];
     if (self) {
         self.keypath = keypath;
         self.textStyle = textStyle;
+        self.fontStyle = fontStyle;
     }
     return self;
 }

@@ -106,11 +106,8 @@
 		8373680819A8344600D9559D /* userIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 837367FA19A8344600D9559D /* userIcon.png */; };
 		8373680919A8344600D9559D /* userIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837367FB19A8344600D9559D /* userIcon@2x.png */; };
 		837BA0E319CCAED8002AA13E /* RYUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */; };
-		837BA0F319CCC619002AA13E /* BNRDynamicTypeManagedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0E919CCC619002AA13E /* BNRDynamicTypeManagedButton.m */; };
-		837BA0F419CCC619002AA13E /* BNRDynamicTypeManagedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0EB19CCC619002AA13E /* BNRDynamicTypeManagedLabel.m */; };
-		837BA0F519CCC619002AA13E /* BNRDynamicTypeManagedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0ED19CCC619002AA13E /* BNRDynamicTypeManagedTextField.m */; };
-		837BA0F619CCC619002AA13E /* BNRDynamicTypeManagedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0EF19CCC619002AA13E /* BNRDynamicTypeManagedTextView.m */; };
 		837BA0F719CCC619002AA13E /* BNRDynamicTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */; };
+		837BA0FA19CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */; };
 		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
@@ -422,16 +419,10 @@
 		837367FB19A8344600D9559D /* userIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userIcon@2x.png"; sourceTree = "<group>"; };
 		837BA0E119CCAED8002AA13E /* RYUserListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListCollectionViewCell.h; sourceTree = "<group>"; };
 		837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListCollectionViewCell.m; sourceTree = "<group>"; };
-		837BA0E819CCC619002AA13E /* BNRDynamicTypeManagedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDynamicTypeManagedButton.h; sourceTree = "<group>"; };
-		837BA0E919CCC619002AA13E /* BNRDynamicTypeManagedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManagedButton.m; sourceTree = "<group>"; };
-		837BA0EA19CCC619002AA13E /* BNRDynamicTypeManagedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDynamicTypeManagedLabel.h; sourceTree = "<group>"; };
-		837BA0EB19CCC619002AA13E /* BNRDynamicTypeManagedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManagedLabel.m; sourceTree = "<group>"; };
-		837BA0EC19CCC619002AA13E /* BNRDynamicTypeManagedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDynamicTypeManagedTextField.h; sourceTree = "<group>"; };
-		837BA0ED19CCC619002AA13E /* BNRDynamicTypeManagedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManagedTextField.m; sourceTree = "<group>"; };
-		837BA0EE19CCC619002AA13E /* BNRDynamicTypeManagedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDynamicTypeManagedTextView.h; sourceTree = "<group>"; };
-		837BA0EF19CCC619002AA13E /* BNRDynamicTypeManagedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManagedTextView.m; sourceTree = "<group>"; };
 		837BA0F119CCC619002AA13E /* BNRDynamicTypeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDynamicTypeManager.h; sourceTree = "<group>"; };
 		837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManager.m; sourceTree = "<group>"; };
+		837BA0F819CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+RYCustomFont.h"; sourceTree = "<group>"; };
+		837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+RYCustomFont.m"; sourceTree = "<group>"; };
 		837C98D619A82411002A9B34 /* RYUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListViewController.h; sourceTree = "<group>"; };
 		837C98D719A82411002A9B34 /* RYUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListViewController.m; sourceTree = "<group>"; };
 		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
@@ -974,6 +965,8 @@
 				836F484119A04BAB00E948BE /* UIViewController+Extras.m */,
 				83C354C019BCE548000A5BD4 /* UIImagePickerController+Orientations.h */,
 				83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */,
+				837BA0F819CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.h */,
+				837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */,
 			);
 			name = Categories;
 			path = Ryff/Categories;
@@ -982,25 +975,9 @@
 		837BA0E619CCC619002AA13E /* BNRDynamicTypeManager */ = {
 			isa = PBXGroup;
 			children = (
-				837BA0E719CCC619002AA13E /* Controls */,
 				837BA0F019CCC619002AA13E /* Core */,
 			);
 			path = BNRDynamicTypeManager;
-			sourceTree = "<group>";
-		};
-		837BA0E719CCC619002AA13E /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				837BA0E819CCC619002AA13E /* BNRDynamicTypeManagedButton.h */,
-				837BA0E919CCC619002AA13E /* BNRDynamicTypeManagedButton.m */,
-				837BA0EA19CCC619002AA13E /* BNRDynamicTypeManagedLabel.h */,
-				837BA0EB19CCC619002AA13E /* BNRDynamicTypeManagedLabel.m */,
-				837BA0EC19CCC619002AA13E /* BNRDynamicTypeManagedTextField.h */,
-				837BA0ED19CCC619002AA13E /* BNRDynamicTypeManagedTextField.m */,
-				837BA0EE19CCC619002AA13E /* BNRDynamicTypeManagedTextView.h */,
-				837BA0EF19CCC619002AA13E /* BNRDynamicTypeManagedTextView.m */,
-			);
-			path = Controls;
 			sourceTree = "<group>";
 		};
 		837BA0F019CCC619002AA13E /* Core */ = {
@@ -1781,7 +1758,6 @@
 				83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */,
 				83BF315D19C9FFC200F5BE48 /* SDWebImageDecoder.m in Sources */,
 				83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */,
-				837BA0F319CCC619002AA13E /* BNRDynamicTypeManagedButton.m in Sources */,
 				83CCC919197EFCBF00FD1B4B /* UIAlertView+AFNetworking.m in Sources */,
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				836F484519A04BAB00E948BE /* UIView+Styling.m in Sources */,
@@ -1833,7 +1809,6 @@
 				83360CDA19B6B76500136FCB /* RYNotificationsManager.m in Sources */,
 				83E3017219C7BAEE0085F17F /* RYTagCollectionViewCell.m in Sources */,
 				836F484619A04BAB00E948BE /* UIViewController+Extras.m in Sources */,
-				837BA0F619CCC619002AA13E /* BNRDynamicTypeManagedTextView.m in Sources */,
 				83082FE819B55DF4000AFACB /* RYTagFeedViewController.m in Sources */,
 				83BF316819C9FFC200F5BE48 /* UIView+WebCacheOperation.m in Sources */,
 				83BF315B19C9FFC200F5BE48 /* SDImageCache.m in Sources */,
@@ -1871,6 +1846,7 @@
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
 				83CA12101995CD23002610E8 /* FLEXFileBrowserSearchOperation.m in Sources */,
 				83BF316019C9FFC200F5BE48 /* SDWebImageManager.m in Sources */,
+				837BA0FA19CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m in Sources */,
 				83CCC913197EFCBF00FD1B4B /* AFURLConnectionOperation.m in Sources */,
 				83CA123019981087002610E8 /* RYAudioDeckManager.m in Sources */,
 				83CA12151995CD23002610E8 /* FLEXLiveObjectsTableViewController.m in Sources */,
@@ -1908,14 +1884,12 @@
 				83CA12291995CD23002610E8 /* FLEXImagePreviewViewController.m in Sources */,
 				836F484419A04BAB00E948BE /* UIImage+Thumbnail.m in Sources */,
 				830BBCC818FA0A5800A9C53F /* RYLocationServices.m in Sources */,
-				837BA0F419CCC619002AA13E /* BNRDynamicTypeManagedLabel.m in Sources */,
 				83CA12081995CD23002610E8 /* FLEXMethodCallingViewController.m in Sources */,
 				83CCC91D197EFCBF00FD1B4B /* UIRefreshControl+AFNetworking.m in Sources */,
 				83FCD1BB18F9413400A493F0 /* RYPost.m in Sources */,
 				83CCC916197EFCBF00FD1B4B /* AFURLSessionManager.m in Sources */,
 				83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */,
 				83CA121E1995CD23002610E8 /* FLEXObjectExplorerFactory.m in Sources */,
-				837BA0F519CCC619002AA13E /* BNRDynamicTypeManagedTextField.m in Sources */,
 				83CA12171995CD23002610E8 /* FLEXArrayExplorerViewController.m in Sources */,
 				83CA121D1995CD23002610E8 /* FLEXImageExplorerViewController.m in Sources */,
 				83BF316119C9FFC200F5BE48 /* SDWebImagePrefetcher.m in Sources */,

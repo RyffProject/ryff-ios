@@ -14,7 +14,6 @@
 #define kProfileInfoCellWidthMinusText isIpad ? 171.0f : 258.0f
 #define kProfileInfoCellHeightMinusText 412.0f
 #define kProfileInfoCellMinimumHeight 402.0f
-#define kProfileInfoCellFont [UIFont fontWithName:kRegularFont size:18.0f]
 
 @class RYUser;
 

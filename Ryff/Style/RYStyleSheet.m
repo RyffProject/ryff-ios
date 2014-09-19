@@ -10,8 +10,12 @@
 
 // Categories
 #import "UIColor+Hex.h"
+#import "UIFontDescriptor+RYCustomFont.h"
 
 @implementation RYStyleSheet
+
+#pragma mark -
+#pragma mark - Colors
 
 + (UIColor *)audioActionColor
 {
@@ -51,6 +55,19 @@
 + (UIColor *)darkTextColor
 {
     return [UIColor colorWithHexString:@"5c5c5c"];
+}
+
+#pragma mark -
+#pragma mark - Fonts
+
++ (UIFont *)customFontForTextStyle:(NSString *)textStyle
+{
+    return [UIFont fontWithDescriptor:[UIFontDescriptor preferredCustomFontDescriptorWithTextStyle:textStyle] size: 0];
+}
+
++ (UIFont *)boldCustomFontForTextStyle:(NSString *)textStyle
+{
+    return [UIFont fontWithDescriptor:[UIFontDescriptor preferredCustomBoldFontDescriptorWithTextStyle:textStyle] size: 0];
 }
 
 #pragma mark -

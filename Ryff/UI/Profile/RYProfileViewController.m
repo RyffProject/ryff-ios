@@ -436,7 +436,7 @@
                 CGFloat widthMinusText = kProfileInfoCellWidthMinusText;
                 
                 UITextView *sizingView = [[UITextView alloc] init];
-                [sizingView setFont:kProfileInfoCellFont];
+                [sizingView setFont:[RYStyleSheet customFontForTextStyle:UIFontTextStyleBody]];
                 [sizingView setText:_user.bio];
                 CGSize resultSize = [sizingView sizeThatFits:CGSizeMake(tableView.frame.size.width-widthMinusText, 20000)];
                 height = resultSize.height + kProfileInfoCellHeightMinusText;

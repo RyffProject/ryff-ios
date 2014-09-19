@@ -18,6 +18,7 @@
 // Frameworks
 #import "UIImageView+WebCache.h"
 #import "DWTagList.h"
+#import "BNRDynamicTypeManager.h"
 
 // Categories
 #import "UIViewController+Extras.h"
@@ -59,9 +60,6 @@
 {
     [super awakeFromNib];
     
-    [_nameField setFont:[UIFont fontWithName:kRegularFont size:28.0f]];
-    [_usernameLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
-    [_bioTextView setFont:kProfileInfoCellFont];
     _nameField.textColor = [RYStyleSheet darkTextColor];
     _usernameLabel.textColor = [RYStyleSheet darkTextColor];
     _bioTextView.textColor = [RYStyleSheet darkTextColor];
@@ -70,11 +68,9 @@
     [_avatarImageView setBackgroundColor:[RYStyleSheet tabBarColor]];
     [RYStyleSheet styleProfileImageView:_avatarImageView];
     
-    [_followersCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
     [_followersCountLabel setTextColor:[RYStyleSheet darkTextColor]];
     [_followersImageView setImage:[[UIImage imageNamed:@"stream"] colorImage:[RYStyleSheet darkTextColor]]];
     
-    [_karmaCountLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
     [_karmaCountLabel setTextColor:[RYStyleSheet darkTextColor]];
     [_karmaImageView setImage:[[UIImage imageNamed:@"upvote"] colorImage:[RYStyleSheet darkTextColor]]];
     
@@ -89,6 +85,13 @@
     
     _tagListView.delegate = self;
     [_tagListView styleForRyff];
+    
+    // Dynamic fonts
+    [[BNRDynamicTypeManager sharedInstance] watchTextField:_nameField textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
+    [[BNRDynamicTypeManager sharedInstance] watchLabel:_usernameLabel textStyle:UIFontTextStyleSubheadline fontStyle:FONT_REGULAR];
+    [[BNRDynamicTypeManager sharedInstance] watchTextView:_bioTextView textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
+    [[BNRDynamicTypeManager sharedInstance] watchLabel:_followersCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
+    [[BNRDynamicTypeManager sharedInstance] watchLabel:_karmaCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
 }
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView
