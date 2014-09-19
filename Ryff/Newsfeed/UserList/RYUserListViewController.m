@@ -15,16 +15,16 @@
 #import "RYUser.h"
 
 // Custom UI
-#import "RYUserListTableViewCell.h"
+#import "RYUserListCollectionViewCell.h"
 
 // Associated ViewControllers
 #import "RYProfileViewController.h"
 
 #define kUserListCellReuseID @"userListCell"
 
-@interface RYUserListViewController () <UsersDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface RYUserListViewController () <UsersDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 // Data
 @property (nonatomic, strong) NSArray *users;
@@ -39,8 +39,6 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
-    [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 #pragma mark - Configuration
@@ -53,7 +51,7 @@
         [self setTitle:title];
     
     if (self.view.window && self.isViewLoaded)
-        [_tableView reloadData];
+        [_collectionView reloadData];
 }
 
 - (void) configureWithFollowersForUser:(RYUser *)user
@@ -72,38 +70,35 @@
     _users = users;
     
     if (self.view.window && self.isViewLoaded)
-        [_tableView reloadData];
+        [_collectionView reloadData];
 }
 
 #pragma mark -
-#pragma mark - TableView Data Source
+#pragma mark - CollectionView Data Source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _users.count;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0f;
+    RYUser *user = _users[indexPath.row];
+    RYUserListCollectionViewCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kUserListCellReuseID forIndexPath:indexPath];
+    [userCell configureWithUser:user];
+    return userCell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [tableView dequeueReusableCellWithIdentifier:kUserListCellReuseID];
+    return 1;
 }
 
-#pragma mark - TableView Delegate
+#pragma mark -
+#pragma mark - CollectionView Delegate
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     RYUser *user = _users[indexPath.row];
     
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
@@ -115,10 +110,28 @@
         [self presentViewController:profileVC animated:YES completion:nil];
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark -
+#pragma mark - CollectionView Flow Delegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RYUser *user = _users[indexPath.row];
-    [(RYUserListTableViewCell*)cell configureForUser:user];
+    return [RYUserListCollectionViewCell preferredSizeWithAvailableSize:CGSizeMake(self.view.frame.size.width/2 - 20, 20000) forUser:user];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsZero;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 20.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 20.0f;
 }
 
 @end

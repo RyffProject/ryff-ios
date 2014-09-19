@@ -105,8 +105,8 @@
 		8373680719A8344600D9559D /* userDelete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837367F919A8344600D9559D /* userDelete@2x.png */; };
 		8373680819A8344600D9559D /* userIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 837367FA19A8344600D9559D /* userIcon.png */; };
 		8373680919A8344600D9559D /* userIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 837367FB19A8344600D9559D /* userIcon@2x.png */; };
+		837BA0E319CCAED8002AA13E /* RYUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */; };
 		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
-		837C98DB19A82439002A9B34 /* RYUserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
 		8384965F19CBD62D0033EF92 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965D19CBD62D0033EF92 /* check.png */; };
@@ -415,10 +415,10 @@
 		837367F919A8344600D9559D /* userDelete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userDelete@2x.png"; sourceTree = "<group>"; };
 		837367FA19A8344600D9559D /* userIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userIcon.png; sourceTree = "<group>"; };
 		837367FB19A8344600D9559D /* userIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userIcon@2x.png"; sourceTree = "<group>"; };
+		837BA0E119CCAED8002AA13E /* RYUserListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListCollectionViewCell.h; sourceTree = "<group>"; };
+		837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListCollectionViewCell.m; sourceTree = "<group>"; };
 		837C98D619A82411002A9B34 /* RYUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListViewController.h; sourceTree = "<group>"; };
 		837C98D719A82411002A9B34 /* RYUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListViewController.m; sourceTree = "<group>"; };
-		837C98D919A82439002A9B34 /* RYUserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListTableViewCell.h; sourceTree = "<group>"; };
-		837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListTableViewCell.m; sourceTree = "<group>"; };
 		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
 		837CCD1619A3E12D00F95FCA /* RYTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTag.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -968,8 +968,8 @@
 			children = (
 				837C98D619A82411002A9B34 /* RYUserListViewController.h */,
 				837C98D719A82411002A9B34 /* RYUserListViewController.m */,
-				837C98D919A82439002A9B34 /* RYUserListTableViewCell.h */,
-				837C98DA19A82439002A9B34 /* RYUserListTableViewCell.m */,
+				837BA0E119CCAED8002AA13E /* RYUserListCollectionViewCell.h */,
+				837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */,
 			);
 			path = UserList;
 			sourceTree = "<group>";
@@ -1831,7 +1831,6 @@
 				83CA12011995CD23002610E8 /* FLEXArgumentInputTextView.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				83BF316519C9FFC200F5BE48 /* UIImage+WebP.m in Sources */,
-				837C98DB19A82439002A9B34 /* RYUserListTableViewCell.m in Sources */,
 				83CA12221995CD23002610E8 /* FLEXViewExplorerViewController.m in Sources */,
 				83360CDD19B6B84E00136FCB /* RYNotification.m in Sources */,
 				83CA12211995CD23002610E8 /* FLEXViewControllerExplorerViewController.m in Sources */,
@@ -1849,6 +1848,7 @@
 				837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */,
 				83BF315A19C9FFC200F5BE48 /* NSData+ImageContentType.m in Sources */,
 				83302D8F19C7A20B008C5A54 /* RYTagListViewController.m in Sources */,
+				837BA0E319CCAED8002AA13E /* RYUserListCollectionViewCell.m in Sources */,
 				83CCC912197EFCBF00FD1B4B /* AFSecurityPolicy.m in Sources */,
 				83CA122D19981070002610E8 /* RYAudioDeckViewController.m in Sources */,
 				83CA12021995CD23002610E8 /* FLEXArgumentInputView.m in Sources */,
