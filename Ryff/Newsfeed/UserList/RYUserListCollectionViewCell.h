@@ -10,9 +10,16 @@
 
 @class RYUser;
 
+@protocol UserListCellDelegate <NSObject>
+- (void)followUserTapped:(RYUser *)user;
+- (void)tagSelected:(NSString *)tag;
+@end
+
 @interface RYUserListCollectionViewCell : UICollectionViewCell
 
-- (void) configureWithUser:(RYUser *)user;
+@property (nonatomic, weak) id<UserListCellDelegate> delegate;
+
+- (void) configureWithUser:(RYUser *)user delegate:(id<UserListCellDelegate>)delegate;
 
 + (CGSize) preferredSizeWithAvailableSize:(CGSize)boundingSize forUser:(RYUser *)user;
 

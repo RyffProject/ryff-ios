@@ -109,6 +109,7 @@
 		837BA0F719CCC619002AA13E /* BNRDynamicTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */; };
 		837BA0FA19CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */; };
 		837BA10219CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA10119CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m */; };
+		837BA10A19CD12A8002AA13E /* UIViewController+RYSocialTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA10919CD12A8002AA13E /* UIViewController+RYSocialTransitions.m */; };
 		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
@@ -426,6 +427,8 @@
 		837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+RYCustomFont.m"; sourceTree = "<group>"; };
 		837BA10019CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
 		837BA10119CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
+		837BA10819CD12A8002AA13E /* UIViewController+RYSocialTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RYSocialTransitions.h"; sourceTree = "<group>"; };
+		837BA10919CD12A8002AA13E /* UIViewController+RYSocialTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RYSocialTransitions.m"; sourceTree = "<group>"; };
 		837C98D619A82411002A9B34 /* RYUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListViewController.h; sourceTree = "<group>"; };
 		837C98D719A82411002A9B34 /* RYUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListViewController.m; sourceTree = "<group>"; };
 		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
@@ -971,6 +974,8 @@
 				83C354C119BCE548000A5BD4 /* UIImagePickerController+Orientations.m */,
 				837BA0F819CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.h */,
 				837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */,
+				837BA10819CD12A8002AA13E /* UIViewController+RYSocialTransitions.h */,
+				837BA10919CD12A8002AA13E /* UIViewController+RYSocialTransitions.m */,
 			);
 			name = Categories;
 			path = Ryff/Categories;
@@ -1806,6 +1811,7 @@
 				83CA120D1995CD23002610E8 /* FLEXToolbarItem.m in Sources */,
 				830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */,
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
+				837BA10A19CD12A8002AA13E /* UIViewController+RYSocialTransitions.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
 				83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */,
 				8322309D19B00D0200C60033 /* PXAlertView.m in Sources */,

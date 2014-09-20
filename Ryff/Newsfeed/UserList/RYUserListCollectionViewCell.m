@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
+#import "RYRegistrationServices.h"
 
 // Data Objects
 #import "RYUser.h"
@@ -22,7 +23,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIImage+Color.h"
 
-@interface RYUserListCollectionViewCell ()
+@interface RYUserListCollectionViewCell () <DWTagListDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *avatarWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -38,12 +39,18 @@
 @property (weak, nonatomic) IBOutlet UITextView *bioTextView;
 @property (weak, nonatomic) IBOutlet DWTagList *tagListView;
 
+// Data
+@property (nonatomic, strong) RYUser *user;
+
 @end
 
 @implementation RYUserListCollectionViewCell
 
-- (void) configureWithUser:(RYUser *)user
+- (void) configureWithUser:(RYUser *)user delegate:(id<UserListCellDelegate>)delegate
 {
+    _user = user;
+    _delegate = delegate;
+    
     if (user.avatarURL)
         [_avatarImageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     else
@@ -55,7 +62,24 @@
     _upvoteCountLabel.text = [NSString stringWithFormat:@"%ld",(long)user.karma];
     _followersCountLabel.text = [NSString stringWithFormat:@"%ld",(long)user.numFollowers];
     
-    if (user.isFollowing)
+    [self styleFollowing:user.isFollowing];
+    
+    _bioTextView.text = user.bio;
+    [_tagListView setTags:[RYTag getTagTags:user.tags]];
+}
+
+- (void) styleFollowing:(BOOL)following
+{
+    if (_user.userId == [RYRegistrationServices loggedInUser].userId)
+    {
+        // current user
+        _followButton.hidden = YES;
+        return;
+    }
+    else
+        _followButton.hidden = NO;
+    
+    if (following)
     {
         [_followButton setImage:[UIImage imageNamed:@"stream"] forState:UIControlStateNormal];
         _followButton.tintColor = [RYStyleSheet postActionColor];
@@ -65,9 +89,6 @@
         [_followButton setImage:[UIImage imageNamed:@"availableStream"] forState:UIControlStateNormal];
         _followButton.tintColor = [RYStyleSheet availableActionColor];
     }
-    
-    _bioTextView.text = user.bio;
-    [_tagListView setTags:[RYTag getTagTags:user.tags]];
 }
 
 #pragma mark -
@@ -87,8 +108,9 @@
     _upvoteCountLabel.font = _followersCountLabel.font = [UIFont fontWithName:kRegularFont size:20.0f];
     _userLabel.font = [UIFont fontWithName:kRegularFont size:24.0f];
     
-    _tagListView.userInteractionEnabled = NO;
+    _bioTextView.userInteractionEnabled = NO;
     [_tagListView styleForRyff];
+    _tagListView.tagDelegate = self;
     
     self.backgroundColor = [RYStyleSheet profileBackgroundColor];
     self.layer.cornerRadius = 10.0f;
@@ -114,7 +136,19 @@
 
 - (IBAction)followButtonHit:(id)sender
 {
+    if (_delegate && [_delegate respondsToSelector:@selector(followUserTapped:)])
+        [_delegate followUserTapped:_user];
     
+    [self styleFollowing:!_user.isFollowing];
+}
+
+#pragma mark -
+#pragma mark - TagList Delegate
+
+- (void) selectedTag:(NSString *)tagName
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(tagSelected:)])
+        [_delegate tagSelected:tagName];
 }
 
 @end

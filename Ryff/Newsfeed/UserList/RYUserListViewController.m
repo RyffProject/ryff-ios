@@ -18,12 +18,12 @@
 #import "RYUserListCollectionViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
-// Associated ViewControllers
-#import "RYProfileViewController.h"
+// Categories
+#import "UIViewController+RYSocialTransitions.h"
 
 #define kUserListCellReuseID @"userListCell"
 
-@interface RYUserListViewController () <UsersDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
+@interface RYUserListViewController () <UsersDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, UserListCellDelegate, FollowDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -51,6 +51,11 @@
     _collectionView.collectionViewLayout = waterfall;
 }
 
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [_collectionView.collectionViewLayout invalidateLayout];
+}
+
 #pragma mark - Configuration
 
 - (void) configureForUsers:(NSArray *)users title:(NSString *)title
@@ -66,10 +71,22 @@
 
 - (void) configureWithFollowersForUser:(RYUser *)user
 {
-    NSString *username = user.nickname.length > 0 ? user.nickname : user.username;
-    [self setTitle:[NSString stringWithFormat:@"Following %@",username]];
+    [self setTitle:@"Followers"];
     
     [[RYServices sharedInstance] getFollowersForUser:user.userId page:0 delegate:self];
+}
+
+#pragma mark -
+#pragma mark - UserListCell Delegate
+
+- (void) followUserTapped:(RYUser *)user
+{
+    [[RYServices sharedInstance] follow:!user.isFollowing user:user.userId forDelegate:self];
+}
+
+- (void) tagSelected:(NSString *)tag
+{
+    [self pushTagFeedForTags:@[tag]];
 }
 
 #pragma mark -
@@ -84,6 +101,24 @@
 }
 
 #pragma mark -
+#pragma mark - Follow Delegate
+
+- (void) follow:(BOOL)following confirmedForUser:(RYUser *)user
+{
+    for (NSInteger userIdx = 0; userIdx < _users.count; userIdx++)
+    {
+        RYUser *oldUser = _users[userIdx];
+        if (oldUser.userId == user.userId)
+        {
+            NSMutableArray *mutableUsers = [_users mutableCopy];
+            [mutableUsers replaceObjectAtIndex:userIdx withObject:user];
+            _users = mutableUsers;
+            [_collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:userIdx inSection:0]]];
+        }
+    }
+}
+
+#pragma mark -
 #pragma mark - CollectionView Data Source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -95,7 +130,7 @@
 {
     RYUser *user = _users[indexPath.row];
     RYUserListCollectionViewCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier:kUserListCellReuseID forIndexPath:indexPath];
-    [userCell configureWithUser:user];
+    [userCell configureWithUser:user delegate:self];
     return userCell;
 }
 
@@ -110,14 +145,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RYUser *user = _users[indexPath.row];
-    
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-    [profileVC configureForUser:user];
-    if (self.navigationController)
-        [self.navigationController pushViewController:profileVC animated:YES];
-    else
-        [self presentViewController:profileVC animated:YES completion:nil];
+    [self pushUserProfileForUser:user];
 }
 
 #pragma mark -

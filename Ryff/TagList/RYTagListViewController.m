@@ -10,6 +10,7 @@
 
 // Data Managers
 #import "RYDiscoverServices.h"
+#import "RYStyleSheet.h"
 
 // Data Objects
 #import "RYTag.h"
@@ -18,8 +19,8 @@
 // Custom UI
 #import "RYTagListCollectionContainerCell.h"
 
-// Associated View Controllers
-#import "RYTagFeedViewController.h"
+// Categories
+#import "UIViewController+RYSocialTransitions.h"
 
 #define kTagListContainerCellReuseID @"tagListContainerCell"
 
@@ -51,15 +52,22 @@
     self.title = @"Discover";
 }
 
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [_collectionView.collectionViewLayout invalidateLayout];
+    
+    for (RYTagListCollectionContainerCell *tagListCell in _collectionView.visibleCells)
+    {
+        [tagListCell.collectionView.collectionViewLayout invalidateLayout];
+    }
+}
+
 #pragma mark -
 #pragma mark - TagListCollectionContainer Delegate
 
 - (void) tagSelected:(RYTag *)tag
 {
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYTagFeedViewController *tagFeed = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"tagFeedVC"];
-    [tagFeed configureWithTags:@[tag.tag]];
-    [self.navigationController pushViewController:tagFeed animated:YES];
+    [self pushTagFeedForTags:@[tag.tag]];
 }
 
 #pragma mark -

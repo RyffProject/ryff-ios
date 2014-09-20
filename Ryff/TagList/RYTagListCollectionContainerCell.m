@@ -22,7 +22,6 @@
 @interface RYTagListCollectionContainerCell () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 // Data
 @property (nonatomic, strong) RYTagList *tagList;

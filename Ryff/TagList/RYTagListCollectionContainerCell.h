@@ -19,6 +19,7 @@
 @interface RYTagListCollectionContainerCell : UICollectionViewCell
 
 @property (nonatomic, weak) id<TagListCollectionContainerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 - (void) configureWithTagList:(RYTagList *)tagList delegate:(id<TagListCollectionContainerDelegate>)delegate;
 

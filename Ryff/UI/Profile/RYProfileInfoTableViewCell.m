@@ -83,7 +83,7 @@
     [_nameField setDelegate:self];
     [_bioTextView setDelegate:self];
     
-    _tagListView.delegate = self;
+    _tagListView.tagDelegate = self;
     [_tagListView styleForRyff];
     
     // Dynamic fonts

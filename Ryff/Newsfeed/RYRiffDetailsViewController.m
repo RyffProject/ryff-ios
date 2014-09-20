@@ -16,13 +16,12 @@
 #import "RYSocialTextView.h"
 
 // Associated View Controllers
-#import "RYProfileViewController.h"
 #import "RYRiffCreateViewController.h"
-#import "RYTagFeedViewController.h"
 #import "RYRiffStreamViewController.h"
 
 // Categories
 #import "UIViewController+Extras.h"
+#import "UIViewController+RYSocialTransitions.h"
 #import "UIImageView+WebCache.h"
 
 #define kPostImageCellReuseID @"postImageCell"
@@ -118,13 +117,7 @@
     if (postIdx < _childrenPosts.count)
     {
         RYPost *selectedPost = _childrenPosts[postIdx];
-        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-        [profileVC configureForUser:selectedPost.user];
-        if (self.navigationController)
-            [self.navigationController pushViewController:profileVC animated:YES];
-        else
-            [self presentViewController:profileVC animated:YES completion:nil];
+        [self pushUserProfileForUser:selectedPost.user];
     }
 }
 
@@ -133,18 +126,12 @@
 
 - (void) presentProfileForUsername:(NSString *)username
 {
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-    [profileVC configureForUsername:username];
-    [self.navigationController pushViewController:profileVC animated:YES];
+    [self pushUserProfileForUsername:username];
 }
 
 - (void) presentNewsfeedForTag:(NSString *)tag
 {
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYTagFeedViewController *tagFeedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"tagFeedVC"];
-    [tagFeedVC configureWithTags:@[tag]];
-    [self.navigationController pushViewController:tagFeedVC animated:YES];
+    [self pushTagFeedForTags:@[tag]];
 }
 
 #pragma mark -
@@ -284,10 +271,7 @@
     {
         // push new riff details vc
         RYPost *post = indexPath.row < _childrenPosts.count ? _childrenPosts[indexPath.row] : nil;
-        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-        [riffDetails configureForPost:post];
-        [self.navigationController pushViewController:riffDetails animated:YES];
+        [self pushRiffDetailsForPost:post];
     }
 }
 

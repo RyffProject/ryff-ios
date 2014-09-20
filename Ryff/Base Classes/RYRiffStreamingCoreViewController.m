@@ -15,11 +15,10 @@
 
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
-#import "RYRiffDetailsViewController.h"
-#import "RYProfileViewController.h"
 
 // UI Categories
 #import "UIImage+Color.h"
+#import "UIViewController+RYSocialTransitions.h"
 
 @interface RYRiffStreamingCoreViewController () <FollowDelegate>
 
@@ -77,10 +76,7 @@
 - (void) avatarAction:(NSInteger)riffIndex
 {
     RYPost *post = _feedItems[riffIndex];
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-    [profileVC configureForUser:post.user];
-    [self.navigationController pushViewController:profileVC animated:YES];
+    [self pushUserProfileForUser:post.user];
 }
 
 /*
@@ -266,10 +262,7 @@
     [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_riffSection] animated:YES];
     
     RYPost *post = _feedItems[indexPath.row];
-    NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-    RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-    [riffDetails configureForPost:post];
-    [self.navigationController pushViewController:riffDetails animated:YES];
+    [self pushRiffDetailsForPost:post];
 }
 
 @end

@@ -28,6 +28,7 @@
 #import "UIImage+Color.h"
 #import "UIColor+Hex.h"
 #import "UIImagePickerController+Orientations.h"
+#import "UIViewController+RYSocialTransitions.h"
 
 // Frameworks
 #import <AVFoundation/AVFoundation.h>
@@ -35,8 +36,6 @@
 // Associated View Controllers
 #import "RYRiffCreateViewController.h"
 #import "RYLoginViewController.h"
-#import "RYTagFeedViewController.h"
-#import "RYUserListViewController.h"
 #import "RYNotificationsTableViewController.h"
 #import "RYRiffDetailsViewController.h"
 
@@ -217,12 +216,7 @@
 - (void) followersAction
 {
     if (_user.numFollowers > 0)
-    {
-        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYUserListViewController *userList = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"userListVC"];
-        [userList configureWithFollowersForUser:_user];
-        [self.navigationController pushViewController:userList animated:YES];
-    }
+        [self pushFollowersViewControllerForUser:_user];
 }
 
 - (void) tagSelected:(NSInteger)tagSelected
@@ -230,14 +224,7 @@
     if (tagSelected < _user.tags.count)
     {
         RYTag *tag = _user.tags[tagSelected];
-        
-        NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
-        RYTagFeedViewController *feedVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"tagFeedVC"];
-        [feedVC configureWithTags:@[tag.tag]];
-        if (self.navigationController)
-            [self.navigationController pushViewController:feedVC animated:YES];
-        else
-            [self presentViewController:feedVC animated:YES completion:nil];
+        [self pushTagFeedForTags:@[tag.tag]];
     }
 }
 

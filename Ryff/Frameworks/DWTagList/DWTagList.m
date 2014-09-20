@@ -251,12 +251,13 @@ static UIColor *kAddTagColor;
     }
     else
     {
+        NSString *tagText = [tagView.label.text stringByReplacingOccurrencesOfString:@"#" withString:@""];
         if ([self.tagDelegate respondsToSelector:@selector(selectedTag:tagIndex:)]) {
-            [self.tagDelegate selectedTag:tagView.label.text tagIndex:tagView.tag];
+            [self.tagDelegate selectedTag:tagText tagIndex:tagView.tag];
         }
         
         if ([self.tagDelegate respondsToSelector:@selector(selectedTag:)]) {
-            [self.tagDelegate selectedTag:tagView.label.text];
+            [self.tagDelegate selectedTag:tagText];
         }
     }
 
