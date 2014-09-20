@@ -16,13 +16,14 @@
 
 // Custom UI
 #import "RYUserListCollectionViewCell.h"
+#import "CHTCollectionViewWaterfallLayout.h"
 
 // Associated ViewControllers
 #import "RYProfileViewController.h"
 
 #define kUserListCellReuseID @"userListCell"
 
-@interface RYUserListViewController () <UsersDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface RYUserListViewController () <UsersDelegate, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -39,6 +40,15 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    CHTCollectionViewWaterfallLayout *waterfall = [[CHTCollectionViewWaterfallLayout alloc] init];
+    waterfall.columnCount = isIpad ? 2 : 1;
+    waterfall.minimumColumnSpacing = 20.0f;
+    waterfall.minimumInteritemSpacing = 20.0f;
+    waterfall.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
+    waterfall.itemRenderDirection = CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst;
+    
+    _collectionView.collectionViewLayout = waterfall;
 }
 
 #pragma mark - Configuration
@@ -111,27 +121,13 @@
 }
 
 #pragma mark -
-#pragma mark - CollectionView Flow Delegate
+#pragma mark - CHTCollectionViewDelegateWaterfallLayout Delegate
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RYUser *user = _users[indexPath.row];
-    return [RYUserListCollectionViewCell preferredSizeWithAvailableSize:CGSizeMake(self.view.frame.size.width/2 - 20, 20000) forUser:user];
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsZero;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 20.0f;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 20.0f;
+    CGFloat availableWidth = isIpad ? self.view.frame.size.width/2 - 40 : self.view.frame.size.width;
+    return [RYUserListCollectionViewCell preferredSizeWithAvailableSize:CGSizeMake(availableWidth, 20000) forUser:user];
 }
 
 @end

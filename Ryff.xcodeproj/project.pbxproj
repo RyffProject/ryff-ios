@@ -108,6 +108,7 @@
 		837BA0E319CCAED8002AA13E /* RYUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0E219CCAED8002AA13E /* RYUserListCollectionViewCell.m */; };
 		837BA0F719CCC619002AA13E /* BNRDynamicTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */; };
 		837BA0FA19CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */; };
+		837BA10219CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BA10119CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m */; };
 		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
@@ -423,6 +424,8 @@
 		837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDynamicTypeManager.m; sourceTree = "<group>"; };
 		837BA0F819CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+RYCustomFont.h"; sourceTree = "<group>"; };
 		837BA0F919CCC7C2002AA13E /* UIFontDescriptor+RYCustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+RYCustomFont.m"; sourceTree = "<group>"; };
+		837BA10019CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		837BA10119CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		837C98D619A82411002A9B34 /* RYUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYUserListViewController.h; sourceTree = "<group>"; };
 		837C98D719A82411002A9B34 /* RYUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYUserListViewController.m; sourceTree = "<group>"; };
 		837CCD1519A3E12D00F95FCA /* RYTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTag.h; sourceTree = "<group>"; };
@@ -923,6 +926,7 @@
 				83CCC8FC197EFCBF00FD1B4B /* UIKit+AFNetworking */,
 				830BBCCF18FA142000A9C53F /* BlockAlert */,
 				830BBCAC18F9F54900A9C53F /* SSKeychain */,
+				837BA0FF19CCFA69002AA13E /* CHTCollectionViewWaterfallLayout */,
 			);
 			name = Extras;
 			path = Frameworks;
@@ -987,6 +991,15 @@
 				837BA0F219CCC619002AA13E /* BNRDynamicTypeManager.m */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		837BA0FF19CCFA69002AA13E /* CHTCollectionViewWaterfallLayout */ = {
+			isa = PBXGroup;
+			children = (
+				837BA10019CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.h */,
+				837BA10119CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m */,
+			);
+			path = CHTCollectionViewWaterfallLayout;
 			sourceTree = "<group>";
 		};
 		837C98D519A82403002A9B34 /* UserList */ = {
@@ -1889,6 +1902,7 @@
 				83FCD1BB18F9413400A493F0 /* RYPost.m in Sources */,
 				83CCC916197EFCBF00FD1B4B /* AFURLSessionManager.m in Sources */,
 				83CCC91E197EFCBF00FD1B4B /* UIWebView+AFNetworking.m in Sources */,
+				837BA10219CCFA69002AA13E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				83CA121E1995CD23002610E8 /* FLEXObjectExplorerFactory.m in Sources */,
 				83CA12171995CD23002610E8 /* FLEXArrayExplorerViewController.m in Sources */,
 				83CA121D1995CD23002610E8 /* FLEXImageExplorerViewController.m in Sources */,
