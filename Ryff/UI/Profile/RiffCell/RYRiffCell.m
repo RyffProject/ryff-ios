@@ -126,6 +126,7 @@
     {
         UITapGestureRecognizer *postImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(postImageHit:)];
         [_postImageView addGestureRecognizer:postImageTap];
+        _postImageView.clipsToBounds = YES;
     }
     
     UITapGestureRecognizer *usernameTap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(usernameHit:)];

@@ -135,7 +135,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="plus.png" width="50" height="50"/>
+        <image name="plus.png" width="60" height="60"/>
         <image name="remix.png" width="45" height="40"/>
         <image name="star.png" width="50" height="50"/>
         <image name="upvote.png" width="38" height="50"/>

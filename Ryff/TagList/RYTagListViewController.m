@@ -17,14 +17,14 @@
 #import "RYTagList.h"
 
 // Custom UI
-#import "RYTagListCollectionContainerCell.h"
+#import "RYTagCollectionViewCell.h"
 
 // Categories
 #import "UIViewController+RYSocialTransitions.h"
 
-#define kTagListContainerCellReuseID @"tagListContainerCell"
+#define kTagCellReuseID @"tagCell"
 
-@interface RYTagListViewController () <TagListCollectionContainerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface RYTagListViewController () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -41,13 +41,14 @@
     
     RYTagList *trending = [[RYTagList alloc] initWithTagListType:TRENDING_LIST];
     RYTagList *suggested = [[RYTagList alloc] initWithTagListType:SUGGESTED_LIST];
-    
+    trending.delegate = self;
+    suggested.delegate = self;
     [trending fetchData];
     [suggested fetchData];
     
     _tagLists = @[trending, suggested];
     
-    self.view.backgroundColor = [RYStyleSheet profileBackgroundColor];
+    self.view.backgroundColor = [RYStyleSheet lightBackgroundColor];
     
     self.title = @"Discover";
 }
@@ -55,11 +56,6 @@
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [_collectionView.collectionViewLayout invalidateLayout];
-    
-    for (RYTagListCollectionContainerCell *tagListCell in _collectionView.visibleCells)
-    {
-        [tagListCell.collectionView.collectionViewLayout invalidateLayout];
-    }
 }
 
 #pragma mark -
@@ -71,23 +67,43 @@
 }
 
 #pragma mark -
+#pragma mark - TagList Delegate
+
+- (void) tagsUpdated
+{
+    [_collectionView reloadData];
+}
+
+#pragma mark -
 #pragma mark - CollectionView Data Source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _tagLists.count;
+    RYTagList *tagList = _tagLists[section];
+    return tagList.list.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    RYTagList *tagList = _tagLists[indexPath.row];
-    RYTagListCollectionContainerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagListContainerCellReuseID forIndexPath:indexPath];
-    [cell configureWithTagList:tagList delegate:self];
+    RYTagList *tagList = _tagLists[indexPath.section];
+    RYTag *tag = tagList.list[indexPath.row];
+    RYTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
+    [cell configureWithTag:tag];
     return cell;
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return _tagLists.count;
+}
+
+#pragma mark -
+#pragma mark - CollectionView Delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RYTagList *tagList = _tagLists[indexPath.section];
+    RYTag *selectedTag = tagList.list[indexPath.row];
+    [self pushTagFeedForTags:@[selectedTag.tag]];
 }
 
 #pragma mark -
@@ -95,12 +111,12 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width, 235);
+    return CGSizeMake(150, 150);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsZero;
+    return UIEdgeInsetsMake(17.5, 17.5, 17.5, 17.5);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
