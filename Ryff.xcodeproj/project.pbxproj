@@ -112,6 +112,7 @@
 		837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837C98D719A82411002A9B34 /* RYUserListViewController.m */; };
 		837CCD1719A3E12D00F95FCA /* RYTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 837CCD1619A3E12D00F95FCA /* RYTag.m */; };
 		837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */; };
+		83814BCD19D0DCBF00F60FBF /* RYTagListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83814BCC19D0DCBF00F60FBF /* RYTagListHeaderView.m */; };
 		8384965F19CBD62D0033EF92 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965D19CBD62D0033EF92 /* check.png */; };
 		8384966019CBD62D0033EF92 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965E19CBD62D0033EF92 /* check@2x.png */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
@@ -432,6 +433,8 @@
 		837CCD1619A3E12D00F95FCA /* RYTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTag.m; sourceTree = "<group>"; };
 		837E9AC41981E3360052E006 /* RYProfileInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYProfileInfoTableViewCell.h; sourceTree = "<group>"; };
 		837E9AC51981E3360052E006 /* RYProfileInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYProfileInfoTableViewCell.m; sourceTree = "<group>"; };
+		83814BCB19D0DCBF00F60FBF /* RYTagListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagListHeaderView.h; sourceTree = "<group>"; };
+		83814BCC19D0DCBF00F60FBF /* RYTagListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListHeaderView.m; sourceTree = "<group>"; };
 		8384965D19CBD62D0033EF92 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		8384965E19CBD62D0033EF92 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -879,6 +882,8 @@
 				83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */,
 				83E3017019C7BAEE0085F17F /* RYTagCollectionViewCell.h */,
 				83E3017119C7BAEE0085F17F /* RYTagCollectionViewCell.m */,
+				83814BCB19D0DCBF00F60FBF /* RYTagListHeaderView.h */,
+				83814BCC19D0DCBF00F60FBF /* RYTagListHeaderView.m */,
 			);
 			name = Discover;
 			path = TagList;
@@ -1769,6 +1774,7 @@
 			files = (
 				83CA12231995CD23002610E8 /* FLEXHeapEnumerator.m in Sources */,
 				83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */,
+				83814BCD19D0DCBF00F60FBF /* RYTagListHeaderView.m in Sources */,
 				83BF315D19C9FFC200F5BE48 /* SDWebImageDecoder.m in Sources */,
 				83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */,
 				83CCC919197EFCBF00FD1B4B /* UIAlertView+AFNetworking.m in Sources */,

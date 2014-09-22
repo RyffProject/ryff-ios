@@ -29,13 +29,13 @@ static RYDiscoverServices* _sharedInstance;
 #pragma mark -
 #pragma mark - Search Tags
 
-- (void) tagSearchWithParams:(NSDictionary *)dictionary toAction:(NSString *)action forDelegate:(id<TagDelegate>)delegate
+- (void) tagSearchWithParams:(NSDictionary *)params toAction:(NSString *)action forDelegate:(id<TagDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
-        [manager POST:action parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {

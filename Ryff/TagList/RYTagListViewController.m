@@ -18,11 +18,13 @@
 
 // Custom UI
 #import "RYTagCollectionViewCell.h"
+#import "RYTagListHeaderView.h"
 
 // Categories
 #import "UIViewController+RYSocialTransitions.h"
 
 #define kTagCellReuseID @"tagCell"
+#define kTagHeaderReuseID @"tagListHeader"
 
 @interface RYTagListViewController () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -85,12 +87,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    RYTagList *tagList = _tagLists[indexPath.section];
-    RYTag *tag = tagList.list[indexPath.row];
-    RYTagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
-    [cell configureWithTag:tag];
-    return cell;
+    return [collectionView dequeueReusableCellWithReuseIdentifier:kTagCellReuseID forIndexPath:indexPath];
 }
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kTagHeaderReuseID forIndexPath:indexPath];
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return _tagLists.count;
@@ -98,6 +102,19 @@
 
 #pragma mark -
 #pragma mark - CollectionView Delegate
+
+- (void) collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RYTagList *tagList = _tagLists[indexPath.section];
+    RYTag *tag = tagList.list[indexPath.row];
+    [((RYTagCollectionViewCell *)cell) configureWithTag:tag];
+}
+
+- (void) collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
+{
+    RYTagList *tagList = _tagLists[indexPath.section];
+    [((RYTagListHeaderView *)view) titleSection:tagList.listTitle];
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -112,6 +129,11 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(150, 150);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(self.view.frame.size.width, 50.0f);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

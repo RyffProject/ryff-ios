@@ -124,7 +124,10 @@
     if (_user)
         [self setTitle:_user.username];
     else
+    {
+        self.feedItems = nil;
         [self setTitle:@"Me"];
+    }
     
     [self.tableView reloadData];
 }
