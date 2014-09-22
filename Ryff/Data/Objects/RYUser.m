@@ -14,14 +14,13 @@
 
 @implementation RYUser
 
-- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname avatarURL:(NSURL*)avatarURL karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
+- (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
 {
     if (self = [super init])
     {
         _userId         = userId;
         _username       = username;
         _nickname       = nickname;
-        _avatarURL      = avatarURL;
         _karma          = karma;
         _bio            = bio;
         _isFollowing    = isFollowing;
@@ -37,7 +36,6 @@
     NSNumber *userId        = [userDict objectForKey:@"id"];
     NSString *username      = [userDict objectForKey:@"username"];
     NSString *name          = [userDict objectForKey:@"name"];
-    NSString *avatarUrl     = [userDict objectForKey:@"avatar"];
     NSNumber *karma         = [userDict objectForKey:@"karma"];
     NSString *bio           = [userDict objectForKey:@"bio"];
     NSString *dateCreated   = [userDict objectForKey:@"date_created"];
@@ -54,7 +52,14 @@
         date = [dateFormatter dateFromString:dateCreated];
     }
     
-    RYUser *newUser = [[RYUser alloc] initWithUser:userId.intValue username:username nickname:name avatarURL:[NSURL URLWithString:avatarUrl] karma:karma.intValue bio:bio dateCreated:date isFollowing:isFollowing numFollowers:numFollowers numFollowing:numFollowing tags:tags];
+    RYUser *newUser = [[RYUser alloc] initWithUser:userId.intValue username:username nickname:name karma:karma.intValue bio:bio dateCreated:date isFollowing:isFollowing numFollowers:numFollowers numFollowing:numFollowing tags:tags];
+    
+    if (userDict[@"avatar_url"] && [userDict[@"avatar_url"] length] > 0)
+        newUser.avatarURL = [NSURL URLWithString:userDict[@"avatar_url"]];
+    if (userDict[@"avatar_small_url"] && [userDict[@"avatar_small_url"] length] > 0)
+        newUser.avatarSmallURL = [NSURL URLWithString:userDict[@"avatar_small_url"]];
+    
+    
     return newUser;
 }
 
@@ -72,7 +77,9 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     // We'll ignore the zone for now
-    RYUser *newUser = [[RYUser alloc] initWithUser:self.userId username:self.username nickname:self.nickname avatarURL:self.avatarURL karma:self.karma bio:self.bio dateCreated:self.dateCreated isFollowing:self.isFollowing numFollowers:self.numFollowers numFollowing:self.numFollowing tags:self.tags];
+    RYUser *newUser = [[RYUser alloc] initWithUser:self.userId username:self.username nickname:self.nickname karma:self.karma bio:self.bio dateCreated:self.dateCreated isFollowing:self.isFollowing numFollowers:self.numFollowers numFollowing:self.numFollowing tags:self.tags];
+    newUser.avatarURL = _avatarURL;
+    newUser.avatarSmallURL = _avatarSmallURL;
     return newUser;
 }
 

@@ -25,6 +25,9 @@
 // Optional
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) NSURL *imageMediumURL;
+@property (nonatomic, strong) NSURL *imageSmallURL;
+@property (nonatomic, strong) NSURL *riffHQURL;
 @property (nonatomic, strong) NSArray *tags;
 
 - (RYPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content title:(NSString *)title riffURL:(NSURL*)riffURL duration:(CGFloat)duration dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;

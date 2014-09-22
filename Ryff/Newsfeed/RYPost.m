@@ -58,6 +58,13 @@
     
     if (postDict[@"image_url"] && ((NSString*)postDict[@"image_url"]).length > 0)
         newPost.imageURL = [NSURL URLWithString:postDict[@"image_url"]];
+    if (postDict[@"image_medium_url"] && [postDict[@"image_medium_url"] length] > 0)
+        newPost.imageMediumURL = [NSURL URLWithString:postDict[@"image_medium_url"]];
+    if (postDict[@"image_small_url"] && [postDict[@"image_small_url"] length] > 0)
+        newPost.imageSmallURL = [NSURL URLWithString:postDict[@"image_small_url"]];
+    
+    if (postDict[@"riff_hq_url"] && [postDict[@"riff_hq_url"] length] > 0)
+        newPost.riffHQURL = [NSURL URLWithString:postDict[@"riff_hq_url"]];
     
     return newPost;
 }

@@ -76,9 +76,15 @@
     [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:post.duration]];
     
     if (post.imageURL && _postImageView)
-        [_postImageView sd_setImageWithURL:post.imageURL placeholderImage:[UIImage imageNamed:@"user"]];
+    {
+        // determine photo quality
+        if (_postImageView.frame.size.width > 200.0f)
+            [_postImageView sd_setImageWithURL:post.imageURL placeholderImage:[UIImage imageNamed:@"user"]];
+        else
+            [_postImageView sd_setImageWithURL:post.imageMediumURL placeholderImage:[UIImage imageNamed:@"user"]];
+    }
     if (post.user.avatarURL && _avatarImageView)
-        [_avatarImageView sd_setImageWithURL:post.user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
+        [_avatarImageView sd_setImageWithURL:post.user.avatarSmallURL placeholderImage:[UIImage imageNamed:@"user"]];
     
     UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_starButton setTintColor:starredColor];
