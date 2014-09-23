@@ -109,12 +109,15 @@
 
 - (void) awakeFromNib
 {
-    [_postLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
-    [_postLabel setTextColor:[UIColor whiteColor]];
-    [_userLabel setFont:[UIFont fontWithName:kBoldFont size:20.0f]];
-    [_userLabel setTextColor:[UIColor whiteColor]];
+    _wrapperView.layer.cornerRadius = 5.0f;
+    _wrapperView.clipsToBounds = YES;
     
-    _socialTextView.colorForContentText = [UIColor whiteColor];
+    [_postLabel setFont:[UIFont fontWithName:kRegularFont size:20.0f]];
+    [_postLabel setTextColor:[RYStyleSheet darkTextColor]];
+    [_userLabel setFont:[UIFont fontWithName:kBoldFont size:20.0f]];
+    [_userLabel setTextColor:[RYStyleSheet darkTextColor]];
+    
+    _socialTextView.colorForContentText = [RYStyleSheet darkTextColor];
     _socialTextView.textContainerInset = UIEdgeInsetsZero;
     _socialTextView.scrollEnabled = NO;
     _socialTextView.textContainer.maximumNumberOfLines = 0;
@@ -148,10 +151,13 @@
     
     [_upvoteCountLabel setFont:[UIFont fontWithName:kRegularFont size:21.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
-    [_durationLabel setTextColor:[UIColor whiteColor]];
+    [_durationLabel setTextColor:[RYStyleSheet darkTextColor]];
     
     [_upvoteImageView setImage:[UIImage imageNamed:@"upvote"]];
     
+    _playlistAddButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _repostButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _starButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_repostButton setTintColor:[RYStyleSheet availableActionColor]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
@@ -164,13 +170,13 @@
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     if (highlighted)
     {
-        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.45 alpha:0.8f]];
+        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.85f]];
         [_postImageView setAlpha:0.7f];
         [_avatarImageView setAlpha:0.7f];
     }
     else
     {
-        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:0.25 alpha:0.8f]];
+        [_wrapperView setBackgroundColor:[UIColor colorWithWhite:1.f alpha:0.7f]];
         [_postImageView setAlpha:1.0f];
         [_avatarImageView setAlpha:1.0f];
     }

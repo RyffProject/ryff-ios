@@ -166,8 +166,6 @@
     NSInteger sectionCount = 1;
     if (_childrenPosts.count > 0)
         sectionCount++;
-    if (_parentPosts.count > 0)
-        sectionCount++;
     return sectionCount;
 }
 
