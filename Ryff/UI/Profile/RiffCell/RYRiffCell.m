@@ -83,8 +83,13 @@
         else
             [_postImageView sd_setImageWithURL:post.imageMediumURL placeholderImage:[UIImage imageNamed:@"user"]];
     }
-    if (post.user.avatarURL && _avatarImageView)
-        [_avatarImageView sd_setImageWithURL:post.user.avatarSmallURL placeholderImage:[UIImage imageNamed:@"user"]];
+    if (_avatarImageView)
+    {
+        if (post.user.avatarSmallURL)
+            [_avatarImageView sd_setImageWithURL:post.user.avatarSmallURL placeholderImage:[UIImage imageNamed:@"user"]];
+        else
+            [_avatarImageView setImage:[UIImage imageNamed:@"user"]];
+    }
     
     UIColor *starredColor   = post.isStarred ? [RYStyleSheet postActionColor] : [RYStyleSheet availableActionColor];
     [_starButton setTintColor:starredColor];

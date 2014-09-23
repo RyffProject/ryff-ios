@@ -56,7 +56,8 @@
         [username appendAttributedString:action];
         [_actionLabel setAttributedText:username];
         
-        [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:@"2 minutes ago" attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
+        NSString *timeString = [RYStyleSheet displayTimeWithSeconds:[[NSDate date] timeIntervalSinceDate:post.dateCreated]];
+        [_timeLabel setAttributedText:[[NSAttributedString alloc] initWithString:timeString attributes:@{NSFontAttributeName: [UIFont fontWithName:kItalicFont size:18.0f]}]];
         
         [_avatarImageView sd_setImageWithURL:user.avatarURL placeholderImage:[UIImage imageNamed:@"user"]];
     }
