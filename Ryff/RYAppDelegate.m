@@ -17,11 +17,15 @@
 
 // Frameworks
 #import "SSKeychain.h"
+#import "Crittercism.h"
 
 @implementation RYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // log crash events
+    [Crittercism enableWithAppID:@"5421e1f8b573f17c9b000004"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Present main storyboard
     NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";

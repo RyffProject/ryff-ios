@@ -82,6 +82,8 @@
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
+		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
+		835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */; };
 		835E482F19AE634B002A3AC2 /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482D19AE634B002A3AC2 /* options.png */; };
 		835E483019AE634B002A3AC2 /* options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482E19AE634B002A3AC2 /* options@2x.png */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
@@ -389,6 +391,11 @@
 		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
+		835E1E0019D21A50007EBD74 /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
+		835E1E0119D21A50007EBD74 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		835E1E0219D21A50007EBD74 /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		835E1E0319D21A50007EBD74 /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
+		835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_7.a; sourceTree = "<group>"; };
 		835E482D19AE634B002A3AC2 /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
 		835E482E19AE634B002A3AC2 /* options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "options@2x.png"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
@@ -712,6 +719,7 @@
 				83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */,
 				830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */,
 				83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */,
+				835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */,
 				83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */,
 				83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */,
 			);
@@ -918,6 +926,7 @@
 		833E1D511975DFA90002A2BE /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				835E1DFF19D21A50007EBD74 /* CrittercismSDK */,
 				837BA0E619CCC619002AA13E /* BNRDynamicTypeManager */,
 				83BF313719C9FFC200F5BE48 /* SDWebImage */,
 				8322309719B00D0200C60033 /* PXAlertView */,
@@ -955,6 +964,18 @@
 				831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */,
 			);
 			path = RiffCreate;
+			sourceTree = "<group>";
+		};
+		835E1DFF19D21A50007EBD74 /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				835E1E0019D21A50007EBD74 /* CRFilter.h */,
+				835E1E0119D21A50007EBD74 /* Crittercism.h */,
+				835E1E0219D21A50007EBD74 /* CrittercismDelegate.h */,
+				835E1E0319D21A50007EBD74 /* dsym_upload.sh */,
+				835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */,
+			);
+			path = CrittercismSDK;
 			sourceTree = "<group>";
 		};
 		836F483719A04BAB00E948BE /* Categories */ = {
@@ -1583,6 +1604,7 @@
 				83FCD13418F907C400A493F0 /* Sources */,
 				83FCD13518F907C400A493F0 /* Frameworks */,
 				83FCD13618F907C400A493F0 /* Resources */,
+				835E1E0719D21BFB007EBD74 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1671,6 +1693,7 @@
 				83ED34ED1931851600FEB018 /* AppIcon50x50@2x.png in Resources */,
 				831A88B7199EEEDD00C44CED /* star.png in Resources */,
 				83ED34F11931851600FEB018 /* AppIcon60x60@2x.png in Resources */,
+				835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */,
 				831A88AF199EEEDD00C44CED /* playing.png in Resources */,
 				83C6A5EE1960EB9600BB3D1A /* record.png in Resources */,
 				8384966019CBD62D0033EF92 /* check@2x.png in Resources */,
@@ -1766,6 +1789,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		835E1E0719D21BFB007EBD74 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_ID=\"5421e1f8b573f17c9b000004\"\nAPI_KEY=\"G5G9tRRu5McUcNUeaCye6lM9nziKM1DQ\"\nsource \"${SRCROOT}\"/Ryff/Frameworks/CrittercismSDK/dsym_upload.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83FCD13418F907C400A493F0 /* Sources */ = {
@@ -2059,6 +2099,10 @@
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Ryff/Frameworks/CrittercismSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -2074,6 +2118,10 @@
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Ryff/Frameworks/CrittercismSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

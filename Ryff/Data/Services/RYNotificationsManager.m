@@ -179,7 +179,8 @@ static RYNotificationsManager *_sharedInstance;
         case MENTION_NOTIF:
             notificationString = [[NSMutableAttributedString alloc] initWithString:@"You were mentioned in " attributes:notificationTextAttributes];
             [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postString attributes:highlightedNotificationAttributes]];
-            [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postsString attributes:notificationTextAttributes]];
+            if (postsString)
+                [notificationString appendAttributedString:[[NSAttributedString alloc] initWithString:postsString attributes:notificationTextAttributes]];
             break;
         case UNRECOGNIZED_NOTIF:
             break;
