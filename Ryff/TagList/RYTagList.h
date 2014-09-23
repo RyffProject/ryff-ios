@@ -18,7 +18,8 @@
 typedef enum : NSUInteger {
     SEARCH = 0,
     TRENDING_LIST,
-    SUGGESTED_LIST
+    SUGGESTED_LIST,
+    MY_LIST
 } TagListType;
 
 @interface RYTagList : NSObject <TagDelegate>

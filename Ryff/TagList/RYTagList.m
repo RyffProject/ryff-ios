@@ -8,8 +8,12 @@
 
 #import "RYTagList.h"
 
+// Data Managers
+#import "RYRegistrationServices.h"
+
 // Data Objects
 #import "RYTag.h"
+#import "RYUser.h"
 
 @interface RYTagList ()
 
@@ -43,6 +47,11 @@
             [[RYDiscoverServices sharedInstance] getTrendingTagsForDelegate:self];
         else if (_searchType == SUGGESTED_LIST)
             [[RYDiscoverServices sharedInstance] getSuggestedTagsForDelegate:self];
+        else if (_searchType == MY_LIST)
+        {
+            // use my tags
+            [self tagsRetrieved:[RYRegistrationServices loggedInUser].tags];
+        }
         else
         {
             // search tags
@@ -68,6 +77,8 @@
         listTitle = @"Trending Tags";
     else if (_searchType == SUGGESTED_LIST)
         listTitle = @"Suggested Tags";
+    else if (_searchType == MY_LIST)
+        listTitle = @"Subscribed Tags";
     return listTitle;
 }
 

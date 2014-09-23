@@ -9,6 +9,7 @@
 #import "RYTagListViewController.h"
 
 // Data Managers
+#import "RYRegistrationServices.h"
 #import "RYDiscoverServices.h"
 #import "RYStyleSheet.h"
 
@@ -41,14 +42,28 @@
 {
     [super viewDidLoad];
     
-    RYTagList *trending = [[RYTagList alloc] initWithTagListType:TRENDING_LIST];
-    RYTagList *suggested = [[RYTagList alloc] initWithTagListType:SUGGESTED_LIST];
-    trending.delegate = self;
-    suggested.delegate = self;
-    [trending fetchData];
-    [suggested fetchData];
+    NSMutableArray *tagLists = [[NSMutableArray alloc] initWithCapacity:2];
     
-    _tagLists = @[trending, suggested];
+    RYTagList *trending = [[RYTagList alloc] initWithTagListType:TRENDING_LIST];
+    trending.delegate = self;
+    [trending fetchData];
+    [tagLists addObject:trending];
+    
+    if ([RYRegistrationServices loggedInUser])
+    {
+        // suggested tag list requires logged in user
+        RYTagList *suggested = [[RYTagList alloc] initWithTagListType:SUGGESTED_LIST];
+        suggested.delegate = self;
+        [suggested fetchData];
+        [tagLists addObject:suggested];
+        
+        RYTagList *myTags = [[RYTagList alloc] initWithTagListType:MY_LIST];
+        myTags.delegate = self;
+        [myTags fetchData];
+        [tagLists addObject:myTags];
+    }
+    
+    _tagLists = tagLists;
     
     self.view.backgroundColor = [RYStyleSheet lightBackgroundColor];
     
@@ -133,7 +148,13 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(self.view.frame.size.width, 50.0f);
+    CGSize headerSize;
+    RYTagList *tagList = _tagLists[section];
+    if (tagList.listType == SEARCH)
+        headerSize = CGSizeZero;
+    else
+        headerSize = CGSizeMake(self.view.frame.size.width, 50.0f);
+    return headerSize;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
