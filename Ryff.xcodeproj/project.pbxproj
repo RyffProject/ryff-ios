@@ -84,6 +84,7 @@
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
 		835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */; };
+		835E1E0A19D2320D007EBD74 /* RYLoadMoreControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1E0919D2320D007EBD74 /* RYLoadMoreControl.m */; };
 		835E482F19AE634B002A3AC2 /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482D19AE634B002A3AC2 /* options.png */; };
 		835E483019AE634B002A3AC2 /* options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 835E482E19AE634B002A3AC2 /* options@2x.png */; };
 		836461AE195FBF05005938F5 /* RYLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 836461AD195FBF05005938F5 /* RYLoginTableViewCell.m */; };
@@ -396,6 +397,8 @@
 		835E1E0219D21A50007EBD74 /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
 		835E1E0319D21A50007EBD74 /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
 		835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_7.a; sourceTree = "<group>"; };
+		835E1E0819D2320D007EBD74 /* RYLoadMoreControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoadMoreControl.h; sourceTree = "<group>"; };
+		835E1E0919D2320D007EBD74 /* RYLoadMoreControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoadMoreControl.m; sourceTree = "<group>"; };
 		835E482D19AE634B002A3AC2 /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
 		835E482E19AE634B002A3AC2 /* options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "options@2x.png"; sourceTree = "<group>"; };
 		836461AC195FBF05005938F5 /* RYLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginTableViewCell.h; sourceTree = "<group>"; };
@@ -813,6 +816,8 @@
 				8312628C19AD120D00532CA3 /* RYSocialTextView.m */,
 				83DC3B7619BD0EC00036AD2A /* RYRefreshControl.h */,
 				83DC3B7719BD0EC00036AD2A /* RYRefreshControl.m */,
+				835E1E0819D2320D007EBD74 /* RYLoadMoreControl.h */,
+				835E1E0919D2320D007EBD74 /* RYLoadMoreControl.m */,
 			);
 			path = "Custom UI Objects";
 			sourceTree = "<group>";
@@ -1853,6 +1858,7 @@
 				830BBCE518FA57F200A9C53F /* RYCoreViewController.m in Sources */,
 				83CA11FF1995CD23002610E8 /* FLEXArgumentInputStructView.m in Sources */,
 				837BA10A19CD12A8002AA13E /* UIViewController+RYSocialTransitions.m in Sources */,
+				835E1E0A19D2320D007EBD74 /* RYLoadMoreControl.m in Sources */,
 				83CA12161995CD23002610E8 /* FLEXWebViewController.m in Sources */,
 				83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */,
 				8322309D19B00D0200C60033 /* PXAlertView.m in Sources */,

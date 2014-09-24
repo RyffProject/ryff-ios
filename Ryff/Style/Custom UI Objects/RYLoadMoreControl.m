@@ -1,21 +1,21 @@
 //
-//  RYRefreshControl.m
+//  RYLoadMoreControl.m
 //  Ryff
 //
-//  Created by Christopher Laganiere on 9/7/14.
+//  Created by Christopher Laganiere on 9/23/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYRefreshControl.h"
+#import "RYLoadMoreControl.h"
 
 #define kRefreshPullHeight 55.0f
 #define kRefreshControlHeight 55.0f
 #define kRefreshControlWidth 200.0f
 
-#define kRefreshTitle @"Pull to Refresh"
-#define kRefreshingTitle @"Refreshing"
+#define kRefreshTitle @"Pull to Load More"
+#define kRefreshingTitle @"Loading"
 
-@interface RYRefreshControl ()
+@interface RYLoadMoreControl ()
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
@@ -24,13 +24,13 @@
 
 // Data
 @property (nonatomic, assign) UIEdgeInsets originalContentInset;
-@property (nonatomic, assign) BOOL canRefresh;
+@property (nonatomic, assign) BOOL canLoadMore;
 @property (nonatomic, assign) BOOL ignoreEdges;
 @property (nonatomic, assign) BOOL dontAdjustInsets;
 
 @end
 
-@implementation RYRefreshControl
+@implementation RYLoadMoreControl
 
 #pragma mark -
 #pragma mark - Life Cycle
@@ -38,7 +38,7 @@
 static int scrollObservanceContext;
 - (id) initInScrollView:(UIScrollView *)scrollView
 {
-    if (self = [super initWithFrame:CGRectMake(0.5*(scrollView.frame.size.width-kRefreshControlWidth), -(kRefreshControlHeight + scrollView.contentInset.top), kRefreshControlWidth, kRefreshControlHeight)])
+    if (self = [super initWithFrame:CGRectMake(0.5*(_scrollView.frame.size.width-kRefreshControlWidth), MAX(_scrollView.contentSize.height,_scrollView.frame.size.height) + _scrollView.contentInset.bottom, kRefreshControlWidth, kRefreshControlHeight)])
     {
         _scrollView             = scrollView;
         _originalContentInset   = scrollView.contentInset;
@@ -50,6 +50,7 @@ static int scrollObservanceContext;
         [_scrollView addSubview:self];
         [_scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:&scrollObservanceContext];
         [_scrollView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:&scrollObservanceContext];
+        [_scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:&scrollObservanceContext];
         
         [self setupRefresh];
     }
@@ -60,6 +61,7 @@ static int scrollObservanceContext;
 {
     [_scrollView removeObserver:self forKeyPath:@"contentOffset" context:&scrollObservanceContext];
     [_scrollView removeObserver:self forKeyPath:@"contentInset"context:&scrollObservanceContext];
+    [_scrollView removeObserver:self forKeyPath:@"contentSize"context:&scrollObservanceContext];
     _scrollView = nil;
 }
 
@@ -70,6 +72,7 @@ static int scrollObservanceContext;
     {
         [_scrollView removeObserver:self forKeyPath:@"contentOffset" context:&scrollObservanceContext];
         [_scrollView removeObserver:self forKeyPath:@"contentInset" context:&scrollObservanceContext];
+        [_scrollView removeObserver:self forKeyPath:@"contentSize"context:&scrollObservanceContext];
         _scrollView = nil;
     }
 }
@@ -79,7 +82,7 @@ static int scrollObservanceContext;
 
 - (void) setupRefresh
 {
-    CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-25.0f), 5, 25.0f, 25.0f);
+    CGRect circleFrame          = CGRectMake(0.5f*(self.frame.size.width-25.0f), 25, 25.0f, 25.0f);
     CGPoint circleCenter        = CGPointMake(circleFrame.size.width/2, circleFrame.size.height/2);
     CGFloat outerStrokeWidth    = 4.0f;
     _circleShape                = [CAShapeLayer layer];
@@ -99,7 +102,7 @@ static int scrollObservanceContext;
     _activityIndicator.color            = _tintColor;
     [self addSubview:_activityIndicator];
     
-    _hintLabel               = [[UILabel alloc] initWithFrame:CGRectMake(0, kRefreshControlHeight-20.0f, kRefreshControlWidth, 20.0f)];
+    _hintLabel               = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kRefreshControlWidth, 20.0f)];
     _hintLabel.textAlignment = NSTextAlignmentCenter;
     _hintLabel.font          = [UIFont fontWithName:kRegularFont size:16.0f];
     _hintLabel.textColor     = [UIColor lightGrayColor];
@@ -145,27 +148,27 @@ static int scrollObservanceContext;
 //    animation.fromValue = shapeLayer.opacity;
 //    animation.toValue   = [NSNumber numberWithFloat:1.0];
 //    animation.duration = duration;        // 1 second
-//    
+//
 //    [shapeLayer addAnimation:animation forKey:@"flashAnimation"];
 //}
 
 #pragma mark -
 #pragma mark - Actions
 
-- (void) beginRefreshing
+- (void) beginLoading
 {
-    if (!_isRefreshing)
+    if (!_isLoadingMore)
     {
-        _canRefresh = NO;
-        _isRefreshing = YES;
+        _canLoadMore = NO;
+        _isLoadingMore = YES;
         _ignoreEdges = YES;
         
         if (!_dontAdjustInsets)
         {
             CGPoint offset = self.scrollView.contentOffset;
             UIEdgeInsets scrollViewInsets = _originalContentInset;
-            scrollViewInsets.top += kRefreshControlHeight;
-            offset.y -= kRefreshControlHeight;
+            scrollViewInsets.bottom += kRefreshControlHeight;
+            offset.y += kRefreshControlHeight;
             [_scrollView setContentInset:scrollViewInsets];
             [_scrollView setContentOffset:offset animated:NO];
         }
@@ -184,11 +187,11 @@ static int scrollObservanceContext;
     }
 }
 
-- (void) endRefreshing
+- (void) endLoading
 {
-    if (_isRefreshing)
+    if (_isLoadingMore)
     {
-        _isRefreshing = NO;
+        _isLoadingMore = NO;
         _circleShape.fillColor = [UIColor clearColor].CGColor;
         
         __block UIScrollView *blockScrollView = self.scrollView;
@@ -219,31 +222,39 @@ static int scrollObservanceContext;
         if (!_ignoreEdges)
             _originalContentInset = [[change objectForKey:@"new"] UIEdgeInsetsValue];
     }
+    else if ([keyPath isEqualToString:@"contentSize"])
+    {
+        if (!_ignoreEdges)
+            self.frame = CGRectMake(0.5*(_scrollView.frame.size.width-kRefreshControlWidth), MAX(_scrollView.contentSize.height,_scrollView.frame.size.height) + _scrollView.contentInset.bottom, kRefreshControlWidth, kRefreshControlHeight);
+    }
     else if ([keyPath isEqualToString:@"contentOffset"])
     {
         if (_ignoreEdges)
             return;
         
-        CGFloat offset = [[change objectForKey:@"new"] CGPointValue].y + self.originalContentInset.top;
+        CGFloat offset = [[change objectForKey:@"new"] CGPointValue].y + self.originalContentInset.bottom + _scrollView.frame.size.height;
         
-        if (_isRefreshing)
+        if (_isLoadingMore)
         {
             // already refreshing
-            if (offset < 0.0f && offset >= -kRefreshControlHeight)
+            if (offset > _scrollView.contentSize.height && offset <= _scrollView.contentSize.height + kRefreshControlHeight)
             {
                 _ignoreEdges = YES;
+                CGFloat diff = kRefreshControlHeight;
                 if (!self.scrollView.dragging)
                 {
                     // was released above tipping point
                     UIEdgeInsets scrollViewInsets = _originalContentInset;
-                    scrollViewInsets.top += kRefreshControlHeight;
+                    scrollViewInsets.bottom += diff;
+                    CGPoint oldOffset = self.scrollView.contentOffset;
                     [self.scrollView setContentInset:scrollViewInsets];
+                    [self.scrollView setContentOffset:oldOffset animated:NO];
                 }
                 else
                 {
                     // still touching
                     UIEdgeInsets scrollViewInsets = _originalContentInset;
-                    scrollViewInsets.top -= offset;
+                    scrollViewInsets.bottom += diff;
                     [self.scrollView setContentInset:scrollViewInsets];
                 }
                 _ignoreEdges = NO;
@@ -253,12 +264,13 @@ static int scrollObservanceContext;
         {
             // not refreshing yet
             BOOL shouldDraw = YES;
-            if (!_canRefresh)
+            CGFloat scrollViewHeight = MAX(_scrollView.contentSize.height, _scrollView.frame.size.height);
+            if (!_canLoadMore)
             {
-                if (offset >= -5.0f)
+                if (offset <= scrollViewHeight + 5.0f)
                 {
                     // We can refresh again after the control is scrolled out of view
-                    _canRefresh = YES;
+                    _canLoadMore = YES;
                     
                     // show subviews again
                     _circleShape.opacity = 1.0f;
@@ -268,7 +280,7 @@ static int scrollObservanceContext;
             }
             else
             {
-                if (offset >= 0.0f)
+                if (offset <= scrollViewHeight)
                 {
                     // Don't draw if the control is not visible
                     shouldDraw = NO;
@@ -277,12 +289,12 @@ static int scrollObservanceContext;
             
             if (shouldDraw)
             {
-                CGFloat percentPulled = MIN(-kRefreshControlHeight-offset,kRefreshPullHeight)/kRefreshPullHeight;
+                CGFloat percentPulled = MIN(offset - scrollViewHeight - self.originalContentInset.bottom - kRefreshPullHeight,kRefreshPullHeight)/kRefreshPullHeight;
                 if (percentPulled == 1.0f)
                 {
                     // triggered refresh
                     _dontAdjustInsets = YES;
-                    [self beginRefreshing];
+                    [self beginLoading];
                     [self sendActionsForControlEvents:UIControlEventValueChanged];
                     _dontAdjustInsets = NO;
                 }

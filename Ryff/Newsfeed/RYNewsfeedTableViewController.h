@@ -11,10 +11,12 @@
 
 // Custom UI
 #import "RYRefreshControl.h"
+#import "RYLoadMoreControl.h"
 
 @interface RYNewsfeedTableViewController : RYRiffStreamingCoreViewController <PostDelegate>
 
 @property (nonatomic, strong) RYRefreshControl *refreshControl;
+@property (nonatomic, strong) RYLoadMoreControl *loadMoreControl;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

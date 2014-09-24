@@ -38,6 +38,10 @@
     _refreshControl.tintColor = [RYStyleSheet postActionColor];
     [_refreshControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
+    _loadMoreControl = [[RYLoadMoreControl alloc] initInScrollView:_tableView];
+    _loadMoreControl.tintColor = [RYStyleSheet postActionColor];
+    [_loadMoreControl addTarget:self action:@selector(loadMoreContent:) forControlEvents:UIControlEventValueChanged];
+    
     // set up test data
     self.feedItems = @[];
     _searchType = NEW;
@@ -76,6 +80,13 @@
 - (void) refreshContent:(RYRefreshControl *)refreshControl
 {
     [self fetchContent];
+}
+
+- (void) loadMoreContent:(RYLoadMoreControl *)loadMoreControl
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_loadMoreControl endLoading];
+    });
 }
 
 #pragma mark -
