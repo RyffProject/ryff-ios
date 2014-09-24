@@ -228,7 +228,7 @@ static RYUser* _loggedInUser;
             mutParams[@"page"] = page;
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:action parameters:mutParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {

@@ -55,7 +55,7 @@
     if (!self.feedItems || self.feedItems.count == 0)
     {
         [_refreshControl beginRefreshing];
-        [self fetchContent:0];
+        [self fetchContent:1];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
@@ -78,7 +78,7 @@
 
 - (void) refreshContent:(RYRefreshControl *)refreshControl
 {
-    [self fetchContent:0];
+    [self fetchContent:1];
 }
 
 - (void) loadMoreContent:(RYLoadMoreControl *)loadMoreControl
@@ -91,21 +91,36 @@
 
 - (void) postSucceeded:(NSArray *)posts page:(NSNumber *)page
 {
-    if (page && page > 0)
+    if (page && page.integerValue > 1)
+    {
+        _loadMoreControl.hidden = YES;
+        [self.tableView beginUpdates];
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:posts.count];
+        for (NSInteger postIdx = self.feedItems.count; postIdx < self.feedItems.count+posts.count; postIdx++)
+        {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:postIdx inSection:self.riffSection]];
+        }
+        
         self.feedItems = [self.feedItems arrayByAddingObjectsFromArray:posts];
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        _loadMoreControl.hidden = NO;
+    }
     else
+    {
         self.feedItems = posts;
+        [self.tableView reloadData];
+    }
     
     _currentPage = page.integerValue;
     [_refreshControl endRefreshing];
-    [self.tableView reloadData];
+    [_loadMoreControl endLoading];
 }
 
 - (void) postFailed:(NSString *)reason page:(NSNumber *)page
 {
-    self.feedItems = nil;
     [_refreshControl endRefreshing];
-    [self.riffTableView reloadData];
+    [_loadMoreControl endLoading];
 }
 
 #pragma mark -
