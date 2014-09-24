@@ -39,6 +39,7 @@
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCell" bundle:NULL] forCellReuseIdentifier:kRiffCellReuseID];
     [self.riffTableView registerNib:[UINib nibWithNibName:@"RYRiffCellAvatar" bundle:NULL] forCellReuseIdentifier:KRiffCellAvatarReuseID];
     
+    _feedItems = @[];
     _riffSection = 0;
     _openRiffDetailsSection = -1;
 }

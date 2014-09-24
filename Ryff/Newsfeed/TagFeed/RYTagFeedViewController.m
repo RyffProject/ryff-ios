@@ -117,13 +117,13 @@
 #pragma mark -
 #pragma mark - Post Delegate
 
-- (void) postSucceeded:(NSArray *)posts
+- (void) postSucceeded:(NSArray *)posts page:(NSNumber *)page
 {
-    [super postSucceeded:posts];
+    [super postSucceeded:posts page:page];
     [self configureWithTags:_configurationTags];
 }
 
-- (void) postFailed:(NSString *)reason
+- (void) postFailed:(NSString *)reason page:(NSNumber *)page
 {
     [self.refreshControl endRefreshing];
 }

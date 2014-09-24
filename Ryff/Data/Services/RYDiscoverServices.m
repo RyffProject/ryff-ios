@@ -77,11 +77,11 @@ static RYDiscoverServices* _sharedInstance;
 #pragma mark -
 #pragma mark - Search Posts
 
-- (void) searchForPostsWithTags:(NSArray *)tags searchType:(SearchType)searchType delegate:(id<PostDelegate>)delegate
+- (void) searchForPostsWithTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate
 {
     NSDictionary *params = @{@"tags":tags};
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kSearchPostsNew];
-    [[RYServices sharedInstance] getPostsWithParams:params toAction:action forDelegate:delegate];
+    [[RYServices sharedInstance] getPostsWithParams:params toAction:action page:page forDelegate:delegate];
 }
 
 @end

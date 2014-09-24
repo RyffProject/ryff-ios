@@ -219,25 +219,29 @@ static RYUser* _loggedInUser;
     });
 }
 
-- (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action forDelegate:(id<PostDelegate>)delegate
+- (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action page:(NSNumber *)page forDelegate:(id<PostDelegate>)delegate
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
+        
+        NSMutableDictionary *mutParams = params ? [params mutableCopy] : [[NSMutableDictionary alloc] initWithCapacity:1];
+        if (page)
+            mutParams[@"page"] = page;
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager POST:action parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dictionary = responseObject;
             if (dictionary[@"success"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(postSucceeded:)])
-                    [delegate postSucceeded:[RYPost postsFromDictArray:dictionary[@"posts"]]];
+                if (delegate && [delegate respondsToSelector:@selector(postSucceeded:page:)])
+                    [delegate postSucceeded:[RYPost postsFromDictArray:dictionary[@"posts"]] page:page];
             }
-            else if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
-                [delegate postFailed:responseObject];
+            else if (delegate && [delegate respondsToSelector:@selector(postFailed:page:)])
+                [delegate postFailed:responseObject page:page];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Post error: %@",[error localizedDescription]);
-            if (delegate && [delegate respondsToSelector:@selector(postFailed:)])
-                [delegate postFailed:[error localizedDescription]];
+            if (delegate && [delegate respondsToSelector:@selector(postFailed:page:)])
+                [delegate postFailed:[error localizedDescription] page:page];
         }];
     });
 }
@@ -246,22 +250,15 @@ static RYUser* _loggedInUser;
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:2];
     [params setObject:@(userId) forKey:@"id"];
-    if (page)
-        [params setObject:page forKey:@"page"];
     
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetPosts];
-    [self getPostsWithParams:params toAction:action forDelegate:delegate];
+    [self getPostsWithParams:params toAction:action page:page forDelegate:delegate];
 }
 
 - (void) getNewsfeedPostsWithPage:(NSNumber *)page delegate:(id<PostDelegate>)delegate
 {
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetNewsfeedPosts];
-    
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:1];
-    if (page)
-        [params setObject:page forKey:@"page"];
-    
-    [self getPostsWithParams:params toAction:action forDelegate:delegate];
+    [self getPostsWithParams:nil toAction:action page:page forDelegate:delegate];
 }
 
 - (void) getPostsForTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page limit:(NSNumber *)limit delegate:(id<PostDelegate>)delegate
@@ -284,18 +281,16 @@ static RYUser* _loggedInUser;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:2];
     if (tags)
         [params setObject:tags forKey:@"tags"];
-    if (page)
-        [params setObject:page forKey:@"page"];
     if (limit)
         [params setObject:limit forKey:@"limit"];
     
-    [self getPostsWithParams:params toAction:action forDelegate:delegate];
+    [self getPostsWithParams:params toAction:action page:page forDelegate:delegate];
 }
 
 - (void) getStarredPostsForUser:(NSInteger)userID delegate:(id<PostDelegate>)delegate
 {
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetStarredPosts];
-    [self getPostsWithParams:nil toAction:action forDelegate:delegate];
+    [self getPostsWithParams:nil toAction:action page:nil forDelegate:delegate];
 }
 
 #pragma mark -

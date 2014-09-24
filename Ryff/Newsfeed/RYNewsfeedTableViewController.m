@@ -43,7 +43,6 @@
     [_loadMoreControl addTarget:self action:@selector(loadMoreContent:) forControlEvents:UIControlEventValueChanged];
     
     // set up test data
-    self.feedItems = @[];
     _searchType = NEW;
     
     [self addNewPostButtonToNavBar];
@@ -56,7 +55,7 @@
     if (!self.feedItems || self.feedItems.count == 0)
     {
         [_refreshControl beginRefreshing];
-        [self fetchContent];
+        [self fetchContent:0];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedIn:) name:kLoggedInNotification object:nil];
@@ -72,35 +71,37 @@
 #pragma mark -
 #pragma mark - Configuration
 
-- (void) fetchContent
+- (void) fetchContent:(NSInteger)page
 {
-    [[RYServices sharedInstance] getNewsfeedPostsWithPage:0 delegate:self];
+    [[RYServices sharedInstance] getNewsfeedPostsWithPage:@(page) delegate:self];
 }
 
 - (void) refreshContent:(RYRefreshControl *)refreshControl
 {
-    [self fetchContent];
+    [self fetchContent:0];
 }
 
 - (void) loadMoreContent:(RYLoadMoreControl *)loadMoreControl
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_loadMoreControl endLoading];
-    });
+    [self fetchContent:(_currentPage+1)];
 }
 
 #pragma mark -
 #pragma mark - Post Delegate
 
-- (void) postSucceeded:(NSArray *)posts
+- (void) postSucceeded:(NSArray *)posts page:(NSNumber *)page
 {
-    [self setFeedItems:posts];
+    if (page && page > 0)
+        self.feedItems = [self.feedItems arrayByAddingObjectsFromArray:posts];
+    else
+        self.feedItems = posts;
     
+    _currentPage = page.integerValue;
     [_refreshControl endRefreshing];
     [self.tableView reloadData];
 }
 
-- (void) postFailed:(NSString *)reason
+- (void) postFailed:(NSString *)reason page:(NSNumber *)page
 {
     self.feedItems = nil;
     [_refreshControl endRefreshing];
@@ -112,7 +113,7 @@
 
 - (void) userLoggedIn:(NSNotification *)notification
 {
-    [self fetchContent];
+    [self fetchContent:0];
 }
 
 #pragma mark -

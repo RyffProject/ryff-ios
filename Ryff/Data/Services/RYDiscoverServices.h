@@ -41,6 +41,6 @@
 - (void) getSuggestedTagsForDelegate:(id<TagDelegate>)delegate;
 
 // Search Posts
-- (void) searchForPostsWithTags:(NSArray *)tags searchType:(SearchType)searchType delegate:(id<PostDelegate>)delegate;
+- (void) searchForPostsWithTags:(NSArray *)tags searchType:(SearchType)searchType page:(NSNumber *)page delegate:(id<PostDelegate>)delegate;
 
 @end

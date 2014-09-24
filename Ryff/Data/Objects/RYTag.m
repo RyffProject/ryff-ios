@@ -70,7 +70,7 @@
 
 #pragma mark - PostDelegate
 
-- (void) postSucceeded:(NSArray *)posts
+- (void) postSucceeded:(NSArray *)posts page:(NSNumber *)page
 {
     // try to get post with an image
     for (RYPost *post in posts)

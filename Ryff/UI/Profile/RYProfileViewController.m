@@ -318,13 +318,16 @@
 #pragma mark -
 #pragma mark - POSTDelegate
 
-- (void) postFailed:(NSString*)reason
+- (void) postFailed:(NSString*)reason page:(NSNumber *)page
 {
     
 }
-- (void) postSucceeded:(NSArray *)posts
+- (void) postSucceeded:(NSArray *)posts page:(NSNumber *)page
 {
-    [self setFeedItems:posts];
+    if (page && page > 0)
+        self.feedItems = [self.feedItems arrayByAddingObjectsFromArray:posts];
+    else
+        self.feedItems = posts;
     [self.tableView reloadData];
 }
 

@@ -50,9 +50,9 @@ typedef enum : NSUInteger {
 } FamilyType;
 
 @protocol PostDelegate <NSObject>
-- (void) postSucceeded:(NSArray*)posts;
+- (void) postSucceeded:(NSArray*)posts page:(NSNumber *)page;
 @optional
-- (void) postFailed:(NSString*)reason;
+- (void) postFailed:(NSString*)reason page:(NSNumber *)page;
 @end
 
 @protocol FamilyPostDelegate <NSObject>
@@ -116,6 +116,6 @@ typedef enum : NSUInteger {
 - (void) star:(BOOL)shouldStar post:(RYPost *)post forDelegate:(id<ActionDelegate>)delegate;
 
 // Helper
-- (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action forDelegate:(id<PostDelegate>)delegate;
+- (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action page:(NSNumber *)page forDelegate:(id<PostDelegate>)delegate;
 
 @end

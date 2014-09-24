@@ -22,5 +22,6 @@
 
 // Data
 @property (nonatomic, assign) SearchType searchType;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
