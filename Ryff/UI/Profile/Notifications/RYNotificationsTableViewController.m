@@ -18,15 +18,18 @@
 // Custom UI
 #import "RYNotificationsTableViewCell.h"
 #import "RYRefreshControl.h"
+#import "RYLoadMoreControl.h"
 
 #define kNotificationCellReuseID @"notificationCell"
 
 @interface RYNotificationsTableViewController () <NotificationsDelegate>
 
 @property (nonatomic, strong) RYRefreshControl *refControl;
+@property (nonatomic, strong) RYLoadMoreControl *loadMoreControl;
 
 // Data
 @property (nonatomic, strong) NSArray *notifications;
+@property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, weak) id<NotificationSelectionDelegate> delegate;
 
 @end
@@ -41,12 +44,16 @@
     _refControl.tintColor = [RYStyleSheet postActionColor];
     [_refControl addTarget:self action:@selector(refreshContent:) forControlEvents:UIControlEventValueChanged];
     
+    _loadMoreControl = [[RYLoadMoreControl alloc] initInScrollView:self.tableView];
+    _loadMoreControl.tintColor = [RYStyleSheet postActionColor];
+    [_loadMoreControl addTarget:self action:@selector(loadMoreContent:) forControlEvents:UIControlEventValueChanged];
+    
     self.tableView.backgroundColor = [RYStyleSheet lightBackgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsZero;
     
     [_refControl beginRefreshing];
-    [self fetchContent];
+    [self fetchContent:1];
 }
 
 - (void) configureWithDelegate:(id<NotificationSelectionDelegate>)delegate
@@ -54,30 +61,57 @@
     _delegate = delegate;
 }
 
-- (void) fetchContent
+- (void) fetchContent:(NSInteger)page
 {
-    [[RYNotificationsManager sharedInstance] fetchNotificationsForDelegate:self page:nil];
+    [[RYNotificationsManager sharedInstance] fetchNotificationsForDelegate:self page:@(page)];
 }
 
 #pragma mark - Actions
 
 - (void) refreshContent:(RYRefreshControl *)refreshControl
 {
-    [self fetchContent];
+    [self fetchContent:1];
+}
+
+- (void) loadMoreContent:(RYLoadMoreControl *)loadMoreContent
+{
+    [self fetchContent:(_currentPage+1)];
 }
 
 #pragma mark -
 #pragma mark - Notifications Delegate
 
-- (void) notificationsRetrieved:(NSArray *)notifications
+- (void) notificationsRetrieved:(NSArray *)notifications page:(NSNumber *)page
 {
-    _notifications = notifications;
+    if (page && page.integerValue > 1)
+    {
+        _loadMoreControl.hidden = YES;
+        [self.tableView beginUpdates];
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:notifications.count];
+        for (NSInteger notifIdx = _notifications.count; notifIdx < _notifications.count+notifications.count; notifIdx++)
+        {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:notifIdx inSection:0]];
+        }
+        
+        _notifications = [_notifications arrayByAddingObjectsFromArray:notifications];
+        [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        _loadMoreControl.hidden = NO;
+    }
+    else
+    {
+        _notifications = notifications;
+        [self.tableView reloadData];
+    }
+    
+    _currentPage = page.integerValue;
     [_refControl endRefreshing];
-    [self.tableView reloadData];
+    [_loadMoreControl endLoading];
 }
 
-- (void) failedNotificationsRetrieval:(NSString *)reason
+- (void) failedNotificationsRetrieval:(NSString *)reason page:(NSNumber *)page
 {
+    [_loadMoreControl endLoading];
     [_refControl endRefreshing];
 }
 

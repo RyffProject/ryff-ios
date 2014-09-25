@@ -15,9 +15,9 @@
 @class RYNotification;
 
 @protocol NotificationsDelegate <NSObject>
-- (void) notificationsRetrieved:(NSArray *)notifications;
+- (void) notificationsRetrieved:(NSArray *)notifications page:(NSNumber *)page;
 @optional
-- (void) failedNotificationsRetrieval:(NSString *)reason;
+- (void) failedNotificationsRetrieval:(NSString *)reason page:(NSNumber *)page;
 @end
 
 @interface RYNotificationsManager : NSObject

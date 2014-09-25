@@ -69,11 +69,12 @@ static RYNotificationsManager *_sharedInstance;
 
 - (void) fetchNotificationsForDelegate:(id<NotificationsDelegate>)delegate page:(NSNumber *)page
 {
+    if (!page)
+        page = @(1);
+    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
-        NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:1];
-        if (page)
-            params[@"page"] = page;
+        NSDictionary *params = @{@"page": page};
         
         NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kGetNotifications];
         
@@ -82,17 +83,17 @@ static RYNotificationsManager *_sharedInstance;
             NSDictionary *responseDict = responseObject;
             if (responseDict[@"success"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(notificationsRetrieved:)])
+                if (delegate && [delegate respondsToSelector:@selector(notificationsRetrieved:page:)])
                 {
                     NSArray *notifications = [RYNotification notificationsFromDictArray:responseDict[@"notifications"]];
-                    [delegate notificationsRetrieved:notifications];
+                    [delegate notificationsRetrieved:notifications page:page];
                 }
             }
-            else if (responseDict[@"error"] && delegate && [delegate respondsToSelector:@selector(failedNotificationsRetrieval:)])
-                [delegate failedNotificationsRetrieval:responseDict[@"error"]];
+            else if (responseDict[@"error"] && delegate && [delegate respondsToSelector:@selector(failedNotificationsRetrieval:page:)])
+                [delegate failedNotificationsRetrieval:responseDict[@"error"] page:page];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (delegate && [delegate respondsToSelector:@selector(failedNotificationsRetrieval:)])
-                [delegate failedNotificationsRetrieval:[error localizedDescription]];
+            if (delegate && [delegate respondsToSelector:@selector(failedNotificationsRetrieval:page:)])
+                [delegate failedNotificationsRetrieval:[error localizedDescription] page:page];
         }];
     });
 }
