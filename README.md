@@ -1,18 +1,36 @@
-RyffApp
-=======
+Ryff
+====
 
-Submission for LA HACKS 2014 - Ryff Social Music App
+Social Music
 
-Completed in 36 hours.
+## About
 
-<img src="http://s3.amazonaws.com/challengepost/photos/production/solution_photos/000/122/323/datas/xlarge.png?1397412155"></img>
+[Ryff](https://github.com/RyffProject) is social network in which users collaboratively create music by mixing their own recordings with tracks posted by others. Users can follow each other or search with tags to find new people to follow or riffs to stream to a local playlist. The universal iOS app provides an interface for creating a profile, finding other users, messaging users, listening to riffs, and recording/mixing audio to post.
 
-Information at http://ryff.me/ and http://lahacks.challengepost.com/submissions/22799-ryff
+<img src="http://i.imgur.com/ugFml74.png"></img>
 
-" Ryff was conceived at LA Hacks 2014 by Chris Laganiere and Robert Fotino, two first-year computer science students at UCLA.
+This repository is the native iOS application, written in Objective-C and Swift for iOS 8. Ryff uses [PHP server-side code](https://github.com/RyffProject/ryff-api) in addition to several excellent open-source Frameworks. There is also a [web interface](https://github.com/RyffProject/ryff-web) in the making.
 
-Ryff is an app to help musicians find each other. You can create an artist profile, add your musical interests, and connect with other local musicians looking to play. Ryff allows you to record and post samples of your music without leaving the app, so you can show off your talents to people in the area. Do your friends have a band, but nobody wants to play drums? Start a group on Ryff and search for nearby artists who play drums. Trying to find a guitarist who's into a specific genre? You can do that, too.
+## Organization
 
-Ryff allows you to connect with the people that you want to be connected with. You can browse nearby artists and musical groups with similar tastes, hear how they sound, and either add them to your favorites or skip them and move on to the next. If you like the music of a particular artist, you should message them and meet up. Here at Ryff it's our belief that you should Never Jam Alone.
+/Workspace is general storage for inspiration or designs relating to the iOS app.
 
-If you have an iPhone, Ryff is coming soon to an app store near you. Android and web interfaces are in the works. If you have any questions or feedback, you can email the creators at robert.fotino@gmail.com and chrislaganiere@gmail.com. "
+/Ryff contains the complete project and source code. Ryff conforms to MVC design pattern and is written with standard Objective-C style. 
+
+## Open-Source Resources We Love
+
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+* [SDWebImage](https://github.com/rs/SDWebImage)
+* [PXAlertView](https://github.com/alexanderjarvis/PXAlertView)
+* [DWTagList](https://github.com/domness/DWTagList)
+* [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
+* [BNRDynamicTypeManager](https://github.com/bignerdranch/BNRDynamicTypeManager/blob/master/BNRDynamicTypeManager/Core/BNRDynamicTypeManager.m)
+* [FLEX](https://github.com/Flipboard/FLEX)
+
+## Contributors
+
+* [Chris Laganiere](https://github.com/ChrisLaganiere)
+
+## License
+
+The Ryff API is released under the Apache License, Version 2.0.
