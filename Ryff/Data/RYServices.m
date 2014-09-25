@@ -221,6 +221,9 @@ static RYUser* _loggedInUser;
 
 - (void) getPostsWithParams:(NSDictionary *)params toAction:(NSString *)action page:(NSNumber *)page forDelegate:(id<PostDelegate>)delegate
 {
+    if (!page)
+        page = @(1);
+    
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         
         NSMutableDictionary *mutParams = params ? [params mutableCopy] : [[NSMutableDictionary alloc] initWithCapacity:1];

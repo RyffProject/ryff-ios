@@ -87,7 +87,7 @@
     
     [self.tableView setBackgroundColor:[RYStyleSheet profileBackgroundColor]];
     [self configureForUser:_user];
-    if (_user)
+    if (_user && (!self.feedItems || self.feedItems.count == 0))
     {
         [[RYServices sharedInstance] getUserWithId:@(_user.userId) orUsername:nil delegate:self];
         [[RYServices sharedInstance] getUserPostsForUser:_user.userId page:nil delegate:self];
@@ -285,17 +285,13 @@
 {
     [_notificationsPopover dismissPopoverAnimated:NO];
     
-    UIViewController *vcToPush;
-    
     switch (notification.type) {
         case FOLLOW_NOTIF:
         {
             if (notification.users.count > 0)
             {
                 RYUser *user = notification.users.lastObject;
-                RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-                [profileVC configureForUser:user];
-                vcToPush = profileVC;
+                [self pushUserProfileForUser:user];
             }
             break;
         }
@@ -305,9 +301,7 @@
             if (notification.post)
             {
                 RYPost *post = notification.post;
-                RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-                [riffDetails configureForPost:post];
-                vcToPush = riffDetails;
+                [self pushRiffDetailsForPost:post];
             }
             break;
         }
@@ -316,18 +310,13 @@
             if (notification.posts.count > 0)
             {
                 RYPost *post = notification.posts.lastObject;
-                RYRiffDetailsViewController *riffDetails = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffDetails"];
-                [riffDetails configureForPost:post];
-                vcToPush = riffDetails;
+                [self pushRiffDetailsForPost:post];
             }
             break;
         }
         case UNRECOGNIZED_NOTIF:
             break;
     }
-    
-    if (vcToPush)
-        [self.navigationController pushViewController:vcToPush animated:YES];
 }
 
 #pragma mark -

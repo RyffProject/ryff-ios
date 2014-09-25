@@ -52,6 +52,8 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"RYRiffDetailsCell" bundle:NULL] forCellReuseIdentifier:kRiffDetailsCellReuseID];
     
+    
+    self.feedItems = @[_post];
     self.riffSection = 0;
     [[RYServices sharedInstance] getFamilyForPost:_post.postId delegate:self];
     
@@ -77,8 +79,6 @@
     _post = post;
     
     [self setTitle:post.title];
-    
-    self.feedItems = @[post];
 }
 
 #pragma mark - Actions
@@ -173,7 +173,7 @@
 {
     NSInteger numRows;
     if (section == self.riffSection)
-        numRows = [super tableView:tableView numberOfRowsInSection:0];
+        numRows = [super tableView:tableView numberOfRowsInSection:self.riffSection];
     else
         numRows = _childrenPosts.count;
     return numRows;
