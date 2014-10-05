@@ -92,10 +92,10 @@
             </objects>
             <point key="canvasLocation" x="800" y="-475"/>
         </scene>
-        <!--View Controller-->
+        <!--Riff Create Tracks View Controller-->
         <scene sceneID="RlJ-zG-RLD">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="otm-Sr-EJk" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="otm-Sr-EJk" customClass="RYRiffCreateTracksViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wSf-TO-BIb"/>
                         <viewControllerLayoutGuide type="bottom" id="BQy-Ga-UP8"/>
@@ -103,7 +103,41 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZCT-t6-LOb">
                         <rect key="frame" x="0.0" y="0.0" width="368" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZaT-4l-Q5D">
+                                <rect key="frame" x="16" y="0.0" width="368" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kwv-XF-Mqq">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="riffTrackCell" id="eGq-F8-3h9" customClass="RYRiffCreateCollectionViewCell" customModule="Ryff" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZaT-4l-Q5D" firstAttribute="leading" secondItem="ZCT-t6-LOb" secondAttribute="leadingMargin" id="KyY-an-RwI"/>
+                            <constraint firstItem="ZaT-4l-Q5D" firstAttribute="height" secondItem="ZCT-t6-LOb" secondAttribute="height" id="Ngg-i6-uUf"/>
+                            <constraint firstItem="ZaT-4l-Q5D" firstAttribute="width" secondItem="ZCT-t6-LOb" secondAttribute="width" id="QEH-mk-ljZ"/>
+                            <constraint firstItem="ZaT-4l-Q5D" firstAttribute="top" secondItem="wSf-TO-BIb" secondAttribute="bottom" id="Qtb-LS-ILm"/>
+                            <constraint firstItem="ZaT-4l-Q5D" firstAttribute="width" secondItem="ZCT-t6-LOb" secondAttribute="width" id="pby-mB-WZL"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="pby-mB-WZL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                 </viewController>

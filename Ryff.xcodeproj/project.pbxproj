@@ -68,6 +68,7 @@
 		8322309619AFFCC200C60033 /* sliderSeek@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8322309219AFFCC200C60033 /* sliderSeek@2x.png */; };
 		8322309C19B00D0200C60033 /* PXAlertView+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309919B00D0200C60033 /* PXAlertView+Customization.m */; };
 		8322309D19B00D0200C60033 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8322309B19B00D0200C60033 /* PXAlertView.m */; };
+		83247D8719E10DCF002EE723 /* RYRiffCreateTracksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */; };
 		832658A519BA416C0047D93B /* RYRiffCellAvatar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */; };
 		83302D8F19C7A20B008C5A54 /* RYTagListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */; };
 		83302D9519C7A972008C5A54 /* RYDiscoverServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 83302D9419C7A972008C5A54 /* RYDiscoverServices.m */; };
@@ -370,6 +371,7 @@
 		8322309919B00D0200C60033 /* PXAlertView+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXAlertView+Customization.m"; sourceTree = "<group>"; };
 		8322309A19B00D0200C60033 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
 		8322309B19B00D0200C60033 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
+		83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateTracksViewController.swift; sourceTree = "<group>"; };
 		832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellAvatar.xib; sourceTree = "<group>"; };
 		83302D8D19C7A20B008C5A54 /* RYTagListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTagListViewController.h; sourceTree = "<group>"; };
 		83302D8E19C7A20B008C5A54 /* RYTagListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListViewController.m; sourceTree = "<group>"; };
@@ -977,6 +979,7 @@
 				831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */,
 				83B73E4E19DF526E001C746E /* RYRiffEngine.swift */,
 				83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */,
+				83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */,
 				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
 				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
 			);
@@ -1836,6 +1839,7 @@
 				83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */,
 				83814BCD19D0DCBF00F60FBF /* RYTagListHeaderView.m in Sources */,
 				83BF315D19C9FFC200F5BE48 /* SDWebImageDecoder.m in Sources */,
+				83247D8719E10DCF002EE723 /* RYRiffCreateTracksViewController.swift in Sources */,
 				83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */,
 				83CCC919197EFCBF00FD1B4B /* UIAlertView+AFNetworking.m in Sources */,
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
