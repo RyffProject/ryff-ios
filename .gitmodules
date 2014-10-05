@@ -1,0 +1,3 @@
+[submodule "Ryff/Frameworks/FDWaveformView"]
+	path = Ryff/Frameworks/FDWaveformView
+	url = https://github.com/fulldecent/FDWaveformView.git
