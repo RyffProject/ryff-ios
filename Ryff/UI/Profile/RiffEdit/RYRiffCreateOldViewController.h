@@ -1,5 +1,5 @@
 //
-//  RYRiffCreateViewController.h
+//  RYRiffCreateOldViewController.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 6/17/14.
@@ -11,7 +11,7 @@
 #import "RYCoreViewController.h"
 #import "RYDataManager.h"
 
-@interface RYRiffCreateViewController : RYCoreViewController <TrackDownloadDelegate>
+@interface RYRiffCreateOldViewController : RYCoreViewController <TrackDownloadDelegate>
 
 - (void) includeRiffs:(NSArray*)arrayOfRiffs;
 

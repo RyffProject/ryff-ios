@@ -15,7 +15,7 @@
 #import "UIImage+Thumbnail.h"
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 
 #define kHudTag 1912984
 
@@ -35,7 +35,7 @@
 
 - (void) newPost:(id)sender
 {
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 

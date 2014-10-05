@@ -16,7 +16,6 @@
 #import "RYSocialTextView.h"
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
 #import "RYRiffStreamViewController.h"
 
 // Categories

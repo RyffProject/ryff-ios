@@ -80,7 +80,7 @@
 		834A0B4F19BED5A700E4D7E9 /* RYRegistrationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 834A0B4E19BED5A700E4D7E9 /* RYRegistrationServices.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
-		8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */; };
+		8355167219512CF100CF2C23 /* RYRiffCreateOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
 		835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */; };
@@ -122,6 +122,8 @@
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
 		83B73E4F19DF526E001C746E /* RYRiffEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E4E19DF526E001C746E /* RYRiffEngine.swift */; };
 		83B73E5119E0DFBD001C746E /* RYRiffCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */; };
+		83B73E5319E0F866001C746E /* RYRiffCreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */; };
+		83B73E5519E0F87E001C746E /* RiffCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B73E5419E0F87E001C746E /* RiffCreate.storyboard */; };
 		83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */; };
 		83BF315A19C9FFC200F5BE48 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313B19C9FFC200F5BE48 /* NSData+ImageContentType.m */; };
 		83BF315B19C9FFC200F5BE48 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313D19C9FFC200F5BE48 /* SDImageCache.m */; };
@@ -390,8 +392,8 @@
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
 		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
-		8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateViewController.h; sourceTree = "<group>"; };
-		8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateViewController.m; sourceTree = "<group>"; };
+		8355167019512CF100CF2C23 /* RYRiffCreateOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateOldViewController.h; sourceTree = "<group>"; };
+		8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateOldViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
 		835E1E0019D21A50007EBD74 /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
@@ -455,6 +457,8 @@
 		83B73E4D19DF526E001C746E /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Ryff-Bridging-Header.h"; path = "UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h"; sourceTree = "<group>"; };
 		83B73E4E19DF526E001C746E /* RYRiffEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffEngine.swift; sourceTree = "<group>"; };
 		83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateViewController.swift; sourceTree = "<group>"; };
+		83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateCollectionViewCell.swift; sourceTree = "<group>"; };
+		83B73E5419E0F87E001C746E /* RiffCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RiffCreate.storyboard; sourceTree = "<group>"; };
 		83BF313819C9FFC200F5BE48 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		83BF313A19C9FFC200F5BE48 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -974,6 +978,8 @@
 				831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */,
 				83B73E4E19DF526E001C746E /* RYRiffEngine.swift */,
 				83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */,
+				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
+				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
 			);
 			path = RiffCreate;
 			sourceTree = "<group>";
@@ -1104,8 +1110,8 @@
 			isa = PBXGroup;
 			children = (
 				835516731951314400CF2C23 /* RiffCreate */,
-				8355167019512CF100CF2C23 /* RYRiffCreateViewController.h */,
-				8355167119512CF100CF2C23 /* RYRiffCreateViewController.m */,
+				8355167019512CF100CF2C23 /* RYRiffCreateOldViewController.h */,
+				8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */,
 			);
 			name = RiffEdit;
 			path = UI/Profile/RiffEdit;
@@ -1784,6 +1790,7 @@
 				83ED34EE1931851600FEB018 /* AppIcon57x57.png in Resources */,
 				8309553819CA5EAC000A41B3 /* RYRiffDetailsCell.xib in Resources */,
 				83ED34F41931851600FEB018 /* AppIcon76x76.png in Resources */,
+				83B73E5519E0F87E001C746E /* RiffCreate.storyboard in Resources */,
 				83ED34F31931851600FEB018 /* AppIcon72x72@2x.png in Resources */,
 				8397133F1936DD1100913996 /* Main.storyboard in Resources */,
 				83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */,
@@ -1839,6 +1846,7 @@
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				83C354B319BBAD41000A5BD4 /* RYRiffStreamViewController.m in Sources */,
 				83C8940B19C809E100127F68 /* RYTagList.m in Sources */,
+				83B73E5319E0F866001C746E /* RYRiffCreateCollectionViewCell.swift in Sources */,
 				83BF316719C9FFC200F5BE48 /* UIImageView+WebCache.m in Sources */,
 				83CA12261995CD23002610E8 /* FLEXUtility.m in Sources */,
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
@@ -1927,7 +1935,7 @@
 				83CA123019981087002610E8 /* RYAudioDeckManager.m in Sources */,
 				83CA12151995CD23002610E8 /* FLEXLiveObjectsTableViewController.m in Sources */,
 				833FC1B21989E4B0002491C8 /* RYRiffDetailsTableViewCell.m in Sources */,
-				8355167219512CF100CF2C23 /* RYRiffCreateViewController.m in Sources */,
+				8355167219512CF100CF2C23 /* RYRiffCreateOldViewController.m in Sources */,
 				831B96081964DEC6003A8616 /* RYDataManager.m in Sources */,
 				83CCC911197EFCBF00FD1B4B /* AFNetworkReachabilityManager.m in Sources */,
 				837E9AC61981E3360052E006 /* RYProfileInfoTableViewCell.m in Sources */,
@@ -2067,7 +2075,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -2100,7 +2108,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2115,7 +2123,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2138,7 +2146,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

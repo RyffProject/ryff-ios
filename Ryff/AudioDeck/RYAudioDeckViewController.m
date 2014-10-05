@@ -25,7 +25,7 @@
 #import "UIImage+Thumbnail.h"
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 #import "RYRiffDetailsViewController.h"
 
 #define kAudioDeckCellReuseID @"audioDeckCell"
@@ -148,7 +148,7 @@
     RYPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
     if (post)
     {
-        RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+        RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
         [riffCreateVC includeRiffs:@[post.riffURL]];
         [self presentViewController:riffCreateVC animated:YES completion:nil];
     }

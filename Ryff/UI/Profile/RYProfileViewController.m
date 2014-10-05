@@ -35,7 +35,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 #import "RYLoginViewController.h"
 #import "RYNotificationsTableViewController.h"
 #import "RYRiffDetailsViewController.h"
