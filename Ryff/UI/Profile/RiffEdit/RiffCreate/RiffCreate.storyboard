@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjz-Fr-Pg1">
-                                <rect key="frame" x="16" y="20" width="180" height="600"/>
+                                <rect key="frame" x="-4" y="20" width="240" height="600"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="6o2-dh-0ul"/>
                                 </constraints>
@@ -33,7 +33,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axg-tx-mpr">
-                                <rect key="frame" x="196" y="20" width="388" height="600"/>
+                                <rect key="frame" x="236" y="20" width="368" height="600"/>
                                 <connections>
                                     <segue destination="otm-Sr-EJk" kind="embed" id="Yfk-AO-F5c"/>
                                 </connections>
@@ -44,9 +44,9 @@
                             <constraint firstItem="rjz-Fr-Pg1" firstAttribute="top" secondItem="SD0-dW-cpo" secondAttribute="bottom" id="6FG-IG-6E6"/>
                             <constraint firstItem="axg-tx-mpr" firstAttribute="height" secondItem="Hta-WB-eJp" secondAttribute="height" id="Az6-Wq-Pgt"/>
                             <constraint firstItem="axg-tx-mpr" firstAttribute="top" secondItem="SD0-dW-cpo" secondAttribute="bottom" id="EAY-9a-cRf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="axg-tx-mpr" secondAttribute="trailing" id="YEF-fR-mZt"/>
-                            <constraint firstItem="rjz-Fr-Pg1" firstAttribute="leading" secondItem="Hta-WB-eJp" secondAttribute="leadingMargin" id="e7y-vD-k1m"/>
-                            <constraint firstItem="rjz-Fr-Pg1" firstAttribute="width" secondItem="Hta-WB-eJp" secondAttribute="width" multiplier="0.3" id="lyj-i3-b5l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="axg-tx-mpr" secondAttribute="trailing" constant="-20" id="YEF-fR-mZt"/>
+                            <constraint firstItem="rjz-Fr-Pg1" firstAttribute="leading" secondItem="Hta-WB-eJp" secondAttribute="leadingMargin" constant="-20" id="e7y-vD-k1m"/>
+                            <constraint firstItem="rjz-Fr-Pg1" firstAttribute="width" secondItem="Hta-WB-eJp" secondAttribute="width" multiplier="0.4" id="lyj-i3-b5l"/>
                             <constraint firstItem="axg-tx-mpr" firstAttribute="leading" secondItem="rjz-Fr-Pg1" secondAttribute="trailing" id="n0U-aI-NEA"/>
                             <constraint firstItem="axg-tx-mpr" firstAttribute="width" secondItem="Hta-WB-eJp" secondAttribute="width" multiplier="0.65" id="qzd-7g-sfr"/>
                             <constraint firstItem="rjz-Fr-Pg1" firstAttribute="height" secondItem="Hta-WB-eJp" secondAttribute="height" id="wvI-JR-qSW"/>
@@ -82,7 +82,7 @@
                         <viewControllerLayoutGuide type="bottom" id="F25-me-mXt"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fBs-18-UQd">
-                        <rect key="frame" x="0.0" y="0.0" width="180" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.3921568627" green="0.83529411760000005" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -101,7 +101,7 @@
                         <viewControllerLayoutGuide type="bottom" id="BQy-Ga-UP8"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZCT-t6-LOb">
-                        <rect key="frame" x="0.0" y="0.0" width="388" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="368" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

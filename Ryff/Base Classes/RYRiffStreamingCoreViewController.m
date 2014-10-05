@@ -125,10 +125,10 @@
  */
 - (void) repostAction:(NSInteger)riffIndex
 {
-    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
-    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    [riffCreateVC includeRiffs:@[post.riffURL]];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
+//    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
+//    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+//    [riffCreateVC includeRiffs:@[post.riffURL]];
+//    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
 ///*

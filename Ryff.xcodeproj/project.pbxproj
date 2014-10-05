@@ -945,7 +945,6 @@
 				83BF313719C9FFC200F5BE48 /* SDWebImage */,
 				8322309719B00D0200C60033 /* PXAlertView */,
 				830BBCB618FA055900A9C53F /* MBProgressHUD */,
-				836F483719A04BAB00E948BE /* Categories */,
 				83CA118B1995CD23002610E8 /* FLEX */,
 				83EB8BA319959F5C0007837D /* DWTagList */,
 				83CCC8E8197EFCBF00FD1B4B /* AFNetworking */,
@@ -1448,6 +1447,7 @@
 			isa = PBXGroup;
 			children = (
 				833E1D511975DFA90002A2BE /* Extras */,
+				836F483719A04BAB00E948BE /* Categories */,
 				83DBCA7818F99E2000262496 /* Base Classes */,
 				83FCD1A918F93E6C00A493F0 /* Images */,
 				83FCD1A518F9393500A493F0 /* Style */,
@@ -2061,6 +2061,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2076,6 +2077,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULE_NAME = Ryff;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -2100,6 +2102,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Laganiere (6EN5YZJ6J8)";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2109,6 +2112,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULE_NAME = Ryff;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2120,6 +2124,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Ryff Icon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
@@ -2129,6 +2134,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ryff/Frameworks/CrittercismSDK",
 				);
+				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ryff/UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2143,6 +2149,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Ryff Icon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
@@ -2152,6 +2159,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Ryff/Frameworks/CrittercismSDK",
 				);
+				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ryff/UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";

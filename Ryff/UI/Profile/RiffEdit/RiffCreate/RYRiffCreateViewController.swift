@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 class RYRiffCreateViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var collectionView: UICollectionView!

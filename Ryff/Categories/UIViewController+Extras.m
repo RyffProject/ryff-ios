@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Jason Loewy. All rights reserved.
 //
 
+#import "Ryff-Swift.h"
+
 #import "UIViewController+Extras.h"
 
 // Custom UI
@@ -35,7 +37,7 @@
 
 - (void) newPost:(id)sender
 {
-    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateContainer"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
