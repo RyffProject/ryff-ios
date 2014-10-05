@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 // Server paths
 #define kApiRoot                @"https://ryff.me/api/"
