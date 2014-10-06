@@ -9,7 +9,7 @@
         <!--Riff Create Container View Controller-->
         <scene sceneID="Gbe-tH-pJX">
             <objects>
-                <viewController storyboardIdentifier="RiffCreateContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7wc-pw-icY" customClass="RYRiffCreateContainerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="container" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7wc-pw-icY" customClass="RYRiffCreateContainerViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SD0-dW-cpo"/>
                         <viewControllerLayoutGuide type="bottom" id="nbd-EM-Dyg"/>
@@ -112,7 +112,7 @@
         <!--Riff Create Tracks View Controller-->
         <scene sceneID="RlJ-zG-RLD">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="otm-Sr-EJk" customClass="RYRiffCreateTracksViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="otm-Sr-EJk" customClass="RYRiffCreateTracksViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wSf-TO-BIb"/>
                         <viewControllerLayoutGuide type="bottom" id="BQy-Ga-UP8"/>
