@@ -37,7 +37,7 @@
 
 - (void) newPost:(id)sender
 {
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateContainer"];
+    RYRiffCreateContainerViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateContainer"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 

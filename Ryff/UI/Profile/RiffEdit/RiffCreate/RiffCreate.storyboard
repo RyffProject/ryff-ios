@@ -6,10 +6,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Riff Create View Controller-->
+        <!--Riff Create Container View Controller-->
         <scene sceneID="Gbe-tH-pJX">
             <objects>
-                <viewController storyboardIdentifier="RiffCreateContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7wc-pw-icY" customClass="RYRiffCreateViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RiffCreateContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7wc-pw-icY" customClass="RYRiffCreateContainerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SD0-dW-cpo"/>
                         <viewControllerLayoutGuide type="bottom" id="nbd-EM-Dyg"/>
@@ -73,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="380" y="288"/>
         </scene>
-        <!--View Controller-->
+        <!--Riff Create Deck View Controller-->
         <scene sceneID="f0M-gi-Wci">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="QMl-rl-YQ0" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="QMl-rl-YQ0" customClass="RYRiffCreateDeckViewController" customModule="Ryff" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tHL-uO-cJg"/>
                         <viewControllerLayoutGuide type="bottom" id="F25-me-mXt"/>
@@ -84,13 +84,30 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fBs-18-UQd">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzK-5b-Osi" customClass="FDWaveformView">
+                                <rect key="frame" x="10" y="50" width="220" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="idt-Vv-AQ2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="0.3921568627" green="0.83529411760000005" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="xzK-5b-Osi" firstAttribute="width" secondItem="fBs-18-UQd" secondAttribute="width" constant="-20" id="2hG-Mj-fvW"/>
+                            <constraint firstItem="xzK-5b-Osi" firstAttribute="top" secondItem="tHL-uO-cJg" secondAttribute="bottom" constant="50" id="XYo-Yy-dwv"/>
+                            <constraint firstItem="xzK-5b-Osi" firstAttribute="leading" secondItem="fBs-18-UQd" secondAttribute="leadingMargin" constant="-6" id="t9e-bn-DPU"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="activeTrackWaveformView" destination="xzK-5b-Osi" id="1NY-tq-d8k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c66-ra-tMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="-475"/>
+            <point key="canvasLocation" x="574" y="-443"/>
         </scene>
         <!--Riff Create Tracks View Controller-->
         <scene sceneID="RlJ-zG-RLD">
@@ -123,6 +140,10 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="otm-Sr-EJk" id="i0u-fG-L6a"/>
+                                    <outlet property="delegate" destination="otm-Sr-EJk" id="92O-wd-uUm"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,9 +161,13 @@
                         </variation>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="collectionView" destination="ZaT-4l-Q5D" id="BiX-d7-KYP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVr-VX-c99" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="953" y="-443"/>
         </scene>
     </scenes>
 </document>

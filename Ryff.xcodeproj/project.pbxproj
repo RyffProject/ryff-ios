@@ -82,6 +82,7 @@
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
 		835299C019E1EC3F002BB490 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835299B319E1EC3F002BB490 /* FDWaveformView.m */; };
+		835299CB19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
@@ -123,7 +124,7 @@
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
 		83B73E4F19DF526E001C746E /* RYRiffEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E4E19DF526E001C746E /* RYRiffEngine.swift */; };
-		83B73E5119E0DFBD001C746E /* RYRiffCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */; };
+		83B73E5119E0DFBD001C746E /* RYRiffCreateContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5019E0DFBD001C746E /* RYRiffCreateContainerViewController.swift */; };
 		83B73E5319E0F866001C746E /* RYRiffCreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */; };
 		83B73E5519E0F87E001C746E /* RiffCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B73E5419E0F87E001C746E /* RiffCreate.storyboard */; };
 		83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */; };
@@ -397,6 +398,7 @@
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
 		835299B219E1EC3F002BB490 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
 		835299B319E1EC3F002BB490 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
+		835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateDeckViewController.swift; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateOldViewController.h; sourceTree = "<group>"; };
 		8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateOldViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
@@ -461,7 +463,7 @@
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
 		83B73E4D19DF526E001C746E /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Ryff-Bridging-Header.h"; path = "UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h"; sourceTree = "<group>"; };
 		83B73E4E19DF526E001C746E /* RYRiffEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffEngine.swift; sourceTree = "<group>"; };
-		83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateViewController.swift; sourceTree = "<group>"; };
+		83B73E5019E0DFBD001C746E /* RYRiffCreateContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateContainerViewController.swift; sourceTree = "<group>"; };
 		83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateCollectionViewCell.swift; sourceTree = "<group>"; };
 		83B73E5419E0F87E001C746E /* RiffCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RiffCreate.storyboard; sourceTree = "<group>"; };
 		83BF313819C9FFC200F5BE48 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -992,8 +994,9 @@
 				831B96091964E428003A8616 /* RYTrackDownloadTableViewCell.h */,
 				831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */,
 				83B73E4E19DF526E001C746E /* RYRiffEngine.swift */,
-				83B73E5019E0DFBD001C746E /* RYRiffCreateViewController.swift */,
+				83B73E5019E0DFBD001C746E /* RYRiffCreateContainerViewController.swift */,
 				83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */,
+				835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */,
 				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
 				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
 			);
@@ -1932,6 +1935,7 @@
 				83BF315F19C9FFC200F5BE48 /* SDWebImageDownloaderOperation.m in Sources */,
 				83CCC91B197EFCBF00FD1B4B /* UIImageView+AFNetworking.m in Sources */,
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
+				835299CB19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift in Sources */,
 				83CA12181995CD23002610E8 /* FLEXClassExplorerViewController.m in Sources */,
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
 				83CA11FB1995CD23002610E8 /* FLEXArgumentInputJSONObjectView.m in Sources */,
@@ -1939,7 +1943,7 @@
 				83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */,
 				83CA120A1995CD23002610E8 /* FLEXExplorerToolbar.m in Sources */,
 				83CA121B1995CD23002610E8 /* FLEXDictionaryExplorerViewController.m in Sources */,
-				83B73E5119E0DFBD001C746E /* RYRiffCreateViewController.swift in Sources */,
+				83B73E5119E0DFBD001C746E /* RYRiffCreateContainerViewController.swift in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				83CA11FD1995CD23002610E8 /* FLEXArgumentInputNumberView.m in Sources */,
 				83B73E4F19DF526E001C746E /* RYRiffEngine.swift in Sources */,

@@ -6,8 +6,13 @@
 #import "RYServices.h"
 #import "RYRegistrationServices.h"
 #import "RYDiscoverServices.h"
+#import "RYAudioDeckManager.h"
+#import "RYDataManager.h"
 
 // Data Objects
 #import "RYUser.h"
 #import "RYPost.h"
 #import "RYTag.h"
+
+// Custom UI
+#import "FDWaveformView.h"
