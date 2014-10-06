@@ -76,7 +76,7 @@ static RYDataManager *_sharedInstance;
         [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:NULL];
     
     NSString *fileName = [[riffURL pathComponents] lastObject];
-    return [NSURL URLWithString:[trackDir stringByAppendingPathComponent:fileName]];
+    return [NSURL fileURLWithPath:[trackDir stringByAppendingPathComponent:fileName]];
 }
 
 /*
