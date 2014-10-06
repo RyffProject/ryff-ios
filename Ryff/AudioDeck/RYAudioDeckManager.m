@@ -145,7 +145,7 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.imageURL || post.user.avatarURL.absoluteString.length > 0)
         {
             NSURL *imageURL = post.imageURL ? post.imageURL : post.user.avatarURL;
-            __block RYAudioDeckManager *blockSelf = self;
+            __weak RYAudioDeckManager *blockSelf = self;
             
             [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                 blockSelf.nowPlayingArtwork = image;
