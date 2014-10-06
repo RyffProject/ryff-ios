@@ -22,11 +22,6 @@ class RYRiffCreateTracksViewController: UIViewController, UICollectionViewDataSo
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // MARK: UICollectionView Data Source
     

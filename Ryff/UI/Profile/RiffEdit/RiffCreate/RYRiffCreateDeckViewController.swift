@@ -11,6 +11,7 @@ import UIKit
 class RYRiffCreateDeckViewController: UIViewController {
 
     @IBOutlet weak var activeTrackWaveformView: FDWaveformView!
+    weak var riffEngine: RYRiffEngine?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,6 @@ class RYRiffCreateDeckViewController: UIViewController {
                 activeTrackWaveformView.audioURL = postURL
             }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

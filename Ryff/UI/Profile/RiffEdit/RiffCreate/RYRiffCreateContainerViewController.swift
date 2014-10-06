@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 class RYRiffCreateContainerViewController: UIViewController {
     
     var riffEngine: RYRiffEngine
@@ -26,9 +27,15 @@ class RYRiffCreateContainerViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "tracks") {
+            riffTracksViewController = segue.destinationViewController as RYRiffCreateTracksViewController
+            riffTracksViewController.riffEngine = riffEngine
+        }
+        else if (segue.identifier == "deck") {
+            riffDeckViewController = segue.destinationViewController as RYRiffCreateDeckViewController
+            riffDeckViewController.riffEngine = riffEngine
+        }
     }
     
 }
