@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RYRiffCreateDeckViewController: UIViewController {
+class RYRiffCreateDeckViewController: UIViewController, FDWaveFormProgressDelegate, RiffEngineDeckDelegate {
 
     @IBOutlet weak var activeTrackWaveformView: FDWaveformView!
     weak var riffEngine: RYRiffEngine?
@@ -29,5 +29,27 @@ class RYRiffCreateDeckViewController: UIViewController {
             }
         }
     }
-
+    
+    // MARK: FDWaveFormProgressDelegate
+    
+    func skipToPosition(position: CGFloat) {
+        riffEngine?.activeTrack?.skipToPosition(position)
+    }
+    
+    // MARK: RiffEngineDeckDelegate
+    
+    func activeTrackProgressChanged() {
+        if let progress = riffEngine?.activeTrack?.position() {
+            let progressSamples:NSNumber = progress*(Int(activeTrackWaveformView.totalSamples) as NSNumber)
+            activeTrackWaveformView.progressSamples = progressSamples
+        }
+    }
+    
+    func activeTrackChanged() {
+        
+    }
+    
+    func controlsChanged() {
+        
+    }
 }

@@ -16,12 +16,13 @@ protocol RiffEngineTrackDelegate: NSObjectProtocol {
 
 protocol RiffEngineDeckDelegate: NSObjectProtocol {
     func activeTrackChanged()
+    func activeTrackProgressChanged()
     func controlsChanged()
 }
 
 class RiffTrack: NSObject {
-    var audioFile: AVAudioFile
-    var audioNode: AVAudioPlayerNode
+    let audioFile: AVAudioFile
+    let audioNode: AVAudioPlayerNode
     var trackName: String?
     var trackAuthor: RYUser?
     
@@ -32,18 +33,24 @@ class RiffTrack: NSObject {
         self.audioFile   = audioFile
         super.init()
         
-        self.restart()
+        audioNode.play()
     }
     
     convenience init(trackName: String, audioURL:NSURL) {
         self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:AVAudioFile(forReading: audioURL, error: nil))
-        self.restart()
     }
     
-    func restart() {
-        audioNode.scheduleFile(audioFile, atTime: nil) { () -> Void in
-            self.restart()
-        }
+    func position() -> Double {
+        let length:NSNumber = Int(audioFile.length)
+        let lastPosition:NSNumber = Int(audioNode.lastRenderTime.sampleTime)
+        return lastPosition/length
+    }
+    
+    func skipToPosition(percentFinished:CGFloat) {
+        let length:NSNumber = Int(audioFile.length)
+        let sampleTime = Int64(percentFinished*length)
+        let audioTime = AVAudioTime(sampleTime: sampleTime, atRate: audioFile.processingFormat.sampleRate)
+        audioNode.playAtTime(audioTime)
     }
 }
 
@@ -82,8 +89,7 @@ class RYRiffEngine: NSObject {
     func recordActive() {
         if let audioFile = recordingFile {
             // finish recording
-            let buffer = AVAudioPCMBuffer()
-            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL:audioFile.url)
+            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL: audioFile.url)
             recordingFile = nil
             recording = false
             
