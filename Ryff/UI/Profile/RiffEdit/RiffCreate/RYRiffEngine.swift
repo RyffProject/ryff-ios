@@ -20,19 +20,30 @@ protocol RiffEngineDeckDelegate: NSObjectProtocol {
 }
 
 class RiffTrack: NSObject {
-    var audioNode: AVAudioPlayerNode?
+    var audioFile: AVAudioFile
+    var audioNode: AVAudioPlayerNode
     var trackName: String?
     var trackAuthor: RYUser?
     
-    init(trackName: String, trackAuthor: RYUser, audioNode:AVAudioPlayerNode) {
-        self.trackName = trackName
+    init(trackName: String, trackAuthor: RYUser, audioNode: AVAudioPlayerNode, audioFile: AVAudioFile) {
+        self.trackName   = trackName
         self.trackAuthor = trackAuthor
+        self.audioNode   = audioNode
+        self.audioFile   = audioFile
         super.init()
+        
+        self.restart()
     }
     
-    convenience init(buffer:AVAudioPCMBuffer) {
-        self.init(trackName:"New", trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode())
-        audioNode?.scheduleBuffer(buffer, atTime: nil, options: .Loops, completionHandler: nil)
+    convenience init(trackName: String, audioURL:NSURL) {
+        self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:AVAudioFile(forReading: audioURL, error: nil))
+        self.restart()
+    }
+    
+    func restart() {
+        audioNode.scheduleFile(audioFile, atTime: nil) { () -> Void in
+            self.restart()
+        }
     }
 }
 
@@ -41,37 +52,51 @@ class RYRiffEngine: NSObject {
     let audioEngine:AVAudioEngine
     var audioTracks:Array<RiffTrack>
     var activeTrack:RiffTrack?
-    var recordingFile:AVAudioFile?
     var recording:Bool
     weak var trackDelegate:RiffEngineTrackDelegate?
     weak var deckDelegate:RiffEngineDeckDelegate?
+    
+    private var recordingFile:AVAudioFile?
     
     override init() {
         audioEngine = AVAudioEngine()
         audioTracks = Array()
         recording = false
         super.init()
+        
+        audioEngine.startAndReturnError(nil)
     }
     
     // MARK: Media Controls
     
-    func addTrack(track:RiffTrack) {
+    func addTrack(track: RiffTrack) {
         audioTracks.append(track)
+        audioEngine.attachNode(track.audioNode)
+        
+        trackDelegate?.tracksChanged()
+        deckDelegate?.activeTrackChanged()
     }
     
     // MARK: Active Track
     
     func recordActive() {
-        if (recordingFile != nil) {
+        if let audioFile = recordingFile {
             // finish recording
             let buffer = AVAudioPCMBuffer()
-            recordingFile?.readIntoBuffer(buffer, error: nil)
-            activeTrack = RiffTrack(buffer:buffer)
+            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL:audioFile.url)
             recordingFile = nil
             recording = false
+            
+            // notify delegate
+            deckDelegate?.activeTrackChanged()
         }
         else {
             // start recording
+            if let newTrack = activeTrack {
+                self.addTrack(newTrack)
+                activeTrack = nil
+            }
+            
             recordingFile = AVAudioFile()
             audioEngine.inputNode.installTapOnBus(0, bufferSize: 4096, format: audioEngine.inputNode.inputFormatForBus(0), block: { (buffer, when) -> Void in
                 var error:NSError?
@@ -81,17 +106,6 @@ class RYRiffEngine: NSObject {
                 }
             })
             recording = true
-        }
-    }
-    
-    func addTrackToTracks(track: RiffTrack) {
-        if let playerNode = track.audioNode {
-            audioTracks.append(track)
-            activeTrack = nil
-            
-            audioEngine.attachNode(playerNode)
-            trackDelegate?.tracksChanged()
-            deckDelegate?.activeTrackChanged()
         }
     }
     
