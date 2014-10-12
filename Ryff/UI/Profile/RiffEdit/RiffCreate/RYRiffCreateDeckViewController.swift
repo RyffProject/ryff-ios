@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RYRiffCreateDeckViewController: UIViewController, FDWaveFormProgressDelegate, RiffEngineDeckDelegate {
+class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
 
     @IBOutlet weak var activeTrackWaveformView: FDWaveformView!
     weak var riffEngine: RYRiffEngine?
@@ -30,7 +30,7 @@ class RYRiffCreateDeckViewController: UIViewController, FDWaveFormProgressDelega
         }
     }
     
-    // MARK: FDWaveFormProgressDelegate
+    // MARK: Media
     
     func skipToPosition(position: CGFloat) {
         riffEngine?.activeTrack?.skipToPosition(position)
