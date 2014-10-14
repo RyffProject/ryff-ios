@@ -14,7 +14,6 @@ class RYRiffCreateContainerViewController: UIViewController {
     var riffEngine: RYRiffEngine
     var riffTracksViewController: RYRiffCreateTracksViewController!
     var riffDeckViewController: RYRiffCreateDeckViewController!
-    var other: RYRiffCreateContainerViewController!
     
     // MARK: ViewController Life Cycle
     
