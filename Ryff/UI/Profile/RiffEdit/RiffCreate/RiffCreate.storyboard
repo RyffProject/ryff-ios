@@ -92,17 +92,31 @@
                                     <constraint firstAttribute="height" constant="50" id="idt-Vv-AQ2"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJd-C0-7RS">
+                                <rect key="frame" x="10" y="108" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="EqS-gs-obe"/>
+                                    <constraint firstAttribute="height" constant="35" id="Wyf-fv-JPS"/>
+                                </constraints>
+                                <state key="normal" image="record.png"/>
+                                <connections>
+                                    <action selector="recordButtonHit:" destination="QMl-rl-YQ0" eventType="touchUpInside" id="qQW-jA-agk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.3921568627" green="0.83529411760000005" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xzK-5b-Osi" firstAttribute="width" secondItem="fBs-18-UQd" secondAttribute="width" constant="-20" id="2hG-Mj-fvW"/>
+                            <constraint firstItem="bJd-C0-7RS" firstAttribute="top" secondItem="tHL-uO-cJg" secondAttribute="bottom" constant="108" id="VZG-ZO-OLG"/>
                             <constraint firstItem="xzK-5b-Osi" firstAttribute="top" secondItem="tHL-uO-cJg" secondAttribute="bottom" constant="50" id="XYo-Yy-dwv"/>
                             <constraint firstItem="xzK-5b-Osi" firstAttribute="leading" secondItem="fBs-18-UQd" secondAttribute="leadingMargin" constant="-6" id="t9e-bn-DPU"/>
+                            <constraint firstItem="bJd-C0-7RS" firstAttribute="leading" secondItem="fBs-18-UQd" secondAttribute="leadingMargin" constant="-6" id="udY-H8-ldN"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
                         <outlet property="activeTrackWaveformView" destination="xzK-5b-Osi" id="1NY-tq-d8k"/>
+                        <outlet property="recordButton" destination="bJd-C0-7RS" id="vIw-rh-Har"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c66-ra-tMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -170,4 +184,7 @@
             <point key="canvasLocation" x="953" y="-443"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="record.png" width="45" height="45"/>
+    </resources>
 </document>

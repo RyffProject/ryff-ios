@@ -32,11 +32,9 @@ class RiffTrack: NSObject {
         self.audioNode   = audioNode
         self.audioFile   = audioFile
         super.init()
-        
-        audioNode.play()
     }
     
-    convenience init(trackName: String, audioURL:NSURL) {
+    convenience init(trackName: String, audioURL:NSURL, audioEngine: AVAudioEngine) {
         self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:AVAudioFile(forReading: audioURL, error: nil))
     }
     
@@ -70,8 +68,6 @@ class RYRiffEngine: NSObject {
         audioTracks = Array()
         recording = false
         super.init()
-        
-        audioEngine.startAndReturnError(nil)
     }
     
     // MARK: Media Controls
@@ -89,7 +85,10 @@ class RYRiffEngine: NSObject {
     func recordActive() {
         if let audioFile = recordingFile {
             // finish recording
-            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL: audioFile.url)
+            audioEngine.stop()
+            audioEngine.mainMixerNode.removeTapOnBus(0)
+            let audioURL = audioFile.url.filePathURL!
+            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL: audioURL, audioEngine: audioEngine)
             recordingFile = nil
             recording = false
             
@@ -103,15 +102,23 @@ class RYRiffEngine: NSObject {
                 activeTrack = nil
             }
             
-            recordingFile = AVAudioFile()
-            audioEngine.inputNode.installTapOnBus(0, bufferSize: 4096, format: audioEngine.inputNode.inputFormatForBus(0), block: { (buffer, when) -> Void in
+            var audioError:NSError?
+            
+            let settings = [AVFormatIDKey: kAudioFormatMPEG4AAC, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVEncoderBitRatePerChannelKey: 16, AVEncoderAudioQualityKey: AVAudioQuality.High.toRaw()]
+            recordingFile = AVAudioFile(forWriting: RYDataManager.urlForNextTrack(), settings: settings, error: &audioError)
+            audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 4096, format: audioEngine.mainMixerNode.inputFormatForBus(0), block: { (buffer, when) -> Void in
                 var error:NSError?
                 self.recordingFile?.writeFromBuffer(buffer, error: &error)
                 if (error != nil) {
                     println(error?.localizedDescription)
                 }
             })
+            audioEngine.startAndReturnError(nil)
             recording = true
+            
+            if let err = audioError {
+                println(err.localizedDescription)
+            }
         }
     }
     

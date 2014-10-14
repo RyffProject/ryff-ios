@@ -11,7 +11,8 @@ import UIKit
 class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
 
     @IBOutlet weak var activeTrackWaveformView: FDWaveformView!
-    weak var riffEngine: RYRiffEngine?
+    @IBOutlet weak var recordButton: UIButton!
+    weak var riffEngine: RYRiffEngine!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +27,36 @@ class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
             if (NSFileManager.defaultManager().fileExistsAtPath(postURL.path!)) {
                 activeTrackWaveformView.audioURL = postURL
                 activeTrackWaveformView.doesAllowScrubbing = true
+                self.styleFromRiffEngine()
             }
         }
     }
     
+    func styleFromRiffEngine() {
+        if (riffEngine.recording) {
+            recordButton.tintColor = RYStyleSheet.postActionColor()
+        } else {
+            recordButton.tintColor = RYStyleSheet.availableActionColor()
+        }
+    }
+    
+    // MARK: Actions
+    
+    
+    @IBAction func recordButtonHit(sender: AnyObject) {
+        riffEngine.recordActive()
+        self.styleFromRiffEngine()
+    }
     // MARK: Media
     
     func skipToPosition(position: CGFloat) {
-        riffEngine?.activeTrack?.skipToPosition(position)
+        riffEngine.activeTrack?.skipToPosition(position)
     }
     
     // MARK: RiffEngineDeckDelegate
     
     func activeTrackProgressChanged() {
-        if let progress = riffEngine?.activeTrack?.position() {
+        if let progress = riffEngine.activeTrack?.position() {
             let progressSamples:NSNumber = progress*(Int(activeTrackWaveformView.totalSamples) as NSNumber)
             activeTrackWaveformView.progressSamples = progressSamples
         }
