@@ -17,6 +17,24 @@ This repository is the native iOS application, written in Objective-C and Swift 
 
 /Ryff contains the complete project and source code. Ryff conforms to MVC design pattern and is written with standard Objective-C style. 
 
+## Development Status
+
+To Do
+* More intricate interface for recording and mixing audio, using new APIs in iOS 8 like AVAudioEngine
+* Messaging other users
+
+Completed Features
+* Create and edit user profile
+* Registration and log in
+* Find and follow other users
+* Basic interface for recording audio to post
+* Create new posts with images
+* Interface for finding popular and suggested tags to follow
+* Search through posts and users tagged with a given tag
+* Create and edit a playlist and listen to riffs
+* Listen to audio in the background, stream to another device, control audio through control center
+* Local and push notifications for interactions with other users
+
 ## Open-Source Resources We Love
 
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
@@ -33,4 +51,4 @@ This repository is the native iOS application, written in Objective-C and Swift 
 
 ## License
 
-The Ryff API is released under the Apache License, Version 2.0.
+Ryff is released under the Apache License, Version 2.0.
