@@ -29,6 +29,7 @@ Completed Features
 * Find and follow other users
 * Basic interface for recording audio to post
 * Create new posts with images
+* Newsfeed and infinite scroll with custom pull-to-refresh and pull-to-load-more controls
 * Interface for finding popular and suggested tags to follow
 * Search through posts and users tagged with a given tag
 * Create and edit a playlist and listen to riffs
