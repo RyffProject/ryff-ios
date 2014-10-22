@@ -9,7 +9,7 @@ Social Music
 
 <img src="http://i.imgur.com/ugFml74.png"></img>
 
-This repository is the native iOS application, written in Objective-C and Swift for iOS 8. Ryff uses [PHP server-side code](https://github.com/RyffProject/ryff-api) in addition to several excellent open-source Frameworks.
+This repository is the native iOS application, written in Objective-C and Swift for iOS 8. Ryff uses [PHP server-side code](https://github.com/RyffProject/ryff-api) in addition to several excellent open-source frameworks.
 
 ## Organization
 
