@@ -24,8 +24,8 @@ To Do
 * Messaging other users
 
 Completed Features
-* Create and edit user profile
 * Registration and log in
+* Create and edit user profile
 * Find and follow other users
 * Basic interface for recording audio to post
 * Create new posts with images
@@ -43,7 +43,7 @@ Completed Features
 * [PXAlertView](https://github.com/alexanderjarvis/PXAlertView)
 * [DWTagList](https://github.com/domness/DWTagList)
 * [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
-* [BNRDynamicTypeManager](https://github.com/bignerdranch/BNRDynamicTypeManager/blob/master/BNRDynamicTypeManager/Core/BNRDynamicTypeManager.m)
+* [BNRDynamicTypeManager](https://github.com/bignerdranch/BNRDynamicTypeManager)
 * [FLEX](https://github.com/Flipboard/FLEX)
 
 ## Contributors
