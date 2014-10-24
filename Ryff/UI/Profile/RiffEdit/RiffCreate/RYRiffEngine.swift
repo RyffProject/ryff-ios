@@ -38,14 +38,14 @@ class RiffTrack: NSObject {
         self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:AVAudioFile(forReading: audioURL, error: nil))
     }
     
-    func position() -> Double {
-        let length:NSNumber = Int(audioFile.length)
-        let lastPosition:NSNumber = Int(audioNode.lastRenderTime.sampleTime)
+    func position() -> CGFloat {
+        let length = CGFloat(audioFile.length)
+        let lastPosition = CGFloat(audioNode.lastRenderTime.sampleTime)
         return lastPosition/length
     }
     
     func skipToPosition(percentFinished:CGFloat) {
-        let length:NSNumber = Int(audioFile.length)
+        let length = CGFloat(audioFile.length)
         let sampleTime = Int64(percentFinished*length)
         let audioTime = AVAudioTime(sampleTime: sampleTime, atRate: audioFile.processingFormat.sampleRate)
         audioNode.playAtTime(audioTime)
@@ -104,7 +104,7 @@ class RYRiffEngine: NSObject {
             
             var audioError:NSError?
             
-            let settings = [AVFormatIDKey: kAudioFormatMPEG4AAC, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVEncoderBitRatePerChannelKey: 16, AVEncoderAudioQualityKey: AVAudioQuality.High.toRaw()]
+            let settings = [AVFormatIDKey: kAudioFormatMPEG4AAC, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVEncoderBitRatePerChannelKey: 16, AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue]
             recordingFile = AVAudioFile(forWriting: RYDataManager.urlForNextTrack(), settings: settings, error: &audioError)
             audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 4096, format: audioEngine.mainMixerNode.inputFormatForBus(0), block: { (buffer, when) -> Void in
                 var error:NSError?

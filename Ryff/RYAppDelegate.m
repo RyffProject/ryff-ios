@@ -125,14 +125,9 @@
     
 }
 
-// allow us to use xCode 5 still
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-
 - (void) application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
     [application registerForRemoteNotifications];
 }
-
-#endif
 
 @end

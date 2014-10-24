@@ -57,7 +57,7 @@ class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
     
     func activeTrackProgressChanged() {
         if let progress = riffEngine.activeTrack?.position() {
-            let progressSamples:NSNumber = progress*(Int(activeTrackWaveformView.totalSamples) as NSNumber)
+            let progressSamples = UInt(progress*CGFloat(activeTrackWaveformView.totalSamples))
             activeTrackWaveformView.progressSamples = progressSamples
         }
     }
