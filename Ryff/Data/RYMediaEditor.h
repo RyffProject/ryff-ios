@@ -23,4 +23,6 @@
 
 - (void) mergeAudioData:(NSArray*)trackURLs;
 
++ (NSDictionary *)getRecorderSettings;
+
 @end

@@ -9,6 +9,7 @@
 #import "RYDiscoverServices.h"
 #import "RYAudioDeckManager.h"
 #import "RYDataManager.h"
+#import "RYMediaEditor.h"
 
 // Data Objects
 #import "RYUser.h"

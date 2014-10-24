@@ -34,8 +34,8 @@ class RiffTrack: NSObject {
         super.init()
     }
     
-    convenience init(trackName: String, audioURL:NSURL, audioEngine: AVAudioEngine) {
-        self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:AVAudioFile(forReading: audioURL, error: nil))
+    convenience init(trackName: String, audioFile:AVAudioFile, audioEngine: AVAudioEngine) {
+        self.init(trackName:trackName, trackAuthor:RYRegistrationServices.loggedInUser(), audioNode:AVAudioPlayerNode(), audioFile:audioFile)
     }
     
     func position() -> CGFloat {
@@ -87,8 +87,9 @@ class RYRiffEngine: NSObject {
             // finish recording
             audioEngine.stop()
             audioEngine.mainMixerNode.removeTapOnBus(0)
-            let audioURL = audioFile.url.filePathURL!
-            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioURL: audioURL, audioEngine: audioEngine)
+            let audioURL = audioFile.url.absoluteURL!
+            let audioFile = AVAudioFile(forReading: audioURL, error: nil)
+            activeTrack = RiffTrack(trackName: "Track \(audioTracks.count+1)", audioFile: audioFile, audioEngine: audioEngine)
             recordingFile = nil
             recording = false
             
@@ -104,11 +105,12 @@ class RYRiffEngine: NSObject {
             
             var audioError:NSError?
             
-            let settings = [AVFormatIDKey: kAudioFormatMPEG4AAC, AVNumberOfChannelsKey: 2, AVSampleRateKey: 44100.0, AVEncoderBitRatePerChannelKey: 16, AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue]
+            let settings = RYMediaEditor.getRecorderSettings()
+            audioEngine.connect(audioEngine.inputNode, to: audioEngine.mainMixerNode, format: audioEngine.inputNode.inputFormatForBus(0))
             recordingFile = AVAudioFile(forWriting: RYDataManager.urlForNextTrack(), settings: settings, error: &audioError)
             audioEngine.mainMixerNode.installTapOnBus(0, bufferSize: 4096, format: audioEngine.mainMixerNode.inputFormatForBus(0), block: { (buffer, when) -> Void in
                 var error:NSError?
-                self.recordingFile?.writeFromBuffer(buffer, error: &error)
+                let success = self.recordingFile?.writeFromBuffer(buffer, error: &error)
                 if (error != nil) {
                     println(error?.localizedDescription)
                 }
