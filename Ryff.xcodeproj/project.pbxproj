@@ -80,9 +80,9 @@
 		834A0B4F19BED5A700E4D7E9 /* RYRegistrationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 834A0B4E19BED5A700E4D7E9 /* RYRegistrationServices.m */; };
 		834FEC0D19897E4B00C3D9B9 /* RYRiffCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */; };
 		834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */; };
-		835299C019E1EC3F002BB490 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835299B319E1EC3F002BB490 /* FDWaveformView.m */; };
 		8355167219512CF100CF2C23 /* RYRiffCreateOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
+		835E1AB21A493E4500FC679B /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1AB11A493E4500FC679B /* FDWaveformView.m */; };
 		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
 		835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */; };
 		835E1E0A19D2320D007EBD74 /* RYLoadMoreControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1E0919D2320D007EBD74 /* RYLoadMoreControl.m */; };
@@ -396,13 +396,13 @@
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
 		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
-		835299B219E1EC3F002BB490 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
-		835299B319E1EC3F002BB490 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
 		835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateDeckViewController.swift; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateOldViewController.h; sourceTree = "<group>"; };
 		8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateOldViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
+		835E1AB01A493E4500FC679B /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDWaveformView.h; path = Ryff/Frameworks/FDWaveformView/FDWaveformView.h; sourceTree = SOURCE_ROOT; };
+		835E1AB11A493E4500FC679B /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDWaveformView.m; path = Ryff/Frameworks/FDWaveformView/FDWaveformView.m; sourceTree = SOURCE_ROOT; };
 		835E1E0019D21A50007EBD74 /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
 		835E1E0119D21A50007EBD74 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		835E1E0219D21A50007EBD74 /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
@@ -979,8 +979,8 @@
 		835299A919E1EC3F002BB490 /* FDWaveformView */ = {
 			isa = PBXGroup;
 			children = (
-				835299B219E1EC3F002BB490 /* FDWaveformView.h */,
-				835299B319E1EC3F002BB490 /* FDWaveformView.m */,
+				835E1AB01A493E4500FC679B /* FDWaveformView.h */,
+				835E1AB11A493E4500FC679B /* FDWaveformView.m */,
 			);
 			name = FDWaveformView;
 			path = FDWaveformView/FDWaveformView;
@@ -2007,7 +2007,7 @@
 				83BF316219C9FFC200F5BE48 /* UIButton+WebCache.m in Sources */,
 				83BF315E19C9FFC200F5BE48 /* SDWebImageDownloader.m in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,
-				835299C019E1EC3F002BB490 /* FDWaveformView.m in Sources */,
+				835E1AB21A493E4500FC679B /* FDWaveformView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
