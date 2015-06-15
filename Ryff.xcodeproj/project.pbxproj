@@ -83,6 +83,7 @@
 		8355167219512CF100CF2C23 /* RYRiffCreateOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */; };
 		835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */; };
 		835E1AB21A493E4500FC679B /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1AB11A493E4500FC679B /* FDWaveformView.m */; };
+		835E1AB51A4943D600FC679B /* RYRiffAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1AB41A4943D600FC679B /* RYRiffAudioEngine.m */; };
 		835E1E0519D21A50007EBD74 /* dsym_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 835E1E0319D21A50007EBD74 /* dsym_upload.sh */; };
 		835E1E0619D21A50007EBD74 /* libCrittercism_v4_3_7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 835E1E0419D21A50007EBD74 /* libCrittercism_v4_3_7.a */; };
 		835E1E0A19D2320D007EBD74 /* RYLoadMoreControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 835E1E0919D2320D007EBD74 /* RYLoadMoreControl.m */; };
@@ -403,6 +404,8 @@
 		835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateTableViewCell.m; sourceTree = "<group>"; };
 		835E1AB01A493E4500FC679B /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FDWaveformView.h; path = Ryff/Frameworks/FDWaveformView/FDWaveformView.h; sourceTree = SOURCE_ROOT; };
 		835E1AB11A493E4500FC679B /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FDWaveformView.m; path = Ryff/Frameworks/FDWaveformView/FDWaveformView.m; sourceTree = SOURCE_ROOT; };
+		835E1AB31A4943D600FC679B /* RYRiffAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffAudioEngine.h; sourceTree = "<group>"; };
+		835E1AB41A4943D600FC679B /* RYRiffAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffAudioEngine.m; sourceTree = "<group>"; };
 		835E1E0019D21A50007EBD74 /* CRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRFilter.h; sourceTree = "<group>"; };
 		835E1E0119D21A50007EBD74 /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		835E1E0219D21A50007EBD74 /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
@@ -999,6 +1002,8 @@
 				835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */,
 				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
 				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
+				835E1AB31A4943D600FC679B /* RYRiffAudioEngine.h */,
+				835E1AB41A4943D600FC679B /* RYRiffAudioEngine.m */,
 			);
 			path = RiffCreate;
 			sourceTree = "<group>";
@@ -1843,7 +1848,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_ID=\"5421e1f8b573f17c9b000004\"\nAPI_KEY=\"G5G9tRRu5McUcNUeaCye6lM9nziKM1DQ\"\nsource \"${SRCROOT}\"/Ryff/Frameworks/CrittercismSDK/dsym_upload.sh";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1970,6 +1975,7 @@
 				8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */,
 				831B960B1964E428003A8616 /* RYTrackDownloadTableViewCell.m in Sources */,
 				83CA12281995CD23002610E8 /* FLEXHierarchyTableViewController.m in Sources */,
+				835E1AB51A4943D600FC679B /* RYRiffAudioEngine.m in Sources */,
 				83EB8BA619959F5C0007837D /* DWTagList.m in Sources */,
 				83CA12111995CD23002610E8 /* FLEXFileBrowserTableViewController.m in Sources */,
 				83DC3B7819BD0EC00036AD2A /* RYRefreshControl.m in Sources */,
