@@ -30,7 +30,7 @@ class RYRiffCreateTracksViewController: UIViewController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("riffTrackCell", forIndexPath: indexPath) as UICollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier("riffTrackCell", forIndexPath: indexPath) as! UICollectionViewCell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

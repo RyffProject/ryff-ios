@@ -28,11 +28,11 @@ class RYRiffCreateContainerViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "tracks") {
-            riffTracksViewController = segue.destinationViewController as RYRiffCreateTracksViewController
+            riffTracksViewController = segue.destinationViewController as! RYRiffCreateTracksViewController
             riffTracksViewController.riffEngine = riffEngine
         }
         else if (segue.identifier == "deck") {
-            riffDeckViewController = segue.destinationViewController as RYRiffCreateDeckViewController
+            riffDeckViewController = segue.destinationViewController as! RYRiffCreateDeckViewController
             riffDeckViewController.riffEngine = riffEngine
         }
     }
