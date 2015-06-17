@@ -7,7 +7,7 @@ Social Music
 
 [Ryff](https://github.com/RyffProject) is social network in which users collaboratively create music by mixing their own recordings with tracks posted by others. Users can follow each other or search with tags to find new people to follow, or browse trending riffs to stream to a local playlist. The universal iOS app provides an interface for creating a profile, finding other users, messaging users, listening to riffs, and recording/mixing audio to post.
 
-<img src="http://i.imgur.com/ugFml74.png"></img>
+<img src="http://i.imgur.com/SDdpwny.png"></img>
 
 This repository is the native iOS application, written in Objective-C and Swift for iOS 8. Ryff uses [PHP server-side code](https://github.com/RyffProject/ryff-api) in addition to several excellent open-source frameworks.
 
