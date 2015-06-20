@@ -127,7 +127,7 @@
 {
 //    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
 //    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-//    [riffCreateVC includeRiffs:@[post.riffURL]];
+//    [riffCreateVC includeRiffs:@[post.riffHQURL]];
 //    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 

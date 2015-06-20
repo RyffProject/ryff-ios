@@ -71,7 +71,7 @@
     {
         // have to download track
         [_downloadingPosts addObject:post];
-        [[RYDataManager sharedInstance] saveRiffAt:post.riffURL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
+        [[RYDataManager sharedInstance] saveRiffAt:post.riffHQURL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
     }
     [_tableView reloadData];
 }
@@ -468,7 +468,7 @@
     for (NSInteger trackIdx = 0; trackIdx < _downloadingPosts.count; trackIdx++)
     {
         RYPost *post = _downloadingPosts[trackIdx];
-        if ([post.riffURL isEqual:downloadingURL])
+        if ([post.riffHQURL isEqual:downloadingURL])
         {
             // found the right index
             index = trackIdx;

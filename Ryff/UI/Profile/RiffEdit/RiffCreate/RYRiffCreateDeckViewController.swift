@@ -23,7 +23,7 @@ class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
         super.viewWillAppear(animated)
         
         if let post = RYAudioDeckManager.sharedInstance()?.currentlyPlayingPost() {
-            let postURL = RYDataManager.urlForTempRiff(post.riffURL)
+            let postURL = RYDataManager.urlForTempRiff(post.riffHQURL)
             if (NSFileManager.defaultManager().fileExistsAtPath(postURL.path!)) {
                 activeTrackWaveformView.audioURL = postURL
                 activeTrackWaveformView.doesAllowScrubbing = true
