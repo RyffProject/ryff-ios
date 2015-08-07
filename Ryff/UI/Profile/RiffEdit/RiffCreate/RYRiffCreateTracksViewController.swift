@@ -11,7 +11,6 @@ import UIKit
 class RYRiffCreateTracksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    weak var riffEngine:RYRiffEngine?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -26,7 +25,7 @@ class RYRiffCreateTracksViewController: UIViewController, UICollectionViewDataSo
     // MARK: UICollectionView Data Source
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (riffEngine != nil) ? riffEngine!.audioTracks.count : 0
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

@@ -8,11 +8,10 @@
 
 import UIKit
 
-class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
+class RYRiffCreateDeckViewController: UIViewController {
 
     @IBOutlet weak var activeTrackWaveformView: FDWaveformView!
     @IBOutlet weak var recordButton: UIButton!
-    weak var riffEngine: RYRiffEngine!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,33 +32,33 @@ class RYRiffCreateDeckViewController: UIViewController, RiffEngineDeckDelegate {
     }
     
     func styleFromRiffEngine() {
-        if (riffEngine.recording) {
-            recordButton.tintColor = RYStyleSheet.postActionColor()
-        } else {
-            recordButton.tintColor = RYStyleSheet.availableActionColor()
-        }
+//        if (riffEngine.recording) {
+//            recordButton.tintColor = RYStyleSheet.postActionColor()
+//        } else {
+//            recordButton.tintColor = RYStyleSheet.availableActionColor()
+//        }
     }
     
     // MARK: Actions
     
     
     @IBAction func recordButtonHit(sender: AnyObject) {
-        riffEngine.recordActive()
+//        riffEngine.recordActive()
         self.styleFromRiffEngine()
     }
     // MARK: Media
     
     func skipToPosition(position: CGFloat) {
-        riffEngine.activeTrack?.skipToPosition(position)
+//        riffEngine.activeTrack?.skipToPosition(position)
     }
     
     // MARK: RiffEngineDeckDelegate
     
     func activeTrackProgressChanged() {
-        if let progress = riffEngine.activeTrack?.position() {
-            let progressSamples = UInt(progress*CGFloat(activeTrackWaveformView.totalSamples))
-            activeTrackWaveformView.progressSamples = progressSamples
-        }
+//        if let progress = riffEngine.activeTrack?.position() {
+//            let progressSamples = UInt(progress*CGFloat(activeTrackWaveformView.totalSamples))
+//            activeTrackWaveformView.progressSamples = progressSamples
+//        }
     }
     
     func activeTrackChanged() {
