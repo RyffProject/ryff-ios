@@ -1,5 +1,5 @@
 //
-//  RYRiffCreateViewController.swift
+//  RYRiffCreateTracksViewController.swift
 //  Ryff
 //
 //  Created by Christopher Laganiere on 10/4/14.
@@ -8,35 +8,28 @@
 
 import UIKit
 
-class RYRiffCreateViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-    var collectionView: UICollectionView!
-    var riffEngine: RYRiffEngine
+class RYRiffCreateTracksViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    // MARK: ViewController Life Cycle
+    @IBOutlet weak var collectionView: UICollectionView!
     
     required init(coder aDecoder: NSCoder) {
-        riffEngine = RYRiffEngine()
         super.init(coder: aDecoder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Do any additional setup after loading the view.
     }
     
     // MARK: UICollectionView Data Source
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return riffEngine.audioTracks.count
+        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("trackCell", forIndexPath: indexPath) as UICollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier("riffTrackCell", forIndexPath: indexPath) as! UICollectionViewCell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

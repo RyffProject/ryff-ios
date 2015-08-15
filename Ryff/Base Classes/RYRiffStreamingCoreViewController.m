@@ -14,7 +14,7 @@
 #import "RYSocialTextView.h"
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 
 // UI Categories
 #import "UIImage+Color.h"
@@ -125,10 +125,10 @@
  */
 - (void) repostAction:(NSInteger)riffIndex
 {
-    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-    [riffCreateVC includeRiffs:@[post.riffURL]];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
+//    RYPost *post = [self.feedItems objectAtIndex:riffIndex];
+//    RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+//    [riffCreateVC includeRiffs:@[post.riffHQURL]];
+//    [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 
 ///*

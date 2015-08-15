@@ -133,7 +133,7 @@ static RYAudioDeckManager *_sharedInstance;
 
 - (void) playPost:(RYPost *)post
 {
-    NSURL *localURL = [RYDataManager urlForTempRiff:post.riffURL];
+    NSURL *localURL = [RYDataManager urlForTempRiff:post.riffHQURL];
     if ([[NSFileManager defaultManager] fileExistsAtPath:localURL.path])
     {
         // confirmed that media file exists
@@ -145,7 +145,7 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.imageURL || post.user.avatarURL.absoluteString.length > 0)
         {
             NSURL *imageURL = post.imageURL ? post.imageURL : post.user.avatarURL;
-            __block RYAudioDeckManager *blockSelf = self;
+            __weak RYAudioDeckManager *blockSelf = self;
             
             [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                 blockSelf.nowPlayingArtwork = image;
@@ -272,7 +272,7 @@ static RYAudioDeckManager *_sharedInstance;
     
     [self notifyPlaylistChanged];
     
-    [[RYDataManager sharedInstance] fetchTempRiff:post.riffURL forDelegate:self];
+    [[RYDataManager sharedInstance] fetchTempRiff:post.riffHQURL forDelegate:self];
 }
 
 - (void) movePostFromPlaylistIndex:(NSInteger)playlistIdx toIndex:(NSInteger)newPlaylistIdx
@@ -301,7 +301,7 @@ static RYAudioDeckManager *_sharedInstance;
         if (post.postId == exitingPost.postId)
         {
             [_riffPlaylist removeObject:exitingPost];
-            [[RYDataManager sharedInstance] deleteLocalRiff:exitingPost.riffURL];
+            [[RYDataManager sharedInstance] deleteLocalRiff:exitingPost.riffHQURL];
             
             [self notifyPlaylistChanged];
             
@@ -315,7 +315,7 @@ static RYAudioDeckManager *_sharedInstance;
         {
             [_downloadQueue removeObject:exitingPost];
             
-            [[RYDataManager sharedInstance] cancelDownloadOperationWithURL:post.riffURL];
+            [[RYDataManager sharedInstance] cancelDownloadOperationWithURL:post.riffHQURL];
             [self notifyPlaylistChanged];
             
             return;
@@ -378,7 +378,7 @@ static RYAudioDeckManager *_sharedInstance;
     NSArray *allPosts = [_riffPlaylist arrayByAddingObjectsFromArray:_downloadQueue];
     for (RYPost *existingPost in allPosts)
     {
-        NSString *riffName = [[existingPost.riffURL pathComponents] lastObject];
+        NSString *riffName = [[existingPost.riffHQURL pathComponents] lastObject];
         if ([riffName isEqualToString:fileName])
         {
             fileInPlaylist = YES;
@@ -405,7 +405,7 @@ static RYAudioDeckManager *_sharedInstance;
     if ([_recentlyPlayed containsObject:post])
         [_recentlyPlayed removeObject:post];
     
-    [[RYDataManager sharedInstance] deleteLocalRiff:post.riffURL];
+    [[RYDataManager sharedInstance] deleteLocalRiff:post.riffHQURL];
 }
 
 #pragma mark -
@@ -433,7 +433,7 @@ static RYAudioDeckManager *_sharedInstance;
 {
     for (RYPost *post in _downloadQueue)
     {
-        if (post.riffURL == trackURL)
+        if (post.riffHQURL == trackURL)
         {
             if (_delegate && [_delegate respondsToSelector:@selector(post:downloadProgressChanged:)])
                 [_delegate post:post downloadProgressChanged:progress];
@@ -448,11 +448,11 @@ static RYAudioDeckManager *_sharedInstance;
 {
     for (RYPost *post in _downloadQueue)
     {
-        if (post.riffURL == trackURL)
+        if (post.riffHQURL == trackURL)
         {
             [_downloadQueue removeObject:post];
             
-            if (trackURL == _currentlyPlayingPost.riffURL)
+            if (trackURL == _currentlyPlayingPost.riffHQURL)
             {
                 [self playPost:_currentlyPlayingPost];
             }
@@ -474,7 +474,7 @@ static RYAudioDeckManager *_sharedInstance;
 {
     for (RYPost *post in _downloadQueue)
     {
-        if (post.riffURL == trackURL)
+        if (post.riffHQURL == trackURL)
         {
             [_downloadQueue removeObject:post];
             

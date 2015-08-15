@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define kMediaFileType @".m4a"
-
 @protocol MergeAudioDelegate <NSObject>
 - (void) mergeSucceeded:(NSURL*)newTrackURL;
 - (void) mergeFailed:(NSString*)reason;
@@ -22,5 +20,7 @@
 + (instancetype) sharedInstance;
 
 - (void) mergeAudioData:(NSArray*)trackURLs;
+
++ (NSDictionary *)getRecorderSettings;
 
 @end

@@ -113,8 +113,8 @@
     }
     
     _currentPage = page.integerValue;
-    [_refreshControl endRefreshing];
     [_loadMoreControl endLoading];
+    [_refreshControl endRefreshing];
 }
 
 - (void) postFailed:(NSString *)reason page:(NSNumber *)page

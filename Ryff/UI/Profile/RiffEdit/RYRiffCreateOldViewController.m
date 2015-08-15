@@ -1,12 +1,12 @@
 //
-//  RYRiffCreateViewController.m
+//  RYRiffCreateOldViewController.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 6/17/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 
 // Data Managers
 #import "RYServices.h"
@@ -33,7 +33,7 @@
 #define kDownloadSection (_audioPlayers && _audioPlayers.count > 0) ? 1 : 0
 #define kTrackSection 0
 
-@interface RYRiffCreateViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate, RiffDelegate, UIGestureRecognizerDelegate>
+@interface RYRiffCreateOldViewController () <UITableViewDataSource, UITableViewDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate, RiffCreateCellDelegate, MergeAudioDelegate, RiffDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *imageWrapper;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -57,7 +57,7 @@
 
 @end
 
-@implementation RYRiffCreateViewController
+@implementation RYRiffCreateOldViewController
 
 /*
  Start this view controller with these tracks already populating _audioPlayers. This is used when reposting riffs.
@@ -71,7 +71,7 @@
     {
         // have to download track
         [_downloadingPosts addObject:post];
-        [[RYDataManager sharedInstance] saveRiffAt:post.riffURL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
+        [[RYDataManager sharedInstance] saveRiffAt:post.riffHQURL toLocalURL:[RYDataManager urlForNextTrack] forDelegate:self];
     }
     [_tableView reloadData];
 }
@@ -443,7 +443,7 @@
     [self hideHUD];
     [self showCheckHUDWithTitle:@"Posted" forDuration:1.5f];
     
-    __block RYRiffCreateViewController* blockSelf = self;
+    __weak RYRiffCreateOldViewController* blockSelf = self;
     [self performBlock:^{
         [blockSelf dismissViewControllerAnimated:YES completion:nil];
     } afterDelay:1.5f];
@@ -468,7 +468,7 @@
     for (NSInteger trackIdx = 0; trackIdx < _downloadingPosts.count; trackIdx++)
     {
         RYPost *post = _downloadingPosts[trackIdx];
-        if ([post.riffURL isEqual:downloadingURL])
+        if ([post.riffHQURL isEqual:downloadingURL])
         {
             // found the right index
             index = trackIdx;

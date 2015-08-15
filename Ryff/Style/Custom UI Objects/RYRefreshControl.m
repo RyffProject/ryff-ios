@@ -158,23 +158,22 @@ static int scrollObservanceContext;
     {
         _canRefresh = NO;
         _isRefreshing = YES;
-        _ignoreEdges = YES;
         
         if (!_dontAdjustInsets)
         {
+            _ignoreEdges = YES;
             CGPoint offset = self.scrollView.contentOffset;
             UIEdgeInsets scrollViewInsets = _originalContentInset;
             scrollViewInsets.top += kRefreshControlHeight;
             offset.y -= kRefreshControlHeight;
             [_scrollView setContentInset:scrollViewInsets];
             [_scrollView setContentOffset:offset animated:NO];
+            _ignoreEdges = NO;
         }
         
         [UIView animateWithDuration:0.4f animations:^{
             _circleShape.opacity = 0.0f;
         }];
-        
-        _ignoreEdges = NO;
         
         _activityIndicator.hidden = NO;
         [_activityIndicator startAnimating];
@@ -191,11 +190,13 @@ static int scrollObservanceContext;
         _isRefreshing = NO;
         _circleShape.fillColor = [UIColor clearColor].CGColor;
         
-        __block UIScrollView *blockScrollView = self.scrollView;
+        __weak UIScrollView *blockScrollView = self.scrollView;
         [UIView animateWithDuration:0.4 animations:^{
+            
             _ignoreEdges = YES;
             [blockScrollView setContentInset:self.originalContentInset];
             _ignoreEdges = NO;
+            
             _activityIndicator.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
         } completion:^(BOOL finished) {
             
@@ -203,9 +204,6 @@ static int scrollObservanceContext;
             [_activityIndicator stopAnimating];
             _activityIndicator.layer.transform = CATransform3DIdentity;
             [_hintLabel setText:kRefreshTitle];
-            
-            _ignoreEdges = YES;
-            _ignoreEdges = NO;
         }];
     }
 }

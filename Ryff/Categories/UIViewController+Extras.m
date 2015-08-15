@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Jason Loewy. All rights reserved.
 //
 
+#import "Ryff-Swift.h"
+
 #import "UIViewController+Extras.h"
 
 // Custom UI
@@ -15,7 +17,7 @@
 #import "UIImage+Thumbnail.h"
 
 // Associated View Controllers
-#import "RYRiffCreateViewController.h"
+#import "RYRiffCreateOldViewController.h"
 
 #define kHudTag 1912984
 
@@ -35,7 +37,7 @@
 
 - (void) newPost:(id)sender
 {
-    RYRiffCreateViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
+    RYRiffCreateContainerViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"container"];
     [self presentViewController:riffCreateVC animated:YES completion:nil];
 }
 

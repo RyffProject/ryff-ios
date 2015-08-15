@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="saT-d5-Uau">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="saT-d5-Uau">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller - Log In-->
+        <!--Log In-->
         <scene sceneID="FZ2-93-Xhv">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EMe-6F-6J5" customClass="RYLoginViewController" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="300" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z5a-tp-kYE" id="dmx-Wv-Ntw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="74.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" id="r66-20-XnK">
@@ -57,7 +57,7 @@
                                                 <rect key="frame" x="0.0" y="97" width="300" height="75"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5og-2h-GHb" id="DSg-1k-b9i">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="74"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="74.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SXo-z2-2Aj">
@@ -118,7 +118,7 @@
             </objects>
             <point key="canvasLocation" x="-1154" y="-84"/>
         </scene>
-        <!--Newsfeed Table View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="Jq7-cD-F4A">
             <objects>
                 <viewController id="w4S-u9-x9H" customClass="RYNewsfeedTableViewController" sceneMemberID="viewController">
@@ -147,7 +147,7 @@
             </objects>
             <point key="canvasLocation" x="2936" y="-1487"/>
         </scene>
-        <!--Profile View Controller - Profile-->
+        <!--Profile-->
         <scene sceneID="mt7-0A-k3M">
             <objects>
                 <tableViewController storyboardIdentifier="profileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ucm-P8-gbm" customClass="RYProfileViewController" sceneMemberID="viewController">
@@ -157,10 +157,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileInfoCell" rowHeight="260" id="sAe-nt-kaX" customClass="RYProfileInfoTableViewCell">
-                                <rect key="frame" x="0.0" y="55" width="320" height="260"/>
+                                <rect key="frame" x="0.0" y="49.5" width="320" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sAe-nt-kaX" id="oVW-iP-ftI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="259"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="259.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="kCa-HQ-uHc">
@@ -302,7 +302,7 @@
             </objects>
             <point key="canvasLocation" x="1273" y="-164"/>
         </scene>
-        <!--Riff Details View Controller - Riff Details-->
+        <!--Riff Details-->
         <scene sceneID="NnO-Nz-5Hn">
             <objects>
                 <tableViewController storyboardIdentifier="riffDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p3s-g7-JP8" customClass="RYRiffDetailsViewController" sceneMemberID="viewController">
@@ -312,10 +312,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riffDetails" rowHeight="150" id="DcT-8U-Icq" customClass="RYRiffDetailsTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DcT-8U-Icq" id="TPH-Bl-aaA">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="u0W-dQ-Rpo">
@@ -432,7 +432,7 @@
             </objects>
             <point key="canvasLocation" x="4390" y="-1487"/>
         </scene>
-        <!--Riff Create View Controller - Create Riff-->
+        <!--Create Riff-->
         <scene sceneID="4rX-tx-JFn">
             <objects>
                 <viewController storyboardIdentifier="RiffCreateVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3mv-Eg-8OW" customClass="RYRiffCreateViewController" sceneMemberID="viewController">
@@ -450,7 +450,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e9J-eO-unV" id="1f7-Ly-uYQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pFv-Bx-pNe">
@@ -522,7 +522,7 @@
                                         <rect key="frame" x="0.0" y="102" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NAA-ip-uvT" id="acq-Ob-gOa">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="mFs-j7-vma">
@@ -653,7 +653,7 @@
             </objects>
             <point key="canvasLocation" x="128" y="-70"/>
         </scene>
-        <!--Page View Controller - Discover-->
+        <!--Discover-->
         <scene sceneID="NRY-4d-Cpc">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="QEg-B0-KHJ" sceneMemberID="viewController">
@@ -663,7 +663,7 @@
             </objects>
             <point key="canvasLocation" x="1151" y="1040"/>
         </scene>
-        <!--Audio Deck View Controller - AudioDeck-->
+        <!--AudioDeck-->
         <scene sceneID="Ww6-pH-4x4">
             <objects>
                 <viewController storyboardIdentifier="audioDeck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xx6-ui-AHi" customClass="RYAudioDeckViewController" sceneMemberID="viewController">
@@ -679,10 +679,10 @@
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="audioDeckCell" rowHeight="50" id="7Tw-S7-ekF" customClass="RYAudioDeckTableViewCell">
-                                        <rect key="frame" x="0.0" y="55" width="260" height="50"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="260" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Tw-S7-ekF" id="w9W-c1-jD1">
-                                            <rect key="frame" x="0.0" y="0.0" width="260" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="95R-Eu-Wyg">
@@ -826,7 +826,7 @@
             </objects>
             <point key="canvasLocation" x="3500" y="-1487"/>
         </scene>
-        <!--Newsfeed Container View Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="PcP-8r-2bf">
             <objects>
                 <viewController storyboardIdentifier="newsfeedContainer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rrs-2R-swK" customClass="RYNewsfeedContainerViewController" sceneMemberID="viewController">
@@ -863,7 +863,7 @@
             </objects>
             <point key="canvasLocation" x="1348" y="-1415"/>
         </scene>
-        <!--Newsfeed Navigation Controller - Newsfeed-->
+        <!--Newsfeed-->
         <scene sceneID="2Um-8B-pmy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dDB-P7-B99" customClass="RYNewsfeedNavigationController" sceneMemberID="viewController">
@@ -896,12 +896,12 @@
         <image name="next.png" width="75" height="56"/>
         <image name="pause.png" width="50" height="50"/>
         <image name="play.png" width="50" height="57"/>
-        <image name="playing.png" width="35" height="35"/>
-        <image name="plus.png" width="50" height="50"/>
+        <image name="playing.png" width="34" height="27"/>
+        <image name="plus.png" width="60" height="60"/>
         <image name="record.png" width="45" height="45"/>
         <image name="remix.png" width="45" height="40"/>
         <image name="reset.png" width="30" height="30"/>
-        <image name="stream.png" width="35" height="35"/>
+        <image name="stream.png" width="41" height="27"/>
         <image name="upvote.png" width="38" height="50"/>
         <image name="user.png" width="30" height="30"/>
     </resources>

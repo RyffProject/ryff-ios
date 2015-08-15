@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 // Server paths
-#define kApiRoot                @"https://ryff.me/api/"
+#define kApiRoot                @"http://ryff.chrislaganiere.net/api/"
 
 // Users
 #define kGetUser                @"get-user.php"

@@ -11,6 +11,7 @@
 // Data Managers
 #import "RYMediaEditor.h"
 #import "RYAudioDeckManager.h"
+#import "RYRiffAudioEngine.h"
 
 // Frameworks
 #import "AFHTTPRequestOperation.h"
@@ -76,7 +77,7 @@ static RYDataManager *_sharedInstance;
         [[NSFileManager defaultManager] createDirectoryAtPath:trackDir withIntermediateDirectories:NO attributes:nil error:NULL];
     
     NSString *fileName = [[riffURL pathComponents] lastObject];
-    return [NSURL URLWithString:[trackDir stringByAppendingPathComponent:fileName]];
+    return [NSURL fileURLWithPath:[trackDir stringByAppendingPathComponent:fileName]];
 }
 
 /*
@@ -95,7 +96,7 @@ static RYDataManager *_sharedInstance;
     NSInteger trackNum = 0;
     do {
         trackNum++;
-        NSString *trackString = [[trackDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track%ld%@",(long)trackNum,kMediaFileType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
+        NSString *trackString = [[trackDir stringByAppendingPathComponent:[NSString stringWithFormat:@"track%ld%@",(long)trackNum,RecordingAudioFileFormat]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
         trackPath = [NSURL fileURLWithPath:trackString];
     } while ([[NSFileManager defaultManager] fileExistsAtPath:[trackPath path]]);
     return trackPath;

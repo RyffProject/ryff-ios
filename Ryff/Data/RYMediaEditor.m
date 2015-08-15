@@ -92,4 +92,14 @@ static RYMediaEditor *_sharedInstance;
     }];
 }
 
+// possible fix for Apple bug: http://stackoverflow.com/questions/24401609/avfoundation-malformed-m4a-file-format-using-avaudioengine-and-avaudiofile
++ (NSDictionary *)getRecorderSettings
+{
+    return @{AVFormatIDKey: @(kAudioFormatMPEG4AAC),
+             AVNumberOfChannelsKey: @(2),
+             AVSampleRateKey:@(44100),
+             AVSampleRateKey:@(16),
+             AVEncoderAudioQualityKey: @(AVAudioQualityHigh)};
+}
+
 @end

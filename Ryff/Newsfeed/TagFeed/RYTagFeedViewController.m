@@ -109,9 +109,9 @@
     self.navigationItem.titleView = titleView;
 }
 
-- (void) fetchContent
+- (void) fetchContent:(NSInteger)page
 {
-    [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:nil limit:nil delegate:self];
+    [[RYServices sharedInstance] getPostsForTags:_configurationTags searchType:self.searchType page:@(page) limit:nil delegate:self];
 }
 
 #pragma mark -
@@ -136,7 +136,7 @@
     self.searchType = searchType;
     
     [self.refreshControl beginRefreshing];
-    [self fetchContent];
+    [self fetchContent:1];
 }
 
 #pragma mark -
