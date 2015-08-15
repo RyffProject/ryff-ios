@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830029B91B7FB2B300666D93 /* RYRiffAudioNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */; };
 		830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185F319009C3A00093EFA /* RYLoginViewController.m */; };
 		830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185FD1900AEB300093EFA /* UIColor+Hex.m */; };
 		830186011900B1CD00093EFA /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185FF1900B1CD00093EFA /* tabBar.png */; };
@@ -294,6 +295,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830029B71B7FB2B300666D93 /* RYRiffAudioNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffAudioNode.h; sourceTree = "<group>"; };
+		830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffAudioNode.m; sourceTree = "<group>"; };
 		830185F219009C3A00093EFA /* RYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginViewController.h; sourceTree = "<group>"; };
 		830185F319009C3A00093EFA /* RYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginViewController.m; sourceTree = "<group>"; };
 		830185FC1900AEB300093EFA /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -1002,6 +1005,8 @@
 				835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */,
 				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
 				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
+				830029B71B7FB2B300666D93 /* RYRiffAudioNode.h */,
+				830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */,
 				835E1AB31A4943D600FC679B /* RYRiffAudioEngine.h */,
 				835E1AB41A4943D600FC679B /* RYRiffAudioEngine.m */,
 			);
@@ -1883,6 +1888,7 @@
 				83CA12191995CD23002610E8 /* FLEXDefaultsExplorerViewController.m in Sources */,
 				83CA12241995CD23002610E8 /* FLEXResources.m in Sources */,
 				83BF315C19C9FFC200F5BE48 /* SDWebImageCompat.m in Sources */,
+				830029B91B7FB2B300666D93 /* RYRiffAudioNode.m in Sources */,
 				83302D9519C7A972008C5A54 /* RYDiscoverServices.m in Sources */,
 				83BF316419C9FFC200F5BE48 /* UIImage+MultiFormat.m in Sources */,
 				83CA120F1995CD23002610E8 /* FLEXClassesTableViewController.m in Sources */,

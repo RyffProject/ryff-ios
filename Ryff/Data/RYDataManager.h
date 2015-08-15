@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class AFHTTPRequestOperation;
 

@@ -11,43 +11,23 @@
 @import AVFoundation;
 @import Accelerate;
 
-#pragma mark - Riff Audio Node
+#import "RYRiffAudioNode.h"
 
-@interface RYRiffAudioNode : NSObject
-
-@property (nonatomic) AVAudioPCMBuffer *audioBuffer;
-@property (nonatomic) AVAudioPlayerNode *playerNode;
-
-@end
-
-@implementation RYRiffAudioNode
-
-- (instancetype)initWithAudioFile:(AVAudioFile *)audioFile {
-    if (self = [super init]) {
-        _audioBuffer = [self audioBufferFromAudioFile:audioFile];
-    }
-    return self;
-}
-
-- (AVAudioPCMBuffer *)audioBufferFromAudioFile:(AVAudioFile *)audioFile {
-    NSError *error;
-    AVAudioPCMBuffer *audioBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:[audioFile processingFormat] frameCapacity:(AVAudioFrameCount)[audioFile length]];
-    [audioFile readIntoBuffer:audioBuffer error:&error];
-    return audioBuffer;
-}
-
-@end
+static const CGFloat DefaultBPM = 120;
+const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 
 #pragma mark - Riff Audio Engine
 
 @interface RYRiffAudioEngine()
 
 @property (nonatomic) AVAudioEngine *engine;
+@property (nonatomic) NSTimer *beat;
+
 @property (nonatomic) NSArray/*RYRiffAudioNode*/ *riffAudioNodes;
 @property (nonatomic) NSURL *mixerOutputFileURL;
-
-@property (nonatomic) BOOL mixerOutputFilePlayerIsPaused;
 @property (nonatomic) BOOL isRecording;
+
+@property (nonatomic, nullable) RYRiffAudioNode *recordingNode;
 
 - (void)handleInterruption:(NSNotification *)notification;
 - (void)handleRouteChange:(NSNotification *)notification;
@@ -56,53 +36,28 @@
 
 @implementation RYRiffAudioEngine
 
-- (instancetype)init
+- (instancetype)initWithRiffNodeCount:(NSInteger)riffNodeCount;
 {
     if (self = [super init]) {
-        // create the various nodes
         
-        /*  AVAudioPlayerNode supports scheduling the playback of AVAudioBuffer instances,
-         or segments of audio files opened via AVAudioFile. Buffers and segments may be
-         scheduled at specific points in time, or to play immediately following preceding segments. */
-        
-//        _marimbaPlayer = [[AVAudioPlayerNode alloc] init];
-//        _drumPlayer = [[AVAudioPlayerNode alloc] init];
-        
-        /*  A delay unit delays the input signal by the specified time interval
-         and then blends it with the input signal. The amount of high frequency
-         roll-off can also be controlled in order to simulate the effect of
-         a tape delay. */
-        
-//        _delay = [[AVAudioUnitDelay alloc] init];
-        
-        /*  A reverb simulates the acoustic characteristics of a particular environment.
-         Use the different presets to simulate a particular space and blend it in with
-         the original signal using the wetDryMix parameter. */
-        
-//        _reverb = [[AVAudioUnitReverb alloc] init];
-        
-//        _mixerOutputFilePlayer = [[AVAudioPlayerNode alloc] init];
-        
-        _mixerOutputFileURL = nil;
-        _mixerOutputFilePlayerIsPaused = NO;
         _isRecording = NO;
+        _mixerOutputFileURL = [NSURL URLWithString:[NSTemporaryDirectory() stringByAppendingString:@"mixerOutput.caf"]];
+        
+        [self startBeatTimer:(1/DefaultBPM)];
+        
+        [self createNodes:riffNodeCount];
         
         // create an instance of the engine and attach the nodes
         [self createEngineAndAttachNodes];
         
-        NSError *error;
+        // AVAudioSession setup
+        [self initAVAudioSession];
         
-        // load marimba loop
-        NSURL *marimbaLoopURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"marimbaLoop" ofType:@"caf"]];
-        AVAudioFile *marimbaLoopFile = [[AVAudioFile alloc] initForReading:marimbaLoopURL error:&error];
-//        _marimbaLoopBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:[marimbaLoopFile processingFormat] frameCapacity:(AVAudioFrameCount)[marimbaLoopFile length]];
-//        NSAssert([marimbaLoopFile readIntoBuffer:_marimbaLoopBuffer error:&error], @"couldn't read marimbaLoopFile into buffer, %@", [error localizedDescription]);
+        // make engine connections
+        [self makeEngineConnections];
         
-        // load drum loop
-        NSURL *drumLoopURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"drumLoop" ofType:@"caf"]];
-        AVAudioFile *drumLoopFile = [[AVAudioFile alloc] initForReading:drumLoopURL error:&error];
-//        _drumLoopBuffer = [[AVAudioPCMBuffer alloc] initWithPCMFormat:[drumLoopFile processingFormat] frameCapacity:(AVAudioFrameCount)[drumLoopFile length]];
-//        NSAssert([drumLoopFile readIntoBuffer:_drumLoopBuffer error:&error], @"couldn't read drumLoopFile into buffer, %@", [error localizedDescription]);
+        // start the engine
+        [self startEngine];
         
         // sign up for notifications from the engine if there's a hardware config change
         [[NSNotificationCenter defaultCenter] addObserverForName:AVAudioEngineConfigurationChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -119,23 +74,125 @@
                 [self.delegate engineConfigurationHasChanged];
             }
         }];
-        
-        // AVAudioSession setup
-        [self initAVAudioSession];
-        
-        // make engine connections
-        [self makeEngineConnections];
-        
-        // settings for effects units
-//        [_reverb loadFactoryPreset:AVAudioUnitReverbPresetMediumHall3];
-//        _delay.delayTime = 0.5;
-//        _delay.wetDryMix = 0.0;
-        
-        // start the engine
-        [self startEngine];
     }
     return self;
 }
+
+- (void)startBeatTimer:(NSTimeInterval)timeInterval {
+    _beat = [NSTimer scheduledTimerWithTimeInterval:(1/DefaultBPM) target:self selector:@selector(beatStrike:) userInfo:nil repeats:YES];
+    _beat.tolerance = 0.0001;
+}
+
+- (void)stopBeatTimer {
+    [_beat invalidate];
+}
+
+- (void)beatStrike:(NSTimer *)beat {
+    NSLog(@"beatStrike");
+    
+//    [self startWaitingAudioNodes];
+}
+
+- (void)startWaitingAudioNodes {
+    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
+        if (riffNode.isActive && !riffNode.audioPlayerNode.isPlaying) {
+            [riffNode play];
+        }
+    }
+}
+
+- (void)stopAllNodes {
+    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
+        [riffNode stop];
+    }
+}
+
+#pragma mark - Recording
+
+- (void)startRecordingOutputToNode:(RYRiffAudioNode *)riffNode {
+    if (!self.isRecording) {
+        NSError *error;
+        AVAudioMixerNode *mainMixer = [_engine mainMixerNode];
+        AVAudioFile *mixerOutputFile = [[AVAudioFile alloc] initForWriting:_mixerOutputFileURL settings:[[mainMixer outputFormatForBus:0] settings] error:&error];
+        if (error) {
+            NSLog(@"stopRecording open file error: %@", [error localizedDescription]);
+        }
+        
+        [self startEngine];
+        [mainMixer installTapOnBus:0 bufferSize:4096 format:[mainMixer outputFormatForBus:0] block:^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
+            NSError *error;
+            [mixerOutputFile writeFromBuffer:buffer error:&error];
+            if (error) {
+                NSLog(@"startRecordingOutputToNode tap error: %@", [error localizedDescription]);
+            }
+        }];
+        _recordingNode = riffNode;
+        _isRecording = YES;
+    }
+}
+
+- (void)stopRecordingOutput {
+    if (self.isRecording) {
+        [[_engine mainMixerNode] removeTapOnBus:0];
+        
+        NSError *error;
+        AVAudioFile *recordedFile = [[AVAudioFile alloc] initForReading:_mixerOutputFileURL error:&error];
+        if (error) {
+            NSLog(@"stopRecording open file error: %@", [error localizedDescription]);
+        }
+        
+        [_recordingNode setAudioFile:recordedFile];
+        [_recordingNode startWithDelay:0 looping:YES];
+        [_recordingNode play];
+        
+        _recordingNode = nil;
+        _isRecording = NO;
+    }
+}
+
+#pragma mark - RiffAudioDataSource
+
+- (nullable RYRiffAudioNode *)nodeAtIndex:(NSInteger)index {
+    if (index > 0 && index < self.riffAudioNodes.count) {
+        return [self.riffAudioNodes objectAtIndex:index];
+    }
+    return nil;
+}
+
+- (void)toggleNodeAtIndex:(NSInteger)index {
+    RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
+    if (riffNode) {
+        if (!riffNode.audioBuffer) {
+            // toggle recording
+            if (riffNode.isRecording) {
+                [self startRecordingOutputToNode:riffNode];
+            }
+            else {
+                [self stopRecordingOutput];
+            }
+        }
+        else {
+            // toggle playing
+            riffNode.isActive = !riffNode.isActive;
+            if (riffNode.isActive) {
+                [riffNode play];
+            }
+            else {
+                [riffNode stop];
+            }
+        }
+    }
+}
+
+- (void)clearNodeAtIndex:(NSInteger)index {
+    RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
+    if (riffNode) {
+        [riffNode stop];
+        [riffNode deleteAudio];
+    }
+}
+
+#pragma mark - Private
 
 - (void)createEngineAndAttachNodes
 {
@@ -157,52 +214,27 @@
      externally to the engine, but are not usable until they are attached to the engine via
      the attachNode method. */
     
-//    [_engine attachNode:_marimbaPlayer];
-//    [_engine attachNode:_drumPlayer];
-//    [_engine attachNode:_delay];
-//    [_engine attachNode:_reverb];
-//    [_engine attachNode:_mixerOutputFilePlayer];
+    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
+        [self.engine attachNode:riffNode.audioPlayerNode];
+    }
+}
+
+- (void)createNodes:(NSInteger)nodeCount {
+    NSMutableArray *riffAudioNodes = [[NSMutableArray alloc] initWithCapacity:nodeCount];
+    for (NSInteger nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++) {
+        RYRiffAudioNode *riffNode = [[RYRiffAudioNode alloc] init];
+        [riffAudioNodes addObject:riffNode];
+    }
+    self.riffAudioNodes = riffAudioNodes;
 }
 
 - (void)makeEngineConnections
 {
-    /*  The engine will construct a singleton main mixer and connect it to the outputNode on demand,
-     when this property is first accessed. You can then connect additional nodes to the mixer.
-     
-     By default, the mixer's output format (sample rate and channel count) will track the format
-     of the output node. You may however make the connection explicitly with a different format. */
-    
-    // get the engine's optional singleton main mixer node
     AVAudioMixerNode *mainMixer = [_engine mainMixerNode];
     
-    // establish a connection between nodes
-    
-    /*  Nodes have input and output buses (AVAudioNodeBus). Use connect:to:fromBus:toBus:format: to
-     establish connections betweeen nodes. Connections are always one-to-one, never one-to-many or
-     many-to-one.
-     
-     Note that any pre-existing connection(s) involving the source's output bus or the
-     destination's input bus will be broken.
-     
-     @method connect:to:fromBus:toBus:format:
-     @param node1 the source node
-     @param node2 the destination node
-     @param bus1 the output bus on the source node
-     @param bus2 the input bus on the destination node
-     @param format if non-null, the format of the source node's output bus is set to this
-     format. In all cases, the format of the destination node's input bus is set to
-     match that of the source node's output bus. */
-    
-    // marimba player -> delay -> main mixer
-    [_engine connect: _marimbaPlayer to:_delay format:_marimbaLoopBuffer.format];
-    [_engine connect:_delay to:mainMixer format:_marimbaLoopBuffer.format];
-    
-    // drum player -> reverb -> main mixer
-    [_engine connect:_drumPlayer to:_reverb format:_drumLoopBuffer.format];
-    [_engine connect:_reverb to:mainMixer format:_drumLoopBuffer.format];
-    
-    // node tap player
-    [_engine connect:_mixerOutputFilePlayer to:mainMixer format:[mainMixer outputFormatForBus:0]];
+    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
+        [_engine connect:riffNode.audioPlayerNode to:mainMixer format:nil];
+    }
 }
 
 - (void)startEngine
@@ -227,216 +259,6 @@
         NSError *error;
         NSAssert([_engine startAndReturnError:&error], @"couldn't start engine, %@", [error localizedDescription]);
     }
-}
-
-- (void)toggleMarimba {
-    if (!self.marimbaPlayerIsPlaying) {
-        [self startEngine];
-        [_marimbaPlayer scheduleBuffer:_marimbaLoopBuffer atTime:nil options:AVAudioPlayerNodeBufferLoops completionHandler:nil];
-        [_marimbaPlayer play];
-    } else
-        [_marimbaPlayer stop];
-}
-
-- (void)toggleDrums {
-    if (!self.drumPlayerIsPlaying) {
-        [self startEngine];
-        [_drumPlayer scheduleBuffer:_drumLoopBuffer atTime:nil options:AVAudioPlayerNodeBufferLoops completionHandler:nil];
-        [_drumPlayer play];
-    } else
-        [_drumPlayer stop];
-}
-
-- (void)startRecordingMixerOutput
-{
-    // install a tap on the main mixer output bus and write output buffers to file
-    
-    /*  The method installTapOnBus:bufferSize:format:block: will create a "tap" to record/monitor/observe the output of the node.
-     
-     @param bus
-     the node output bus to which to attach the tap
-     @param bufferSize
-     the requested size of the incoming buffers. The implementation may choose another size.
-     @param format
-     If non-nil, attempts to apply this as the format of the specified output bus. This should
-     only be done when attaching to an output bus which is not connected to another node; an
-     error will result otherwise.
-     The tap and connection formats (if non-nil) on the specified bus should be identical.
-     Otherwise, the latter operation will override any previously set format.
-     Note that for AVAudioOutputNode, tap format must be specified as nil.
-     @param tapBlock
-     a block to be called with audio buffers
-     
-     Only one tap may be installed on any bus. Taps may be safely installed and removed while
-     the engine is running. */
-    
-    NSError *error;
-    if (!_mixerOutputFileURL) _mixerOutputFileURL = [NSURL URLWithString:[NSTemporaryDirectory() stringByAppendingString:@"mixerOutput.caf"]];
-    
-    AVAudioMixerNode *mainMixer = [_engine mainMixerNode];
-    AVAudioFile *mixerOutputFile = [[AVAudioFile alloc] initForWriting:_mixerOutputFileURL settings:[[mainMixer outputFormatForBus:0] settings] error:&error];
-    NSAssert(mixerOutputFile != nil, @"mixerOutputFile is nil, %@", [error localizedDescription]);
-    
-    [self startEngine];
-    [mainMixer installTapOnBus:0 bufferSize:4096 format:[mainMixer outputFormatForBus:0] block:^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
-        NSError *error;
-        
-        // as AVAudioPCMBuffer's are delivered this will write sequentially. The buffer's frameLength signifies how much of the buffer is to be written
-        // IMPORTANT: The buffer format MUST match the file's processing format which is why outputFormatForBus: was used when creating the AVAudioFile object above
-        NSAssert([mixerOutputFile writeFromBuffer:buffer error:&error], @"error writing buffer data to file, %@", [error localizedDescription]);
-    }];
-    _isRecording = true;
-}
-
-- (void)stopRecordingMixerOutput
-{
-    // stop recording really means remove the tap on the main mixer that was created in startRecordingMixerOutput
-    if (_isRecording) {
-        [[_engine mainMixerNode] removeTapOnBus:0];
-        _isRecording = NO;
-    }
-}
-
-- (void)playRecordedFile
-{
-    [self startEngine];
-    if (_mixerOutputFilePlayerIsPaused) {
-        [_mixerOutputFilePlayer play];
-    }
-    else {
-        if (_mixerOutputFileURL) {
-            NSError *error;
-            AVAudioFile *recordedFile = [[AVAudioFile alloc] initForReading:_mixerOutputFileURL error:&error];
-            NSAssert(recordedFile != nil, @"recordedFile is nil, %@", [error localizedDescription]);
-            [_mixerOutputFilePlayer scheduleFile:recordedFile atTime:nil completionHandler:^{
-                _mixerOutputFilePlayerIsPaused = NO;
-                
-                // the data in the file has been scheduled but the player isn't actually done playing yet
-                // calculate the approximate time remaining for the player to finish playing and then dispatch the notification to the main thread
-                AVAudioTime *playerTime = [_mixerOutputFilePlayer playerTimeForNodeTime:_mixerOutputFilePlayer.lastRenderTime];
-                double delayInSecs = (recordedFile.length - playerTime.sampleTime) / recordedFile.processingFormat.sampleRate;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSecs * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if ([self.delegate respondsToSelector:@selector(mixerOutputFilePlayerHasStopped)])
-                        [self.delegate mixerOutputFilePlayerHasStopped];
-                    [_mixerOutputFilePlayer stop];
-                });
-            }];
-            [_mixerOutputFilePlayer play];
-            _mixerOutputFilePlayerIsPaused = NO;
-        }
-    }
-}
-
-- (void)stopPlayingRecordedFile
-{
-    [_mixerOutputFilePlayer stop];
-    _mixerOutputFilePlayerIsPaused = NO;
-}
-
-- (void)pausePlayingRecordedFile
-{
-    [_mixerOutputFilePlayer pause];
-    _mixerOutputFilePlayerIsPaused = YES;
-}
-
-- (BOOL)marimbaPlayerIsPlaying
-{
-    return _marimbaPlayer.isPlaying;
-}
-
-- (BOOL)drumPlayerIsPlaying
-{
-    return _drumPlayer.isPlaying;
-}
-
-- (void)setMarimbaPlayerVolume:(float)marimbaPlayerVolume
-{
-    _marimbaPlayer.volume = marimbaPlayerVolume;
-}
-
-- (float)marimbaPlayerVolume
-{
-    return _marimbaPlayer.volume;
-}
-
-- (void)setDrumPlayerVolume:(float)drumPlayerVolume
-{
-    _drumPlayer.volume = drumPlayerVolume;
-}
-
-- (float)drumPlayerVolume
-{
-    return _drumPlayer.volume;
-}
-
-- (void)setOutputVolume:(float)outputVolume
-{
-    _engine.mainMixerNode.outputVolume = outputVolume;
-}
-
-- (float)outputVolume
-{
-    return _engine.mainMixerNode.outputVolume;
-}
-
-- (void)setMarimbaPlayerPan:(float)marimbaPlayerPan
-{
-    _marimbaPlayer.pan = marimbaPlayerPan;
-}
-
-- (float)marimbaPlayerPan
-{
-    return _marimbaPlayer.pan;
-}
-
-- (void)setDrumPlayerPan:(float)drumPlayerPan
-{
-    _drumPlayer.pan = drumPlayerPan;
-}
-
-- (float)drumPlayerPan
-{
-    return _drumPlayer.pan;
-}
-
-- (void)setDelayWetDryMix:(float)delayWetDryMix
-{
-    _delay.wetDryMix = delayWetDryMix * 100.0;
-}
-
-- (float)delayWetDryMix
-{
-    return _delay.wetDryMix/100.0;
-}
-
-- (void)setReverbWetDryMix:(float)reverbWetDryMix
-{
-    _reverb.wetDryMix = reverbWetDryMix * 100.0;
-}
-
-- (float)reverbWetDryMix
-{
-    return _reverb.wetDryMix/100.0;
-}
-
-- (void)setBypassDelay:(BOOL)bypassDelay
-{
-    _delay.bypass = bypassDelay;
-}
-
-- (BOOL)bypassDelay
-{
-    return _delay.bypass;
-}
-
-- (void)setBypassReverb:(BOOL)bypassReverb
-{
-    _reverb.bypass = bypassReverb;
-}
-
-- (BOOL)bypassReverb
-{
-    return _reverb.bypass;
 }
 
 #pragma mark AVAudioSession
@@ -491,10 +313,8 @@
     NSLog(@"Session interrupted > --- %s ---\n", theInterruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
     
     if (theInterruptionType == AVAudioSessionInterruptionTypeBegan) {
-        [_drumPlayer stop];
-        [_marimbaPlayer stop];
-        [self stopPlayingRecordedFile];
-        [self stopRecordingMixerOutput];
+        [self stopRecordingOutput];
+        [self stopAllNodes];
         
         if ([self.delegate respondsToSelector:@selector(engineWasInterrupted)]) {
             [self.delegate engineWasInterrupted];
