@@ -29,6 +29,7 @@
 - (void)startWithDelay:(AVAudioTime * __nullable)delay looping:(BOOL)looping;
 
 - (void)play;
+- (void)pause;
 - (void)stop;
 
 @end

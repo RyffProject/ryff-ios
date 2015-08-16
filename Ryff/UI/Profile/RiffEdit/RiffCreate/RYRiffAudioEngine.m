@@ -36,14 +36,14 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 
 @implementation RYRiffAudioEngine
 
-- (instancetype)initWithRiffNodeCount:(NSInteger)riffNodeCount;
+- (nonnull instancetype)initWithRiffNodeCount:(NSInteger)riffNodeCount
 {
     if (self = [super init]) {
         
         _isRecording = NO;
         _mixerOutputFileURL = [NSURL URLWithString:[NSTemporaryDirectory() stringByAppendingString:@"mixerOutput.caf"]];
         
-        [self startBeatTimer:(1/DefaultBPM)];
+//        [self startBeatTimer:(1/DefaultBPM)];
         
         [self createNodes:riffNodeCount];
         
@@ -51,7 +51,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         [self createEngineAndAttachNodes];
         
         // AVAudioSession setup
-        [self initAVAudioSession];
+//        [self initAVAudioSession];
         
         // make engine connections
         [self makeEngineConnections];
@@ -126,6 +126,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
                 NSLog(@"startRecordingOutputToNode tap error: %@", [error localizedDescription]);
             }
         }];
+        riffNode.isRecording = YES;
         _recordingNode = riffNode;
         _isRecording = YES;
     }
@@ -144,6 +145,8 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         [_recordingNode setAudioFile:recordedFile];
         [_recordingNode startWithDelay:0 looping:YES];
         [_recordingNode play];
+        _recordingNode.isRecording = NO;
+        _recordingNode.isActive = YES;
         
         _recordingNode = nil;
         _isRecording = NO;
@@ -162,25 +165,28 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 - (void)toggleNodeAtIndex:(NSInteger)index {
     RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
     if (riffNode) {
-        if (!riffNode.audioBuffer) {
+        if (!riffNode.isReadyToPlay) {
             // toggle recording
             if (riffNode.isRecording) {
-                [self startRecordingOutputToNode:riffNode];
+                [self stopRecordingOutput];
             }
             else {
-                [self stopRecordingOutput];
+                [self startRecordingOutputToNode:riffNode];
             }
         }
         else {
             // toggle playing
-            riffNode.isActive = !riffNode.isActive;
-            if (riffNode.isActive) {
-                [riffNode play];
+            if (riffNode.audioPlayerNode.isPlaying) {
+                [riffNode pause];
+                riffNode.isActive = NO;
             }
             else {
-                [riffNode stop];
+                [riffNode play];
+                riffNode.isActive = YES;
             }
         }
+        
+        [self.delegate nodeStatusChangedAtIndex:index];
     }
 }
 
@@ -189,6 +195,9 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     if (riffNode) {
         [riffNode stop];
         [riffNode deleteAudio];
+        riffNode.isActive = NO;
+        
+        [self.delegate nodeStatusChangedAtIndex:index];
     }
 }
 
@@ -233,8 +242,11 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     AVAudioMixerNode *mainMixer = [_engine mainMixerNode];
     
     for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
-        [_engine connect:riffNode.audioPlayerNode to:mainMixer format:nil];
+        [self.engine connect:riffNode.audioPlayerNode to:mainMixer format:[mainMixer outputFormatForBus:0]];
     }
+    
+    AVAudioInputNode *inputNode = [self.engine inputNode];
+    [self.engine connect:inputNode to:[self.engine mainMixerNode] format:[inputNode inputFormatForBus:0]];
 }
 
 - (void)startEngine
@@ -257,6 +269,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     
     if (!_engine.isRunning) {
         NSError *error;
+        [_engine prepare];
         NSAssert([_engine startAndReturnError:&error], @"couldn't start engine, %@", [error localizedDescription]);
     }
 }

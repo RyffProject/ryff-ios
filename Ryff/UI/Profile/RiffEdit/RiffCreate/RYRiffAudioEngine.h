@@ -19,6 +19,7 @@ extern const NSString * __nonnull RecordingAudioFileFormat;
 @end
 
 @protocol AudioEngineDelegate <NSObject>
+- (void)nodeStatusChangedAtIndex:(NSInteger)index;
 @optional
 - (void)engineWasInterrupted;
 - (void)engineConfigurationHasChanged;
@@ -26,6 +27,8 @@ extern const NSString * __nonnull RecordingAudioFileFormat;
 @end
 
 @interface RYRiffAudioEngine : NSObject <RiffAudioDataSource>
+
+- (nonnull instancetype)initWithRiffNodeCount:(NSInteger)riffNodeCount;
 
 @property (nonatomic) float outputVolume;
 

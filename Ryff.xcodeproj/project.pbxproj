@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		830029B91B7FB2B300666D93 /* RYRiffAudioNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */; };
+		830029BB1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830029BA1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift */; };
+		830029BD1B7FD3F900666D93 /* RYRiffCreateNodeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830029BC1B7FD3F900666D93 /* RYRiffCreateNodeCollectionViewCell.swift */; };
 		830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185F319009C3A00093EFA /* RYLoginViewController.m */; };
 		830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 830185FD1900AEB300093EFA /* UIColor+Hex.m */; };
 		830186011900B1CD00093EFA /* tabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 830185FF1900B1CD00093EFA /* tabBar.png */; };
@@ -122,13 +124,8 @@
 		8384965F19CBD62D0033EF92 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965D19CBD62D0033EF92 /* check.png */; };
 		8384966019CBD62D0033EF92 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8384965E19CBD62D0033EF92 /* check@2x.png */; };
 		838E5F4419E220510005CB34 /* RiffCreate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B73E5419E0F87E001C746E /* RiffCreate.storyboard */; };
-		838E5F4519E220550005CB34 /* RYRiffCreateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */; };
-		838E5F4619E220580005CB34 /* RYRiffCreateDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */; };
-		838E5F4719E2205B0005CB34 /* RYRiffCreateContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E5F4219E21E590005CB34 /* RYRiffCreateContainerViewController.swift */; };
-		838E5F4819E2205E0005CB34 /* RYRiffCreateTracksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */; };
 		8397133F1936DD1100913996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8397133E1936DD1100913996 /* Main.storyboard */; };
 		8398EC8419A012D800130EFC /* RYNewsfeedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */; };
-		83B73E4F19DF526E001C746E /* RYRiffEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B73E4E19DF526E001C746E /* RYRiffEngine.swift */; };
 		83BF315919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */; };
 		83BF315A19C9FFC200F5BE48 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313B19C9FFC200F5BE48 /* NSData+ImageContentType.m */; };
 		83BF315B19C9FFC200F5BE48 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BF313D19C9FFC200F5BE48 /* SDImageCache.m */; };
@@ -297,6 +294,8 @@
 /* Begin PBXFileReference section */
 		830029B71B7FB2B300666D93 /* RYRiffAudioNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffAudioNode.h; sourceTree = "<group>"; };
 		830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffAudioNode.m; sourceTree = "<group>"; };
+		830029BA1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateCollectionViewController.swift; sourceTree = "<group>"; };
+		830029BC1B7FD3F900666D93 /* RYRiffCreateNodeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateNodeCollectionViewCell.swift; sourceTree = "<group>"; };
 		830185F219009C3A00093EFA /* RYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYLoginViewController.h; sourceTree = "<group>"; };
 		830185F319009C3A00093EFA /* RYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYLoginViewController.m; sourceTree = "<group>"; };
 		830185FC1900AEB300093EFA /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -377,7 +376,6 @@
 		8322309919B00D0200C60033 /* PXAlertView+Customization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PXAlertView+Customization.m"; sourceTree = "<group>"; };
 		8322309A19B00D0200C60033 /* PXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXAlertView.h; sourceTree = "<group>"; };
 		8322309B19B00D0200C60033 /* PXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXAlertView.m; sourceTree = "<group>"; };
-		83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateTracksViewController.swift; sourceTree = "<group>"; };
 		832658A419BA416C0047D93B /* RYRiffCellAvatar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCellAvatar.xib; sourceTree = "<group>"; };
 		832B89F71B32367700881AD8 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
 		832B89F81B32367700881AD8 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
@@ -402,7 +400,6 @@
 		834FEC0C19897E4B00C3D9B9 /* RYRiffCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYRiffCell.xib; sourceTree = "<group>"; };
 		834FEC0E19897E6600C3D9B9 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCell.h; sourceTree = "<group>"; };
 		834FEC0F19897E6600C3D9B9 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCell.m; sourceTree = "<group>"; };
-		835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateDeckViewController.swift; sourceTree = "<group>"; };
 		8355167019512CF100CF2C23 /* RYRiffCreateOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateOldViewController.h; sourceTree = "<group>"; };
 		8355167119512CF100CF2C23 /* RYRiffCreateOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffCreateOldViewController.m; sourceTree = "<group>"; };
 		835516741951315F00CF2C23 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
@@ -464,13 +461,10 @@
 		83814BCC19D0DCBF00F60FBF /* RYTagListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTagListHeaderView.m; sourceTree = "<group>"; };
 		8384965D19CBD62D0033EF92 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		8384965E19CBD62D0033EF92 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
-		838E5F4219E21E590005CB34 /* RYRiffCreateContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateContainerViewController.swift; sourceTree = "<group>"; };
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedContainerViewController.h; sourceTree = "<group>"; };
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
 		83B73E4D19DF526E001C746E /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Ryff-Bridging-Header.h"; path = "UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h"; sourceTree = "<group>"; };
-		83B73E4E19DF526E001C746E /* RYRiffEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffEngine.swift; sourceTree = "<group>"; };
-		83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYRiffCreateCollectionViewCell.swift; sourceTree = "<group>"; };
 		83B73E5419E0F87E001C746E /* RiffCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RiffCreate.storyboard; sourceTree = "<group>"; };
 		83BF313819C9FFC200F5BE48 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		83BF313919C9FFC200F5BE48 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -999,11 +993,8 @@
 				835516751951315F00CF2C23 /* RYRiffCreateTableViewCell.m */,
 				831B96091964E428003A8616 /* RYTrackDownloadTableViewCell.h */,
 				831B960A1964E428003A8616 /* RYTrackDownloadTableViewCell.m */,
-				83B73E4E19DF526E001C746E /* RYRiffEngine.swift */,
-				83247D8619E10DCF002EE723 /* RYRiffCreateTracksViewController.swift */,
-				838E5F4219E21E590005CB34 /* RYRiffCreateContainerViewController.swift */,
-				835299CA19E1EF12002BB490 /* RYRiffCreateDeckViewController.swift */,
-				83B73E5219E0F866001C746E /* RYRiffCreateCollectionViewCell.swift */,
+				830029BA1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift */,
+				830029BC1B7FD3F900666D93 /* RYRiffCreateNodeCollectionViewCell.swift */,
 				83B73E5419E0F87E001C746E /* RiffCreate.storyboard */,
 				830029B71B7FB2B300666D93 /* RYRiffAudioNode.h */,
 				830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */,
@@ -1871,6 +1862,7 @@
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				836F484519A04BAB00E948BE /* UIView+Styling.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
+				830029BB1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift in Sources */,
 				830BBCBA18FA055900A9C53F /* MBProgressHUD.m in Sources */,
 				83CA12251995CD23002610E8 /* FLEXRuntimeUtility.m in Sources */,
 				83CCC918197EFCBF00FD1B4B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -1881,7 +1873,6 @@
 				83CA12271995CD23002610E8 /* FLEXHierarchyTableViewCell.m in Sources */,
 				830BBCB418F9F54900A9C53F /* SSKeychain.m in Sources */,
 				83CCC90F197EFCBF00FD1B4B /* AFHTTPRequestOperationManager.m in Sources */,
-				838E5F4519E220550005CB34 /* RYRiffCreateCollectionViewCell.swift in Sources */,
 				83CA11F91995CD23002610E8 /* FLEXArgumentInputFontsPickerView.m in Sources */,
 				83CA12041995CD23002610E8 /* FLEXDefaultEditorViewController.m in Sources */,
 				83CCC91A197EFCBF00FD1B4B /* UIButton+AFNetworking.m in Sources */,
@@ -1918,7 +1909,6 @@
 				83CA12001995CD23002610E8 /* FLEXArgumentInputSwitchView.m in Sources */,
 				8312628D19AD120D00532CA3 /* RYSocialTextView.m in Sources */,
 				83CA11F81995CD23002610E8 /* FLEXArgumentInputColorView.m in Sources */,
-				838E5F4719E2205B0005CB34 /* RYRiffCreateContainerViewController.swift in Sources */,
 				836F484319A04BAB00E948BE /* UIImage+Color.m in Sources */,
 				83360CDA19B6B76500136FCB /* RYNotificationsManager.m in Sources */,
 				83E3017219C7BAEE0085F17F /* RYTagCollectionViewCell.m in Sources */,
@@ -1945,7 +1935,6 @@
 				83CCC910197EFCBF00FD1B4B /* AFHTTPSessionManager.m in Sources */,
 				83BF315F19C9FFC200F5BE48 /* SDWebImageDownloaderOperation.m in Sources */,
 				83CCC91B197EFCBF00FD1B4B /* UIImageView+AFNetworking.m in Sources */,
-				838E5F4619E220580005CB34 /* RYRiffCreateDeckViewController.swift in Sources */,
 				83DBCA7B18F99E3F00262496 /* RYRiffStreamingCoreViewController.m in Sources */,
 				83CA12181995CD23002610E8 /* FLEXClassExplorerViewController.m in Sources */,
 				830BBCB518F9F54900A9C53F /* SSKeychainQuery.m in Sources */,
@@ -1953,11 +1942,9 @@
 				83CCC91C197EFCBF00FD1B4B /* UIProgressView+AFNetworking.m in Sources */,
 				83CA123319981702002610E8 /* RYAudioDeckTableViewCell.m in Sources */,
 				83CA120A1995CD23002610E8 /* FLEXExplorerToolbar.m in Sources */,
-				838E5F4819E2205E0005CB34 /* RYRiffCreateTracksViewController.swift in Sources */,
 				83CA121B1995CD23002610E8 /* FLEXDictionaryExplorerViewController.m in Sources */,
 				83CCC914197EFCBF00FD1B4B /* AFURLRequestSerialization.m in Sources */,
 				83CA11FD1995CD23002610E8 /* FLEXArgumentInputNumberView.m in Sources */,
-				83B73E4F19DF526E001C746E /* RYRiffEngine.swift in Sources */,
 				831E5FFA19A03269007F3C31 /* RYNewsfeedNavigationController.m in Sources */,
 				83CCC915197EFCBF00FD1B4B /* AFURLResponseSerialization.m in Sources */,
 				835516761951315F00CF2C23 /* RYRiffCreateTableViewCell.m in Sources */,
@@ -1976,6 +1963,7 @@
 				83CA12011995CD23002610E8 /* FLEXArgumentInputTextView.m in Sources */,
 				83CCC917197EFCBF00FD1B4B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				83BF316519C9FFC200F5BE48 /* UIImage+WebP.m in Sources */,
+				830029BD1B7FD3F900666D93 /* RYRiffCreateNodeCollectionViewCell.swift in Sources */,
 				83CA12221995CD23002610E8 /* FLEXViewExplorerViewController.m in Sources */,
 				83360CDD19B6B84E00136FCB /* RYNotification.m in Sources */,
 				83CA12211995CD23002610E8 /* FLEXViewControllerExplorerViewController.m in Sources */,

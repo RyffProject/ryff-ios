@@ -10,6 +10,8 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 
+#import "Ryff-Swift.h"
+
 // Data Managers
 #import "RYAudioDeckManager.h"
 #import "RYStyleSheet.h"
@@ -25,7 +27,6 @@
 #import "UIImage+Thumbnail.h"
 
 // Associated View Controllers
-#import "RYRiffCreateOldViewController.h"
 #import "RYRiffDetailsViewController.h"
 
 #define kAudioDeckCellReuseID @"audioDeckCell"
@@ -148,8 +149,7 @@
     RYPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
     if (post)
     {
-        RYRiffCreateOldViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"Main" bundle:NULL] instantiateViewControllerWithIdentifier:@"RiffCreateVC"];
-        [riffCreateVC includeRiffs:@[post.riffHQURL]];
+        RYRiffCreateCollectionViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffCreate"];
         [self presentViewController:riffCreateVC animated:YES completion:nil];
     }
 }

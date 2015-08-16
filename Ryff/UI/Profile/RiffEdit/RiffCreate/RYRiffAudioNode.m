@@ -43,18 +43,24 @@
 
 - (void)startWithDelay:(AVAudioTime * __nullable)delay looping:(BOOL)looping {
     AVAudioPlayerNodeBufferOptions options = looping ? AVAudioPlayerNodeBufferLoops : 0;
-    [self.audioPlayerNode scheduleBuffer:self.audioBuffer atTime:delay options:options completionHandler:nil];
+    [self.audioPlayerNode scheduleBuffer:self.audioBuffer atTime:delay options:options completionHandler:^{
+        NSLog(@"schedule audio");
+    }];
 }
 
 - (void)play {
     [self.audioPlayerNode play];
 }
 
+- (void)pause {
+    [self.audioPlayerNode pause];
+}
+
 - (void)stop {
     [self.audioPlayerNode stop];
 }
 
-- (BOOL) readyToPlay {
+- (BOOL) isReadyToPlay {
     return (self.audioBuffer != NULL);
 }
 
