@@ -51,7 +51,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         [self createEngineAndAttachNodes];
         
         // AVAudioSession setup
-//        [self initAVAudioSession];
+        [self initAVAudioSession];
         
         // make engine connections
         [self makeEngineConnections];
@@ -156,7 +156,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 #pragma mark - RiffAudioDataSource
 
 - (nullable RYRiffAudioNode *)nodeAtIndex:(NSInteger)index {
-    if (index > 0 && index < self.riffAudioNodes.count) {
+    if (index >= 0 && index < self.riffAudioNodes.count) {
         return [self.riffAudioNodes objectAtIndex:index];
     }
     return nil;
@@ -286,7 +286,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     NSError *error;
     
     // set the session category
-    bool success = [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
+    bool success = [sessionInstance setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
     if (!success) NSLog(@"Error setting AVAudioSession category! %@\n", [error localizedDescription]);
     
     double hwSampleRate = 44100.0;
