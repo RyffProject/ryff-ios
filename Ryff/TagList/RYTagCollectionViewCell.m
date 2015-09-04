@@ -29,6 +29,22 @@
 
 @implementation RYTagCollectionViewCell
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        
+        _tagLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
+        _tagLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _tagLabel.layer.shadowOffset = CGSizeMake(-1, 1);
+        _tagLabel.layer.shadowRadius = 2.0f;
+        
+        self.layer.cornerRadius = 35.0f;
+        self.clipsToBounds = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagUpdated:) name:kRetrievedTrendingPostNotification object:nil];
+    }
+    return self;
+}
+
 - (void) configureWithTag:(RYTag *)tag
 {
     _currentTag = tag;
@@ -55,21 +71,6 @@
 
 #pragma mark -
 #pragma mark - LifeCycle
-
-- (void) awakeFromNib
-{
-    [super awakeFromNib];
-    
-    _tagLabel.font = [UIFont fontWithName:kBoldFont size:21.0f];
-    _tagLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-    _tagLabel.layer.shadowOffset = CGSizeMake(-1, 1);
-    _tagLabel.layer.shadowRadius = 2.0f;
-    
-    self.layer.cornerRadius = 35.0f;
-    self.clipsToBounds = YES;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tagUpdated:) name:kRetrievedTrendingPostNotification object:nil];
-}
 
 - (void) prepareForReuse
 {

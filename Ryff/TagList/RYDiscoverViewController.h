@@ -1,5 +1,5 @@
 //
-//  RYTagListViewController.h
+//  RYDiscoverViewController.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 9/15/14.
@@ -8,6 +8,6 @@
 
 #import "RYCoreViewController.h"
 
-@interface RYTagListViewController : RYCoreViewController
+@interface RYDiscoverViewController : RYCoreViewController
 
 @end

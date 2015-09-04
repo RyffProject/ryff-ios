@@ -15,6 +15,7 @@
 #import "RYUser.h"
 #import "RYPostsDataSource.h"
 #import "RYNewsfeedDataSource.h"
+#import "RYUserFeedDataSource.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -23,14 +24,18 @@
 // Associated View Controller
 #import "RYProfileViewController.h"
 #import "RYNewsfeedContainerViewController.h"
+#import "RYDiscoverViewController.h"
 
 typedef NS_ENUM (NSInteger, RYTabIndex) {
-    RYTabIndexNewsfeed = 0
+    RYTabIndexNewsfeed = 0,
+    RYTabIndexProfile
 };
 
 @interface RYTabBarViewController () <UITabBarControllerDelegate>
 
 @property (nonatomic) UINavigationController *newsfeedNavigationController;
+@property (nonatomic) UINavigationController *profileNavigationController;
+@property (nonatomic) UINavigationController *discoverNavigationController;
 
 @end
 
@@ -39,9 +44,12 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 - (instancetype)init {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.delegate = self;
-        _newsfeedNavigationController = [self newsfeedNavigationController];
+        _newsfeedNavigationController = [self newsfeed];
+        _profileNavigationController = [self profile];
+        _discoverNavigationController = [self discover];
         
-        self.viewControllers = @[self.newsfeedNavigationController];
+        self.viewControllers = @[self.newsfeedNavigationController, self.profileNavigationController, self.discoverNavigationController];
+        self.selectedIndex = 0;
     }
     return self;
 }
@@ -58,8 +66,9 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
         if ([viewController isKindOfClass:[UINavigationController class]])
         {
             UIViewController *potentialProfile = ((UINavigationController*)viewController).viewControllers.firstObject;
-            if ([potentialProfile isKindOfClass:[RYProfileViewController class]])
-                [((RYProfileViewController *)potentialProfile) addSettingsOptions];
+            if ([potentialProfile isKindOfClass:[RYProfileViewController class]]) {
+//                [((RYProfileViewController *)potentialProfile) addSettingsOptions];
+            }
         }
     }
 }
@@ -78,11 +87,26 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 
 #pragma mark - View Controllers
 
-- (UINavigationController *)newsfeedNavigationController {
+- (UINavigationController *)newsfeed {
     RYNewsfeedDataSource *dataSource = [[RYNewsfeedDataSource alloc] init];
     RYPostsViewController *newsfeed = [[RYPostsViewController alloc] initWithDataSource: dataSource];
     UINavigationController *newsfeedNavigationController = [[UINavigationController alloc] initWithRootViewController:newsfeed];
+    newsfeedNavigationController.tabBarItem.title = @"Newsfeed";
     return newsfeedNavigationController;
+}
+
+- (UINavigationController *)profile {
+    RYProfileViewController *profile = [[RYProfileViewController alloc] initWithUser:[RYRegistrationServices loggedInUser]];
+    UINavigationController *profileNavigationController = [[UINavigationController alloc] initWithRootViewController:profile];
+    profileNavigationController.tabBarItem.title = profile.title;
+    return profileNavigationController;
+}
+
+- (UINavigationController *)discover {
+    RYDiscoverViewController *discover = [[RYDiscoverViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:discover];
+    discover.tabBarItem.title = @"Discover";
+    return discoverNavigationController;
 }
 
 #pragma mark - UITabBarControllerDelegate

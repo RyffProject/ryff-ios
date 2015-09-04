@@ -22,3 +22,4 @@
 #import "RYStyleSheet.h"
 #import "RYTag.h"
 #import "RYUser.h"
+#import "RYUserFeedDataSource.h"

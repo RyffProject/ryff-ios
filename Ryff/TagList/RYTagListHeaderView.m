@@ -22,17 +22,17 @@
 
 @implementation RYTagListHeaderView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        _titleLabel.textColor = [RYStyleSheet darkTextColor];
+        [[BNRDynamicTypeManager sharedInstance] watchLabel:_titleLabel textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
+    }
+    return self;
+}
+
 - (void) titleSection:(NSString *)title
 {
     _titleLabel.text = title;
-}
-
-- (void) awakeFromNib
-{
-    [super awakeFromNib];
-    
-    _titleLabel.textColor = [RYStyleSheet darkTextColor];
-    [[BNRDynamicTypeManager sharedInstance] watchLabel:_titleLabel textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
 }
 
 @end

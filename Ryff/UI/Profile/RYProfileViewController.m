@@ -42,7 +42,7 @@
 #define kProfileInfoCellReuseID @"ProfileInfoCell"
 #define kLoggedOutCellReuseID @"loggedOutCell"
 
-@interface RYProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, NotificationSelectionDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
+@interface RYOLDProfileViewController () <PostDelegate, UpdateUserDelegate, UsersDelegate, ProfileInfoCellDelegate, FollowDelegate, NotificationSelectionDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioPlayerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *notificationsBarButton;
@@ -59,7 +59,7 @@
 
 @end
 
-@implementation RYProfileViewController
+@implementation RYOLDProfileViewController
 
 #pragma mark -
 #pragma mark - ViewController Lifecycle

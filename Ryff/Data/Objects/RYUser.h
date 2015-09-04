@@ -31,4 +31,6 @@
 + (RYUser *)userFromDict:(NSDictionary*)userDict;
 + (NSArray *) usersFromDictArray:(NSArray *)dictArray;
 
++ (RYUser *)sampleUser;
+
 @end

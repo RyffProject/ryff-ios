@@ -11,7 +11,7 @@
 
 @class RYUser;
 
-@interface RYProfileViewController : RYRiffStreamingCoreViewController
+@interface RYOLDProfileViewController : RYRiffStreamingCoreViewController
 
 - (void) configureForUser:(RYUser *)user;
 - (void) configureForUsername:(NSString *)username;

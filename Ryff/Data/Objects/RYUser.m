@@ -74,6 +74,10 @@
     return users;
 }
 
++ (RYUser *)sampleUser {
+    return [[RYUser alloc] initWithUser:1 username:@"dabeat" nickname:@"Pat" karma:3 bio:@"here's some stuff about me" dateCreated:[NSDate date] isFollowing:NO numFollowers:4 numFollowing:2 tags:@[]];
+}
+
 -(id)copyWithZone:(NSZone *)zone
 {
     // We'll ignore the zone for now

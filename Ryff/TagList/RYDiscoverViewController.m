@@ -1,12 +1,12 @@
 //
-//  RYTagListViewController.m
+//  RYDiscoverViewController.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 9/15/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYTagListViewController.h"
+#import "RYDiscoverViewController.h"
 
 // Data Managers
 #import "RYRegistrationServices.h"
@@ -27,20 +27,38 @@
 #define kTagCellReuseID @"tagCell"
 #define kTagHeaderReuseID @"tagListHeader"
 
-@interface RYTagListViewController () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface RYDiscoverViewController () <TagListDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic) UICollectionView *collectionView;
 
 // Data
-@property (nonatomic, strong) NSArray *tagLists;
+@property (nonatomic) NSArray *tagLists;
 
 @end
 
-@implementation RYTagListViewController
+@implementation RYDiscoverViewController
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+        self.collectionView.dataSource = self;
+        self.collectionView.delegate = self;
+    }
+    return self;
+}
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.collectionView];
+    NSDictionary *viewsDict = @{@"collectionView": self.collectionView};
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[collectionView]|" options:0 metrics:nil views:viewsDict]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[collectionView]|" options:0 metrics:nil views:viewsDict]];
+    
+    [self.collectionView registerClass:[RYTagCollectionViewCell class] forCellWithReuseIdentifier:kTagCellReuseID];
+    [self.collectionView registerClass:[RYTagListHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kTagHeaderReuseID];
     
     NSMutableArray *tagLists = [[NSMutableArray alloc] initWithCapacity:2];
     
