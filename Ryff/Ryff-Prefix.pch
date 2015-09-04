@@ -13,6 +13,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "SwiftCompatability.h"
 #endif
 
 #define isIpad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad

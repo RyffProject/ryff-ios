@@ -19,6 +19,15 @@
 #import "SSKeychain.h"
 #import "Crittercism.h"
 
+// View Controllers
+#import "RYTabBarViewController.h"
+
+@interface RYAppDelegate ()
+
+@property (nonatomic) RYTabBarViewController *tabBarViewController;
+
+@end
+
 @implementation RYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,12 +35,16 @@
     // log crash events
     [Crittercism enableWithAppID:@"5421e1f8b573f17c9b000004"];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Present main storyboard
-    NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";
-    UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
-    [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _tabBarViewController = [[RYTabBarViewController alloc] init];
+    self.window.rootViewController = self.tabBarViewController;
     [self.window makeKeyAndVisible];
+    
+    // Present main storyboard
+//    NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";
+//    UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
+//    [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
+//    [self.window makeKeyAndVisible];
     
     [[RYRegistrationServices sharedInstance] attemptBackgroundLogIn];
     

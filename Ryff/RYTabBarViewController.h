@@ -1,5 +1,5 @@
 //
-//  RYCoreTabBarViewController.h
+//  RYTabBarViewController.h
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/12/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RYCoreTabBarViewController : UITabBarController
+@interface RYTabBarViewController : UITabBarController
 
 @end

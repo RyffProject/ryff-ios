@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F15B3641B9A1C95009F3790 /* RYPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3631B9A1C95009F3790 /* RYPostsViewController.swift */; };
+		3F15B3671B9A1CBF009F3790 /* RYPostsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3661B9A1CBF009F3790 /* RYPostsDataSource.m */; };
+		3F15B3691B9A2497009F3790 /* RYPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3681B9A2497009F3790 /* RYPostTableViewCell.swift */; };
+		3F15B36D1B9A2BD0009F3790 /* RYNewsfeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B36C1B9A2BD0009F3790 /* RYNewsfeedDataSource.m */; };
+		3F15B36F1B9A2FE0009F3790 /* RYPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3631B9A1C95009F3790 /* RYPostsViewController.swift */; };
+		3F15B3721B9A30AA009F3790 /* RYPostsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3661B9A1CBF009F3790 /* RYPostsDataSource.m */; };
+		3F15B3731B9A30AD009F3790 /* RYNewsfeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B36C1B9A2BD0009F3790 /* RYNewsfeedDataSource.m */; };
+		3F15B3741B9A314B009F3790 /* RYPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F15B3681B9A2497009F3790 /* RYPostTableViewCell.swift */; };
 		61B262729FECCE862CBC2CDE /* libPods-Ryff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 610389EFACE91AC8266D46F6 /* libPods-Ryff.a */; };
 		830029B91B7FB2B300666D93 /* RYRiffAudioNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 830029B81B7FB2B300666D93 /* RYRiffAudioNode.m */; };
 		830029BB1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830029BA1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift */; };
@@ -240,7 +248,7 @@
 		83FCD1AF18F93F5500A493F0 /* artists.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AC18F93F5500A493F0 /* artists.png */; };
 		83FCD1B018F93F5500A493F0 /* artists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AD18F93F5500A493F0 /* artists@2x.png */; };
 		83FCD1B118F93F5500A493F0 /* user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD1AE18F93F5500A493F0 /* user@2x.png */; };
-		83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */; };
+		83FCD1B818F9405F00A493F0 /* RYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1B718F9405F00A493F0 /* RYTabBarViewController.m */; };
 		83FCD1BB18F9413400A493F0 /* RYPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD1BA18F9413400A493F0 /* RYPost.m */; };
 		89AC917E84DC12FB55E0A66D /* libPods-RyffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8BF0F30F13E8E20F6D2D2C /* libPods-RyffTests.a */; };
 /* End PBXBuildFile section */
@@ -257,6 +265,14 @@
 
 /* Begin PBXFileReference section */
 		0F068F340A8DD53B769F8B4B /* Pods-Ryff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ryff/Pods-Ryff.debug.xcconfig"; sourceTree = "<group>"; };
+		3F15B3631B9A1C95009F3790 /* RYPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPostsViewController.swift; sourceTree = "<group>"; };
+		3F15B3651B9A1CBF009F3790 /* RYPostsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYPostsDataSource.h; sourceTree = "<group>"; };
+		3F15B3661B9A1CBF009F3790 /* RYPostsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYPostsDataSource.m; sourceTree = "<group>"; };
+		3F15B3681B9A2497009F3790 /* RYPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RYPostTableViewCell.swift; sourceTree = "<group>"; };
+		3F15B36B1B9A2BD0009F3790 /* RYNewsfeedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYNewsfeedDataSource.h; path = Ryff/Classes/RYNewsfeedDataSource.h; sourceTree = SOURCE_ROOT; };
+		3F15B36C1B9A2BD0009F3790 /* RYNewsfeedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYNewsfeedDataSource.m; path = Ryff/Classes/RYNewsfeedDataSource.m; sourceTree = SOURCE_ROOT; };
+		3F15B36E1B9A2EA6009F3790 /* SwiftCompatability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCompatability.h; sourceTree = "<group>"; };
+		3F15B3711B9A3082009F3790 /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Ryff-Bridging-Header.h"; path = "../Ryff-Bridging-Header.h"; sourceTree = "<group>"; };
 		5D10781F97C58C1D8BE87763 /* Pods-Ryff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ryff/Pods-Ryff.release.xcconfig"; sourceTree = "<group>"; };
 		610389EFACE91AC8266D46F6 /* libPods-Ryff.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ryff.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -423,7 +439,6 @@
 		8397133E1936DD1100913996 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNewsfeedContainerViewController.h; sourceTree = "<group>"; };
 		8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNewsfeedContainerViewController.m; sourceTree = "<group>"; };
-		83B73E4D19DF526E001C746E /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Ryff-Bridging-Header.h"; path = "UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h"; sourceTree = "<group>"; };
 		83B73E5419E0F87E001C746E /* RiffCreate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RiffCreate.storyboard; sourceTree = "<group>"; };
 		83C354B119BBAD41000A5BD4 /* RYRiffStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYRiffStreamViewController.h; sourceTree = "<group>"; };
 		83C354B219BBAD41000A5BD4 /* RYRiffStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYRiffStreamViewController.m; sourceTree = "<group>"; };
@@ -614,8 +629,8 @@
 		83FCD1AC18F93F5500A493F0 /* artists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artists.png; sourceTree = "<group>"; };
 		83FCD1AD18F93F5500A493F0 /* artists@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "artists@2x.png"; sourceTree = "<group>"; };
 		83FCD1AE18F93F5500A493F0 /* user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@2x.png"; sourceTree = "<group>"; };
-		83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYCoreTabBarViewController.h; sourceTree = "<group>"; };
-		83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYCoreTabBarViewController.m; sourceTree = "<group>"; };
+		83FCD1B618F9405F00A493F0 /* RYTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYTabBarViewController.h; sourceTree = "<group>"; };
+		83FCD1B718F9405F00A493F0 /* RYTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYTabBarViewController.m; sourceTree = "<group>"; };
 		83FCD1B918F9413400A493F0 /* RYPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYPost.h; path = ../../Newsfeed/RYPost.h; sourceTree = "<group>"; };
 		83FCD1BA18F9413400A493F0 /* RYPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYPost.m; path = ../../Newsfeed/RYPost.m; sourceTree = "<group>"; };
 		8B8BF0F30F13E8E20F6D2D2C /* libPods-RyffTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RyffTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -650,6 +665,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F15B36A1B9A2B91009F3790 /* PostsDataSources */ = {
+			isa = PBXGroup;
+			children = (
+				3F15B3651B9A1CBF009F3790 /* RYPostsDataSource.h */,
+				3F15B3661B9A1CBF009F3790 /* RYPostsDataSource.m */,
+				3F15B36B1B9A2BD0009F3790 /* RYNewsfeedDataSource.h */,
+				3F15B36C1B9A2BD0009F3790 /* RYNewsfeedDataSource.m */,
+			);
+			name = PostsDataSources;
+			sourceTree = "<group>";
+		};
 		5BD8AE6B5B14CE56E937FC6A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1253,7 +1279,7 @@
 				83FCD1A018F921AB00A493F0 /* Data */,
 				83FCD14A18F907C400A493F0 /* RYAppDelegate.h */,
 				83FCD14B18F907C400A493F0 /* RYAppDelegate.m */,
-				83B73E4D19DF526E001C746E /* Ryff-Bridging-Header.h */,
+				3F15B3711B9A3082009F3790 /* Ryff-Bridging-Header.h */,
 				8397133E1936DD1100913996 /* Main.storyboard */,
 				83FCD14D18F907C400A493F0 /* MainIphone.storyboard */,
 				83FCD18C18F9142600A493F0 /* Newsfeed */,
@@ -1264,8 +1290,8 @@
 				830185F119009C2B00093EFA /* Login */,
 				83FCD15618F907C400A493F0 /* Images.xcassets */,
 				83FCD14218F907C400A493F0 /* Supporting Files */,
-				83FCD1B618F9405F00A493F0 /* RYCoreTabBarViewController.h */,
-				83FCD1B718F9405F00A493F0 /* RYCoreTabBarViewController.m */,
+				83FCD1B618F9405F00A493F0 /* RYTabBarViewController.h */,
+				83FCD1B718F9405F00A493F0 /* RYTabBarViewController.m */,
 			);
 			path = Ryff;
 			sourceTree = "<group>";
@@ -1277,6 +1303,7 @@
 				83FCD14418F907C400A493F0 /* InfoPlist.strings */,
 				83FCD14718F907C400A493F0 /* main.m */,
 				83FCD14918F907C400A493F0 /* Ryff-Prefix.pch */,
+				3F15B36E1B9A2EA6009F3790 /* SwiftCompatability.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1339,6 +1366,8 @@
 				831E5FF919A03269007F3C31 /* RYNewsfeedNavigationController.m */,
 				8398EC8219A012D800130EFC /* RYNewsfeedContainerViewController.h */,
 				8398EC8319A012D800130EFC /* RYNewsfeedContainerViewController.m */,
+				3F15B3631B9A1C95009F3790 /* RYPostsViewController.swift */,
+				3F15B3681B9A2497009F3790 /* RYPostTableViewCell.swift */,
 			);
 			path = Newsfeed;
 			sourceTree = "<group>";
@@ -1353,6 +1382,7 @@
 				83E56B671953A0DA00EF054C /* RYMediaEditor.m */,
 				831B96061964DEC6003A8616 /* RYDataManager.h */,
 				831B96071964DEC6003A8616 /* RYDataManager.m */,
+				3F15B36A1B9A2B91009F3790 /* PostsDataSources */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1695,11 +1725,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F15B3691B9A2497009F3790 /* RYPostTableViewCell.swift in Sources */,
 				83CA12231995CD23002610E8 /* FLEXHeapEnumerator.m in Sources */,
 				83814BCD19D0DCBF00F60FBF /* RYTagListHeaderView.m in Sources */,
 				83082FEB19B5652D000AFACB /* RYSearchTypeTableViewCell.m in Sources */,
 				83FCD18F18F9144100A493F0 /* RYNewsfeedTableViewController.m in Sources */,
 				836F484519A04BAB00E948BE /* UIView+Styling.m in Sources */,
+				3F15B3671B9A1CBF009F3790 /* RYPostsDataSource.m in Sources */,
 				830185F419009C3A00093EFA /* RYLoginViewController.m in Sources */,
 				830029BB1B7FD17C00666D93 /* RYRiffCreateCollectionViewController.swift in Sources */,
 				83CA12251995CD23002610E8 /* FLEXRuntimeUtility.m in Sources */,
@@ -1731,7 +1763,7 @@
 				83360CD419B6A7FF00136FCB /* RYNotificationsTableViewCell.m in Sources */,
 				8322309D19B00D0200C60033 /* PXAlertView.m in Sources */,
 				83CA121A1995CD23002610E8 /* FLEXDescriptionTableViewCell.m in Sources */,
-				83FCD1B818F9405F00A493F0 /* RYCoreTabBarViewController.m in Sources */,
+				83FCD1B818F9405F00A493F0 /* RYTabBarViewController.m in Sources */,
 				8310F5AA1981F92300250172 /* RYPlayControl.m in Sources */,
 				83CA12061995CD23002610E8 /* FLEXFieldEditorViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
@@ -1791,6 +1823,7 @@
 				83CA12111995CD23002610E8 /* FLEXFileBrowserTableViewController.m in Sources */,
 				83DC3B7819BD0EC00036AD2A /* RYRefreshControl.m in Sources */,
 				83CA12071995CD23002610E8 /* FLEXIvarEditorViewController.m in Sources */,
+				3F15B36D1B9A2BD0009F3790 /* RYNewsfeedDataSource.m in Sources */,
 				834FEC1019897E6600C3D9B9 /* RYRiffCell.m in Sources */,
 				83CA11FC1995CD23002610E8 /* FLEXArgumentInputNotSupportedView.m in Sources */,
 				837C98D819A82411002A9B34 /* RYUserListViewController.m in Sources */,
@@ -1812,6 +1845,7 @@
 				83CA12091995CD23002610E8 /* FLEXPropertyEditorViewController.m in Sources */,
 				83CA12031995CD23002610E8 /* FLEXArgumentInputViewFactory.m in Sources */,
 				830185FE1900AEB300093EFA /* UIColor+Hex.m in Sources */,
+				3F15B3641B9A1C95009F3790 /* RYPostsViewController.swift in Sources */,
 				83FCD1A318F921EA00A493F0 /* RYServices.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1820,7 +1854,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F15B3731B9A30AD009F3790 /* RYNewsfeedDataSource.m in Sources */,
 				83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */,
+				3F15B36F1B9A2FE0009F3790 /* RYPostsViewController.swift in Sources */,
+				3F15B3741B9A314B009F3790 /* RYPostTableViewCell.swift in Sources */,
+				3F15B3721B9A30AA009F3790 /* RYPostsDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1946,8 +1984,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"RYFF=1",
+				);
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1957,7 +2001,7 @@
 				);
 				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ryff/UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1972,8 +2016,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"RYFF=1",
+				);
 				INFOPLIST_FILE = "Ryff/Ryff-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1983,7 +2033,7 @@
 				);
 				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Ryff/UI/Profile/RiffEdit/RiffCreate/Ryff-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2001,12 +2051,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "RYFFTESTS=1";
 				INFOPLIST_FILE = "RyffTests/RyffTests-Info.plist";
+				MODULE_NAME = RyffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2024,8 +2073,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "RYFFTESTS=1";
 				INFOPLIST_FILE = "RyffTests/RyffTests-Info.plist";
+				MODULE_NAME = RyffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

@@ -69,7 +69,7 @@
 
 - (void) followFailed:(NSString *)reason
 {
-    
+    NSLog(@"Follow user failed: %@", reason);
 }
 
 #pragma mark - ProfilePost Delegate

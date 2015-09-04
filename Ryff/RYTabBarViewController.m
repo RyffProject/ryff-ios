@@ -1,18 +1,20 @@
 //
-//  RYCoreTabBarViewController.m
+//  RYTabBarViewController.m
 //  Ryff
 //
 //  Created by Christopher Laganiere on 4/12/14.
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "RYCoreTabBarViewController.h"
+#import "RYTabBarViewController.h"
 
 // Data Managers
 #import "RYServices.h"
 
 // Data Objects
 #import "RYUser.h"
+#import "RYPostsDataSource.h"
+#import "RYNewsfeedDataSource.h"
 
 // Custom UI
 #import "RYStyleSheet.h"
@@ -22,14 +24,29 @@
 #import "RYProfileViewController.h"
 #import "RYNewsfeedContainerViewController.h"
 
-@interface RYCoreTabBarViewController ()
+typedef NS_ENUM (NSInteger, RYTabIndex) {
+    RYTabIndexNewsfeed = 0
+};
+
+@interface RYTabBarViewController () <UITabBarControllerDelegate>
+
+@property (nonatomic) UINavigationController *newsfeedNavigationController;
 
 @end
 
-@implementation RYCoreTabBarViewController
+@implementation RYTabBarViewController
 
-- (void)viewDidLoad
-{
+- (instancetype)init {
+    if (self = [super initWithNibName:nil bundle:nil]) {
+        self.delegate = self;
+        _newsfeedNavigationController = [self newsfeedNavigationController];
+        
+        self.viewControllers = @[self.newsfeedNavigationController];
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self.tabBar setTintColor:[RYStyleSheet audioActionColor]];
     [self.tabBar setTranslucent:NO];
@@ -50,14 +67,28 @@
 #pragma mark -
 #pragma mark - TabBar Delegate
 
-- (void) tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     if ([self.selectedViewController isKindOfClass:[RYNewsfeedContainerViewController class]] && [self.selectedViewController.tabBarItem isEqual:item])
     {
         UINavigationController *navController = ((RYNewsfeedContainerViewController *)self.selectedViewController).newsfeedNav;
         if (navController)
             [navController popToRootViewControllerAnimated:YES];
     }
+}
+
+#pragma mark - View Controllers
+
+- (UINavigationController *)newsfeedNavigationController {
+    RYNewsfeedDataSource *dataSource = [[RYNewsfeedDataSource alloc] init];
+    RYPostsViewController *newsfeed = [[RYPostsViewController alloc] initWithDataSource: dataSource];
+    UINavigationController *newsfeedNavigationController = [[UINavigationController alloc] initWithRootViewController:newsfeed];
+    return newsfeedNavigationController;
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
 }
 
 @end
