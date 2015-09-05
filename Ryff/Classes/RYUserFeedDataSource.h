@@ -16,4 +16,6 @@
 
 - (nonnull instancetype)initWithUser:(RYUser * __nonnull)user NS_DESIGNATED_INITIALIZER;
 
++ (RYPostsDataSource * __nonnull)postsDataSourceWithUser:(RYUser * __nullable)user;
+
 @end

@@ -16,7 +16,7 @@ import GTScrollNavigationBar
     internal var riffSection = 0
     internal var dataSource: RYPostsDataSource?
     
-    private let tableView = UITableView(frame: CGRectZero, style: .Grouped)
+    internal let tableView = UITableView(frame: CGRectZero, style: .Grouped)
     private let refreshControl: RYRefreshControl
     
     required init(dataSource: RYPostsDataSource?) {
@@ -64,6 +64,19 @@ import GTScrollNavigationBar
     }
     
     // MARK: RYPostTableViewCellDelegate
+    
+    func didTapUser(postCell: RYPostTableViewCell) {
+        let cellIndexPath = tableView.indexPathForCell(postCell)
+        if let postIndex = cellIndexPath?.row, post = dataSource?.postAtIndex(postIndex) {
+            // Check if already looking at that user.
+            if let userFeed = dataSource as? RYUserFeedDataSource {
+                if (userFeed.user.userId == post.user.userId) {
+                    return
+                }
+            }
+            pushProfileViewControllerForUser(post.user)
+        }
+    }
     
     func didTapStarred(postCell: RYPostTableViewCell) {
         let cellIndexPath = tableView.indexPathForCell(postCell)

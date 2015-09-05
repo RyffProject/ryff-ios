@@ -22,6 +22,15 @@
     return self;
 }
 
++ (RYPostsDataSource * __nonnull)postsDataSourceWithUser:(RYUser * __nullable)user {
+    if (user) {
+        return [[RYUserFeedDataSource alloc] initWithUser:user];
+    }
+    else {
+        return [[RYPostsDataSource alloc] init];
+    }
+}
+
 #pragma mark - Private
 
 - (void)fetchContent:(NSInteger)page {

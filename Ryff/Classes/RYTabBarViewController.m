@@ -109,7 +109,8 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 }
 
 - (RYNavigationController *)profile {
-    RYProfileViewController *profile = [[RYProfileViewController alloc] initWithUser:[RYRegistrationServices loggedInUser]];
+    RYPostsDataSource *dataSource = [RYUserFeedDataSource postsDataSourceWithUser:[RYRegistrationServices loggedInUser]];
+    RYProfileViewController *profile = [[RYProfileViewController alloc] initWithDataSource:dataSource];
     RYNavigationController *profileNavigationController = [[RYNavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class] toolbarClass:nil];
     [profileNavigationController setViewControllers:@[profile]];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:profile.title image:[[UIImage imageNamed:@"user"] imageWithSize:tabBarIconSize] tag:RYTabIndexProfile];

@@ -14,20 +14,14 @@ class RYProfileViewController: RYPostsViewController {
     private let SectionProfile = 0
     private let SectionRiff = 1
     
-    convenience init(user: RYUser?) {
-        if let user = user {
-            self.init(dataSource: RYUserFeedDataSource(user: user))
-        }
-        else {
-            self.init(dataSource: nil)
-        }
-        riffSection = 1
+     required init(dataSource: RYPostsDataSource?) {
+        super.init(dataSource: dataSource)
+        riffSection = SectionRiff
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.registerClass(RYUserProfileTableViewCell.self, forCellReuseIdentifier: RYProfileTableViewCellReuseIdentifier)
     }
     
     override func configure(dataSource: RYPostsDataSource) {
@@ -58,16 +52,25 @@ class RYProfileViewController: RYPostsViewController {
         if indexPath.section == SectionRiff {
             return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }
-        return tableView.dequeueReusableCellWithIdentifier(RYProfileTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(RYProfileTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        cell.selectionStyle = .None
+        return cell
     }
     
     // MARK: UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == SectionRiff {
+            return super.tableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
+        }
+        return 150
+    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == SectionRiff {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
-        return 100
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -75,7 +78,7 @@ class RYProfileViewController: RYPostsViewController {
             super.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
         }
         else if indexPath.section == SectionProfile {
-            if let profileCell = cell as? RYProfileTableViewCell, userDataSource = dataSource as? RYUserFeedDataSource {
+            if let profileCell = cell as? RYUserProfileTableViewCell, userDataSource = dataSource as? RYUserFeedDataSource {
                 profileCell.styleWithUser(userDataSource.user)
             }
         }

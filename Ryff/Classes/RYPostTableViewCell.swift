@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol RYPostTableViewCellDelegate: class {
+    func didTapUser(postCell: RYPostTableViewCell)
     func didTapStarred(postCell: RYPostTableViewCell)
 }
 
@@ -103,9 +104,13 @@ class RYPostTableViewCell: UITableViewCell {
         
         // Actions
         
+        usernameLabel.userInteractionEnabled = true
+        let userTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapUser:"))
+        usernameLabel.addGestureRecognizer(userTapGesture)
+        
         starredImageView.userInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
-        starredImageView.addGestureRecognizer(tapGesture)
+        let starredTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
+        starredImageView.addGestureRecognizer(starredTapGesture)
     }
     
     @availability(*, unavailable)
@@ -156,6 +161,10 @@ class RYPostTableViewCell: UITableViewCell {
     }
     
     // MARK: Actions
+    
+    func didTapUser(tapGesture: UITapGestureRecognizer) {
+        delegate?.didTapUser(self)
+    }
     
     func didTapStarred(tapGesture: UITapGestureRecognizer) {
         styleStarred(!postStarred)

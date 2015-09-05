@@ -41,9 +41,6 @@ static RYUser* _loggedInUser;
 
 + (RYUser *)loggedInUser
 {
-    // TEST
-    return [RYUser sampleUser];
-    
     if (_loggedInUser == NULL)
     {
         NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
