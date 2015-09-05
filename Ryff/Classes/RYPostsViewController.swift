@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GTScrollNavigationBar
 
-@objc class RYPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RYPostsDataSourceDelegate {
+@objc class RYPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RYPostsDataSourceDelegate, RYPostTableViewCellDelegate {
     
     private let RYPostTableViewCellReuseIdentifier = "postCellReuseIdentifier"
     
@@ -44,6 +45,9 @@ import UIKit
         view.addSubview(tableView)
         tableView.registerClass(RYPostTableViewCell.self, forCellReuseIdentifier: RYPostTableViewCellReuseIdentifier)
         
+        // Set nav bar scroll view for GTScrollNavigationBar
+        navigationController?.scrollNavigationBar.scrollView = tableView
+        
         NSLayoutConstraint.activateConstraints(subviewConstraints())
         dataSource?.refreshContent()
     }
@@ -57,6 +61,15 @@ import UIKit
         self.dataSource = dataSource
         dataSource.delegate = self
         tableView.reloadData()
+    }
+    
+    // MARK: RYPostTableViewCellDelegate
+    
+    func didTapStarred(postCell: RYPostTableViewCell) {
+        let cellIndexPath = tableView.indexPathForCell(postCell)
+        if let postIndex = cellIndexPath?.row, post = dataSource?.postAtIndex(postIndex) {
+            dataSource?.toggleStarred(post)
+        }
     }
     
     // MARK: RYPostsDataSourceDelegate
@@ -96,6 +109,12 @@ import UIKit
         dataSource?.loadMoreContent()
     }
     
+    // MARK: Scroll View Delegate
+    
+    func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(false)
+    }
+    
     // MARK: UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -103,7 +122,7 @@ import UIKit
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == riffSection {
-            return dataSource?.feedItems.count ?? 0
+            return dataSource?.numberOfPosts() ?? 0
         }
         else {
             return 0
@@ -125,7 +144,7 @@ import UIKit
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == riffSection {
-            if let post = dataSource?.feedItems[indexPath.row] as? RYPost {
+            if let post = dataSource?.postAtIndex(indexPath.row) {
                 return RYPostTableViewCell.heightForPost(post)
             }
         }
@@ -138,8 +157,8 @@ import UIKit
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == riffSection {
-            if let postCell = cell as? RYPostTableViewCell, post = dataSource?.feedItems[indexPath.row] as? RYPost {
-                postCell.styleWithPost(post)
+            if let postCell = cell as? RYPostTableViewCell, post = dataSource?.postAtIndex(indexPath.row) {
+                postCell.styleWithPost(post, delegate: self)
             }
         }
     }

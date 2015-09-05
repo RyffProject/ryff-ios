@@ -7,6 +7,7 @@ target 'Ryff' do
 	pod 'MBProgressHUD', '~> 0.9.1'
 	pod 'SSKeychain'
 	pod 'CHTCollectionViewWaterfallLayout'
+	pod 'GTScrollNavigationBar'
 end
 
 target 'RyffTests' do
@@ -15,5 +16,5 @@ target 'RyffTests' do
 	pod 'MBProgressHUD', '~> 0.9.1'
 	pod 'SSKeychain'
 	pod 'CHTCollectionViewWaterfallLayout'
+	pod 'GTScrollNavigationBar'
 end
-

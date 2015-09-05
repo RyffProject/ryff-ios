@@ -63,12 +63,12 @@ class RYProfileViewController: RYPostsViewController {
     
     // MARK: UITableViewDelegate
     
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        if indexPath.section == SectionRiff {
-//            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-//        }
-//        return 100
-//    }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == SectionRiff {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
+        return 100
+    }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == SectionRiff {

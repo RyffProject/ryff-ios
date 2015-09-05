@@ -29,6 +29,9 @@
 #import "RYAudioDeckViewController.h"
 #import "RYNavigationController.h"
 
+// Frameworks
+@import GTScrollNavigationBar;
+
 static const CGSize tabBarIconSize = {25, 25};
 
 typedef NS_ENUM (NSInteger, RYTabIndex) {
@@ -89,8 +92,10 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 - (RYNavigationController *)newsfeed {
     RYNewsfeedDataSource *dataSource = [[RYNewsfeedDataSource alloc] init];
     RYPostsViewController *newsfeed = [[RYPostsViewController alloc] initWithDataSource: dataSource];
-    RYNavigationController *newsfeedNavigationController = [[RYNavigationController alloc] initWithRootViewController:newsfeed];
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Newsfeed" image:[[UIImage imageNamed:@"stream"] imageWithSize:tabBarIconSize] tag:RYTabIndexNewsfeed];
+    newsfeed.title = @"Newsfeed";
+    RYNavigationController *newsfeedNavigationController = [[RYNavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class] toolbarClass:nil];
+    [newsfeedNavigationController setViewControllers:@[newsfeed]];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:newsfeed.title image:[[UIImage imageNamed:@"stream"] imageWithSize:tabBarIconSize] tag:RYTabIndexNewsfeed];
     newsfeedNavigationController.tabBarItem = tabBarItem;
     return newsfeedNavigationController;
 }
@@ -105,7 +110,8 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 
 - (RYNavigationController *)profile {
     RYProfileViewController *profile = [[RYProfileViewController alloc] initWithUser:[RYRegistrationServices loggedInUser]];
-    RYNavigationController *profileNavigationController = [[RYNavigationController alloc] initWithRootViewController:profile];
+    RYNavigationController *profileNavigationController = [[RYNavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class] toolbarClass:nil];
+    [profileNavigationController setViewControllers:@[profile]];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:profile.title image:[[UIImage imageNamed:@"user"] imageWithSize:tabBarIconSize] tag:RYTabIndexProfile];
     profileNavigationController.tabBarItem = tabBarItem;
     return profileNavigationController;

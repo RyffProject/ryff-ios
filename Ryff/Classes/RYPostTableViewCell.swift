@@ -9,15 +9,24 @@
 import UIKit
 import SDWebImage
 
+protocol RYPostTableViewCellDelegate: class {
+    func didTapStarred(postCell: RYPostTableViewCell)
+}
+
 private struct PostCellConstants {
     private static let MaximumWidth: CGFloat = 400
     private static let MinimumImageHeight: CGFloat = 150
     private static let FooterHeight: CGFloat = 45
     private static let ElementPadding: CGFloat = 15
-//    private static let StarWidth: CGFloat = 30
 }
 
 class RYPostTableViewCell: UITableViewCell {
+    
+    /// Delegate to notify when actions are attempted.
+    private weak var delegate: RYPostTableViewCellDelegate?
+    
+    /// Specifies whether the post for which this cell was last styled was starred.
+    private var postStarred: Bool = false
     
     private let containerView = UIView(frame: CGRectZero)
     
@@ -36,6 +45,8 @@ class RYPostTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        // Styling
         
         backgroundColor = UIColor.clearColor()
         
@@ -72,6 +83,7 @@ class RYPostTableViewCell: UITableViewCell {
         
         postDescriptionTextView.backgroundColor = UIColor.clearColor()
         postDescriptionTextView.textColor = UIColor.lightGrayColor()
+        postDescriptionTextView.editable = false
         postDescriptionTextView.textContainer.maximumNumberOfLines = 3
         postDescriptionTextView.textContainer.lineBreakMode = .ByTruncatingTail
         postDescriptionTextView.scrollEnabled = false
@@ -88,6 +100,12 @@ class RYPostTableViewCell: UITableViewCell {
         bottomDetailsView.addSubview(starredCountLabel)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
+        
+        // Actions
+        
+        starredImageView.userInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
+        starredImageView.addGestureRecognizer(tapGesture)
     }
     
     @availability(*, unavailable)
@@ -97,20 +115,24 @@ class RYPostTableViewCell: UITableViewCell {
     
     // MARK: Styling
     
-    func styleWithPost(post: RYPost) {
+    class func heightForPost(post: RYPost) -> CGFloat {
+        //        if let _ = post.imageURL {
+        return PostCellConstants.MaximumWidth + PostCellConstants.FooterHeight
+        //        }
+        //        else {
+        //            return PostCellConstants.MinimumImageHeight + PostCellConstants.FooterHeight
+        //        }
+    }
+    
+    func styleWithPost(post: RYPost, delegate: RYPostTableViewCellDelegate) {
+        self.delegate = delegate
+        
         usernameLabel.text = post.user.username
         postTitleLabel.text = post.title
         postDescriptionTextView.text = post.content
         starredCountLabel.text = "\(post.upvotes)"
-        
-        if post.isUpvoted {
-            starredImageView.tintColor = RYStyleSheet.audioActionColor()
-            starredCountLabel.textColor = RYStyleSheet.audioActionColor()
-        }
-        else {
-            starredImageView.tintColor = UIColor.lightGrayColor()
-            starredCountLabel.textColor = UIColor.lightGrayColor()
-        }
+        postStarred = post.isStarred
+        styleStarred(postStarred)
         
         if let _ = post.imageURL {
             postImageView.sd_setImageWithURL(post.imageURL, placeholderImage: nil)
@@ -122,16 +144,25 @@ class RYPostTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
     }
     
-    // MARK: Layout
-    
-    class func heightForPost(post: RYPost) -> CGFloat {
-//        if let _ = post.imageURL {
-            return PostCellConstants.MaximumWidth + PostCellConstants.FooterHeight
-//        }
-//        else {
-//            return PostCellConstants.MinimumImageHeight + PostCellConstants.FooterHeight
-//        }
+    private func styleStarred(starred: Bool) {
+        if starred {
+            starredImageView.tintColor = RYStyleSheet.audioActionColor()
+            starredCountLabel.textColor = RYStyleSheet.audioActionColor()
+        }
+        else {
+            starredImageView.tintColor = UIColor.lightGrayColor()
+            starredCountLabel.textColor = UIColor.lightGrayColor()
+        }
     }
+    
+    // MARK: Actions
+    
+    func didTapStarred(tapGesture: UITapGestureRecognizer) {
+        styleStarred(!postStarred)
+        delegate?.didTapStarred(self)
+    }
+    
+    // MARK: Layout
     
     private func subviewConstraints() -> [NSLayoutConstraint] {
         let metrics = ["maxWidth": PostCellConstants.MaximumWidth, "padding": PostCellConstants.ElementPadding, "footerHeight": PostCellConstants.FooterHeight]
@@ -175,7 +206,6 @@ class RYPostTableViewCell: UITableViewCell {
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[description]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=0)-[starredImage]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += [NSLayoutConstraint(item: starredCountLabel, attribute: .CenterY, relatedBy: .Equal, toItem: starredImageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
-//        constraints += [NSLayoutConstraint(item: starredImageView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: PostCellConstants.StarWidth)]
         
         return constraints as? [NSLayoutConstraint] ?? []
     }
