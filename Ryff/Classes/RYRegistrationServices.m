@@ -17,11 +17,15 @@
 #import "RYTag.h"
 
 // Frameworks
-#import "SSKeychain.h"
+@import SSKeychain;
 #import "AFHTTPRequestOperationManager.h"
 #import "SDWebImageManager.h"
 
 @implementation RYRegistrationServices
+
+static NSString *ryffServiceName = @"ryff";
+static NSString *userKey = @"auth_username";
+static NSString *passwordKey = @"auth_password";
 
 static RYRegistrationServices* _sharedInstance;
 static RYUser* _loggedInUser;
@@ -55,16 +59,21 @@ static RYUser* _loggedInUser;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     if (password && password.length > 0)
-        [SSKeychain setPassword:password forService:@"ryff" account:username];
+        [SSKeychain setPassword:password forService:ryffServiceName account:username];
 }
 
 - (BOOL) attemptBackgroundLogIn
 {
+    // TEST
+    [self logInUserWithUsername:@"semigraphic" Password:@"password" forDelegate:nil];
+    return YES;
+    // TEST
+    
     BOOL success = NO;
     
     NSDictionary *userDict = [[NSUserDefaults standardUserDefaults] objectForKey:kLoggedInUserKey];
     RYUser *userObject = [RYUser userFromDict:userDict];
-    NSString *password = [SSKeychain passwordForService:@"ryff" account:userObject.username];
+    NSString *password = [SSKeychain passwordForService:ryffServiceName account:userObject.username];
     
     if (userObject.username && password)
     {
@@ -76,7 +85,7 @@ static RYUser* _loggedInUser;
 
 - (void) logOut
 {
-    [SSKeychain deletePasswordForService:@"ryff" account:[RYRegistrationServices loggedInUser].username];
+    [SSKeychain deletePasswordForService:ryffServiceName account:[RYRegistrationServices loggedInUser].username];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kLoggedInUserKey];
     _loggedInUser = nil;
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -99,7 +108,7 @@ static RYUser* _loggedInUser;
             
             if (dictionary[@"success"])
             {
-                [self setLoggedInUser:dictionary[@"user"] username:params[@"username"] password:params[@"password"]];
+                [self setLoggedInUser:dictionary[@"user"] username:params[userKey] password:params[passwordKey]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kLoggedInNotification object:nil];
                 
                 if (delegate && [delegate respondsToSelector:@selector(updateSucceeded:)])
@@ -124,7 +133,7 @@ static RYUser* _loggedInUser;
 - (void) logInUserWithUsername:(NSString*)username Password:(NSString*)password forDelegate:(id<UpdateUserDelegate>)delegate
 {
     NSString *action = [NSString stringWithFormat:@"%@%@",kApiRoot,kLogIn];
-    NSDictionary *params = @{@"auth_username":username,@"auth_password":password};
+    NSDictionary *params = @{userKey:username, passwordKey:password};
     [self updateUserWithParams:params toAction:action forDelegate:delegate];
 }
 

@@ -16,7 +16,7 @@
 #import "RYNotificationsManager.h"
 
 // Frameworks
-#import "SSKeychain.h"
+@import SSKeychain;
 #import "Crittercism.h"
 
 // View Controllers
@@ -39,12 +39,6 @@
     _tabBarViewController = [[RYTabBarViewController alloc] init];
     self.window.rootViewController = self.tabBarViewController;
     [self.window makeKeyAndVisible];
-    
-    // Present main storyboard
-//    NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";
-//    UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
-//    [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
-//    [self.window makeKeyAndVisible];
     
     [[RYRegistrationServices sharedInstance] attemptBackgroundLogIn];
     

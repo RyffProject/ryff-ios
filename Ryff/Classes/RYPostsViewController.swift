@@ -15,13 +15,17 @@ import UIKit
     internal var riffSection = 0
     internal var dataSource: RYPostsDataSource?
     
-    private let tableView = UITableView(frame: CGRectZero)
+    private let tableView = UITableView(frame: CGRectZero, style: .Grouped)
+    private let refreshControl: RYRefreshControl
     
     required init(dataSource: RYPostsDataSource?) {
+        refreshControl = RYRefreshControl(inScrollView: tableView)
         super.init(nibName: nil, bundle: nil)
         if let dataSource = dataSource {
             configure(dataSource)
         }
+        
+        refreshControl.addTarget(self, action: Selector("refreshContent:"), forControlEvents: .ValueChanged)
     }
     
     @availability(*, unavailable)
@@ -32,27 +36,38 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = RYStyleSheet.lightBackgroundColor()
+        tableView.separatorStyle = .None
         tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addSubview(tableView)
-        NSLayoutConstraint.activateConstraints(subviewConstraints())
         tableView.registerClass(RYPostTableViewCell.self, forCellReuseIdentifier: RYPostTableViewCellReuseIdentifier)
         
+        NSLayoutConstraint.activateConstraints(subviewConstraints())
         dataSource?.refreshContent()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     func configure(dataSource: RYPostsDataSource) {
         self.dataSource = dataSource
+        dataSource.delegate = self
         tableView.reloadData()
     }
     
     // MARK: RYPostsDataSourceDelegate
     
     func contentUpdated() {
+        refreshControl.endRefreshing()
         tableView.reloadData()
     }
     
     func contentFailedToUpdate() {
-        
+        refreshControl.endRefreshing()
     }
     
     func postUpdatedAtIndex(postIndex: Int) {
@@ -97,7 +112,9 @@ import UIKit
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == riffSection {
-            return tableView.dequeueReusableCellWithIdentifier(RYPostTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(RYPostTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            cell.selectionStyle = .None
+            return cell
         }
         else {
             assert(false, "Error: PostsViewController asked to supply tableview cell for undefined section")
@@ -106,9 +123,17 @@ import UIKit
     }
     
     // MARK: UITableViewDelegate
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == riffSection {
+            if let post = dataSource?.feedItems[indexPath.row] as? RYPost {
+                return RYPostTableViewCell.heightForPost(post)
+            }
+        }
+        return 0.0
+    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100;
+        return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

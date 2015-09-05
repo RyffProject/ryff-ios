@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3F24D8321B9B4ED300E78B05 /* RYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F24D8311B9B4ED300E78B05 /* RYNavigationController.m */; };
+		3F32A8F81B9B87F000E79282 /* RYFadingVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */; };
+		3F3744EC1B9B89B4005A9DD2 /* RYFadingVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */; };
+		3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */; };
+		3F3744EF1B9B94CC005A9DD2 /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */; };
 		3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B531B9B3C2B00B5CC74 /* RYAudioDeckManager.m */; };
 		3F387BC31B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B551B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m */; };
 		3F387BC41B9B3C2B00B5CC74 /* RYAudioDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B571B9B3C2B00B5CC74 /* RYAudioDeckViewController.m */; };
@@ -97,7 +101,6 @@
 		3FE76E641B9B414500099CF5 /* RYPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B841B9B3C2B00B5CC74 /* RYPostsViewController.swift */; };
 		3FE76E651B9B414900099CF5 /* RYPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B851B9B3C2B00B5CC74 /* RYPostTableViewCell.swift */; };
 		3FE76E691B9B443900099CF5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE76E681B9B443900099CF5 /* Media.xcassets */; };
-		61B262729FECCE862CBC2CDE /* libPods-Ryff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 610389EFACE91AC8266D46F6 /* libPods-Ryff.a */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
@@ -111,7 +114,8 @@
 		83FCD16018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
 		83FCD16818F907C400A493F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD16618F907C400A493F0 /* InfoPlist.strings */; };
 		83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD16918F907C400A493F0 /* RyffTests.m */; };
-		89AC917E84DC12FB55E0A66D /* libPods-RyffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B8BF0F30F13E8E20F6D2D2C /* libPods-RyffTests.a */; };
+		9795D935FF6483EC5F9A5340 /* Pods_Ryff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB93B1A2EE317EA6B5C1F4CD /* Pods_Ryff.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EC092E28FF5A6FF568A7BCC8 /* Pods_RyffTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E251082A40810E7130987A45 /* Pods_RyffTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +133,8 @@
 		3F15B36E1B9A2EA6009F3790 /* SwiftCompatability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCompatability.h; sourceTree = "<group>"; };
 		3F24D8301B9B4ED300E78B05 /* RYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYNavigationController.h; path = Classes/RYNavigationController.h; sourceTree = "<group>"; };
 		3F24D8311B9B4ED300E78B05 /* RYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYNavigationController.m; path = Classes/RYNavigationController.m; sourceTree = "<group>"; };
+		3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYFadingVisualEffectView.swift; path = Classes/RYFadingVisualEffectView.swift; sourceTree = "<group>"; };
+		3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILayoutPriority.swift; path = Categories/UILayoutPriority.swift; sourceTree = "<group>"; };
 		3F387B521B9B3C2B00B5CC74 /* RYAudioDeckManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckManager.h; path = Classes/RYAudioDeckManager.h; sourceTree = "<group>"; };
 		3F387B531B9B3C2B00B5CC74 /* RYAudioDeckManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYAudioDeckManager.m; path = Classes/RYAudioDeckManager.m; sourceTree = "<group>"; };
 		3F387B541B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckTableViewCell.h; path = Classes/RYAudioDeckTableViewCell.h; sourceTree = "<group>"; };
@@ -289,7 +295,6 @@
 		3FE76E611B9B412E00099CF5 /* libCrittercism_v4_3_7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_7.a; sourceTree = "<group>"; };
 		3FE76E681B9B443900099CF5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5D10781F97C58C1D8BE87763 /* Pods-Ryff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ryff/Pods-Ryff.release.xcconfig"; sourceTree = "<group>"; };
-		610389EFACE91AC8266D46F6 /* libPods-Ryff.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ryff.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFE42F2F5730A2D8E9FEB19 /* Pods-RyffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		830BBCC918FA0C2300A9C53F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -308,7 +313,8 @@
 		83FCD16518F907C400A493F0 /* RyffTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RyffTests-Info.plist"; sourceTree = "<group>"; };
 		83FCD16718F907C400A493F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83FCD16918F907C400A493F0 /* RyffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyffTests.m; sourceTree = "<group>"; };
-		8B8BF0F30F13E8E20F6D2D2C /* libPods-RyffTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RyffTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB93B1A2EE317EA6B5C1F4CD /* Pods_Ryff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ryff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E251082A40810E7130987A45 /* Pods_RyffTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RyffTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +328,7 @@
 				83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */,
 				83FCD14018F907C400A493F0 /* UIKit.framework in Frameworks */,
 				83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */,
-				61B262729FECCE862CBC2CDE /* libPods-Ryff.a in Frameworks */,
+				9795D935FF6483EC5F9A5340 /* Pods_Ryff.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +339,7 @@
 				83FCD15E18F907C400A493F0 /* XCTest.framework in Frameworks */,
 				83FCD16018F907C400A493F0 /* UIKit.framework in Frameworks */,
 				83FCD15F18F907C400A493F0 /* Foundation.framework in Frameworks */,
-				89AC917E84DC12FB55E0A66D /* libPods-RyffTests.a in Frameworks */,
+				EC092E28FF5A6FF568A7BCC8 /* Pods_RyffTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +458,7 @@
 				3F387B8D1B9B3C2B00B5CC74 /* RYRefreshControl.m */,
 				3F387BA81B9B3C2B00B5CC74 /* RYSocialTextView.h */,
 				3F387BA91B9B3C2B00B5CC74 /* RYSocialTextView.m */,
+				3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -585,7 +592,7 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
-		3F387C1F1B9B3FA600B5CC74 /* Categories */ = {
+		3F387C1F1B9B3FA600B5CC74 /* Categories and Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				3F387C201B9B3FB200B5CC74 /* NSObject+block.h */,
@@ -606,8 +613,9 @@
 				3F387C2F1B9B3FB200B5CC74 /* UIViewController+Extras.m */,
 				3F387C301B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.h */,
 				3F387C311B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m */,
+				3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */,
 			);
-			name = Categories;
+			name = "Categories and Extensions";
 			sourceTree = "<group>";
 		};
 		3F387C3B1B9B3FF000B5CC74 /* Extras */ = {
@@ -749,8 +757,8 @@
 				83FCD13D18F907C400A493F0 /* CoreGraphics.framework */,
 				83FCD13F18F907C400A493F0 /* UIKit.framework */,
 				83FCD15D18F907C400A493F0 /* XCTest.framework */,
-				610389EFACE91AC8266D46F6 /* libPods-Ryff.a */,
-				8B8BF0F30F13E8E20F6D2D2C /* libPods-RyffTests.a */,
+				CB93B1A2EE317EA6B5C1F4CD /* Pods_Ryff.framework */,
+				E251082A40810E7130987A45 /* Pods_RyffTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -760,7 +768,7 @@
 			children = (
 				3F387BFD1B9B3C3700B5CC74 /* Data */,
 				3F387C011B9B3D6A00B5CC74 /* User Interface */,
-				3F387C1F1B9B3FA600B5CC74 /* Categories */,
+				3F387C1F1B9B3FA600B5CC74 /* Categories and Extensions */,
 				3F387C0B1B9B3F5300B5CC74 /* Audio Mixer */,
 				3F387C0C1B9B3F6D00B5CC74 /* Style */,
 				3F387C3B1B9B3FF000B5CC74 /* Extras */,
@@ -813,6 +821,7 @@
 				83FCD13618F907C400A493F0 /* Resources */,
 				835E1E0719D21BFB007EBD74 /* Run Script */,
 				7F9865D3E129952ED8C70A59 /* Copy Pods Resources */,
+				0DB45C9E4B0C6A0C57AEE9C8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -832,6 +841,7 @@
 				83FCD15918F907C400A493F0 /* Frameworks */,
 				83FCD15A18F907C400A493F0 /* Resources */,
 				3548D77566CAD9E664FC3FA6 /* Copy Pods Resources */,
+				89A4492C7B6EF4DDA854E096 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -925,6 +935,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		0DB45C9E4B0C6A0C57AEE9C8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ryff/Pods-Ryff-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		14EE549E532443BF66C382E8 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -984,6 +1009,21 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		89A4492C7B6EF4DDA854E096 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1004,6 +1044,7 @@
 				3F387BF11B9B3C2B00B5CC74 /* RYStyleSheet.m in Sources */,
 				3F387BEE1B9B3C2B00B5CC74 /* RYSearchTypeTableViewCell.m in Sources */,
 				3F387BEB1B9B3C2B00B5CC74 /* RYRiffDetailsViewController.m in Sources */,
+				3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3F387C331B9B3FB200B5CC74 /* UIColor+Hex.m in Sources */,
 				3F387BE61B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift in Sources */,
 				3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */,
@@ -1046,6 +1087,7 @@
 				3F387BEA1B9B3C2B00B5CC74 /* RYRiffDetailsTableViewCell.m in Sources */,
 				3F387BEC1B9B3C2B00B5CC74 /* RYRiffStreamingCoreViewController.m in Sources */,
 				3F387C391B9B3FB200B5CC74 /* UIViewController+Extras.m in Sources */,
+				3F32A8F81B9B87F000E79282 /* RYFadingVisualEffectView.swift in Sources */,
 				3F387BF31B9B3C2B00B5CC74 /* RYTag.m in Sources */,
 				3F387BD21B9B3C2B00B5CC74 /* RYNewsfeedNavigationController.m in Sources */,
 				3F387BC81B9B3C2B00B5CC74 /* RYDiscoverServices.m in Sources */,
@@ -1076,7 +1118,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */,
+				3F3744EC1B9B89B4005A9DD2 /* RYFadingVisualEffectView.swift in Sources */,
 				3FE76E641B9B414500099CF5 /* RYPostsViewController.swift in Sources */,
+				3F3744EF1B9B94CC005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3FE76E651B9B414900099CF5 /* RYPostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1262,7 +1306,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "RYFFTESTS=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"RYFFTESTS=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "RyffTests/RyffTests-Info.plist";
 				MODULE_NAME = RyffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1284,7 +1331,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryff/Ryff-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "RYFFTESTS=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"RYFFTESTS=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "RyffTests/RyffTests-Info.plist";
 				MODULE_NAME = RyffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

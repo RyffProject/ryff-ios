@@ -19,6 +19,13 @@
 
 @implementation RYPostsDataSource
 
+- (instancetype)init {
+    if (self = [super init]) {
+        _feedItems = @[];
+    }
+    return self;
+}
+
 - (void)loadMoreContent {
     [self fetchContent:(_currentPage + 1)];
 }

@@ -22,7 +22,9 @@
 // Data Managers
 #import "RYServices.h"
 #import "RYRegistrationServices.h"
-#import "SSKeychain.h"
+
+// Frameworks
+@import SSKeychain;
 
 #define kFieldCellReuseID @"FieldCell"
 #define kLoginCellReuseID @"LoginCell"
