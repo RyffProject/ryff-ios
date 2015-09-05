@@ -14,7 +14,7 @@
 #import "MBProgressHUD.h"
 
 // Categories
-#import "UIImage+Thumbnail.h"
+#import "UIImage+Size.h"
 
 #define kHudTag 1912984
 
