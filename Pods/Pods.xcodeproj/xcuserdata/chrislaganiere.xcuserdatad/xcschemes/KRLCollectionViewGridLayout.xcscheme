@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6559FE0156464D9E480396DB"
-               BuildableName = "GTScrollNavigationBar.framework"
-               BlueprintName = "GTScrollNavigationBar"
+               BlueprintIdentifier = "5EF902E2E25B5D86D3493A32"
+               BuildableName = "KRLCollectionViewGridLayout.framework"
+               BlueprintName = "KRLCollectionViewGridLayout"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

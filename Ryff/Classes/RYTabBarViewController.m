@@ -21,6 +21,7 @@
 #import "RYStyleSheet.h"
 #import "UIImage+Color.h"
 #import "UIImage+Size.h"
+#import "UIViewController+Extras.h"
 
 // Associated View Controller
 #import "RYProfileViewController.h"
@@ -96,6 +97,7 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
     RYNavigationController *newsfeedNavigationController = [[RYNavigationController alloc] initWithRootViewController:newsfeed];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:newsfeed.title image:[[UIImage imageNamed:@"stream"] imageWithSize:tabBarIconSize] tag:RYTabIndexNewsfeed];
     newsfeedNavigationController.tabBarItem = tabBarItem;
+    [newsfeed addNewPostButtonToNavBar];
     return newsfeedNavigationController;
 }
 

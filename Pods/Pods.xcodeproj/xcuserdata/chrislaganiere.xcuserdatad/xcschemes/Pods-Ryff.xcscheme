@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "87DE8DDF3A79C27C1988AD29"
+               BlueprintIdentifier = "27D6E988C4B82B6AF11E4AF3"
                BuildableName = "Pods_Ryff.framework"
                BlueprintName = "Pods-Ryff"
                ReferencedContainer = "container:Pods.xcodeproj">

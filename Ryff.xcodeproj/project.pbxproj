@@ -113,6 +113,7 @@
 		3FF2A4931B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */; };
 		3FF2A4951B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
 		3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
+		3FF2A49E1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
@@ -312,6 +313,7 @@
 		3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Transitions.swift"; path = "Categories/UIViewController+Transitions.swift"; sourceTree = "<group>"; };
 		3FF2A4941B9CD1A000EBF74D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3FF2A49C1B9CDF4F00EBF74D /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ryff-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "KRLCollectionViewGridLayout+Ryff.swift"; path = "Categories/KRLCollectionViewGridLayout+Ryff.swift"; sourceTree = "<group>"; };
 		5D10781F97C58C1D8BE87763 /* Pods-Ryff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ryff/Pods-Ryff.release.xcconfig"; sourceTree = "<group>"; };
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFE42F2F5730A2D8E9FEB19 /* Pods-RyffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -439,8 +441,6 @@
 				3F387B5B1B9B3C2B00B5CC74 /* RYCoreViewController.m */,
 				3F387B621B9B3C2B00B5CC74 /* RYGroupTableViewCell.h */,
 				3F387B631B9B3C2B00B5CC74 /* RYGroupTableViewCell.m */,
-				3F387B961B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift */,
-				3F387B971B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift */,
 				3F387B981B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.h */,
 				3F387B991B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m */,
 				3F387B9A1B9B3C2B00B5CC74 /* RYRiffCreateTableViewCell.h */,
@@ -591,6 +591,8 @@
 				3F387B911B9B3C2B00B5CC74 /* RYRiffAudioEngine.m */,
 				3F387B921B9B3C2B00B5CC74 /* RYRiffAudioNode.h */,
 				3F387B931B9B3C2B00B5CC74 /* RYRiffAudioNode.m */,
+				3F387B961B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift */,
+				3F387B971B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift */,
 			);
 			name = "Audio Mixer";
 			sourceTree = "<group>";
@@ -638,6 +640,7 @@
 				3F387C311B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m */,
 				3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */,
 				3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */,
+				3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */,
 			);
 			name = "Categories and Extensions";
 			sourceTree = "<group>";
@@ -792,8 +795,8 @@
 				3FE76E661B9B43E700099CF5 /* Main Application */,
 				3F387BFD1B9B3C3700B5CC74 /* Data */,
 				3F387C011B9B3D6A00B5CC74 /* User Interface */,
-				3F387C1F1B9B3FA600B5CC74 /* Categories and Extensions */,
 				3F387C0B1B9B3F5300B5CC74 /* Audio Mixer */,
+				3F387C1F1B9B3FA600B5CC74 /* Categories and Extensions */,
 				3F387C0C1B9B3F6D00B5CC74 /* Style */,
 				3F387C3B1B9B3FF000B5CC74 /* Extras */,
 				83FCD15618F907C400A493F0 /* Images.xcassets */,
@@ -1102,6 +1105,7 @@
 				3F387BF91B9B3C2B00B5CC74 /* RYUser.m in Sources */,
 				3F387BC71B9B3C2B00B5CC74 /* RYDataManager.m in Sources */,
 				3F387BC51B9B3C2B00B5CC74 /* RYCorePageViewController.m in Sources */,
+				3FF2A49E1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift in Sources */,
 				3F387C361B9B3FB200B5CC74 /* UIImage+Size.m in Sources */,
 				3F387BE81B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m in Sources */,
 				3F387BC41B9B3C2B00B5CC74 /* RYAudioDeckViewController.m in Sources */,

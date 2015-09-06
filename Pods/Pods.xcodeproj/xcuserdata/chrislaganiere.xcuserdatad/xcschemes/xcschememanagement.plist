@@ -14,7 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GTScrollNavigationBar.xcscheme</key>
+		<key>KRLCollectionViewGridLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,6 +47,26 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0469E15C6493CFE6935DCCA1F2325FCB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4EB6DFE12524FD2DA752B684CE4CF6F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>66BBA2D942F6FD3569C2323193E93180</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8933734DEB8C707799F8C16D5EF95254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8AEF711DC5BCBE34B3DA76FF0207400F</key>
 		<dict>
 			<key>primary</key>
@@ -67,12 +87,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9F193AA30E724653AED855623AC2C856</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B9F3B163B68288C65279212D5B4942C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C2814CF121DAF0BC8208C621CC869657</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C77B105113B1931525CFE52A471EE588</key>
 		<dict>
 			<key>primary</key>
 			<true/>

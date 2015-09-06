@@ -14,12 +14,17 @@ protocol RYRiffCreateNodeCellDelegate: class {
 
 class RYRiffCreateNodeCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var clearButton: UIButton!
+    private let clearImageView = UIImageView(frame: CGRectZero)
     
     weak var delegate: RYRiffCreateNodeCellDelegate?
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    @availability(*, unavailable)
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     func styleWithRiffNode(riffNode: RYRiffAudioNode) {
@@ -39,7 +44,7 @@ class RYRiffCreateNodeCollectionViewCell: UICollectionViewCell {
     
     // MARK: Actions
     
-    @IBAction func clearButtonHit(sender: AnyObject) {
+    func didTapClear(tapGesture: UITapGestureRecognizer) {
         delegate?.clearHitOnNodeCell(self)
     }
     

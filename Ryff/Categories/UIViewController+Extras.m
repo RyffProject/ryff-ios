@@ -23,19 +23,16 @@
 #pragma mark -
 #pragma mark - Navigation
 
-- (void) addNewPostButtonToNavBar
-{
-    if (self.navigationItem)
-    {
+- (void) addNewPostButtonToNavBar {
+    if (self.navigationItem) {
         UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"create"] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
         [self.navigationItem setRightBarButtonItem:newPostButton];
     }
 }
 
-- (void) newPost:(id)sender
-{
-    RYRiffCreateCollectionViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffCreate"];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
+- (void)newPost:(id)sender {
+    RYRiffCreateCollectionViewController *riffCreateCollectionViewController = [[RYRiffCreateCollectionViewController alloc] initWithNibName:nil bundle:nil];
+    [self presentViewController:riffCreateCollectionViewController animated:YES completion:nil];
 }
 
 #pragma mark -

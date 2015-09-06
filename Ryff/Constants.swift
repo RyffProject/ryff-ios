@@ -26,4 +26,9 @@ struct Constants {
         static let AvatarHeight: CGFloat = 60
     }
     
+    struct Mixer {
+        static let RegularPadSpacing: CGFloat = 45
+        static let CompactPadSpacing: CGFloat = 30
+    }
+    
 }

@@ -54,7 +54,7 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-Ryff/AFNetworking.framework'
   install_framework 'Pods-Ryff/CHTCollectionViewWaterfallLayout.framework'
-  install_framework 'Pods-Ryff/GTScrollNavigationBar.framework'
+  install_framework 'Pods-Ryff/KRLCollectionViewGridLayout.framework'
   install_framework 'Pods-Ryff/MBProgressHUD.framework'
   install_framework 'Pods-Ryff/SDWebImage.framework'
   install_framework 'Pods-Ryff/SSKeychain.framework'
@@ -62,7 +62,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-Ryff/AFNetworking.framework'
   install_framework 'Pods-Ryff/CHTCollectionViewWaterfallLayout.framework'
-  install_framework 'Pods-Ryff/GTScrollNavigationBar.framework'
+  install_framework 'Pods-Ryff/KRLCollectionViewGridLayout.framework'
   install_framework 'Pods-Ryff/MBProgressHUD.framework'
   install_framework 'Pods-Ryff/SDWebImage.framework'
   install_framework 'Pods-Ryff/SSKeychain.framework'
