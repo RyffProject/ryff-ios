@@ -62,7 +62,7 @@ static RYUser* _loggedInUser;
 - (BOOL) attemptBackgroundLogIn
 {
     // TEST
-    [self logInUserWithUsername:@"semigraphic" Password:@"password" forDelegate:nil];
+    [self logInUserWithUsername:@"sheschool" Password:@"password" forDelegate:nil];
     return YES;
     // TEST
     

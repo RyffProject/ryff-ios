@@ -72,7 +72,6 @@
 }
 
 - (void)postUpdateFailed:(RYPost *)post reason:(NSString *)reason {
-    NSLog(@"Failed to upvote post #%ld: %@", post.postId, reason);
     if ([self.feedItems containsObject:post]) {
         [self.delegate postUpdatedAtIndex:[self.feedItems indexOfObject:post]];
     }

@@ -12,6 +12,13 @@
 #import "RYPost.h"
 #import "RYTag.h"
 
+// Data Managers
+#import "RYServices.h"
+
+@interface RYUser () <FollowDelegate>
+
+@end
+
 @implementation RYUser
 
 - (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
@@ -78,13 +85,47 @@
     return [[RYUser alloc] initWithUser:1 username:@"dabeat" nickname:@"Pat" karma:3 bio:@"here's some stuff about me" dateCreated:[NSDate date] isFollowing:NO numFollowers:4 numFollowing:2 tags:@[]];
 }
 
--(id)copyWithZone:(NSZone *)zone
-{
-    // We'll ignore the zone for now
+#pragma mark - Actions
+
+- (void)toggleFollowing {
+    [[RYServices sharedInstance] follow:!self.isFollowing user:self.userId forDelegate:self];
+}
+
+#pragma mark - FollowDelegate
+
+- (void)follow:(BOOL)following confirmedForUser:(RYUser *)user {
+    [self.delegate userUpdated:user];
+}
+
+- (void)followFailed:(NSString *)reason {
+    NSLog(@"Follow user %ld failed: %@", self.userId, reason);
+    [self.delegate userUpdateFailed:self reason:reason];
+}
+
+#pragma mark - NSCopying
+
+-(id)copyWithZone:(NSZone *)zone {
     RYUser *newUser = [[RYUser alloc] initWithUser:self.userId username:self.username nickname:self.nickname karma:self.karma bio:self.bio dateCreated:self.dateCreated isFollowing:self.isFollowing numFollowers:self.numFollowers numFollowing:self.numFollowing tags:self.tags];
     newUser.avatarURL = _avatarURL;
     newUser.avatarSmallURL = _avatarSmallURL;
     return newUser;
+}
+
+#pragma mark - NSObject
+
+- (BOOL) isEqual:(id)object {
+    BOOL equal = NO;
+    if ([object isKindOfClass:[RYUser class]])
+    {
+        RYUser *other = (RYUser *)object;
+        if (other.userId == self.userId)
+            equal = YES;
+    }
+    return equal;
+}
+
+- (NSUInteger)hash {
+    return self.userId;
 }
 
 @end

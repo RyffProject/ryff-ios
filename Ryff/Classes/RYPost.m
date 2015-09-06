@@ -106,10 +106,12 @@
 }
 
 - (void) upvoteFailed:(NSString*)reason post:(RYPost *)oldPost {
+    NSLog(@"Upvote post %ld failed: %@", self.postId, reason);
     [self.delegate postUpdateFailed:oldPost reason:reason];
 }
 
 - (void) starFailed:(NSString *)reason post:(RYPost *)oldPost {
+    NSLog(@"Star post %ld failed: %@", self.postId, reason);
     [self.delegate postUpdateFailed:oldPost reason:reason];
 }
 

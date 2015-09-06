@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RYUser : NSObject
+@class RYUser;
+
+@protocol RYUserDelegate <NSObject>
+- (void)userUpdated:(RYUser *)user;
+- (void)userUpdateFailed:(RYUser *)user reason:(NSString *)reason;
+@end
+
+@interface RYUser : NSObject <NSCopying>
 
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString *username;
@@ -26,11 +33,18 @@
 @property (nonatomic, strong) NSURL *avatarSmallURL;
 @property (nonatomic, strong) NSString *nickname;
 
+// Delegate to notify when actions occur.
+@property (nonatomic, weak) id<RYUserDelegate> delegate;
+
 - (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags;
 
 + (RYUser *)userFromDict:(NSDictionary*)userDict;
 + (NSArray *) usersFromDictArray:(NSArray *)dictArray;
 
 + (RYUser *)sampleUser;
+
+// Actions
+
+- (void)toggleFollowing;
 
 @end

@@ -130,12 +130,6 @@ import GTScrollNavigationBar
         dataSource?.loadMoreContent()
     }
     
-    // MARK: Scroll View Delegate
-    
-    func scrollViewDidScrollToTop(scrollView: UIScrollView) {
-        navigationController?.scrollNavigationBar.resetToDefaultPositionWithAnimation(false)
-    }
-    
     // MARK: UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
