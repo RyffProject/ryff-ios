@@ -45,9 +45,6 @@ import GTScrollNavigationBar
         view.addSubview(tableView)
         tableView.registerClass(RYPostTableViewCell.self, forCellReuseIdentifier: RYPostTableViewCellReuseIdentifier)
         
-        // Set nav bar scroll view for GTScrollNavigationBar
-        navigationController?.scrollNavigationBar.scrollView = tableView
-        
         NSLayoutConstraint.activateConstraints(subviewConstraints())
         dataSource?.refreshContent()
     }
@@ -66,23 +63,34 @@ import GTScrollNavigationBar
     // MARK: RYPostTableViewCellDelegate
     
     func didTapUser(postCell: RYPostTableViewCell) {
-        let cellIndexPath = tableView.indexPathForCell(postCell)
-        if let postIndex = cellIndexPath?.row, post = dataSource?.postAtIndex(postIndex) {
+        if let post = postForIndexPath(tableView.indexPathForCell(postCell)) {
             // Check if already looking at that user.
             if let userFeed = dataSource as? RYUserFeedDataSource {
                 if (userFeed.user.userId == post.user.userId) {
                     return
                 }
             }
-            pushProfileViewControllerForUser(post.user)
+            pushProfileViewController(post.user)
+        }
+    }
+    
+    func didTapPost(postCell: RYPostTableViewCell) {
+        if let post = postForIndexPath(tableView.indexPathForCell(postCell)) {
+            pushPostDetailsViewController(post)
         }
     }
     
     func didTapStarred(postCell: RYPostTableViewCell) {
-        let cellIndexPath = tableView.indexPathForCell(postCell)
-        if let postIndex = cellIndexPath?.row, post = dataSource?.postAtIndex(postIndex) {
+        if let post = postForIndexPath(tableView.indexPathForCell(postCell)) {
             dataSource?.toggleStarred(post)
         }
+    }
+    
+    private func postForIndexPath(indexPath: NSIndexPath?) -> RYPost? {
+        if let postIndex = indexPath?.row, post = dataSource?.postAtIndex(postIndex) {
+            return post
+        }
+        return nil
     }
     
     // MARK: RYPostsDataSourceDelegate

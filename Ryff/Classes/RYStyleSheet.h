@@ -17,6 +17,7 @@
 + (UIColor *)tabBarColor;
 + (UIColor *)audioBackgroundColor;
 + (UIColor *)lightBackgroundColor;
++ (UIColor *)darkBackgroundColor;
 + (UIColor *)profileBackgroundColor;
 + (UIColor *)darkTextColor;
 

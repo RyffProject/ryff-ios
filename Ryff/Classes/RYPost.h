@@ -8,9 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class RYPost;
 @class RYUser;
 
-@interface RYPost : NSObject
+@protocol RYPostDelegate <NSObject>
+- (void)postUpdated:(RYPost *)post;
+- (void)postUpdateFailed:(RYPost *)post reason:(NSString *)reason;
+@end
+
+@interface RYPost : NSObject <NSCopying>
 
 @property (nonatomic, assign) NSInteger postId;
 @property (nonatomic, strong) RYUser *user;
@@ -30,9 +36,16 @@
 @property (nonatomic, strong) NSURL *riffHQURL;
 @property (nonatomic, strong) NSArray *tags;
 
+// Delegate to notify when actions occur.
+@property (nonatomic, weak) id<RYPostDelegate> delegate;
+
 - (RYPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content title:(NSString *)title riffURL:(NSURL*)riffURL duration:(CGFloat)duration dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes;
 
 + (RYPost *)postWithDict:(NSDictionary*)postDict;
 + (NSArray *)postsFromDictArray:(NSArray *)dictArray;
+
+// Actions
+
+- (void)toggleStarred;
 
 @end

@@ -47,6 +47,10 @@
     return [UIColor colorWithHexString:@"cee5ea"];
 }
 
++ (UIColor *)darkBackgroundColor {
+    return [UIColor colorWithHexString:@"574a4a"];
+}
+
 + (UIColor *)profileBackgroundColor
 {
     return [UIColor colorWithHexString:@"f2f3ed"];

@@ -8,8 +8,15 @@
 
 #import "RYPost.h"
 
+// Data Managers
+#import "RYServices.h"
+
 // Data Objects
 #import "RYUser.h"
+
+@interface RYPost () <ActionDelegate>
+
+@end
 
 @implementation RYPost
 
@@ -82,7 +89,44 @@
     return posts;
 }
 
-#pragma mark - Internal
+#pragma mark - Actions
+
+- (void)toggleStarred {
+    [[RYServices sharedInstance] star:!self.isStarred post:self forDelegate:self];
+}
+
+#pragma mark - ActionDelegate
+
+- (void) upvoteSucceeded:(RYPost*)updatedPost {
+    [self.delegate postUpdated:updatedPost];
+}
+
+- (void) starSucceeded:(RYPost *)updatedPost {
+    [self.delegate postUpdated:updatedPost];
+}
+
+- (void) upvoteFailed:(NSString*)reason post:(RYPost *)oldPost {
+    [self.delegate postUpdateFailed:oldPost reason:reason];
+}
+
+- (void) starFailed:(NSString *)reason post:(RYPost *)oldPost {
+    [self.delegate postUpdateFailed:oldPost reason:reason];
+}
+
+#pragma mark - NSCopying
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    RYPost *newPost = [[RYPost alloc] initWithPostId:self.postId User:[self.user copy] Content:self.content title:self.title riffURL:self.riffURL duration:self.duration dateCreated:self.dateCreated isUpvoted:self.isUpvoted isStarred:self.isStarred upvotes:self.upvotes];
+    newPost.riffHQURL = self.riffHQURL;
+    newPost.imageURL = self.imageURL;
+    newPost.imageMediumURL = self.imageMediumURL;
+    newPost.imageSmallURL = self.imageSmallURL;
+    newPost.tags = self.tags;
+    return newPost;
+}
+
+#pragma mark - NSObject
 
 - (BOOL) isEqual:(id)object
 {

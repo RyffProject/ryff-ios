@@ -8,17 +8,11 @@
 
 import UIKit
 
-private struct UserProfileCellConstants {
-    private static let AvatarHeight: CGFloat = 60
-    private static let ElementPadding: CGFloat = 15
-    private static let MaximumElementWidth: CGFloat = 400
-}
-
 class RYUserProfileTableViewCell: UITableViewCell {
     
     private let avatarImageView = UIImageView(frame: CGRectZero)
     private let usernameLabel = UILabel(frame: CGRectZero)
-    private let userBioTextView = UITextView(frame: CGRectZero)
+    private let userBioTextView = RYPostTextView(frame: CGRectZero)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,13 +27,6 @@ class RYUserProfileTableViewCell: UITableViewCell {
         usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(usernameLabel)
         
-        userBioTextView.backgroundColor = UIColor.clearColor()
-        userBioTextView.textColor = UIColor.darkGrayColor()
-        userBioTextView.editable = false
-        userBioTextView.textAlignment = .Center
-        userBioTextView.textContainer.maximumNumberOfLines = 5
-        userBioTextView.textContainer.lineBreakMode = .ByTruncatingTail
-        userBioTextView.scrollEnabled = false
         userBioTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(userBioTextView)
         
@@ -63,7 +50,7 @@ class RYUserProfileTableViewCell: UITableViewCell {
     
     private func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["avatar": avatarImageView, "username": usernameLabel, "bio": userBioTextView]
-        let metrics = ["padding": UserProfileCellConstants.ElementPadding, "avatarHeight": UserProfileCellConstants.AvatarHeight, "maxWidth": UserProfileCellConstants.MaximumElementWidth]
+        let metrics = ["padding": Constants.Global.ElementPadding, "avatarHeight": Constants.User.AvatarHeight, "maxWidth": Constants.Global.ContentMaximumWidth]
         
         var constraints: [AnyObject] = []
         

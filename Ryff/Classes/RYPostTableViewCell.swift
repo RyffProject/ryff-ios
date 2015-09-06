@@ -11,14 +11,8 @@ import SDWebImage
 
 protocol RYPostTableViewCellDelegate: class {
     func didTapUser(postCell: RYPostTableViewCell)
+    func didTapPost(postCell: RYPostTableViewCell)
     func didTapStarred(postCell: RYPostTableViewCell)
-}
-
-private struct PostCellConstants {
-    private static let MaximumWidth: CGFloat = 400
-    private static let MinimumImageHeight: CGFloat = 150
-    private static let FooterHeight: CGFloat = 45
-    private static let ElementPadding: CGFloat = 15
 }
 
 class RYPostTableViewCell: UITableViewCell {
@@ -40,9 +34,8 @@ class RYPostTableViewCell: UITableViewCell {
     
     private let bottomDetailsView = UIView(frame: CGRectZero)
     private let bottomEffectsView = RYFadingVisualEffectView(effect: UIBlurEffect(style: .Dark), direction: .Bottom)
-    private let postDescriptionTextView = UITextView(frame: CGRectZero)
-    private let starredImageView = UIImageView(frame: CGRectZero)
-    private let starredCountLabel = UILabel(frame: CGRectZero)
+    private let postDescriptionTextView = RYPostTextView(frame: CGRectZero)
+    private let starredView = RYStarredView(frame: CGRectZero)
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,23 +75,11 @@ class RYPostTableViewCell: UITableViewCell {
         bottomEffectsView.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomDetailsView.addSubview(bottomEffectsView)
         
-        postDescriptionTextView.backgroundColor = UIColor.clearColor()
-        postDescriptionTextView.textColor = UIColor.lightGrayColor()
-        postDescriptionTextView.editable = false
-        postDescriptionTextView.textContainer.maximumNumberOfLines = 3
-        postDescriptionTextView.textContainer.lineBreakMode = .ByTruncatingTail
-        postDescriptionTextView.scrollEnabled = false
-        postDescriptionTextView.setContentCompressionResistancePriority(UILayoutPriority.Low, forAxis: .Horizontal)
         postDescriptionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomDetailsView.addSubview(postDescriptionTextView)
         
-        starredImageView.image = UIImage(named: "star")
-        starredImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        bottomDetailsView.addSubview(starredImageView)
-        
-        starredCountLabel.textAlignment = .Right
-        starredCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        bottomDetailsView.addSubview(starredCountLabel)
+        starredView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        bottomDetailsView.addSubview(starredView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
         
@@ -108,9 +89,17 @@ class RYPostTableViewCell: UITableViewCell {
         let userTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapUser:"))
         usernameLabel.addGestureRecognizer(userTapGesture)
         
-        starredImageView.userInteractionEnabled = true
+        postTitleLabel.userInteractionEnabled = true
+        let postTitleTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapPost:"))
+        postTitleLabel.addGestureRecognizer(postTitleTapGesture)
+        
+        postImageView.userInteractionEnabled = true
+        let postTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapPost:"))
+        postImageView.addGestureRecognizer(postTapGesture)
+        
+        starredView.userInteractionEnabled = true
         let starredTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
-        starredImageView.addGestureRecognizer(starredTapGesture)
+        starredView.addGestureRecognizer(starredTapGesture)
     }
     
     @availability(*, unavailable)
@@ -122,7 +111,7 @@ class RYPostTableViewCell: UITableViewCell {
     
     class func heightForPost(post: RYPost) -> CGFloat {
         //        if let _ = post.imageURL {
-        return PostCellConstants.MaximumWidth + PostCellConstants.FooterHeight
+        return Constants.Global.ContentMaximumWidth + Constants.Post.FooterHeight
         //        }
         //        else {
         //            return PostCellConstants.MinimumImageHeight + PostCellConstants.FooterHeight
@@ -135,9 +124,8 @@ class RYPostTableViewCell: UITableViewCell {
         usernameLabel.text = post.user.username
         postTitleLabel.text = post.title
         postDescriptionTextView.text = post.content
-        starredCountLabel.text = "\(post.upvotes)"
         postStarred = post.isStarred
-        styleStarred(postStarred)
+        starredView.style(postStarred, starredCount: post.upvotes)
         
         if let _ = post.imageURL {
             postImageView.sd_setImageWithURL(post.imageURL, placeholderImage: nil)
@@ -149,33 +137,26 @@ class RYPostTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
     }
     
-    private func styleStarred(starred: Bool) {
-        if starred {
-            starredImageView.tintColor = RYStyleSheet.audioActionColor()
-            starredCountLabel.textColor = RYStyleSheet.audioActionColor()
-        }
-        else {
-            starredImageView.tintColor = UIColor.lightGrayColor()
-            starredCountLabel.textColor = UIColor.lightGrayColor()
-        }
-    }
-    
     // MARK: Actions
     
     func didTapUser(tapGesture: UITapGestureRecognizer) {
         delegate?.didTapUser(self)
     }
     
+    func didTapPost(tapGesture: UITapGestureRecognizer) {
+        delegate?.didTapPost(self)
+    }
+    
     func didTapStarred(tapGesture: UITapGestureRecognizer) {
-        styleStarred(!postStarred)
+        starredView.style(!postStarred)
         delegate?.didTapStarred(self)
     }
     
     // MARK: Layout
     
     private func subviewConstraints() -> [NSLayoutConstraint] {
-        let metrics = ["maxWidth": PostCellConstants.MaximumWidth, "padding": PostCellConstants.ElementPadding, "footerHeight": PostCellConstants.FooterHeight]
-        let viewsDict = ["container": containerView, "topView": topDetailsView, "topEffects": topEffectsView, "username": usernameLabel, "title": postTitleLabel, "postImage": postImageView, "bottomView": bottomDetailsView, "bottomEffects": bottomEffectsView, "description": postDescriptionTextView, "starredImage": starredImageView, "starredCount": starredCountLabel]
+        let metrics = ["maxWidth": Constants.Global.ContentMaximumWidth, "padding": Constants.Global.ElementPadding, "footerHeight": Constants.Post.FooterHeight]
+        let viewsDict = ["container": containerView, "topView": topDetailsView, "topEffects": topEffectsView, "username": usernameLabel, "title": postTitleLabel, "postImage": postImageView, "bottomView": bottomDetailsView, "bottomEffects": bottomEffectsView, "description": postDescriptionTextView, "starred": starredView]
         
         var constraints: [AnyObject] = []
         
@@ -211,10 +192,9 @@ class RYPostTableViewCell: UITableViewCell {
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[bottomEffects]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
         // Bottom Details Subviews
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[description]-(padding)-[starredCount]-[starredImage]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[description]-(padding)-[starred]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[description]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=0)-[starredImage]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
-        constraints += [NSLayoutConstraint(item: starredCountLabel, attribute: .CenterY, relatedBy: .Equal, toItem: starredImageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=0)-[starred]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
         return constraints as? [NSLayoutConstraint] ?? []
     }

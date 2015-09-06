@@ -89,8 +89,6 @@
 		3F387C381B9B3FB200B5CC74 /* UIView+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387C2D1B9B3FB200B5CC74 /* UIView+Styling.m */; };
 		3F387C391B9B3FB200B5CC74 /* UIViewController+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387C2F1B9B3FB200B5CC74 /* UIViewController+Extras.m */; };
 		3F387C3A1B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387C311B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m */; };
-		3F51B57D1B9BB246007A136D /* UIViewController+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F51B57C1B9BB246007A136D /* UIViewController+Transitions.swift */; };
-		3F51B57E1B9BB425007A136D /* UIViewController+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F51B57C1B9BB246007A136D /* UIViewController+Transitions.swift */; };
 		3F51B57F1B9BB435007A136D /* RYUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744F01B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift */; };
 		3F51B5801B9BB438007A136D /* RYProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B8B1B9B3C2B00B5CC74 /* RYProfileViewController.swift */; };
 		3FE76E471B9B40BB00099CF5 /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E431B9B40BB00099CF5 /* BlockAlertView.m */; };
@@ -105,6 +103,16 @@
 		3FE76E641B9B414500099CF5 /* RYPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B841B9B3C2B00B5CC74 /* RYPostsViewController.swift */; };
 		3FE76E651B9B414900099CF5 /* RYPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B851B9B3C2B00B5CC74 /* RYPostTableViewCell.swift */; };
 		3FE76E691B9B443900099CF5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE76E681B9B443900099CF5 /* Media.xcassets */; };
+		3FF2A4891B9CCDC500EBF74D /* RYPostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4881B9CCDC500EBF74D /* RYPostTextView.swift */; };
+		3FF2A48A1B9CCDC500EBF74D /* RYPostTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4881B9CCDC500EBF74D /* RYPostTextView.swift */; };
+		3FF2A48C1B9CCFB300EBF74D /* RYStarredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A48B1B9CCFB300EBF74D /* RYStarredView.swift */; };
+		3FF2A48D1B9CCFB300EBF74D /* RYStarredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A48B1B9CCFB300EBF74D /* RYStarredView.swift */; };
+		3FF2A48F1B9CCFD900EBF74D /* RYPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A48E1B9CCFD900EBF74D /* RYPostDetailsViewController.swift */; };
+		3FF2A4901B9CCFD900EBF74D /* RYPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A48E1B9CCFD900EBF74D /* RYPostDetailsViewController.swift */; };
+		3FF2A4921B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */; };
+		3FF2A4931B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */; };
+		3FF2A4951B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
+		3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
@@ -278,7 +286,6 @@
 		3F387C2F1B9B3FB200B5CC74 /* UIViewController+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extras.m"; path = "Categories/UIViewController+Extras.m"; sourceTree = "<group>"; };
 		3F387C301B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RYSocialTransitions.h"; path = "Categories/UIViewController+RYSocialTransitions.h"; sourceTree = "<group>"; };
 		3F387C311B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RYSocialTransitions.m"; path = "Categories/UIViewController+RYSocialTransitions.m"; sourceTree = "<group>"; };
-		3F51B57C1B9BB246007A136D /* UIViewController+Transitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Transitions.swift"; sourceTree = "<group>"; };
 		3FE76E421B9B40BB00099CF5 /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlertView.h; sourceTree = "<group>"; };
 		3FE76E431B9B40BB00099CF5 /* BlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlertView.m; sourceTree = "<group>"; };
 		3FE76E451B9B40BB00099CF5 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
@@ -299,6 +306,12 @@
 		3FE76E601B9B412E00099CF5 /* dsym_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = dsym_upload.sh; sourceTree = "<group>"; };
 		3FE76E611B9B412E00099CF5 /* libCrittercism_v4_3_7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_3_7.a; sourceTree = "<group>"; };
 		3FE76E681B9B443900099CF5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		3FF2A4881B9CCDC500EBF74D /* RYPostTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYPostTextView.swift; path = Classes/RYPostTextView.swift; sourceTree = "<group>"; };
+		3FF2A48B1B9CCFB300EBF74D /* RYStarredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYStarredView.swift; path = Classes/RYStarredView.swift; sourceTree = "<group>"; };
+		3FF2A48E1B9CCFD900EBF74D /* RYPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYPostDetailsViewController.swift; path = Classes/RYPostDetailsViewController.swift; sourceTree = "<group>"; };
+		3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Transitions.swift"; path = "Categories/UIViewController+Transitions.swift"; sourceTree = "<group>"; };
+		3FF2A4941B9CD1A000EBF74D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3FF2A49C1B9CDF4F00EBF74D /* Ryff-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Ryff-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5D10781F97C58C1D8BE87763 /* Pods-Ryff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ryff.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ryff/Pods-Ryff.release.xcconfig"; sourceTree = "<group>"; };
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFE42F2F5730A2D8E9FEB19 /* Pods-RyffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -412,7 +425,8 @@
 		3F387C011B9B3D6A00B5CC74 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				3FE76E661B9B43E700099CF5 /* Main Application */,
+				3F24D8301B9B4ED300E78B05 /* RYNavigationController.h */,
+				3F24D8311B9B4ED300E78B05 /* RYNavigationController.m */,
 				3F387C021B9B3DA000B5CC74 /* Posts */,
 				3F387C061B9B3E4400B5CC74 /* Audio Deck */,
 				3F387C071B9B3E8800B5CC74 /* Registration */,
@@ -442,6 +456,7 @@
 			children = (
 				3F387B841B9B3C2B00B5CC74 /* RYPostsViewController.swift */,
 				3F387B851B9B3C2B00B5CC74 /* RYPostTableViewCell.swift */,
+				3FF2A48E1B9CCFD900EBF74D /* RYPostDetailsViewController.swift */,
 				3F387C051B9B3E2600B5CC74 /* Profile */,
 				3F387C041B9B3E2100B5CC74 /* Newsfeed */,
 				3F387B941B9B3C2B00B5CC74 /* RYRiffCell.h */,
@@ -466,6 +481,8 @@
 				3F387BA81B9B3C2B00B5CC74 /* RYSocialTextView.h */,
 				3F387BA91B9B3C2B00B5CC74 /* RYSocialTextView.m */,
 				3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */,
+				3FF2A4881B9CCDC500EBF74D /* RYPostTextView.swift */,
+				3FF2A48B1B9CCFB300EBF74D /* RYStarredView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -584,6 +601,7 @@
 				3FE76E681B9B443900099CF5 /* Media.xcassets */,
 				3F387BAA1B9B3C2B00B5CC74 /* RYStyleSheet.h */,
 				3F387BAB1B9B3C2B00B5CC74 /* RYStyleSheet.m */,
+				3FF2A4941B9CD1A000EBF74D /* Constants.swift */,
 				3F387C0D1B9B3F8900B5CC74 /* Main.storyboard */,
 				3F387C0E1B9B3F8900B5CC74 /* RiffCreate.storyboard */,
 				3F387C0F1B9B3F8900B5CC74 /* RYRiffCell.xib */,
@@ -619,7 +637,7 @@
 				3F387C301B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.h */,
 				3F387C311B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m */,
 				3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */,
-				3F51B57C1B9BB246007A136D /* UIViewController+Transitions.swift */,
+				3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */,
 			);
 			name = "Categories and Extensions";
 			sourceTree = "<group>";
@@ -717,8 +735,7 @@
 				3FE76E5A1B9B411C00099CF5 /* RYAppDelegate.m */,
 				3F387BAC1B9B3C2B00B5CC74 /* RYTabBarViewController.h */,
 				3F387BAD1B9B3C2B00B5CC74 /* RYTabBarViewController.m */,
-				3F24D8301B9B4ED300E78B05 /* RYNavigationController.h */,
-				3F24D8311B9B4ED300E78B05 /* RYNavigationController.m */,
+				3FF2A49C1B9CDF4F00EBF74D /* Ryff-Bridging-Header.h */,
 			);
 			name = "Main Application";
 			sourceTree = "<group>";
@@ -772,6 +789,7 @@
 		83FCD14118F907C400A493F0 /* Ryff */ = {
 			isa = PBXGroup;
 			children = (
+				3FE76E661B9B43E700099CF5 /* Main Application */,
 				3F387BFD1B9B3C3700B5CC74 /* Data */,
 				3F387C011B9B3D6A00B5CC74 /* User Interface */,
 				3F387C1F1B9B3FA600B5CC74 /* Categories and Extensions */,
@@ -1049,6 +1067,7 @@
 				3F387BEF1B9B3C2B00B5CC74 /* RYServices.m in Sources */,
 				3F387C341B9B3FB200B5CC74 /* UIFontDescriptor+RYCustomFont.m in Sources */,
 				3F387BF11B9B3C2B00B5CC74 /* RYStyleSheet.m in Sources */,
+				3FF2A4951B9CD1A000EBF74D /* Constants.swift in Sources */,
 				3F387BEE1B9B3C2B00B5CC74 /* RYSearchTypeTableViewCell.m in Sources */,
 				3F387BEB1B9B3C2B00B5CC74 /* RYRiffDetailsViewController.m in Sources */,
 				3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */,
@@ -1073,11 +1092,13 @@
 				3F387BCC1B9B3C2B00B5CC74 /* RYLocationServices.m in Sources */,
 				3F387BCB1B9B3C2B00B5CC74 /* RYLoadMoreControl.m in Sources */,
 				3F387BE51B9B3C2B00B5CC74 /* RYRiffCell.m in Sources */,
+				3FF2A48C1B9CCFB300EBF74D /* RYStarredView.swift in Sources */,
 				3F387BD61B9B3C2B00B5CC74 /* RYNotificationsTableViewCell.m in Sources */,
 				3F387BD91B9B3C2B00B5CC74 /* RYPost.m in Sources */,
 				3F387BD11B9B3C2B00B5CC74 /* RYNewsfeedDataSource.m in Sources */,
 				3FE76E5B1B9B411C00099CF5 /* RYAppDelegate.m in Sources */,
 				3F387BF71B9B3C2B00B5CC74 /* RYTagListHeaderView.m in Sources */,
+				3FF2A48F1B9CCFD900EBF74D /* RYPostDetailsViewController.swift in Sources */,
 				3F387BF91B9B3C2B00B5CC74 /* RYUser.m in Sources */,
 				3F387BC71B9B3C2B00B5CC74 /* RYDataManager.m in Sources */,
 				3F387BC51B9B3C2B00B5CC74 /* RYCorePageViewController.m in Sources */,
@@ -1085,7 +1106,6 @@
 				3F387BE81B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m in Sources */,
 				3F387BC41B9B3C2B00B5CC74 /* RYAudioDeckViewController.m in Sources */,
 				3FE76E581B9B40FF00099CF5 /* BNRDynamicTypeManager.m in Sources */,
-				3F51B57D1B9BB246007A136D /* UIViewController+Transitions.swift in Sources */,
 				3F387BCF1B9B3C2B00B5CC74 /* RYMediaEditor.m in Sources */,
 				3F387BE01B9B3C2B00B5CC74 /* RYProfileViewController.swift in Sources */,
 				3F387C371B9B3FB200B5CC74 /* UIImagePickerController+Orientations.m in Sources */,
@@ -1095,6 +1115,7 @@
 				3F387BEC1B9B3C2B00B5CC74 /* RYRiffStreamingCoreViewController.m in Sources */,
 				3F387C391B9B3FB200B5CC74 /* UIViewController+Extras.m in Sources */,
 				3F32A8F81B9B87F000E79282 /* RYFadingVisualEffectView.swift in Sources */,
+				3FF2A4891B9CCDC500EBF74D /* RYPostTextView.swift in Sources */,
 				3F387BF31B9B3C2B00B5CC74 /* RYTag.m in Sources */,
 				3F387BD21B9B3C2B00B5CC74 /* RYNewsfeedNavigationController.m in Sources */,
 				3F387BC81B9B3C2B00B5CC74 /* RYDiscoverServices.m in Sources */,
@@ -1116,6 +1137,7 @@
 				3F387BCD1B9B3C2B00B5CC74 /* RYLoginTableViewCell.m in Sources */,
 				3FE76E471B9B40BB00099CF5 /* BlockAlertView.m in Sources */,
 				3F24D8321B9B4ED300E78B05 /* RYNavigationController.m in Sources */,
+				3FF2A4921B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */,
 				3F387BED1B9B3C2B00B5CC74 /* RYRiffStreamViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
 			);
@@ -1128,11 +1150,15 @@
 				3F51B57F1B9BB435007A136D /* RYUserProfileTableViewCell.swift in Sources */,
 				83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */,
 				3F3744EC1B9B89B4005A9DD2 /* RYFadingVisualEffectView.swift in Sources */,
+				3FF2A4931B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */,
+				3FF2A4901B9CCFD900EBF74D /* RYPostDetailsViewController.swift in Sources */,
 				3F51B5801B9BB438007A136D /* RYProfileViewController.swift in Sources */,
 				3FE76E641B9B414500099CF5 /* RYPostsViewController.swift in Sources */,
-				3F51B57E1B9BB425007A136D /* UIViewController+Transitions.swift in Sources */,
+				3FF2A48A1B9CCDC500EBF74D /* RYPostTextView.swift in Sources */,
 				3F3744EF1B9B94CC005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3FE76E651B9B414900099CF5 /* RYPostTableViewCell.swift in Sources */,
+				3FF2A48D1B9CCFB300EBF74D /* RYStarredView.swift in Sources */,
+				3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

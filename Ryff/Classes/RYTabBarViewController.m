@@ -93,8 +93,7 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
     RYNewsfeedDataSource *dataSource = [[RYNewsfeedDataSource alloc] init];
     RYPostsViewController *newsfeed = [[RYPostsViewController alloc] initWithDataSource: dataSource];
     newsfeed.title = @"Newsfeed";
-    RYNavigationController *newsfeedNavigationController = [[RYNavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class] toolbarClass:nil];
-    [newsfeedNavigationController setViewControllers:@[newsfeed]];
+    RYNavigationController *newsfeedNavigationController = [[RYNavigationController alloc] initWithRootViewController:newsfeed];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:newsfeed.title image:[[UIImage imageNamed:@"stream"] imageWithSize:tabBarIconSize] tag:RYTabIndexNewsfeed];
     newsfeedNavigationController.tabBarItem = tabBarItem;
     return newsfeedNavigationController;
@@ -111,8 +110,7 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 - (RYNavigationController *)profile {
     RYPostsDataSource *dataSource = [RYUserFeedDataSource postsDataSourceWithUser:[RYRegistrationServices loggedInUser]];
     RYProfileViewController *profile = [[RYProfileViewController alloc] initWithDataSource:dataSource];
-    RYNavigationController *profileNavigationController = [[RYNavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class] toolbarClass:nil];
-    [profileNavigationController setViewControllers:@[profile]];
+    RYNavigationController *profileNavigationController = [[RYNavigationController alloc] initWithRootViewController:profile];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:profile.title image:[[UIImage imageNamed:@"user"] imageWithSize:tabBarIconSize] tag:RYTabIndexProfile];
     profileNavigationController.tabBarItem = tabBarItem;
     return profileNavigationController;

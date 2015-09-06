@@ -8,7 +8,7 @@
 
 #import "RYPostsDataSource.h"
 
-@interface RYPostsDataSource () <ActionDelegate>
+@interface RYPostsDataSource () <RYPostDelegate>
 
 @property (nonatomic) NSArray/*<RYPost>*/ *feedItems;
 
@@ -48,20 +48,15 @@
 #pragma mark - Actions
 
 - (void)toggleStarred:(RYPost * __nullable)post {
-    if (post) {
-        [[RYServices sharedInstance] star:!post.isStarred post:post forDelegate:self];
-    }
+    [post toggleStarred];
 }
 
 #pragma mark - Post Delegate
 
 - (void)postSucceeded:(NSArray *)posts page:(NSNumber *)page {
-    if (page && page.integerValue > 1) {
-        self.feedItems = [self.feedItems arrayByAddingObjectsFromArray:posts];
-    }
-    else {
-        self.feedItems = posts;
-    }
+    BOOL shouldClearOldPosts = (!page || page.integerValue <= 1);
+    [self addPosts:posts clearOldPosts:shouldClearOldPosts];
+    
     _currentPage = page.integerValue;
     [_delegate contentUpdated];
 }
@@ -70,31 +65,39 @@
     [_delegate contentFailedToUpdate];
 }
 
-#pragma mark - ActionDelegate
+#pragma mark - RYPostDelegate
 
-- (void) upvoteSucceeded:(RYPost*)updatedPost {
-    [self reloadPost:updatedPost];
+- (void)postUpdated:(RYPost *)post {
+    [self reloadPost:post];
 }
 
-- (void) starSucceeded:(RYPost *)updatedPost {
-    [self reloadPost:updatedPost];
-}
-
-- (void) upvoteFailed:(NSString*)reason post:(RYPost *)oldPost {
-    NSLog(@"Failed to upvote post #%ld: %@", oldPost.postId, reason);
-    if ([self.feedItems containsObject:oldPost]) {
-        [self.delegate postUpdatedAtIndex:[self.feedItems indexOfObject:oldPost]];
-    }
-}
-
-- (void) starFailed:(NSString *)reason post:(RYPost *)oldPost {
-    NSLog(@"Failed to star post #%ld: %@", oldPost.postId, reason);
-    if ([self.feedItems containsObject:oldPost]) {
-        [self.delegate postUpdatedAtIndex:[self.feedItems indexOfObject:oldPost]];
+- (void)postUpdateFailed:(RYPost *)post reason:(NSString *)reason {
+    NSLog(@"Failed to upvote post #%ld: %@", post.postId, reason);
+    if ([self.feedItems containsObject:post]) {
+        [self.delegate postUpdatedAtIndex:[self.feedItems indexOfObject:post]];
     }
 }
 
 #pragma mark - Private
+
+/**
+ *  Start tracking posts by adding them to self.feedItems. Will set delegate on all posts to self.
+ *
+ *  @param posts NSArray of `RYPost` objects.
+ *  @param clearOldPosts Should delete old posts to refresh content, instead of just adding to existing content.
+ */
+- (void)addPosts:(NSArray *)posts clearOldPosts:(BOOL)clearOldPosts {
+    for (RYPost *post in posts) {
+        post.delegate = self;
+    }
+    
+    if (clearOldPosts) {
+        self.feedItems = posts;
+    }
+    else {
+        self.feedItems = [self.feedItems arrayByAddingObjectsFromArray:posts];
+    }
+}
 
 /**
  *  Fetch `RYPost` content from server from the given page offset.
@@ -120,6 +123,7 @@
         if (oldPost.postId == post.postId)
         {
             // Found the old post, should replace it.
+            post.delegate = self;
             NSMutableArray *mutableFeedItems = [self.feedItems mutableCopy];
             [mutableFeedItems replaceObjectAtIndex:postIndex withObject:post];
             _feedItems = mutableFeedItems;
