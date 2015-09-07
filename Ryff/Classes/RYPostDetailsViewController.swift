@@ -23,9 +23,8 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     private let usernameLabel = UILabel(frame: CGRectZero)
     private let postTitleLabel = UILabel(frame: CGRectZero)
     private let postImageView = UIImageView(frame: CGRectZero)
-    private let nowPlayingImageView = UIImageView(frame: CGRectZero)
-    private let nowPlayingLabel = UILabel(frame: CGRectZero)
-    private let addToPlaylistLabel = UILabel(frame: CGRectZero)
+    private let nowPlayingView = RYNowPlayingView(frame: CGRectZero)
+    private let addToPlaylistView = RYAddToPlaylistView(frame: CGRectZero)
     private let postDescriptionTextView = RYPostTextView(frame: CGRectZero)
     private let followLabel = UILabel(frame: CGRectZero)
     private let starredView = RYStarredView(frame: CGRectZero)
@@ -60,29 +59,30 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         scrollView.addSubview(containerView)
         
         usernameLabel.textColor = UIColor.lightTextColor()
+        usernameLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
         usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         containerView.addSubview(usernameLabel)
         
         postTitleLabel.textColor = UIColor.whiteColor()
+        postTitleLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
         postTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         containerView.addSubview(postTitleLabel)
         
         postImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         containerView.addSubview(postImageView)
         
-        nowPlayingImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        containerView.addSubview(nowPlayingImageView)
+        nowPlayingView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.addSubview(nowPlayingView)
         
-        nowPlayingLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        containerView.addSubview(nowPlayingLabel)
+        addToPlaylistView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.addSubview(addToPlaylistView)
         
-        addToPlaylistLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        containerView.addSubview(addToPlaylistLabel)
-        
+        postDescriptionTextView.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
         postDescriptionTextView.textContainer.maximumNumberOfLines = 0
         postDescriptionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         containerView.addSubview(postDescriptionTextView)
         
+        followLabel.setDynamicStyle(TextStyle.Body, fontStyle: .Bold)
         followLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         containerView.addSubview(followLabel)
         
@@ -170,8 +170,8 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     }
     
     private func subviewConstraints() -> [NSLayoutConstraint] {
-        let viewsDict = ["scrollView": scrollView, "container": containerView, "username": usernameLabel, "title": postTitleLabel, "image": postImageView, "nowPlayingImage": nowPlayingImageView, "nowPlayingLabel": nowPlayingLabel, "addToPlaylist": addToPlaylistLabel, "description": postDescriptionTextView, "follow": followLabel, "starred": starredView]
-        let metrics = ["padding": Constants.Global.ElementPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "contentWidth": Constants.Global.ContentMaximumWidth, "nowPlayingHeight": Constants.Post.NowPlayingHeight]
+        let viewsDict = ["scrollView": scrollView, "container": containerView, "username": usernameLabel, "title": postTitleLabel, "image": postImageView, "nowPlaying": nowPlayingView, "addToPlaylist": addToPlaylistView, "description": postDescriptionTextView, "follow": followLabel, "starred": starredView]
+        let metrics = ["padding": Constants.Global.ElementPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "contentWidth": Constants.Global.ContentMaximumWidth]
         
         var constraints: [AnyObject] = []
         
@@ -185,7 +185,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[container]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
         
         // Vertical Layout
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[username]-(padding)-[image]-(relatedPadding)-[nowPlayingImage(nowPlayingHeight)]-(padding)-[description]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[username]-(padding)-[image]-(relatedPadding)-[nowPlaying]-(padding)-[description]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
         // Top Labels
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[username]-(padding)-[title]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
@@ -195,9 +195,9 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[image]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += [NSLayoutConstraint(item: postImageView, attribute: .Height, relatedBy: .Equal, toItem: postImageView, attribute: .Width, multiplier: 1.0, constant: 0.0)]
         
-        // Now Playing
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[nowPlayingImage]-(relatedPadding)-[nowPlayingLabel]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
-        constraints += [NSLayoutConstraint(item: nowPlayingLabel, attribute: .CenterY, relatedBy: .Equal, toItem: nowPlayingImageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
+        // Now Playing and Add to Playlist
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[nowPlaying]-(>=padding)-[addToPlaylist]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += [NSLayoutConstraint(item: addToPlaylistView, attribute: .Top, relatedBy: .Equal, toItem: nowPlayingView, attribute: .Top, multiplier: 1.0, constant: 0.0)]
         
         // Follow
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[description]-(>=padding,==padding@900)-[follow]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)

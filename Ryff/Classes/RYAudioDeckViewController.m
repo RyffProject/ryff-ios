@@ -31,7 +31,7 @@
 
 #define kAudioDeckCellReuseID @"audioDeckCell"
 
-@interface RYAudioDeckViewController () <UITableViewDataSource, UITableViewDelegate, AudioDeckDelegate>
+@interface RYAudioDeckViewControllerOLD () <UITableViewDataSource, UITableViewDelegate, AudioDeckDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *controlWrapperView;
@@ -47,7 +47,7 @@
 
 @end
 
-@implementation RYAudioDeckViewController
+@implementation RYAudioDeckViewControllerOLD
 
 #pragma mark -
 #pragma mark - ViewController Lifecycle

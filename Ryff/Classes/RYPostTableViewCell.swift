@@ -60,11 +60,13 @@ class RYPostTableViewCell: UITableViewCell {
         topDetailsView.addSubview(topEffectsView)
         
         usernameLabel.textColor = UIColor.lightTextColor()
+        usernameLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
         usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         topDetailsView.addSubview(usernameLabel)
         
         postTitleLabel.textColor = UIColor.whiteColor()
         postTitleLabel.textAlignment = .Right
+        postTitleLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
         postTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         topDetailsView.addSubview(postTitleLabel)
         
@@ -75,6 +77,7 @@ class RYPostTableViewCell: UITableViewCell {
         bottomEffectsView.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomDetailsView.addSubview(bottomEffectsView)
         
+        postDescriptionTextView.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
         postDescriptionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         bottomDetailsView.addSubview(postDescriptionTextView)
         

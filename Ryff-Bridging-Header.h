@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
+// Ryff Files
 #import "RYAudioDeckManager.h"
 #import "RYDataManager.h"
 #import "RYDiscoverServices.h"
@@ -21,3 +22,6 @@
 #import "RYTag.h"
 #import "RYUser.h"
 #import "RYUserFeedDataSource.h"
+
+// Frameworks
+#import "BNRDynamicTypeManager.h"

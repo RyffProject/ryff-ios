@@ -25,7 +25,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         _titleLabel.textColor = [RYStyleSheet darkTextColor];
-        [[BNRDynamicTypeManager sharedInstance] watchLabel:_titleLabel textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
+//        [[BNRDynamicTypeManager sharedInstance] watchLabel:_titleLabel textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
     }
     return self;
 }

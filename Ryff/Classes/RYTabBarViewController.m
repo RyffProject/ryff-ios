@@ -43,7 +43,7 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 @property (nonatomic) RYNavigationController *newsfeedNavigationController;
 @property (nonatomic) RYNavigationController *profileNavigationController;
 @property (nonatomic) RYNavigationController *discoverNavigationController;
-@property (nonatomic) RYAudioDeckViewController *audioDeckNavigationController;
+@property (nonatomic) RYAudioDeckViewControllerOLD *audioDeckNavigationController;
 
 @end
 
@@ -114,8 +114,8 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
     return profileNavigationController;
 }
 
-- (RYAudioDeckViewController *)audioDeck {
-    RYAudioDeckViewController *audioDeck = [[RYAudioDeckViewController alloc] initWithNibName:nil bundle:nil];
+- (RYAudioDeckViewControllerOLD *)audioDeck {
+    RYAudioDeckViewControllerOLD *audioDeck = [[RYAudioDeckViewControllerOLD alloc] initWithNibName:nil bundle:nil];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Audio Deck" image:[[UIImage imageNamed:@"audioPlaying"] imageWithSize:tabBarIconSize] tag:RYTabIndexAudioDeck];
     audioDeck.tabBarItem = tabBarItem;
     return audioDeck;

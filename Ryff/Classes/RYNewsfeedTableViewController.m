@@ -22,7 +22,7 @@
 @interface RYNewsfeedTableViewController ()
 
 // iPad
-@property (nonatomic, strong) RYAudioDeckViewController *audioDeckVC;
+@property (nonatomic, strong) RYAudioDeckViewControllerOLD *audioDeckVC;
 @end
 
 @implementation RYNewsfeedTableViewController

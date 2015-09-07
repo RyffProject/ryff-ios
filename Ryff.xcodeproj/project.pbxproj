@@ -114,6 +114,13 @@
 		3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
 		3FF2A49E1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
+		838165851B9E2110002C0FDB /* BNRDynamicTypeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E571B9B40FF00099CF5 /* BNRDynamicTypeManager.m */; };
+		8381658A1B9E2F1F002C0FDB /* RYAudioDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838165891B9E2F1F002C0FDB /* RYAudioDeckViewController.swift */; };
+		8381658B1B9E2F1F002C0FDB /* RYAudioDeckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838165891B9E2F1F002C0FDB /* RYAudioDeckViewController.swift */; };
+		8381658D1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8381658C1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift */; };
+		8381658E1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8381658C1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift */; };
+		838165911B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 838165901B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m */; };
+		838165921B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 838165901B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m */; };
 		83F4EEBD1B9D3921007CF11A /* NSMutableDictionary+Safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */; };
 		83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4EEBF1B9D3A8F007CF11A /* NSDictionary+Safety.m */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
@@ -128,6 +135,10 @@
 		83FCD16018F907C400A493F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13F18F907C400A493F0 /* UIKit.framework */; };
 		83FCD16818F907C400A493F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83FCD16618F907C400A493F0 /* InfoPlist.strings */; };
 		83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FCD16918F907C400A493F0 /* RyffTests.m */; };
+		83FF51031B9E1D0500FE9E73 /* RYAddToPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF51021B9E1D0500FE9E73 /* RYAddToPlaylistView.swift */; };
+		83FF51051B9E1D3800FE9E73 /* RYNowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF51041B9E1D3800FE9E73 /* RYNowPlayingView.swift */; };
+		83FF51061B9E1D3D00FE9E73 /* RYNowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF51041B9E1D3800FE9E73 /* RYNowPlayingView.swift */; };
+		83FF51071B9E1D4000FE9E73 /* RYAddToPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FF51021B9E1D0500FE9E73 /* RYAddToPlaylistView.swift */; };
 		9795D935FF6483EC5F9A5340 /* Pods_Ryff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB93B1A2EE317EA6B5C1F4CD /* Pods_Ryff.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EC092E28FF5A6FF568A7BCC8 /* Pods_RyffTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E251082A40810E7130987A45 /* Pods_RyffTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -319,6 +330,10 @@
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFE42F2F5730A2D8E9FEB19 /* Pods-RyffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		830BBCC918FA0C2300A9C53F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		838165891B9E2F1F002C0FDB /* RYAudioDeckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYAudioDeckViewController.swift; path = Classes/RYAudioDeckViewController.swift; sourceTree = "<group>"; };
+		8381658C1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIKit+BNRDynamicTypeManager.swift"; path = "Categories/UIKit+BNRDynamicTypeManager.swift"; sourceTree = "<group>"; };
+		8381658F1B9E2FE2002C0FDB /* RYAudioDeckPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckPlaylist.h; path = Classes/RYAudioDeckPlaylist.h; sourceTree = "<group>"; };
+		838165901B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYAudioDeckPlaylist.m; path = Classes/RYAudioDeckPlaylist.m; sourceTree = "<group>"; };
 		83F4EEBB1B9D3921007CF11A /* NSMutableDictionary+Safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+Safety.h"; path = "Categories/NSMutableDictionary+Safety.h"; sourceTree = "<group>"; };
 		83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableDictionary+Safety.m"; path = "Categories/NSMutableDictionary+Safety.m"; sourceTree = "<group>"; };
 		83F4EEBE1B9D3A8F007CF11A /* NSDictionary+Safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Safety.h"; path = "Categories/NSDictionary+Safety.h"; sourceTree = "<group>"; };
@@ -338,6 +353,8 @@
 		83FCD16518F907C400A493F0 /* RyffTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RyffTests-Info.plist"; sourceTree = "<group>"; };
 		83FCD16718F907C400A493F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83FCD16918F907C400A493F0 /* RyffTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyffTests.m; sourceTree = "<group>"; };
+		83FF51021B9E1D0500FE9E73 /* RYAddToPlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYAddToPlaylistView.swift; path = Classes/RYAddToPlaylistView.swift; sourceTree = "<group>"; };
+		83FF51041B9E1D3800FE9E73 /* RYNowPlayingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYNowPlayingView.swift; path = Classes/RYNowPlayingView.swift; sourceTree = "<group>"; };
 		CB93B1A2EE317EA6B5C1F4CD /* Pods_Ryff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ryff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E251082A40810E7130987A45 /* Pods_RyffTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RyffTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -488,6 +505,8 @@
 				3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */,
 				3FF2A4881B9CCDC500EBF74D /* RYPostTextView.swift */,
 				3FF2A48B1B9CCFB300EBF74D /* RYStarredView.swift */,
+				83FF51021B9E1D0500FE9E73 /* RYAddToPlaylistView.swift */,
+				83FF51041B9E1D3800FE9E73 /* RYNowPlayingView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -525,6 +544,7 @@
 				3F387B571B9B3C2B00B5CC74 /* RYAudioDeckViewController.m */,
 				3F387B541B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.h */,
 				3F387B551B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m */,
+				838165891B9E2F1F002C0FDB /* RYAudioDeckViewController.swift */,
 			);
 			name = "Audio Deck";
 			sourceTree = "<group>";
@@ -585,6 +605,8 @@
 				3F387B711B9B3C2B00B5CC74 /* RYNewsfeedDataSource.m */,
 				3F387BBC1B9B3C2B00B5CC74 /* RYUserFeedDataSource.h */,
 				3F387BBD1B9B3C2B00B5CC74 /* RYUserFeedDataSource.m */,
+				8381658F1B9E2FE2002C0FDB /* RYAudioDeckPlaylist.h */,
+				838165901B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -650,6 +672,7 @@
 				83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */,
 				83F4EEBE1B9D3A8F007CF11A /* NSDictionary+Safety.h */,
 				83F4EEBF1B9D3A8F007CF11A /* NSDictionary+Safety.m */,
+				8381658C1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift */,
 			);
 			name = "Categories and Extensions";
 			sourceTree = "<group>";
@@ -1076,6 +1099,7 @@
 				3F387BE21B9B3C2B00B5CC74 /* RYRegistrationServices.m in Sources */,
 				3F387C321B9B3FB200B5CC74 /* NSObject+block.m in Sources */,
 				3F387BE41B9B3C2B00B5CC74 /* RYRiffAudioNode.m in Sources */,
+				8381658D1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift in Sources */,
 				3F387BF01B9B3C2B00B5CC74 /* RYSocialTextView.m in Sources */,
 				3F387BC61B9B3C2B00B5CC74 /* RYCoreViewController.m in Sources */,
 				3F387BFB1B9B3C2B00B5CC74 /* RYUserListCollectionViewCell.m in Sources */,
@@ -1086,6 +1110,7 @@
 				3F387BEE1B9B3C2B00B5CC74 /* RYSearchTypeTableViewCell.m in Sources */,
 				3F387BEB1B9B3C2B00B5CC74 /* RYRiffDetailsViewController.m in Sources */,
 				3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */,
+				83FF51051B9E1D3800FE9E73 /* RYNowPlayingView.swift in Sources */,
 				3F387C331B9B3FB200B5CC74 /* UIColor+Hex.m in Sources */,
 				83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */,
 				3F387BE61B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift in Sources */,
@@ -1142,6 +1167,7 @@
 				3F387BC31B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m in Sources */,
 				3F387BD51B9B3C2B00B5CC74 /* RYNotificationsManager.m in Sources */,
 				3F387BD81B9B3C2B00B5CC74 /* RYPlayControl.m in Sources */,
+				83FF51031B9E1D0500FE9E73 /* RYAddToPlaylistView.swift in Sources */,
 				3F3744F11B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift in Sources */,
 				3F387BD41B9B3C2B00B5CC74 /* RYNotification.m in Sources */,
 				3F387BE71B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift in Sources */,
@@ -1154,9 +1180,11 @@
 				3F387BCD1B9B3C2B00B5CC74 /* RYLoginTableViewCell.m in Sources */,
 				3FE76E471B9B40BB00099CF5 /* BlockAlertView.m in Sources */,
 				3F24D8321B9B4ED300E78B05 /* RYNavigationController.m in Sources */,
+				838165911B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m in Sources */,
 				3FF2A4921B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */,
 				3F387BED1B9B3C2B00B5CC74 /* RYRiffStreamViewController.m in Sources */,
 				83FCD14818F907C400A493F0 /* main.m in Sources */,
+				8381658A1B9E2F1F002C0FDB /* RYAudioDeckViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,18 +1192,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				838165851B9E2110002C0FDB /* BNRDynamicTypeManager.m in Sources */,
 				3F51B57F1B9BB435007A136D /* RYUserProfileTableViewCell.swift in Sources */,
 				83FCD16A18F907C400A493F0 /* RyffTests.m in Sources */,
 				3F3744EC1B9B89B4005A9DD2 /* RYFadingVisualEffectView.swift in Sources */,
 				3FF2A4931B9CCFEC00EBF74D /* UIViewController+Transitions.swift in Sources */,
+				83FF51071B9E1D4000FE9E73 /* RYAddToPlaylistView.swift in Sources */,
+				8381658B1B9E2F1F002C0FDB /* RYAudioDeckViewController.swift in Sources */,
+				83FF51061B9E1D3D00FE9E73 /* RYNowPlayingView.swift in Sources */,
 				3FF2A4901B9CCFD900EBF74D /* RYPostDetailsViewController.swift in Sources */,
 				3F51B5801B9BB438007A136D /* RYProfileViewController.swift in Sources */,
 				3FE76E641B9B414500099CF5 /* RYPostsViewController.swift in Sources */,
 				3FF2A48A1B9CCDC500EBF74D /* RYPostTextView.swift in Sources */,
+				838165921B9E2FE2002C0FDB /* RYAudioDeckPlaylist.m in Sources */,
 				3F3744EF1B9B94CC005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3FE76E651B9B414900099CF5 /* RYPostTableViewCell.swift in Sources */,
 				3FF2A48D1B9CCFB300EBF74D /* RYStarredView.swift in Sources */,
 				3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */,
+				8381658E1B9E2F45002C0FDB /* UIKit+BNRDynamicTypeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

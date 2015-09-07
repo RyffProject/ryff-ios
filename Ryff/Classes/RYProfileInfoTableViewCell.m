@@ -87,11 +87,11 @@
     [_tagListView styleForRyff];
     
     // Dynamic fonts
-    [[BNRDynamicTypeManager sharedInstance] watchTextField:_nameField textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
-    [[BNRDynamicTypeManager sharedInstance] watchLabel:_usernameLabel textStyle:UIFontTextStyleSubheadline fontStyle:FONT_REGULAR];
-    [[BNRDynamicTypeManager sharedInstance] watchTextView:_bioTextView textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
-    [[BNRDynamicTypeManager sharedInstance] watchLabel:_followersCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
-    [[BNRDynamicTypeManager sharedInstance] watchLabel:_karmaCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
+//    [[BNRDynamicTypeManager sharedInstance] watchTextField:_nameField textStyle:UIFontTextStyleHeadline fontStyle:FONT_BOLD];
+//    [[BNRDynamicTypeManager sharedInstance] watchLabel:_usernameLabel textStyle:UIFontTextStyleSubheadline fontStyle:FONT_REGULAR];
+//    [[BNRDynamicTypeManager sharedInstance] watchTextView:_bioTextView textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
+//    [[BNRDynamicTypeManager sharedInstance] watchLabel:_followersCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
+//    [[BNRDynamicTypeManager sharedInstance] watchLabel:_karmaCountLabel textStyle:UIFontTextStyleBody fontStyle:FONT_REGULAR];
 }
 
 - (void) configureForUser:(RYUser *)user delegate:(id<ProfileInfoCellDelegate, UpdateUserDelegate>)delegate parentTableView:(UITableView *)tableView

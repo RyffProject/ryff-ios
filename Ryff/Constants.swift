@@ -13,13 +13,14 @@ struct Constants {
     struct Global {
         static let ContentMaximumWidth: CGFloat = 500
         static let ElementPadding: CGFloat = 15
-        static let RelatedElementPadding: CGFloat = 10
+        static let RelatedElementPadding: CGFloat = 8
     }
     
     struct Post {
         static let MinimumImageHeight: CGFloat = 150
         static let FooterHeight: CGFloat = 45
-        static let NowPlayingHeight: CGFloat = 10
+        static let AudioActionHeightSmall: CGFloat = 15
+        static let AudioActionHeightLarge: CGFloat = 20
     }
     
     struct User {
@@ -27,10 +28,10 @@ struct Constants {
     }
     
     struct Mixer {
-        static let RegularPadSpacing: CGFloat = 30
-        static let CompactPadSpacing: CGFloat = 20
-        static let SmallActionDimension: CGFloat = 15
-        static let LargeActionDimension: CGFloat = 20
+        static let PadSpacingRegular: CGFloat = 30
+        static let PadSpacingCompact: CGFloat = 20
+        static let ActionDimensionSmall: CGFloat = 15
+        static let ActionDimensionLarge: CGFloat = 20
     }
     
 }

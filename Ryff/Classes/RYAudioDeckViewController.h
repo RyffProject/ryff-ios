@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-@interface RYAudioDeckViewController : UIViewController
+@interface RYAudioDeckViewControllerOLD : UIViewController
 
 @end

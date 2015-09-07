@@ -19,11 +19,13 @@ class RYStarredView: UIView {
         backgroundColor = UIColor.clearColor()
         
         starredImageView.image = UIImage(named: "star")
+        starredImageView.contentMode = .ScaleAspectFit
         starredImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(starredImageView)
         
         starredCountLabel.alpha = 0.5
         starredCountLabel.textAlignment = .Right
+        starredCountLabel.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
         starredCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(starredCountLabel)
         
@@ -57,11 +59,11 @@ class RYStarredView: UIView {
     
     func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["image": starredImageView, "count": starredCountLabel]
-        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding]
+        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionHeight": Constants.Post.AudioActionHeightLarge]
         
         var constraints: [AnyObject] = []
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[count]-(relatedPadding)-[image]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[count]-(relatedPadding)-[image(actionHeight)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionHeight)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += [NSLayoutConstraint(item: starredCountLabel, attribute: .CenterY, relatedBy: .Equal, toItem: starredImageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
         return constraints as? [NSLayoutConstraint] ?? []
     }

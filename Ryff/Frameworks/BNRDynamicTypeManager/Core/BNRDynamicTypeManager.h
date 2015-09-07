@@ -15,10 +15,10 @@
  size.
  */
 
-typedef enum : NSUInteger {
-    FONT_REGULAR = 0,
-    FONT_BOLD,
-} FontStyle;
+typedef NS_ENUM(NSInteger, FontStyle) {
+    FontStyleRegular = 0,
+    FontStyleBold
+};
 
 @interface BNRDynamicTypeManager : NSObject
 

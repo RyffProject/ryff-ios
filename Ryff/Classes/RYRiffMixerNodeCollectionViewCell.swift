@@ -172,7 +172,7 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
     
     func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["delete": deleteImageView, "reset": resetImageView, "play": playImageView, "highlight": highlightView, "starred": starredView, "image": postImageView]
-        let metrics = ["padding": Constants.Global.ElementPadding, "small": Constants.Mixer.SmallActionDimension, "large": Constants.Mixer.LargeActionDimension]
+        let metrics = ["padding": Constants.Global.ElementPadding, "small": Constants.Mixer.ActionDimensionSmall, "large": Constants.Mixer.ActionDimensionLarge]
         
         var constraints: [AnyObject] = []
         

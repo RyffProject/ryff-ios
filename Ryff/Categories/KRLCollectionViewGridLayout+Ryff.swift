@@ -15,11 +15,11 @@ extension KRLCollectionViewGridLayout {
         var spacing: CGFloat
         if (traitEnvironment.traitCollection.horizontalSizeClass == .Compact) {
             numberOfItemsPerLine = 2
-            spacing = Constants.Mixer.CompactPadSpacing
+            spacing = Constants.Mixer.PadSpacingCompact
         }
         else {
             numberOfItemsPerLine = 4
-            spacing = Constants.Mixer.RegularPadSpacing
+            spacing = Constants.Mixer.PadSpacingRegular
         }
         sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
         interitemSpacing = spacing
