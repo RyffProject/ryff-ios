@@ -114,6 +114,8 @@
 		3FF2A4961B9CD1A000EBF74D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A4941B9CD1A000EBF74D /* Constants.swift */; };
 		3FF2A49E1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */; };
 		830BBCCA18FA0C2300A9C53F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830BBCC918FA0C2300A9C53F /* CoreLocation.framework */; };
+		83F4EEBD1B9D3921007CF11A /* NSMutableDictionary+Safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */; };
+		83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F4EEBF1B9D3A8F007CF11A /* NSDictionary+Safety.m */; };
 		83FADE4C19AC54DA00182155 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FADE4B19AC54DA00182155 /* QuartzCore.framework */; };
 		83FCD13C18F907C400A493F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13B18F907C400A493F0 /* Foundation.framework */; };
 		83FCD13E18F907C400A493F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FCD13D18F907C400A493F0 /* CoreGraphics.framework */; };
@@ -317,6 +319,10 @@
 		6616A16D4F2C65AA11F6581D /* Pods-RyffTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFE42F2F5730A2D8E9FEB19 /* Pods-RyffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RyffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RyffTests/Pods-RyffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		830BBCC918FA0C2300A9C53F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		83F4EEBB1B9D3921007CF11A /* NSMutableDictionary+Safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableDictionary+Safety.h"; path = "Categories/NSMutableDictionary+Safety.h"; sourceTree = "<group>"; };
+		83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableDictionary+Safety.m"; path = "Categories/NSMutableDictionary+Safety.m"; sourceTree = "<group>"; };
+		83F4EEBE1B9D3A8F007CF11A /* NSDictionary+Safety.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Safety.h"; path = "Categories/NSDictionary+Safety.h"; sourceTree = "<group>"; };
+		83F4EEBF1B9D3A8F007CF11A /* NSDictionary+Safety.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Safety.m"; path = "Categories/NSDictionary+Safety.m"; sourceTree = "<group>"; };
 		83FADE4B19AC54DA00182155 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		83FCD13818F907C400A493F0 /* Ryff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83FCD13B18F907C400A493F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -640,6 +646,10 @@
 				3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */,
 				3FF2A4911B9CCFEC00EBF74D /* UIViewController+Transitions.swift */,
 				3FF2A49D1B9CF23A00EBF74D /* KRLCollectionViewGridLayout+Ryff.swift */,
+				83F4EEBB1B9D3921007CF11A /* NSMutableDictionary+Safety.h */,
+				83F4EEBC1B9D3921007CF11A /* NSMutableDictionary+Safety.m */,
+				83F4EEBE1B9D3A8F007CF11A /* NSDictionary+Safety.h */,
+				83F4EEBF1B9D3A8F007CF11A /* NSDictionary+Safety.m */,
 			);
 			name = "Categories and Extensions";
 			sourceTree = "<group>";
@@ -890,6 +900,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Chris Laganiere";
 				TargetAttributes = {
+					83FCD13718F907C400A493F0 = {
+						DevelopmentTeam = DGUKNK322A;
+					};
 					83FCD15B18F907C400A493F0 = {
 						DevelopmentTeam = DGUKNK322A;
 						TestTargetID = 83FCD13718F907C400A493F0;
@@ -1074,7 +1087,9 @@
 				3F387BEB1B9B3C2B00B5CC74 /* RYRiffDetailsViewController.m in Sources */,
 				3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3F387C331B9B3FB200B5CC74 /* UIColor+Hex.m in Sources */,
+				83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */,
 				3F387BE61B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift in Sources */,
+				83F4EEBD1B9D3921007CF11A /* NSMutableDictionary+Safety.m in Sources */,
 				3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */,
 				3F387BF21B9B3C2B00B5CC74 /* RYTabBarViewController.m in Sources */,
 				3F387BDF1B9B3C2B00B5CC74 /* RYProfileViewController.m in Sources */,
@@ -1277,7 +1292,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Ryff Icon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Laganiere (Q5X54XY23P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1296,6 +1312,7 @@
 				);
 				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1310,7 +1327,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Ryff Icon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Chris Laganiere (Q5X54XY23P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1329,6 +1347,7 @@
 				);
 				MODULE_NAME = Ryff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ryff-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;

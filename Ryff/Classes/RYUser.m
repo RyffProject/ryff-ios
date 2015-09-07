@@ -15,15 +15,45 @@
 // Data Managers
 #import "RYServices.h"
 
+// Categories
+#import "NSDictionary+Safety.h"
+#import "NSMutableDictionary+Safety.h"
+
+// Update Notification Keys
+static NSString *UserUpdatedNotificationKey = @"UserUpdatedNotificationKey";
+static NSString *UserNotificationKeyUserID = @"userId";
+static NSString *UserNotificationKeyUserData = @"user";
+
+// Dictionary Representation Keys
+static NSString *UserDictionaryKeyID = @"id";
+static NSString *UserDictionaryKeyUsername = @"username";
+static NSString *UserDictionaryKeyName = @"name";
+static NSString *UserDictionaryKeyKarma = @"karma";
+static NSString *UserDictionaryKeyBio = @"bio";
+static NSString *UserDictionaryKeyDateCreated = @"date_created";
+static NSString *UserDictionaryKeyIsFollowing = @"is_following";
+static NSString *UserDictionaryKeyNumFollowers = @"num_followers";
+static NSString *UserDictionaryKeyNumFollowing = @"num_following";
+static NSString *UserDictionaryKeyTags = @"tags";
+static NSString *UserDictionaryKeyAvatarURL = @"avatar_url";
+static NSString *UserDictionaryKeyAvatarSmallURL = @"avatar_url_small";
+
 @interface RYUser () <FollowDelegate>
 
 @end
 
 @implementation RYUser
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userUpdatedNotification:) name:UserUpdatedNotificationKey object:nil];
+    }
+    return self;
+}
+
 - (RYUser *)initWithUser:(NSInteger)userId username:(NSString *)username nickname:(NSString *)nickname karma:(NSInteger)karma bio:(NSString*)bio dateCreated:(NSDate *)dateCreated isFollowing:(BOOL)isFollowing numFollowers:(NSInteger)numFollowers numFollowing:(NSInteger)numFollowing tags:(NSArray *)tags
 {
-    if (self = [super init])
+    if (self = [self init])
     {
         _userId         = userId;
         _username       = username;
@@ -38,18 +68,22 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 + (RYUser *)userFromDict:(NSDictionary*)userDict
 {
-    NSNumber *userId        = [userDict objectForKey:@"id"];
-    NSString *username      = [userDict objectForKey:@"username"];
-    NSString *name          = [userDict objectForKey:@"name"];
-    NSNumber *karma         = [userDict objectForKey:@"karma"];
-    NSString *bio           = [userDict objectForKey:@"bio"];
-    NSString *dateCreated   = [userDict objectForKey:@"date_created"];
-    BOOL isFollowing        = [[userDict objectForKey:@"is_following"] boolValue];
-    NSInteger numFollowers  = [[userDict objectForKey:@"num_followers"] intValue];
-    NSInteger numFollowing  = [[userDict objectForKey:@"num_following"] intValue];
-    NSArray *tags           = [RYTag tagsFromDictArray:[userDict objectForKey:@"tags"]];
+    NSNumber *userId        = [userDict safeObjectForKey:UserDictionaryKeyID];
+    NSString *username      = [userDict safeObjectForKey:UserDictionaryKeyUsername];
+    NSString *name          = [userDict safeObjectForKey:UserDictionaryKeyName];
+    NSNumber *karma         = [userDict safeObjectForKey:UserDictionaryKeyKarma];
+    NSString *bio           = [userDict safeObjectForKey:UserDictionaryKeyBio];
+    NSString *dateCreated   = [userDict safeObjectForKey:UserDictionaryKeyDateCreated];
+    BOOL isFollowing        = [[userDict safeObjectForKey:UserDictionaryKeyIsFollowing] boolValue];
+    NSInteger numFollowers  = [[userDict safeObjectForKey:UserDictionaryKeyNumFollowers] intValue];
+    NSInteger numFollowing  = [[userDict safeObjectForKey:UserDictionaryKeyNumFollowing] intValue];
+    NSArray *tags           = [RYTag tagsFromDictArray:[userDict safeObjectForKey:UserDictionaryKeyTags]];
     
     NSDate *date;
     if (dateCreated)
@@ -95,6 +129,9 @@
 
 - (void)follow:(BOOL)following confirmedForUser:(RYUser *)user {
     [self.delegate userUpdated:user];
+    
+    NSDictionary *userInfo = @{UserNotificationKeyUserID: @(user.userId), UserNotificationKeyUserData: [user dictionaryRepresentation]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserUpdatedNotificationKey object:nil userInfo:userInfo];
 }
 
 - (void)followFailed:(NSString *)reason {
@@ -102,13 +139,60 @@
     [self.delegate userUpdateFailed:self reason:reason];
 }
 
+#pragma mark - Notifications
+
+- (void)userUpdatedNotification:(NSNotification *)notification {
+    NSNumber *userID = [notification.userInfo safeObjectForKey:UserNotificationKeyUserID];
+    if (userID && userID.integerValue == self.userId) {
+        // Data updated, should copy changes.
+        NSDictionary *otherDict = [notification.userInfo safeObjectForKey:UserNotificationKeyUserData];
+        if (otherDict) {
+            [self copyFromDictionary:otherDict];
+            [self.delegate userUpdated:self];
+        }
+    }
+}
+
+#pragma mark - Copying
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:16];
+    [dictionary safelySetObject:@(self.userId) forKey:UserDictionaryKeyID];
+    [dictionary safelySetObject:self.username forKey:UserDictionaryKeyUsername];
+    [dictionary safelySetObject:self.nickname forKey:UserDictionaryKeyName];
+    [dictionary safelySetObject:self.bio forKey:UserDictionaryKeyBio];
+    [dictionary safelySetObject:self.dateCreated forKey:UserDictionaryKeyBio];
+    [dictionary safelySetObject:@(self.isFollowing) forKey:UserDictionaryKeyIsFollowing];
+    [dictionary safelySetObject:@(self.numFollowers) forKey:UserDictionaryKeyNumFollowers];
+    [dictionary safelySetObject:@(self.numFollowing) forKey:UserDictionaryKeyNumFollowing];
+    [dictionary safelySetObject:self.avatarURL forKey:UserDictionaryKeyAvatarURL];
+    [dictionary safelySetObject:self.avatarSmallURL forKey:UserDictionaryKeyAvatarSmallURL];
+    [dictionary safelySetObject:[RYTag dictionaryRepresentationForTags:self.tags] forKey:UserDictionaryKeyTags];
+    return dictionary;
+}
+
+- (void)copyFromDictionary:(NSDictionary *)dictionaryRepresentation {
+    self.userId = [[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyID] integerValue];
+    self.username = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyUsername];
+    self.nickname = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyName];
+    self.karma = [[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyKarma] integerValue];
+    self.bio = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyBio];
+    self.dateCreated = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyDateCreated];
+    self.isFollowing = [[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyIsFollowing] boolValue];
+    self.numFollowers = [[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyNumFollowers] integerValue];
+    self.numFollowing = [[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyNumFollowing] integerValue];
+    self.avatarURL = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyAvatarURL];
+    self.avatarSmallURL = [dictionaryRepresentation safeObjectForKey:UserDictionaryKeyAvatarSmallURL];
+    self.tags = [RYTag tagsFromDictArray:[dictionaryRepresentation safeObjectForKey:UserDictionaryKeyTags]];
+}
+
 #pragma mark - NSCopying
 
 -(id)copyWithZone:(NSZone *)zone {
-    RYUser *newUser = [[RYUser alloc] initWithUser:self.userId username:self.username nickname:self.nickname karma:self.karma bio:self.bio dateCreated:self.dateCreated isFollowing:self.isFollowing numFollowers:self.numFollowers numFollowing:self.numFollowing tags:self.tags];
-    newUser.avatarURL = _avatarURL;
-    newUser.avatarSmallURL = _avatarSmallURL;
-    return newUser;
+    RYUser *other = [[RYUser alloc] init];
+    NSDictionary *dictionaryRepresentation = [self dictionaryRepresentation];
+    [other copyFromDictionary:dictionaryRepresentation];
+    return other;
 }
 
 #pragma mark - NSObject

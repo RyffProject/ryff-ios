@@ -105,7 +105,7 @@
  *  @param page Page offset from start.
  */
 - (void)fetchContent:(NSInteger)page {
-    NSAssert(NO, @"Must subclass RYPostsDataSource to specify appropriate fetch action");
+//    NSAssert(NO, @"Must subclass RYPostsDataSource to specify appropriate fetch action");
 }
 
 /**

@@ -14,6 +14,14 @@
 // Data Objects
 #import "RYPost.h"
 
+// Categories
+#import "NSDictionary+Safety.h"
+#import "NSMutableDictionary+Safety.h"
+
+static NSString *TagDictionaryKeyTag = @"tag";
+static NSString *TagDictionaryKeyNumUsers = @"num_users";
+static NSString *TagDictionaryKeyNumPosts = @"num_posts";
+
 @interface RYTag () <PostDelegate>
 
 @end
@@ -33,9 +41,9 @@
 
 + (RYTag *)tagFromDict:(NSDictionary *)tagDict
 {
-    NSString *tag = tagDict[@"tag"];
-    NSInteger numUsers = [tagDict[@"num_users"] integerValue];
-    NSInteger numPosts = [tagDict[@"num_posts"] integerValue];
+    NSString *tag = [tagDict safeObjectForKey:TagDictionaryKeyTag];
+    NSInteger numUsers = [[tagDict safeObjectForKey:TagDictionaryKeyNumUsers] integerValue];
+    NSInteger numPosts = [[tagDict safeObjectForKey:TagDictionaryKeyNumPosts] integerValue];
     return [[RYTag alloc] initWithTag:tag numUsers:numUsers numPosts:numPosts];
 }
 
@@ -85,6 +93,24 @@
         _trendingPost = posts.firstObject;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRetrievedTrendingPostNotification object:nil userInfo:@{@"tag": _tag}];
+}
+
+#pragma mark - Copying
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:4];
+    [dictionary safelySetObject:self.tag forKey:TagDictionaryKeyTag];
+    [dictionary safelySetObject:@(self.numUsers) forKey:TagDictionaryKeyNumUsers];
+    [dictionary safelySetObject:@(self.numPosts) forKey:TagDictionaryKeyNumPosts];
+    return dictionary;
+}
+
++ (NSArray *)dictionaryRepresentationForTags:(NSArray *)tags {
+    NSMutableArray *allTags = [[NSMutableArray alloc] initWithCapacity:tags.count];
+    for (RYTag *tag in tags) {
+        [allTags addObject:[tag dictionaryRepresentation]];
+    }
+    return allTags;
 }
 
 @end

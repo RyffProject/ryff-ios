@@ -30,4 +30,6 @@
 
 + (NSArray *)getTagTags:(NSArray *)tags;
 
++ (NSArray *)dictionaryRepresentationForTags:(NSArray *)tags;
+
 @end

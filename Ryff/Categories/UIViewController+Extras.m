@@ -18,6 +18,8 @@
 
 #define kHudTag 1912984
 
+static const CGSize BarButtonItemSize = {30, 30};
+
 @implementation UIViewController (Extras)
 
 #pragma mark -
@@ -25,7 +27,7 @@
 
 - (void) addNewPostButtonToNavBar {
     if (self.navigationItem) {
-        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"create"] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
+        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"create"] imageWithSize:BarButtonItemSize] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
         [self.navigationItem setRightBarButtonItem:newPostButton];
     }
 }

@@ -14,15 +14,48 @@
 // Data Objects
 #import "RYUser.h"
 
+// Categories
+#import "NSDictionary+Safety.h"
+#import "NSMutableDictionary+Safety.h"
+
+// Update Notification Keys
+static NSString *PostUpdatedNotificationKey = @"PostUpdatedNotificationKey";
+static NSString *PostNotificationKeyUserID = @"postId";
+static NSString *PostNotificationKeyUserData = @"post";
+
+// Dictionary Representation Keys
+static NSString *PostDictionaryKeyID = @"id";
+static NSString *PostDictionaryKeyUser = @"user";
+static NSString *PostDictionaryKeyContent = @"content";
+static NSString *PostDictionaryKeyTitle = @"title";
+static NSString *PostDictionaryKeyDuration = @"duration";
+static NSString *PostDictionaryKeyRiffURL = @"riff_url";
+static NSString *PostDictionaryKeyDateCreated = @"date_created";
+static NSString *PostDictionaryKeyIsUpvoted = @"is_upvoted";
+static NSString *PostDictionaryKeyUpvotes = @"upvotes";
+static NSString *PostDictionaryKeyIsStarred = @"is_starred";
+static NSString *PostDictionaryKeyImageURL = @"image_url";
+static NSString *PostDictionaryKeyImageMediumURL = @"image_medium_url";
+static NSString *PostDictionaryKeyImageSmallURL = @"image_small_url";
+static NSString *PostDictionaryKeyRiffHQURL = @"riff_hq_url";
+static NSString *PostDictionaryKeyTags = @"tags";
+
 @interface RYPost () <ActionDelegate>
 
 @end
 
 @implementation RYPost
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdatedNotification:) name:PostUpdatedNotificationKey object:nil];
+    }
+    return self;
+}
+
 - (RYPost *)initWithPostId:(NSInteger)postId User:(RYUser *)user Content:(NSString*)content title:(NSString *)title riffURL:(NSURL*)riffURL duration:(CGFloat)duration dateCreated:(NSDate*)dateCreated isUpvoted:(BOOL)isUpvoted isStarred:(BOOL)isStarred upvotes:(NSInteger)upvotes
 {
-    if (self = [super init])
+    if (self = [self init])
     {
         _postId      = postId;
         _user        = user;
@@ -36,6 +69,10 @@
         _isStarred   = isStarred;
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (RYPost *)postWithDict:(NSDictionary*)postDict
@@ -99,10 +136,16 @@
 
 - (void) upvoteSucceeded:(RYPost*)updatedPost {
     [self.delegate postUpdated:updatedPost];
+    
+    NSDictionary *userInfo = @{PostNotificationKeyUserID: @(updatedPost.postId), PostNotificationKeyUserData: [updatedPost dictionaryRepresentation]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PostUpdatedNotificationKey object:nil userInfo:userInfo];
 }
 
 - (void) starSucceeded:(RYPost *)updatedPost {
     [self.delegate postUpdated:updatedPost];
+    
+    NSDictionary *userInfo = @{PostNotificationKeyUserID: @(updatedPost.postId), PostNotificationKeyUserData: [updatedPost dictionaryRepresentation]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PostUpdatedNotificationKey object:nil userInfo:userInfo];
 }
 
 - (void) upvoteFailed:(NSString*)reason post:(RYPost *)oldPost {
@@ -115,17 +158,65 @@
     [self.delegate postUpdateFailed:oldPost reason:reason];
 }
 
+#pragma mark - Notifications
+
+- (void)postUpdatedNotification:(NSNotification *)notification {
+    NSNumber *postId = [notification.userInfo safeObjectForKey:PostNotificationKeyUserID];
+    if (postId && postId.integerValue == self.postId) {
+        // Data updated, should copy changes.
+        NSDictionary *otherDict = [notification.userInfo safeObjectForKey:PostNotificationKeyUserData];
+        if (otherDict) {
+            [self copyFromDictionary:otherDict];
+            [self.delegate postUpdated:self];
+        }
+    }
+}
+
+#pragma mark - Copying
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:16];
+    [dictionary safelySetObject:@(self.postId) forKey:PostDictionaryKeyID];
+    [dictionary safelySetObject:self.content forKey:PostDictionaryKeyContent];
+    [dictionary safelySetObject:self.title forKey:PostDictionaryKeyTitle];
+    [dictionary safelySetObject:self.riffURL forKey:PostDictionaryKeyRiffURL];
+    [dictionary safelySetObject:@(self.duration) forKey:PostDictionaryKeyDuration];
+    [dictionary safelySetObject:self.dateCreated forKey:PostDictionaryKeyDateCreated];
+    [dictionary safelySetObject:@(self.isUpvoted) forKey:PostDictionaryKeyIsUpvoted];
+    [dictionary safelySetObject:@(self.isStarred) forKey:PostDictionaryKeyIsStarred];
+    [dictionary safelySetObject:@(self.upvotes) forKey:PostDictionaryKeyUpvotes];
+    [dictionary safelySetObject:self.riffHQURL forKey:PostDictionaryKeyRiffHQURL];
+    [dictionary safelySetObject:self.imageURL forKey:PostDictionaryKeyImageURL];
+    [dictionary safelySetObject:self.imageMediumURL forKey:PostDictionaryKeyImageMediumURL];
+    [dictionary safelySetObject:self.imageSmallURL forKey:PostDictionaryKeyImageSmallURL];
+    [dictionary safelySetObject:[RYTag dictionaryRepresentationForTags:self.tags] forKey:PostDictionaryKeyTags];
+    return dictionary;
+}
+
+- (void)copyFromDictionary:(NSDictionary *)dictionaryRepresentation {
+    self.postId = [[dictionaryRepresentation safeObjectForKey:PostDictionaryKeyID] integerValue];
+    self.content = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyContent];
+    self.title = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyTitle];
+    self.riffURL = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyRiffURL];
+    self.duration = [[dictionaryRepresentation safeObjectForKey:PostDictionaryKeyDuration] floatValue];
+    self.dateCreated = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyDateCreated];
+    self.isUpvoted = [[dictionaryRepresentation safeObjectForKey:PostDictionaryKeyIsUpvoted] boolValue];
+    self.isStarred = [[dictionaryRepresentation safeObjectForKey:PostDictionaryKeyIsStarred] boolValue];
+    self.upvotes = [[dictionaryRepresentation safeObjectForKey:PostDictionaryKeyUpvotes] integerValue];
+    self.riffHQURL = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyRiffHQURL];
+    self.imageURL = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyImageURL];
+    self.imageMediumURL = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyImageMediumURL];
+    self.imageSmallURL = [dictionaryRepresentation safeObjectForKey:PostDictionaryKeyImageSmallURL];
+}
+
 #pragma mark - NSCopying
 
 -(id)copyWithZone:(NSZone *)zone
 {
-    RYPost *newPost = [[RYPost alloc] initWithPostId:self.postId User:[self.user copy] Content:self.content title:self.title riffURL:self.riffURL duration:self.duration dateCreated:self.dateCreated isUpvoted:self.isUpvoted isStarred:self.isStarred upvotes:self.upvotes];
-    newPost.riffHQURL = self.riffHQURL;
-    newPost.imageURL = self.imageURL;
-    newPost.imageMediumURL = self.imageMediumURL;
-    newPost.imageSmallURL = self.imageSmallURL;
-    newPost.tags = self.tags;
-    return newPost;
+    RYPost *other = [[RYPost alloc] init];
+    NSDictionary *dictionaryRepresentation = [self dictionaryRepresentation];
+    [other copyFromDictionary:dictionaryRepresentation];
+    return other;
 }
 
 #pragma mark - NSObject
