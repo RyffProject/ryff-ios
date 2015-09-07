@@ -18,7 +18,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 
 #pragma mark - Riff Audio Engine
 
-@interface RYRiffAudioEngine()
+@interface RYRiffAudioEngine() <RYRiffAudioNodeDelegate>
 
 @property (nonatomic) AVAudioEngine *engine;
 @property (nonatomic) NSTimer *beat;
@@ -142,12 +142,20 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         }
         
         [_recordingNode setAudioFile:recordedFile];
-        [_recordingNode startWithDelay:0 looping:YES];
-        [_recordingNode play];
+//        [_recordingNode startWithDelay:0 looping:YES];
+        _recordingNode.activeAction = RYRiffActiveAudioNodeActionLooping;
         
         _recordingNode = nil;
         _isRecording = NO;
     }
+}
+
+#pragma mark - RYRiffAudioNodeDelegates
+
+- (void)riffAudioFinished:(RYRiffAudioNode *)node {
+    [node stop];
+    node.status = RYRiffAudioNodeStatusReadyToPlay;
+    [self.delegate nodeStatusChangedAtIndex:[self.riffAudioNodes indexOfObject:node]];
 }
 
 #pragma mark - RiffAudioDataSource
@@ -169,14 +177,14 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
                 break;
             case RYRiffAudioNodeStatusRecording:
                 [self stopRecordingOutput];
-                riffNode.status = RYRiffAudioNodeStatusActive;
+                riffNode.status = RYRiffAudioNodeStatusReadyToPlay;
                 break;
             case RYRiffAudioNodeStatusReadyToPlay:
-                [riffNode play];
+                [self startNode:riffNode];
                 riffNode.status = RYRiffAudioNodeStatusActive;
                 break;
             case RYRiffAudioNodeStatusActive:
-                [riffNode pause];
+                [riffNode stop];
                 riffNode.status = RYRiffAudioNodeStatusReadyToPlay;
                 break;
         }
@@ -188,11 +196,45 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 - (void)clearNodeAtIndex:(NSInteger)index {
     RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
     if (riffNode) {
+        if (riffNode.status == RYRiffAudioNodeStatusRecording) {
+            [self stopRecordingOutput];
+        }
+        
         [riffNode stop];
         [riffNode deleteAudio];
         riffNode.status = RYRiffAudioNodeStatusEmpty;
         
         [self.delegate nodeStatusChangedAtIndex:index];
+    }
+}
+
+- (void)loopNodeAtIndex:(NSInteger)index {
+    RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
+    if (riffNode) {
+        if (riffNode.status == RYRiffAudioNodeStatusRecording) {
+            [self stopRecordingOutput];
+        }
+        
+        if (!riffNode.audioPlayerNode.isPlaying) {
+            riffNode.activeAction = RYRiffActiveAudioNodeActionLooping;
+            [self startNode:riffNode];
+            [self.delegate nodeStatusChangedAtIndex:index];
+        }
+    }
+}
+
+- (void)playNodeAtIndex:(NSInteger)index {
+    RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
+    if (riffNode) {
+        if (riffNode.status == RYRiffAudioNodeStatusRecording) {
+            [self stopRecordingOutput];
+        }
+        
+        if (!riffNode.audioPlayerNode.isPlaying) {
+            riffNode.activeAction = RYRiffActiveAudioNodeActionPlayingOnce;
+            [self startNode:riffNode];
+            [self.delegate nodeStatusChangedAtIndex:index];
+        }
     }
 }
 
@@ -226,7 +268,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 - (void)createNodes:(NSInteger)nodeCount {
     NSMutableArray *riffAudioNodes = [[NSMutableArray alloc] initWithCapacity:nodeCount];
     for (NSInteger nodeIndex = 0; nodeIndex < nodeCount; nodeIndex++) {
-        RYRiffAudioNode *riffNode = [[RYRiffAudioNode alloc] init];
+        RYRiffAudioNode *riffNode = [[RYRiffAudioNode alloc] initWithDelegate:self];
         [riffAudioNodes addObject:riffNode];
     }
     self.riffAudioNodes = riffAudioNodes;
@@ -266,6 +308,16 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         NSError *error;
         [_engine prepare];
         NSAssert([_engine startAndReturnError:&error], @"couldn't start engine, %@", [error localizedDescription]);
+    }
+}
+
+- (void)startNode:(RYRiffAudioNode *)riffNode {
+    if (riffNode.audioBuffer && riffNode.status != RYRiffAudioNodeStatusActive) {
+        BOOL looping = (riffNode.activeAction == RYRiffActiveAudioNodeActionLooping);
+        [riffNode startWithDelay:0 looping:looping];
+        [riffNode play];
+        
+        riffNode.status = RYRiffAudioNodeStatusActive;
     }
 }
 

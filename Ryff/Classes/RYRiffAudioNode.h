@@ -13,6 +13,10 @@
 @class AVAudioTime;
 @class AVAudioFile;
 
+@protocol RYRiffAudioNodeDelegate <NSObject>
+- (void)riffAudioFinished:(RYRiffAudioNode * __nonnull)node;
+@end
+
 typedef NS_ENUM(NSInteger, RYRiffAudioNodeStatus) {
     RYRiffAudioNodeStatusEmpty = 0,
     RYRiffAudioNodeStatusRecording,
@@ -21,7 +25,7 @@ typedef NS_ENUM(NSInteger, RYRiffAudioNodeStatus) {
 };
 
 typedef NS_ENUM(NSInteger, RYRiffActiveAudioNodeAction) {
-    RYRiffActiveAudioNodeActionOnce = 0,
+    RYRiffActiveAudioNodeActionPlayingOnce = 0,
     RYRiffActiveAudioNodeActionLooping
 };
 
@@ -29,9 +33,12 @@ typedef NS_ENUM(NSInteger, RYRiffActiveAudioNodeAction) {
 
 @property (nonatomic, assign) RYRiffAudioNodeStatus status;
 @property (nonatomic, assign) RYRiffActiveAudioNodeAction activeAction;
+@property (nonatomic, weak, nullable) id<RYRiffAudioNodeDelegate> delegate;
 
 @property (nonatomic, readonly, nonnull) AVAudioPlayerNode *audioPlayerNode;
 @property (nonatomic, readonly, nullable) AVAudioPCMBuffer *audioBuffer;
+
+- (nonnull instancetype)initWithDelegate:(id<RYRiffAudioNodeDelegate> __nullable)delegate NS_DESIGNATED_INITIALIZER;
 
 - (void)setAudioBuffer:(AVAudioPCMBuffer * __nonnull)audioBuffer;
 - (void)setAudioFile:(AVAudioFile * __nonnull)audioFile;

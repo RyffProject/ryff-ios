@@ -10,6 +10,9 @@ import UIKit
 
 protocol RYRiffMixerNodeCellDelegate: class {
     func clearHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell)
+    func loopHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell)
+    func playOnceHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell)
+    func remixStarredHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell)
 }
 
 class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
@@ -29,6 +32,8 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // Styling
+        
         postImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(postImageView)
         
@@ -36,6 +41,7 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         addSubview(highlightView)
         
         deleteImageView.image = UIImage(named: "x")
+        deleteImageView.tintColor = UIColor.blackColor()
         deleteImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(deleteImageView)
         
@@ -47,20 +53,33 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         playImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(playImageView)
         
+        starredView.style(true, text: "Starred")
         starredView.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(starredView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
+        
+        // Actions
+        
+        deleteImageView.userInteractionEnabled = true
+        let clearTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapClear:"))
+        deleteImageView.addGestureRecognizer(clearTapGesture)
+        
+        resetImageView.userInteractionEnabled = true
+        let loopTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapLoop:"))
+        resetImageView.addGestureRecognizer(loopTapGesture)
+        
+        playImageView.userInteractionEnabled = true
+        let playOnceTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapPlayOnce:"))
+        playImageView.addGestureRecognizer(playOnceTapGesture)
+        
+        let remixStarredTapGesture = UITapGestureRecognizer(target: self, action: Selector("didTapRemixStarred:"))
+        starredView.addGestureRecognizer(remixStarredTapGesture)
     }
     
     @availability(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func styleWithRiffNode(riffNode: RYRiffAudioNode) {
-        self.backgroundColor = statusColor(riffNode.status)
-        hideElements(riffNode.status)
     }
     
     // MARK: Actions
@@ -69,12 +88,40 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         delegate?.clearHitOnNodeCell(self)
     }
     
+    func didTapLoop(tapGesture: UITapGestureRecognizer) {
+        delegate?.loopHitOnNodeCell(self)
+    }
+    
+    func didTapPlayOnce(tapGesture: UITapGestureRecognizer) {
+        delegate?.playOnceHitOnNodeCell(self)
+    }
+    
+    func didTapRemixStarred(tapGesture: UITapGestureRecognizer) {
+        delegate?.remixStarredHitOnNodeCell(self)
+    }
+    
+    // MARK: Styling
+    
+    func styleWithRiffNode(riffNode: RYRiffAudioNode) {
+        self.backgroundColor = statusColor(riffNode.status)
+        hideElements(riffNode.status)
+        colorElements(riffNode)
+        
+        // Temporary
+        if (riffNode.status == .Active) {
+            highlightView.backgroundColor = RYStyleSheet.audioHighlightColor().colorWithAlphaComponent(0.8)
+        }
+        else if (riffNode.status == .ReadyToPlay) {
+            highlightView.backgroundColor = RYStyleSheet.audioHighlightColor().colorWithAlphaComponent(0.4)
+        }
+    }
+    
     // MARK: Status-Dependent
     
     /**
     Provides an appropriate background color for this cell based on the provided riff node status.
     
-    :param: status RYRIffAudioNodeStatus to style for.
+    :param: status RYRiffAudioNodeStatus to style for.
     
     :returns: UIColor appropriate for this status.
     */
@@ -103,6 +150,22 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         
         let notReadyToPlay = (status != .ReadyToPlay && status != .Active)
         highlightView.hidden = notReadyToPlay
+    }
+    
+    func colorElements(riffNode: RYRiffAudioNode) {
+        if (riffNode.status == .Active && riffNode.activeAction == .Looping) {
+            resetImageView.tintColor = UIColor.whiteColor()
+        }
+        else {
+            resetImageView.tintColor = UIColor.blackColor()
+        }
+        
+        if (riffNode.status == .Active && riffNode.activeAction == .PlayingOnce) {
+            playImageView.tintColor = UIColor.whiteColor()
+        }
+        else {
+            playImageView.tintColor = UIColor.blackColor()
+        }
     }
     
     // MARK: Layout

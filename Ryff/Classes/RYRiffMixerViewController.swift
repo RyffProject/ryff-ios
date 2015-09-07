@@ -65,6 +65,22 @@ class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, 
         }
     }
     
+    func loopHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell) {
+        if let indexPath = collectionView.indexPathForCell(nodeCell) {
+            riffEngine.loopNodeAtIndex(indexPath.row)
+        }
+    }
+    
+    func playOnceHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell) {
+        if let indexPath = collectionView.indexPathForCell(nodeCell) {
+            riffEngine.playNodeAtIndex(indexPath.row)
+        }
+    }
+    
+    func remixStarredHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell) {
+        // TODO: let user remix starred posts
+    }
+    
     // MARK: AudioEngineDelegate
     
     func nodeStatusChangedAtIndex(index: Int) {

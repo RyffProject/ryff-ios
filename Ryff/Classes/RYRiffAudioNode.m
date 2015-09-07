@@ -19,9 +19,10 @@
 
 @implementation RYRiffAudioNode
 
-- (instancetype)init {
+- (nonnull instancetype)initWithDelegate:(id<RYRiffAudioNodeDelegate> __nullable)delegate {
     if (self = [super init]) {
         _audioPlayerNode = [[AVAudioPlayerNode alloc] init];
+        _delegate = delegate;
     }
     return self;
 }
@@ -44,7 +45,11 @@
 - (void)startWithDelay:(AVAudioTime * __nullable)delay looping:(BOOL)looping {
     AVAudioPlayerNodeBufferOptions options = looping ? AVAudioPlayerNodeBufferLoops : 0;
     [self.audioPlayerNode scheduleBuffer:self.audioBuffer atTime:delay options:options completionHandler:^{
-        NSLog(@"schedule audio");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.status == RYRiffAudioNodeStatusActive) {
+                [self.delegate riffAudioFinished:self];
+            }
+        });
     }];
 }
 

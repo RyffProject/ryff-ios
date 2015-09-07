@@ -16,6 +16,8 @@ extern const NSString * __nonnull RecordingAudioFileFormat;
 - (nullable RYRiffAudioNode *)nodeAtIndex:(NSInteger)index;
 - (void)toggleNodeAtIndex:(NSInteger)index;
 - (void)clearNodeAtIndex:(NSInteger)index;
+- (void)playNodeAtIndex:(NSInteger)index;
+- (void)loopNodeAtIndex:(NSInteger)index;
 @end
 
 @protocol AudioEngineDelegate <NSObject>
