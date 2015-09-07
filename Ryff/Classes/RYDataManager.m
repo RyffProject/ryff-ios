@@ -109,8 +109,8 @@ static RYDataManager *_sharedInstance;
     if ([[NSFileManager defaultManager] fileExistsAtPath:[localURL path]])
     {
         // don't need to download
-        if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
-            [delegate track:riffURL FinishedDownloading:localURL];
+        if (delegate && [delegate respondsToSelector:@selector(track:finishedDownloading:)])
+            [delegate track:riffURL finishedDownloading:localURL];
     }
     else
     {
@@ -130,10 +130,10 @@ static RYDataManager *_sharedInstance;
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:[localURL path] append:NO];
     
     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        if (delegate && [delegate respondsToSelector:@selector(track:DownloadProgressed:)])
+        if (delegate && [delegate respondsToSelector:@selector(track:downloadProgressed:)])
         {
             CGFloat downloadProgress = totalBytesRead / (CGFloat)totalBytesExpectedToRead;
-            [delegate track:riffURL DownloadProgressed:downloadProgress];
+            [delegate track:riffURL downloadProgressed:downloadProgress];
         }
     }];
     
@@ -141,8 +141,8 @@ static RYDataManager *_sharedInstance;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [_downloadQueue removeObject:operation];
         
-        if (delegate && [delegate respondsToSelector:@selector(track:FinishedDownloading:)])
-            [delegate track:riffURL FinishedDownloading:localURL];
+        if (delegate && [delegate respondsToSelector:@selector(track:finishedDownloading:)])
+            [delegate track:riffURL finishedDownloading:localURL];
         
         [_downloadQueue removeObject:downloadOperation];
         _currentDownload = nil;
@@ -150,8 +150,8 @@ static RYDataManager *_sharedInstance;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [_downloadQueue removeObject:downloadOperation];
-        if (delegate && [delegate respondsToSelector:@selector(track:DownloadFailed:)])
-            [delegate track:riffURL DownloadFailed:[error localizedDescription]];
+        if (delegate && [delegate respondsToSelector:@selector(track:downloadFailed:)])
+            [delegate track:riffURL downloadFailed:[error localizedDescription]];
         
         [_downloadQueue removeObject:downloadOperation];
         _currentDownload = nil;
@@ -207,6 +207,9 @@ static RYDataManager *_sharedInstance;
  */
 - (void) clearCache
 {
+    return;
+    
+#warning check this out
     NSString *directory = NSTemporaryDirectory();
     NSError *error = nil;
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:&error])

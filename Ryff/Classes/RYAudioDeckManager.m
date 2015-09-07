@@ -429,7 +429,7 @@ static RYAudioDeckManager *_sharedInstance;
 #pragma mark -
 #pragma mark - TrackDownload Delegate
 
-- (void) track:(NSURL *)trackURL DownloadProgressed:(CGFloat)progress
+- (void) track:(NSURL *)trackURL downloadProgressed:(CGFloat)progress
 {
     for (RYPost *post in _downloadQueue)
     {
@@ -444,7 +444,7 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (void) track:(NSURL *)trackURL FinishedDownloading:(NSURL *)localURL
+- (void) track:(NSURL *)trackURL finishedDownloading:(NSURL *)localURL
 {
     for (RYPost *post in _downloadQueue)
     {
@@ -470,7 +470,7 @@ static RYAudioDeckManager *_sharedInstance;
     }
 }
 
-- (void) track:(NSURL *)trackURL DownloadFailed:(NSString *)reason
+- (void) track:(NSURL *)trackURL downloadFailed:(NSString *)reason
 {
     for (RYPost *post in _downloadQueue)
     {
