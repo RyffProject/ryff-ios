@@ -100,6 +100,9 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         let starGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
         starredView.addGestureRecognizer(starGesture)
         
+        let addToPlaylistGesture = UITapGestureRecognizer(target: self, action: Selector("didTapAddToPlaylist:"))
+        addToPlaylistView.addGestureRecognizer(addToPlaylistGesture)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -117,6 +120,10 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     func didTapStarred(tapGesture: UITapGestureRecognizer) {
         starredView.style(!post.isStarred)
         post.toggleStarred()
+    }
+    
+    func didTapAddToPlaylist(tapGesture: UITapGestureRecognizer) {
+        RYAudioDeck.sharedAudioDeck.currentPlaylist?.addPost(post)
     }
     
     // MARK: RYPostDelegate

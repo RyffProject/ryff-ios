@@ -10,10 +10,31 @@ import Foundation
 import AVFoundation
 
 protocol AVAudioDeckDelegate: class {
+    
+    /**
+    Current playing status of the Audio Deck changed.
+    The currently playing post is implied to be the same, but the deck's play/pause/progress status changed.
+    */
+    func playbackStatusChanged()
+    
+    /**
+    The currently playing post changed.
+    */
     func currentlyPlayingChanged()
+    
+    /**
+    The current playlist changed.
+    */
+    func playlistChanged()
 }
 
 class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate {
+    
+    let PlaylistChangedNotification = "AudioDeckPlaylistChanged"
+    let CurrentlyPlayingChangedNotification = "AudioDeckCurrentlyPlayingChanged"
+    let PlaybackProgressUpdateTimeInterval: NSTimeInterval = 0.1
+    
+    static let sharedAudioDeck = RYAudioDeck()
     
     var playbackProgress: CGFloat {
         get {
@@ -25,7 +46,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         set {
             if let player = audioPlayer {
                 player.currentTime = NSTimeInterval(playbackProgress*CGFloat(player.duration))
-                // TODO: notify delegate of playing change
+                playbackStatusChanged()
             }
         }
     }
@@ -33,18 +54,22 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     private(set) var currentPlaylist: RYAudioDeckPlaylist?
     private(set) var currentlyPlaying: RYPost? {
         didSet {
+            updateNowPlayingInfo(true)
             delegate?.currentlyPlayingChanged()
+            NSNotificationCenter.defaultCenter().postNotificationName(CurrentlyPlayingChangedNotification, object: nil)
         }
     }
     
     private weak var delegate: AVAudioDeckDelegate?
-    private let playlist = RYAudioDeckPlaylist()
+    private let defaultPlaylist = RYAudioDeckPlaylist()
     private var audioPlayer: AVAudioPlayer?
+    private var progressTimer: NSTimer?
     
     override init() {
         super.init()
-        playlist.playlistDelegate = self
-        currentPlaylist = playlist
+        defaultPlaylist.playlistDelegate = self
+        currentPlaylist = defaultPlaylist
+        progressTimer = NSTimer.scheduledTimerWithTimeInterval(PlaybackProgressUpdateTimeInterval, target: self, selector: Selector("updateProgress:"), userInfo: nil, repeats: true)
     }
     
     // MARK: Public
@@ -53,7 +78,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         if let player = audioPlayer {
             if !player.playing {
                 player.play()
-                // TODO: notify delegate of playing change
+                playbackStatusChanged()
             }
         }
         else {
@@ -64,7 +89,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     func pause() {
         if let player = audioPlayer where player.playing {
             player.pause()
-            // TODO: notify delegate of playing change
+            playbackStatusChanged()
         }
     }
     
@@ -75,7 +100,10 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     // MARK: RYAudioDeckPlaylistDelegate
     
     func playlistChanged() {
-        if let currentlyPlaying = currentlyPlaying, firstInPlaylist = currentPlaylist?.readyPosts.first where currentlyPlaying != firstInPlaylist {
+        if currentlyPlaying == nil {
+            playNextTrack()
+        }
+        else if let currentlyPlaying = currentlyPlaying, firstInPlaylist = currentPlaylist?.readyPosts.first where currentlyPlaying != firstInPlaylist {
             stop()
         }
     }
@@ -109,8 +137,8 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
             audioPlayer?.delegate = self
             audioPlayer?.play()
             currentlyPlaying = post
+            playbackStatusChanged()
             UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
-            // TODO: notify delegate of playing change
             // TODO: update now playing information
         }
     }
@@ -126,8 +154,24 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
             }
             
             self.currentlyPlaying = nil
-            delegate?.currentlyPlayingChanged()
-            // TODO: update now playing information
+            playbackStatusChanged()
+        }
+    }
+    
+    private func playbackStatusChanged() {
+        updateNowPlayingInfo(false)
+        delegate?.playbackStatusChanged()
+    }
+    
+    private func updateNowPlayingInfo(currentlyPlayingChanged: Bool) {
+        
+    }
+    
+    // MARK: Timer
+    
+    func updateProgress(timer: NSTimer) {
+        if let player = audioPlayer where player.playing {
+            playbackStatusChanged()
         }
     }
     
