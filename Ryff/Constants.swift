@@ -27,8 +27,10 @@ struct Constants {
     }
     
     struct Mixer {
-        static let RegularPadSpacing: CGFloat = 45
-        static let CompactPadSpacing: CGFloat = 30
+        static let RegularPadSpacing: CGFloat = 30
+        static let CompactPadSpacing: CGFloat = 20
+        static let SmallActionDimension: CGFloat = 15
+        static let LargeActionDimension: CGFloat = 20
     }
     
 }

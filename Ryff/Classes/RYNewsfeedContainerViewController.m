@@ -26,7 +26,7 @@
     
     UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
     [statusBarView setAutoresizesSubviews:UIViewAutoresizingFlexibleWidth];
-    [statusBarView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+//    [statusBarView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     [self.view insertSubview:statusBarView aboveSubview:_newsfeedContainerView];
     
     [_newsfeedContainerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];

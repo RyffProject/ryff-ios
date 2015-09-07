@@ -37,9 +37,9 @@ class RYStarredView: UIView {
     
     // MARK: Styling
     
-    func style(starred: Bool, starredCount: Int) {
+    func style(starred: Bool, text: String) {
         style(starred)
-        starredCountLabel.text = "\(starredCount)"
+        starredCountLabel.text = text
     }
     
     func style(starred: Bool) {

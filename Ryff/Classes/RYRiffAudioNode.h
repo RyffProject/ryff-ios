@@ -13,11 +13,22 @@
 @class AVAudioTime;
 @class AVAudioFile;
 
+typedef NS_ENUM(NSInteger, RYRiffAudioNodeStatus) {
+    RYRiffAudioNodeStatusEmpty = 0,
+    RYRiffAudioNodeStatusRecording,
+    RYRiffAudioNodeStatusReadyToPlay,
+    RYRiffAudioNodeStatusActive
+};
+
+typedef NS_ENUM(NSInteger, RYRiffActiveAudioNodeAction) {
+    RYRiffActiveAudioNodeActionOnce = 0,
+    RYRiffActiveAudioNodeActionLooping
+};
+
 @interface RYRiffAudioNode : NSObject
 
-@property (nonatomic, assign) BOOL isReadyToPlay;
-@property (nonatomic, assign) BOOL isActive;
-@property (nonatomic, assign) BOOL isRecording;
+@property (nonatomic, assign) RYRiffAudioNodeStatus status;
+@property (nonatomic, assign) RYRiffActiveAudioNodeAction activeAction;
 
 @property (nonatomic, readonly, nonnull) AVAudioPlayerNode *audioPlayerNode;
 @property (nonatomic, readonly, nullable) AVAudioPCMBuffer *audioBuffer;

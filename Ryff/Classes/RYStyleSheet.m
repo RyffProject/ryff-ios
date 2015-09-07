@@ -37,11 +37,6 @@
     return [UIColor colorWithHexString:@"383838"];
 }
 
-+ (UIColor *)audioBackgroundColor
-{
-    return [UIColor colorWithHexString:@"282828"];
-}
-
 + (UIColor *)lightBackgroundColor
 {
     return [UIColor colorWithHexString:@"cee5ea"];
@@ -59,6 +54,21 @@
 + (UIColor *)darkTextColor
 {
     return [UIColor colorWithHexString:@"5c5c5c"];
+}
+
+// Audio Mixer Colors
+
++ (UIColor *)audioPadColor
+{
+    return [UIColor colorWithHexString:@"282828"];
+}
+
++ (UIColor *)recordingColor {
+    return [UIColor colorWithHexString:@"ee4056"];
+}
+
++ (UIColor *)audioHighlightColor {
+    return [UIColor whiteColor];
 }
 
 #pragma mark -

@@ -33,8 +33,8 @@ static const CGSize BarButtonItemSize = {30, 30};
 }
 
 - (void)newPost:(id)sender {
-    RYRiffCreateCollectionViewController *riffCreateCollectionViewController = [[RYRiffCreateCollectionViewController alloc] initWithNibName:nil bundle:nil];
-    [self presentViewController:riffCreateCollectionViewController animated:YES completion:nil];
+    RYRiffMixerViewController *riffMixer = [[RYRiffMixerViewController alloc] initWithNibName:nil bundle:nil];
+    [self presentViewController:riffMixer animated:YES completion:nil];
 }
 
 #pragma mark -

@@ -95,7 +95,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 
 - (void)startWaitingAudioNodes {
     for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
-        if (riffNode.isActive && !riffNode.audioPlayerNode.isPlaying) {
+        if (riffNode.status == RYRiffAudioNodeStatusActive) {
             [riffNode play];
         }
     }
@@ -126,7 +126,6 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
                 NSLog(@"startRecordingOutputToNode tap error: %@", [error localizedDescription]);
             }
         }];
-        riffNode.isRecording = YES;
         _recordingNode = riffNode;
         _isRecording = YES;
     }
@@ -145,8 +144,6 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         [_recordingNode setAudioFile:recordedFile];
         [_recordingNode startWithDelay:0 looping:YES];
         [_recordingNode play];
-        _recordingNode.isRecording = NO;
-        _recordingNode.isActive = YES;
         
         _recordingNode = nil;
         _isRecording = NO;
@@ -165,25 +162,23 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 - (void)toggleNodeAtIndex:(NSInteger)index {
     RYRiffAudioNode *riffNode = [self nodeAtIndex:index];
     if (riffNode) {
-        if (!riffNode.isReadyToPlay) {
-            // toggle recording
-            if (riffNode.isRecording) {
-                [self stopRecordingOutput];
-            }
-            else {
+        switch (riffNode.status) {
+            case RYRiffAudioNodeStatusEmpty:
                 [self startRecordingOutputToNode:riffNode];
-            }
-        }
-        else {
-            // toggle playing
-            if (riffNode.audioPlayerNode.isPlaying) {
-                [riffNode pause];
-                riffNode.isActive = NO;
-            }
-            else {
+                riffNode.status = RYRiffAudioNodeStatusRecording;
+                break;
+            case RYRiffAudioNodeStatusRecording:
+                [self stopRecordingOutput];
+                riffNode.status = RYRiffAudioNodeStatusActive;
+                break;
+            case RYRiffAudioNodeStatusReadyToPlay:
                 [riffNode play];
-                riffNode.isActive = YES;
-            }
+                riffNode.status = RYRiffAudioNodeStatusActive;
+                break;
+            case RYRiffAudioNodeStatusActive:
+                [riffNode pause];
+                riffNode.status = RYRiffAudioNodeStatusReadyToPlay;
+                break;
         }
         
         [self.delegate nodeStatusChangedAtIndex:index];
@@ -195,7 +190,7 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     if (riffNode) {
         [riffNode stop];
         [riffNode deleteAudio];
-        riffNode.isActive = NO;
+        riffNode.status = RYRiffAudioNodeStatusEmpty;
         
         [self.delegate nodeStatusChangedAtIndex:index];
     }

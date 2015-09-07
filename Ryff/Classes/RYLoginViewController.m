@@ -229,7 +229,7 @@
             [usernameField setSecureTextEntry:NO];
             [usernameField setTintColor:[UIColor whiteColor]];
             
-            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+//            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
             
             break;
         }
@@ -244,7 +244,7 @@
             [passwordField setSecureTextEntry:YES];
             [passwordField setTintColor:[UIColor whiteColor]];
             
-            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+//            [[cell viewWithTag:8] setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
             break;
         }
         case kLoginRow:

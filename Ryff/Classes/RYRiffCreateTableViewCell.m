@@ -34,10 +34,10 @@
     _riffCreateDelegate = delegate;
     _audioPlayer        = player;
     
-    if (lastRowInSection)
-        [_separatorView setBackgroundColor:[UIColor clearColor]];
-    else
-        [_separatorView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+//    if (lastRowInSection)
+//        [_separatorView setBackgroundColor:[UIColor clearColor]];
+//    else
+//        [_separatorView setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
     
     [_playButton setTintColor:[RYStyleSheet audioActionColor]];
     [_deleteButton setTintColor:[RYStyleSheet audioActionColor]];

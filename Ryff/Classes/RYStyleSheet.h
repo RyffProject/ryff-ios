@@ -10,16 +10,20 @@
 
 @interface RYStyleSheet : NSObject
 
-// Colors
+// Social Colors
 + (UIColor *)audioActionColor;
 + (UIColor *)availableActionColor;
 + (UIColor *)postActionColor;
 + (UIColor *)tabBarColor;
-+ (UIColor *)audioBackgroundColor;
 + (UIColor *)lightBackgroundColor;
 + (UIColor *)darkBackgroundColor;
 + (UIColor *)profileBackgroundColor;
 + (UIColor *)darkTextColor;
+
+// Audio Mixer Colors
++ (UIColor *)audioPadColor;
++ (UIColor *)recordingColor;
++ (UIColor *)audioHighlightColor;
 
 // Fonts
 + (UIFont *)customFontForTextStyle:(NSString *)textStyle;

@@ -55,7 +55,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[RYStyleSheet audioBackgroundColor]];
+    [self.view setBackgroundColor:[RYStyleSheet audioPadColor]];
     
     [_playButton setTintColor:[RYStyleSheet audioActionColor]];
     [_repostButton setTintColor:[RYStyleSheet audioActionColor]];
@@ -63,7 +63,7 @@
     [_volumeSlider setTintColor:[RYStyleSheet audioActionColor]];
     [_nowPlayingLabel setTextColor:[RYStyleSheet audioActionColor]];
     
-    [_controlWrapperView setBackgroundColor:[[RYStyleSheet audioBackgroundColor] colorWithAlphaComponent:0.85f]];
+    [_controlWrapperView setBackgroundColor:[[RYStyleSheet audioPadColor] colorWithAlphaComponent:0.85f]];
     [_controlWrapperView setClipsToBounds:YES];
     [_controlWrapperView.layer setCornerRadius:10.0f];
     
@@ -153,8 +153,8 @@
     RYPost *post = [[RYAudioDeckManager sharedInstance] currentlyPlayingPost];
     if (post)
     {
-        RYRiffCreateCollectionViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffCreate"];
-        [self presentViewController:riffCreateVC animated:YES completion:nil];
+        RYRiffMixerViewController *riffMixer = [[RYRiffMixerViewController alloc] initWithNibName:nil bundle:nil];
+        [self presentViewController:riffMixer animated:YES completion:nil];
     }
 }
 

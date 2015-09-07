@@ -125,7 +125,7 @@ class RYPostTableViewCell: UITableViewCell {
         postTitleLabel.text = post.title
         postDescriptionTextView.text = post.content
         postStarred = post.isStarred
-        starredView.style(postStarred, starredCount: post.upvotes)
+        starredView.style(postStarred, text: "\(post.upvotes)")
         
         if let _ = post.imageURL {
             postImageView.sd_setImageWithURL(post.imageURL, placeholderImage: nil)

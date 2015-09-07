@@ -151,7 +151,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         postTitleLabel.text = post.title
         postDescriptionTextView.text = post.content
         styleFollowing(post.user.isFollowing)
-        starredView.style(post.isStarred, starredCount: post.upvotes)
+        starredView.style(post.isStarred, text: "\(post.upvotes)")
         
         if let imageURL = post.imageURL {
             postImageView.sd_setImageWithURL(imageURL)

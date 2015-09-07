@@ -1,5 +1,5 @@
 //
-//  RYRiffCreateCollectionViewController.swift
+//  RYRiffMixerCollectionViewController.swift
 //  Ryff
 //
 //  Created by Christopher Laganiere on 8/15/15.
@@ -10,7 +10,7 @@ import UIKit
 import KRLCollectionViewGridLayout
 
 @objc
-class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, AudioEngineDelegate, RYRiffCreateNodeCellDelegate {
+class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, AudioEngineDelegate, RYRiffMixerNodeCellDelegate {
     
     private let NumberOfNodes = 8
     private let NodeCellReuseIdentifier = "RiffNodeCell"
@@ -37,13 +37,15 @@ class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = UIColor.greenColor()
+        view.backgroundColor = RYStyleSheet.darkBackgroundColor()
+        
+        collectionView.backgroundColor = UIColor.clearColor()
         collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
         
-        collectionView.registerClass(RYRiffCreateNodeCollectionViewCell.self, forCellWithReuseIdentifier: NodeCellReuseIdentifier)
+        collectionView.registerClass(RYRiffMixerNodeCollectionViewCell.self, forCellWithReuseIdentifier: NodeCellReuseIdentifier)
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
@@ -55,9 +57,9 @@ class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewD
         return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
     
-    // MARK: RYRiffCreateNodeCellDelegate
+    // MARK: RYRiffMixerNodeCellDelegate
     
-    func clearHitOnNodeCell(nodeCell: RYRiffCreateNodeCollectionViewCell) {
+    func clearHitOnNodeCell(nodeCell: RYRiffMixerNodeCollectionViewCell) {
         if let indexPath = collectionView.indexPathForCell(nodeCell) {
             riffEngine.clearNodeAtIndex(indexPath.row)
         }
@@ -68,7 +70,7 @@ class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewD
     func nodeStatusChangedAtIndex(index: Int) {
         if let riffNode = riffEngine.nodeAtIndex(index) {
             let indexPath = NSIndexPath(forItem: index, inSection: 0)
-            if let nodeCell = collectionView.cellForItemAtIndexPath(indexPath) as? RYRiffCreateNodeCollectionViewCell {
+            if let nodeCell = collectionView.cellForItemAtIndexPath(indexPath) as? RYRiffMixerNodeCollectionViewCell {
                 nodeCell.styleWithRiffNode(riffNode)
             }
         }
@@ -92,7 +94,7 @@ class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewD
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier(NodeCellReuseIdentifier, forIndexPath: indexPath) as! RYRiffCreateNodeCollectionViewCell
+        return collectionView.dequeueReusableCellWithReuseIdentifier(NodeCellReuseIdentifier, forIndexPath: indexPath) as! RYRiffMixerNodeCollectionViewCell
     }
     
     // MARK: UICollectionViewDelegate
@@ -102,7 +104,7 @@ class RYRiffCreateCollectionViewController : UIViewController, UICollectionViewD
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if let nodeCell = cell as? RYRiffCreateNodeCollectionViewCell, riffNode = riffEngine.nodeAtIndex(indexPath.row) {
+        if let nodeCell = cell as? RYRiffMixerNodeCollectionViewCell, riffNode = riffEngine.nodeAtIndex(indexPath.row) {
             nodeCell.styleWithRiffNode(riffNode)
             nodeCell.delegate = self
         }

@@ -48,8 +48,8 @@
 		3F387BE31B9B3C2B00B5CC74 /* RYRiffAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B911B9B3C2B00B5CC74 /* RYRiffAudioEngine.m */; };
 		3F387BE41B9B3C2B00B5CC74 /* RYRiffAudioNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B931B9B3C2B00B5CC74 /* RYRiffAudioNode.m */; };
 		3F387BE51B9B3C2B00B5CC74 /* RYRiffCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B951B9B3C2B00B5CC74 /* RYRiffCell.m */; };
-		3F387BE61B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B961B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift */; };
-		3F387BE71B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B971B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift */; };
+		3F387BE61B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B961B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift */; };
+		3F387BE71B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B971B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift */; };
 		3F387BE81B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B991B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m */; };
 		3F387BE91B9B3C2B00B5CC74 /* RYRiffCreateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B9B1B9B3C2B00B5CC74 /* RYRiffCreateTableViewCell.m */; };
 		3F387BEA1B9B3C2B00B5CC74 /* RYRiffDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B9D1B9B3C2B00B5CC74 /* RYRiffDetailsTableViewCell.m */; };
@@ -217,8 +217,8 @@
 		3F387B931B9B3C2B00B5CC74 /* RYRiffAudioNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffAudioNode.m; path = Classes/RYRiffAudioNode.m; sourceTree = "<group>"; };
 		3F387B941B9B3C2B00B5CC74 /* RYRiffCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffCell.h; path = Classes/RYRiffCell.h; sourceTree = "<group>"; };
 		3F387B951B9B3C2B00B5CC74 /* RYRiffCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffCell.m; path = Classes/RYRiffCell.m; sourceTree = "<group>"; };
-		3F387B961B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYRiffCreateCollectionViewController.swift; path = Classes/RYRiffCreateCollectionViewController.swift; sourceTree = "<group>"; };
-		3F387B971B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYRiffCreateNodeCollectionViewCell.swift; path = Classes/RYRiffCreateNodeCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F387B961B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYRiffMixerViewController.swift; path = Classes/RYRiffMixerViewController.swift; sourceTree = "<group>"; };
+		3F387B971B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYRiffMixerNodeCollectionViewCell.swift; path = Classes/RYRiffMixerNodeCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F387B981B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffCreateOldViewController.h; path = Classes/RYRiffCreateOldViewController.h; sourceTree = "<group>"; };
 		3F387B991B9B3C2B00B5CC74 /* RYRiffCreateOldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYRiffCreateOldViewController.m; path = Classes/RYRiffCreateOldViewController.m; sourceTree = "<group>"; };
 		3F387B9A1B9B3C2B00B5CC74 /* RYRiffCreateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYRiffCreateTableViewCell.h; path = Classes/RYRiffCreateTableViewCell.h; sourceTree = "<group>"; };
@@ -596,8 +596,8 @@
 				3F387B911B9B3C2B00B5CC74 /* RYRiffAudioEngine.m */,
 				3F387B921B9B3C2B00B5CC74 /* RYRiffAudioNode.h */,
 				3F387B931B9B3C2B00B5CC74 /* RYRiffAudioNode.m */,
-				3F387B961B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift */,
-				3F387B971B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift */,
+				3F387B961B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift */,
+				3F387B971B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift */,
 			);
 			name = "Audio Mixer";
 			sourceTree = "<group>";
@@ -1088,7 +1088,7 @@
 				3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */,
 				3F387C331B9B3FB200B5CC74 /* UIColor+Hex.m in Sources */,
 				83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */,
-				3F387BE61B9B3C2B00B5CC74 /* RYRiffCreateCollectionViewController.swift in Sources */,
+				3F387BE61B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift in Sources */,
 				83F4EEBD1B9D3921007CF11A /* NSMutableDictionary+Safety.m in Sources */,
 				3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */,
 				3F387BF21B9B3C2B00B5CC74 /* RYTabBarViewController.m in Sources */,
@@ -1144,7 +1144,7 @@
 				3F387BD81B9B3C2B00B5CC74 /* RYPlayControl.m in Sources */,
 				3F3744F11B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift in Sources */,
 				3F387BD41B9B3C2B00B5CC74 /* RYNotification.m in Sources */,
-				3F387BE71B9B3C2B00B5CC74 /* RYRiffCreateNodeCollectionViewCell.swift in Sources */,
+				3F387BE71B9B3C2B00B5CC74 /* RYRiffMixerNodeCollectionViewCell.swift in Sources */,
 				3F387BDC1B9B3C2B00B5CC74 /* RYPostTableViewCell.swift in Sources */,
 				3F387BDA1B9B3C2B00B5CC74 /* RYPostsDataSource.m in Sources */,
 				3F387BE11B9B3C2B00B5CC74 /* RYRefreshControl.m in Sources */,
