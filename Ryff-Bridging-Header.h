@@ -6,14 +6,12 @@
 //  Copyright (c) 2014 Chris Laganiere. All rights reserved.
 //
 
-#import "FDWaveformView.h"
 #import "RYAudioDeckManager.h"
 #import "RYDataManager.h"
 #import "RYDiscoverServices.h"
 #import "RYLoadMoreControl.h"
 #import "RYMediaEditor.h"
 #import "RYPost.h"
-#import "RYPostsDataSource.h"
 #import "RYRefreshControl.h"
 #import "RYRegistrationServices.h"
 #import "RYRiffAudioEngine.h"

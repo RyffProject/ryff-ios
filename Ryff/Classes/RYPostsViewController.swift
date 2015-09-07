@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GTScrollNavigationBar
 
 @objc class RYPostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, RYPostsDataSourceDelegate, RYPostTableViewCellDelegate {
     

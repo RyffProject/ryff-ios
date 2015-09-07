@@ -13,7 +13,6 @@
 
 // Data Objects
 #import "RYUser.h"
-#import "RYPostsDataSource.h"
 #import "RYNewsfeedDataSource.h"
 #import "RYUserFeedDataSource.h"
 
@@ -29,9 +28,6 @@
 #import "RYDiscoverViewController.h"
 #import "RYAudioDeckViewController.h"
 #import "RYNavigationController.h"
-
-// Frameworks
-@import GTScrollNavigationBar;
 
 static const CGSize tabBarIconSize = {25, 25};
 

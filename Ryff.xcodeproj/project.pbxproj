@@ -92,7 +92,6 @@
 		3F51B57F1B9BB435007A136D /* RYUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744F01B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift */; };
 		3F51B5801B9BB438007A136D /* RYProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B8B1B9B3C2B00B5CC74 /* RYProfileViewController.swift */; };
 		3FE76E471B9B40BB00099CF5 /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E431B9B40BB00099CF5 /* BlockAlertView.m */; };
-		3FE76E481B9B40BB00099CF5 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E461B9B40BB00099CF5 /* FDWaveformView.m */; };
 		3FE76E4C1B9B40DF00099CF5 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E4B1B9B40DF00099CF5 /* DWTagList.m */; };
 		3FE76E521B9B40F300099CF5 /* PXAlertView+Customization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E4F1B9B40F300099CF5 /* PXAlertView+Customization.m */; };
 		3FE76E531B9B40F300099CF5 /* PXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE76E511B9B40F300099CF5 /* PXAlertView.m */; };
@@ -1082,7 +1081,6 @@
 				3FE76E4C1B9B40DF00099CF5 /* DWTagList.m in Sources */,
 				3FE76E531B9B40F300099CF5 /* PXAlertView.m in Sources */,
 				3F387BDD1B9B3C2B00B5CC74 /* RYProfileInfoTableViewCell.m in Sources */,
-				3FE76E481B9B40BB00099CF5 /* FDWaveformView.m in Sources */,
 				3F387BF41B9B3C2B00B5CC74 /* RYTagCollectionViewCell.m in Sources */,
 				3F387C3A1B9B3FB200B5CC74 /* UIViewController+RYSocialTransitions.m in Sources */,
 				3F387BDB1B9B3C2B00B5CC74 /* RYPostsViewController.swift in Sources */,
