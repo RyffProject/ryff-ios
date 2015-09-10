@@ -13,7 +13,6 @@
 		3F3744EE1B9B9442005A9DD2 /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */; };
 		3F3744EF1B9B94CC005A9DD2 /* UILayoutPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */; };
 		3F3744F11B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3744F01B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift */; };
-		3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B531B9B3C2B00B5CC74 /* RYAudioDeckManager.m */; };
 		3F387BC31B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B551B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m */; };
 		3F387BC41B9B3C2B00B5CC74 /* RYAudioDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B571B9B3C2B00B5CC74 /* RYAudioDeckViewController.m */; };
 		3F387BC51B9B3C2B00B5CC74 /* RYCorePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F387B591B9B3C2B00B5CC74 /* RYCorePageViewController.m */; };
@@ -163,8 +162,6 @@
 		3F32A8F71B9B87F000E79282 /* RYFadingVisualEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYFadingVisualEffectView.swift; path = Classes/RYFadingVisualEffectView.swift; sourceTree = "<group>"; };
 		3F3744ED1B9B9442005A9DD2 /* UILayoutPriority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILayoutPriority.swift; path = Categories/UILayoutPriority.swift; sourceTree = "<group>"; };
 		3F3744F01B9BA7C1005A9DD2 /* RYUserProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RYUserProfileTableViewCell.swift; path = Classes/RYUserProfileTableViewCell.swift; sourceTree = "<group>"; };
-		3F387B521B9B3C2B00B5CC74 /* RYAudioDeckManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckManager.h; path = Classes/RYAudioDeckManager.h; sourceTree = "<group>"; };
-		3F387B531B9B3C2B00B5CC74 /* RYAudioDeckManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYAudioDeckManager.m; path = Classes/RYAudioDeckManager.m; sourceTree = "<group>"; };
 		3F387B541B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckTableViewCell.h; path = Classes/RYAudioDeckTableViewCell.h; sourceTree = "<group>"; };
 		3F387B551B9B3C2B00B5CC74 /* RYAudioDeckTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RYAudioDeckTableViewCell.m; path = Classes/RYAudioDeckTableViewCell.m; sourceTree = "<group>"; };
 		3F387B561B9B3C2B00B5CC74 /* RYAudioDeckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RYAudioDeckViewController.h; path = Classes/RYAudioDeckViewController.h; sourceTree = "<group>"; };
@@ -419,8 +416,6 @@
 		3F387BFF1B9B3C6900B5CC74 /* Data Managers */ = {
 			isa = PBXGroup;
 			children = (
-				3F387B521B9B3C2B00B5CC74 /* RYAudioDeckManager.h */,
-				3F387B531B9B3C2B00B5CC74 /* RYAudioDeckManager.m */,
 				3F387B5C1B9B3C2B00B5CC74 /* RYDataManager.h */,
 				3F387B5D1B9B3C2B00B5CC74 /* RYDataManager.m */,
 				3F387B6C1B9B3C2B00B5CC74 /* RYMediaEditor.h */,
@@ -1117,7 +1112,6 @@
 				83F4EEC01B9D3A8F007CF11A /* NSDictionary+Safety.m in Sources */,
 				3F387BE61B9B3C2B00B5CC74 /* RYRiffMixerViewController.swift in Sources */,
 				83F4EEBD1B9D3921007CF11A /* NSMutableDictionary+Safety.m in Sources */,
-				3F387BC21B9B3C2B00B5CC74 /* RYAudioDeckManager.m in Sources */,
 				3F387BF21B9B3C2B00B5CC74 /* RYTabBarViewController.m in Sources */,
 				3F387BDF1B9B3C2B00B5CC74 /* RYProfileViewController.m in Sources */,
 				3FE76E4C1B9B40DF00099CF5 /* DWTagList.m in Sources */,

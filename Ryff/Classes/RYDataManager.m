@@ -10,7 +10,6 @@
 
 // Data Managers
 #import "RYMediaEditor.h"
-#import "RYAudioDeckManager.h"
 #import "RYRiffAudioEngine.h"
 
 // Frameworks
@@ -214,12 +213,12 @@ static RYDataManager *_sharedInstance;
     NSError *error = nil;
     for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:&error])
     {
-        if (![[RYAudioDeckManager sharedInstance] playlistContainsFile:file])
-        {
-            [[NSFileManager defaultManager] removeItemAtPath:[directory stringByAppendingPathComponent:file] error:&error];
-            if (error)
-                NSLog(@"clearCache failed: %@",[error localizedDescription]);
-        }
+//        if (![[RYAudioDeckManager sharedInstance] playlistContainsFile:file])
+//        {
+//            [[NSFileManager defaultManager] removeItemAtPath:[directory stringByAppendingPathComponent:file] error:&error];
+//            if (error)
+//                NSLog(@"clearCache failed: %@",[error localizedDescription]);
+//        }
     }
     
     for (DownloadOperation *download in _downloadQueue)

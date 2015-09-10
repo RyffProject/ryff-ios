@@ -12,7 +12,6 @@
 #import "RYServices.h"
 #import "RYRegistrationServices.h"
 #import "RYDataManager.h"
-#import "RYAudioDeckManager.h"
 #import "RYNotificationsManager.h"
 
 // Frameworks
@@ -82,21 +81,26 @@
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event
 {
-    RYAudioDeckManager *audioDeck = [RYAudioDeckManager sharedInstance];
+    RYAudioDeck *audioDeck = [RYAudioDeck sharedAudioDeck];
     if(event.type == UIEventTypeRemoteControl)
     {
         switch (event.subtype) {
             case UIEventSubtypeRemoteControlPlay:
-            [audioDeck playTrack:YES];
+                [audioDeck play];
                 break;
             case UIEventSubtypeRemoteControlPause:
-                [audioDeck playTrack:NO];
+                [audioDeck pause];
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                [audioDeck playTrack:![audioDeck isPlaying]];
+                if (audioDeck.isPlaying) {
+                    [audioDeck pause];
+                }
+                else {
+                    [audioDeck play];
+                }
                 break;
             case UIEventSubtypeRemoteControlNextTrack:
-                [audioDeck skipTrack];
+                [audioDeck skip];
                 break;
             case UIEventSubtypeRemoteControlPreviousTrack:
                 [audioDeck setPlaybackProgress:0.0f];

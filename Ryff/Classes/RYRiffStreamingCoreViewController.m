@@ -85,24 +85,24 @@
  */
 - (void) playerControlAction:(NSInteger)riffIndex
 {
-    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
-    RYPost *post = _feedItems[riffIndex];
-    if (post.postId == [audioManager currentlyPlayingPost].postId)
-    {
-        // currently playing
-        BOOL shouldPlay = ![audioManager isPlaying];
-        [audioManager playTrack:shouldPlay];
-    }
-    else if ([audioManager idxOfDownload:post] >= 0)
-    {
-        // currently downloading, should stop download
-        [audioManager removePostFromPlaylist:post];
-    }
-    else
-    {
-        // not active
-        [audioManager forcePostToTop:post];
-    }
+//    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+//    RYPost *post = _feedItems[riffIndex];
+//    if (post.postId == [audioManager currentlyPlayingPost].postId)
+//    {
+//        // currently playing
+//        BOOL shouldPlay = ![audioManager isPlaying];
+//        [audioManager playTrack:shouldPlay];
+//    }
+//    else if ([audioManager idxOfDownload:post] >= 0)
+//    {
+//        // currently downloading, should stop download
+//        [audioManager removePostFromPlaylist:post];
+//    }
+//    else
+//    {
+//        // not active
+//        [audioManager forcePostToTop:post];
+//    }
 }
 
 /*

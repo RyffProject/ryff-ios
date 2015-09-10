@@ -13,7 +13,6 @@
 
 #import "RYRiffAudioNode.h"
 
-static const CGFloat DefaultBPM = 120;
 const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 
 #pragma mark - Riff Audio Engine
@@ -21,8 +20,6 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
 @interface RYRiffAudioEngine() <RYRiffAudioNodeDelegate>
 
 @property (nonatomic) AVAudioEngine *engine;
-@property (nonatomic) NSTimer *beat;
-
 @property (nonatomic) NSArray/*RYRiffAudioNode*/ *riffAudioNodes;
 @property (nonatomic) NSURL *mixerOutputFileURL;
 @property (nonatomic) BOOL isRecording;
@@ -42,8 +39,6 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         
         _isRecording = NO;
         _mixerOutputFileURL = [NSURL URLWithString:[NSTemporaryDirectory() stringByAppendingString:@"mixerOutput.caf"]];
-        
-//        [self startBeatTimer:(1/DefaultBPM)];
         
         [self createNodes:riffNodeCount];
         
@@ -78,33 +73,9 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     return self;
 }
 
-- (void)startBeatTimer:(NSTimeInterval)timeInterval {
-    _beat = [NSTimer scheduledTimerWithTimeInterval:(1/DefaultBPM) target:self selector:@selector(beatStrike:) userInfo:nil repeats:YES];
-    _beat.tolerance = 0.0001;
-}
-
-- (void)stopBeatTimer {
-    [_beat invalidate];
-}
-
-- (void)beatStrike:(NSTimer *)beat {
-    NSLog(@"beatStrike");
-    
-//    [self startWaitingAudioNodes];
-}
-
-- (void)startWaitingAudioNodes {
-    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
-        if (riffNode.status == RYRiffAudioNodeStatusActive) {
-            [riffNode play];
-        }
-    }
-}
-
-- (void)stopAllNodes {
-    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
-        [riffNode stop];
-    }
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self endAVAudioSession];
 }
 
 #pragma mark - Recording
@@ -142,7 +113,6 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
         }
         
         [_recordingNode setAudioFile:recordedFile];
-//        [_recordingNode startWithDelay:0 looping:YES];
         _recordingNode.activeAction = RYRiffActiveAudioNodeActionLooping;
         
         _recordingNode = nil;
@@ -321,6 +291,12 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     }
 }
 
+- (void)stopAllNodes {
+    for (RYRiffAudioNode *riffNode in self.riffAudioNodes) {
+        [riffNode stop];
+    }
+}
+
 #pragma mark AVAudioSession
 
 - (void)initAVAudioSession
@@ -364,6 +340,21 @@ const NSString * __nonnull RecordingAudioFileFormat = @".caf";
     // activate the audio session
     success = [sessionInstance setActive:YES error:&error];
     if (!success) NSLog(@"Error setting session active! %@\n", [error localizedDescription]);
+}
+
+- (void)endAVAudioSession
+{
+    // Configure the audio session
+    AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
+    NSError *error;
+    
+    // set the session category
+    bool success = [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if (!success) NSLog(@"Error setting AVAudioSession category back to playback only! %@\n", [error localizedDescription]);
+    
+    // activate the audio session
+    success = [sessionInstance setActive:NO error:&error];
+    if (!success) NSLog(@"Error setting session inactive! %@\n", [error localizedDescription]);
 }
 
 - (void)handleInterruption:(NSNotification *)notification

@@ -14,7 +14,6 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
-#import "RYAudioDeckManager.h"
 #import "RYServices.h"
 
 // Custom UI
@@ -160,11 +159,11 @@
     _starButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [_repostButton setTintColor:[RYStyleSheet availableActionColor]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaylistChanged:) name:kPlaylistChangedNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
 }
 
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
@@ -184,50 +183,50 @@
 
 - (void) styleFromAudioDeck
 {
-    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
-    if (_post.postId == [audioManager currentlyPlayingPost].postId)
-    {
-        // currently playing
-        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
-        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
-        
-        _playControlView.hidden             = NO;
-        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
-        [_playControlView setProgress:0.0f animated:NO];
-        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
-            [_playControlView setCenterImage:nil];
-        else if ([audioManager isPlaying])
-            [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
-        else
-            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
-    }
-    else if ([audioManager playlistContainsPost:_post.postId])
-    {
-        // in playlist or downloading
-        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
-        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
-        
-        _playControlView.hidden             = NO;
-        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
-        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
-        {
-            // downloading
-            [_playControlView setCenterImage:nil];
-        }
-        else
-        {
-            // in playlist
-            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
-            [_playControlView setProgress:0.0f animated:NO];
-        }
-    }
-    else
-    {
-        [_playlistAddButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
-        _playlistAddButton.tintColor = [RYStyleSheet availableActionColor];
-        
-        _playControlView.hidden = YES;
-    }
+//    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+//    if (_post.postId == [audioManager currentlyPlayingPost].postId)
+//    {
+//        // currently playing
+//        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+//        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
+//        
+//        _playControlView.hidden             = NO;
+//        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
+//        [_playControlView setProgress:0.0f animated:NO];
+//        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+//            [_playControlView setCenterImage:nil];
+//        else if ([audioManager isPlaying])
+//            [_playControlView setCenterImage:[UIImage imageNamed:@"playing"]];
+//        else
+//            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
+//    }
+//    else if ([audioManager playlistContainsPost:_post.postId])
+//    {
+//        // in playlist or downloading
+//        [_playlistAddButton setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+//        _playlistAddButton.tintColor        = [RYStyleSheet postActionColor];
+//        
+//        _playControlView.hidden             = NO;
+//        _playControlView.controlTintColor   = [RYStyleSheet availableActionColor];
+//        if ([[RYAudioDeckManager sharedInstance] idxOfDownload:_post] >= 0)
+//        {
+//            // downloading
+//            [_playControlView setCenterImage:nil];
+//        }
+//        else
+//        {
+//            // in playlist
+//            [_playControlView setCenterImage:[UIImage imageNamed:@"play"]];
+//            [_playControlView setProgress:0.0f animated:NO];
+//        }
+//    }
+//    else
+//    {
+//        [_playlistAddButton setImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+//        _playlistAddButton.tintColor = [RYStyleSheet availableActionColor];
+//        
+//        _playControlView.hidden = YES;
+//    }
 }
 
 #pragma mark -
@@ -260,18 +259,18 @@
 #pragma mark - Actions
 - (IBAction)playlistAddHit:(id)sender
 {
-    if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
-    {
-        // playlist contains already
-        [[RYAudioDeckManager sharedInstance] removePostFromPlaylist:_post];
-        [_playlistAddButton setTintColor:[RYStyleSheet availableActionColor]];
-    }
-    else
-    {
-        // add to playlist
-        [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
-        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
-    }
+//    if ([[RYAudioDeckManager sharedInstance] playlistContainsPost:_post.postId])
+//    {
+//        // playlist contains already
+//        [[RYAudioDeckManager sharedInstance] removePostFromPlaylist:_post];
+//        [_playlistAddButton setTintColor:[RYStyleSheet availableActionColor]];
+//    }
+//    else
+//    {
+//        // add to playlist
+//        [[RYAudioDeckManager sharedInstance] addPostToPlaylist:_post];
+//        [_playlistAddButton setTintColor:[RYStyleSheet postActionColor]];
+//    }
 }
 
 - (IBAction)repostHit:(id)sender

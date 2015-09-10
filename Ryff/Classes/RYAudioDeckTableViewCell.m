@@ -10,7 +10,6 @@
 
 // Data Managers
 #import "RYStyleSheet.h"
-#import "RYAudioDeckManager.h"
 
 // Data Objects
 #import "RYPost.h"
@@ -59,11 +58,11 @@
     UITapGestureRecognizer *playControlGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playControlHit:)];
     [_statusWrapperView addGestureRecognizer:playControlGesture];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaybackChanged:) name:kPlaybackChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckPlaybackChanged:) name:kPlaybackChangedNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDownloadProgress:) name:kDownloadProgressNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioDeckTrackChanged:) name:kTrackChangedNotification object:nil];
 }
 
 #pragma mark -
@@ -71,11 +70,11 @@
 
 - (void) playControlHit:(UITapGestureRecognizer *)tapGesture
 {
-    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
-    if (_post.postId == [audioManager currentlyPlayingPost].postId)
-        [audioManager playTrack:![audioManager isPlaying]];
-    else
-        [audioManager forcePostToTop:_post];
+//    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+//    if (_post.postId == [audioManager currentlyPlayingPost].postId)
+//        [audioManager playTrack:![audioManager isPlaying]];
+//    else
+//        [audioManager forcePostToTop:_post];
 }
 
 #pragma mark -
@@ -98,49 +97,49 @@
 
 - (void) styleFromAudioDeck
 {
-    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
-    if ([audioManager idxOfDownload:_post] >= 0)
-    {
-        // currently downloading
-        [self styleDownloading:YES];
-        [_playControl setCenterImage:nil];
-        
-        if ([audioManager idxOfDownload:_post] != 0)
-            [_playControl setProgress:0.0f animated:NO];
-    }
-    else if (_post.postId == [audioManager currentlyPlayingPost].postId)
-    {
-        // currently playing
-        [self hidePlaylistIndex:YES];
-        [self styleDownloading:NO];
-        [self styleFromPlaybackProgress];
-        
-        if ([audioManager isPlaying])
-            [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
-        else
-            [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
-        [_playControl setProgress:0.0f animated:NO];
-    }
-    else if (_trackIdx > 0)
-    {
-        // just in playlist
-        [self hidePlaylistIndex:NO];
-        [self styleDownloading:NO];
-        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)_trackIdx]];
-        [_playControl setCenterImage:nil];
-        [_playControl setProgress:0.0f animated:NO];
-    }
+//    RYAudioDeckManager *audioManager = [RYAudioDeckManager sharedInstance];
+//    if ([audioManager idxOfDownload:_post] >= 0)
+//    {
+//        // currently downloading
+//        [self styleDownloading:YES];
+//        [_playControl setCenterImage:nil];
+//        
+//        if ([audioManager idxOfDownload:_post] != 0)
+//            [_playControl setProgress:0.0f animated:NO];
+//    }
+//    else if (_post.postId == [audioManager currentlyPlayingPost].postId)
+//    {
+//        // currently playing
+//        [self hidePlaylistIndex:YES];
+//        [self styleDownloading:NO];
+//        [self styleFromPlaybackProgress];
+//        
+//        if ([audioManager isPlaying])
+//            [_playControl setCenterImage:[UIImage imageNamed:@"playing"]];
+//        else
+//            [_playControl setCenterImage:[UIImage imageNamed:@"play"]];
+//        [_playControl setProgress:0.0f animated:NO];
+//    }
+//    else if (_trackIdx > 0)
+//    {
+//        // just in playlist
+//        [self hidePlaylistIndex:NO];
+//        [self styleDownloading:NO];
+//        [_trackIndexLabel setText:[NSString stringWithFormat:@"%ld",(long)_trackIdx]];
+//        [_playControl setCenterImage:nil];
+//        [_playControl setProgress:0.0f animated:NO];
+//    }
 }
 
 - (void) styleFromPlaybackProgress
 {
-    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
-    {
-        CGFloat percentRemaining  = (1.0f - [[RYAudioDeckManager sharedInstance] currentPlaybackProgress]);
-        CGFloat playbackRemaining = percentRemaining*_post.duration;
-        [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:playbackRemaining]];
-    }
-    
+//    if (_post.postId == [[RYAudioDeckManager sharedInstance] currentlyPlayingPost].postId)
+//    {
+//        CGFloat percentRemaining  = (1.0f - [[RYAudioDeckManager sharedInstance] currentPlaybackProgress]);
+//        CGFloat playbackRemaining = percentRemaining*_post.duration;
+//        [_durationLabel setText:[RYStyleSheet convertSecondsToDisplayTime:playbackRemaining]];
+//    }
+//    
 }
 
 - (void) hidePlaylistIndex:(BOOL)hidePlaylistIndex
