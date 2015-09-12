@@ -19,46 +19,36 @@
 @property (nonatomic, strong) CAShapeLayer *circleShape;
 @property (nonatomic, strong) UIImageView *centerImageView;
 
+@property (nonatomic, strong) NSArray *configuredSubviewConstraints;
+
 @end
 
 @implementation RYPlayControl
 
-- (void) configureWithFrame:(CGRect)frame centerImageInset:(NSNumber *)centerImageInset
-{
-    if (!_controlTintColor)
+- (nonnull instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         _controlTintColor = [RYStyleSheet audioActionColor];
-    
-    CGFloat outerStrokeWidth = 3.0f;
-    
-    _circleShape      = [CAShapeLayer layer];
-    CGPoint circleCenter        = CGPointMake(frame.size.width/2, frame.size.height/2);
-    _circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-outerStrokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
-    _circleShape.strokeColor    = _controlTintColor.CGColor;
-    _circleShape.fillColor      = nil;
-    _circleShape.lineWidth      = outerStrokeWidth;
-    _circleShape.strokeEnd      = 0.0f;
-    [self.layer addSublayer:_circleShape];
-    
-    CGFloat inset = centerImageInset ? centerImageInset.floatValue : 2*outerStrokeWidth;
-    CGRect imageFrame   = CGRectMake(inset, inset, frame.size.width-2*inset, frame.size.height-2*inset);
-    _centerImageView    = [[UIImageView alloc] initWithFrame:imageFrame];
-    _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self addSubview:_centerImageView];
+        _centerImageInset = 5.0f;
+        _strokeWidth = 3.0f;
+        
+        _circleShape = [self progressCircleWithFrame:frame strokeWidth:self.strokeWidth color:self.controlTintColor];
+        [self.layer addSublayer:_circleShape];
+        
+        _centerImageView    = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:_centerImageView];
+        
+        _configuredSubviewConstraints = [self subviewConstraints];
+        [NSLayoutConstraint activateConstraints:self.configuredSubviewConstraints];
+    }
+    return self;
 }
 
-- (void) setControlTintColor:(UIColor *)controlTintColor
-{
-    _controlTintColor = controlTintColor;
-    [_centerImageView setImage:[_centerImageView.image colorImage:_controlTintColor]];
-    _circleShape.strokeColor      = _controlTintColor.CGColor;
-}
-
-- (void) setProgress:(CGFloat)progress animated:(BOOL)animated
-{
-    if (animated)
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
+    if (animated) {
         [self animateFill:_circleShape toStrokeEnd:progress];
-    else
-    {
+    }
+    else {
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.0];
         _circleShape.strokeEnd = progress;
@@ -66,18 +56,42 @@
     }
 }
 
-- (void) setCenterImage:(UIImage *)image
-{
-    if (image)
-        [_centerImageView setImage:[image colorImage:_controlTintColor]];
-    else
-        [_centerImageView setImage:nil];
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.circleShape.frame = self.bounds;
+}
+
+#pragma mark - Properties
+
+- (void)setCenterImage:(UIImage * __nullable)centerImage {
+    [_centerImageView setImage:[centerImage colorImage:self.controlTintColor]];
+}
+
+- (void)setControlTintColor:(UIColor * __nullable)controlTintColor {
+    _controlTintColor = controlTintColor ?: [UIColor blueColor];
+    [self.centerImageView setImage:[self.centerImageView.image colorImage:self.controlTintColor]];
+    _circleShape.strokeColor = self.controlTintColor.CGColor;
+}
+
+- (void)setCenterImageInset:(CGFloat)centerImageInset {
+    _centerImageInset = centerImageInset;
+    [self resetConstraints];
 }
 
 #pragma mark - Internal
 
-- (void) animateFill:(CAShapeLayer*)shapeLayer toStrokeEnd:(CGFloat)strokeEnd
-{
+- (CAShapeLayer *)progressCircleWithFrame:(CGRect)frame strokeWidth:(CGFloat)strokeWidth color:(UIColor *)color {
+    CAShapeLayer *circleShape                = [CAShapeLayer layer];
+    CGPoint circleCenter        = CGPointMake(frame.size.width/2, frame.size.height/2);
+    circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-strokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
+    circleShape.strokeColor    = color.CGColor;
+    circleShape.fillColor      = nil;
+    circleShape.lineWidth      = strokeWidth;
+    circleShape.strokeEnd      = 0.0f;
+    return circleShape;
+}
+
+- (void)animateFill:(CAShapeLayer*)shapeLayer toStrokeEnd:(CGFloat)strokeEnd {
     [shapeLayer removeAnimationForKey:@"strokeEnd"];
     
     CGFloat animationDuration = 0.1f;
@@ -88,6 +102,26 @@
     fillStroke.toValue           = @(strokeEnd);
     shapeLayer.strokeEnd         = strokeEnd;
     [shapeLayer addAnimation:fillStroke forKey:@"fill stroke"];
+}
+
+- (void)resetConstraints {
+    [NSLayoutConstraint deactivateConstraints:self.configuredSubviewConstraints];
+    _configuredSubviewConstraints = [self subviewConstraints];
+    [NSLayoutConstraint activateConstraints:self.configuredSubviewConstraints];
+}
+
+#pragma mark - Layout
+
+- (NSArray *)subviewConstraints {
+    NSDictionary *views = NSDictionaryOfVariableBindings(self.centerImageView);
+    NSDictionary *metrics = @{@"inset": @(self.centerImageInset)};
+    NSMutableArray *constraints = [[NSMutableArray alloc] initWithCapacity:16];
+    
+    // Center image view
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(inset)-[centerImageView]-(inset)-" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(inset)-[centerImageView]-(inset)-" options:0 metrics:metrics views:views]];
+    
+    return @[];
 }
 
 @end

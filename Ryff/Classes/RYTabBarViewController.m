@@ -26,7 +26,6 @@
 #import "RYProfileViewController.h"
 #import "RYNewsfeedContainerViewController.h"
 #import "RYDiscoverViewController.h"
-#import "RYAudioDeckViewController.h"
 #import "RYNavigationController.h"
 
 static const CGSize tabBarIconSize = {25, 25};
@@ -43,7 +42,7 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
 @property (nonatomic) RYNavigationController *newsfeedNavigationController;
 @property (nonatomic) RYNavigationController *profileNavigationController;
 @property (nonatomic) RYNavigationController *discoverNavigationController;
-@property (nonatomic) RYAudioDeckViewControllerOLD *audioDeckNavigationController;
+@property (nonatomic) RYNavigationController *audioDeckNavigationController;
 
 @end
 
@@ -114,11 +113,12 @@ typedef NS_ENUM (NSInteger, RYTabIndex) {
     return profileNavigationController;
 }
 
-- (RYAudioDeckViewControllerOLD *)audioDeck {
-    RYAudioDeckViewControllerOLD *audioDeck = [[RYAudioDeckViewControllerOLD alloc] initWithNibName:nil bundle:nil];
+- (RYNavigationController *)audioDeck {
+    RYAudioDeckViewController *audioDeck = [[RYAudioDeckViewController alloc] initWithAudioDeck:[RYAudioDeck sharedAudioDeck]];
+    RYNavigationController *audioDeckNagivationController = [[RYNavigationController alloc] initWithRootViewController:audioDeck];
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Audio Deck" image:[[UIImage imageNamed:@"audioPlaying"] imageWithSize:tabBarIconSize] tag:RYTabIndexAudioDeck];
-    audioDeck.tabBarItem = tabBarItem;
-    return audioDeck;
+    audioDeckNagivationController.tabBarItem = tabBarItem;
+    return audioDeckNagivationController;
 }
 
 #pragma mark - UITabBarControllerDelegate

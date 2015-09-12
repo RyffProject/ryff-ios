@@ -11,6 +11,7 @@
 #import "RYDiscoverServices.h"
 #import "RYLoadMoreControl.h"
 #import "RYMediaEditor.h"
+#import "RYPlayControl.h"
 #import "RYPost.h"
 #import "RYRefreshControl.h"
 #import "RYRegistrationServices.h"

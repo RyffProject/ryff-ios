@@ -128,7 +128,7 @@
     [_playControlView addGestureRecognizer:playControlTap];
     [_playControlView setBackgroundColor:[UIColor clearColor]];
     
-    [_playControlView configureWithFrame:_playControlView.bounds centerImageInset:@(_playControlView.frame.size.width/4)];
+//    [_playControlView configureWithFrame:_playControlView.bounds centerImageInset:@(_playControlView.frame.size.width/4)];
     
     if (_avatarImageView)
     {

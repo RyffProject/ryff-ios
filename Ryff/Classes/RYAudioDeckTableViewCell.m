@@ -18,7 +18,7 @@
 // Custom UI
 #import "RYPlayControl.h"
 
-@interface RYAudioDeckTableViewCell () <UIGestureRecognizerDelegate>
+@interface RYAudioDeckTableViewCellOLD () <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *statusWrapperView;
 @property (weak, nonatomic) IBOutlet RYPlayControl *playControl;
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation RYAudioDeckTableViewCell
+@implementation RYAudioDeckTableViewCellOLD
 
 #pragma mark -
 #pragma mark - Preparation
@@ -52,7 +52,7 @@
     [_riffTitleLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     [_durationLabel setFont:[UIFont fontWithName:kRegularFont size:18.0f]];
     
-    [_playControl configureWithFrame:_playControl.frame centerImageInset:nil];
+//    [_playControl configureWithFrame:_playControl.frame centerImageInset:nil];
     [_playControl setControlTintColor:[UIColor whiteColor]];
     
     UITapGestureRecognizer *playControlGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playControlHit:)];

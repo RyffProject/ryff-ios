@@ -10,7 +10,7 @@
 
 @class RYPost;
 
-@interface RYAudioDeckTableViewCell : UITableViewCell
+@interface RYAudioDeckTableViewCellOLD : UITableViewCell
 
 - (void) configureForPost:(RYPost *)post trackIdx:(NSInteger)trackIdx;
 
