@@ -21,6 +21,7 @@ struct Constants {
         static let FooterHeight: CGFloat = 45
         static let AudioActionHeightSmall: CGFloat = 15
         static let AudioActionHeightLarge: CGFloat = 20
+        static let AudioActionPadding: CGFloat = 10
     }
     
     struct User {

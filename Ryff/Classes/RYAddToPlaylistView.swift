@@ -39,11 +39,11 @@ class RYAddToPlaylistView: UIView {
     
     func subviewContraints() -> [NSLayoutConstraint] {
         let views = ["image": imageView, "text": label]
-        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
+        let metrics = ["padding": Constants.Post.AudioActionPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
         
         var constraints: [NSLayoutConstraint] = []
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[text]-(relatedPadding)-[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[text]-(relatedPadding)-[image(actionDimension)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[image(actionDimension)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += [NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: imageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
         return constraints
     }

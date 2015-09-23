@@ -16,19 +16,32 @@ class RYNowPlayingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        imageView.image = UIImage(named: "audioPlaying")
         imageView.tintColor = RYStyleSheet.postActionColor()
         imageView.contentMode = .ScaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
-        label.text = "Now Playing"
         label.textColor = RYStyleSheet.postActionColor()
         label.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
         NSLayoutConstraint.activateConstraints(subviewContraints())
+        
+        style(nowPlaying: true)
+    }
+    
+    // MARK: Styling
+    
+    func style(nowPlaying nowPlaying: Bool) {
+        if (nowPlaying) {
+            label.text = "Now Playing"
+            imageView.image = UIImage(named: "audioPlaying")
+        }
+        else {
+            label.text = "Play"
+            imageView.image = UIImage(named: "play")
+        }
     }
     
     @available(*, unavailable)
@@ -38,11 +51,11 @@ class RYNowPlayingView: UIView {
     
     func subviewContraints() -> [NSLayoutConstraint] {
         let views = ["image": imageView, "text": label]
-        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
+        let metrics = ["padding": Constants.Post.AudioActionPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
         
         var constraints: [NSLayoutConstraint] = []
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[image(actionDimension)]-(relatedPadding)-[text]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[image(actionDimension)]-(relatedPadding)-[text]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[image(actionDimension)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += [NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: imageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
         return constraints
     }

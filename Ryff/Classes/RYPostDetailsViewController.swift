@@ -100,6 +100,9 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         let starGesture = UITapGestureRecognizer(target: self, action: Selector("didTapStarred:"))
         starredView.addGestureRecognizer(starGesture)
         
+        let nowPlayingGesture = UITapGestureRecognizer(target: self, action: Selector("didTapNowPlaying:"))
+        nowPlayingView.addGestureRecognizer(nowPlayingGesture)
+        
         let addToPlaylistGesture = UITapGestureRecognizer(target: self, action: Selector("didTapAddToPlaylist:"))
         addToPlaylistView.addGestureRecognizer(addToPlaylistGesture)
         
@@ -108,6 +111,15 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         styleForPost(post)
+        updateNowPlaying()
+        updateAddToPlaylist()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("currentlyPlayingChanged:"), name: RYAudioDeck.NotificationCurrentlyPlayingChanged, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playlistChanged:"), name: RYAudioDeck.NotificationPlaylistChanged, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: Actions
@@ -120,6 +132,15 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     func didTapStarred(tapGesture: UITapGestureRecognizer) {
         starredView.style(!post.isStarred)
         post.toggleStarred()
+    }
+    
+    func didTapNowPlaying(tapGesture: UITapGestureRecognizer) {
+        if RYAudioDeck.sharedAudioDeck.playing {
+            RYAudioDeck.sharedAudioDeck.pause()
+        }
+        else {
+            RYAudioDeck.sharedAudioDeck.play()
+        }
     }
     
     func didTapAddToPlaylist(tapGesture: UITapGestureRecognizer) {
@@ -135,6 +156,16 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     
     func postUpdateFailed(post: RYPost!, reason: String!) {
         styleForPost(post)
+    }
+    
+    // MARK: Notifications
+    
+    func playlistChanged(notification: NSNotification) {
+        updateAddToPlaylist()
+    }
+    
+    func currentlyPlayingChanged(notification: NSNotification) {
+        updateNowPlaying()
     }
     
     // MARK: RYUserDelegate
@@ -176,6 +207,27 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         }
     }
     
+    /**
+    The Audio Deck's current playlist changed, should update addToPlaylistView.
+    */
+    private func updateAddToPlaylist() {
+        // Hide addToPlaylistView if in playlist.
+        addToPlaylistView.hidden = RYAudioDeck.sharedAudioDeck.currentPlaylist?.hasPost(post) ?? false
+    }
+    
+    /**
+    The Audio Deck's currently playing post changed, should update nowPlayingView.
+    */
+    private func updateNowPlaying() {
+        if RYAudioDeck.sharedAudioDeck.currentlyPlaying?.isEqual(post) ?? false {
+            nowPlayingView.hidden = false
+            nowPlayingView.style(nowPlaying: RYAudioDeck.sharedAudioDeck.playing)
+        }
+        else {
+            nowPlayingView.hidden = true
+        }
+    }
+    
     private func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["scrollView": scrollView, "container": containerView, "username": usernameLabel, "title": postTitleLabel, "image": postImageView, "nowPlaying": nowPlayingView, "addToPlaylist": addToPlaylistView, "description": postDescriptionTextView, "follow": followLabel, "starred": starredView]
         let metrics = ["padding": Constants.Global.ElementPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "contentWidth": Constants.Global.ContentMaximumWidth]
@@ -192,7 +244,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[container]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
         
         // Vertical Layout
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[username]-(padding)-[image]-(relatedPadding)-[nowPlaying]-(padding)-[description]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[username]-(padding)-[image]-(relatedPadding)-[nowPlaying]-(relatedPadding)-[description]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
         // Top Labels
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[username]-(padding)-[title]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
@@ -203,7 +255,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         constraints += [NSLayoutConstraint(item: postImageView, attribute: .Height, relatedBy: .Equal, toItem: postImageView, attribute: .Width, multiplier: 1.0, constant: 0.0)]
         
         // Now Playing and Add to Playlist
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(padding)-[nowPlaying]-(>=padding)-[addToPlaylist]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(relatedPadding)-[nowPlaying]-(>=relatedPadding)-[addToPlaylist]-(relatedPadding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += [NSLayoutConstraint(item: addToPlaylistView, attribute: .Top, relatedBy: .Equal, toItem: nowPlayingView, attribute: .Top, multiplier: 1.0, constant: 0.0)]
         
         // Follow

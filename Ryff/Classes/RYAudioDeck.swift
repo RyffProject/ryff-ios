@@ -25,15 +25,16 @@ protocol AVAudioDeckDelegate: class {
     func currentlyPlayingChanged()
     
     /**
-    The current playlist changed.
+    The current playlist changed. Either the songs in the current playlist have been reordered, or
+    a new playlist has taken its place.
     */
     func playlistChanged()
 }
 
 class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate {
     
-    let PlaylistChangedNotification = "AudioDeckPlaylistChanged"
-    let CurrentlyPlayingChangedNotification = "AudioDeckCurrentlyPlayingChanged"
+    static let NotificationPlaylistChanged = "AudioDeckPlaylistChanged"
+    static let NotificationCurrentlyPlayingChanged = "AudioDeckCurrentlyPlayingChanged"
     let PlaybackProgressUpdateTimeInterval: NSTimeInterval = 0.1
     
     static let sharedAudioDeck = RYAudioDeck()
@@ -59,13 +60,18 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         }
     }
     
-    private(set) var currentPlaylist: RYAudioDeckPlaylist?
+    private(set) var currentPlaylist: RYAudioDeckPlaylist? {
+        didSet {
+            delegate?.playlistChanged()
+            NSNotificationCenter.defaultCenter().postNotificationName(RYAudioDeck.NotificationPlaylistChanged, object: nil)
+        }
+    }
     private(set) var currentlyPlaying: RYPost? {
         didSet {
             updateNowPlayingInfo(true)
             delegate?.currentlyPlayingChanged()
             // Post notification so UI can adjust if needed.
-            NSNotificationCenter.defaultCenter().postNotificationName(CurrentlyPlayingChangedNotification, object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(RYAudioDeck.NotificationCurrentlyPlayingChanged, object: nil)
         }
     }
     
@@ -137,7 +143,8 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
             playNextTrack()
         }
         // Post notification so UI can update if needed.
-        NSNotificationCenter.defaultCenter().postNotificationName(PlaylistChangedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(RYAudioDeck.NotificationPlaylistChanged, object: nil)
+        delegate?.playlistChanged()
     }
     
     // MARK: AVAudioPlayerDelegate
@@ -230,6 +237,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     */
     private func playbackStatusChanged() {
         updateNowPlayingInfo(false)
+        NSNotificationCenter.defaultCenter().postNotificationName(RYAudioDeck.NotificationCurrentlyPlayingChanged, object: nil)
         delegate?.playbackStatusChanged()
     }
     
