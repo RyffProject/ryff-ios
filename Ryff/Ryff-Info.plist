@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ChrisLaganiere.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,6 +24,10 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>Locations used to find nearby users are never shared with third parties or used without your permission.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos selected for upload will never be used without your permission, and are deleted when removed from your account.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-RegIta.ttf</string>
@@ -31,6 +35,12 @@
 		<string>Lato-Bol.ttf</string>
 		<string>Lato-Reg.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -54,15 +64,11 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos selected for upload will never be used without your permission, and are deleted when removed from your account.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Locations used to find nearby users are never shared with third parties or used without your permission.</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>  
+          <key>NSAllowsArbitraryLoads</key><true/>  
+     </dict>
 </dict>
 </plist>

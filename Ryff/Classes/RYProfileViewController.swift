@@ -52,7 +52,7 @@ class RYProfileViewController: RYPostsViewController {
         if indexPath.section == SectionRiff {
             return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier(RYProfileTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(RYProfileTableViewCellReuseIdentifier, forIndexPath: indexPath) 
         cell.selectionStyle = .None
         return cell
     }
