@@ -28,7 +28,7 @@ import UIKit
         refreshControl.addTarget(self, action: Selector("refreshContent:"), forControlEvents: .ValueChanged)
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -40,7 +40,7 @@ import UIKit
         tableView.delegate = self
         tableView.backgroundColor = RYStyleSheet.lightBackgroundColor()
         tableView.separatorStyle = .None
-        tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         tableView.registerClass(RYPostTableViewCell.self, forCellReuseIdentifier: RYPostTableViewCellReuseIdentifier)
         
@@ -113,10 +113,10 @@ import UIKit
     private func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["tableView": tableView]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
     
     // MARK: Actions
@@ -145,7 +145,7 @@ import UIKit
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == riffSection {
-            let cell = tableView.dequeueReusableCellWithIdentifier(RYPostTableViewCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(RYPostTableViewCellReuseIdentifier, forIndexPath: indexPath)
             cell.selectionStyle = .None
             return cell
         }

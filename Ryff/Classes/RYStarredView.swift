@@ -20,19 +20,19 @@ class RYStarredView: UIView {
         
         starredImageView.image = UIImage(named: "star")
         starredImageView.contentMode = .ScaleAspectFit
-        starredImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        starredImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(starredImageView)
         
         starredCountLabel.alpha = 0.5
         starredCountLabel.textAlignment = .Right
         starredCountLabel.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
-        starredCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        starredCountLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(starredCountLabel)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -61,11 +61,11 @@ class RYStarredView: UIView {
         let viewsDict = ["image": starredImageView, "count": starredCountLabel]
         let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionHeight": Constants.Post.AudioActionHeightLarge]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[count]-(relatedPadding)-[image(actionHeight)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionHeight)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += [NSLayoutConstraint(item: starredCountLabel, attribute: .CenterY, relatedBy: .Equal, toItem: starredImageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

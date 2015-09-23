@@ -20,20 +20,20 @@ class RYUserProfileTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clearColor()
         
         RYStyleSheet.styleProfileImageView(avatarImageView)
-        avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(avatarImageView)
         
         usernameLabel.textAlignment = .Center
-        usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(usernameLabel)
         
-        userBioTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        userBioTextView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(userBioTextView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -52,7 +52,7 @@ class RYUserProfileTableViewCell: UITableViewCell {
         let viewsDict = ["avatar": avatarImageView, "username": usernameLabel, "bio": userBioTextView]
         let metrics = ["padding": Constants.Global.ElementPadding, "avatarHeight": Constants.User.AvatarHeight, "maxWidth": Constants.Global.ContentMaximumWidth]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         
         // Avatar
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=padding)-[avatar(avatarHeight)]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
@@ -68,7 +68,7 @@ class RYUserProfileTableViewCell: UITableViewCell {
         
         
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[avatar(avatarHeight)]-(padding)-[username]-(padding)-[bio]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

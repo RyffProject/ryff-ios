@@ -19,20 +19,20 @@ class RYAddToPlaylistView: UIView {
         imageView.image = UIImage(named: "plus")
         imageView.tintColor = RYStyleSheet.postActionColor()
         imageView.contentMode = .ScaleAspectFit
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
         label.text = "Add to Playlist"
         label.textColor = RYStyleSheet.postActionColor()
         label.textAlignment = .Right
         label.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
         NSLayoutConstraint.activateConstraints(subviewContraints())
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,11 +41,11 @@ class RYAddToPlaylistView: UIView {
         let views = ["image": imageView, "text": label]
         let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[text]-(relatedPadding)-[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += [NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: imageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

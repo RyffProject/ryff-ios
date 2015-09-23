@@ -36,7 +36,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         post.user.delegate = self
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,42 +51,42 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         view.backgroundColor = RYStyleSheet.darkBackgroundColor()
         
         scrollView.backgroundColor = UIColor.clearColor()
-        scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         
         containerView.backgroundColor = UIColor.clearColor()
-        containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(containerView)
         
         usernameLabel.textColor = UIColor.lightTextColor()
         usernameLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
-        usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(usernameLabel)
         
         postTitleLabel.textColor = UIColor.whiteColor()
         postTitleLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
-        postTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(postTitleLabel)
         
-        postImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(postImageView)
         
-        nowPlayingView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        nowPlayingView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(nowPlayingView)
         
-        addToPlaylistView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        addToPlaylistView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(addToPlaylistView)
         
         postDescriptionTextView.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
         postDescriptionTextView.textContainer.maximumNumberOfLines = 0
-        postDescriptionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(postDescriptionTextView)
         
         followLabel.setDynamicStyle(TextStyle.Body, fontStyle: .Bold)
-        followLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        followLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(followLabel)
         
-        starredView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        starredView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(starredView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
@@ -180,7 +180,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         let viewsDict = ["scrollView": scrollView, "container": containerView, "username": usernameLabel, "title": postTitleLabel, "image": postImageView, "nowPlaying": nowPlayingView, "addToPlaylist": addToPlaylistView, "description": postDescriptionTextView, "follow": followLabel, "starred": starredView]
         let metrics = ["padding": Constants.Global.ElementPadding, "relatedPadding": Constants.Global.RelatedElementPadding, "contentWidth": Constants.Global.ContentMaximumWidth]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         
         // Scroll View
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
@@ -214,7 +214,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:[description]-(>=padding,==padding@901)-[starred]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:[follow]-(padding)-[starred]-(>=padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

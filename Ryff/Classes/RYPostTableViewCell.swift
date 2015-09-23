@@ -44,44 +44,44 @@ class RYPostTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor.clearColor()
         
-        containerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = UIColor.clearColor()
         addSubview(containerView)
         
         postImageView.backgroundColor = RYStyleSheet.tabBarColor()
-        postImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(postImageView)
         
         topDetailsView.backgroundColor = UIColor.clearColor()
-        topDetailsView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        topDetailsView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(topDetailsView)
         
-        topEffectsView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        topEffectsView.translatesAutoresizingMaskIntoConstraints = false
         topDetailsView.addSubview(topEffectsView)
         
         usernameLabel.textColor = UIColor.lightTextColor()
         usernameLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
-        usernameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         topDetailsView.addSubview(usernameLabel)
         
         postTitleLabel.textColor = UIColor.whiteColor()
         postTitleLabel.textAlignment = .Right
         postTitleLabel.setDynamicStyle(TextStyle.Subheadline, fontStyle: .Bold)
-        postTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         topDetailsView.addSubview(postTitleLabel)
         
         bottomDetailsView.backgroundColor = UIColor.clearColor()
-        bottomDetailsView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        bottomDetailsView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(bottomDetailsView)
         
-        bottomEffectsView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        bottomEffectsView.translatesAutoresizingMaskIntoConstraints = false
         bottomDetailsView.addSubview(bottomEffectsView)
         
         postDescriptionTextView.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
-        postDescriptionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         bottomDetailsView.addSubview(postDescriptionTextView)
         
-        starredView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        starredView.translatesAutoresizingMaskIntoConstraints = false
         bottomDetailsView.addSubview(starredView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
@@ -105,7 +105,7 @@ class RYPostTableViewCell: UITableViewCell {
         starredView.addGestureRecognizer(starredTapGesture)
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -161,7 +161,7 @@ class RYPostTableViewCell: UITableViewCell {
         let metrics = ["maxWidth": Constants.Global.ContentMaximumWidth, "padding": Constants.Global.ElementPadding, "footerHeight": Constants.Post.FooterHeight]
         let viewsDict = ["container": containerView, "topView": topDetailsView, "topEffects": topEffectsView, "username": usernameLabel, "title": postTitleLabel, "postImage": postImageView, "bottomView": bottomDetailsView, "bottomEffects": bottomEffectsView, "description": postDescriptionTextView, "starred": starredView]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         
         // Container
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=0,==0@900)-[container(<=maxWidth,==maxWidth@900)]-(>=0,==0@900)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
@@ -199,7 +199,7 @@ class RYPostTableViewCell: UITableViewCell {
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(padding)-[description]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=0)-[starred]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

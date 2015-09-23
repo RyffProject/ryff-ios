@@ -89,11 +89,12 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         
         // Set up AVAudioSession
         let audioSession = AVAudioSession.sharedInstance()
-        if !audioSession.setCategory(AVAudioSessionCategoryPlayback, error: nil) {
-            println("Something went wrong setting audio session category")
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setActive(true)
         }
-        if !audioSession.setActive(true, error: nil) {
-            println("Something went wrong setting audio session active")
+        catch let error as NSError {
+            print(error.localizedDescription)
         }
     }
     
@@ -141,7 +142,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     
     // MARK: AVAudioPlayerDelegate
     
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
         playNextTrack()
     }
     
@@ -173,7 +174,13 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         
         let localURL = RYDataManager.urlForTempRiff(post.riffHQURL)
         if let localPath = localURL.path where NSFileManager.defaultManager().fileExistsAtPath(localPath) {
-            audioPlayer = AVAudioPlayer(contentsOfURL: localURL, error: nil)
+            do {
+                try audioPlayer = AVAudioPlayer(contentsOfURL: localURL)
+            }
+            catch let error as NSError {
+                print(error.localizedDescription)
+                return
+            }
             audioPlayer?.delegate = self
             audioPlayer?.play()
             currentlyPlaying = post
@@ -185,9 +192,9 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
             if (post.imageURL != nil || post.user.avatarURL != nil) {
                 let imageURL = post.imageURL ?? post.user.avatarURL
                 weak var weakself = self
-                SDWebImageManager.sharedManager().downloadImageWithURL(imageURL, options: nil, progress: nil, completed: { (image, error, cacheType, finished, imageURL) -> Void in
+                SDWebImageManager.sharedManager().downloadImageWithURL(imageURL, options: [], progress: nil, completed: { (image, error, cacheType, finished, imageURL) -> Void in
                     if let error = error {
-                        println("Couldn't download image for post: \(error.localizedDescription)")
+                        print("Couldn't download image for post: \(error.localizedDescription)")
                     }
                     else {
                         weakself?.nowPlayingImage = image

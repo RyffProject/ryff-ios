@@ -34,27 +34,27 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         
         // Styling
         
-        postImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        postImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(postImageView)
         
-        highlightView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        highlightView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(highlightView)
         
         deleteImageView.image = UIImage(named: "x")
         deleteImageView.tintColor = UIColor.blackColor()
-        deleteImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        deleteImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(deleteImageView)
         
         resetImageView.image = UIImage(named: "reset")
-        resetImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        resetImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(resetImageView)
         
         playImageView.image = UIImage(named: "play")
-        playImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        playImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(playImageView)
         
         starredView.style(true, text: "Starred")
-        starredView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        starredView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(starredView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
@@ -77,7 +77,7 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         starredView.addGestureRecognizer(remixStarredTapGesture)
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -174,7 +174,7 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         let viewsDict = ["delete": deleteImageView, "reset": resetImageView, "play": playImageView, "highlight": highlightView, "starred": starredView, "image": postImageView]
         let metrics = ["padding": Constants.Global.ElementPadding, "small": Constants.Mixer.ActionDimensionSmall, "large": Constants.Mixer.ActionDimensionLarge]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         
         // Highlight
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[highlight]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
@@ -195,7 +195,7 @@ class RYRiffMixerNodeCollectionViewCell: UICollectionViewCell {
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:[reset(large)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:[play(small)]-(padding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: viewsDict)
         
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
     
 }

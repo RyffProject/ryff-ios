@@ -29,7 +29,7 @@ class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, 
         collectionView.delegate = self
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -40,7 +40,7 @@ class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, 
         view.backgroundColor = RYStyleSheet.darkBackgroundColor()
         
         collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
@@ -53,8 +53,8 @@ class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, 
         collectionViewLayout.style(self)
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     // MARK: RYRiffMixerNodeCellDelegate
@@ -97,10 +97,10 @@ class RYRiffMixerViewController : UIViewController, UICollectionViewDataSource, 
     func subviewConstraints() -> [NSLayoutConstraint] {
         let viewsDict = ["collectionView": collectionView]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[collectionView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[collectionView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDict)
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
     
     // MARK: UICollectionViewDataSource

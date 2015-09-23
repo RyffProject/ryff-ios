@@ -19,19 +19,19 @@ class RYNowPlayingView: UIView {
         imageView.image = UIImage(named: "audioPlaying")
         imageView.tintColor = RYStyleSheet.postActionColor()
         imageView.contentMode = .ScaleAspectFit
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
         label.text = "Now Playing"
         label.textColor = RYStyleSheet.postActionColor()
         label.setDynamicStyle(TextStyle.Body, fontStyle: .Regular)
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
         NSLayoutConstraint.activateConstraints(subviewContraints())
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -40,11 +40,11 @@ class RYNowPlayingView: UIView {
         let views = ["image": imageView, "text": label]
         let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "actionDimension": Constants.Post.AudioActionHeightSmall]
         
-        var constraints: [AnyObject] = []
+        var constraints: [NSLayoutConstraint] = []
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[image(actionDimension)]-(relatedPadding)-[text]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[image(actionDimension)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         constraints += [NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: imageView, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
-        return constraints as? [NSLayoutConstraint] ?? []
+        return constraints
     }
 
 }

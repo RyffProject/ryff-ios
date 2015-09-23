@@ -21,7 +21,7 @@ class RYPostTextView: UITextView {
         setContentCompressionResistancePriority(UILayoutPriority.Low, forAxis: .Horizontal)
     }
     
-    @availability(*, unavailable)
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
