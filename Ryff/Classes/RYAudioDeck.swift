@@ -60,6 +60,7 @@ class RYAudioDeck: NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate 
         }
     }
     
+    let defaultPlaylist = RYAudioDeckPlaylist()
     private(set) var currentPlaylist: RYAudioDeckPlaylist?
     private(set) var currentlyPlaying: RYPost? {
         didSet {
@@ -70,8 +71,7 @@ class RYAudioDeck: NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate 
         }
     }
     
-    private weak var delegate: RYAudioDeckDelegate?
-    private let defaultPlaylist = RYAudioDeckPlaylist()
+    weak var delegate: RYAudioDeckDelegate?
     private var audioPlayer: AVAudioPlayer?
     private var progressTimer: NSTimer?
     private var nowPlayingImage: UIImage?
@@ -136,6 +136,9 @@ class RYAudioDeck: NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate 
             stop()
             playNextTrack()
         }
+        
+        delegate?.playlistChanged()
+        
         // Post notification so UI can update if needed.
         NSNotificationCenter.defaultCenter().postNotificationName(PlaylistChangedNotification, object: nil)
     }

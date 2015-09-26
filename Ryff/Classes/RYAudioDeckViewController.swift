@@ -46,6 +46,11 @@ class RYAudioDeckViewController: UIViewController, UITableViewDataSource, UITabl
         NSLayoutConstraint.activateConstraints(subviewConstraints())
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        audioDeck?.delegate = self
+    }
+    
     // MARK: RYAudioDeckDelegate
     
     func playbackStatusChanged() {

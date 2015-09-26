@@ -10,15 +10,21 @@ import Foundation
 
 class RYAudioDeckTableViewCell: UITableViewCell {
     
-    static let preferredHeight: CGFloat = 50;
+    static let preferredHeight: CGFloat = 50
+    private let playControlDimension: CGFloat = 34
     
-    private let playControl = RYPlayControl(frame: CGRectZero)
+    private let playControl: RYPlayControl
+    private let titleLabel = UILabel(frame: CGRectZero)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        playControl = RYPlayControl(frame: CGRectMake(0, 0, playControlDimension, playControlDimension))
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         playControl.setTranslatesAutoresizingMaskIntoConstraints(false)
         addSubview(playControl)
+        
+        titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        addSubview(titleLabel)
         
         NSLayoutConstraint.activateConstraints(subviewConstraints())
     }
@@ -29,26 +35,31 @@ class RYAudioDeckTableViewCell: UITableViewCell {
     }
     
     func styleWithReadyPost(post: RYPost) {
+        titleLabel.text = post.title
         playControl.setProgress(0.67, animated: false)
     }
     
     func styleWithDownload(post: RYPost) {
+        titleLabel.text = post.title
         playControl.setProgress(0.33, animated: false)
     }
     
     // Layout
     
     private func subviewConstraints() -> [NSLayoutConstraint] {
-        let views = ["playControl": playControl]
-        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding]
+        let views = ["playControl": playControl, "title": titleLabel]
+        let metrics = ["relatedPadding": Constants.Global.RelatedElementPadding, "padding": Constants.Global.ElementPadding, "controlDimension": playControlDimension]
         var constraints: [AnyObject] = []
     
         // Horizontal
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(relatedPadding)-[playControl]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|-(relatedPadding)-[playControl(controlDimension)]-(relatedPadding)-[title]-(relatedPadding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+
         // Play Control
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-(relatedPadding)-[playControl]-(relatedPadding)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
-        constraints += [NSLayoutConstraint(item: playControl, attribute: .Width, relatedBy: .Equal, toItem: playControl, attribute: .Height, multiplier: 1.0, constant: 0.0)]
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:[playControl(controlDimension)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += [NSLayoutConstraint(item: playControl, attribute: .CenterY, relatedBy: .Equal, toItem: playControl.superview, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
+        
+        // Title
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[playControl(controlDimension)]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         
         return constraints as? [NSLayoutConstraint] ?? []
     }

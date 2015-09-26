@@ -31,15 +31,15 @@
         _centerImageInset = 5.0f;
         _strokeWidth = 3.0f;
         
-        _circleShape = [self progressCircleWithFrame:frame strokeWidth:self.strokeWidth color:self.controlTintColor];
-        [self.layer addSublayer:_circleShape];
-        
         _centerImageView    = [[UIImageView alloc] initWithFrame:CGRectZero];
         _centerImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_centerImageView];
         
         _configuredSubviewConstraints = [self subviewConstraints];
         [NSLayoutConstraint activateConstraints:self.configuredSubviewConstraints];
+        
+        _circleShape = [self progressCircleWithFrame:self.frame strokeWidth:self.strokeWidth color:self.controlTintColor];
+        [self.layer addSublayer:self.circleShape];
     }
     return self;
 }
@@ -54,11 +54,6 @@
         _circleShape.strokeEnd = progress;
         [CATransaction commit];
     }
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.circleShape.frame = self.bounds;
 }
 
 #pragma mark - Properties
@@ -81,8 +76,8 @@
 #pragma mark - Internal
 
 - (CAShapeLayer *)progressCircleWithFrame:(CGRect)frame strokeWidth:(CGFloat)strokeWidth color:(UIColor *)color {
-    CAShapeLayer *circleShape                = [CAShapeLayer layer];
-    CGPoint circleCenter        = CGPointMake(frame.size.width/2, frame.size.height/2);
+    CAShapeLayer *circleShape  = [CAShapeLayer layer];
+    CGPoint circleCenter       = CGPointMake(frame.size.width/2, frame.size.height/2);
     circleShape.path           = [UIBezierPath bezierPathWithArcCenter:circleCenter radius:(frame.size.width-strokeWidth/2) / 2 startAngle:-M_PI_2 endAngle:-M_PI_2 + 2 * M_PI clockwise:YES].CGPath;
     circleShape.strokeColor    = color.CGColor;
     circleShape.fillColor      = nil;
@@ -113,13 +108,13 @@
 #pragma mark - Layout
 
 - (NSArray *)subviewConstraints {
-    NSDictionary *views = NSDictionaryOfVariableBindings(self.centerImageView);
+    NSDictionary *views = @{@"image": self.centerImageView};
     NSDictionary *metrics = @{@"inset": @(self.centerImageInset)};
     NSMutableArray *constraints = [[NSMutableArray alloc] initWithCapacity:16];
     
     // Center image view
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(inset)-[centerImageView]-(inset)-" options:0 metrics:metrics views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(inset)-[centerImageView]-(inset)-" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(inset)-[image]-(inset)-|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(inset)-[image]-(inset)-|" options:0 metrics:metrics views:views]];
     
     return @[];
 }
