@@ -8,10 +8,12 @@
 
 @interface RYPlayControl : UIView
 
-@property (nonatomic, strong) UIColor *controlTintColor;
+@property (nonatomic, strong, nullable) UIColor *controlTintColor;
+@property (nonatomic, strong, nullable) UIImage *centerImage;
+@property (nonatomic) CGFloat centerImageInset;
+@property (nonatomic) CGFloat strokeWidth;
 
-- (void) configureWithFrame:(CGRect)frame centerImageInset:(NSNumber *)centerImageInset;
-- (void) setProgress:(CGFloat)progress animated:(BOOL)animated;
-- (void) setCenterImage:(UIImage *)image;
+- (nonnull instancetype)initWithFrame:(CGRect)frame;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 @end

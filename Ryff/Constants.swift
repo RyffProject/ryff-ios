@@ -35,4 +35,9 @@ struct Constants {
         static let ActionDimensionLarge: CGFloat = 20
     }
     
+    struct AudioDeck {
+        static let ConsolePostImageDimensionCompact: CGFloat = 50
+        static let ConsolePostImageDimensionRegular: CGFloat = 100
+    }
+    
 }

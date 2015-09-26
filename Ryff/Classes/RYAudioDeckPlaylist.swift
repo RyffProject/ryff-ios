@@ -14,7 +14,7 @@ protocol RYAudioDeckPlaylistDelegate: class {
 
 @objc class RYAudioDeckPlaylist: NSObject, TrackDownloadDelegate {
     
-    static let AudioDeckDownloadProgressNotification = "AudioDeckDownloadProgressChanged"
+    static let PlaylistDownloadProgressNotification = "AudioDeckPlaylistDownloadProgressChanged"
     
     weak var playlistDelegate: RYAudioDeckPlaylistDelegate?
     

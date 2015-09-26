@@ -11,7 +11,8 @@ import AVFoundation
 import MediaPlayer
 import SDWebImage
 
-protocol AVAudioDeckDelegate: class {
+ /// Protocol to be implemented by an object receiving updates from RYAudioDeck.
+protocol RYAudioDeckDelegate: class {
     
     /**
     Current playing status of the Audio Deck changed.
@@ -31,7 +32,7 @@ protocol AVAudioDeckDelegate: class {
     func playlistChanged()
 }
 
-class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate {
+class RYAudioDeck: NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate {
     
     static let NotificationPlaylistChanged = "AudioDeckPlaylistChanged"
     static let NotificationCurrentlyPlayingChanged = "AudioDeckCurrentlyPlayingChanged"
@@ -40,7 +41,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
     static let sharedAudioDeck = RYAudioDeck()
     
     @objc(isPlaying)
-    var playing : Bool {
+    var playing: Bool {
         get {
             return audioPlayer?.playing ?? false
         }
@@ -60,6 +61,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         }
     }
     
+    let defaultPlaylist = RYAudioDeckPlaylist()
     private(set) var currentPlaylist: RYAudioDeckPlaylist? {
         didSet {
             delegate?.playlistChanged()
@@ -75,8 +77,7 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
         }
     }
     
-    private weak var delegate: AVAudioDeckDelegate?
-    private let defaultPlaylist = RYAudioDeckPlaylist()
+    weak var delegate: RYAudioDeckDelegate?
     private var audioPlayer: AVAudioPlayer?
     private var progressTimer: NSTimer?
     private var nowPlayingImage: UIImage?
@@ -142,6 +143,9 @@ class RYAudioDeck : NSObject, RYAudioDeckPlaylistDelegate, AVAudioPlayerDelegate
             stop()
             playNextTrack()
         }
+        
+        delegate?.playlistChanged()
+        
         // Post notification so UI can update if needed.
         NSNotificationCenter.defaultCenter().postNotificationName(RYAudioDeck.NotificationPlaylistChanged, object: nil)
         delegate?.playlistChanged()

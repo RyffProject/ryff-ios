@@ -6,53 +6,53 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>CHTCollectionViewWaterfallLayout.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>KRLCollectionViewGridLayout.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Ryff.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-RyffTests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SSKeychain.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4EB6DFE12524FD2DA752B684CE4CF6F0</key>
+		<key>12D9723DA6FC9334CE1435F1F069EE49</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>52B88AA9985B188548754FDEC4321BE6</key>
+		<key>4EB6DFE12524FD2DA752B684CE4CF6F0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DC2F8C9363E989DBE8CF4EAAEB4DF7C</key>
+		<key>AF7B2FC32BB12986BA0BF6C4CB51BFEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA310DB753F892C72B7AF4C25E6CEC06</key>
+		<key>D7B8FEA8CF7F5F6473FA000DAA7C17FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1C491773DBE31ED33318A3AD409EC24</key>
+		<key>E2C7547D2DD7E86D2C40276BA99E896B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

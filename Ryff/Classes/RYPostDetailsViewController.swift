@@ -144,7 +144,7 @@ class RYPostDetailsViewController: UIViewController, RYPostDelegate, RYUserDeleg
     }
     
     func didTapAddToPlaylist(tapGesture: UITapGestureRecognizer) {
-        RYAudioDeck.sharedAudioDeck.currentPlaylist?.addPost(post)
+        RYAudioDeck.sharedAudioDeck.defaultPlaylist.addPost(post)
     }
     
     // MARK: RYPostDelegate
