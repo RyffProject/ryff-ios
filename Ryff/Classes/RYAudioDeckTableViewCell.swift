@@ -16,6 +16,8 @@ class RYAudioDeckTableViewCell: UITableViewCell {
     private let playControl: RYPlayControl
     private let titleLabel = UILabel(frame: CGRectZero)
     
+    private var post: RYPost?
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         playControl = RYPlayControl(frame: CGRectMake(0, 0, playControlDimension, playControlDimension))
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,11 +37,25 @@ class RYAudioDeckTableViewCell: UITableViewCell {
     }
     
     func styleWithReadyPost(post: RYPost) {
+        self.post = post
         titleLabel.text = post.title
-        playControl.setProgress(0.67, animated: false)
+        
+        if let currentlyPlaying = RYAudioDeck.sharedAudioDeck.currentlyPlaying where currentlyPlaying == post {
+            // Style for currentlyPlaying.
+            playControl.hideProgress(false)
+            playControl.hideCenterImage(true)
+            
+            playControl.setProgress(RYAudioDeck.sharedAudioDeck.playbackProgress, animated: false)
+        }
+        else {
+            // Style for ready in playlist.
+            playControl.hideProgress(true)
+            playControl.hideCenterImage(false)
+        }
     }
     
     func styleWithDownload(post: RYPost) {
+        self.post = post
         titleLabel.text = post.title
         playControl.setProgress(0.33, animated: false)
     }
@@ -59,7 +75,7 @@ class RYAudioDeckTableViewCell: UITableViewCell {
         constraints += [NSLayoutConstraint(item: playControl, attribute: .CenterY, relatedBy: .Equal, toItem: playControl.superview, attribute: .CenterY, multiplier: 1.0, constant: 0.0)]
         
         // Title
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[playControl(controlDimension)]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[title]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
         
         return constraints
     }

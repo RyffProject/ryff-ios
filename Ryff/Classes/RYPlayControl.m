@@ -51,9 +51,19 @@
     else {
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.0];
-        _circleShape.strokeEnd = progress;
+        self.circleShape.strokeEnd = progress;
         [CATransaction commit];
     }
+}
+
+#pragma mark - Visibility
+
+- (void)hideProgress:(BOOL)hideProgress {
+    self.circleShape.hidden = YES;
+}
+
+- (void)hideCenterImage:(BOOL)hideCenterImage {
+    self.centerImageView.hidden = hideCenterImage;
 }
 
 #pragma mark - Properties

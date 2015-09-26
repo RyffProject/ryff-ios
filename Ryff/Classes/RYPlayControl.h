@@ -16,4 +16,7 @@
 - (nonnull instancetype)initWithFrame:(CGRect)frame;
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
+- (void)hideProgress:(BOOL)hideProgress;
+- (void)hideCenterImage:(BOOL)hideCenterImage;
+
 @end

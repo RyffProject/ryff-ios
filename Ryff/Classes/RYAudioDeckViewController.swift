@@ -55,6 +55,7 @@ class RYAudioDeckViewController: UIViewController, UITableViewDataSource, UITabl
     
     func playbackStatusChanged() {
         consoleView.updatePlayback()
+        reloadCurrentlyPlayingCell()
     }
     
     func currentlyPlayingChanged() {
@@ -63,6 +64,17 @@ class RYAudioDeckViewController: UIViewController, UITableViewDataSource, UITabl
     
     func playlistChanged() {
         tableView.reloadData()
+    }
+    
+    // MARK: Private Styling
+    
+    func reloadCurrentlyPlayingCell() {
+        if let post = audioDeck?.currentlyPlaying, postIndex = audioDeck?.currentPlaylist?.readyPosts.indexOf(post) {
+            let indexpath = NSIndexPath(index: postIndex)
+            if let postCell = tableView.cellForRowAtIndexPath(indexpath) as? RYAudioDeckTableViewCell {
+                postCell.styleWithReadyPost(post)
+            }
+        }
     }
     
     // MARK: UITableViewDataSource
