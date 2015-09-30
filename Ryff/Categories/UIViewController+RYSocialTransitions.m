@@ -25,7 +25,7 @@
 {
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-    [profileVC configureForUser:user];
+//    [profileVC configureForUser:user];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
@@ -33,7 +33,7 @@
 {
     NSString *storyboardName = isIpad ? @"Main" : @"MainIphone";
     RYProfileViewController *profileVC = [[UIStoryboard storyboardWithName:storyboardName bundle:NULL] instantiateViewControllerWithIdentifier:@"profileVC"];
-    [profileVC configureForUsername:username];
+//    [profileVC configureForUsername:username];
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 

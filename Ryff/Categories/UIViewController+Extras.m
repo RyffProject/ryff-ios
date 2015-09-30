@@ -14,28 +14,27 @@
 #import "MBProgressHUD.h"
 
 // Categories
-#import "UIImage+Thumbnail.h"
+#import "UIImage+Size.h"
 
 #define kHudTag 1912984
+
+static const CGSize BarButtonItemSize = {30, 30};
 
 @implementation UIViewController (Extras)
 
 #pragma mark -
 #pragma mark - Navigation
 
-- (void) addNewPostButtonToNavBar
-{
-    if (self.navigationItem)
-    {
-        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"create"] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
+- (void) addNewPostButtonToNavBar {
+    if (self.navigationItem) {
+        UIBarButtonItem *newPostButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"create"] imageWithSize:BarButtonItemSize] style:UIBarButtonItemStylePlain target:self action:@selector(newPost:)];
         [self.navigationItem setRightBarButtonItem:newPostButton];
     }
 }
 
-- (void) newPost:(id)sender
-{
-    RYRiffCreateCollectionViewController *riffCreateVC = [[UIStoryboard storyboardWithName:@"RiffCreate" bundle:NULL] instantiateViewControllerWithIdentifier:@"riffCreate"];
-    [self presentViewController:riffCreateVC animated:YES completion:nil];
+- (void)newPost:(id)sender {
+    RYRiffMixerViewController *riffMixer = [[RYRiffMixerViewController alloc] initWithNibName:nil bundle:nil];
+    [self presentViewController:riffMixer animated:YES completion:nil];
 }
 
 #pragma mark -

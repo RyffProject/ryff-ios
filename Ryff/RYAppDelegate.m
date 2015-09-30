@@ -12,12 +12,20 @@
 #import "RYServices.h"
 #import "RYRegistrationServices.h"
 #import "RYDataManager.h"
-#import "RYAudioDeckManager.h"
 #import "RYNotificationsManager.h"
 
 // Frameworks
-#import "SSKeychain.h"
+@import SSKeychain;
 #import "Crittercism.h"
+
+// View Controllers
+#import "RYTabBarViewController.h"
+
+@interface RYAppDelegate ()
+
+@property (nonatomic) RYTabBarViewController *tabBarViewController;
+
+@end
 
 @implementation RYAppDelegate
 
@@ -26,11 +34,9 @@
     // log crash events
     [Crittercism enableWithAppID:@"5421e1f8b573f17c9b000004"];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Present main storyboard
-    NSString *storyboardName        = (isIpad) ? @"Main" : @"MainIphone";
-    UIStoryboard *mainStoryboard    = [UIStoryboard storyboardWithName:storyboardName bundle:NULL];
-    [self.window setRootViewController:[mainStoryboard instantiateViewControllerWithIdentifier:@"coreTabController"]];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _tabBarViewController = [[RYTabBarViewController alloc] init];
+    self.window.rootViewController = self.tabBarViewController;
     [self.window makeKeyAndVisible];
     
     [[RYRegistrationServices sharedInstance] attemptBackgroundLogIn];
@@ -75,21 +81,26 @@
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event
 {
-    RYAudioDeckManager *audioDeck = [RYAudioDeckManager sharedInstance];
+    RYAudioDeck *audioDeck = [RYAudioDeck sharedAudioDeck];
     if(event.type == UIEventTypeRemoteControl)
     {
         switch (event.subtype) {
             case UIEventSubtypeRemoteControlPlay:
-            [audioDeck playTrack:YES];
+                [audioDeck play];
                 break;
             case UIEventSubtypeRemoteControlPause:
-                [audioDeck playTrack:NO];
+                [audioDeck pause];
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                [audioDeck playTrack:![audioDeck isPlaying]];
+                if (audioDeck.isPlaying) {
+                    [audioDeck pause];
+                }
+                else {
+                    [audioDeck play];
+                }
                 break;
             case UIEventSubtypeRemoteControlNextTrack:
-                [audioDeck skipTrack];
+                [audioDeck skip];
                 break;
             case UIEventSubtypeRemoteControlPreviousTrack:
                 [audioDeck setPlaybackProgress:0.0f];

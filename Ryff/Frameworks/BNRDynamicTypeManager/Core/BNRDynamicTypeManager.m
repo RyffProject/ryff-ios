@@ -125,10 +125,14 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
     }
     if (fontKeypath && style) {
         
-        if (fontStyle == FONT_REGULAR)
-            [element setValue:[RYStyleSheet customFontForTextStyle:style] forKeyPath:fontKeypath];
-        else if (fontStyle == FONT_BOLD)
-            [element setValue:[RYStyleSheet boldCustomFontForTextStyle:style] forKey:fontKeypath];
+        switch (fontStyle) {
+            case FontStyleRegular:
+                [element setValue:[RYStyleSheet customFontForTextStyle:style] forKeyPath:fontKeypath];
+                break;
+            case FontStyleBold:
+                [element setValue:[RYStyleSheet boldCustomFontForTextStyle:style] forKey:fontKeypath];
+                break;
+        }
 
         BNRDynamicTypeTuple *tuple = [[BNRDynamicTypeTuple alloc] initWithKeypath:fontKeypath textStyle:style fontStyle:fontStyle];
         [self.elementToTupleTable setObject:tuple
@@ -144,10 +148,14 @@ static NSString * const BNRDynamicTypeManagerFontKeypathUITextView  = @"font";
 
     for (id element in elementToTupleTable) {
         BNRDynamicTypeTuple *tuple = [elementToTupleTable objectForKey:element];
-        if (tuple.fontStyle == FONT_REGULAR)
-            [element setValue:[RYStyleSheet customFontForTextStyle:tuple.textStyle] forKeyPath:tuple.keypath];
-        else if (tuple.fontStyle == FONT_BOLD)
-            [element setValue:[RYStyleSheet boldCustomFontForTextStyle:tuple.textStyle] forKey:tuple.keypath];
+        switch (tuple.fontStyle) {
+            case FontStyleRegular:
+                [element setValue:[RYStyleSheet customFontForTextStyle:tuple.textStyle] forKeyPath:tuple.keypath];
+                break;
+            case FontStyleBold:
+                [element setValue:[RYStyleSheet boldCustomFontForTextStyle:tuple.textStyle] forKey:tuple.keypath];
+                break;
+        }
     }
 }
 
