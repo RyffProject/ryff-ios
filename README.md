@@ -19,9 +19,7 @@ This repository is the native iOS application, written in Objective-C and Swift 
 
 ## Development Status
 
-To Do
-* More intricate interface for recording and mixing audio, using new APIs in iOS 8 like AVAudioEngine
-* Messaging other users
+**Update (September 2015)**: After spending the summer of 2015 as the Core iOS intern at [Tumblr](http://tumblr.com), learning a lot about building apps that scale, I want to refactor some parts of this codebase. I'm rewriting a lot of the app in Swift, following modern iOS layout guidelines, and better structuring logic. You can follow progress at the refactor pull request: [Codebase Overhaul](https://github.com/RyffProject/ryff-ios/pull/5).
 
 Completed Features
 * Registration and log in
