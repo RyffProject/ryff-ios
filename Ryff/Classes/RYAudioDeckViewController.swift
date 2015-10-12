@@ -71,9 +71,9 @@ class RYAudioDeckViewController: UIViewController, UITableViewDataSource, UITabl
     func reloadCurrentlyPlayingCell() {
         if let post = audioDeck?.currentlyPlaying, postIndex = audioDeck?.currentPlaylist?.readyPosts.indexOf(post) {
             let indexpath = NSIndexPath(index: postIndex)
-            if let postCell = tableView.cellForRowAtIndexPath(indexpath) as? RYAudioDeckTableViewCell {
-                postCell.styleWithReadyPost(post)
-            }
+//            if let postCell = tableView.cellForRowAtIndexPath(indexpath) as? RYAudioDeckTableViewCell {
+//                postCell.styleWithReadyPost(post)
+//            }
         }
     }
     
